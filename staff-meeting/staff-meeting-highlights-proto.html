@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎉 员工大会 · 环节亮点交互原型</title>
+<style>
+  :root{
+    --pink:#FF4D8D; --orange:#FF7A3C; --purple:#FF5C5C; --cyan:#FFC24D;
+    --blue:#FF8FB8; --yellow:#FFD23D; --ink:#3A2418; --paper:#FFFFFF;
+    --shadow:0 18px 40px rgba(255,122,60,.20);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:linear-gradient(135deg,#FFEAD8 0%,#FFE2E8 48%,#FFF3DC 100%);
+    background-attachment:fixed;min-height:100vh;scroll-behavior:smooth}
+  a{color:inherit}
+  /* ===== 顶栏导航 ===== */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(255,255,255,.72);box-shadow:0 6px 24px rgba(124,77,255,.12)}
+  .topbar{display:flex;align-items:center;gap:14px;max-width:1180px;margin:0 auto;padding:12px 18px}
+  .logo{font-weight:900;font-size:18px;letter-spacing:.5px;
+    background:linear-gradient(90deg,var(--orange),var(--pink),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  nav.tabs{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+  .tab{padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;
+    border:2px solid transparent;background:#fff;color:#6b6486;transition:.2s;white-space:nowrap}
+  .tab:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .tab.active{background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;border-color:#fff}
+  .ghost-btn{font-size:12px;padding:6px 10px;border-radius:999px;border:2px dashed var(--purple);
+    background:#fff;color:var(--purple);cursor:pointer;font-weight:700}
+
+  /* ===== 布局 ===== */
+  main{max-width:1180px;margin:0 auto;padding:26px 18px 80px}
+  .hero{background:linear-gradient(120deg,var(--orange),var(--pink) 55%,var(--cyan));
+    border-radius:26px;padding:30px 30px;color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hero h1{font-size:30px;font-weight:900;letter-spacing:1px}
+  .hero p{margin-top:10px;font-size:14px;opacity:.95;max-width:640px;line-height:1.7}
+  .hero .badges{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);
+    padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700}
+  .hero .deco{position:absolute;right:-40px;top:-40px;font-size:160px;opacity:.18;transform:rotate(-12deg)}
+
+  section.block{margin-top:34px;scroll-margin-top:80px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .sec-no{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:20px;
+    font-weight:900;color:#fff;box-shadow:var(--shadow)}
+  .sec-head h2{font-size:22px;font-weight:900}
+  .sec-head .sub{font-size:12px;color:#c0a08f;margin-top:2px}
+
+  /* ===== 卡片 ===== */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:880px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--paper);border-radius:20px;padding:18px;box-shadow:var(--shadow);
+    border:1px solid rgba(255,122,60,.12);position:relative;overflow:hidden}
+  .card h3{font-size:16px;font-weight:900;display:flex;align-items:center;gap:8px}
+  .card .tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;color:#fff}
+  .tag.new{background:linear-gradient(90deg,var(--pink),var(--orange))}
+  .tag.ref{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+  .tag.tip{background:linear-gradient(90deg,#ffb072,#ffd0a3)}
+  .card p.desc{font-size:13px;color:#6b6486;line-height:1.7;margin-top:8px}
+  .card .mini{font-size:11px;color:#c49a86;margin-top:6px}
+
+  /* ===== 按钮 ===== */
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:13px;padding:9px 16px;border-radius:999px;
+    color:#fff;background:linear-gradient(90deg,var(--pink),var(--purple));transition:.18s;
+    box-shadow:0 8px 18px rgba(255,77,141,.28)}
+  .btn:hover{transform:translateY(-2px) scale(1.02)}
+  .btn:active{transform:scale(.97)}
+  .btn.cyan{background:linear-gradient(90deg,var(--cyan),var(--blue))}
+  .btn.ghost{background:#fff;color:var(--purple);border:2px solid var(--purple)}
+  .btn.sm{padding:6px 12px;font-size:12px}
+
+  /* ===== 数据回顾 ===== */
+  #fwCanvas{position:fixed;inset:0;pointer-events:none;z-index:60}
+  .kpi-wrap{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+  .kpi{flex:1;min-width:130px;background:linear-gradient(135deg,#fff,#fff3e9);border-radius:16px;
+    padding:14px;text-align:center;border:1px solid rgba(255,122,60,.14)}
+  .kpi .num{font-size:30px;font-weight:900;
+    background:linear-gradient(90deg,var(--pink),var(--purple));-webkit-background-clip:text;
+    background-clip:text;color:transparent}
+  .kpi .lbl{font-size:12px;color:#c0a08f;margin-top:4px}
+  .progress{height:10px;border-radius:999px;background:#eee;overflow:hidden;margin-top:10px}
+  .progress > i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--orange),var(--pink));transition:width 1.2s ease}
+
+  /* ===== 时光机 ===== */
+  .timeline{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 14px}
+  .tl-card{flex:0 0 180px;background:#fff;border-radius:16px;padding:12px;border:2px solid #ffd9c2;
+    cursor:pointer;transition:.2s}
+  .tl-card:hover{border-color:var(--pink);transform:translateY(-3px)}
+  .tl-card .ph{height:90px;border-radius:12px;display:grid;place-items:center;font-size:34px;
+    background:linear-gradient(135deg,#ffe0cf,#ffd9ec)}
+  .tl-card .t{font-size:12px;font-weight:800;margin-top:8px}
+  .tl-card .d{font-size:11px;color:#c49a86}
+  .player{margin-top:10px;background:#1A1430;color:#fff;border-radius:16px;padding:18px;display:none}
+  .player.show{display:block;animation:pop .4s ease}
+  @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+
+  /* ===== 反向述职 ===== */
+  .score-row{display:flex;align-items:center;gap:8px;margin:7px 0}
+  .score-row .name{width:92px;font-size:13px;font-weight:700}
+  .stars{font-size:20px;cursor:pointer;letter-spacing:2px}
+  .stars .s{filter:grayscale(1);opacity:.4;transition:.15s}
+  .stars .s.on{filter:none;opacity:1}
+  .qa-box{margin-top:10px;background:#fff5ef;border-radius:14px;padding:12px;font-size:13px}
+  .qa-box .q{font-weight:800;color:var(--purple)}
+  .qa-box .a{margin-top:6px;color:#555;background:#fff;padding:8px 10px;border-radius:10px}
+  input.fld,textarea.fld{width:100%;border:2px solid #eadcff;border-radius:12px;padding:9px 12px;
+    font-size:13px;font-family:inherit;margin-top:8px;outline:none}
+  input.fld:focus,textarea.fld:focus{border-color:var(--purple)}
+
+  /* ===== 命运盲盒 ===== */
+  .blindbox{width:150px;height:150px;margin:14px auto;border-radius:24px;cursor:pointer;
+    background:linear-gradient(135deg,var(--purple),var(--pink));display:grid;place-items:center;
+    font-size:60px;box-shadow:var(--shadow);transition:.3s;position:relative}
+  .blindbox:hover{transform:rotate(-6deg) scale(1.05)}
+  .blindbox.open{animation:shake .5s}
+  @keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(8deg)}75%{transform:rotate(-8deg)}}
+  .reveal{margin-top:8px;text-align:center;font-size:15px;font-weight:800;color:var(--pink);
+    min-height:24px}
+
+  /* ===== 弹幕 ===== */
+  .danmu-stage{position:relative;height:200px;background:linear-gradient(135deg,#1A1430,#3a2b66);
+    border-radius:16px;overflow:hidden}
+  .danmu{position:absolute;white-space:nowrap;font-weight:800;color:#fff;font-size:15px;
+    text-shadow:0 2px 8px rgba(0,0,0,.4);animation:fly 7s linear}
+  @keyframes fly{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
+
+  /* ===== 词云 ===== */
+  .cloud{height:230px;position:relative;background:#fff;border-radius:16px;overflow:hidden}
+  .cloud span{position:absolute;font-weight:900;animation:floaty 6s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  /* ===== 扫码答题 ===== */
+  .qr{width:120px;height:120px;margin:10px auto;background:#fff;border:8px solid #1A1430;
+    border-radius:14px;display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(7,1fr);gap:2px;padding:6px}
+  .qr i{background:#1A1430;border-radius:2px}
+  .qr i.o{background:transparent}
+  .poll-bar{margin:8px 0}
+  .poll-bar .pl{display:flex;justify-content:space-between;font-size:12px;font-weight:700}
+  .poll-bar .pb{height:12px;border-radius:999px;background:#eee;overflow:hidden;margin-top:3px}
+  .poll-bar .pb > i{display:block;height:100%;width:0;transition:width .9s;border-radius:999px}
+
+  /* ===== 抽奖转盘 ===== */
+  .wheel-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .wheel{width:200px;height:200px;border-radius:50%;position:relative;
+    background:conic-gradient(var(--pink) 0 25%,var(--orange) 25% 50%,var(--cyan) 50% 75%,var(--purple) 75% 100%);
+    box-shadow:var(--shadow);transition:transform 3.2s cubic-bezier(.17,.67,.3,1.3)}
+  .wheel .seg{position:absolute;width:100%;height:100%;display:grid;place-items:center;
+    font-size:13px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .wheel-center{position:absolute;width:54px;height:54px;background:#fff;border-radius:50%;
+    top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;
+    font-size:22px;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:2}
+  .wheel-pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+    width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;
+    border-top:22px solid var(--ink);z-index:3}
+  .result{font-size:16px;font-weight:900;color:var(--purple);min-height:26px;text-align:center}
+
+  /* ===== 颁奖 ===== */
+  .trophy-stage{text-align:center;padding:10px}
+  .trophy{font-size:90px;cursor:pointer;filter:drop-shadow(0 10px 18px rgba(255,159,28,.4));transition:.3s}
+  .trophy:hover{transform:scale(1.08) rotate(-4deg)}
+  .award-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .pill{background:#fff;border:2px solid var(--orange);color:var(--orange);font-weight:800;
+    font-size:12px;padding:5px 12px;border-radius:999px;cursor:pointer}
+  .pill.on{background:var(--orange);color:#fff}
+
+  /* ===== 金句墙 ===== */
+  .quote-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .quote{background:linear-gradient(135deg,#fff,#fff0f7);border-radius:16px;padding:14px;
+    font-weight:800;font-size:14px;line-height:1.5;border-left:5px solid var(--pink);
+    box-shadow:0 8px 18px rgba(255,77,141,.12);transition:.2s}
+  .quote:hover{transform:translateY(-4px) rotate(-1deg)}
+  .quote .by{display:block;margin-top:8px;font-size:11px;color:#c9a994;font-weight:600}
+
+  footer{text-align:center;color:#b09a8e;font-size:12px;margin-top:50px;line-height:1.8}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;
+    opacity:0;transition:.3s;z-index:80;box-shadow:var(--shadow)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .hint{font-size:11px;color:#c9a994;margin-top:8px}
+</style>
+</head>
+<body>
+<canvas id="fwCanvas"></canvas>
+<header>
+  <div class="topbar">
+    <div class="logo">🎊 员工大会 · 环节亮点原型</div>
+    <nav class="tabs">
+      <div class="tab active" data-go="s1">一·开头热场</div>
+      <div class="tab" data-go="s2">二·暖场互动</div>
+      <div class="tab" data-go="s3">三·颁奖</div>
+      <div class="tab" data-go="s4">四·结尾</div>
+    </nav>
+    <button class="ghost-btn" id="allFire">🎆 全屏烟花</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="deco">🎉</div>
+    <h1>员工大会 · 环节亮点交互原型 Demo</h1>
+    <p>这是一份<strong>可点击体验</strong>的原型，不是静态方案。每个卡片都是一个真实可交互的小模块，方便你向 stakeholders 直接演示「现场会是什么感觉」。配色与动效刻意走活泼路线，可按部门 IP 色一键替换。</p>
+    <div class="badges">
+      <span class="badge">💡 新鲜 idea</span>
+      <span class="badge">📚 过往设计参考</span>
+      <span class="badge">🔥 零依赖 · 离线可用</span>
+      <span class="badge">📱 手机也能点</span>
+    </div>
+  </div>
+
+  <!-- ============ 一、开头热场 ============ -->
+  <section class="block" id="s1">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--pink),var(--orange))">1</div>
+      <div><h2>开头热场</h2><div class="sub">把「冷数据」变成「热情绪」，让开场 30 秒就燃起来</div></div>
+    </div>
+
+    <div class="grid g2">
+      <!-- 关键数据回顾 -->
+      <div class="card">
+        <h3>📈 关键数据回顾 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">一年关键数据（修复 Bug 数、客户好评、增长曲线）做成动态可视化，<b>达成某目标时大屏炸烟花</b>——冷数据变热情绪。</p>
+        <div class="kpi-wrap">
+          <div class="kpi"><div class="num" data-to="1286">0</div><div class="lbl">修复 Bug 数</div></div>
+          <div class="kpi"><div class="num" data-to="98" data-suffix="%">0</div><div class="lbl">客户好评率</div></div>
+          <div class="kpi"><div class="num" data-to="237" data-suffix="%">0</div><div class="lbl">业务增长</div></div>
+        </div>
+        <div class="progress"><i id="kpiBar"></i></div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn" id="runKpi">▶ 播放数据动画</button>
+          <button class="btn cyan" id="hitGoal">🎯 达成年度目标·炸烟花</button>
+        </div>
+        <div class="hint">提示：真实场景可接数据看板 API，目标达成自动触发烟花。</div>
+      </div>
+
+      <!-- 播放时光机 -->
+      <div class="card">
+        <h3>⏳ 播放时光机 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">回放团队关键瞬间：群聊名场面、里程碑截图、某次救火的分享。点卡片「播放」进入大屏回放模式。</p>
+        <div class="timeline" id="tl">
+          <div class="tl-card" data-t="群聊名场面" data-e="深夜救火，全员在线刷屏「收到」"><div class="ph">💬</div><div class="t">群聊名场面</div><div class="d">03-12 凌晨</div></div>
+          <div class="tl-card" data-t="里程碑截图" data-e="V3.0 上线，DAU 破 10w"><div class="ph">🏁</div><div class="t">里程碑截图</div><div class="d">06-30</div></div>
+          <div class="tl-card" data-t="救火分享" data-e="一次 P0 故障的完整复盘"><div class="ph">🔥</div><div class="t">救火分享</div><div class="d">09-08</div></div>
+          <div class="tl-card" data-t="客户好评" data-e="客户手写感谢信截图"><div class="ph">💌</div><div class="t">客户好评</div><div class="d">11-20</div></div>
+        </div>
+        <div class="player" id="player">
+          <div style="font-size:13px;opacity:.7">▶ 大屏回放中…</div>
+          <div id="plTitle" style="font-size:18px;font-weight:900;margin-top:6px"></div>
+          <div id="plDesc" style="font-size:13px;margin-top:8px;opacity:.85"></div>
+        </div>
+      </div>
+
+      <!-- 暖场视频 -->
+      <div class="card">
+        <h3>🎬 暖场视频 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">① 客户声音视频（打分/好在哪）② XX岗位的一天（促协同）③ 复用 BG 视频 ④ 主持人 QA 互动开场（猜数字/图/文）。</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <div style="flex:1;min-width:120px;background:#fff0f7;border-radius:12px;padding:12px;font-size:12px;font-weight:700">🎧 客户声音<br><span style="color:#c49a86;font-weight:500">打分 + 好在哪</span></div>
+          <div style="flex:1;min-width:120px;background:#fff0e0;border-radius:12px;padding:12px;font-size:12px;font-weight:700">🎥 岗位的一天<br><span style="color:#c49a86;font-weight:500">促协同</span></div>
+        </div>
+        <button class="btn ghost sm" style="margin-top:10px" onclick="toast('真实场景：此处嵌入视频源，可接腾讯云点播')">▶ 预览暖场视频</button>
+      </div>
+
+      <!-- 数字人视频 -->
+      <div class="card">
+        <h3>🤖 数字人视频 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">把部门形象 IP 生成数字人形象 + 音频，用作大会开场介绍、提醒保密等。制作手册：</p>
+        <div class="mini">🔗 drive.weixin.qq.com/s?k=AJEAIQdfAAoFiMmNV3AaUAsQZIADc<br>🔗 drive.weixin.qq.com/s?k=AJEAIQdfAAonSApCIhAaUAsQZIADc</div>
+        <div style="margin-top:10px;background:linear-gradient(135deg,#FF7A3C,#FF4D8D);border-radius:14px;padding:16px;color:#fff;text-align:center">
+          <div style="font-size:40px">🧑‍💼</div>
+          <div style="font-weight:900;margin-top:6px">Hi，我是部门数字人「小安」</div>
+          <div style="font-size:12px;opacity:.9;margin-top:4px">开场 + 保密提醒可由我代班</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 二、暖场互动 ============ -->
+  <section class="block" id="s2">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--purple),var(--blue))">2</div>
+      <div><h2>暖场互动（可穿插抽奖）</h2><div class="sub">把观众从「坐着看」变成「参与进来」</div></div>
+    </div>
+
+    <div class="grid g3">
+      <!-- 反向述职 -->
+      <div class="card">
+        <h3>🔄 反向述职 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">员工给领导现场打分/提问，领导当场答。把「向上管理」变成公开环节。</p>
+        <div id="scoreList"></div>
+        <input class="fld" id="qaQ" placeholder="向领导提个问题…" />
+        <button class="btn sm" style="margin-top:8px" id="askBtn">📨 现场提问</button>
+        <div class="qa-box" id="qaBox" style="display:none">
+          <div class="q" id="qaQtext"></div>
+          <div class="a">领导当场答：…（演示中由 GM 实时口播）</div>
+        </div>
+      </div>
+
+      <!-- 命运盲盒 -->
+      <div class="card">
+        <h3>🎁 命运盲盒 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">抽奖不只抽实物，抽「被命运选中的体验」：表演才艺 / 项目组准备好的绕口令等。</p>
+        <div class="blindbox" id="blindbox">📦</div>
+        <div class="reveal" id="blindReveal">点击盲盒，看看命运给你安排了啥～</div>
+      </div>
+
+      <!-- 实时弹幕 -->
+      <div class="card">
+        <h3>💬 实时弹幕 <span class="tag tip">TIPS</span></h3>
+        <p class="desc">台上分享时，台下用协作白板实时弹幕 / 举牌互动。</p>
+        <div class="danmu-stage" id="danmuStage"></div>
+        <input class="fld" id="danmuInput" placeholder="发条弹幕…" />
+        <button class="btn cyan sm" style="margin-top:8px" id="danmuBtn">🚀 发射</button>
+      </div>
+
+      <!-- 词云图 -->
+      <div class="card">
+        <h3>☁️ 词云图 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">用于互动 / QA 环节，可借助 AI 产品或微词云生成。</p>
+        <div class="cloud" id="cloud"></div>
+        <div class="mini">🔗 design.weiciyun.com/edit/484bd31fd40b3ee5aa5abc158b1a7ad3</div>
+      </div>
+
+      <!-- 扫码答题 -->
+      <div class="card">
+        <h3>📱 扫码答题 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">腾讯文档收集表，现场扫码答题；趣味版关联智能表格实时展示结果 ⭐×5。</p>
+        <div class="qr" id="qr"></div>
+        <div class="poll-bar"><div class="pl"><span>A. 稳</span><span id="pvA">0%</span></div><div class="pb"><i id="pbA" style="background:var(--pink)"></i></div></div>
+        <div class="poll-bar"><div class="pl"><span>B. 快</span><span id="pvB">0%</span></div><div class="pb"><i id="pbB" style="background:var(--orange)"></i></div></div>
+        <div class="poll-bar"><div class="pl"><span>C. 准</span><span id="pvC">0%</span></div><div class="pb"><i id="pbC" style="background:var(--cyan)"></i></div></div>
+        <button class="btn sm" style="margin-top:6px" id="simVote">🎲 模拟一波投票</button>
+      </div>
+
+      <!-- AI生图/抽奖 -->
+      <div class="card">
+        <h3>🎨 AI生图 / 抽奖 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">员工头像+祝福语 / 老板愿景生成 AI 作品，投票猜作者 / 评选 / 随机抽奖。</p>
+        <div class="wheel-wrap">
+          <div style="position:relative">
+            <div class="wheel-pointer"></div>
+            <div class="wheel" id="wheel">
+              <div class="seg" style="transform:rotate(45deg)">才艺</div>
+              <div class="seg" style="transform:rotate(135deg)">红包</div>
+              <div class="seg" style="transform:rotate(225deg)">咖啡券</div>
+              <div class="seg" style="transform:rotate(315deg)">免加班</div>
+              <div class="wheel-center">🎯</div>
+            </div>
+          </div>
+        </div>
+        <div class="result" id="wheelRes">点击转盘抽奖 →</div>
+        <button class="btn" style="margin-top:8px;width:100%" id="spinBtn">🎰 转!</button>
+        <div class="mini">🤖 roboneo.com 生图 · 抽奖系统.zip</div>
+      </div>
+
+      <!-- 员工talk -->
+      <div class="card">
+        <h3>🎤 员工 talk <span class="tag ref">过往参考</span></h3>
+        <p class="desc">个人/部门 case 融入热梗/rap，脱稿+金句+自黑梗，配轻松 BGM 和梗图 PPT。</p>
+        <div style="background:#1A1430;color:#fff;border-radius:14px;padding:14px;margin-top:8px">
+          <div style="font-size:13px;opacity:.7">🎵 BGM: 轻快 Lo-fi</div>
+          <div style="font-weight:900;margin-top:6px">「我们的 bug，是通往完美的路」</div>
+          <div style="font-size:12px;opacity:.8;margin-top:6px">— 自黑梗 + 金句卡 🃏</div>
+        </div>
+      </div>
+
+      <!-- 新人自我介绍 -->
+      <div class="card">
+        <h3>👋 新人自我介绍 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">选部门新人上台介绍，并让新人来给大家抽奖——破冰 + 福利一步到位。</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          <div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--blue));display:grid;place-items:center;font-size:22px">🧑‍🚀</div>
+          <div><div style="font-weight:800;font-size:14px">新人 · 小新</div><div style="font-size:11px;color:#c49a86">「大家好，我来抽第一位幸运儿」</div></div>
+        </div>
+        <button class="btn cyan sm" style="margin-top:10px" onclick="toast('真实场景：新人点击抽奖系统抽取')">🎁 新人代抽</button>
+      </div>
+
+      <!-- 现场寻宝 -->
+      <div class="card">
+        <h3>🔍 现场寻宝 <span class="tag ref">过往参考</span></h3>
+        <p class="desc">把「宝藏凭证」随机贴在员工桌/椅下方，互动环节让找到的人上台领奖。</p>
+        <div style="text-align:center;margin-top:8px">
+          <div style="font-size:46px">🪑🔎</div>
+          <div style="font-size:13px;font-weight:800;margin-top:6px">你的椅子下有贴纸吗？</div>
+          <button class="btn sm" style="margin-top:10px" id="treasureBtn">🫳 翻一下我的椅子</button>
+          <div class="reveal" id="treasureRes"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>📖 答案之书 + QA 联动 <span class="tag ref">过往参考</span></h3>
+      <p class="desc">可借用 BG 文化组「答案之书」回答问题/点评项目/导入小结；QA 环节可联动答案之书增加趣味，或让员工线上作答看与 GM 是否「心有灵犀」。</p>
+      <button class="btn ghost" id="ansBook">📖 翻开答案之书</button>
+      <span class="reveal" id="ansText" style="margin-left:10px"></span>
+    </div>
+  </section>
+
+  <!-- ============ 三、颁奖 ============ -->
+  <section class="block" id="s3">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--orange),var(--yellow))">3</div>
+      <div><h2>颁奖</h2><div class="sub">高光时刻，给荣誉最体面的仪式感</div></div>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <h3>🏆 GM 颁奖 <span class="tag ref">参考</span></h3>
+        <p class="desc">老板/GM 颁奖，准备花束 / 锦旗 / 奖杯。点奖杯触发颁奖特效。</p>
+        <div class="trophy-stage">
+          <div class="trophy" id="trophy">🏆</div>
+          <div class="award-pills">
+            <span class="pill" data-a="🌹 花束">🌹 花束</span>
+            <span class="pill" data-a="🎖 锦旗">🎖 锦旗</span>
+            <span class="pill" data-a="🏆 奖杯">🏆 奖杯</span>
+          </div>
+          <div class="reveal" id="awardRes">点击奖杯 → 颁奖！</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🎞 AE 颁奖视频 <span class="tag ref">参考</span></h3>
+        <p class="desc">由 AE 团队制作的颁奖专属视频，配合获奖名单滚动。</p>
+        <div style="background:#1A1430;border-radius:14px;height:120px;display:grid;place-items:center;color:#fff;margin-top:8px">
+          <div style="text-align:center"><div style="font-size:34px">🎬</div><div style="font-size:12px;opacity:.8">AE 颁奖视频 · 点击播放</div></div>
+        </div>
+        <button class="btn ghost sm" style="margin-top:10px" onclick="toast('真实场景：此处接入 AE 视频源')">▶ 播放</button>
+      </div>
+      <div class="card">
+        <h3>🖼 获奖人 AI 二次生图 <span class="tag ref">参考</span></h3>
+        <p class="desc">获奖人照片或用 AI 二次生图，作为荣誉墙 / 纪念卡片。</p>
+        <div style="text-align:center;margin-top:8px">
+          <div style="font-size:56px">✨🧑‍💼✨</div>
+          <div style="font-size:12px;color:#c49a86;margin-top:6px">AI 把获奖照变成「殿堂级海报」</div>
+          <button class="btn sm" style="margin-top:10px" onclick="toast('真实场景：接 AI 生图生成荣誉海报')">🪄 生成荣誉海报</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 四、结尾 ============ -->
+  <section class="block" id="s4">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--cyan),var(--blue))">4</div>
+      <div><h2>结尾</h2><div class="sub">让大会的余温延续到群里、到晚上</div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>💡 金句海报墙 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">把大会金句做成大屏（可提前准备，也可现场用词云图），结束时大合影。</p>
+        <div class="quote-grid" id="quoteGrid"></div>
+        <button class="btn" style="margin-top:12px;width:100%" id="groupPhoto">📸 全场大合影</button>
+      </div>
+      <div class="card">
+        <h3>🎞 精彩混剪视频 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">把现场片段及时剪辑为混剪，发到大群，再过渡到晚上的年会。</p>
+        <div style="background:linear-gradient(135deg,#1A1430,#3a2b66);border-radius:16px;height:150px;
+          display:grid;place-items:center;color:#fff;margin-top:8px">
+          <div style="text-align:center"><div style="font-size:40px">🎥✨</div>
+          <div style="font-size:13px;font-weight:800;margin-top:6px">现场混剪 · 实时出片</div>
+          <div style="font-size:11px;opacity:.8">→ 发大群 → 接年会</div></div>
+        </div>
+        <button class="btn cyan" style="margin-top:12px;width:100%" onclick="toast('真实场景：剪辑师实时产出，推送大群')">▶ 播放混剪</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    🎉 员工大会环节亮点交互原型 · 零依赖离线 HTML<br>
+    配色变量集中在 <code>:root</code>，可一键换成部门 IP 色 ｜ 每个模块均可独立抽出成独立页
+  </footer>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 通用 ============ */
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800);}
+
+/* 导航 */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.go).scrollIntoView({behavior:'smooth'});
+});
+
+/* ============ 一、数据回顾 + 烟花 ============ */
+function countUp(el){
+  const to=+el.dataset.to, suf=el.dataset.suffix||'';
+  let cur=0;const step=Math.max(1,Math.ceil(to/60));
+  const t=setInterval(()=>{cur+=step;if(cur>=to){cur=to;clearInterval(t);}el.textContent=cur+suf;},22);
+}
+document.getElementById('runKpi').onclick=()=>{
+  document.querySelectorAll('.num[data-to]').forEach(countUp);
+  const bar=document.getElementById('kpiBar');bar.style.width='0';
+  requestAnimationFrame(()=>bar.style.width='86%');
+};
+document.getElementById('hitGoal').onclick=()=>{
+  const bar=document.getElementById('kpiBar');bar.style.width='100%';
+  document.querySelectorAll('.num[data-to]').forEach(countUp);
+  fireworksBurst();toast('🎯 年度目标达成！大屏炸烟花！');
+};
+
+/* 烟花 canvas */
+const cv=document.getElementById('fwCanvas'),ctx=cv.getContext('2d');
+let parts=[],rafOn=false;
+function resize(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resize);resize();
+function fireworksBurst(x,y){
+  x=x||innerWidth/2;y=y||innerHeight*0.4;
+  const colors=['#FF4D8D','#FF9F1C','#7C4DFF','#00D9C0','#4D96FF','#FFD93D'];
+  for(let i=0;i<90;i++){
+    const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;
+    parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,
+      life:1,color:colors[Math.floor(Math.random()*colors.length)],r:Math.random()*2+1.5});
+  }
+  if(!rafOn){rafOn=true;loop();}
+}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.vy+=0.06;p.life-=0.012;
+    ctx.globalAlpha=Math.max(p.life,0);ctx.fillStyle=p.color;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();
+  });
+  ctx.globalAlpha=1;parts=parts.filter(p=>p.life>0);
+  if(parts.length)requestAnimationFrame(loop);else rafOn=false;
+}
+document.getElementById('allFire').onclick=()=>{
+  for(let i=0;i<5;i++)setTimeout(()=>fireworksBurst(innerWidth*(0.2+Math.random()*0.6),innerHeight*(0.25+Math.random()*0.3)),i*220);
+};
+
+/* 时光机 */
+document.querySelectorAll('#tl .tl-card').forEach(c=>c.onclick=()=>{
+  const p=document.getElementById('player');p.classList.add('show');
+  document.getElementById('plTitle').textContent='▶ '+c.dataset.t;
+  document.getElementById('plDesc').textContent=c.dataset.e;
+  fireworksBurst();
+});
+
+/* ============ 二、反向述职 ============ */
+const leaders=[{n:'GM 小王',s:0},{n:'总监 老李',s:0},{n:'老板 阿强',s:0}];
+const sl=document.getElementById('scoreList');
+leaders.forEach((l,i)=>{
+  const row=document.createElement('div');row.className='score-row';
+  row.innerHTML=`<span class="name">${l.n}</span><span class="stars" data-i="${i}"></span>`;
+  sl.appendChild(row);
+  const st=row.querySelector('.stars');
+  for(let k=1;k<=5;k++){
+    const s=document.createElement('span');s.className='s';s.textContent='⭐';
+    s.onclick=()=>{l.s=k;[...st.children].forEach((c,idx)=>c.classList.toggle('on',idx<k));
+      toast(`已给 ${l.n} 打 ${k} 星`);};
+    st.appendChild(s);
+  }
+});
+document.getElementById('askBtn').onclick=()=>{
+  const q=document.getElementById('qaQ').value.trim();if(!q){toast('先写个问题～');return;}
+  const box=document.getElementById('qaBox');box.style.display='block';
+  document.getElementById('qaQtext').textContent='Q：'+q;
+  toast('问题已投屏，等 GM 当场答 🎤');
+};
+
+/* 命运盲盒 */
+const fates=['🎤 表演一段才艺','📜 念项目组准备的绕口令','🤝 随机拥抱一位同事','🎁 抽中「免加班一天」','💃 即兴跳 15 秒','🧠 回答一个灵魂拷问'];
+document.getElementById('blindbox').onclick=function(){
+  this.classList.add('open');setTimeout(()=>this.classList.remove('open'),500);
+  const f=fates[Math.floor(Math.random()*fates.length)];
+  document.getElementById('blindReveal').textContent='命运安排你：'+f+'！';
+  fireworksBurst();
+};
+
+/* 弹幕 */
+const danmuStage=document.getElementById('danmuStage');
+function sendDanmu(text,color){
+  const d=document.createElement('div');d.className='danmu';d.textContent=text;
+  d.style.top=(Math.random()*70+10)+'%';
+  d.style.color=color||['#FFD93D','#00D9C0','#FF4D8D','#fff'][Math.floor(Math.random()*4)];
+  danmuStage.appendChild(d);setTimeout(()=>d.remove(),7000);
+}
+document.getElementById('danmuBtn').onclick=()=>{
+  const v=document.getElementById('danmuInput').value.trim();if(!v)return;
+  sendDanmu(v);document.getElementById('danmuInput').value='';
+};
+['老板稳！','这波操作 6','学到了','哈哈哈哈','+1'].forEach((t,i)=>setTimeout(()=>sendDanmu(t),i*900));
+
+/* 词云 */
+const words=[['AI',34],['协作',26],['救火',30],['增长',28],['客户第一',22],['稳',20],['快',18],['靠谱',24],['创新',26],['一起',16],['破局',22],['热爱',20]];
+const cloud=document.getElementById('cloud');
+words.forEach((w,i)=>{
+  const s=document.createElement('span');s.textContent=w[0];
+  s.style.fontSize=w[1]+'px';
+  s.style.left=(Math.random()*78+4)+'%';s.style.top=(Math.random()*72+6)+'%';
+  s.style.color=['#FF4D8D','#7C4DFF','#4D96FF','#FF9F1C','#00D9C0'][i%5];
+  s.style.animationDelay=(Math.random()*4)+'s';
+  cloud.appendChild(s);
+});
+
+/* 扫码答题 */
+const qr=document.getElementById('qr');
+const pat=[1,1,1,0,1,1,0,1,1,0,0,1,1,1,1,0,1,0,1,1,1,0,0,1,1,1,0,1,1,0,1,1,0,1,1,1,1,0,1,1,0,1,0,1,1,1,1];
+for(let i=0;i<49;i++){const c=document.createElement('i');if(pat[i%pat.length])c.className='o';qr.appendChild(c);}
+function renderPoll(a,b,c){const tot=a+b+c;(()=>{const pa=Math.round(a/tot*100),pb=Math.round(b/tot*100),pc=100-pa-pb;
+  document.getElementById('pbA').style.width=pa+'%';document.getElementById('pvA').textContent=pa+'%';
+  document.getElementById('pbB').style.width=pb+'%';document.getElementById('pvB').textContent=pb+'%';
+  document.getElementById('pbC').style.width=pc+'%';document.getElementById('pvC').textContent=pc+'%';})();}
+renderPoll(12,8,5);
+document.getElementById('simVote').onclick=()=>{
+  renderPoll(10+Math.floor(Math.random()*30),8+Math.floor(Math.random()*20),6+Math.floor(Math.random()*15));
+  toast('已模拟一波实时投票 ⭐');
+};
+
+/* 抽奖转盘 */
+const wheel=document.getElementById('wheel');const segs=['才艺','红包','咖啡券','免加班'];
+let spinning=false;
+document.getElementById('spinBtn').onclick=()=>{
+  if(spinning)return;spinning=true;
+  const turn=360*5+Math.floor(Math.random()*360);
+  wheel.style.transform='rotate('+turn+'deg)';
+  setTimeout(()=>{
+    const idx=Math.floor(((360-(turn%360))/90))%4;
+    document.getElementById('wheelRes').textContent='🎉 抽中：'+segs[idx]+'！';
+    fireworksBurst();spinning=false;
+  },3300);
+};
+
+/* 答案之书 + 寻宝 + 颁奖 + 金句 + 合影 */
+const answers=['稳住，能赢','向前一步','听客户的','再快一点','相信团队','今天值得庆祝'];
+document.getElementById('ansBook').onclick=()=>{
+  document.getElementById('ansText').textContent='「'+answers[Math.floor(Math.random()*answers.length)]+'」';
+};
+document.getElementById('treasureBtn').onclick=()=>{
+  const hit=Math.random()>0.5;
+  document.getElementById('treasureRes').textContent=hit?'🎉 找到了！上台领奖～':'😅 这次没有，下个环节再翻翻';
+  if(hit)fireworksBurst();
+};
+document.querySelectorAll('.pill').forEach(p=>p.onclick=()=>{
+  document.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');
+  const r=document.getElementById('awardRes');r.textContent='🎉 '+p.dataset.a+'已颁出！';fireworksBurst();
+});
+document.getElementById('trophy').onclick=()=>{fireworksBurst();document.getElementById('awardRes').textContent='🏆 荣誉时刻！';};
+
+const quotes=[['这一年，我们稳稳的','— GM'],['慢一点，想十分','— Alan'],['AI 不是替代，是放大','— 文化组'],['每一个 bug 都是路标','— 研发'],['客户的声音，是我们北极星','— 售前'],['在一起，才了不起','— 全员']];
+const qg=document.getElementById('quoteGrid');
+quotes.forEach(q=>{const d=document.createElement('div');d.className='quote';
+  d.innerHTML=q[0]+'<span class="by">'+q[1]+'</span>';qg.appendChild(d);});
+document.getElementById('groupPhoto').onclick=()=>{
+  toast('📸 咔嚓！全场大合影已生成');
+  for(let i=0;i<3;i++)setTimeout(()=>fireworksBurst(innerWidth*(0.3+Math.random()*0.4),innerHeight*0.3),i*200);
+};
+
+/* 开场自动来一发 */
+setTimeout(()=>fireworksBurst(innerWidth*0.5,innerHeight*0.35),600);
+</script>
+</body>
+</html>

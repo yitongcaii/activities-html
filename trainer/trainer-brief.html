@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>讲师小提纲（通用版）</title>
+<style>
+  :root{
+    --accent:#FF7A45;
+    --accent-soft:#FFF1E8;
+    --ink:#2b2b2b;
+    --muted:#8a8a8a;
+    --line:#e3e3e3;
+    --tipbg:#FFF8E1;
+    --tipbd:#FFE08A;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);margin:0;padding:32px;background:#fafafa;}
+  .wrap{max-width:880px;margin:0 auto;background:#fff;padding:36px 40px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-radius:12px;}
+  header{border-bottom:3px solid var(--accent);padding-bottom:14px;margin-bottom:22px;}
+  h1{font-size:26px;margin:0 0 6px;color:var(--accent);}
+  .sub{color:var(--muted);font-size:13px;}
+  h2{font-size:18px;margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
+  h2 .tag{background:var(--accent);color:#fff;font-size:12px;padding:2px 8px;border-radius:20px;}
+  .card{background:#fcfcfc;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px;}
+  label{display:block;font-weight:600;margin:12px 0 4px;font-size:14px;}
+  input[type=text],textarea{width:100%;border:none;border-bottom:1px dashed #c9c9c9;background:transparent;font-size:14px;padding:6px 2px;font-family:inherit;color:var(--ink);}
+  textarea{resize:vertical;min-height:46px;border:1px dashed #c9c9c9;border-radius:6px;padding:8px;}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent);}
+  .row{display:flex;gap:12px;flex-wrap:wrap;}
+  .row > div{flex:1;min-width:140px;}
+  .tip{background:var(--tipbg);border-left:4px solid var(--tipbd);padding:8px 12px;font-size:12.5px;color:#6b5b00;border-radius:0 6px 6px 0;margin-top:8px;line-height:1.5;}
+  .redline{background:var(--accent-soft);border:1px solid #ffd2bd;border-radius:10px;padding:14px 18px;font-size:13.5px;line-height:1.9;}
+  .redline b{color:var(--accent);}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--accent-soft);color:var(--accent);}
+  .menu-note{font-size:12.5px;color:var(--muted);margin-top:6px;}
+  .print-btn{position:fixed;top:18px;right:18px;background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:14px;cursor:pointer;box-shadow:0 2px 8px rgba(255,122,69,.4);}
+  footer{margin-top:24px;font-size:12px;color:var(--muted);text-align:center;}
+  @media print{
+    body{background:#fff;padding:0;}
+    .wrap{box-shadow:none;max-width:none;padding:0 8px;}
+    .print-btn{display:none;}
+    .card,.redline,table{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨 打印 / 存PDF</button>
+<div class="wrap">
+  <header>
+    <h1>讲师小提纲（通用版）</h1>
+    <div class="sub">培训前 HRBP 与讲师对齐 · 约 15 分钟填完 · 讲师照着备、照着讲</div>
+  </header>
+
+  <h2><span class="tag">A</span> 训前对齐（HRBP 填，来自 TNA）</h2>
+  <div class="card">
+    <label>1. 核心目的（行为化）：学完学员能 ______</label>
+    <input type="text" placeholder="例：独立用新工具完成一次客户配置">
+    <label>2. 学员是谁 / 什么基础</label>
+    <div class="row">
+      <div><input type="text" placeholder="新人 / 熟手 / 混合"></div>
+      <div><input type="text" placeholder="已知（基础）"></div>
+    </div>
+    <label>3. 不训会怎样 / 训了业务有何不同</label>
+    <input type="text" placeholder="例：客诉率持续偏高 / 交付提速 30%">
+  </div>
+
+  <h2><span class="tag">B</span> 讲师骨架（填要点，不写稿）</h2>
+
+  <div class="card">
+    <label>4. 开场钩子（1 句话抓注意力，别念标题）</label>
+    <textarea placeholder="例：上次我们因为一个话术失误，丢了一个大客户……"></textarea>
+    <div class="tip">💡 别念"今天我们讲…"。三选一：①真实翻车故事 ②反常识数字 ③抛给全场的提问。"钩子"= 让学员第 1 分钟就抬头。</div>
+  </div>
+
+  <div class="card">
+    <label>5. 今天只讲 3 件事（多了记不住）</label>
+    <div class="row">
+      <div><input type="text" placeholder="①"></div>
+      <div><input type="text" placeholder="②"></div>
+      <div><input type="text" placeholder="③"></div>
+    </div>
+    <div class="tip">💡 先列 10 点再砍到 3。判断："如果不讲这句，学员回去会少做啥？"少做的才留。</div>
+  </div>
+
+  <div class="card">
+    <label>6. 每点 1 个真实案例 / 故事（别只讲概念）</label>
+    <textarea placeholder="对应①②③，写真实事件 + 情绪 + 结果"></textarea>
+    <div class="tip">💡 用你自己/团队的真事，带情绪和结果。一个真例子 > 十句定义。没案例现在问业务要一个。</div>
+  </div>
+
+  <div class="card">
+    <label>7. 时间分配（分钟）</label>
+    <div class="row">
+      <div><input type="text" placeholder="开场"></div>
+      <div><input type="text" placeholder="点1"></div>
+      <div><input type="text" placeholder="点2"></div>
+      <div><input type="text" placeholder="点3"></div>
+      <div><input type="text" placeholder="收尾"></div>
+    </div>
+    <div class="tip">💡 互动也要算时间！别把练习时间吃掉导致拖堂。单模块别超 20 分钟连讲。</div>
+  </div>
+
+  <div class="card">
+    <label>8. 互动点（至少 2 处，见下方技法菜单）</label>
+    <textarea placeholder="例：点1后→技法2（邻座30秒）；点2后→技法6（两两role-play）"></textarea>
+    <div class="tip">💡 互动不是"有没有"，是"放对地方"：讲完一个难点立刻练，比结尾集中答疑有效 3 倍。直接抄菜单编号即可。</div>
+  </div>
+
+  <div class="card">
+    <label>9. 收尾（一句话总结 + 回岗动作）</label>
+    <textarea placeholder="例：今天核心就一句____；回去先做____"></textarea>
+    <div class="tip">💡 让学员自己说"回去先做哪一件"，比讲师替他们总结记得牢。收尾 = 把"学到"变"做到"。</div>
+  </div>
+
+  <div class="card">
+    <label>10. 怎么知道学会没（随堂小测 / 练习验收）</label>
+    <textarea placeholder="例：邻座互讲 1 分钟 + 1 道小测题"></textarea>
+    <div class="tip">💡 别只靠"听懂没"（没人说没懂）。用 1 道小测 / 一次邻座互讲 / 一个现场演练验收。</div>
+  </div>
+
+  <h2><span class="tag">C</span> 讲师红线（打印随讲义）</h2>
+  <div class="redline">
+    <b>❌ 不念 PPT</b>：PPT 是提词，不是台词　|　<b>❌ 少概念多举例</b>：一个真例子顶十句定义<br>
+    <b>⏱ 每 15–20 分钟一次互动</b>，别连讲超 20 分钟　|　<b>💡 先讲"为什么重要"再讲"怎么做"</b>，学员才听<br>
+    <b>❌ 留答疑时间，不拖堂</b>
+  </div>
+
+  <h2><span class="tag">+</span> 互动技法菜单（讲师直接挑编号）</h2>
+  <table>
+    <tr><th>#</th><th>技法</th><th>怎么做（30 秒上手）</th><th>适合</th></tr>
+    <tr><td>1</td><td>二选一举手</td><td>"你更认同 A 还是 B？"全场举手</td><td>观点类</td></tr>
+    <tr><td>2</td><td>邻座 30 秒</td><td>转头对旁边人说一句"这点我遇到过…"</td><td>破沉默/暖场</td></tr>
+    <tr><td>3</td><td>快速小测</td><td>腾讯文档/问卷 1–2 题当场测</td><td>检验学会没</td></tr>
+    <tr><td>4</td><td>案例接龙</td><td>给半截真实场景，学员接"你会怎么回"</td><td>练判断</td></tr>
+    <tr><td>5</td><td>弹幕/留言</td><td>共享文档实时打字，内向/异地也能参与</td><td>全员/异地</td></tr>
+    <tr><td>6</td><td>两两 role-play</td><td>邻座互演客户/员工 2 分钟</td><td>沟通/客服技能</td></tr>
+    <tr><td>7</td><td>温柔点名</td><td>"听听还没发言的 XX 怎么看"</td><td>拉齐参与</td></tr>
+    <tr><td>8</td><td>倒计时挑战</td><td>给 1 分钟写"今天最该改的 1 件事"</td><td>收尾固化</td></tr>
+  </table>
+  <div class="menu-note">用法：在 B8 那行直接写"点1后→技法2，点2后→技法6"，对着菜单抄编号即可，零门槛。</div>
+
+  <footer>通用模板 · 换任何主题（产品训 / 合规训 / 工具训）A/B/C 三块都不用改 · HRBP 与讲师对齐工具</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>员工大会 · 环节设计（SOP）</title>
+<style>
+  :root{
+    --bg:#f6f4ff; --card:#ffffff; --ink:#1f1733; --sub:#6b6280;
+    --purple:#7c3aed; --pink:#ec4899; --accent:#06b6d4; --line:#ece8f7;
+    --orange:#fb923c; --teal:#14b8a6; --blue:#6366f1; --gold:#f59e0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+    background:radial-gradient(1100px 520px at 12% -8%,#ffe9f6 0%,var(--bg) 52%) fixed,var(--bg);
+    color:var(--ink);line-height:1.7;padding-bottom:70px}
+  header{text-align:center;padding:50px 20px 42px;color:#fff;
+    background:linear-gradient(120deg,var(--purple),var(--pink) 55%,var(--accent));
+    clip-path:polygon(0 0,100% 0,100% 88%,0 100%);box-shadow:0 14px 36px rgba(124,58,237,.2)}
+  header .kicker{font-size:13px;opacity:.9;letter-spacing:2px}
+  header h1{font-size:30px;font-weight:800;margin-top:8px;text-shadow:0 4px 18px rgba(0,0,0,.16)}
+  header p{opacity:.95;font-size:14px;margin-top:8px}
+  .doc{max-width:960px;margin:0 auto;padding:30px 22px 0}
+  .chunk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-top:22px;box-shadow:0 6px 20px rgba(80,40,120,.06)}
+  .chunk h2{font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .chunk h2::before{content:"";width:6px;height:22px;border-radius:3px;background:linear-gradient(var(--purple),var(--pink))}
+  .chunk h3{font-size:16px;font-weight:700;margin:16px 0 8px;color:#3a2b5e}
+  .note{background:#f3eefb;border-left:4px solid var(--purple);padding:12px 16px;border-radius:10px;color:#4a3b6e;font-size:13.5px;margin:12px 0}
+  .note.warn{background:#fff3e6;border-left-color:var(--orange);color:#7a4b16}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;overflow:hidden;border-radius:12px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:linear-gradient(120deg,var(--purple),var(--pink));color:#fff;font-weight:700}
+  tbody tr:nth-child(even){background:#faf8ff}
+  .backlink{display:inline-block;margin:26px 0 0;color:#fff;text-decoration:none;font-size:13px;font-weight:700;
+    background:linear-gradient(120deg,var(--purple),var(--pink));padding:9px 18px;border-radius:30px}
+  .backlink:hover{filter:brightness(1.1)}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:40px;padding:0 20px;line-height:1.9}
+  .meta{font-size:12px;color:var(--sub);margin-top:4px}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">员工大会 · 标准作业流程</div>
+  <h1>员工大会 SOP（环节设计）</h1>
+  <p>文化活动标准流程 · 筹备 · 执行 · 复盘</p>
+</header>
+
+<main class="doc">
+  <div class="note">文档类型：员工大会 SOP（标准作业流程）｜适用范围：员工大会 / 大型线下全员沟通会｜用法：先厘清 Why，再按 会前→会中→会后 推进，每项落实「环节 / 内容 / 责任人 / 完成标准」。本文件是标准流程，避坑点 / Checklist / Rundown 为配套文件。</div>
+
+  <div class="chunk">
+    <h2>零、厘清 Why（策划起点）</h2>
+    <p>动手前先对齐 <b>Why</b>，再定 How / What。想不清为什么开，流程再细也白搭。每次办会前用以下维度确认本次 Why + 可衡量目标，写进会议框架：</p>
+    <table>
+      <thead><tr><th>Why 维度</th><th>说明（范本，按本次改写）</th><th>可衡量的预期结果</th></tr></thead>
+      <tbody>
+        <tr><td>对齐战略方向</td><td>让全员清楚部门/业务往哪走、重点是什么</td><td>会后调研 ≥x% 员工能说清本期战略重点</td></tr>
+        <tr><td>传递组织与价值观</td><td>文化入脑、入眼、入心，强化认同感</td><td>价值观相关金句/案例传播覆盖全员</td></tr>
+        <tr><td>凝聚共识与信任</td><td>消除信息差、答疑解惑，拉近老板与员工距离</td><td>QA 覆盖共性疑问 ≥x 条，老板有效回应率</td></tr>
+        <tr><td>表彰激励与仪式感</td><td>认可贡献、提振士气</td><td>表彰覆盖关键人群，满意度 ≥x%</td></tr>
+      </tbody>
+    </table>
+    <p class="meta">提示：本表是维度范本，不是固定答案。每次结合大会主题填具体 Why 与期望结果。案例：安全直通车「让大家了解为什么要调、怎么调」；医疗「使命愿景首次发布入脑入心」。</p>
+  </div>
+
+  <div class="chunk">
+    <h2>一、会前准备 · 内容优先（⭐⭐⭐⭐⭐ 最高优先级）</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>会议框架</td><td>明确形式、目标、设计思路、环节、希望达到的结果</td><td>BP</td><td>提前至少 1 周整理完毕，与 BP leader 对齐</td></tr>
+        <tr><td>发言人稿件</td><td>会上所有发言人（发言基干/员工）的材料与逐字稿把关</td><td>BP & ABP</td><td>稿件定稿、口径对齐</td></tr>
+        <tr><td>发言人稿件</td><td>主持人稿把关（可借元宝等 AI 助手辅助）</td><td>BP & ABP</td><td>稿件定稿、口径对齐</td></tr>
+        <tr><td>QA 收集</td><td>至少提前 1 周回收问卷，对齐问答建议 & 老板分工（匿名用腾讯问卷，实名用部门 KM/腾讯文档）</td><td>BP</td><td>问卷回收完毕、问答分工对齐</td></tr>
+        <tr><td>高管谈参</td><td>Dowson、线负责人、GM 的发言要点建议</td><td>BP & ABP</td><td>谈参清单输出</td></tr>
+        <tr><td>高管照片</td><td>如需高管照片，提前与高管秘书对齐，确认职位展示描述（中台可联系 kellyyzhang 取 Dowson 照片）</td><td>ABP</td><td>照片与职位描述确认</td></tr>
+        <tr><td>参会指引</td><td>准备 Dowson、线负责人、GM 的大会指引，明确参与哪些环节、需回答什么</td><td>BP</td><td>提前至少 3 天整理完毕、与 BP leader 对齐并发送相关方</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>二、会前准备 · 运营落地</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>场地时间预定</td><td>会议场地、彩排场地&时间、老板时间，提前发日历 book 住</td><td>BP & 秘书</td><td>联动秘书至少提前半个月确认</td></tr>
+        <tr><td>场地时间预定</td><td>线下参会日历勿附带会议码，白名单单独发</td><td>BP & 秘书</td><td>联动秘书至少提前半个月确认</td></tr>
+        <tr><td>技术侧保障</td><td>腾讯会议/Webinar 线上限 300 人，超出需申请扩容</td><td>ABP & 秘书</td><td>提前 1 周完成设备确认 & 扩容</td></tr>
+        <tr><td>技术侧保障</td><td>乐享找技术支持</td><td>ABP & 秘书</td><td>提前 1 周完成设备确认 & 扩容</td></tr>
+        <tr><td>技术侧保障</td><td>现场多地连线提前联调彩排+预案，接有线网络、调试收音与清晰度</td><td>ABP & 秘书</td><td>提前 1 周完成设备确认 & 扩容</td></tr>
+        <tr><td>技术侧保障</td><td>正式会用「研讨会」（嘉宾/观众分离、可禁聊移出）</td><td>ABP & 秘书</td><td>提前 1 周完成设备确认 & 扩容</td></tr>
+        <tr><td>技术侧保障</td><td>外籍同事开实时翻译</td><td>ABP & 秘书</td><td>提前 1 周完成设备确认 & 扩容</td></tr>
+        <tr><td>技术侧保障</td><td>嘉宾线上接入需开视频时，提前设置会议背景图</td><td>ABP & 秘书</td><td>会前设置完毕</td></tr>
+        <tr><td>技术侧保障</td><td>线下大会议室（如数码大厦北塔15F）有控台，可开启语音实时翻译显示在大屏</td><td>ABP & 秘书 & 控台</td><td>会前与控台确认翻译屏可用性</td></tr>
+        <tr><td>技术侧保障</td><td>直播间/控台一体机兼容性检查；rooms 如需开摄像头并录像，需额外在 rooms 上点录屏</td><td>ABP & 秘书 & 控台</td><td>会前完成兼容性确认 & 录屏设置</td></tr>
+        <tr><td>场地布置</td><td>讲台主 KV 包边、横幅</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>2 个易拉宝（场内议程/场外指引）</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>KT 板传价值观</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>座位手举牌</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>嘉宾椅贴 + 老板座次图</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>饮品 / 瓶装水</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>互动环节备礼品</td><td>ABP & 秘书</td><td>提前 1 周下单制作，提前 2 天物料全部到位</td></tr>
+        <tr><td>场地布置</td><td>座位数量控制：只摆与人数正好的座位，旁边另备留一些，集中座位、引导靠前坐</td><td>ABP & 秘书</td><td>会前布置完成</td></tr>
+        <tr><td>场地布置</td><td>可找会服提供会议室测量服务；更多预算可联动秘书脑暴（茶歇/签到板/更多氛围布置）</td><td>ABP & 秘书</td><td>按需</td></tr>
+        <tr><td>rundown & 彩排</td><td>制作 rundown（明确分工+流程），打印人手一份</td><td>ABP & 秘书</td><td>rundown 提前 1 周制作完</td></tr>
+        <tr><td>rundown & 彩排</td><td>talker 彩排 2–3 次，全脱稿流畅</td><td>ABP & 秘书</td><td>彩排提前 1–2 天完成</td></tr>
+        <tr><td>rundown & 彩排</td><td>主持人彩排 2–3 次，与控台配合流畅、至少半脱稿</td><td>ABP & 秘书</td><td>彩排提前 1–2 天完成</td></tr>
+        <tr><td>rundown & 彩排</td><td>发言人穿衣风格是否结合主题统一</td><td>ABP & 秘书</td><td>彩排提前 1–2 天完成</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>三、环节设计参考（持续更新的「宝藏」库）</h2>
+    <table>
+      <thead><tr><th>模块</th><th>参考内容</th><th>目标</th></tr></thead>
+      <tbody>
+        <tr><td>音乐素材</td><td>暖场轻松音乐 / 结尾激昂音乐 / 上场音乐 / 互动音乐（员工大会音乐集）</td><td>保证氛围不冷场</td></tr>
+        <tr><td>暖场视频</td><td>客户声音收集 /「XX 岗位的一天」跟拍 / 复用 BG 视频 / 主持人 QA 互动开场 / 暖场数字人开场</td><td>贴合主题、做好导入</td></tr>
+        <tr><td>游戏互动锦集</td><td>团建小游戏汇总 / 训练游戏大全</td><td>热场</td></tr>
+        <tr><td>互动环节参考</td><td>答案之书 / 扫码答题 / 词云图 / 数智人主持 / AI 生图音频视频抽奖 / 员工 talk / 新人介绍抽奖 / 现场寻宝 / 员工问卷感谢+抽奖 / QA 心有灵犀</td><td>提高参与度、让大家投入</td></tr>
+        <tr><td>颁奖环节参考</td><td>老板/GM 颁奖（花束&锦旗&奖杯&礼品）/ AE 颁奖视频 / 配颁奖音乐</td><td>表彰仪式感</td></tr>
+        <tr><td>补充装备包</td><td>年会素材合集（夸克链接）+ BGM 流程音乐包</td><td>资源复用、快速筹备</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>四、会中关注 · 现场执行</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>签到与暖场</td><td>主持人、分享人、领奖人提前到场并安排靠前座位；员工入场引导往前坐</td><td>ALL</td><td>保证大会顺利开展</td></tr>
+        <tr><td>签到与暖场</td><td>线上开启等候室，工作人员监控静音；异地同事改视频设备名为地区，提前进会议室；提前打开会议录制</td><td>ALL</td><td>保证大会顺利开展</td></tr>
+        <tr><td>签到与暖场</td><td>提前 30 min 播放暖场音乐/视频，开放签到</td><td>ALL</td><td>保证大会顺利开展</td></tr>
+        <tr><td>签到与暖场</td><td>主持人台侧强调纪律（手机静音、不截屏录屏等）</td><td>ALL</td><td>保证大会顺利开展</td></tr>
+        <tr><td>现场分工</td><td>工作人员按 rundown 分工各司其职，突发问题及时工作群对齐</td><td>ALL</td><td>保证大会顺利开展</td></tr>
+        <tr><td>互动环节</td><td>线上加入的嘉宾/员工，在 QA 或扫码互动时，线上公告栏同步发链接（非二维码），手机端直接点开参与</td><td>ALL</td><td>保证大会顺利开展</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>五、会后回顾 · 沉淀与传播</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>问卷收集</td><td>会后即时发问卷收反馈建议（工具：企微群/KM/云知）</td><td>ABP</td><td>覆盖率达 100%；会后即时发；汇总≥x 条可落地改进建议</td></tr>
+        <tr><td>录屏沉淀</td><td>保留录屏内容沉淀部门云知或 KM</td><td>ABP</td><td>需剪辑则 1 周内上传；不需剪辑 3 天内上传</td></tr>
+        <tr><td>内容生产·二次传播</td><td>会议纪要提炼：各环节小结、战略导向、CVP/线负责人/GM/总监对共性问题的有效回应；借 AI 做发言小结脑图；跟进 todo</td><td>BP & ABP & 秘书</td><td>含核心议程/老板要点/环节小结/金句；突出 HR 视角「关键价值传递」</td></tr>
+        <tr><td>内容生产·二次传播</td><td>传播途径：海报 / 云知&KM 文字 / 金句海报，经公邮、企微/群、平台后台推全员</td><td>BP & ABP & 秘书</td><td>涉老板确认最晚 1 周内发；不涉及则第 2–3 天发</td></tr>
+        <tr><td>内容生产·二次传播</td><td>传播复盘：渠道覆盖、话题延续性、关键人群阅读反馈、各部门覆盖</td><td>BP & ABP & 秘书</td><td>形成复盘结论，指导下次</td></tr>
+        <tr><td>内容生产·二次传播</td><td>最佳发布时间：上午 11:00–12:00 / 下午 16:30–17:30</td><td>—</td><td>按窗口发布</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>配套文件说明</h2>
+    <ul>
+      <li><b>本文件 = SOP</b>：标准流程，定义「怎么做、谁负责、做到什么程度」。</li>
+      <li><b>员工大会会前检查清单 Checklist</b>：把本 SOP 关键项抽成打勾项，会前逐条核验防遗漏。</li>
+      <li><b>Rundown</b>：大会当天的分钟级流程表（时间/环节/负责人/时长），现场控场用。</li>
+      <li><b>避坑点与解决方案归档</b>：经验库（20 坑 + 17 方案），供复盘参考，不替代 SOP。</li>
+    </ul>
+    <a class="backlink" href="./">← 返回总目录</a>
+  </div>
+</main>
+
+<footer>
+  本地源文件 <code>员工大会SOP.md</code> · 本页托管于 GitHub Pages<br/>
+  回到 <a href="./" style="color:var(--purple)">文化活动创意效果实验室 · 总目录</a>
+</footer>
+</body>
+</html>

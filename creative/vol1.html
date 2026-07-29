@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>创意效果实验室 · 文化活动 HTML 玩法合集</title>
+<style>
+/* ============ 主题变量（三套：浅色 / 深色 / 投影） ============ */
+:root,
+[data-theme="light"]{
+  --bg:#f6f4ff; --card:#ffffff; --ink:#1f1733; --sub:#6b6280;
+  --purple:#7c3aed; --pink:#ec4899; --accent:#06b6d4; --line:#ece8f7;
+  --glass:rgba(255,255,255,.55); --noise:0;
+}
+[data-theme="dark"]{
+  --bg:#100b1f; --card:#1b1430; --ink:#f3efff; --sub:#a99fc4;
+  --purple:#a78bfa; --pink:#f472b6; --accent:#22d3ee; --line:#2c2348;
+  --glass:rgba(40,30,70,.5); --noise:.06;
+}
+[data-theme="projector"]{ /* 投屏：高对比、大字号友好 */
+  --bg:#0a0a12; --card:#16162a; --ink:#ffffff; --sub:#d7d2e8;
+  --purple:#c4b5fd; --pink:#fb7185; --accent:#38e0ff; --line:#34345a;
+  --glass:rgba(30,30,55,.6); --noise:.04;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;
+  transition:background .4s,color .4s;
+  padding-bottom:80px;
+}
+/* 噪点质感：整页叠一层极淡噪点（深色/投影模式更明显） */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+  opacity:var(--noise);mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+/* ============ 顶栏导航 ============ */
+header{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+  background:var(--glass);border-bottom:1px solid var(--line);
+}
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 20px;max-width:1080px;margin:0 auto}
+.bar .logo{font-weight:800;background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;margin-right:auto}
+.bar a{color:var(--sub);text-decoration:none;font-size:13px;padding:4px 9px;border-radius:20px}
+.bar a:hover{background:var(--line);color:var(--ink)}
+.theme-btns{display:flex;gap:4px;margin-left:6px}
+.theme-btns button{
+  border:1px solid var(--line);background:var(--card);color:var(--sub);
+  font-size:12px;padding:4px 10px;border-radius:20px;cursor:pointer
+}
+.theme-btns button.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+/* ============ 通用区块 ============ */
+section{padding:54px 0;border-bottom:1px solid var(--line)}
+.sec-no{font-size:13px;font-weight:700;color:var(--pink);letter-spacing:2px}
+h2{font-size:26px;margin:6px 0 4px}
+.lead{color:var(--sub);margin-bottom:22px;max-width:680px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;background:var(--line);color:var(--sub);margin-bottom:14px}
+/* ============ 1. 打字机 ============ */
+.tw{font-size:34px;font-weight:800;min-height:46px}
+.tw .cur{display:inline-block;width:3px;height:32px;background:var(--purple);vertical-align:-4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+/* ============ 2. 配色生成器 ============ */
+.cg-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.cg-row input[type=color]{width:54px;height:42px;border:1px solid var(--line);border-radius:10px;background:none;cursor:pointer}
+.cg-row input[type=text]{width:120px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-family:monospace}
+.cg-row button{border:none;background:linear-gradient(90deg,var(--purple),var(--pink));color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:700}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.swatch{border-radius:14px;padding:16px;color:#fff;min-height:96px;display:flex;flex-direction:column;justify-content:flex-end;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.swatch small{opacity:.85;font-weight:400}
+.gradprev{height:70px;border-radius:14px;margin-top:14px}
+/* ============ 3. 横向时间轴 ============ */
+.tl{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 16px;scroll-snap-type:x mandatory}
+.tl .stop{flex:0 0 220px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.tl .t{font-size:13px;font-weight:800;color:var(--purple)}
+.tl .h{font-weight:700;margin:6px 0}
+.tl .o{font-size:12px;color:var(--sub)}
+.tl .stop::before{content:"";display:block;width:34px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--purple),var(--pink));margin-bottom:10px}
+/* ============ 4. 玻璃拟态 ============ */
+.glasswrap{position:relative;height:240px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(120deg,var(--purple),var(--accent),var(--pink));}
+.glass{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.4);border-radius:16px;padding:24px 30px;color:#fff;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.glass h3{font-size:22px;margin-bottom:6px}
+/* ============ 5. 滚动叙事 ============ */
+.scene{min-height:62vh;display:flex;align-items:center;opacity:0;transform:translateY(40px);transition:.8s}
+.scene.in{opacity:1;transform:none}
+.scene .big{font-size:46px;font-weight:800;line-height:1.2}
+.scene:nth-child(odd){justify-content:flex-start}
+.scene:nth-child(even){justify-content:flex-end;text-align:right}
+.dot{color:var(--pink)}
+/* ============ 6. 勾选清单 ============ */
+.chk{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;cursor:pointer;transition:.2s}
+.chk:hover{background:var(--line)}
+.chk.done{opacity:.5}
+.chk.done .txt{text-decoration:line-through}
+.chk input{width:18px;height:18px;accent-color:var(--purple)}
+.progress{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin:8px 0 18px}
+.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--pink));transition:width .4s}
+.hint{font-size:12px;color:var(--sub)}
+/* ============ 7. 抽奖 ============ */
+.lottery{text-align:center}
+.lottery .stage{font-size:40px;font-weight:800;min-height:56px;padding:18px;border-radius:16px;background:var(--line);margin-bottom:16px;letter-spacing:2px}
+.lottery button{border:none;background:linear-gradient(90deg,var(--purple),var(--pink));color:#fff;font-size:18px;font-weight:800;padding:14px 40px;border-radius:30px;cursor:pointer;box-shadow:0 10px 30px rgba(124,58,237,.35)}
+.lottery button:disabled{opacity:.6;cursor:default}
+/* ============ 8. 弹幕 ============ */
+.dm-stage{position:relative;height:200px;border-radius:16px;background:var(--line);overflow:hidden;margin-bottom:14px}
+.dm{position:absolute;white-space:nowrap;font-weight:700;will-change:transform;animation:fly 7s linear forwards}
+@keyframes fly{from{transform:translateX(100%)}to{transform:translateX(-120%)}}
+.dm-row{display:flex;gap:10px}
+.dm-row input{flex:1;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.dm-row button{border:none;background:var(--accent);color:#06283b;font-weight:700;padding:0 22px;border-radius:10px;cursor:pointer}
+/* ============ 9. 运镜 ============ */
+.morph{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000}
+.morph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.7,0,.2,1)}
+.morph .cap{position:absolute;left:14px;bottom:12px;color:#fff;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.6);background:rgba(0,0,0,.3);padding:4px 10px;border-radius:8px}
+.morph-nav{display:flex;gap:8px;margin-top:12px}
+.morph-nav button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--sub);padding:9px;border-radius:10px;cursor:pointer;font-size:13px}
+.morph-nav button.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+footer{text-align:center;color:var(--sub);font-size:13px;padding:30px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <span class="logo">✨ 创意效果实验室</span>
+    <a href="#s1">打字机</a>
+    <a href="#s2">配色</a>
+    <a href="#s3">时间轴</a>
+    <a href="#s4">玻璃</a>
+    <a href="#s5">滚动</a>
+    <a href="#s6">清单</a>
+    <a href="#s7">抽奖</a>
+    <a href="#s8">弹幕</a>
+    <a href="#s9">运镜</a>
+    <span class="theme-btns">
+      <button data-t="light" class="on">浅色</button>
+      <button data-t="dark">深色</button>
+      <button data-t="projector">投屏</button>
+    </span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 1 打字机 -->
+  <section id="s1">
+    <div class="sec-no">EFFECT 01</div>
+    <h2>打字机 / 逐字浮现标题</h2>
+    <p class="lead">开场标题一个字一个字蹦出来，配闪烁光标，氛围感拉满。适合活动开场、致辞页、章节过渡。</p>
+    <div class="card">
+      <div class="tw" id="tw"></div>
+    </div>
+  </section>
+
+  <!-- 2 配色生成器 -->
+  <section id="s2">
+    <div class="sec-no">EFFECT 02</div>
+    <h2>配色生成器（70·20·10）</h2>
+    <p class="lead">输一个主色，自动吐出「主色70% / 辅助20% / 点缀10%」三色卡 + 渐变预览。给供应商 brief 或快速定视觉体系用。</p>
+    <div class="card">
+      <div class="cg-row">
+        <input type="color" id="cgColor" value="#7c3aed">
+        <input type="text" id="cgHex" value="#7c3aed">
+        <button id="cgGo">生成配色</button>
+      </div>
+      <div class="swatches" id="cgSw"></div>
+      <div class="gradprev" id="cgGrad"></div>
+    </div>
+  </section>
+
+  <!-- 3 横向时间轴 -->
+  <section id="s3">
+    <div class="sec-no">EFFECT 03</div>
+    <h2>横向时间轴滑动</h2>
+    <p class="lead">年度节奏、Offsite 当天 Rundown 用横向滑动时间线，比表格直观。左右拖 / 滚轮横滑。下面是 Offsite 当天示例。</p>
+    <div class="card">
+      <div class="tl" id="tl"></div>
+    </div>
+  </section>
+
+  <!-- 4 玻璃拟态 -->
+  <section id="s4">
+    <div class="sec-no">EFFECT 04</div>
+    <h2>玻璃拟态 + 噪点质感</h2>
+    <p class="lead">毛玻璃卡片叠在渐变上，整页再罩一层极淡噪点，立刻从"网页感"变"设计感"。深色/投屏模式噪点更明显。</p>
+    <div class="card">
+      <div class="glasswrap">
+        <div class="glass">
+          <h3>深度研讨 · 向内收</h3>
+          <div>小圈 · 产出导向 · 异地 Offsite</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 滚动叙事 -->
+  <section id="s5">
+    <div class="sec-no">EFFECT 05</div>
+    <h2>滚动驱动叙事（Scrollytelling）</h2>
+    <p class="lead">往下滚，每个场景逐个淡入位移。适合案例库、活动复盘、故事线陈述。继续向下滚体验 ↓</p>
+    <div class="scene"><div class="big">为什么是<span class="dot">向内收</span>？</div></div>
+    <div class="scene"><div class="big">因为产出<br>比热闹<span class="dot">更重要</span>。</div></div>
+    <div class="scene"><div class="big">小圈深度<br>才能<span class="dot">真讨论</span>。</div></div>
+    <div class="scene"><div class="big">所以——<br>异地<span class="dot">Offsite</span>。</div></div>
+  </section>
+
+  <!-- 6 勾选清单 -->
+  <section id="s6">
+    <div class="sec-no">EFFECT 06</div>
+    <h2>可勾选清单 + 本地保存</h2>
+    <p class="lead">文化活动的 SOP / Checklist 做成网页，勾了自动存本地（localStorage），刷新不丢。不用打印打勾。</p>
+    <div class="card">
+      <div class="progress"><i id="chkBar"></i></div>
+      <div id="chkList"></div>
+      <p class="hint">✅ 勾选状态已存本地，刷新页面仍在。点错可再点取消。</p>
+    </div>
+  </section>
+
+  <!-- 7 抽奖 -->
+  <section id="s7">
+    <div class="sec-no">EFFECT 07</div>
+    <h2>抽奖组件（可嵌活动页）</h2>
+    <p class="lead">你本行就是做抽奖应用的——直接把转盘/抽取组件嵌进活动 HTML，现场大屏一套视觉。下面是极简抽取 demo。</p>
+    <div class="card lottery">
+      <div class="stage" id="lotStage">点我开始</div>
+      <button id="lotBtn">🎉 抽一名</button>
+    </div>
+  </section>
+
+  <!-- 8 弹幕 -->
+  <section id="s8">
+    <div class="sec-no">EFFECT 08</div>
+    <h2>弹幕互动</h2>
+    <p class="lead">扫码答题、现场留言那类高效果玩法，做成可现场投的弹幕页。输入即飞过屏幕。</p>
+    <div class="card">
+      <div class="dm-stage" id="dmStage"></div>
+      <div class="dm-row">
+        <input id="dmInput" placeholder="发条弹幕试试，如：Offsite 冲冲冲">
+        <button id="dmSend">发送</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 运镜 -->
+  <section id="s9">
+    <div class="sec-no">EFFECT 09</div>
+    <h2>一张图拆多页运镜（Morph）</h2>
+    <p class="lead">同一张图推近平移冒充 PPT 平滑切换，零素材成本。点下面按钮切换取景（完整模板见 平滑切换模板.html）。</p>
+    <div class="card">
+      <div class="morph">
+        <img id="morphImg" src="../generated-images/A_vibrant_flat_illustration_st_2026-07-24T03-49-03.png" alt="">
+        <div class="cap" id="morphCap">全景</div>
+      </div>
+      <div class="morph-nav" id="morphNav"></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>创意效果实验室 · 文化活动 HTML 玩法合集 — 挑中哪个，告诉我即可落地到真实物料</footer>
+
+<script>
+/* ===== 主题切换 ===== */
+const themeBtns=document.querySelectorAll('.theme-btns button');
+themeBtns.forEach(b=>b.onclick=()=>{
+  document.documentElement.dataset.theme=b.dataset.t;
+  themeBtns.forEach(x=>x.classList.toggle('on',x===b));
+});
+
+/* ===== 1 打字机 ===== */
+(function(){
+  const el=document.getElementById('tw'), txt='让每次活动，都被记住。';
+  let i=0;
+  function tick(){
+    if(i<=txt.length){ el.innerHTML=txt.slice(0,i)+'<span class="cur"></span>'; i++; setTimeout(tick,120); }
+    else el.innerHTML=txt+'<span class="cur"></span>';
+  }
+  tick();
+})();
+
+/* ===== 2 配色生成器 ===== */
+(function(){
+  const color=document.getElementById('cgColor'),hex=document.getElementById('cgHex');
+  const sw=document.getElementById('cgSw'),grad=document.getElementById('cgGrad');
+  function h2r(h){h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+  function r2h(r){return '#'+r.map(x=>x.toString(16).padStart(2,'0')).join('');}
+  function mix(a,b,t){return a.map((v,i)=>Math.round(v+(b[i]-v)*t));}
+  color.oninput=()=>hex.value=color.value;
+  function gen(){
+    const main=h2r(hex.value.trim()||'#7c3aed');
+    const white=[255,255,255],black=[20,15,35];
+    const aux=mix(main,white,.45);          // 辅助：主色提亮
+    const accent=mix(main,black,.0);         // 点缀：用互补思路，这里取主色加深做对比
+    const comp=[main[0]^155,main[1]^155,main[2]^155]; // 互补点缀
+    sw.innerHTML=[
+      {c:main,n:'主色 70%',s:hex.value.trim().toUpperCase()},
+      {c:aux,n:'辅助 20%',s:r2h(aux).toUpperCase()},
+      {c:comp,n:'点缀 10%',s:r2h(comp).toUpperCase()}
+    ].map(o=>`<div class="swatch" style="background:${r2h(o.c)}">${o.n}<small>${o.s}</small></div>`).join('');
+    grad.style.background=`linear-gradient(90deg,${r2h(main)},${r2h(comp)})`;
+  }
+  document.getElementById('cgGo').onclick=gen;
+  gen();
+})();
+
+/* ===== 3 横向时间轴 ===== */
+(function(){
+  const data=[
+    {t:'09:00',h:'开场破冰',o:'主理人 · 10min'},
+    {t:'09:30',h:'战略对焦',o:'GM · 40min'},
+    {t:'10:30',h:'深度研讨①',o:'小组 · 60min'},
+    {t:'12:00',h:'午餐 + 散步',o:'自由 · 90min'},
+    {t:'13:30',h:'深度研讨②',o:'小组 · 60min'},
+    {t:'15:00',h:'产出对齐',o:'全员 · 50min'},
+    {t:'16:30',h:'承诺 & 收官',o:'主理人 · 30min'}
+  ];
+  document.getElementById('tl').innerHTML=data.map(d=>
+    `<div class="stop"><div class="t">${d.t}</div><div class="h">${d.h}</div><div class="o">${d.o}</div></div>`
+  ).join('');
+})();
+
+/* ===== 5 滚动叙事 ===== */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.3});
+  document.querySelectorAll('.scene').forEach(s=>io.observe(s));
+})();
+
+/* ===== 6 勾选清单 ===== */
+(function(){
+  const items=[
+    '立项会：确认 Why 与产出目标','异地 logistics：交通/住宿/跨城物料','内容大纲与嘉宾谈参',
+    '邀请函 & 报名','Rundown 分钟级剧本定稿','Checklist 会前逐项打勾','应急预案 & 联系人表','现场摄影/录像安排'
+  ];
+  const KEY='lab_checklist_v1';
+  let state=JSON.parse(localStorage.getItem(KEY)||'{}');
+  const box=document.getElementById('chkList'),bar=document.getElementById('chkBar');
+  function render(){
+    box.innerHTML=items.map((t,i)=>{
+      const on=state[i];
+      return `<label class="chk ${on?'done':''}"><input type="checkbox" ${on?'checked':''} data-i="${i}"><span class="txt">${t}</span></label>`;
+    }).join('');
+    const done=items.filter((_,i)=>state[i]).length;
+    bar.style.width=(done/items.length*100)+'%';
+    localStorage.setItem(KEY,JSON.stringify(state));
+  }
+  box.onchange=e=>{ if(e.target.dataset.i!==undefined){ state[e.target.dataset.i]=e.target.checked; render(); } };
+  render();
+})();
+
+/* ===== 7 抽奖 ===== */
+(function(){
+  const names=['新宇','xk','阿杰','小林','Mia','大鹏','Coco','老王'];
+  const stage=document.getElementById('lotStage'),btn=document.getElementById('lotBtn');
+  let timer=null;
+  btn.onclick=()=>{
+    if(timer){clearInterval(timer);timer=null;btn.textContent='🎉 再抽一次';return;}
+    btn.textContent='停止';
+    let n=0;
+    timer=setInterval(()=>{ stage.textContent=names[n%names.length]; n++; },70);
+    setTimeout(()=>{ clearInterval(timer);timer=null;stage.textContent=names[Math.floor(Math.random()*names.length)];btn.textContent='🎉 再抽一次'; },1400);
+  };
+})();
+
+/* ===== 8 弹幕 ===== */
+(function(){
+  const stage=document.getElementById('dmStage'),input=document.getElementById('dmInput'),send=document.getElementById('dmSend');
+  const colors=['#7c3aed','#ec4899','#06b6d4','#f59e0b','#22c55e'];
+  function fire(text){
+    if(!text)return;
+    const d=document.createElement('div');
+    d.className='dm';d.textContent=text;
+    d.style.top=(10+Math.random()*150)+'px';
+    d.style.color=colors[Math.floor(Math.random()*colors.length)];
+    d.style.fontSize=(16+Math.random()*10)+'px';
+    stage.appendChild(d);
+    setTimeout(()=>d.remove(),7000);
+  }
+  send.onclick=()=>{ fire(input.value.trim()); input.value=''; };
+  input.onkeydown=e=>{ if(e.key==='Enter'){ fire(input.value.trim()); input.value=''; } };
+  ['开始啦 🎉','Offsite 冲冲冲','这环节绝了','明年还来','GM 讲得好'].forEach((t,i)=>setTimeout(()=>fire(t),i*900));
+})();
+
+/* ===== 9 运镜 ===== */
+(function(){
+  const img=document.getElementById('morphImg'),cap=document.getElementById('morphCap'),nav=document.getElementById('morphNav');
+  const slides=[
+    {x:.5,y:.5,s:1,c:'全景'},
+    {x:.3,y:.3,s:1.8,c:'左上特写'},
+    {x:.7,y:.4,s:2.2,c:'右上推近'},
+    {x:.5,y:.8,s:2.6,c:'下方聚焦'}
+  ];
+  slides.forEach((sl,i)=>{
+    const b=document.createElement('button');b.textContent=(i+1)+'·'+sl.c;
+    b.onclick=()=>{ apply(i); };
+    nav.appendChild(b);
+  });
+  function apply(i){
+    const sl=slides[i];
+    img.style.transformOrigin=`${sl.x*100}% ${sl.y*100}%`;
+    img.style.transform=`scale(${sl.s})`;
+    cap.textContent=sl.c;
+    [...nav.children].forEach((b,j)=>b.classList.toggle('on',j===i));
+  }
+  apply(0);
+})();
+</script>
+</body>
+</html>

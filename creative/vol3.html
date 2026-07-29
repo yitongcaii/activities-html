@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>创意效果实验室 vol.3 · 文化活动 HTML 玩法合集</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --bg:#eef1f8; --bg2:#e3e8f5; --card:rgba(255,255,255,.72); --text:#1c2540;
+  --muted:#5b6480; --primary:#6c5ce7; --primary2:#a55eea; --accent:#00b894;
+  --border:rgba(108,92,231,.18); --shadow:0 10px 40px rgba(60,50,140,.16);
+  --noise:0.05;
+}
+[data-theme="dark"]{
+  --bg:#0e1020; --bg2:#161a30; --card:rgba(30,34,60,.62); --text:#eef1ff;
+  --muted:#9aa3c7; --primary:#8b7bff; --primary2:#c77dff; --accent:#2ee6b0;
+  --border:rgba(160,150,255,.22); --shadow:0 12px 44px rgba(0,0,0,.5); --noise:0.09;
+}
+[data-theme="projector"]{
+  --bg:#0a0c1a; --bg2:#101430; --card:rgba(20,26,55,.78); --text:#ffffff;
+  --muted:#c7cdf0; --primary:#ffd166; --primary2:#ff7b9c; --accent:#3ddc97;
+  --border:rgba(255,209,102,.35); --shadow:0 0 0 2px rgba(255,209,102,.25); --noise:0.12;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+  color:var(--text); background:linear-gradient(135deg,var(--bg),var(--bg2));
+  min-height:100vh; padding:28px 16px 80px; position:relative; line-height:1.6;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:var(--noise);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{position:relative; z-index:1; max-width:1080px; margin:0 auto}
+header.top{text-align:center; margin-bottom:10px}
+header.top h1{font-size:30px; background:linear-gradient(90deg,var(--primary),var(--primary2)); -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800}
+header.top p{color:var(--muted); margin-top:6px; font-size:14px}
+.themebar{position:fixed; top:14px; right:14px; z-index:30; display:flex; gap:6px}
+.themebar button{
+  border:1px solid var(--border); background:var(--card); color:var(--text);
+  padding:6px 12px; border-radius:20px; cursor:pointer; font-size:13px; backdrop-filter:blur(8px);
+}
+.themebar button.active{background:linear-gradient(90deg,var(--primary),var(--primary2)); color:#fff; border-color:transparent}
+.effect{
+  background:var(--card); border:1px solid var(--border); border-radius:18px;
+  padding:20px 22px; margin-top:18px; box-shadow:var(--shadow); backdrop-filter:blur(10px);
+}
+.effect h2{font-size:18px; display:flex; align-items:center; gap:10px}
+.effect h2 .no{
+  display:inline-grid; place-items:center; width:30px; height:30px; border-radius:9px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff; font-size:14px; font-weight:700;
+}
+.effect .desc{color:var(--muted); font-size:13px; margin:6px 0 14px}
+.demo{display:flex; flex-wrap:wrap; gap:14px; align-items:center}
+.btn{
+  border:none; border-radius:12px; padding:9px 16px; cursor:pointer; font-size:14px; font-weight:600;
+  background:linear-gradient(90deg,var(--primary),var(--primary2)); color:#fff; transition:.2s;
+}
+.btn:hover{transform:translateY(-1px); opacity:.92}
+.btn.ghost{background:var(--card); color:var(--text); border:1px solid var(--border)}
+input[type=text],textarea,select{
+  border:1px solid var(--border); background:var(--card); color:var(--text); border-radius:10px;
+  padding:8px 10px; font-size:14px; font-family:inherit; outline:none;
+}
+.tag{display:inline-block; padding:4px 10px; border-radius:20px; font-size:12px; background:var(--border); color:var(--text); cursor:pointer; border:1px solid transparent}
+.tag.on{background:linear-gradient(90deg,var(--primary),var(--primary2)); color:#fff}
+.box{width:100%; border-radius:14px; border:1px solid var(--border); background:var(--card); overflow:hidden; position:relative}
+.foot{text-align:center; color:var(--muted); font-size:12px; margin-top:30px}
+@media print{.themebar,.btn,.tag,.ctrl-hide{display:none!important}}
+/* 01 描边 */
+.drawsvg{width:100%; max-width:520px}
+/* 02 图表 */
+.chartwrap{display:flex; gap:24px; flex-wrap:wrap; align-items:center}
+.radar-axis{font-size:11px; fill:var(--muted)}
+/* 03 热力 */
+.heat{display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr); gap:3px}
+.heat i{width:14px; height:14px; border-radius:3px; background:var(--border)}
+.heatlg{display:flex; gap:4px; align-items:center; margin-top:8px; font-size:11px; color:var(--muted)}
+/* 04 对比 */
+.ba{position:relative; width:100%; max-width:560px; height:200px; border-radius:12px; overflow:hidden; user-select:none}
+.ba .pane{position:absolute; inset:0; display:grid; place-items:center; font-weight:800; font-size:20px}
+.ba .before{background:linear-gradient(135deg,#b2bec3,#636e72); color:#fff}
+.ba .after{background:linear-gradient(135deg,var(--primary),var(--primary2)); color:#fff; clip-path:inset(0 0 0 50%)}
+.ba input[type=range]{position:absolute; left:0; bottom:0; width:100%; z-index:5}
+/* 05 长卷 */
+.scroll-x{display:flex; gap:0; overflow-x:auto; padding:10px 0; scroll-snap-type:x mandatory}
+.scroll-x .seg{flex:0 0 240px; scroll-snap-align:center; padding:18px; margin-right:10px; border-radius:14px;
+  background:linear-gradient(160deg,var(--primary),var(--primary2)); color:#fff; min-height:140px}
+/* 07 表情雨 */
+.emojirain{position:relative; width:100%; height:200px; border-radius:12px; border:1px solid var(--border); overflow:hidden; background:var(--card)}
+.emojirain span{position:absolute; bottom:-30px; font-size:26px; animation:rise 2.4s linear forwards}
+@keyframes rise{to{transform:translateY(-230px) rotate(20deg); opacity:0}}
+/* 09 想法墙 */
+.wall{position:relative; width:100%; height:280px; border-radius:12px; border:1px solid var(--border); background:var(--card); overflow:hidden}
+.note{position:absolute; width:120px; padding:10px; border-radius:10px; font-size:13px; cursor:grab;
+  background:#fff7c2; color:#5a4b00; box-shadow:0 6px 16px rgba(0,0,0,.15); border:1px solid #ffe48a; touch-action:none}
+.note:active{cursor:grabbing}
+/* 10 导览 */
+.floormap{width:100%; max-width:480px}
+.floormap .room{cursor:pointer; transition:.2s}
+.floormap .room:hover{opacity:.8}
+/* 11 视差 */
+.parallax{position:relative; height:300px; overflow-y:auto; border-radius:12px; border:1px solid var(--border); scroll-behavior:smooth}
+.parallax .pinner{position:relative; height:760px; padding:30px}
+.parallax .lyr{position:absolute; inset:0; pointer-events:none}
+.parallax .lyr.back{background:radial-gradient(circle at 20% 30%, var(--primary) 0 40px, transparent 41px),radial-gradient(circle at 70% 60%, var(--primary2) 0 60px, transparent 61px); opacity:.35}
+.parallax .lyr.mid{background:radial-gradient(circle at 50% 20%, var(--accent) 0 30px, transparent 31px); opacity:.4}
+.parallax .content{position:relative; z-index:3; display:flex; flex-direction:column; gap:120px; padding:20px}
+.parallax .content .blk{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; max-width:320px}
+/* 12 粒子 */
+#particles{width:100%; height:220px; border-radius:12px; border:1px solid var(--border); display:block; background:var(--card)}
+/* 13 渐变 */
+.gradbox{width:100%; height:180px; border-radius:12px; background:linear-gradient(120deg,var(--primary),var(--primary2),var(--accent)); background-size:300% 300%; animation:flow 6s ease infinite}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+/* 15 徽章 */
+.badges{display:flex; gap:14px; flex-wrap:wrap}
+.badge{width:84px; text-align:center; font-size:12px; color:var(--muted)}
+.badge .dot{width:54px; height:54px; margin:0 auto 6px; border-radius:50%; display:grid; place-items:center; font-size:24px;
+  background:var(--border); filter:grayscale(1); opacity:.5}
+.badge.unlocked .dot{background:linear-gradient(135deg,var(--primary),var(--primary2)); filter:none; opacity:1; box-shadow:0 6px 18px rgba(108,92,231,.4)}
+/* 16 问答 */
+.chat{width:100%; max-width:520px; height:260px; display:flex; flex-direction:column}
+.chat .log{flex:1; overflow-y:auto; border:1px solid var(--border); border-radius:12px; padding:12px; background:var(--card); display:flex; flex-direction:column; gap:8px}
+.chat .msg{padding:8px 12px; border-radius:12px; max-width:80%; font-size:14px}
+.chat .msg.bot{align-self:flex-start; background:var(--border); color:var(--text)}
+.chat .msg.me{align-self:flex-end; background:linear-gradient(90deg,var(--primary),var(--primary2)); color:#fff}
+.qr{width:160px; height:160px; display:grid; place-items:center; border:1px solid var(--border); border-radius:12px; background:#fff}
+.gallery{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; width:100%}
+.gcard{padding:14px; border-radius:12px; background:var(--card); border:1px solid var(--border); font-size:13px}
+.gcard .t{font-weight:700; margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="themebar ctrl-hide">
+  <button data-t="light" class="active">浅色</button>
+  <button data-t="dark">深色</button>
+  <button data-t="projector">投屏</button>
+</div>
+<div class="wrap">
+  <header class="top">
+    <h1>创意效果实验室 · vol.3</h1>
+    <p>文化活动 HTML 玩法合集（第三弹）· 16 个未做的新呈现形式 · 直接玩</p>
+  </header>
+
+  <!-- 01 -->
+  <section class="effect">
+    <h2><span class="no">01</span>SVG 描边手绘动画</h2>
+    <div class="desc">路线 / 愿景被"一笔一笔画出来"，适合 Offsite 路线图、价值观传递。基于 stroke-dasharray。</div>
+    <div class="demo">
+      <svg class="drawsvg" viewBox="0 0 520 200" id="drawsvg">
+        <path id="road" d="M20 160 C 120 40, 200 180, 300 90 S 460 30, 500 120" fill="none"
+              stroke="var(--primary)" stroke-width="6" stroke-linecap="round"/>
+        <circle id="star" cx="260" cy="100" r="46" fill="none" stroke="var(--primary2)" stroke-width="5"/>
+      </svg>
+      <button class="btn ctrl-hide" onclick="replayDraw()">重新绘制</button>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="effect">
+    <h2><span class="no">02</span>雷达 + 环形 交互图表</h2>
+    <div class="desc">能力模型用雷达图（拖动滑块实时变），占比用环形图。适合文化能力评估、参与度汇报。</div>
+    <div class="demo">
+      <div class="chartwrap">
+        <svg width="220" height="220" viewBox="0 0 220 220" id="radar">
+          <g id="radarGrid"></g>
+          <polygon id="radarPoly" fill="rgba(108,92,231,.35)" stroke="var(--primary)" stroke-width="2"></polygon>
+          <g id="radarDots"></g>
+        </svg>
+        <div>
+          <div id="radarSliders"></div>
+          <div style="margin-top:10px"><button class="btn ghost ctrl-hide" onclick="randRadar()">随机</button></div>
+        </div>
+        <div style="text-align:center">
+          <svg width="150" height="150" viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="58" fill="none" stroke="var(--border)" stroke-width="14"/>
+            <circle id="donut" cx="75" cy="75" r="58" fill="none" stroke="var(--accent)" stroke-width="14"
+                    stroke-linecap="round" transform="rotate(-90 75 75)"/>
+            <text id="donutTxt" x="75" y="82" text-anchor="middle" font-size="22" font-weight="800" fill="var(--text)">0%</text>
+          </svg>
+          <div style="font-size:12px;color:var(--muted)">点击切换示例</div>
+          <button class="btn ghost ctrl-hide" onclick="cycleDonut()">下一项</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="effect">
+    <h2><span class="no">03</span>热力日历图</h2>
+    <div class="desc">像 GitHub 贡献图，展示年度运营节奏密度。悬停看某周活动场次。</div>
+    <div class="demo">
+      <div class="heat" id="heat"></div>
+      <div class="heatlg">少 <i style="background:var(--border)"></i><i style="background:var(--primary);opacity:.4"></i><i style="background:var(--primary);opacity:.7"></i><i style="background:var(--primary)"></i><i style="background:var(--primary2)"></i> 多</div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="effect">
+    <h2><span class="no">04</span>Before / After 对比滑块</h2>
+    <div class="desc">拖动滑块看改版前后对比。适合方案展示、物料迭代说明。</div>
+    <div class="demo">
+      <div class="ba" id="ba">
+        <div class="pane before">改版前 · 模板感</div>
+        <div class="pane after" id="baAfter">改版后 · 活力风</div>
+        <input type="range" min="0" max="100" value="50" oninput="baMove(this.value)">
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="effect">
+    <h2><span class="no">05</span>横向长卷</h2>
+    <div class="desc">像古风长卷横向展开，适合年度回顾、大事记。横向滚动 + 吸附。</div>
+    <div class="demo">
+      <div class="scroll-x">
+        <div class="seg">Q1 · 启航<br>文化氛围立项</div>
+        <div class="seg">Q2 · 深耕<br>案例沉淀 SOP</div>
+        <div class="seg">Q3 · 破圈<br>双轨沙龙上线</div>
+        <div class="seg">Q4 · 收官<br>年度盛典</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="effect">
+    <h2><span class="no">06</span>二维码生成器</h2>
+    <div class="desc">输入任意链接/文字，现场生成签到码、跳转码。基于 qrcode.js（需联网）。</div>
+    <div class="demo">
+      <input type="text" id="qrText" value="https://yutttyi.github.io/activities-html/" style="min-width:280px">
+      <button class="btn ctrl-hide" onclick="genQR()">生成</button>
+      <div class="qr" id="qr">…</div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="effect">
+    <h2><span class="no">07</span>表情雨 / 飘心</h2>
+    <div class="desc">投屏氛围烘托，点击放一波❤️✨👏。弹幕的升级版。</div>
+    <div class="demo">
+      <div class="emojirain" id="rain"><button class="btn ctrl-hide" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)" onclick="emojiRain()">放一波 🎉</button></div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="effect">
+    <h2><span class="no">08</span>可筛选案例画廊</h2>
+    <div class="desc">案例按标签筛选，适合案例沉淀库。点标签切换。</div>
+    <div class="demo">
+      <div id="gTags"></div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="effect">
+    <h2><span class="no">09</span>可拖拽想法墙</h2>
+    <div class="desc">便签自由拖动，适合 Offsite 发散 brainstorm。按住拖动（支持触屏）。</div>
+    <div class="demo">
+      <div class="wall" id="wall">
+        <div class="note" style="left:20px;top:20px">AI 布道师怎么激励？</div>
+        <div class="note" style="left:170px;top:70px">案例卡标准模板</div>
+        <div class="note" style="left:60px;top:150px">双轨沙龙主题</div>
+        <div class="note" style="left:230px;top:30px">Token 怎么发</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="effect">
+    <h2><span class="no">10</span>场地 SVG 导览</h2>
+    <div class="desc">点房间看说明，适合异地 Offsite 场馆指引、员工大会动线。</div>
+    <div class="demo">
+      <svg class="floormap" viewBox="0 0 400 240" id="floormap">
+        <rect x="10" y="10" width="380" height="220" fill="none" stroke="var(--border)"/>
+        <rect class="room" data-name="主会场" data-info="容纳 80 人 · 开场/颁奖" x="20" y="20" width="170" height="90" fill="var(--primary)" opacity=".8"/>
+        <rect class="room" data-name="研讨室A" data-info="深度讨论 · 白板+投屏" x="210" y="20" width="160" height="90" fill="var(--primary2)" opacity=".8"/>
+        <rect class="room" data-name="茶歇区" data-info="咖啡/点心 · 自由交流" x="20" y="130" width="170" height="90" fill="var(--accent)" opacity=".8"/>
+        <rect class="room" data-name="休息室" data-info="午休/电话间" x="210" y="130" width="160" height="90" fill="var(--border)"/>
+      </svg>
+      <div id="roomInfo" style="min-width:200px">👈 点房间看说明</div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="effect">
+    <h2><span class="no">11</span>视差滚动 Parallax</h2>
+    <div class="desc">多层背景以不同速度滚动，营造深度。往下滚这个框。</div>
+    <div class="demo">
+      <div class="parallax" id="parallax">
+        <div class="lyr back" id="pBack"></div>
+        <div class="lyr mid" id="pMid"></div>
+        <div class="pinner">
+          <div class="content">
+            <div class="blk">第一层 · 开场基调</div>
+            <div class="blk">第二层 · 核心信息</div>
+            <div class="blk">第三层 · 行动召唤</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="effect">
+    <h2><span class="no">12</span>Canvas 粒子背景</h2>
+    <div class="desc">漂浮粒子 + 连线，活泼氛围。可嵌活动大屏背景。</div>
+    <div class="demo">
+      <canvas id="particles"></canvas>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="effect">
+    <h2><span class="no">13</span>动态渐变背景</h2>
+    <div class="desc">渐变自动流动，投屏不死板。点按钮换配色。</div>
+    <div class="demo">
+      <div class="gradbox" id="gradbox" style="max-width:480px"></div>
+      <button class="btn ghost ctrl-hide" onclick="nextGrad()">换配色</button>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="effect">
+    <h2><span class="no">14</span>语音朗读 TTS</h2>
+    <div class="desc">网页念给你听（Web Speech API），适合投屏无障碍、录口播。</div>
+    <div class="demo">
+      <textarea id="tts" rows="3" style="min-width:320px">欢迎参加本次文化活动，让我们一起用 AI 点亮团队氛围。</textarea>
+      <div><button class="btn ctrl-hide" onclick="speak()">朗读</button> <button class="btn ghost ctrl-hide" onclick="stopSpeak()">停止</button></div>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section class="effect">
+    <h2><span class="no">15</span>积分 / 徽章解锁</h2>
+    <div class="desc">完成任务攒积分，到点解锁徽章。可对接你的 Token 激励体系。</div>
+    <div class="demo">
+      <div>
+        <div style="font-size:13px;color:var(--muted)">当前积分：<b id="pts">0</b></div>
+        <button class="btn ctrl-hide" onclick="doTask()" style="margin-top:8px">完成一个文化任务 +20</button>
+      </div>
+      <div class="badges" id="badges"></div>
+    </div>
+  </section>
+
+  <!-- 16 -->
+  <section class="effect">
+    <h2><span class="no">16</span>规则问答 Chatbot</h2>
+    <div class="desc">输入问题，按关键词匹配答案。适合活动须知自助答。</div>
+    <div class="demo">
+      <div class="chat">
+        <div class="log" id="chatLog">
+          <div class="msg bot">你好，问我「时间 / 地点 / 报名 / 抽奖 / 着装」试试～</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input type="text" id="chatIn" placeholder="输入你的问题…" style="flex:1" onkeydown="if(event.key==='Enter')chatSend()">
+          <button class="btn ctrl-hide" onclick="chatSend()">发送</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">创意效果实验室 · vol.3 ｜ 与 vol.1 / vol.2 相互独立，互不影响 ｜ 主题切换在右上角</div>
+</div>
+
+<script>
+/* 主题 */
+const themeBtns=document.querySelectorAll('.themebar button');
+themeBtns.forEach(b=>b.onclick=()=>{
+  document.documentElement.setAttribute('data-theme',b.dataset.t);
+  themeBtns.forEach(x=>x.classList.remove('active')); b.classList.add('active');
+});
+
+/* 01 描边 */
+function replayDraw(){
+  const len=document.getElementById('road').getTotalLength();
+  const s=document.getElementById('road');
+  s.style.transition='none'; s.style.strokeDasharray=len; s.style.strokeDashoffset=len;
+  void s.getBoundingClientRect();
+  s.style.transition='stroke-dashoffset 2s ease'; s.style.strokeDashoffset=0;
+  const c=document.getElementById('star'), cl=2*Math.PI*46;
+  c.style.transition='none'; c.style.strokeDasharray=cl; c.style.strokeDashoffset=cl;
+  void c.getBoundingClientRect();
+  c.style.transition='stroke-dashoffset 1.6s ease .6s'; c.style.strokeDashoffset=0;
+}
+replayDraw();
+
+/* 02 雷达+环形 */
+const axes=['创意','协作','执行','学习','活力']; let radarV=[.7,.6,.8,.5,.7];
+const RC=110,R=78;
+function radarPoint(i,v){const a=-Math.PI/2+i*(2*Math.PI/axes.length);return [RC+R*v*Math.cos(a),RC+R*v*Math.sin(a)];}
+function drawRadar(){
+  const grid=document.getElementById('radarGrid'); grid.innerHTML='';
+  [.25,.5,.75,1].forEach(r=>{let pts=axes.map((_,i)=>radarPoint(i,r).join(',')).join(' ');
+    grid.innerHTML+=`<polygon points="${pts}" fill="none" stroke="var(--border)"/>`;});
+  axes.forEach((ax,i)=>{const[x,y]=radarPoint(i,1);
+    grid.innerHTML+=`<text class="radar-axis" x="${x}" y="${y}" text-anchor="middle" dy="3">${ax}</text>`;});
+  const poly=document.getElementById('radarPoly');
+  poly.setAttribute('points',radarV.map((v,i)=>radarPoint(i,v).join(',')).join(' '));
+}
+const sl=document.getElementById('radarSliders');
+axes.forEach((ax,i)=>{sl.innerHTML+=`<div>${ax} <input type="range" min="0" max="100" value="${radarV[i]*100}" oninput="radarV[${i}]=this.value/100;drawRadar()"></div>`;});
+function randRadar(){radarV=radarV.map(()=>+(Math.random()*.6+.4).toFixed(2));
+  axes.forEach((ax,i)=>{sl.querySelectorAll('input')[i].value=radarV[i]*100;});drawRadar();}
+drawRadar();
+const donut=document.getElementById('donut'),donutTxt=document.getElementById('donutTxt');
+const C=2*Math.PI*58; donut.style.strokeDasharray=C;
+const donutData=[['参与度',72],['案例产出',55],['沙龙出席',88],['Token 活跃',63]]; let di=0;
+function cycleDonut(){const item=donutData[di%donutData.length]; di++;
+  donut.style.transition='stroke-dashoffset .8s ease'; donut.style.strokeDashoffset=C*(1-item[1]/100);
+  donutTxt.textContent=item[1]+'%'; }
+cycleDonut();
+
+/* 03 热力 */
+const heat=document.getElementById('heat');
+for(let w=0;w<22;w++){for(let d=0;d<7;d++){
+  const i=document.createElement('i'); const v=Math.floor(Math.random()*5);
+  const op=[0,.4,.7,1,1][v]; const col=v>=4?'var(--primary2)':'var(--primary)';
+  i.style.background=col; i.style.opacity=op;
+  i.title=`第${w+1}周 · ${v*2}场活动`; heat.appendChild(i);
+}}
+
+/* 04 对比 */
+function baMove(v){document.getElementById('baAfter').style.clipPath=`inset(0 0 0 ${v}%)`;}
+
+/* 06 二维码 */
+function genQR(){
+  const box=document.getElementById('qr'); box.innerHTML='';
+  if(typeof QRCode==='undefined'){box.textContent='二维码库未加载（需联网）';return;}
+  new QRCode(box,{text:document.getElementById('qrText').value,width:140,height:140,correctLevel:QRCode.CorrectLevel.M});
+}
+genQR();
+
+/* 07 表情雨 */
+function emojiRain(){const r=document.getElementById('rain');const em=['❤️','✨','👏','🎉','🌟'];
+  for(let k=0;k<24;k++){const s=document.createElement('span');s.textContent=em[k%em.length];
+    s.style.left=Math.random()*90+'%';s.style.animationDelay=(Math.random()*1.2)+'s';
+    r.appendChild(s);setTimeout(()=>s.remove(),3600);}}
+
+/* 08 画廊 */
+const cases=[['AI 布道师招募','文化'],['案例卡模板','运营'],['双轨沙龙复盘','文化'],['抽奖组件','技术'],['知识库 READ','运营'],['数智人主持','技术']];
+const allTags=['全部',...new Set(cases.map(c=>c[1]))]; let curTag='全部';
+const gTags=document.getElementById('gTags');
+allTags.forEach(t=>{const s=document.createElement('span');s.className='tag'+(t==='全部'?' on':'');s.textContent=t;
+  s.onclick=()=>{curTag=t;gTags.querySelectorAll('.tag').forEach(x=>x.classList.remove('on'));s.classList.add('on');renderG();};gTags.appendChild(s);});
+function renderG(){const g=document.getElementById('gallery');g.innerHTML='';
+  cases.filter(c=>curTag==='全部'||c[1]===curTag).forEach(c=>{g.innerHTML+=`<div class="gcard"><div class="t">${c[0]}</div><div style="color:var(--muted);font-size:11px">#${c[1]}</div></div>`;});}
+renderG();
+
+/* 09 想法墙 */
+document.querySelectorAll('#wall .note').forEach(n=>{
+  let sx,sy,drag=false;
+  n.addEventListener('pointerdown',e=>{drag=true;n.setPointerCapture(e.pointerId);sx=e.clientX-n.offsetLeft;sy=e.clientY-n.offsetTop;});
+  n.addEventListener('pointermove',e=>{if(!drag)return;n.style.left=(e.clientX-sx)+'px';n.style.top=(e.clientY-sy)+'px';});
+  n.addEventListener('pointerup',()=>drag=false);
+});
+
+/* 10 导览 */
+document.querySelectorAll('#floormap .room').forEach(r=>{
+  r.onclick=()=>{document.getElementById('roomInfo').innerHTML=`<b>${r.dataset.name}</b><br><span style="color:var(--muted);font-size:13px">${r.dataset.info}</span>`;};
+});
+
+/* 11 视差 */
+const pa=document.getElementById('parallax');
+pa.addEventListener('scroll',()=>{const y=pa.scrollTop;
+  document.getElementById('pBack').style.transform=`translateY(${y*0.35}px)`;
+  document.getElementById('pMid').style.transform=`translateY(${y*0.18}px)`;});
+
+/* 12 粒子 */
+const cv=document.getElementById('particles'),ctx=cv.getContext('2d');
+function fit(){cv.width=cv.clientWidth;cv.height=cv.clientHeight;}
+fit();window.addEventListener('resize',fit);
+let ps=Array.from({length:42},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5}));
+function tick(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  const cs=getComputedStyle(document.documentElement);
+  const col=cs.getPropertyValue('--primary').trim()||'#6c5ce7';
+  ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>cv.width)p.vx*=-1;if(p.y<0||p.y>cv.height)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,2.2,0,7);ctx.fillStyle=col;ctx.fill();});
+  for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++){
+    const dx=ps[i].x-ps[j].x,dy=ps[i].y-ps[j].y,d=Math.hypot(dx,dy);
+    if(d<90){ctx.beginPath();ctx.moveTo(ps[i].x,ps[i].y);ctx.lineTo(ps[j].x,ps[j].y);ctx.strokeStyle=col;ctx.globalAlpha=.18;ctx.stroke();ctx.globalAlpha=1;}
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+
+/* 13 渐变 */
+const grads=[['var(--primary)','var(--primary2)','var(--accent)'],['#ff9a9e','#fad0c4','#fbc2eb'],['#43e97b','#38f9d7','#43e97b'],['#fa709a','#fee140','#fa709a']];
+let gi=0;
+function applyGrad(){const[g1,g2,g3]=grads[gi%grads.length];
+  document.getElementById('gradbox').style.background=`linear-gradient(120deg,${g1},${g2},${g3})`;
+  document.getElementById('gradbox').style.backgroundSize='300% 300%';}
+function nextGrad(){gi++;applyGrad();} applyGrad();
+
+/* 14 TTS */
+function speak(){if(!('speechSynthesis'in window)){alert('当前浏览器不支持语音');return;}
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(document.getElementById('tts').value);u.lang='zh-CN';
+  speechSynthesis.speak(u);}
+function stopSpeak(){if('speechSynthesis'in window)speechSynthesis.cancel();}
+
+/* 15 徽章 */
+let points=0; const badgeDefs=[['🌱',20],['🔥',50],['🏆',90],['👑',140]];
+function renderBadges(){const b=document.getElementById('badges');b.innerHTML='';
+  badgeDefs.forEach(([ic,th])=>{const un=points>=th;
+    b.innerHTML+=`<div class="badge${un?' unlocked':''}"><div class="dot">${ic}</div>${th}分${un?' ✓':''}</div>`;});}
+function doTask(){points+=20;document.getElementById('pts').textContent=points;renderBadges();}
+renderBadges();
+
+/* 16 问答 */
+const kb=[['时间','活动 14:00 开始，17:30 结束'],['地点','深圳湾科技生态园 8 栋 3F'],['报名','企业微信搜「文化活动」机器人，发送「报名」'],['抽奖','现场大屏扫码参与，奖品现场发放'],['着装','商务休闲即可，不用正装']];
+function chatSend(){const inp=document.getElementById('chatIn');const q=inp.value.trim();if(!q)return;
+  const log=document.getElementById('chatLog');
+  log.innerHTML+=`<div class="msg me">${q}</div>`;
+  const hit=kb.find(([k])=>q.includes(k));
+  const ans=hit?hit[1]:'没太懂～试试问：时间 / 地点 / 报名 / 抽奖 / 着装';
+  setTimeout(()=>{log.innerHTML+=`<div class="msg bot">${ans}</div>`;log.scrollTop=log.scrollHeight;},400);
+  inp.value='';log.scrollTop=log.scrollHeight;}
+</script>
+</body>
+</html>

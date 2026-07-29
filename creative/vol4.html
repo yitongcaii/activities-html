@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>创意效果实验室 vol.4 · 仪式感 × 实时互动 × 文化沉淀</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --bg:#eef1f8; --bg2:#e3e8f5; --card:rgba(255,255,255,.72); --text:#1c2540;
+  --muted:#5b6480; --primary:#6c5ce7; --primary2:#a55eea; --accent:#00b894;
+  --border:rgba(108,92,231,.18); --shadow:0 10px 40px rgba(60,50,140,.16); --noise:0.05;
+}
+[data-theme="dark"]{
+  --bg:#0e1020; --bg2:#161a30; --card:rgba(30,34,60,.62); --text:#eef1ff;
+  --muted:#9aa3c7; --primary:#8b7bff; --primary2:#c77dff; --accent:#2ee6b0;
+  --border:rgba(160,150,255,.22); --shadow:0 12px 44px rgba(0,0,0,.5); --noise:0.09;
+}
+[data-theme="projector"]{
+  --bg:#0a0c1a; --bg2:#101430; --card:rgba(20,26,55,.78); --text:#ffffff;
+  --muted:#c7cdf0; --primary:#ffd166; --primary2:#ff7b9c; --accent:#3ddc97;
+  --border:rgba(255,209,102,.35); --shadow:0 0 0 2px rgba(255,209,102,.25); --noise:0.12;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;color:var(--text);
+  background:linear-gradient(135deg,var(--bg),var(--bg2));min-height:100vh;padding:28px 16px 80px;position:relative;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:var(--noise);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto}
+header.top{text-align:center;margin-bottom:10px}
+header.top h1{font-size:30px;background:linear-gradient(90deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+header.top p{color:var(--muted);margin-top:6px;font-size:14px}
+.themebar{position:fixed;top:14px;right:14px;z-index:30;display:flex;gap:6px}
+.themebar button{border:1px solid var(--border);background:var(--card);color:var(--text);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:13px;backdrop-filter:blur(8px)}
+.themebar button.active{background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;border-color:transparent}
+.effect{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 22px;margin-top:18px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.effect h2{font-size:18px;display:flex;align-items:center;gap:10px}
+.effect h2 .no{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-size:14px;font-weight:700}
+.effect .desc{color:var(--muted);font-size:13px;margin:6px 0 14px}
+.demo{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{border:none;border-radius:12px;padding:9px 16px;cursor:pointer;font-size:14px;font-weight:600;background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;transition:.2s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.ghost{background:var(--card);color:var(--text);border:1px solid var(--border)}
+input[type=text],textarea,select{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;font-size:14px;font-family:inherit;outline:none}
+.tag{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;background:var(--border);color:var(--text);cursor:pointer;border:1px solid transparent}
+.box{width:100%;border-radius:14px;border:1px solid var(--border);background:var(--card);overflow:hidden;position:relative}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+.ctrl-hide{}
+@media print{.themebar,.btn,.tag,.ctrl-hide{display:none!important}}
+
+/* ===== 01 聚光灯颁奖词 ===== */
+.spotlight{position:relative;width:100%;min-height:340px;border-radius:14px;overflow:hidden;
+  background:radial-gradient(circle at 50% 60%,#2a2150 0%,#0c0a1c 70%);display:grid;place-items:center;text-align:center;padding:30px}
+.spotlight .beam{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:60%;height:140%;
+  background:radial-gradient(ellipse at 50% 0,#fff 0%,rgba(255,255,230,.35) 18%,transparent 60%);
+  filter:blur(6px);opacity:0;transition:opacity .6s,left .5s,top .5s;pointer-events:none;mix-blend-mode:screen}
+.spotlight.on .beam{opacity:.9}
+.spotlight .winner{position:relative;z-index:2;font-size:46px;font-weight:900;color:#fff;letter-spacing:2px;
+  text-shadow:0 0 24px rgba(255,209,102,.7);opacity:0;transform:scale(.7);transition:.5s}
+.spotlight.show .winner{opacity:1;transform:scale(1)}
+.spotlight .cite{position:relative;z-index:2;margin-top:18px;max-width:640px;color:#ffe9b0;font-size:16px;line-height:1.8;min-height:48px}
+.spotlight .meta{position:absolute;top:14px;left:16px;z-index:3;color:#9a93c8;font-size:12px}
+.spot-inputs{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.spot-inputs>div{flex:1;min-width:240px}
+.spot-inputs label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
+.spot-inputs textarea{width:100%;height:84px;resize:vertical}
+
+/* ===== 02 实时投票大屏 ===== */
+.vote-stage{display:flex;gap:20px;flex-wrap:wrap}
+.vote-main{flex:1;min-width:300px}
+.vote-q{font-size:20px;font-weight:800;margin-bottom:14px}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar-row{display:flex;align-items:center;gap:12px}
+.bar-label{width:96px;font-size:14px;font-weight:600;flex:0 0 auto}
+.bar-track{flex:1;height:34px;background:var(--border);border-radius:10px;overflow:hidden;position:relative}
+.bar-fill{height:100%;width:0;border-radius:10px;background:linear-gradient(90deg,var(--primary),var(--primary2));transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar-pct{width:52px;text-align:right;font-weight:700;font-size:14px;flex:0 0 auto}
+.vote-side{flex:0 0 200px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#qrcode{width:170px;height:170px;background:#fff;border-radius:12px;padding:8px;display:grid;place-items:center}
+.vote-side .hint{font-size:12px;color:var(--muted);text-align:center;line-height:1.5}
+.vote-total{font-size:13px;color:var(--muted);margin-top:6px}
+/* 投票页（手机扫码） */
+.vote-mode .vote-main,.vote-mode .vote-side,.vote-mode .demo.ctrl-hide{display:none}
+.vote-mode .vote-mobile{display:block}
+.vote-mobile{display:none;max-width:480px;margin:0 auto;text-align:center}
+.vote-mobile .vm-q{font-size:22px;font-weight:800;margin:18px 0 22px;padding:0 14px}
+.vote-mobile .vm-opts{display:flex;flex-direction:column;gap:14px;padding:0 18px}
+.vote-mobile .vm-opt{border:none;border-radius:16px;padding:20px;font-size:18px;font-weight:700;color:#fff;
+  background:linear-gradient(90deg,var(--primary),var(--primary2));cursor:pointer;transition:.15s}
+.vote-mobile .vm-opt:active{transform:scale(.97)}
+.vote-mobile .vm-thx{margin-top:22px;font-size:15px;color:var(--accent);min-height:22px}
+
+/* ===== 03 文化签名墙 ===== */
+.sig-stage{display:flex;gap:18px;flex-wrap:wrap}
+.sig-left{flex:1;min-width:280px}
+.sig-canvas{border:1px solid var(--border);border-radius:12px;background:var(--card);width:100%;height:240px;touch-action:none;cursor:crosshair;display:block}
+.sig-right{flex:0 0 240px;display:flex;flex-direction:column;gap:10px}
+.sig-wall{width:100%;height:300px;border-radius:12px;border:1px solid var(--border);background:#0c0a1c;display:block;touch-action:none}
+.sig-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.sig-row input[type=text]{flex:1;min-width:160px}
+</style>
+</head>
+<body>
+<div class="themebar ctrl-hide">
+  <button data-t="light" class="active">浅色</button>
+  <button data-t="dark">深色</button>
+  <button data-t="projector">投影</button>
+</div>
+<div class="wrap">
+  <header class="top">
+    <h1>创意效果实验室 · vol.4</h1>
+    <p>仪式感 × 实时互动 × 文化沉淀 —— 员工大会 / Offsite / 表彰场景可直接用的 3 个新玩法</p>
+  </header>
+
+  <!-- 01 聚光灯颁奖词 -->
+  <section class="effect">
+    <h2><span class="no">1</span>聚光灯颁奖词</h2>
+    <div class="desc">暗场里一束光「打」在获奖人身上，颁奖词逐字浮现。适合文化之星 / 月度之星 / 项目表彰。</div>
+    <div class="spot-inputs">
+      <div><label>获奖人（每行一位）</label><textarea id="spNames" class="ctrl-hide">张明
+李婷
+王浩
+陈晓</textarea></div>
+      <div><label>颁奖词（每行对应一位，可留空用默认）</label><textarea id="spCites" class="ctrl-hide">把复杂留给自己，把简单交给团队。
+临危受命，稳稳接住每一次期待。
+用细节定义专业，用靠谱定义信任。
+让文化不只是口号，而是每天的选择。</textarea></div>
+    </div>
+    <div class="demo ctrl-hide">
+      <button class="btn" id="spPick">🎯 随机抽一位</button>
+      <button class="btn ghost" id="spPrev">← 上一位</button>
+      <button class="btn ghost" id="spNext">下一位 →</button>
+      <button class="btn ghost" id="spReplay">↻ 重播颁奖词</button>
+    </div>
+    <div class="box" style="margin-top:14px">
+      <div class="spotlight" id="spot">
+        <div class="beam"></div>
+        <div class="meta" id="spMeta">— / —</div>
+        <div class="winner" id="spWinner"></div>
+        <div class="cite" id="spCite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 实时投票大屏 -->
+  <section class="effect">
+    <h2><span class="no">2</span>扫码实时投票大屏</h2>
+    <div class="desc">大屏显示题目与实时柱状图，观众手机扫码即可投票，票数实时跳动。同浏览器多标签可实时同步（BroadcastChannel）。</div>
+    <div class="demo ctrl-hide" style="margin-bottom:12px">
+      <input type="text" id="vq" value="你最期待本次 Offsite 的哪个环节？" style="flex:1;min-width:240px">
+      <button class="btn ghost" id="vqSet">更新题目</button>
+      <button class="btn ghost" id="vSim">🎲 模拟一波投票</button>
+    </div>
+    <div class="vote-stage">
+      <div class="vote-main">
+        <div class="vote-q" id="vQuestion">你最期待本次 Offsite 的哪个环节？</div>
+        <div class="bars" id="vBars"></div>
+        <div class="vote-total" id="vTotal">总票数：0</div>
+      </div>
+      <div class="vote-side">
+        <div id="qrcode"></div>
+        <div class="hint">手机扫码打开投票页<br>点选项即实时上墙</div>
+      </div>
+    </div>
+    <!-- 投票页（手机端） -->
+    <div class="vote-mobile">
+      <div class="vm-q" id="vmQ">你最期待本次 Offsite 的哪个环节？</div>
+      <div class="vm-opts" id="vmOpts"></div>
+      <div class="vm-thx" id="vmThx"></div>
+    </div>
+  </section>
+
+  <!-- 03 文化签名墙 -->
+  <section class="effect">
+    <h2><span class="no">3</span>文化签名墙</h2>
+    <div class="desc">每人手写签名，笔迹化作彩色粒子飞入、拼成团队标语。多人累积，重开仍在（localStorage）。</div>
+    <div class="sig-row ctrl-hide">
+      <input type="text" id="sigSlogan" value="WE ARE ONE" placeholder="目标标语">
+      <button class="btn ghost" id="sigSloganSet">设定标语</button>
+    </div>
+    <div class="sig-stage">
+      <div class="sig-left">
+        <canvas class="sig-canvas" id="sigPad"></canvas>
+        <div class="sig-row ctrl-hide">
+          <button class="btn" id="sigSend">✍️ 签名入墙</button>
+          <button class="btn ghost" id="sigClear">清空笔迹</button>
+          <button class="btn ghost" id="sigReset">重置整墙</button>
+        </div>
+      </div>
+      <div class="sig-right">
+        <canvas class="sig-wall" id="sigWall"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">vol.4 · 由 WorkBuddy 生成 · 仅新增本页，vol.1~vol.3 未改动</div>
+</div>
+
+<script>
+/* 主题切换 */
+document.querySelectorAll('.themebar button').forEach(b=>{
+  b.onclick=()=>{document.documentElement.dataset.theme=b.dataset.t;
+    document.querySelectorAll('.themebar button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+});
+
+/* ===================== 01 聚光灯颁奖词 ===================== */
+const spNames=document.getElementById('spNames'), spCites=document.getElementById('spCites');
+const spot=document.getElementById('spot'), spWinner=document.getElementById('spWinner'),
+      spCite=document.getElementById('spCite'), spMeta=document.getElementById('spMeta');
+let spIdx=-1, spTimer=null;
+function spList(){return spNames.value.split('\n').map(s=>s.trim()).filter(Boolean)}
+function spCiteList(){return spCites.value.split('\n').map(s=>s.trim())}
+function spPlay(i){
+  const names=spList(); if(!names.length)return;
+  spIdx=(i+names.length)%names.length;
+  spot.classList.remove('on','show'); spWinner.textContent=''; spCite.textContent='';
+  clearTimeout(spTimer);
+  setTimeout(()=>{
+    spot.classList.add('on');
+    setTimeout(()=>{
+      spWinner.textContent=names[spIdx];
+      spot.classList.add('show');
+      const cites=spCiteList();
+      const text=cites[spIdx]||'感谢你的每一份付出，让团队因你而不同。';
+      spMeta.textContent=(spIdx+1)+' / '+names.length;
+      // 逐字浮现
+      spCite.textContent=''; let k=0;
+      (function tick(){ if(k<=text.length){ spCite.textContent=text.slice(0,k); k++; spTimer=setTimeout(tick,55);} })();
+    },350);
+  },60);
+}
+document.getElementById('spPick').onclick=()=>spPlay(Math.floor(Math.random()*spList().length));
+document.getElementById('spPrev').onclick=()=>spPlay(spIdx-1);
+document.getElementById('spNext').onclick=()=>spPlay(spIdx+1);
+document.getElementById('spReplay').onclick=()=>{ if(spIdx>=0) spPlay(spIdx); };
+
+/* ===================== 02 实时投票大屏 ===================== */
+const VOTE_OPTS=['破冰破局','深度研讨','行动产出','吃喝玩乐'];
+let votes=[3,5,2,4];
+const vBars=document.getElementById('vBars'), vQuestion=document.getElementById('vQuestion'),
+      vmQ=document.getElementById('vmQ'), vmOpts=document.getElementById('vmOpts'), vmThx=document.getElementById('vmThx');
+const isVoteMode=new URLSearchParams(location.search).get('vote')==='1';
+if(isVoteMode) document.body.classList.add('vote-mode');
+function renderBars(){
+  const total=votes.reduce((a,b)=>a+b,0)||1;
+  vBars.innerHTML=VOTE_OPTS.map((o,i)=>{
+    const pct=Math.round(votes[i]/total*100);
+    return `<div class="bar-row"><div class="bar-label">${o}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+      <div class="bar-pct">${pct}%</div></div>`;
+  }).join('');
+  document.getElementById('vTotal').textContent='总票数：'+votes.reduce((a,b)=>a+b,0);
+}
+function buildVotePage(){
+  vmQ.textContent=vQuestion.textContent;
+  vmOpts.innerHTML=VOTE_OPTS.map((o,i)=>`<button class="vm-opt" data-i="${i}">${o}</button>`).join('');
+  vmOpts.querySelectorAll('.vm-opt').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i; votes[i]++; renderBars();
+    if(bc) bc.postMessage({i});
+    vmThx.textContent='✓ 已投给「'+VOTE_OPTS[i]+'」，感谢参与！';
+  });
+}
+document.getElementById('vqSet').onclick=()=>{vQuestion.textContent=document.getElementById('vq').value||vQuestion.textContent; vmQ.textContent=vQuestion.textContent;};
+document.getElementById('vSim').onclick=()=>{
+  const n=4+Math.floor(Math.random()*6);
+  for(let k=0;k<n;k++) votes[Math.floor(Math.random()*votes.length)]++;
+  renderBars(); if(bc) bc.postMessage({sim:votes});
+};
+// BroadcastChannel 同步（同浏览器多标签）
+let bc=null;
+try{ bc=new BroadcastChannel('livevote_channel');
+  bc.onmessage=e=>{ if(e.data.sim) votes=e.data.sim.slice(); else if(typeof e.data.i==='number') votes[e.data.i]++; renderBars(); };
+}catch(_){}
+// 二维码（指向投票页）
+try{
+  const url=location.origin+location.pathname+'?vote=1';
+  new QRCode(document.getElementById('qrcode'),{text:url,width:154,height:154,correctLevel:QRCode.CorrectLevel.M});
+}catch(_){}
+renderBars(); buildVotePage();
+
+/* ===================== 03 文化签名墙 ===================== */
+const sigPad=document.getElementById('sigPad'), sigWall=document.getElementById('sigWall');
+const pctx=sigPad.getContext('2d'), wctx=sigWall.getContext('2d');
+function fitCanvas(cv,ctx){const r=cv.getBoundingClientRect();const dpr=window.devicePixelRatio||1;
+  cv.width=r.width*dpr;cv.height=r.height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);return r;}
+let padR, wallR;
+function initSig(){padR=fitCanvas(sigPad,pctx);wallR=fitCanvas(sigWall,wctx);drawWall();}
+// 取目标文字像素点
+let slogan='WE ARE ONE', targets=[];
+function computeTargets(){
+  const off=document.createElement('canvas');off.width=wallR.width;off.height=wallR.height;
+  const o=off.getContext('2d');o.fillStyle='#fff';
+  o.font='900 '+Math.floor(wallR.width/9)+'px system-ui,sans-serif';
+  o.textAlign='center';o.textBaseline='middle';
+  o.fillText(slogan, wallR.width/2, wallR.height/2);
+  const img=o.getImageData(0,0,off.width,off.height).data; targets=[];
+  const step=Math.max(4,Math.floor(wallR.width/120));
+  for(let y=0;y<off.height;y+=step)for(let x=0;x<off.width;x+=step){
+    if(img[(y*off.width+x)*4+3]>128) targets.push({x:x,y:y});
+  }
+  // 打乱，让飞入更自然
+  for(let i=targets.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[targets[i],targets[j]]=[targets[j],targets[i]];}
+}
+// 累积签名点（localStorage）
+let stored=[];
+try{stored=JSON.parse(localStorage.getItem('sigWall_v4')||'[]');}catch(_){}
+function drawWall(){
+  computeTargets();
+  wctx.clearRect(0,0,wallR.width,wallR.height);
+  wctx.fillStyle='#0c0a1c';wctx.fillRect(0,0,wallR.width,wallR.height);
+  // 标语虚线轮廓
+  wctx.strokeStyle='rgba(255,255,255,.12)';wctx.lineWidth=1;
+  targets.forEach(t=>{wctx.fillRect(t.x,t.y,1.4,1.4);});
+  // 已存签名点
+  stored.forEach(p=>{wctx.fillStyle=p.c;wctx.fillRect(p.x,p.y,2.4,2.4);});
+}
+// 笔迹采样
+function samplePad(){
+  const img=pctx.getImageData(0,0,sigPad.width,sigPad.height).data;
+  const pts=[];const step=3;
+  for(let y=0;y<sigPad.height;y+=step)for(let x=0;x<sigPad.width;x+=step){
+    if(img[(y*sigPad.width+x)*4+3]>40) pts.push({x:x,y:y});
+  }
+  return pts;
+}
+let drawing=false;
+function padPos(e){const r=sigPad.getBoundingClientRect();
+  const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  const cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;return {x:cx,y:cy};}
+function startPad(e){drawing=true;pctx.beginPath();const p=padPos(e);pctx.moveTo(p.x,p.y);e.preventDefault();}
+function movePad(e){if(!drawing)return;const p=padPos(e);pctx.lineTo(p.x,p.y);pctx.strokeStyle='#6c5ce7';pctx.lineWidth=3;pctx.lineCap='round';pctx.stroke();e.preventDefault();}
+function endPad(){drawing=false;}
+sigPad.addEventListener('mousedown',startPad);sigPad.addEventListener('mousemove',movePad);window.addEventListener('mouseup',endPad);
+sigPad.addEventListener('touchstart',startPad);sigPad.addEventListener('touchmove',movePad);sigPad.addEventListener('touchend',endPad);
+function scaleToWall(x,y){return {x:x/wallR.width*wallR.width*1, y:y};} // 占位
+document.getElementById('sigSend').onclick=()=>{
+  const pts=samplePad(); if(!pts.length)return;
+  const color=`hsl(${Math.floor(Math.random()*360)},80%,62%)`;
+  flyToWall(pts,color);
+};
+function flyToWall(pts,color){
+  // 把签名点映射到 wall 坐标，飞向 targets
+  const mapped=pts.map(p=>({x:p.x/wallR.width*sigPad.width*(wallR.width/sigPad.width), y:p.y}));
+  // 直接用签名点在 pad 的比例映射到 wall
+  const sx=wallR.width/sigPad.width, sy=wallR.height/sigPad.height;
+  let placed=[];
+  const use=Math.min(pts.length,targets.length-stored.length);
+  for(let k=0;k<pts.length;k++){
+    const t=targets[(stored.length+k)%targets.length];
+    const sx0=pts[k].x*sx, sy0=pts[k].y*sy;
+    const start={x:Math.random()*wallR.width,y:-20};
+    placed.push({from:start,to:{x:t.x,y:t.y},c:color});
+  }
+  // 动画
+  let frame=0;const total=28;
+  (function anim(){
+    wctx.fillStyle='#0c0a1c';wctx.fillRect(0,0,wallR.width,wallR.height);
+    wctx.fillStyle='rgba(255,255,255,.12)';targets.forEach(t=>wctx.fillRect(t.x,t.y,1.4,1.4));
+    stored.forEach(p=>{wctx.fillStyle=p.c;wctx.fillRect(p.x,p.y,2.4,2.4);});
+    const prog=frame/total;
+    placed.forEach(p=>{
+      const x=p.from.x+(p.to.x-p.from.x)*prog, y=p.from.y+(p.to.y-p.from.y)*prog;
+      wctx.fillStyle=p.c;wctx.fillRect(x,y,2.6,2.6);
+    });
+    frame++;
+    if(frame<=total) requestAnimationFrame(anim);
+    else{
+      // 落定：把这些点并入 stored
+      placed.forEach((p,i)=>{ if(stored.length<targets.length) stored.push({x:p.to.x,y:p.to.y,c:p.c}); });
+      localStorage.setItem('sigWall_v4',JSON.stringify(stored));
+      drawWall();
+    }
+  })();
+}
+document.getElementById('sigClear').onclick=()=>{pctx.clearRect(0,0,sigPad.width,sigPad.height);};
+document.getElementById('sigReset').onclick=()=>{stored=[];localStorage.removeItem('sigWall_v4');pctx.clearRect(0,0,sigPad.width,sigPad.height);drawWall();};
+document.getElementById('sigSloganSet').onclick=()=>{slogan=(document.getElementById('sigSlogan').value||'WE ARE ONE').toUpperCase();drawWall();};
+window.addEventListener('resize',initSig);
+initSig();
+</script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>创意效果实验室 vol.5 · 表彰 × 破冰 × 文化传递 × 复盘</title>
+<style>
+:root{
+  --bg:#eef1f8; --bg2:#e3e8f5; --card:rgba(255,255,255,.72); --text:#1c2540;
+  --muted:#5b6480; --primary:#6c5ce7; --primary2:#a55eea; --accent:#00b894;
+  --border:rgba(108,92,231,.18); --shadow:0 10px 40px rgba(60,50,140,.16); --noise:0.05;
+  --gold:#ffd166; --rose:#ff7b9c; --sky:#48c6ef;
+}
+[data-theme="dark"]{
+  --bg:#0e1020; --bg2:#161a30; --card:rgba(30,34,60,.62); --text:#eef1ff;
+  --muted:#9aa3c7; --primary:#8b7bff; --primary2:#c77dff; --accent:#2ee6b0;
+  --border:rgba(160,150,255,.22); --shadow:0 12px 44px rgba(0,0,0,.5); --noise:0.09;
+  --gold:#ffd166; --rose:#ff7b9c; --sky:#48c6ef;
+}
+[data-theme="projector"]{
+  --bg:#0a0c1a; --bg2:#101430; --card:rgba(20,26,55,.78); --text:#ffffff;
+  --muted:#c7cdf0; --primary:#ffd166; --primary2:#ff7b9c; --accent:#3ddc97;
+  --border:rgba(255,209,102,.35); --shadow:0 0 0 2px rgba(255,209,102,.25); --noise:0.12;
+  --gold:#ffd166; --rose:#ff7b9c; --sky:#48c6ef;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;color:var(--text);
+  background:linear-gradient(135deg,var(--bg),var(--bg2));min-height:100vh;padding:28px 16px 80px;position:relative;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:var(--noise);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto}
+header.top{text-align:center;margin-bottom:10px}
+header.top h1{font-size:30px;background:linear-gradient(90deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+header.top p{color:var(--muted);margin-top:6px;font-size:14px}
+.themebar{position:fixed;top:14px;right:14px;z-index:30;display:flex;gap:6px}
+.themebar button{border:1px solid var(--border);background:var(--card);color:var(--text);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:13px;backdrop-filter:blur(8px)}
+.themebar button.active{background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;border-color:transparent}
+.effect{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 22px;margin-top:18px;box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+.effect h2{font-size:18px;display:flex;align-items:center;gap:10px}
+.effect h2 .no{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-size:14px;font-weight:700}
+.effect .desc{color:var(--muted);font-size:13px;margin:6px 0 14px}
+.demo{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{border:none;border-radius:12px;padding:9px 16px;cursor:pointer;font-size:14px;font-weight:600;background:linear-gradient(90deg,var(--primary),var(--primary2));color:#fff;transition:.2s}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn.ghost{background:var(--card);color:var(--text);border:1px solid var(--border)}
+input[type=text],textarea,select{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:8px 10px;font-size:14px;font-family:inherit;outline:none}
+.tag{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;background:var(--border);color:var(--text);cursor:pointer;border:1px solid transparent}
+.box{width:100%;border-radius:14px;border:1px solid var(--border);background:var(--card);overflow:hidden;position:relative}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+.ctrl-hide{}
+@media print{.themebar,.btn,.tag,.ctrl-hide{display:none!important}}
+
+/* ===== 01 勋章解锁动画 ===== */
+.medal-stage{display:grid;place-items:center;min-height:300px;border-radius:14px;position:relative;
+  background:radial-gradient(circle at 50% 40%,rgba(108,92,231,.12),transparent 60%);overflow:hidden}
+.medal{position:relative;width:170px;height:170px;display:grid;place-items:center}
+.medal .ring{position:absolute;inset:0;border-radius:50%;border:6px solid var(--primary);opacity:0;
+  box-shadow:0 0 0 0 rgba(108,92,231,.45);}
+.medal .disc{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-size:54px;
+  transform:scale(.4) rotate(-30deg);opacity:0;
+  box-shadow:0 14px 30px rgba(108,92,231,.45),inset 0 0 18px rgba(255,255,255,.25)}
+.medal .name{position:absolute;bottom:-30px;left:0;right:0;text-align:center;font-weight:700;font-size:15px;opacity:0;transform:translateY(8px)}
+.medal .toast{position:absolute;top:-6px;left:50%;transform:translate(-50%,-10px);background:var(--gold);color:#3a2c00;
+  padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;opacity:0;white-space:nowrap}
+.medal.unlock .ring{animation:ringpop .7s ease forwards}
+.medal.unlock .disc{animation:discpop .7s .15s cubic-bezier(.2,1.4,.4,1) forwards}
+.medal.unlock .name{animation:fadeup .5s .55s forwards}
+.medal.unlock .toast{animation:toastpop .5s .65s forwards}
+@keyframes ringpop{0%{opacity:0;transform:scale(.5)}60%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1);box-shadow:0 0 0 14px rgba(108,92,231,0)}}
+@keyframes discpop{to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes fadeup{to{opacity:1;transform:translateY(0)}}
+@keyframes toastpop{0%{opacity:0;transform:translate(-50%,6px)}100%{opacity:1;transform:translate(-50%,-10px)}}
+.medal-shake{animation:shake .5s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+
+/* ===== 02 荣誉时间轴 ===== */
+.tl-scroll{overflow-x:auto;padding:14px 4px 20px;scrollbar-width:thin}
+.tl-track{position:relative;display:flex;gap:0;min-width:max-content;padding-top:30px}
+.tl-track::before{content:"";position:absolute;top:54px;left:0;right:0;height:3px;background:var(--border)}
+.tl-node{position:relative;width:180px;flex:0 0 auto;padding:0 14px;text-align:center}
+.tl-dot{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));margin:18px auto 0;border:3px solid var(--card);box-shadow:0 0 0 3px var(--border)}
+.tl-year{position:absolute;top:0;left:0;right:0;font-weight:800;font-size:15px;color:var(--primary)}
+.tl-card{margin-top:14px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px;font-size:13px;
+  cursor:pointer;transition:.2s}
+.tl-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.tl-card .t{font-weight:700;margin-bottom:3px}
+.tl-card .d{color:var(--muted);font-size:12px;line-height:1.5}
+.tl-detail{margin-top:14px;padding:14px 16px;border-radius:12px;border:1px dashed var(--border);background:var(--bg2);display:none;font-size:14px;line-height:1.7}
+.tl-detail.show{display:block}
+
+/* ===== 03 随机分组 shuffle ===== */
+.shuffle-stage{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:12px;margin-bottom:14px;min-height:120px}
+.avatar{aspect-ratio:1;border-radius:16px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));transition:transform .5s cubic-bezier(.2,.8,.2,1),background .5s,opacity .4s;position:relative}
+.avatar.shuffling{transform:scale(.6) rotate(20deg);opacity:.5}
+.avatar small{position:absolute;bottom:6px;font-size:11px;font-weight:500;opacity:.9}
+.groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.group{border:1px solid var(--border);border-radius:14px;padding:12px 14px;background:var(--bg2)}
+.group h4{font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.group h4 .gdot{width:12px;height:12px;border-radius:50%}
+.group ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.group li{font-size:12px;background:var(--card);border:1px solid var(--border);padding:3px 9px;border-radius:20px}
+.shuffle-inputs{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.shuffle-inputs>div{flex:1;min-width:220px}
+.shuffle-inputs label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
+.shuffle-inputs input{width:100%}
+
+/* ===== 04 价值观词云飘字 ===== */
+.cloud-stage{position:relative;height:360px;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(108,92,231,.10),transparent 65%)}
+.cloud-word{position:absolute;font-weight:800;white-space:nowrap;opacity:0;transform:translate(-50%,-50%);
+  will-change:transform,opacity;pointer-events:none;text-shadow:0 2px 10px rgba(0,0,0,.12)}
+.cloud-gather{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-weight:900;
+  font-size:30px;background:linear-gradient(90deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;transition:opacity .6s}
+.cloud-gather.show{opacity:1}
+
+/* ===== 05 复盘四象限 ===== */
+.four{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quad{border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--bg2);display:flex;flex-direction:column}
+.quad h4{font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.quad h4 .q{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;color:#fff;font-size:13px}
+.quad.s .q{background:linear-gradient(135deg,#2ee6b0,#00b894)}
+.quad.st .q{background:linear-gradient(135deg,#ff7b9c,#ff5e7e)}
+.quad.m .q{background:linear-gradient(135deg,#48c6ef,#6c5ce7)}
+.quad.l .q{background:linear-gradient(135deg,#ffd166,#ff9f43)}
+.quad textarea{width:100%;flex:1;min-height:90px;resize:vertical;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:8px;font-family:inherit;font-size:13px}
+.quad .cnt{font-size:11px;color:var(--muted);margin-top:6px;text-align:right}
+.retro-actions{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="themebar ctrl-hide">
+  <button data-t="light" class="active">浅色</button>
+  <button data-t="dark">深色</button>
+  <button data-t="projector">投影</button>
+</div>
+<div class="wrap">
+  <header class="top">
+    <h1>创意效果实验室 · vol.5</h1>
+    <p>表彰 × 破冰 × 文化传递 × 复盘产出 —— 员工大会 / Offsite / 团建可直接用的 5 个新玩法</p>
+  </header>
+
+  <!-- 01 勋章解锁动画 -->
+  <section class="effect">
+    <h2><span class="no">1</span>勋章解锁动画</h2>
+    <div class="desc">像游戏成就一样「叮」地弹出勋章，适合文化之星 / 月度之星 / 项目表彰的仪式感时刻。可自定义头衔与获奖人，支持随机抽一位解锁。</div>
+    <div class="demo ctrl-hide">
+      <input type="text" id="medalName" value="李婷" style="min-width:160px" placeholder="获奖人">
+      <select id="medalType">
+        <option value="🌟|文化之星">🌟 文化之星</option>
+        <option value="🏆|月度之星">🏆 月度之星</option>
+        <option value="🚀|突破先锋">🚀 突破先锋</option>
+        <option value="🤝|最佳协作">🤝 最佳协作</option>
+        <option value="💡|创新达人">💡 创新达人</option>
+      </select>
+      <button class="btn" id="medalUnlock">🔓 解锁勋章</button>
+      <button class="btn ghost" id="medalRandom">🎲 随机抽一位</button>
+    </div>
+    <div class="box" style="margin-top:14px"><div class="medal-stage" id="medalStage"></div></div>
+  </section>
+
+  <!-- 02 荣誉时间轴 -->
+  <section class="effect">
+    <h2><span class="no">2</span>荣誉时间轴</h2>
+    <div class="desc">历年获奖者横向滚动，点击任一节点展开当年故事。适合员工大会回顾「我们一路怎么走来的」。</div>
+    <div class="demohint ctrl-hide demo" style="margin-bottom:10px;color:var(--muted);font-size:13px">点下方任意年份卡片可展开当届详情 ↓</div>
+    <div class="box" style="padding:6px">
+      <div class="tl-scroll"><div class="tl-track" id="tlTrack"></div></div>
+      <div class="tl-detail" id="tlDetail"></div>
+    </div>
+  </section>
+
+  <!-- 03 随机分组 shuffle -->
+  <section class="effect">
+    <h2><span class="no">3</span>随机分组 shuffle</h2>
+    <div class="desc">头像卡片翻飞重组，「咔」一下定组，破冰神器。改名单与组数，一键重新洗牌。</div>
+    <div class="shuffle-inputs ctrl-hide">
+      <div><label>成员（每行一位）</label><textarea id="shNames" style="height:70px">张明
+李婷
+王浩
+陈晓
+刘洋
+赵磊
+孙悦
+周琳
+吴桐
+郑凯
+冯雪
+何静</textarea></div>
+      <div><label>分组数</label><input type="text" id="shGroups" value="4"></div>
+    </div>
+    <div class="demo ctrl-hide">
+      <button class="btn" id="shGo">🔀 一键洗牌分组</button>
+      <button class="btn ghost" id="shReset">↻ 还原名单</button>
+    </div>
+    <div class="shuffle-stage" id="shStage" style="margin-top:14px"></div>
+    <div class="groups" id="shGroupsOut"></div>
+  </section>
+
+  <!-- 04 价值观词云飘字 -->
+  <section class="effect">
+    <h2><span class="no">4</span>价值观词云飘字</h2>
+    <div class="desc">关键词从屏幕四面八方飘入、汇聚成一句话，文化传递的视觉锤。可改词与汇聚句。</div>
+    <div class="demohint demo ctrl-hide" style="margin-bottom:10px;color:var(--muted);font-size:13px">
+      <input type="text" id="cloudWords" value="靠谱,担当,客户第一,协作,创新,简单,坦诚,结果,成长,热爱" style="flex:1;min-width:280px" placeholder="关键词，逗号分隔">
+      <input type="text" id="cloudFinal" value="我们因价值观而聚" style="min-width:180px" placeholder="汇聚句">
+      <button class="btn ghost" id="cloudSet">设定</button>
+    </div>
+    <div class="box" style="margin-top:14px">
+      <div class="cloud-stage" id="cloudStage">
+        <div class="cloud-gather" id="cloudGather"></div>
+      </div>
+    </div>
+    <div class="demo ctrl-hide" style="margin-top:12px">
+      <button class="btn" id="cloudPlay">🌪️ 飘入汇聚</button>
+      <button class="btn ghost" id="cloudAgain">↻ 再来一次</button>
+    </div>
+  </section>
+
+  <!-- 05 复盘四象限 -->
+  <section class="effect">
+    <h2><span class="no">5</span>复盘四象限</h2>
+    <div class="desc">开始做 / 停止做 / 多做 / 少做，Offsite 收尾直接产出行动清单。可本地保存，一键导出 Markdown。</div>
+    <div class="four">
+      <div class="quad s"><h4><span class="q">S</span>开始做 Start</h4><textarea data-k="s" placeholder="哪些事我们该开始做？"></textarea><div class="cnt" data-c="s"></div></div>
+      <div class="quad st"><h4><span class="q">T</span>停止做 Stop</h4><textarea data-k="st" placeholder="哪些事该立刻停止？"></textarea><div class="cnt" data-c="st"></div></div>
+      <div class="quad m"><h4><span class="q">M</span>多做 More</h4><textarea data-k="m" placeholder="哪些事值得多做？"></textarea><div class="cnt" data-c="m"></div></div>
+      <div class="quad l"><h4><span class="q">L</span>少做 Less</h4><textarea data-k="l" placeholder="哪些事可以少做？"></textarea><div class="cnt" data-c="l"></div></div>
+    </div>
+    <div class="retro-actions ctrl-hide">
+      <button class="btn" id="retroSave">💾 保存</button>
+      <button class="btn ghost" id="retroExport">📋 导出 Markdown</button>
+      <button class="btn ghost" id="retroClear">🧹 清空</button>
+      <span id="retroMsg" style="color:var(--accent);font-size:13px"></span>
+    </div>
+  </section>
+
+  <div class="foot">vol.5 · 由 WorkBuddy 生成 · 仅新增本页，vol.1~vol.4 未改动</div>
+</div>
+
+<script>
+/* 主题切换 */
+document.querySelectorAll('.themebar button').forEach(b=>{
+  b.onclick=()=>{document.documentElement.dataset.theme=b.dataset.t;
+    document.querySelectorAll('.themebar button').forEach(x=>x.classList.remove('active'));b.classList.add('active')};
+});
+
+/* ===================== 01 勋章解锁动画 ===================== */
+const medalStage=document.getElementById('medalStage');
+const MEDAL_POOL=['李婷','张明','王浩','陈晓','刘洋','赵磊','孙悦','周琳'];
+function buildMedal(){
+  medalStage.innerHTML='';
+  const wrap=document.createElement('div');wrap.className='medal';
+  wrap.innerHTML=`<div class="toast">🎉 勋章解锁！</div><div class="ring"></div>
+    <div class="disc">🌟</div><div class="name"></div>`;
+  medalStage.appendChild(wrap);return wrap;
+}
+let medalEl=buildMedal();
+function unlockMedal(name,type,icon){
+  medalEl=buildMedal();
+  const [ic,t]=type.split('|');
+  medalEl.querySelector('.disc').textContent=ic;
+  medalEl.querySelector('.name').textContent=name+' · '+t;
+  medalEl.querySelector('.toast').textContent='🎉 '+t+' 解锁！';
+  // 触发动画
+  requestAnimationFrame(()=>medalEl.classList.add('unlock'));
+}
+document.getElementById('medalUnlock').onclick=()=>{
+  const name=document.getElementById('medalName').value.trim()||'匿名伙伴';
+  unlockMedal(name,document.getElementById('medalType').value,'');
+};
+document.getElementById('medalRandom').onclick=()=>{
+  const name=MEDAL_POOL[Math.floor(Math.random()*MEDAL_POOL.length)];
+  document.getElementById('medalName').value=name;
+  const sel=document.getElementById('medalType');
+  sel.selectedIndex=Math.floor(Math.random()*sel.options.length);
+  unlockMedal(name,sel.value,'');
+};
+
+/* ===================== 02 荣誉时间轴 ===================== */
+const TL=[
+  {year:'2021',t:'启航之年',d:'团队初建，定下「靠谱」底色',more:'从 0 到 1 搭起第一套协作流程，第一批文化之星在磕碰中诞生。'},
+  {year:'2022',t:'共生之年',d:'跨团队协作机制成型',more:'「客户第一」写进每一次评审；年度荣誉首次以勋章形式授予。'},
+  {year:'2023',t:'突破之年',d:'关键项目接连交付',more:'三个突破先锋拿下最难啃的骨头，文化从口号变成可量化的行为。'},
+  {year:'2024',t:'沉淀之年',d:'案例库与 READ 模型上线',more:'把经验变成可复用资产，季度荣誉墙记录每一个高光时刻。'},
+  {year:'2025',t:'跃迁之年',d:'AI 文化落地，人人都是布道师',more:'主理人制 + 双轨沙龙激活全员，文化之星覆盖更多一线同学。'},
+];
+const tlTrack=document.getElementById('tlTrack'), tlDetail=document.getElementById('tlDetail');
+TL.forEach((it,i)=>{
+  const node=document.createElement('div');node.className='tl-node';
+  node.innerHTML=`<div class="tl-year">${it.year}</div><div class="tl-dot"></div>
+    <div class="tl-card"><div class="t">${it.t}</div><div class="d">${it.d}</div></div>`;
+  node.querySelector('.tl-card').onclick=()=>{
+    tlDetail.classList.add('show');
+    tlDetail.innerHTML=`<strong>${it.year} · ${it.t}</strong><br>${it.more}`;
+    document.querySelectorAll('.tl-card').forEach(c=>c.style.outline='');
+    node.querySelector('.tl-card').style.outline='2px solid var(--primary)';
+  };
+  tlTrack.appendChild(node);
+});
+
+/* ===================== 03 随机分组 shuffle ===================== */
+const shStage=document.getElementById('shStage'), shGroupsOut=document.getElementById('shGroupsOut');
+const PALETTE=['#6c5ce7','#a55eea','#00b894','#ff7b9c','#48c6ef','#ffd166','#fd79a8','#74b9ff'];
+function shList(){return document.getElementById('shNames').value.split('\n').map(s=>s.trim()).filter(Boolean)}
+function renderAvatars(list){
+  shStage.innerHTML='';
+  list.forEach((n,i)=>{
+    const a=document.createElement('div');a.className='avatar';
+    a.style.background=`linear-gradient(135deg,${PALETTE[i%PALETTE.length]},${PALETTE[(i+3)%PALETTE.length]})`;
+    a.innerHTML=n.slice(0,1)+'<small>'+n+'</small>';
+    shStage.appendChild(a);
+  });
+}
+renderAvatars(shList());
+document.getElementById('shReset').onclick=()=>renderAvatars(shList());
+document.getElementById('shGo').onclick=()=>{
+  const list=shList();
+  const g=Math.max(1,Math.min(list.length,parseInt(document.getElementById('shGroups').value)||1));
+  const avs=[...shStage.children];
+  avs.forEach(a=>a.classList.add('shuffling'));
+  // 洗牌动画
+  let steps=0;const maxSteps=10;
+  const timer=setInterval(()=>{
+    // 随机重排位置
+    [...shStage.children].forEach(a=>{a.style.order=Math.floor(Math.random()*100);});
+    steps++;
+    if(steps>=maxSteps){
+      clearInterval(timer);
+      const shuffled=[...list].sort(()=>Math.random()-0.5);
+      const groups=Array.from({length:g},()=>[]);
+      shuffled.forEach((n,i)=>groups[i%g].push(n));
+      avs.forEach(a=>a.classList.remove('shuffling'));
+      // 输出分组
+      shGroupsOut.innerHTML='';
+      groups.forEach((mem,gi)=>{
+        const box=document.createElement('div');box.className='group';
+        box.innerHTML=`<h4><span class="gdot" style="background:${PALETTE[gi%PALETTE.length]}"></span>第 ${gi+1} 组（${mem.length}人）</h4>
+          <ul>${mem.map(m=>'<li>'+m+'</li>').join('')}</ul>`;
+        shGroupsOut.appendChild(box);
+      });
+      renderAvatars(shuffled);
+    }
+  },90);
+};
+
+/* ===================== 04 价值观词云飘字 ===================== */
+const cloudStage=document.getElementById('cloudStage'), cloudGather=document.getElementById('cloudGather');
+let cloudWords=['靠谱','担当','客户第一','协作','创新','简单','坦诚','结果','成长','热爱'];
+let cloudFinal='我们因价值观而聚';
+function playCloud(){
+  // 清旧
+  cloudStage.querySelectorAll('.cloud-word').forEach(e=>e.remove());
+  cloudGather.classList.remove('show');
+  const W=cloudStage.clientWidth,H=cloudStage.clientHeight;
+  cloudWords.forEach((w,i)=>{
+    const el=document.createElement('div');el.className='cloud-word';el.textContent=w;
+    const size=20+Math.random()*30;el.style.fontSize=size+'px';
+    const hue=Math.floor(Math.random()*360);
+    el.style.color=`hsl(${hue},75%,58%)`;
+    // 起始：四面八方
+    const side=i%4;let sx,sy;
+    if(side===0){sx=-100;sy=Math.random()*H;}
+    else if(side===1){sx=W+100;sy=Math.random()*H;}
+    else if(side===2){sx=Math.random()*W;sy=-80;}
+    else{sx=Math.random()*W;sy=H+80;}
+    const tx=W/2+(Math.random()-.5)*160, ty=H/2+(Math.random()-.5)*120;
+    el.style.left=sx+'px';el.style.top=sy+'px';
+    cloudStage.appendChild(el);
+    requestAnimationFrame(()=>{
+      el.style.transition='transform 1.6s cubic-bezier(.2,.7,.2,1),opacity 1.6s';
+      el.style.opacity='.95';
+      el.style.transform=`translate(${tx-sx}px,${ty-sy}px) scale(1)`;
+    });
+  });
+  // 汇聚句
+  setTimeout(()=>{
+    cloudGather.textContent=cloudFinal;
+    cloudGather.classList.add('show');
+  },1700);
+}
+document.getElementById('cloudSet').onclick=()=>{
+  cloudWords=document.getElementById('cloudWords').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+  cloudFinal=document.getElementById('cloudFinal').value.trim()||cloudFinal;
+};
+document.getElementById('cloudPlay').onclick=playCloud;
+document.getElementById('cloudAgain').onclick=playCloud;
+
+/* ===================== 05 复盘四象限 ===================== */
+const RETRO_KEY='retro_v5';
+const retroBoxes={};
+document.querySelectorAll('.quad textarea').forEach(t=>{
+  retroBoxes[t.dataset.k]=t;
+  const cnt=document.querySelector(`.cnt[data-c="${t.dataset.k}"]`);
+  const upd=()=>{cnt.textContent=t.value.trim()?t.value.trim().split('\n').filter(Boolean).length+' 条':'0 条';};
+  t.oninput=upd;
+  cnt&&upd();
+});
+try{
+  const saved=JSON.parse(localStorage.getItem(RETRO_KEY)||'{}');
+  Object.keys(saved).forEach(k=>{ if(retroBoxes[k]) retroBoxes[k].value=saved[k]; });
+  document.querySelectorAll('.quad textarea').forEach(t=>t.oninput());
+}catch(_){}
+document.getElementById('retroSave').onclick=()=>{
+  const o={};Object.keys(retroBoxes).forEach(k=>o[k]=retroBoxes[k].value);
+  localStorage.setItem(RETRO_KEY,JSON.stringify(o));
+  const m=document.getElementById('retroMsg');m.textContent='✓ 已保存到本地';
+  setTimeout(()=>m.textContent='',1800);
+};
+document.getElementById('retroClear').onclick=()=>{
+  Object.values(retroBoxes).forEach(t=>t.value='');
+  localStorage.removeItem(RETRO_KEY);
+  document.querySelectorAll('.quad textarea').forEach(t=>t.oninput());
+};
+document.getElementById('retroExport').onclick=()=>{
+  const map={s:'开始做 Start',st:'停止做 Stop',m:'多做 More',l:'少做 Less'};
+  let md='# 复盘四象限\n\n';
+  Object.keys(map).forEach(k=>{
+    md+=`## ${map[k]}\n`;
+    const lines=retroBoxes[k].value.trim().split('\n').filter(Boolean);
+    md+=(lines.length?lines.map(l=>'- '+l).join('\n'):'- （空）')+'\n\n';
+  });
+  navigator.clipboard?.writeText(md).then(()=>{
+    const m=document.getElementById('retroMsg');m.textContent='✓ 已复制 Markdown 到剪贴板';
+    setTimeout(()=>m.textContent='',2200);
+  }).catch(()=>{ window.prompt('复制以下 Markdown：',md); });
+};
+
+/* 词云初始演示（用户手动点「飘入汇聚」也可） */
+</script>
+</body>
+</html>

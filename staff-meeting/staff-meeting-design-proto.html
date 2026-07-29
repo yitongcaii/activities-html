@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>员工大会 · 流程设计（杂志画册版）</title>
+<style>
+  :root{
+    --bg:#fff6ee; --card:#fff; --bd:#ffd8c2; --txt:#3a2418; --sub:#9a7c6b;
+    --grad:linear-gradient(120deg,#ff7a59,#ff4d8d 50%,#ffb648);
+    --pink:#ff7a59; --mag:#ff4d8d; --mango:#ffb648;
+    --shadow:0 14px 34px rgba(255,140,90,.14);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.62;overflow-x:hidden}
+
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);
+    background:rgba(255,246,238,.82);border-bottom:1px solid var(--bd)}
+  nav .inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:18px;
+    padding:11px 22px;flex-wrap:wrap}
+  .brand{font-weight:900;font-size:16px;background:var(--grad);-webkit-background-clip:text;
+    background-clip:text;color:transparent;white-space:nowrap}
+  nav a{color:var(--sub);text-decoration:none;font-size:13px;transition:.2s}
+  nav a:hover{color:var(--txt)}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px 80px}
+
+  /* hero */
+  .hero{padding:58px 0 8px}
+  .kick{font-size:12px;letter-spacing:3px;color:var(--mag);text-transform:uppercase}
+  h1{font-size:clamp(38px,7.5vw,68px);line-height:.96;margin:12px 0 6px;font-weight:900;letter-spacing:-1px}
+  h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .deck{color:var(--sub);max-width:640px;font-size:17px;margin-top:12px}
+  .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .pill{font-size:13px;padding:7px 14px;border-radius:99px;background:var(--card);
+    border:1px solid var(--bd);color:var(--txt)}
+  .pill b{color:var(--pink)}
+
+  section{padding:40px 0 4px}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+  .sec-no{font-size:13px;font-weight:900;color:var(--mag);letter-spacing:1px}
+  h2{font-size:26px;margin:0;font-weight:900}
+  .sec-sub{color:var(--sub);margin:2px 0 18px;font-size:14px}
+
+  /* FEATURE curve */
+  .feat{background:var(--card);border:1px solid var(--bd);border-radius:0 22px 22px 0;
+    padding:22px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .feat .cap{font-size:12px;color:var(--sub);letter-spacing:2px;margin-bottom:6px}
+  svg{width:100%;height:auto;display:block}
+  .grid-l{stroke:rgba(58,36,24,.08);stroke-width:1}
+  .axis-t{fill:var(--sub);font-size:12px}
+  .curve{fill:none;stroke:url(#cg);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 4px 10px rgba(255,122,89,.4))}
+  .area{fill:url(#ag);opacity:.4}
+  .dot{cursor:pointer}
+  .dot circle{transition:.25s}
+  .dot:hover circle,.dot.active circle{r:11;filter:drop-shadow(0 0 8px var(--mango))}
+  .dot text{fill:var(--txt);font-size:13px;font-weight:800;text-anchor:middle}
+  .dot .emo{fill:var(--sub);font-size:11px;font-weight:500}
+  .dot.active text{fill:var(--mag)}
+
+  /* now-reading detail */
+  .now{margin-top:18px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+  @media(max-width:760px){.now{grid-template-columns:1fr}}
+  .now-main{background:#fffaf4;border:1px solid var(--bd);border-radius:16px;padding:18px}
+  .now-stage{font-size:12px;color:var(--mag);letter-spacing:2px}
+  .now-emo{font-size:26px;font-weight:900;margin:4px 0 10px}
+  .now-flow{color:var(--sub);font-size:14px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .chip{font-size:12px;padding:4px 11px;border-radius:99px;border:1px solid var(--bd);color:var(--mag)}
+  .chip.b{color:var(--pink)}
+  .meter{background:#fffaf4;border:1px solid var(--bd);border-radius:16px;padding:18px}
+  .meter .lab{display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-bottom:7px}
+  .bar{height:11px;border-radius:99px;background:rgba(58,36,24,.08);overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad);transition:width .6s}
+  .meter .purp{margin-top:14px;font-size:12px;color:var(--sub)}
+
+  /* editorial entries */
+  .contents{font-size:12px;letter-spacing:2px;color:var(--mag);margin:30px 0 6px;font-weight:800}
+  .entry{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:28px 0;border-top:1px solid var(--bd);
+    cursor:pointer;transition:.2s}
+  .entry:hover{background:rgba(255,255,255,.4)}
+  .entry.active{background:rgba(255,213,72,.12)}
+  .entry .num{font-size:68px;font-weight:900;line-height:.82;background:var(--grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent;transition:.2s}
+  .entry.active .num{transform:translateX(4px)}
+  .entry .eh{font-size:23px;font-weight:900;margin:0 0 6px}
+  .entry .ef{color:var(--sub);font-size:14px;margin:0}
+  .quote{margin-top:12px;background:#fffaf4;border-left:4px solid var(--mango);border-radius:0 12px 12px 0;
+    padding:9px 14px;font-size:14px;font-style:italic;color:var(--txt)}
+  .entry .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  @media(max-width:760px){.entry{grid-template-columns:1fr}.entry .num{font-size:52px}}
+
+  /* purpose */
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .pcard{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;
+    cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+  .pcard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .pcard.sel{border-color:var(--mag);background:linear-gradient(180deg,rgba(255,77,141,.12),rgba(255,255,255,.04))}
+  .pcard .pk{font-size:20px}
+  .pcard h3{margin:8px 0 5px;font-size:17px}
+  .pcard p{margin:0;color:var(--sub);font-size:13px}
+  .pcard .where{margin-top:9px;font-size:12px;color:var(--pink)}
+  .pcard .tick{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;
+    border:2px solid var(--bd);display:grid;place-items:center;font-size:13px;color:transparent}
+  .pcard.sel .tick{background:var(--mag);border-color:var(--mag);color:#fff}
+  .countbar{display:flex;align-items:center;gap:12px;margin:16px 0 4px;font-size:14px;color:var(--sub)}
+  .countbar b{color:var(--pink)}
+
+  /* bonus */
+  .bcard{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px 18px;
+    cursor:pointer;transition:.2s;display:flex;align-items:center;gap:14px}
+  .bcard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .bcard.on{border-color:var(--pink);background:linear-gradient(180deg,rgba(255,122,89,.12),rgba(255,255,255,.04))}
+  .bmark{width:26px;height:26px;border-radius:8px;border:2px solid var(--bd);display:grid;place-items:center;
+    font-size:15px;color:transparent;flex:none;transition:.2s}
+  .bcard.on .bmark{background:var(--pink);border-color:var(--pink);color:#fff}
+  .bcard .bt{font-weight:800;font-size:15px}
+  .bcard .bd{font-size:12px;color:var(--sub)}
+  .bcard .auto{margin-left:auto;font-size:11px;color:var(--pink);border:1px solid rgba(255,122,89,.4);padding:2px 8px;border-radius:99px}
+
+  /* link */
+  .linkdoc{background:linear-gradient(120deg,rgba(255,122,89,.16),rgba(255,182,72,.14));
+    border:1px solid var(--bd);border-radius:20px;padding:24px;display:flex;align-items:center;
+    gap:20px;flex-wrap:wrap;justify-content:space-between}
+  .linkdoc h3{margin:0 0 6px;font-size:19px}
+  .linkdoc p{margin:0;color:var(--sub);font-size:14px;max-width:560px}
+  .btn{display:inline-block;text-decoration:none;font-weight:800;font-size:14px;color:#fff;
+    background:var(--grad);padding:12px 22px;border-radius:99px;white-space:nowrap;transition:.2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(255,122,89,.3)}
+
+  footer{text-align:center;color:#b09a8e;font-size:12px;margin-top:50px;line-height:1.8}
+  .toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%) translateY(20px);
+    background:var(--txt);color:#fff;font-weight:700;font-size:13px;padding:11px 20px;border-radius:999px;
+    opacity:0;pointer-events:none;transition:.3s;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<nav><div class="inner">
+  <span class="brand">员工大会 · 流程设计</span>
+  <a href="#feature">情绪曲线</a>
+  <a href="#chapters">六段旅程</a>
+  <a href="#purpose">目的聚焦</a>
+  <a href="#bonus">加分项</a>
+  <a href="#link">关联文档</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kick">Style Z · 杂志画册 / Flow as a Magazine</span>
+    <h1>把流程，<br>写成<span class="g">一本会刊</span></h1>
+    <p class="deck">好的员工大会是被设计出来的情绪曲线。六段旅程，六篇专栏——从「到场有兴趣」到「会后还在聊」。</p>
+    <div class="pillrow">
+      <span class="pill">目的聚焦 <b>1–2 个</b></span>
+      <span class="pill">六段体验旅程</span>
+      <span class="pill">情绪起伏 × 记忆点</span>
+    </div>
+  </header>
+
+  <!-- FEATURE curve -->
+  <section id="feature">
+    <div class="sec-h"><span class="sec-no">FEATURE</span><h2>六段情绪曲线</h2></div>
+    <p class="sec-sub">点击曲线上的站点，阅读每一段的「流程动作 / 目的 / 加分项」。</p>
+    <div class="feat">
+      <div class="cap">EMOTION CURVE · 暖场 → 投入 → 高潮 → 共鸣 → 收尾 → 延续</div>
+      <svg id="curve" viewBox="0 0 1000 320" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ff7a59"/><stop offset=".5" stop-color="#ff4d8d"/><stop offset="1" stop-color="#ffb648"/>
+          </linearGradient>
+          <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(255,122,89,.35)"/><stop offset="1" stop-color="rgba(255,182,72,0)"/>
+          </linearGradient>
+        </defs>
+        <g id="grid"></g>
+        <path id="area" class="area"></path>
+        <path id="cpath" class="curve"></path>
+        <g id="dots"></g>
+      </svg>
+
+      <div class="now">
+        <div class="now-main">
+          <div class="now-stage" id="dStage">—</div>
+          <div class="now-emo" id="dEmo">—</div>
+          <div class="now-flow" id="dFlow">—</div>
+          <div class="chips" id="dChips"></div>
+        </div>
+        <div class="meter">
+          <div class="lab"><span>本段情绪强度</span><span id="dVallab">—</span></div>
+          <div class="bar"><i id="dBar"></i></div>
+          <div class="purp" id="dPurp">落在目的：—</div>
+          <div class="chips" id="dPurpChips" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- chapters -->
+  <div class="contents" id="chapters">CONTENTS · 六段旅程专栏</div>
+  <div id="entries"></div>
+
+  <!-- purpose -->
+  <section id="purpose">
+    <div class="sec-h"><span class="sec-no">FOCUS</span><h2>目的聚焦 · 选 1–2 个</h2></div>
+    <p class="sec-sub">一场会别想全都做。先定下核心目的，流程才知道往哪用力。</p>
+    <div class="grid2" id="purposeGrid"></div>
+    <div class="countbar">已选目的：<b id="pCount">0</b> / 2 &nbsp;·&nbsp; 建议聚焦，贪多反而记不住。</div>
+  </section>
+
+  <!-- bonus -->
+  <section id="bonus">
+    <div class="sec-h"><span class="sec-no">PLUS</span><h2>加分项 · 自查清单</h2></div>
+    <p class="sec-sub">四个维度，全中就是「被自发转发的那种会」。</p>
+    <div class="grid2" id="bonusGrid"></div>
+    <div class="countbar">加分项达成：<b id="bCount">1</b> / 4
+      <div class="bar" style="flex:1;max-width:360px"><i id="bBar" style="width:25%"></i></div>
+    </div>
+  </section>
+
+  <!-- link -->
+  <section id="link">
+    <div class="sec-h"><span class="sec-no">MORE</span><h2>关联文档</h2></div>
+    <p class="sec-sub">流程是骨架，环节是血肉。具体玩法看这份。</p>
+    <div class="linkdoc">
+      <div>
+        <h3>员工大会 · 环节亮点设计（完整 demo）</h3>
+        <p>反向述职、命运盲盒、AI 生图抽奖、金句海报墙……所有可点击的环节原型都在这里，对应上面每一段旅程。</p>
+      </div>
+      <a class="btn" href="https://yutttyi.github.io/staff-meeting-demo/%E5%91%98%E5%B7%A5%E5%A4%A7%E4%BC%9A%E7%8E%AF%E8%8A%82%E4%BA%AE%E7%82%B9HTML%E5%8E%9F%E5%9E%8B.html" target="_blank" rel="noopener">打开环节亮点 demo →</a>
+    </div>
+  </section>
+
+  <footer>员工大会流程设计 · 杂志画册版交互原型 ｜ 数据与环节均为示意，可替换为真实内容</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+const stages = [
+  {name:"暖场", emo:"到场有兴趣", val:62, quote:"先让每个人都想留下。",
+   flow:"开场暖场音乐 & 视频，让迟到的人也不尴尬，先热起来。反向述职、命运盲盒、实时弹幕都在这段把场子焐热。",
+   purp:["稳军心","出声量"], bonus:["被看见·被感谢","情绪起伏"]},
+  {name:"投入", emo:"被内容抓住", val:78, quote:"让大家听懂，为什么打这场仗。",
+   flow:"老板 / 各单元负责人发言：今年亮点 + 待提升 → 下一阶段方向 + 关键里程碑 → 对兄弟团队的需要。",
+   purp:["战略传达"], bonus:["记忆点（金句）"]},
+  {name:"高潮", emo:"嗨起来 / 被点燃", val:96, quote:"这一刻，全场被点燃。",
+   flow:"互动热场 QA + 抽奖，接颁奖。AI 生图抽奖、员工 talk、命运盲盒把情绪顶到最高，全场被点燃。",
+   purp:["表彰激励"], bonus:["情绪起伏","记忆点"]},
+  {name:"共鸣", emo:"心灵激荡", val:88, quote:"对的人，被看见、被感谢。",
+   flow:"颁奖背后的故事 / GM 面对面 / 金句时刻。把「被看见、被感谢」落到心里，稳的是军心。",
+   purp:["稳军心","战略传达"], bonus:["被看见·被感谢"]},
+  {name:"收尾", emo:"带着劲头走", val:80, quote:"带着劲，而不是累。",
+   flow:"金句海报墙 + 全场大合影，把一晚上的情绪收成一个「劲」，让人带着方向感离场。",
+   purp:["表彰激励"], bonus:["记忆点"]},
+  {name:"延续", emo:"会后回味", val:70, quote:"会散了，但还在聊。",
+   flow:"精彩混剪发大群、朋友圈物料跟上。让会「开完还没完」，有人自发聊、自发转。",
+   purp:["出声量"], bonus:["会后自发聊 / 朋友圈"]},
+];
+
+// ---- curve geometry ----
+const W=1000,H=320,padL=64,padR=30,padT=34,padB=64;
+const plotW=W-padL-padR, step=plotW/(stages.length-1);
+const X=i=>padL+i*step;
+const Y=v=>padB+((H-padB-padT)*(1-v/100));
+
+let g='';
+[0,25,50,75,100].forEach(v=>{const yy=Y(v);
+  g+=`<line class="grid-l" x1="${padL}" y1="${yy}" x2="${W-padR}" y2="${yy}"/>`;
+  g+=`<text class="axis-t" x="${padL-12}" y="${yy+4}" text-anchor="end">${v}</text>`;});
+$('#grid').innerHTML=g;
+
+let d=`M ${X(0)} ${Y(stages[0].val)}`;
+stages.forEach((s,i)=>{if(i)d+=` L ${X(i)} ${Y(s.val)}`;});
+$('#cpath').setAttribute('d',d);
+$('#area').setAttribute('d',d+` L ${X(stages.length-1)} ${padB} L ${X(0)} ${padB} Z`);
+
+let dots='';
+stages.forEach((s,i)=>{dots+=`<g class="dot" data-i="${i}">
+  <circle cx="${X(i)}" cy="${Y(s.val)}" r="9" fill="#fff" stroke="url(#cg)" stroke-width="5"/>
+  <text x="${X(i)}" y="${Y(s.val)-22}">${s.name}</text>
+  <text class="emo" x="${X(i)}" y="${H-26}">${s.emo}</text></g>`;});
+$('#dots').innerHTML=dots;
+
+const len=$('#cpath').getTotalLength();
+$('#cpath').style.strokeDasharray=len;$('#cpath').style.strokeDashoffset=len;
+requestAnimationFrame(()=>{$('#cpath').style.transition='stroke-dashoffset 1.4s ease';$('#cpath').style.strokeDashoffset=0;});
+
+function setActive(i,scroll){
+  document.querySelectorAll('.dot').forEach((el,idx)=>el.classList.toggle('active',idx==i));
+  document.querySelectorAll('.entry').forEach((el,idx)=>el.classList.toggle('active',idx==i));
+  const s=stages[i];
+  $('#dStage').textContent='第 '+(i+1)+' 段 · '+s.name;
+  $('#dEmo').textContent=s.emo;
+  $('#dFlow').textContent=s.flow;
+  $('#dVallab').textContent=s.val+' / 100';
+  $('#dBar').style.width=s.val+'%';
+  $('#dPurp').textContent='落在目的：'+s.purp.join(' · ');
+  $('#dChips').innerHTML=s.bonus.map(b=>`<span class="chip b">${b}</span>`).join('')
+    + s.purp.map(p=>`<span class="chip">${p}</span>`).join('');
+  $('#dPurpChips').innerHTML=s.purp.map(p=>`<span class="chip">${p}</span>`).join('');
+  if(scroll)$('#feature').scrollIntoView({behavior:'smooth'});
+}
+document.querySelectorAll('.dot').forEach(el=>el.addEventListener('click',()=>setActive(+el.dataset.i,false)));
+
+// ---- chapters ----
+$('#entries').innerHTML=stages.map((s,i)=>`
+  <div class="entry" data-i="${i}">
+    <div class="num">${String(i+1).padStart(2,'0')}</div>
+    <div>
+      <h3 class="eh">${s.name} · ${s.emo}</h3>
+      <p class="ef">${s.flow}</p>
+      <div class="quote">“${s.quote}”</div>
+      <div class="tags">${s.purp.map(p=>`<span class="chip">${p}</span>`).join('')}${s.bonus.map(b=>`<span class="chip b">${b}</span>`).join('')}</div>
+    </div>
+  </div>`).join('');
+document.querySelectorAll('.entry').forEach(el=>el.addEventListener('click',()=>setActive(+el.dataset.i,true)));
+
+// ---- purpose selector ----
+const purposes=[
+  {k:"战略传达",icon:"🎯",desc:"大家听懂「为什么打这场仗」",where:"主要落在：投入 / 共鸣"},
+  {k:"稳军心",icon:"🤝",desc:"融合期 / 变革期尤其重要",where:"主要落在：暖场 / 共鸣"},
+  {k:"出声量",icon:"📣",desc:"对外 / 对内品牌声量",where:"主要落在：延续"},
+  {k:"表彰激励",icon:"🏆",desc:"让对的人被看见",where:"主要落在：高潮 / 收尾"},
+];
+let sel=new Set();
+$('#purposeGrid').innerHTML=purposes.map((p,i)=>`
+  <div class="pcard" data-i="${i}"><div class="tick">✓</div>
+    <div class="pk">${p.icon}</div><h3>${p.k}</h3><p>${p.desc}</p>
+    <div class="where">${p.where}</div></div>`).join('');
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800);}
+$('#purposeGrid').querySelectorAll('.pcard').forEach(el=>el.addEventListener('click',()=>{
+  const i=+el.dataset.i,k=purposes[i].k;
+  if(sel.has(k)){sel.delete(k);el.classList.remove('sel');}
+  else{if(sel.size>=2){toast('建议聚焦 1–2 个，先取消一个再选');return;}sel.add(k);el.classList.add('sel');}
+  $('#pCount').textContent=sel.size;}));
+
+// ---- bonus ----
+const bonuses=[
+  {k:"情绪有没有起伏",d:"情绪曲线已体现：暖场62→高潮96",auto:true},
+  {k:"员工有没有被看见 / 被感谢",d:"颁奖故事、反向述职、金句墙"},
+  {k:"有没有记忆点",d:"金句、物料、名场面"},
+  {k:"会后有没有人自发聊 / 发朋友圈",d:"精彩混剪、朋友圈物料"},
+];
+let bonSet=new Set([bonuses[0].k]);
+$('#bonusGrid').innerHTML=bonuses.map((b,i)=>`
+  <div class="bcard ${b.auto?'on':''}" data-i="${i}"><div class="bmark">✓</div>
+    <div><div class="bt">${b.k}</div><div class="bd">${b.d}</div></div>${b.auto?'<span class="auto">曲线已体现</span>':''}</div>`).join('');
+function updBonus(){const n=bonSet.size;$('#bCount').textContent=n;$('#bBar').style.width=(n/4*100)+'%';}
+$('#bonusGrid').querySelectorAll('.bcard').forEach(el=>el.addEventListener('click',()=>{
+  const i=+el.dataset.i,k=bonuses[i].k;
+  if(bonSet.has(k)){bonSet.delete(k);el.classList.remove('on');}
+  else{bonSet.add(k);el.classList.add('on');}updBonus();}));
+updBonus();
+
+setActive(2,false);
+</script>
+</body>
+</html>

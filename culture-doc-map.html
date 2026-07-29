@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文化活动文档地图</title>
+<style>
+  :root{
+    --blue:#2563eb; --blue2:#60a5fa; --orange:#f97316; --orange2:#fb923c;
+    --ink:#1e293b; --muted:#64748b; --bg:#f8fafc; --card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:32px}
+  .wrap{max-width:1100px;margin:0 auto}
+  header{text-align:center;margin-bottom:28px}
+  h1{font-size:28px;background:linear-gradient(90deg,var(--blue),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);margin-top:8px;font-size:14px}
+  .note{background:#fff7ed;border-left:4px var(--orange);padding:14px 18px;border-radius:8px;margin:18px 0;font-size:14px;color:#9a3412}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .col{background:var(--card);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.06);border-top:5px solid}
+  .col.staff{border-top-color:var(--blue)}
+  .col.off{border-top-color:var(--orange)}
+  .col h2{font-size:20px;margin-bottom:4px}
+  .col .tag{font-size:12px;color:#fff;padding:2px 10px;border-radius:20px;display:inline-block;margin-bottom:14px}
+  .staff .tag{background:var(--blue)}
+  .off .tag{background:var(--orange)}
+  .doc{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px;background:#fcfdff}
+  .off .doc{background:#fffcf8}
+  .doc h3{font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .doc .role{font-size:11px;color:#fff;background:#94a3b8;padding:1px 8px;border-radius:10px}
+  .doc p{font-size:13px;color:var(--muted)}
+  .doc .ex{font-size:12px;color:var(--blue);margin-top:6px}
+  .off .doc .ex{color:var(--orange)}
+  .compare{margin-top:28px;background:var(--card);border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+  .compare h2{font-size:18px;margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{border:1px solid #e2e8f0;padding:10px 12px;text-align:left}
+  th{background:#f1f5f9;font-weight:600}
+  .combo{margin-top:18px;background:linear-gradient(90deg,#eff6ff,#fff7ed);border-radius:12px;padding:16px;font-size:14px;text-align:center;font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>文化活动文档地图</h1>
+    <div class="sub">员工大会 × Offsite —— 两套活动，各自的 SOP / Rundown / Checklist 三件套</div>
+  </header>
+
+  <div class="note">
+    ⚠️ 关键区分：<b>SOP / Rundown / Checklist</b> 是「同一场活动」的三种配套文档（流程规范 / 当天剧本 / 打勾清单）；
+    <b>Offsite</b> 是<b>另一种活动类型</b>，不是员工大会的"第四种文档"。它内部同样有自己的三件套。
+  </div>
+
+  <div class="grid">
+    <!-- 员工大会 -->
+    <div class="col staff">
+      <h2>📣 员工大会</h2>
+      <span class="tag">对外扩 · 全员</span>
+      <div class="doc">
+        <h3>SOP <span class="role">标准流程</span></h3>
+        <p>标准作业流程：定义「怎么做、谁负责、做到什么程度」。零 Why → 会前(内容/运营) → 环节参考 → 会中 → 会后。</p>
+        <div class="ex">文件：员工大会SOP.md</div>
+      </div>
+      <div class="doc">
+        <h3>Rundown <span class="role">当天剧本</span></h3>
+        <p>大会当天的分钟级流程表（时间/环节/负责人/时长），现场控台控场用，每次都不同。</p>
+        <div class="ex">由 SOP 要求会前制作</div>
+      </div>
+      <div class="doc">
+        <h3>Checklist <span class="role">打勾清单</span></h3>
+        <p>把 SOP 关键项抽成打勾项，会前逐条核验防遗漏（当前偏设备/现场风险）。</p>
+        <div class="ex">文件：员工大会会前检查清单Checklist.md</div>
+      </div>
+    </div>
+
+    <!-- Offsite -->
+    <div class="col off">
+      <h2>🧭 Offsite</h2>
+      <span class="tag">向内收 · 小圈</span>
+      <div class="doc">
+        <h3>SOP <span class="role">标准流程</span></h3>
+        <p>标准作业流程：零 Why(目的选型) → 会前(设计优先/运营) → 环节库 → 会中(引导) → 会后(跟进回溯)。</p>
+        <div class="ex">文件：OffsiteSOP.md</div>
+      </div>
+      <div class="doc">
+        <h3>Rundown <span class="role">当天剧本</span></h3>
+        <p>1 日示例：开场立规→图景共享→战略对齐→午餐→研讨→脱口秀→挑战/跑步→承诺墙。能量曲线设计。</p>
+        <div class="ex">来源：知识库模块典型 Rundown</div>
+      </div>
+      <div class="doc">
+        <h3>Checklist <span class="role">打勾清单</span></h3>
+        <p>会前核验「人要对 / 有前置 / 有产出 / 有跟进」四条设计层红线，尤其异地 logistics 红线。</p>
+        <div class="ex">文件：OffsiteChecklist.md</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <h2>🆚 两套活动的核心区别</h2>
+    <table>
+      <tr><th>维度</th><th>员工大会</th><th>Offsite</th></tr>
+      <tr><td>目的</td><td>传达 / 表彰 / 声量</td><td>对齐 / 融合 / 解决真问题</td></tr>
+      <tr><td>规模</td><td>大（全员，线上线下）</td><td>小（核心圈 10–40）</td></tr>
+      <tr><td>形态</td><td>一对多讲</td><td>多对多共创</td></tr>
+      <tr><td>HRBP 角色</td><td>执行统筹</td><td>设计 + 引导（退幕后）</td></tr>
+      <tr><td>产出</td><td>情绪 + 记忆</td><td>行动项 + 共识</td></tr>
+      <tr><td>价值点</td><td>当天</td><td>散场后 90 天</td></tr>
+    </table>
+    <div class="combo">🔗 组合打法：先 Offsite 让核心圈对齐方向 → 再员工大会向全员广播成果</div>
+  </div>
+
+  <footer>整理自 workspace 文化活动文档体系 · 2026-07-22</footer>
+</div>
+</body>
+</html>

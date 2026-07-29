@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>内部活动 Banner & PPT 创意手册</title>
+<style>
+  :root{
+    --pink:#EC4899; --purple:#A855F7; --orange:#FB923C; --teal:#14B8A6;
+    --blue:#6366F1; --gold:#F59E0B; --ink:#241b2f; --muted:#6b6480;
+    --card:#ffffff; --bg1:#fff1f7; --bg2:#f3ecff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--ink);line-height:1.65;padding-bottom:60px;
+  }
+  /* HERO */
+  header{
+    text-align:center;padding:54px 20px 40px;
+    background:linear-gradient(120deg,var(--purple),var(--pink),var(--orange));
+    color:#fff;clip-path:polygon(0 0,100% 0,100% 88%,0 100%);
+  }
+  header h1{font-size:34px;letter-spacing:1px;margin-bottom:10px;text-shadow:0 4px 18px rgba(0,0,0,.18)}
+  header p{opacity:.95;font-size:15px;max-width:680px;margin:0 auto}
+  nav{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
+  nav a{
+    background:rgba(255,255,255,.18);color:#fff;text-decoration:none;
+    padding:8px 16px;border-radius:30px;font-size:13px;font-weight:600;
+    border:1px solid rgba(255,255,255,.35);transition:.2s;backdrop-filter:blur(4px)
+  }
+  nav a:hover{background:#fff;color:var(--purple);transform:translateY(-2px)}
+
+  /* LAYOUT */
+  main{max-width:1080px;margin:0 auto;padding:0 20px}
+  section{margin-top:56px;scroll-margin-top:20px}
+  .ch-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .ch-no{
+    font-size:30px;font-weight:800;color:#fff;width:54px;height:54px;border-radius:16px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    box-shadow:0 8px 18px rgba(0,0,0,.15)
+  }
+  .c-style{background:linear-gradient(135deg,var(--orange),var(--pink))}
+  .c-hl{background:linear-gradient(135deg,var(--teal),var(--blue))}
+  .c-lay{background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .c-mech{background:linear-gradient(135deg,var(--purple),var(--pink))}
+  .c-case{background:linear-gradient(135deg,var(--gold),var(--orange))}
+  .ch-head h2{font-size:24px}
+  .ch-sub{color:var(--muted);font-size:14px;margin:2px 0 22px 68px}
+
+  /* CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .card{
+    background:var(--card);border-radius:16px;padding:18px 18px 16px;
+    box-shadow:0 6px 20px rgba(80,40,120,.08);border-left:5px solid var(--purple);
+    transition:.22s;opacity:0;transform:translateY(18px)
+  }
+  .card.in{opacity:1;transform:none}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(80,40,120,.16)}
+  .card h3{font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .tag{font-size:11px;font-weight:700;color:#fff;padding:2px 9px;border-radius:20px;flex-shrink:0}
+  .card p{font-size:13.5px;color:#4a4358}
+  .card ul{margin:8px 0 0 16px;font-size:13px;color:#4a4358}
+  .card li{margin:3px 0}
+
+  /* COPY BLOCK */
+  .copy{
+    margin-top:14px;background:#fbf7ff;border:1px dashed var(--purple);
+    border-radius:12px;padding:14px 16px;font-size:13px
+  }
+  .copy b{color:var(--purple)}
+  .copy .lbl{
+    display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--purple);
+    padding:2px 10px;border-radius:20px;margin-bottom:8px
+  }
+  .copy code{background:#efe7ff;padding:1px 6px;border-radius:5px;font-family:ui-monospace,Consolas,monospace;color:#7c3aed}
+  .swatch{display:flex;gap:8px;margin:8px 0}
+  .sw{height:30px;flex:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(80,40,120,.08);font-size:13px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid #f0ebf7}
+  th{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:13px}
+  tr:last-child td{border-bottom:none}
+
+  /* DANGER */
+  .warn{background:#fff4e6;border-left:5px solid var(--orange);border-radius:12px;padding:14px 18px;margin-top:16px;font-size:13.5px;color:#7a4a12}
+  .warn b{color:var(--orange)}
+
+  /* SAFETY FIG */
+  .fig{margin:14px 0;background:#fff;border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(80,40,120,.08)}
+  .frame{position:relative;width:100%;aspect-ratio:3/1;background:repeating-linear-gradient(45deg,#fde9f3,#fde9f3 10px,#fff4f9 10px,#fff4f9 20px);border:2px solid var(--purple);border-radius:8px}
+  .safe{position:absolute;top:12%;left:10%;right:10%;bottom:12%;border:2px dashed var(--pink);border-radius:6px}
+  .safe span{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--pink);color:#fff;font-size:11px;padding:1px 8px;border-radius:10px}
+
+  footer{text-align:center;margin-top:60px;color:var(--muted);font-size:13px}
+  footer a{color:var(--purple);font-weight:700;text-decoration:none}
+  @media(max-width:600px){.ch-sub{margin-left:0}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>内部活动 Banner &amp; PPT 创意手册</h1>
+  <p>覆盖月会 / 季会 / 团建 / 表彰 / 生日会 / 年会等几乎所有公司内部活动。四层方法论 + 一份从真实案例里识别出的高效果清单。</p>
+  <nav>
+    <a href="#style">01 风格趋势</a>
+    <a href="#hl">02 内部亮点</a>
+    <a href="#lay">03 排版规则</a>
+    <a href="#mech">04 概念机制</a>
+    <a href="#case">05 高效果案例</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ 01 风格趋势 ============ -->
+<section id="style">
+  <div class="ch-head"><div class="ch-no c-style">01</div><h2>风格趋势（用什么视觉语言）</h2></div>
+  <div class="ch-sub">来源：2026 通用设计趋势。不是风格标签，而是"你决定打破什么、加入什么"的具体决策。</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--orange)">
+      <h3><span class="tag" style="background:var(--orange)">Banner强</span>多巴胺撞色</h3>
+      <p>高饱和互补色并列，不做过渡不做渐变，第一眼 0.5 秒决定感。关键是比例控制，不是五五开。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 配色卡</span>
+        <div class="swatch">
+          <div class="sw" style="background:#7C3AED">底色 70%</div>
+          <div class="sw" style="background:#EC4899">主色 20%</div>
+          <div class="sw" style="background:#FF6B35">冲击色 10%</div>
+        </div>
+        适用：促销 / 节日 / 社交类活动 Banner。
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--pink)">
+      <h3><span class="tag" style="background:var(--pink)">通用</span>创意版式 · 打破对称</h3>
+      <p>放弃"居中+对称"出厂设置。主体放黄金分割点，副标题溢出边界，文字叠压图片留白区之外。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 排版决策</span>
+        <b>横版主视觉</b>放左 1/3 或右 1/3 交叉点，比死居中更有张力；<b>标题</b>大字斜排 / 跨多行错位，打破预期阅读线。</div>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <h3><span class="tag" style="background:var(--gold)">PPT</span>先锋国潮 / 轻东方</h3>
+      <p>水墨笔触叠加霓虹光效；或虚实光影+大面积留白透出东方韵味（轻东方，不是重传统）。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 国潮四色</span>
+        <div class="swatch">
+          <div class="sw" style="background:#C8102E">朱红</div>
+          <div class="sw" style="background:#1A1A1A">墨黑</div>
+          <div class="sw" style="background:#1B4D8F">靛蓝</div>
+          <div class="sw" style="background:#D4AF37">金</div>
+        </div>
+        书法竖排标题打破横排习惯；传统纹样拆成半透明边框，不全铺。</div>
+    </div>
+    <div class="card" style="border-color:var(--purple)">
+      <h3><span class="tag" style="background:var(--purple)">个性</span>新丑风（反叛）</h3>
+      <p>故意"不好看"反而吸睛：冲突配色+无序排版+粗糙字体，打破 PPT 必须精致的默认设定。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 适用判断</span>
+        适合：创意提案 / 青年文化活动 / 表达个性。<b>必须</b>有明确意图，不能看起来像"不会做 PPT"。</div>
+    </div>
+    <div class="card" style="border-color:var(--blue)">
+      <h3><span class="tag" style="background:var(--blue)">叙事</span>浮光幻梦 / 治愈</h3>
+      <p>渐变色彩+模糊光斑+缓慢过渡，用朦胧光影讲有情绪的故事，不是干讲数据。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 页面公式</span>
+        关键页用 <b>"一张大图 + 一句话"</b>，留白 60% 以上。适用情感类 / 公益 / 价值观宣导。</div>
+    </div>
+    <div class="card" style="border-color:var(--teal)">
+      <h3><span class="tag" style="background:var(--teal)">科技</span>Y3K 未来感</h3>
+      <p>深色底+发光元素+网格线，但在科技里注入人文小点缀（一朵花、一只鸟剪影在飞船旁）制造反差记忆点。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 反差点</span>
+        科技页角落放一个<b>自然小元素</b>（绿植 / 手绘星），让冷屏有温度，比纯深蓝发光更难忘。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 内部通用亮点 ============ -->
+<section id="hl">
+  <div class="ch-head"><div class="ch-no c-hl">02</div><h2>内部通用亮点（怎么适配内部场景）</h2></div>
+  <div class="ch-sub">这层跟活动类型无关，是"怎么设计才像我们自己的活动"。四层，越靠前越该优先做。</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--teal)">
+      <h3><span class="tag" style="background:var(--teal)">体系层</span>视觉体系化</h3>
+      <p>同一套配色+字体+IP 贯穿 Banner/PPT/邮件头图/会议室背景/纪念品。内部活动高频，每场从零做最费时。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 季度色卡</span>
+        Q1 蓝 <code>#3B82F6</code> · Q2 绿 <code>#10B981</code> · Q3 橙 <code>#F59E0B</code> · Q4 金 <code>#D4AF37</code>。每场只换强调色和标题，整年是一个视觉叙事。</div>
+    </div>
+    <div class="card" style="border-color:var(--blue)">
+      <h3><span class="tag" style="background:var(--blue)">体系层</span>内部梗 / 黑话视觉化</h3>
+      <p>把部门口头禅、运行梗变成设计元素。外部不敢用，内部天然能用——这是内部场景独有武器。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 标题模板</span>
+        主标题直接写 <b>"又双叒叕改需求？来看 Q3 战报"</b>；把梗做成主视觉字体，员工一眼觉得"这是我们的，不是 HR 模板"。</div>
+    </div>
+    <div class="card" style="border-color:var(--purple)">
+      <h3><span class="tag" style="background:var(--purple)">内容层</span>全员 UGC 视觉</h3>
+      <p>把员工自己的内容变成主视觉：征集"最丑工位照/我的桌面"投票胜出做 Banner；100 张笑脸拼成马赛克。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 征集玩法</span>
+        活动前 1 周发征集 → 投票 Top3 → 胜出者做主视觉背景 + 署名。参与感远超设计师精美图。</div>
+    </div>
+    <div class="card" style="border-color:var(--pink)">
+      <h3><span class="tag" style="background:var(--pink)">内容层</span>数据人格化</h3>
+      <p>不说"Q3 参与率 85%"，说"85% 的同事都来了，就差你一个"配角色形象；进度条做成"团队爬山"。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 文案改写</span>
+        干：<code>目标完成 72%</code> → 活：<b>"还差一口气，山顶见！"</b> + 爬山进度条图。</div>
+    </div>
+    <div class="card" style="border-color:var(--orange)">
+      <h3><span class="tag" style="background:var(--orange)">触点层</span>3 秒可读信息阶梯</h3>
+      <p>内部受众是"刷"不是"看"。一个主标题+一个行动号召，其余全部降权。管 Banner 和 PPT 截图都吃这套。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 朋友圈 Banner 结构</span>
+        上：一句大白话主张（≤8 字）· 中：1 个图标/图 · 下：时间地点或二维码。其余全删。</div>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <h3><span class="tag" style="background:var(--gold)">工作流</span>轻量 AIGC</h3>
+      <p>内部活动要快不要完美：AI 出 3 版 Banner 草图，人挑 1 版改。所有物料生产都能提速。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 工作流</span>
+        一 prompt 多方案 → 人挑 → 精修。别让 AI 替你定稿，让它替你"出选项"。</div>
+    </div>
+  </div>
+  <div class="warn"><b>最通用的 3 个（优先做）：</b>① 视觉体系化（母模板换皮，解决高频重复）② 内部梗视觉化（解决"像不像我们的活动"）③ 3 秒可读信息阶梯（解决内部线上被滑过）。</div>
+</section>
+
+<!-- ============ 03 排版规则 ============ -->
+<section id="lay">
+  <div class="ch-head"><div class="ch-no c-lay">03</div><h2>排版规则（怎么摆）</h2></div>
+  <div class="ch-sub">把前面亮点落地的手艺活。铁律 + Banner/PPT 专项 + 字号表 + 避坑。</div>
+
+  <div class="grid">
+    <div class="card" style="border-color:var(--blue)">
+      <h3><span class="tag" style="background:var(--blue)">铁律</span>通用五条</h3>
+      <ul>
+        <li>信息层级只分三档（主/次/辅）</li>
+        <li>一页一个视觉焦点</li>
+        <li>对齐二选一：全左或全居中</li>
+        <li>字体不超过 2 种</li>
+        <li>留白是排版的一部分</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--purple)">
+      <h3><span class="tag" style="background:var(--purple)">Banner</span>专项</h3>
+      <ul>
+        <li>安全区：关键信息放中央 80%</li>
+        <li>主体放黄金分割点，不是正中</li>
+        <li>图强→字压留白区；字强→图退底纹</li>
+        <li>CTA 用色块/描边独立成块</li>
+        <li>一套设计出横/竖/方三套</li>
+      </ul>
+      <div class="fig">
+        <div class="frame"><div class="safe"><span>安全区 80%</span></div></div>
+        <p style="font-size:12px;color:var(--muted);margin-top:6px">红框内放主体，边缘留给装饰/出血，多尺寸投放不会被裁。</p>
+      </div>
+    </div>
+    <div class="card" style="border-color:var(--pink)">
+      <h3><span class="tag" style="background:var(--pink)">PPT</span>专项</h3>
+      <ul>
+        <li>标题栏固定位置，建立阅读锚点</li>
+        <li>一页一观点（核心页只一句+一图）</li>
+        <li>信息页按 Z / F 视觉流排</li>
+        <li>页脚恒定（页码/活动名/日期）</li>
+        <li>过渡页占全篇 10–15%</li>
+        <li>关键文字不贴边（投影会被切）</li>
+      </ul>
+    </div>
+  </div>
+
+  <table style="margin-top:18px">
+    <thead><tr><th>场景</th><th>元素</th><th>建议</th></tr></thead>
+    <tbody>
+      <tr><td>Banner</td><td>主标题</td><td>画幅宽度的 1/5 ~ 1/6 高</td></tr>
+      <tr><td>Banner</td><td>次信息</td><td>主标题的 1/2 ~ 1/3</td></tr>
+      <tr><td>PPT</td><td>标题</td><td>28–36 pt</td></tr>
+      <tr><td>PPT</td><td>正文</td><td>16–20 pt</td></tr>
+      <tr><td>PPT</td><td>注释/页脚</td><td>12–14 pt</td></tr>
+      <tr><td>通用</td><td>中文标题</td><td>思源黑体 / 苹方 粗体</td></tr>
+      <tr><td>通用</td><td>数字/英文</td><td>换一种字体（Helvetica/Arial）制造对比</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn"><b>避坑清单：</b>× 全居中（除非封面/过渡页）· × 一页超 3 种字号 · × 阴影/描边/渐变堆特效（显 cheap）· × 二维码/LOGO 抢主标题位置 · × PPT 关键文字贴边 · × Banner 主体正中且边缘塞满。</div>
+</section>
+
+<!-- ============ 04 概念机制 ============ -->
+<section id="mech">
+  <div class="ch-head"><div class="ch-no c-mech">04</div><h2>概念机制（本身是个什么玩法）</h2></div>
+  <div class="ch-sub">不是风格、不是排版，是"这个 Banner/PPT 可以是个什么机制"。把物料从展示载体变成互动机制或传播触发器。</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--orange)">
+      <h3><span class="tag" style="background:var(--orange)">Banner</span>倒计时系列</h3>
+      <p>不做一张，做 D-7/D-3/D-1 三张，每张揭开一个信息点，最后揭主视觉。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 三张文案</span>
+        D-7：<b>"今年最佳项目是你心中的哪个？"</b><br>D-3：<b>"投票通道已开 → 二维码"</b><br>D-1：<b>"答案明晚揭晓 · 主视觉全貌"</b></div>
+    </div>
+    <div class="card" style="border-color:var(--pink)">
+      <h3><span class="tag" style="background:var(--pink)">Banner</span>悬念 / 拼图 / 动态</h3>
+      <p>悬念提问式只抛一个问题；拼图式由员工投稿碎片拼成；动态 Banner（GIF/Lottie）在数字触点比死图多一层"活"感。</p>
+    </div>
+    <div class="card" style="border-color:var(--purple)">
+      <h3><span class="tag" style="background:var(--purple)">PPT</span>反转结构</h3>
+      <p>开场先亮结论/结果，再倒推"我们怎么走到这"。复盘会/表彰会最有效，反套路抓注意力。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 复盘会开场</span>
+        第1页：<b>"先说结果：Q3 我们省了 200 万"</b>（大字留白）→ 第2页起倒推三件事。别上来就"大家好我是 XX"。</div>
+    </div>
+    <div class="card" style="border-color:var(--blue)">
+      <h3><span class="tag" style="background:var(--blue)">PPT</span>一张图拆多页</h3>
+      <p>同一张图缩放+平移拆成多页（对应 PowerPoint 平滑/Morph），电影运镜感，比每页换图更省设计时间。</p>
+      <div class="copy"><span class="lbl">可直接抄 · 复刻步骤</span>
+        第1页插图画满 → 复制到第2页放大裁到目标区 → 两页间应用<b>「平滑」</b>切换。必须用同一图片对象，否则失效。
+        <br>→ 可套用模板：<a href="平滑切换模板.html" style="color:var(--purple);font-weight:700">平滑切换模板.html</a></div>
+    </div>
+    <div class="card" style="border-color:var(--teal)">
+      <h3><span class="tag" style="background:var(--teal)">PPT</span>互动抽签 / 弹幕上屏</h3>
+      <p>现场投票、词云、随机抽签直接上屏（AhaSlides 式）。月会/团建/表彰把观众变参与者。</p>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <h3><span class="tag" style="background:var(--gold)">PPT</span>留白提问 / 电影感章节</h3>
+      <p>一页只放一个问题，故意停几秒让全场沉默思考（文化/价值观类）；或按 Act 1/2/3 做章节卡把 PPT 当电影拍（年会/战略发布）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 高效果案例 ============ -->
+<section id="case">
+  <div class="ch-head"><div class="ch-no c-case">05</div><h2>高效果案例库（从真实数据识别）</h2></div>
+  <div class="ch-sub">这些不是 brainstorm，是从文化活动源数据里被标记为高效果 / 有明确创新手法的亮点。共同特征：把物料/PPT 从"展示载体"变成"互动机制"或"传播触发器"。</div>
+  <div class="grid">
+    <div class="card" style="border-color:var(--pink)">
+      <h3><span class="tag" style="background:var(--pink)">物料</span>主KV包边讲台</h3>
+      <p>用主画面把讲台四面整体包边，全场沉浸感，从"一面墙"升级为"一个场"。</p>
+    </div>
+    <div class="card" style="border-color:var(--orange)">
+      <h3><span class="tag" style="background:var(--orange)">物料</span>手举牌 / 报纸机</h3>
+      <p>手举牌座位上放，合影时举起来自带朋友圈传播；报纸机把大会内容做成实体报纸可拍照发圈，用物料驱动社交传播。</p>
+    </div>
+    <div class="card" style="border-color:var(--purple)">
+      <h3><span class="tag" style="background:var(--purple)">PPT</span>扫码答题实时上屏 · 五星</h3>
+      <p>源数据唯一五星效果：腾讯文档收集表 → 关联智能表格 → 现场实时展示答题结果和答对的人。从"会后公布"变"现场上屏"。</p>
+      <div class="copy"><span class="lbl">可直接抄 · SOP</span>
+        建收集表（题+姓名）→ 智能表关联 → 大屏实时仪表卡 → 颁奖环节同步亮答对名单。</div>
+    </div>
+    <div class="card" style="border-color:var(--blue)">
+      <h3><span class="tag" style="background:var(--blue)">PPT</span>GM白板 vs 员工线上</h3>
+      <p>老板白板手写、员工线上同时答，同屏对比"心有灵犀"。把 QA 从单向提问变成双向博弈，制造反差笑点。</p>
+    </div>
+    <div class="card" style="border-color:var(--teal)">
+      <h3><span class="tag" style="background:var(--teal)">PPT</span>数智人开场 / rap talk</h3>
+      <p>部门 IP→数智人→生成音频做开场播报（科技感+新鲜）；业务 case 用热梗/rap 表演，信息传递变娱乐内容。</p>
+    </div>
+    <div class="card" style="border-color:var(--gold)">
+      <h3><span class="tag" style="background:var(--gold)">机制</span>现场寻宝 / AI生图猜作者</h3>
+      <p>"宝藏凭证"提前贴桌椅下，互动才揭晓（物料变游戏触发器）；员工头像/祝福用 AI 生成，现场猜作者（AI 变互动机制）。</p>
+    </div>
+    <div class="card" style="border-color:var(--pink)">
+      <h3><span class="tag" style="background:var(--pink)">暖场</span>客户声音 / 岗位的一天</h3>
+      <p>暖场放客户打分+说产品好（一箭双雕传业务导向）；拍不同岗位一天促进跨岗理解（暖场带组织协同目的）。</p>
+    </div>
+    <div class="card" style="border-color:var(--orange)">
+      <h3><span class="tag" style="background:var(--orange)">颁奖</span>AE 视频替代翻页</h3>
+      <p>用 AE 动效视频做颁奖暖场，附获奖人/团队照片；或让 AI 二次生图。静态翻页→动态叙事，仪式感拉满。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  内部活动 Banner &amp; PPT 创意手册 · 四层方法论 + 高效果案例库<br>
+  配套可复用模板：<a href="平滑切换模板.html">平滑切换模板.html</a>（一张图拆多页 / Morph 运镜）
+</footer>
+
+<script>
+  // 滚动淡入
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+
+  // 导航高亮
+  const links=[...document.querySelectorAll('nav a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  window.addEventListener('scroll',()=>{
+    let idx=0; secs.forEach((s,i)=>{ if(s.offsetTop-120<window.scrollY) idx=i; });
+    links.forEach((l,i)=>{ l.style.background = i===idx?'#fff':''; l.style.color = i===idx?'var(--purple)':''; });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>平滑切换模板 · 一张图拆多页</title>
+<style>
+  :root{
+    --bg1:#ff7e5f; --bg2:#845ec2; --ink:#1d1d2b; --card:#fff;
+    --accent:#ff5d8f; --ok:#2dd4a7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    min-height:100vh;padding:24px;color:var(--ink);
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  h1{color:#fff;font-size:22px;letter-spacing:.5px;margin-bottom:4px}
+  .sub{color:#ffe9f3;font-size:13px;margin-bottom:18px}
+
+  .stage-card{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+
+  /* 主视图：统一 3:2，溢出裁切 */
+  .stage{position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:12px;background:#eee}
+  .stage img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform 1.2s cubic-bezier(.65,0,.35,1)}
+
+  .caption{position:absolute;left:16px;bottom:14px;background:rgba(0,0,0,.55);
+    color:#fff;padding:6px 14px;border-radius:20px;font-size:14px;backdrop-filter:blur(4px)}
+
+  /* 左下角小地图 + 红框 */
+  .minimap{position:absolute;right:14px;bottom:14px;width:180px;aspect-ratio:3/2;
+    border:3px solid #fff;border-radius:8px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.3);background:#ddd}
+  .minimap img{width:100%;height:100%;object-fit:cover;display:block}
+  .crop{position:absolute;border:2px solid var(--accent);box-shadow:0 0 0 9999px rgba(255,93,143,.18);
+    transition:all 1.2s cubic-bezier(.65,0,.35,1)}
+
+  /* 控制条 */
+  .controls{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  button{font-family:inherit;font-size:14px;border:none;cursor:pointer;padding:9px 16px;border-radius:24px;font-weight:600;transition:transform .1s}
+  button:active{transform:scale(.95)}
+  .btn-main{background:linear-gradient(135deg,var(--accent),#ff8c42);color:#fff}
+  .btn-ghost{background:#f0f0f5;color:var(--ink)}
+  .dots{display:flex;gap:7px;margin-left:auto}
+  .dot{width:11px;height:11px;border-radius:50%;background:#d9d9e3;cursor:pointer;transition:.2s}
+  .dot.active{background:var(--accent);transform:scale(1.25)}
+
+  /* 配置说明 */
+  details{margin-top:16px;background:var(--card);border-radius:14px;padding:14px 16px;color:var(--ink);font-size:13px;line-height:1.7}
+  details summary{cursor:pointer;font-weight:700;color:var(--bg2)}
+  code{background:#f3f0ff;padding:1px 6px;border-radius:5px;font-family:ui-monospace,Consolas,monospace;color:#6b3fa0}
+  .tip{background:#fff7e6;border-left:4px solid #ffb020;padding:8px 12px;border-radius:6px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎬 平滑切换模板（一张图拆多页 / Morph）</h1>
+  <div class="sub">点「自动播放」感受运镜；左下红框实时标出当前取景区域。换自己的图只改顶部 <code>CONFIG</code> 即可。</div>
+
+  <div class="stage-card">
+    <div class="stage">
+      <img id="img" src="" alt="scene">
+      <div class="caption" id="cap"></div>
+      <div class="minimap">
+        <img id="thumb" src="" alt="thumb">
+        <div class="crop" id="crop"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-ghost" id="prev">◀ 上一页</button>
+      <button class="btn-main" id="play">▶ 自动播放</button>
+      <button class="btn-ghost" id="next">下一页 ▶</button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+
+  <details>
+    <summary>📐 怎么换成你自己的素材（点击展开）</summary>
+    <p><b>1. 替换图片</b>：把你的图放到本文件同目录（建议比例 <code>3:2</code> 横版，如 1536×1024）。改 <code>CONFIG.img</code> 为文件名即可。比例不同也行，但小地图红框会略有偏差。</p>
+    <p><b>2. 配置每一页</b>：在 <code>CONFIG.slides</code> 数组里加一项，每项三个值：</p>
+    <ul style="margin:6px 0 6px 18px">
+      <li><code>x</code> / <code>y</code>：取景中心，<b>0~1 的比例</b>（0.5 是正中，0.2 偏左上，0.8 偏右下）</li>
+      <li><code>scale</code>：放大倍数（<b>1</b>=全景，<b>2</b>=放大两倍推近，<b>3</b>=局部特写）</li>
+      <li><code>caption</code>：左下角那行字（对应 PPT 里这一页的标题）</li>
+    </ul>
+    <p><b>3. 第一页建议 scale=1</b>（全景），后面逐页放大/平移，运镜感最强。</p>
+    <div class="tip">💡 <b>对照 PowerPoint「平滑 / Morph」</b>：第1页插入图铺满 → 复制到第2页把图放大裁到目标区域 → 两页间应用「平滑」切换。本模板用同一张 <code>&lt;img&gt;</code> 的 transform 缩放平移来模拟，效果一致，且不用装 PPT。</div>
+  </details>
+</div>
+
+<script>
+/* ===================== 只改这里 ===================== */
+const CONFIG = {
+  img: "../generated-images/A_vibrant_flat_illustration_st_2026-07-24T03-49-03.png",
+  slides: [
+    { x:0.5, y:0.5, scale:1,   caption:"00 · 全景总览" },
+    { x:0.22,y:0.45,scale:2.2, caption:"01 · 主舞台 / 颁奖区" },
+    { x:0.5, y:0.45,scale:2.4, caption:"02 · 团队照片墙" },
+    { x:0.78,y:0.45,scale:2.2, caption:"03 · 数据大屏" },
+    { x:0.5, y:0.85,scale:2.6, caption:"04 · 茶歇 / 氛围特写" },
+  ]
+};
+/* =================================================== */
+
+const img = document.getElementById("img");
+const thumb = document.getElementById("thumb");
+const cap = document.getElementById("cap");
+const crop = document.getElementById("crop");
+const dotsBox = document.getElementById("dots");
+img.src = thumb.src = CONFIG.img;
+
+let idx = 0, timer = null;
+
+// 生成进度圆点
+CONFIG.slides.forEach((_,i)=>{
+  const d=document.createElement("div");
+  d.className="dot"; d.onclick=()=>go(i);
+  dotsBox.appendChild(d);
+});
+
+function apply(i){
+  const s = CONFIG.slides[i];
+  img.style.transformOrigin = `${s.x*100}% ${s.y*100}%`;
+  img.style.transform = `scale(${s.scale})`;
+  cap.textContent = s.caption;
+  // 小地图红框：取景区占原图比例 1/scale，中心在 (x,y)
+  const w = 100/s.scale, h = 100/s.scale;
+  const left = (s.x - 0.5/s.scale)*100;
+  const top  = (s.y - 0.5/s.scale)*100;
+  crop.style.width = w+"%"; crop.style.height = h+"%";
+  crop.style.left = left+"%"; crop.style.top = top+"%";
+  [...dotsBox.children].forEach((d,k)=>d.classList.toggle("active",k===i));
+}
+
+function go(i){
+  idx = (i+CONFIG.slides.length)%CONFIG.slides.length;
+  apply(idx);
+}
+function next(){ go(idx+1); }
+function prev(){ go(idx-1); }
+
+document.getElementById("next").onclick=()=>{stop();next();};
+document.getElementById("prev").onclick=()=>{stop();prev();};
+document.getElementById("play").onclick=function(){
+  if(timer){stop();return;}
+  this.textContent="⏸ 暂停";
+  timer=setInterval(next,1600);
+};
+function stop(){ if(timer){clearInterval(timer);timer=null;document.getElementById("play").textContent="▶ 自动播放";} }
+
+apply(0);
+</script>
+</body>
+</html>

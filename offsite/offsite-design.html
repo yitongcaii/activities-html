@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Offsite · 环节设计（SOP）</title>
+<style>
+  :root{
+    --bg:#f6f4ff; --card:#ffffff; --ink:#1f1733; --sub:#6b6280;
+    --purple:#7c3aed; --pink:#ec4899; --accent:#06b6d4; --line:#ece8f7;
+    --orange:#fb923c; --teal:#14b8a6; --blue:#6366f1; --gold:#f59e0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+    background:radial-gradient(1100px 520px at 12% -8%,#ffe9f6 0%,var(--bg) 52%) fixed,var(--bg);
+    color:var(--ink);line-height:1.7;padding-bottom:70px}
+  header{text-align:center;padding:50px 20px 42px;color:#fff;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 55%,var(--purple));
+    clip-path:polygon(0 0,100% 0,100% 88%,0 100%);box-shadow:0 14px 36px rgba(20,184,166,.2)}
+  header .kicker{font-size:13px;opacity:.9;letter-spacing:2px}
+  header h1{font-size:30px;font-weight:800;margin-top:8px;text-shadow:0 4px 18px rgba(0,0,0,.16)}
+  header p{opacity:.95;font-size:14px;margin-top:8px}
+  .doc{max-width:960px;margin:0 auto;padding:30px 22px 0}
+  .chunk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-top:22px;box-shadow:0 6px 20px rgba(80,40,120,.06)}
+  .chunk h2{font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .chunk h2::before{content:"";width:6px;height:22px;border-radius:3px;background:linear-gradient(var(--teal),var(--blue))}
+  .note{background:#e6faf6;border-left:4px solid var(--teal);padding:12px 16px;border-radius:10px;color:#1f5b53;font-size:13.5px;margin:12px 0}
+  .note.warn{background:#fff3e6;border-left-color:var(--orange);color:#7a4b16}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;overflow:hidden;border-radius:12px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:linear-gradient(120deg,var(--teal),var(--blue));color:#fff;font-weight:700}
+  tbody tr:nth-child(even){background:#fafdff}
+  .backlink{display:inline-block;margin:26px 0 0;color:#fff;text-decoration:none;font-size:13px;font-weight:700;
+    background:linear-gradient(120deg,var(--teal),var(--blue));padding:9px 18px;border-radius:30px}
+  .backlink:hover{filter:brightness(1.1)}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:40px;padding:0 20px;line-height:1.9}
+  .meta{font-size:12px;color:var(--sub);margin-top:4px}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Offsite · 标准作业流程</div>
+  <h1>Offsite SOP（环节设计）</h1>
+  <p>异地深度研讨活动 · 筹备 · 执行 · 跟进</p>
+</header>
+
+<main class="doc">
+  <div class="note">活动定位：Offsite = 让少数人（核心圈 10–40 人）离开日常办公地，在抽离日常的异地场域里，把难事想透、对齐方向、产出具体解法。<b>向内收、小圈、深度产出</b>——不是团建旅游，不是小型员工大会。异地属性：默认需处理交通/住宿/餐饮/跨城物料运输/应急预案，Logistics 是成败基础。</div>
+
+  <div class="chunk">
+    <h2>零、厘清 Why（策划起点）</h2>
+    <p>动手前先对齐 <b>Why</b>，再定 How / What。<b>目的不清 = 直接停办</b>，先回去和 leader 对齐那一两件事。</p>
+    <table>
+      <thead><tr><th>Why 维度</th><th>适用场景</th><th>选型红线</th></tr></thead>
+      <tbody>
+        <tr><td>对齐类</td><td>战略对齐（融合/变革）、战略解码、新 leader 上任</td><td>融合期/变革期 <b>必带"对齐"</b></td></tr>
+        <tr><td>解决类</td><td>方向/业务/协作卡点、组织效率、潜在问题挖掘</td><td>卡点明显 <b>必带"解决"</b></td></tr>
+        <tr><td>探索类</td><td>共谈发展机遇、发现业务/合作机会</td><td>一场最多 1 对齐 + 1 解决/探索</td></tr>
+      </tbody>
+    </table>
+    <p class="meta">每场只实现 1–2 个目的，按类挑不贪多。</p>
+  </div>
+
+  <div class="chunk">
+    <h2>一、立项与角色（办不办、谁拍板）</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>定目的</td><td>明确本次 Why（对齐/解决/探索 1–2 个），写入筹备 brief；目的不清则停办</td><td>HRBP & Leader</td><td>brief 含目的、预期产出、成功标准</td></tr>
+        <tr><td>定人（人要对）</td><td>锁定有决策权/话语权的人（10–40 人）；融合期两边关键人都必须到</td><td>HRBP & Leader</td><td>关键人名单确认、出席承诺</td></tr>
+        <tr><td>定预算</td><td>框定单场预算（场地/交通/住宿/餐饮/物料/引导者费），走审批</td><td>HRBP & PM</td><td>预算审批通过</td></tr>
+        <tr><td>角色分工</td><td>明确 Leader（内容 owner）、HRBP（设计+引导+跟进）、Facilitator、PM（异地 logistics）、参与者</td><td>HRBP</td><td>各方职责书面对齐、引导者到位</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>二、异地筹备 · Logistics（成败基础）</h2>
+    <div class="note warn">这是"异地活动"区别于员工大会的核心块。设备不出错也会废在 logistics（人没接到、房间不够、场地货不对板）。</div>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>场地选址与踩点</td><td>选抽离日常的异地场域；实地或视频踩点确认容量/隔音/投屏兼容性/网络/茶歇/住宿可达</td><td>PM & HRBP</td><td>踩点报告（含照片）+ 合同签署</td></tr>
+        <tr><td>交通接驳</td><td>跨城统一订票或大巴；落地后接驳；异地同事行程同步</td><td>PM</td><td>行程单发出、接驳到位</td></tr>
+        <tr><td>住宿分配</td><td>按名单排房，预留 1–2 间机动；敏感场注意层级混住降低距离感</td><td>PM</td><td>房态表确认、无漏人</td></tr>
+        <tr><td>餐饮确认</td><td>正餐（含忌口/过敏登记）、茶歇、晚宴；轻活动不强竞技</td><td>PM</td><td>菜单确认、特殊饮食覆盖</td></tr>
+        <tr><td>跨城物料运输</td><td>便利贴/KT板/拍立得/姓名卡/奖品等提前寄达或随行托运，留备份</td><td>PM</td><td>物料到货签收</td></tr>
+        <tr><td>应急预案</td><td>医疗、天气/交通延误备选、关键人 B 角、设备故障备用投屏</td><td>PM & HRBP</td><td>预案文档 + 紧急联系人表</td></tr>
+        <tr><td>预算与合同</td><td>场地/住宿/餐饮合同留底；发票回收路径</td><td>PM</td><td>合同归档、付款节点清晰</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>三、内容设计（让对话发生，而非念稿）</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>前置 pre-work</td><td>会前 1–2 周发 pre-read / 小问卷，把"当前机遇&卡点"先同步</td><td>HRBP & Leader</td><td>pre-read 发出、基线信息回收</td></tr>
+        <tr><td>主线设计</td><td>按 see→align→act：业务图景共享→战略对齐→轻研讨；能量曲线设计</td><td>HRBP & Facilitator</td><td>环节逻辑自洽、rundown 雏形</td></tr>
+        <tr><td>环节取用</td><td>从环节库选：愿景墙/图景共享/战略对齐/轻研讨/脱口秀/挑战赛/跑步/承诺墙</td><td>HRBP & Facilitator</td><td>选定环节清单</td></tr>
+        <tr><td>引导者 brief</td><td>给 Facilitator 完整 brief：目的、红线、敏感点、期望产出</td><td>HRBP</td><td>brief 发出、对齐</td></tr>
+        <tr><td>产出机制</td><td>预设"带 owner + 截止日"的行动项模板、承诺墙卡片</td><td>HRBP</td><td>模板就绪</td></tr>
+      </tbody>
+    </table>
+    <p class="meta">七大环节设计卡（时长/步骤/产出/坑点）见配套《Offsite 环节设计卡》。</p>
+  </div>
+
+  <div class="chunk">
+    <h2>四、会前冲刺（T-1 周 / T-1 天）</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>T-1 周</td><td>Rundown 定稿、各方确认；物料最终清单；餐饮/住宿最终确认；pre-work 回收完毕</td><td>PM & HRBP</td><td>定稿 sign-off</td></tr>
+        <tr><td>T-1 天</td><td>场地布置（愿景墙/承诺墙/KT板）、设备联调、报到物料装袋、接驳确认</td><td>PM & HRBP</td><td>现场就绪、可彩排关键衔接</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>五、当天执行 · 现场引导</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>场要 open</td><td>开场立规则（保密/可 disagreement/发言机会均等）；姓名卡不写头衔</td><td>Facilitator & HRBP</td><td>心理安全建立</td></tr>
+        <tr><td>see·图景共享</td><td>各单元讲亮点+不足+对他人的需要，现场画关联地图</td><td>Leader & 各单元</td><td>产出跨团队依赖地图</td></tr>
+        <tr><td>align·战略对齐</td><td>上层方向翻译到本团队，分组贴「坚持/砍/新做」，高管当场回应形成落点清单</td><td>Leader & Facilitator</td><td>产出战略落点清单</td></tr>
+        <tr><td>act·轻研讨</td><td>世界咖啡轮转、桌长沉淀，投票选 Top3 动作并认领 owner</td><td>Facilitator</td><td>产出带 owner 行动项</td></tr>
+        <tr><td>收口承诺</td><td>承诺墙：每人写一件具体小事，拍照；可选 3 月后回溯</td><td>HRBP & 参与者</td><td>承诺清单可回溯</td></tr>
+        <tr><td>引导纪律（红线）</td><td>HRBP 退幕后让对话发生；<b>有产出</b>（带 owner+截止日），只讨论不落地=失败</td><td>HRBP & Facilitator</td><td>参与者真产出</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chunk">
+    <h2>六、会后跟进 · 回溯</h2>
+    <table>
+      <thead><tr><th>环节</th><th>细项（要做什么）</th><th>责任人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>48h 纪要</td><td>散场 48h 内发纪要（结论 + 行动项 + owner + 截止日）</td><td>HRBP</td><td>48h 内发出</td></tr>
+        <tr><td>行动跟进</td><td>跟踪行动项落地；关联员工大会广播（先 Offsite 对齐→再员工大会扩散）</td><td>HRBP & Leader</td><td>行动项有进度</td></tr>
+        <tr><td>90 天回溯</td><td>回溯行动/承诺兑现，做「承诺兑现」回顾</td><td>HRBP</td><td>90 天内完成回溯</td></tr>
+      </tbody>
+    </table>
+    <a class="backlink" href="./">← 返回总目录</a>
+  </div>
+</main>
+
+<footer>
+  本地源文件 <code>OffsiteSOP.md</code> · 本页托管于 GitHub Pages<br/>
+  回到 <a href="./" style="color:var(--teal)">文化活动创意效果实验室 · 总目录</a>
+</footer>
+</body>
+</html>

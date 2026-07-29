@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Offsite · 会后沉淀（知识库模块）</title>
+<style>
+  :root{
+    --bg:#f6f4ff; --card:#ffffff; --ink:#1f1733; --sub:#6b6280;
+    --purple:#7c3aed; --pink:#ec4899; --accent:#06b6d4; --line:#ece8f7;
+    --orange:#fb923c; --teal:#14b8a6; --blue:#6366f1; --gold:#f59e0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+    background:radial-gradient(1100px 520px at 12% -8%,#e9fbff 0%,var(--bg) 52%) fixed,var(--bg);
+    color:var(--ink);line-height:1.7;padding-bottom:70px}
+  header{text-align:center;padding:50px 20px 42px;color:#fff;
+    background:linear-gradient(120deg,var(--teal),var(--purple) 55%,var(--pink));
+    clip-path:polygon(0 0,100% 0,100% 88%,0 100%);box-shadow:0 14px 36px rgba(20,184,166,.2)}
+  header .kicker{font-size:13px;opacity:.9;letter-spacing:2px}
+  header h1{font-size:30px;font-weight:800;margin-top:8px;text-shadow:0 4px 18px rgba(0,0,0,.16)}
+  header p{opacity:.95;font-size:14px;margin-top:8px}
+  .doc{max-width:960px;margin:0 auto;padding:30px 22px 0}
+  .chunk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-top:22px;box-shadow:0 6px 20px rgba(80,40,120,.06)}
+  .chunk h2{font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .chunk h2::before{content:"";width:6px;height:22px;border-radius:3px;background:linear-gradient(var(--teal),var(--purple))}
+  .note{background:#e6faf6;border-left:4px solid var(--teal);padding:12px 16px;border-radius:10px;color:#1f5b53;font-size:13.5px;margin:12px 0}
+  .note.warn{background:#fff3e6;border-left-color:var(--orange);color:#7a4b16}
+  ol,ul{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;overflow:hidden;border-radius:12px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:linear-gradient(120deg,var(--teal),var(--purple));color:#fff;font-weight:700}
+  tbody tr:nth-child(even){background:#fafdff}
+  .backlink{display:inline-block;margin:26px 0 0;color:#fff;text-decoration:none;font-size:13px;font-weight:700;
+    background:linear-gradient(120deg,var(--teal),var(--purple));padding:9px 18px;border-radius:30px}
+  .backlink:hover{filter:brightness(1.1)}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:40px;padding:0 20px;line-height:1.9}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Offsite · 知识库模块</div>
+  <h1>好的 Offsite 实现（会后沉淀）</h1>
+  <p>知识沉淀 · 成败红线 · 角色分工 · 典型 Rundown</p>
+</header>
+
+<main class="doc">
+  <div class="note">一句话定位：<b>Offsite = 让少数人把难事想透并达成共识（向内收）</b>；员工大会 = 把信息和大情绪传给很多人（对外扩）。本模块只讲前者，是 Offsite 实操标准与沉淀资产。</div>
+
+  <div class="chunk">
+    <h2>一、定义</h2>
+    <p>基于部门组织 / 业务定位与<b>当前机遇 & 卡点</b>，在<b>抽离日常的场域</b>里，把问题摊开、对齐未来方向、产出具体解法。核心特征：<b>小圈、深度、产出</b>——不是团建旅游，不是小型员工大会。</p>
+  </div>
+
+  <div class="chunk">
+    <h2>二、标准环节（see → align → act）</h2>
+    <p>三段式逻辑自洽：看见全貌 → 对齐方向 → 碰撞出行动。</p>
+    <table>
+      <thead><tr><th>环节</th><th>作用</th><th>关键做法</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. 业务图景共享</b></td><td>打破信息孤岛（see）</td><td>各单元讲「亮点+不足+对他人的需要」，现场画依赖/协同地图</td></tr>
+        <tr><td><b>2. 战略对齐</b></td><td>把方向吵清楚（align）</td><td>上层方向翻译到本团队，形成「战略落点清单」（坚持/砍掉/新做）</td></tr>
+        <tr><td><b>3. 研讨</b></td><td>深度碰撞出具体行动（act）</td><td>世界咖啡轮转，投票选 Top3 可落地动作并认领 owner</td></tr>
+      </tbody>
+    </table>
+    <p class="meta">可选补充：开场建信任（破冰/共创愿景墙）；收口做承诺（承诺墙——每人写「回到岗位会做的一件具体小事」）。</p>
+  </div>
+
+  <div class="chunk">
+    <h2>三、目的与选型（一场只实现 1–2 个）</h2>
+    <table>
+      <thead><tr><th>类别</th><th>具体目的</th></tr></thead>
+      <tbody>
+        <tr><td><b>对齐类</b></td><td>战略对齐（融合/变革）、战略解码、新 leader 上任</td></tr>
+        <tr><td><b>解决类</b></td><td>方向/业务/协作卡点、提高组织效率、挖掘潜在问题</td></tr>
+        <tr><td><b>探索类</b></td><td>共谈发展机遇、发现业务/合作机会</td></tr>
+      </tbody>
+    </table>
+    <div class="note warn">选型红线：一场最多 1 个对齐 + 1 个解决/探索；融合期/变革期必带"对齐"；卡点明显必带"解决"；目的不清 = 直接停办。</div>
+  </div>
+
+  <div class="chunk">
+    <h2>四、成败红线（HRBP 必盯 5 条）</h2>
+    <div class="note warn">Offsite 翻车方式不同于员工大会：员工大会翻在设备/控台（执行层），Offsite 翻在<b>设计层</b>——设备不出错也会废。</div>
+    <ol>
+      <li><b>人要对</b>：有决策权/话语权的人在场（通常 10–40 人）；融合期两边关键人都必须到</li>
+      <li><b>场要 open</b>：开场立规则（保密/可 disagreement/发言机会均等）；姓名卡不写头衔；敏感场用专业引导</li>
+      <li><b>有前置（pre-work）</b>：会前 1–2 周发 pre-read / 小问卷，把「机遇&卡点」先同步</li>
+      <li><b>有产出</b>：研讨必须产出<b>带 owner + 截止日</b>的行动项</li>
+      <li><b>有跟进</b>：散场 <b>48h 内发纪要</b>；<b>90 天回溯</b>行动/承诺兑现</li>
+    </ol>
+  </div>
+
+  <div class="chunk">
+    <h2>五、角色分工（新人最易错：HRBP 不是主角）</h2>
+    <table>
+      <thead><tr><th>角色</th><th>是谁</th><th>负责什么</th></tr></thead>
+      <tbody>
+        <tr><td>业务 Leader</td><td>团队负责人</td><td><b>内容 owner</b>——定目标、定关键议题、当场拍板</td></tr>
+        <tr><td>HRBP（你）</td><td>你</td><td><b>场域设计 + 引导 + 跟进</b>；退到幕后让对话发生</td></tr>
+        <tr><td>Facilitator</td><td>内部有引导力者 / 外部</td><td>带讨论、拉齐观点（敏感场建议外部）</td></tr>
+        <tr><td>PM / 统筹</td><td>你或行政</td><td>场地、物料、餐饮、行程</td></tr>
+        <tr><td>参与者</td><td>核心团队</td><td>真参与、出产出，不养旁观者</td></tr>
+      </tbody>
+    </table>
+    <div class="note warn">⚠️ 常见误区：把 Offsite 办成"小型员工大会"——自己讲、领导讲、大家听。Offsite 的灵魂是参与者的产出，不是你的呈现。</div>
+  </div>
+
+  <div class="chunk">
+    <h2>六、加分项（决定"好"还是"只是还行"）</h2>
+    <ul>
+      <li><b>共创</b>：每个人都要参与发言 & 分享，不养旁观者</li>
+      <li><b>行动</b>：明确当下 & 未来的行为项，且真有人跟（对应红线 4–5）</li>
+    </ul>
+  </div>
+
+  <div class="chunk">
+    <h2>七、典型 Rundown（1 日示例 · 能量曲线设计）</h2>
+    <table>
+      <thead><tr><th>时间</th><th>环节</th><th>作用</th></tr></thead>
+      <tbody>
+        <tr><td>09:00–09:30</td><td>开场：定目的 + 立规则</td><td>收心、立心理安全</td></tr>
+        <tr><td>09:30–10:30</td><td>业务图景共享</td><td>打破孤岛</td></tr>
+        <tr><td>10:30–12:00</td><td>战略对齐</td><td>共识落点</td></tr>
+        <tr><td>12:00–13:30</td><td>午餐 + 轻活动（不强竞技）</td><td>充电</td></tr>
+        <tr><td>13:30–15:00</td><td>研讨（世界咖啡）</td><td>出动作</td></tr>
+        <tr><td>15:00–15:15</td><td>休息</td><td>—</td></tr>
+        <tr><td>15:15–16:00</td><td>总监 / 高管脱口秀（可选）</td><td>松情绪</td></tr>
+        <tr><td>16:00–17:00</td><td>协作挑战 / 主题跑步（可选）</td><td>强关系</td></tr>
+        <tr><td>17:00–17:30</td><td>承诺墙</td><td>锁落地</td></tr>
+      </tbody>
+    </table>
+    <p class="meta">重议题放上午；饭后安排轻互动；每 60–90 分钟休息。</p>
+  </div>
+
+  <div class="chunk">
+    <h2>八、常见翻车点（设计层）</h2>
+    <ul>
+      <li>为 Offsite 而 Offsite：无清晰目的，变成"花了钱聊了天啥也没变"</li>
+      <li>HRBP 抢戏 / leader 念稿：没有真对话</li>
+      <li>强制 fun：尴尬破冰、强竞技，成年人反感，关系更远</li>
+      <li>只讨论不落地：出 10 条共识无 owner，三个月回原点</li>
+      <li>人不对 / 场不 open：关键人没来，或敏感场没人敢说</li>
+    </ul>
+  </div>
+
+  <div class="chunk">
+    <h2>九、附注：与员工大会的核心区别</h2>
+    <table>
+      <thead><tr><th></th><th>员工大会</th><th>Offsite</th></tr></thead>
+      <tbody>
+        <tr><td>目的</td><td>传达 / 表彰 / 声量</td><td>对齐 / 融合 / 解决真问题</td></tr>
+        <tr><td>规模</td><td>大（全员）</td><td>小（核心圈 10–40）</td></tr>
+        <tr><td>形态</td><td>一对多讲</td><td>多对多共创</td></tr>
+        <tr><td>HRBP 角色</td><td>执行统筹</td><td>设计 + 引导</td></tr>
+        <tr><td>产出</td><td>情绪 + 记忆</td><td>行动项 + 共识</td></tr>
+        <tr><td>价值点</td><td>当天</td><td>散场后 90 天</td></tr>
+      </tbody>
+    </table>
+    <p><b>组合打法</b>：先 Offsite 让核心圈对齐方向 → 再员工大会向全员广播成果。</p>
+    <a class="backlink" href="./">← 返回总目录</a>
+  </div>
+</main>
+
+<footer>
+  本地源文件 <code>好的Offsite实现_知识库模块.md</code> · 本页托管于 GitHub Pages<br/>
+  回到 <a href="./">文化活动创意效果实验室 · 总目录</a>
+</footer>
+</body>
+</html>

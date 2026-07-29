@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>讲师小提纲（升级版）</title>
+<style>
+  :root{
+    --A:#2D8CF0; --A-soft:#EAF4FF;
+    --B:#FF7A45; --B-soft:#FFF1E8;
+    --C:#FF4D4F; --C-soft:#FFEBEC;
+    --D:#36B37E; --D-soft:#E8F8F0;
+    --ink:#2b2b2b; --muted:#8a8a8a; --line:#e3e3e3;
+    --tipbg:#FFF8E1; --tipbd:#FFE08A;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);margin:0;padding:32px;background:#fafafa;}
+  .wrap{max-width:900px;margin:0 auto;background:#fff;padding:36px 42px;box-shadow:0 4px 18px rgba(0,0,0,.07);border-radius:14px;}
+  header{border-bottom:3px solid var(--B);padding-bottom:14px;margin-bottom:18px;}
+  h1{font-size:26px;margin:0 0 6px;color:var(--B);}
+  .sub{color:var(--muted);font-size:13px;}
+  .req{background:var(--C);color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+
+  .flow{display:flex;align-items:stretch;gap:6px;margin:18px 0 26px;flex-wrap:wrap;}
+  .step{flex:1;min-width:118px;background:var(--B-soft);border:1px solid #ffd9c7;border-radius:10px;padding:10px 8px;text-align:center;}
+  .step .n{display:inline-block;width:22px;height:22px;line-height:22px;border-radius:50%;background:var(--B);color:#fff;font-size:12px;font-weight:700;margin-bottom:4px;}
+  .step .t{font-size:12.5px;font-weight:600;color:#a8431f;}
+  .step.a{background:var(--A-soft);border-color:#cfe4ff;} .step.a .n{background:var(--A);} .step.a .t{color:#1c5fae;}
+  .step.c{background:var(--C-soft);border-color:#ffd0d1;} .step.c .n{background:var(--C);} .step.c .t{color:#b32023;}
+  .step.d{background:var(--D-soft);border-color:#c7ecd9;} .step.d .n{background:var(--D);} .step.d .t{color:#1c7a52;}
+
+  h2{font-size:18px;margin:28px 0 12px;display:flex;align-items:center;gap:8px;}
+  h2 .tag{color:#fff;font-size:12px;padding:2px 9px;border-radius:20px;}
+  .zone-a h2 .tag{background:var(--A);} .zone-a h2{color:var(--A);}
+  .zone-b h2 .tag{background:var(--B);} .zone-b h2{color:var(--B);}
+  .zone-c h2 .tag{background:var(--C);} .zone-c h2{color:var(--C);}
+  .zone-d h2 .tag{background:var(--D);} .zone-d h2{color:var(--D);}
+
+  .card{background:#fcfcfc;border:1px solid var(--line);border-radius:10px;padding:15px 18px;margin-bottom:13px;}
+  label{display:block;font-weight:600;margin:10px 0 4px;font-size:14px;}
+  input[type=text],textarea{width:100%;border:none;border-bottom:1px dashed #c9c9c9;background:transparent;font-size:14px;padding:6px 2px;font-family:inherit;color:var(--ink);}
+  textarea{resize:vertical;min-height:44px;border:1px dashed #c9c9c9;border-radius:6px;padding:8px;}
+  input:focus,textarea:focus{outline:none;border-color:var(--B);}
+  .row{display:flex;gap:12px;flex-wrap:wrap;} .row>div{flex:1;min-width:130px;}
+
+  .tip{background:var(--tipbg);border-left:4px solid var(--tipbd);padding:8px 12px;font-size:12.5px;color:#6b5b00;border-radius:0 6px 6px 0;margin-top:8px;line-height:1.5;}
+  .tip b{color:#a8431f;}
+  .example{margin-top:8px;display:flex;flex-direction:column;gap:6px;}
+  .good,.bad{padding:7px 11px;border-radius:6px;font-size:12.5px;line-height:1.5;}
+  .good{background:var(--D-soft);border-left:4px solid var(--D);color:#1c7a52;}
+  .bad{background:var(--C-soft);border-left:4px solid var(--C);color:#b32023;}
+
+  .redline{background:var(--C-soft);border:1px solid #ffd0d1;border-radius:10px;padding:14px 18px;}
+  .cmp{display:flex;gap:12px;margin-bottom:10px;}
+  .cmp .x,.cmp .v{flex:1;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.6;}
+  .cmp .x{background:#fff;border:1px dashed #ffb3b5;}
+  .cmp .x b{color:var(--C);}
+  .cmp .v{background:#fff;border:1px solid #b7e6cd;}
+  .cmp .v b{color:var(--D);}
+
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--D-soft);color:var(--D);}
+  .menu-note{font-size:12.5px;color:var(--muted);margin-top:6px;}
+
+  .print-btn{position:fixed;top:18px;right:18px;background:var(--B);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:14px;cursor:pointer;box-shadow:0 2px 8px rgba(255,122,69,.4);z-index:9;}
+  .clear-btn{position:fixed;top:18px;right:132px;background:#fff;color:var(--muted);border:1px solid var(--line);padding:10px 14px;border-radius:8px;font-size:13px;cursor:pointer;z-index:9;}
+  footer{margin-top:24px;font-size:12px;color:var(--muted);text-align:center;}
+  @media print{body{background:#fff;padding:0;}.wrap{box-shadow:none;max-width:none;padding:0 8px;}.print-btn,.clear-btn{display:none;}.card,.redline,table,.step{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">🖨 打印 / 存PDF</button>
+<button class="clear-btn" onclick="clearAll()">清空</button>
+<div class="wrap">
+  <header>
+    <h1>讲师小提纲（升级版）</h1>
+    <div class="sub">培训前 HRBP 与讲师对齐 · 约 15 分钟填完 · 讲师照着备、照着讲 · 内容自动保存在本机</div>
+  </header>
+
+  <div class="flow">
+    <div class="step a"><div class="n">A</div><div class="t">训前对齐</div></div>
+    <div class="step"><div class="n">1</div><div class="t">开场钩子</div></div>
+    <div class="step"><div class="n">2</div><div class="t">3件事+案例</div></div>
+    <div class="step"><div class="n">3</div><div class="t">互动穿插</div></div>
+    <div class="step"><div class="n">4</div><div class="t">收尾作业</div></div>
+    <div class="step c"><div class="n">5</div><div class="t">验收学会没</div></div>
+  </div>
+
+  <section class="zone-a">
+  <h2><span class="tag">A</span> 训前对齐（HRBP 填，来自 TNA）</h2>
+  <div class="card">
+    <label>1. 核心目的（行为化）<span class="req">必填</span>：学完学员能 ______</label>
+    <input type="text" placeholder="例：独立用新工具完成一次客户配置">
+    <div class="tip">💡 只写 1–2 个最核心的目标。判断标准："如果不讲这句，学员回去会少做啥？"少做的才留。</div>
+    <div class="example">
+      <div class="good">✅ 好样例：学完能独立用 XX 工具配置一条客户规则（可观察、可验收）</div>
+      <div class="bad">❌ 差样例：提升安全意识（太虚，无法判断学会没）</div>
+    </div>
+  </div>
+  <div class="card">
+    <label>2. 学员是谁 / 什么基础</label>
+    <div class="row">
+      <div><input type="text" placeholder="新人 / 熟手 / 混合"></div>
+      <div><input type="text" placeholder="已知（基础）"></div>
+    </div>
+    <div class="tip">💡 新人要补基础概念；熟手直接上案例和坑。基础决定你内容深 or 浅。</div>
+  </div>
+  <div class="card">
+    <label>3. 不训会怎样 / 训了业务有何不同</label>
+    <input type="text" placeholder="例：客诉率持续偏高 / 交付提速 30%">
+    <div class="tip">💡 这句是开场"为什么重要"的弹药，提前想好，学员才愿意听。</div>
+  </div>
+  </section>
+
+  <section class="zone-b">
+  <h2><span class="tag">B</span> 讲师骨架（填要点，不写稿）</h2>
+
+  <div class="card">
+    <label>4. 开场钩子（1 句话抓注意力，别念标题）</label>
+    <textarea placeholder="例：上次我们因为一个话术失误，丢了一个大客户……"></textarea>
+    <div class="tip">💡 别念"今天我们讲…"。三选一：①真实翻车故事 ②反常识数字 ③抛给全场的提问。</div>
+    <div class="example">
+      <div class="good">✅ 好样例："去年我们团队因一个配置失误，宕机 3 小时——今天这堂课就是不让它再发生。"</div>
+      <div class="bad">❌ 差样例："大家好，今天我们来讲一下 XX 产品的使用规范。"（学员立马走神）</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>5. 今天只讲 3 件事<span class="req">必填</span>（多了记不住）</label>
+    <div class="row">
+      <div><input type="text" placeholder="①"></div>
+      <div><input type="text" placeholder="②"></div>
+      <div><input type="text" placeholder="③"></div>
+    </div>
+    <div class="tip">💡 先列 10 点再砍到 3。每条应是"学员回去能做的一件事"，不是知识点罗列。</div>
+    <div class="example">
+      <div class="good">✅ 好样例：① 会建配置 ② 会看告警 ③ 会回滚（都是动作）</div>
+      <div class="bad">❌ 差样例：① 产品架构 ② 技术原理 ③ 发展趋势（都是"知道"，不是"做到"）</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>6. 每点 1 个真实案例 / 故事（别只讲概念）</label>
+    <textarea placeholder="对应①②③，写真实事件 + 情绪 + 结果"></textarea>
+    <div class="tip">💡 用你自己/团队的真事，带情绪和结果。一个真例子 > 十句定义。没案例现在问业务要一个。</div>
+    <div class="example">
+      <div class="good">✅ 好样例："上个月 XX 客户半夜告警，小李按这步 5 分钟定位——当时他手都在抖。"</div>
+      <div class="bad">❌ 差样例："配置很重要，大家要重视。"（说了等于没说）</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>7. 时间分配（分钟）</label>
+    <div class="row">
+      <div><input type="text" placeholder="开场"></div>
+      <div><input type="text" placeholder="点1"></div>
+      <div><input type="text" placeholder="点2"></div>
+      <div><input type="text" placeholder="点3"></div>
+      <div><input type="text" placeholder="收尾"></div>
+    </div>
+    <div class="tip">💡 互动也要算时间！别把练习时间吃掉导致拖堂。单模块别超 20 分钟连讲。</div>
+  </div>
+
+  <div class="card">
+    <label>8. 互动点<span class="req">必填</span>（至少 2 处，见下方技法菜单）</label>
+    <textarea placeholder="例：点1后→技法2（邻座30秒）；点2后→技法6（两两role-play）"></textarea>
+    <div class="tip">💡 按时机直接抄编号：<b>开场→技法2(破冰)</b>；<b>难点讲完→技法4(案例接龙)</b>；<b>收尾→技法8(倒计时固化)</b>。讲完一个难点立刻练，比结尾集中答疑有效 3 倍。</div>
+  </div>
+
+  <div class="card">
+    <label>9. 收尾（一句话总结 + 回岗动作）</label>
+    <textarea placeholder="例：今天核心就一句____；回去先做____"></textarea>
+    <div class="tip">💡 让学员自己说"回去先做哪一件"，比讲师替他们总结记得牢。收尾 = 把"学到"变"做到"。</div>
+    <div class="example">
+      <div class="good">✅ 好样例："今天核心一句：配置先校验再发布。回去先把自己那条最老的 rule 审一遍。"</div>
+      <div class="bad">❌ 差样例："今天的课就讲到这里，谢谢大家。"（没落地）</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>10. 怎么知道学会没（随堂小测 / 练习验收）</label>
+    <textarea placeholder="例：邻座互讲 1 分钟 + 1 道小测题"></textarea>
+    <div class="tip">💡 别只靠"听懂没"（没人说没懂）。用 1 道小测 / 一次邻座互讲 / 一个现场演练验收。</div>
+    <div class="example">
+      <div class="good">✅ 好样例：现场让邻座互讲"你今天最该改的 1 件事"，30 秒，立刻知道懂没懂。</div>
+      <div class="bad">❌ 差样例："大家都听懂了吧？好，那我们继续。"（虚假闭环）</div>
+    </div>
+  </div>
+  </section>
+
+  <section class="zone-c">
+  <h2><span class="tag">C</span> 讲师红线（打印随讲义）</h2>
+  <div class="redline">
+    <div class="cmp">
+      <div class="x"><b>× 念 PPT</b><br>照着念台词，学员刷手机</div>
+      <div class="v"><b>√ 举例子</b><br>用真事带出知识点，学员抬头</div>
+    </div>
+    <div class="cmp">
+      <div class="x"><b>× 连讲 40 分钟</b><br>信息过载，前面听后面忘</div>
+      <div class="v"><b>√ 每 15–20 分互动</b><br>讲完难点立刻练，记得牢</div>
+    </div>
+    <div class="cmp">
+      <div class="x"><b>× 只问"听懂没"</b><br>没人说没懂，虚假闭环</div>
+      <div class="v"><b>√ 1 道小测 / 互讲</b><br>现场验收，真知道懂没懂</div>
+    </div>
+    <div style="font-size:13px;line-height:1.9;margin-top:4px;">
+      💡 <b>先讲"为什么重要"再讲"怎么做"</b>，学员才听　|　✅ <b>留 QA 答疑时间，不拖堂</b>
+    </div>
+  </div>
+  </section>
+
+  <section class="zone-d">
+  <h2><span class="tag">+</span> 互动技法菜单（讲师直接挑编号）</h2>
+  <table>
+    <tr><th>#</th><th>技法</th><th>怎么做（30 秒上手）</th><th>适合</th></tr>
+    <tr><td>1</td><td>二选一举手</td><td>"你更认同 A 还是 B？"全场举手</td><td>观点类</td></tr>
+    <tr><td>2</td><td>邻座 30 秒</td><td>转头对旁边人说一句"这点我遇到过…"</td><td>破沉默/暖场</td></tr>
+    <tr><td>3</td><td>快速小测</td><td>腾讯文档/问卷 1–2 题当场测</td><td>检验学会没</td></tr>
+    <tr><td>4</td><td>案例接龙</td><td>给半截真实场景，学员接"你会怎么回"</td><td>练判断</td></tr>
+    <tr><td>5</td><td>弹幕/留言</td><td>共享文档实时打字，内向/异地也能参与</td><td>全员/异地</td></tr>
+    <tr><td>6</td><td>两两 role-play</td><td>邻座互演客户/员工 2 分钟</td><td>沟通/客服技能</td></tr>
+    <tr><td>7</td><td>温柔点名</td><td>"听听还没发言的 XX 怎么看"</td><td>拉齐参与</td></tr>
+    <tr><td>8</td><td>倒计时挑战</td><td>给 1 分钟写"今天最该改的 1 件事"</td><td>收尾固化</td></tr>
+  </table>
+  <div class="menu-note">用法：在 B8 那行直接写"点1后→技法2，点2后→技法6"，对着菜单抄编号即可，零门槛。</div>
+  </section>
+
+  <footer>通用模板 · 换任何主题（产品训 / 合规训 / 工具训）A/B/C 三块都不用改 · HRBP 与讲师对齐工具 · 内容自动保存在本机</footer>
+</div>
+<script>
+  const KEY='trainer_brief_v2';
+  const fields=[...document.querySelectorAll('input,textarea')];
+  function save(){const s={};fields.forEach((el,i)=>s[i]=el.value);localStorage.setItem(KEY,JSON.stringify(s));}
+  function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');fields.forEach((el,i)=>{if(s[i]!==undefined)el.value=s[i];});}catch(e){}}
+  fields.forEach(el=>el.addEventListener('input',save));
+  function clearAll(){if(confirm('确定清空所有填写内容？')){localStorage.removeItem(KEY);fields.forEach(el=>el.value='');}}
+  load();
+</script>
+</body>
+</html>

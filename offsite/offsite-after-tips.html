@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🏕️ Offsite · 会后沉淀 TIPS</title>
+<style>
+  :root{
+    --pink:#FF4D8D; --orange:#FF7A3C; --purple:#FF5C5C; --cyan:#FFC24D;
+    --blue:#FF8FB8; --ink:#3A2418; --paper:#FFFFFF;
+    --shadow:0 12px 28px rgba(255,122,60,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:linear-gradient(135deg,#FFEAD8 0%,#FFE2E8 48%,#FFF3DC 100%);
+    background-attachment:fixed;min-height:100vh;scroll-behavior:smooth}
+  a{color:inherit;text-decoration:none}
+
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(255,255,255,.72);box-shadow:0 4px 18px rgba(124,77,255,.10)}
+  .topbar{display:flex;align-items:center;gap:14px;max-width:1180px;margin:0 auto;padding:9px 18px}
+  .logo{font-weight:900;font-size:16px;letter-spacing:.3px;
+    background:linear-gradient(90deg,var(--orange),var(--pink),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  .ghost-btn{margin-left:auto;font-size:12px;padding:5px 11px;border-radius:999px;
+    border:2px dashed var(--purple);background:#fff;color:var(--purple);cursor:pointer;font-weight:700}
+
+  main{max-width:820px;margin:0 auto;padding:22px 16px 44px}
+  .hero{border-radius:20px;padding:20px 22px;color:#fff;
+    background:linear-gradient(120deg,var(--orange),var(--pink) 55%,var(--cyan));
+    box-shadow:var(--shadow)}
+  .kicker{font-size:11px;font-weight:900;letter-spacing:2px;opacity:.85}
+  .hero h1{font-size:23px;font-weight:900;margin-top:6px;letter-spacing:.5px}
+  .hero p{margin-top:8px;font-size:13px;opacity:.95;line-height:1.7;max-width:600px}
+
+  .tip{background:var(--paper);border-radius:18px;padding:16px 18px;margin-top:14px;
+    box-shadow:var(--shadow);border:1px solid rgba(255,122,60,.12);display:flex;gap:14px;align-items:flex-start}
+  .tip .no{font-size:34px;font-weight:900;line-height:.9;flex:0 0 auto;
+    background:linear-gradient(90deg,var(--orange),var(--pink));-webkit-background-clip:text;
+    background-clip:text;color:transparent}
+  .tip .body{flex:1}
+  .tip h2{font-size:18px;font-weight:900}
+  .tip .tag{display:inline-block;font-size:10px;font-weight:800;padding:2px 9px;border-radius:999px;color:#fff;
+    background:linear-gradient(90deg,var(--blue),var(--cyan));margin-left:8px;vertical-align:middle}
+  .tip .tag.warn{background:linear-gradient(90deg,#ffb072,#ff8a5c)}
+  .tip .lead{font-size:13px;color:#6b6486;line-height:1.75;margin-top:8px}
+  .tip .logic{font-size:12px;color:#9b8f8a;line-height:1.7;margin-top:7px;
+    border-left:3px solid #ffd0c0;padding-left:9px}
+  .tip .logic b{color:var(--pink)}
+
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:13px;padding:8px 15px;border-radius:999px;
+    color:#fff;background:linear-gradient(90deg,var(--pink),var(--purple));transition:.18s;
+    box-shadow:0 6px 14px rgba(255,77,141,.26)}
+  .btn:hover{transform:translateY(-2px) scale(1.02)}
+  .btn:active{transform:scale(.97)}
+  .btn.cyan{background:linear-gradient(90deg,var(--cyan),var(--blue))}
+  .btn.sm{padding:6px 12px;font-size:12px}
+
+  .badge-card{margin-top:10px;max-width:320px;background:linear-gradient(135deg,#fff,#fff0f7);
+    border-radius:14px;padding:13px;text-align:center;border:2px solid #ffd0e0;box-shadow:var(--shadow);display:none}
+  .badge-card.show{display:block;animation:pop .4s ease}
+  .badge-card .code{font-size:22px}
+  .badge-card .rk{font-weight:900;font-size:15px;margin-top:5px}
+  .badge-card .line{font-size:11px;color:#6b6486;margin-top:5px;line-height:1.6}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+  .cool{margin-top:10px}
+  .cool .row{display:flex;align-items:center;gap:9px;background:#fff5ef;border-radius:12px;
+    padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:.18s}
+  .cool .row:hover{transform:translateX(3px)}
+  .cool .ck{width:20px;height:20px;border-radius:6px;border:2px solid var(--purple);display:grid;place-items:center;
+    font-size:12px;color:#fff;font-weight:900;flex:0 0 auto}
+  .cool .row.done .ck{background:var(--purple)}
+  .cool .row.done .tx{color:#b09a8e;text-decoration:line-through}
+  .cool .tx{font-size:12px;font-weight:700}
+  .progress{height:8px;border-radius:999px;background:#eee;overflow:hidden;margin-top:4px}
+  .progress > i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--orange),var(--pink));transition:width .6s ease}
+
+  .tabs3{display:flex;gap:7px;margin-top:10px}
+  .tab3{padding:6px 13px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;
+    background:#fff;color:#6b6486;border:2px solid transparent}
+  .tab3.on{background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff}
+  .fb-list{margin-top:10px}
+  .fb-list .q{background:#fff5ef;border-radius:11px;padding:8px 11px;font-size:12px;margin-bottom:6px;line-height:1.6}
+
+  .pull{margin-top:22px;background:linear-gradient(135deg,#fff,#fff0f7);border-left:5px solid var(--pink);
+    border-radius:14px;padding:15px 17px;font-size:15px;font-weight:900;line-height:1.65;box-shadow:var(--shadow)}
+  .pull .by{display:block;margin-top:7px;font-size:11px;color:#c9a994;font-weight:600}
+
+  footer{text-align:center;color:#b09a8e;font-size:11px;margin-top:30px;line-height:1.7}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:12px;font-weight:700;
+    opacity:0;transition:.3s;z-index:80;box-shadow:var(--shadow)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="logo">🏕️ Offsite · 会后沉淀 TIPS</div>
+    <a class="ghost-btn" href="index.html">↩ 回合集</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="kicker">POST-EVENT · 信任与产出留存</div>
+    <h1>活动结束，关系才刚开始</h1>
+    <p>热闹散场后，信任和产出怎么留下来？三个动作，把「当场的关系」延展成「日常的连接」，把「聊过的共识」盯成「落地的动作」。</p>
+  </div>
+
+  <!-- TIP 1 -->
+  <div class="tip">
+    <div class="no">01</div>
+    <div class="body">
+      <h2>组团合照<span class="tag">关系延展</span></h2>
+      <div class="lead">夜聊收尾举杯 / 碰拳 + 拍照；发组队纪念物料，作为后续跨部门（朋友圈）认亲暗号，把当场关系延展到日常。</div>
+      <div class="logic"><b>核心：</b>合照是第一次「我们是一伙的」物证，纪念物料是群里/朋友圈「对暗号」的钩子——一次活动的关系，靠一个符号在三个月后仍被唤回。</div>
+      <button class="btn" id="genBadge" style="margin-top:10px">🪪 生成组队纪念物料</button>
+      <div class="badge-card" id="badgeCard">
+        <div class="code">🏅</div>
+        <div class="rk" id="badgeRk">山海队 · 跨部门认亲暗号</div>
+        <div class="line" id="badgeLine">口令：「一起赢」｜ 凭证：夜聊碰拳合照 × 队徽贴纸</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIP 2 -->
+  <div class="tip">
+    <div class="no">02</div>
+    <div class="body">
+      <h2>后续跟进群<span class="tag warn">防凉</span></h2>
+      <div class="lead">一周内建「跟进群」，当周复盘活动时的协作契约，盯行动项落地。</div>
+      <div class="logic"><b>核心：</b>热度是带半衰期的。不立刻建群、不复盘契约、不盯行动项，两周后群里就只剩「收到请回复」。机制前置才防凉。</div>
+      <div class="cool" id="cool" style="margin-top:10px">
+        <div class="row" data-i="0"><div class="ck"></div><div class="tx">一周内建「跟进群」（别等凉了才建）</div></div>
+        <div class="row" data-i="1"><div class="ck"></div><div class="tx">当周复盘活动时的「协作契约」</div></div>
+        <div class="row" data-i="2"><div class="ck"></div><div class="tx">盯行动项落地（责任人 + 截止 + 验收）</div></div>
+        <div class="progress"><i id="coolBar"></i></div>
+        <div style="font-size:11px;color:#c49a86;margin-top:5px" id="coolTxt">防凉进度 0/3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIP 3 -->
+  <div class="tip">
+    <div class="no">03</div>
+    <div class="body">
+      <h2>活动反馈收集<span class="tag">真实声音</span></h2>
+      <div class="lead">访谈 / 问卷，收集真实反馈——别只问「满不满意」，要问「哪句共识你真会去做」。</div>
+      <div class="logic"><b>核心：</b>反馈是下一届的素材。区分「感受层」（爽不爽）和「行为层」（会不会真做），后者才决定明年怎么改。</div>
+      <div class="tabs3" id="tabs3">
+        <div class="tab3 on" data-k="interview">🎙 访谈</div>
+        <div class="tab3" data-k="survey">📋 问卷</div>
+      </div>
+      <div class="fb-list" id="fbList"></div>
+      <button class="btn cyan sm" id="collectFb" style="margin-top:4px">📨 收集反馈</button>
+    </div>
+  </div>
+
+  <div class="pull">
+    「最好的 Offsite，不是当天多嗨，是三个月后还有人因为那张合照、那句口令，主动找另一个部门聊了件事。」
+    <span class="by">— 会后沉淀的核心</span>
+  </div>
+
+  <footer>
+    🏕️ Offsite 会后沉淀 TIPS · 零依赖离线 HTML ｜ 配色集中在 <code>:root</code>，可一键换部门 IP 色
+  </footer>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800);}
+
+/* TIP1 纪念物料 */
+const teams=[['山海队','一起赢','夜聊碰拳合照 × 队徽贴纸'],['远征队','向前一步','出征令卷轴 × 罗盘徽章'],
+  ['解谜局','破局者','线索卡 × 门派纹身贴'],['星火队','点亮彼此','星图合照 × 烽火手环']];
+document.getElementById('genBadge').onclick=()=>{
+  const t=teams[Math.floor(Math.random()*teams.length)];
+  document.getElementById('badgeRk').textContent=t[0]+' · 跨部门认亲暗号';
+  document.getElementById('badgeLine').textContent='口令：「'+t[1]+'」｜ 凭证：'+t[2];
+  document.getElementById('badgeCard').classList.add('show');
+  toast('已生成 '+t[0]+' 的认亲物料 🪪');
+};
+
+/* TIP2 防凉 checklist */
+const coolRows=document.querySelectorAll('#cool .row');
+function updCool(){
+  const n=[...coolRows].filter(r=>r.classList.contains('done')).length;
+  document.getElementById('coolBar').style.width=(n/3*100)+'%';
+  document.getElementById('coolTxt').textContent='防凉进度 '+n+'/3'+(n===3?' · 稳了 🔥':'');
+}
+coolRows.forEach(r=>r.onclick=()=>{r.classList.toggle('done');updCool();});
+
+/* TIP3 反馈 */
+const fbData={
+  interview:['当时哪个瞬间让你觉得「我们真是一伙的」？','活动里有哪句共识，你回去真会试着做？','如果下次还办，你最想砍掉/保留哪一段？'],
+  survey:['整体满意度（1-5）','「会主动找其他部门协作」的可能性（1-5）','最想落地的行动项是什么？']
+};
+function renderFb(k){
+  document.getElementById('fbList').innerHTML=fbData[k].map(q=>
+    `<div class="q">· ${q}</div>`).join('');
+}
+renderFb('interview');
+document.querySelectorAll('#tabs3 .tab3').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('#tabs3 .tab3').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');renderFb(t.dataset.k);
+});
+document.getElementById('collectFb').onclick=()=>toast('反馈已收集，进入下一届素材库 📚');
+</script>
+</body>
+</html>

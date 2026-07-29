@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文化活动通用 Idea 卡片库</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #f6f9ff 0%, #fff5f7 100%);
+    color: #2c2c3a;
+    padding: 32px 20px 60px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header {
+    background: linear-gradient(120deg, #6a5cff 0%, #ff6ba6 100%);
+    border-radius: 20px;
+    padding: 28px 32px;
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(106,92,255,.25);
+    margin-bottom: 14px;
+  }
+  header h1 { font-size: 26px; letter-spacing: 1px; margin-bottom: 8px; }
+  header p { font-size: 13px; opacity: .92; }
+  header .skeleton {
+    margin-top: 12px; font-size: 12.5px;
+    background: rgba(255,255,255,.16); border-radius: 10px; padding: 8px 12px;
+  }
+  .cat { margin-top: 34px; }
+  .cat-title {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 18px; font-weight: 700; padding: 6px 16px 6px 12px;
+    border-radius: 12px 12px 12px 2px; color: #fff; margin-bottom: 16px;
+  }
+  .cat-1 .cat-title { background: linear-gradient(120deg,#6a5cff,#8f7bff); }
+  .cat-2 .cat-title { background: linear-gradient(120deg,#ff6ba6,#ff9a6b); }
+  .cat-3 .cat-title { background: linear-gradient(120deg,#1fc8a9,#3ad1e0); }
+  .cat-4 .cat-title { background: linear-gradient(120deg,#ffb648,#ffd24a); }
+  .cat-title .dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; opacity:.9; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 6px 18px rgba(40,40,90,.08);
+    border-top: 4px solid #ddd;
+    transition: transform .18s ease, box-shadow .18s ease;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 14px 28px rgba(40,40,90,.16); }
+  .cat-1 .card { border-top-color: #6a5cff; }
+  .cat-2 .card { border-top-color: #ff6ba6; }
+  .cat-3 .card { border-top-color: #1fc8a9; }
+  .cat-4 .card { border-top-color: #ffb648; }
+  .card h3 { font-size: 15.5px; color: #1f1f2e; margin-bottom: 10px; }
+  .card .do { font-size: 13.5px; color: #3a3a4a; margin-bottom: 8px; }
+  .card .do b { color: #6a5cff; }
+  .card .why {
+    font-size: 12.5px; color: #777;
+    background: #f7f7fb; border-radius: 9px; padding: 8px 10px;
+    border-left: 3px solid #ffd24a;
+  }
+  .card .why b { color: #c98a00; }
+  .tag {
+    position: absolute; top: 14px; right: 14px;
+    font-size: 11px; color:#fff; padding: 2px 8px; border-radius: 8px;
+  }
+  .cat-1 .tag { background:#6a5cff; }
+  .cat-2 .tag { background:#ff6ba6; }
+  .cat-3 .tag { background:#1fc8a9; }
+  .cat-4 .tag { background:#ffb648; }
+  footer { text-align:center; margin-top:44px; font-size:12px; color:#aaa; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎯 文化活动通用 Idea 卡片库</h1>
+    <p>部门级文化/氛围活动的可复用机制库 · 已剥离业务专属词，套用时替换 [领域主题]/[工具]/[slogan]</p>
+    <div class="skeleton">
+      通用骨架：氛围 → 启动会 → 线上 → 线下体验 → 学习考试 → 激励 → 复盘　|
+      时间轴：启动引爆 → 一周集中 → 长期持续　|　本卡片版收录前四类共 21 个 idea
+    </div>
+  </header>
+
+  <!-- 一、引流 & 参与类 -->
+  <section class="cat cat-1">
+    <div class="cat-title"><span class="dot"></span>一、引流 &amp; 参与类</div>
+    <div class="grid">
+      <div class="card"><span class="tag">01</span><h3>集章解锁制</h3>
+        <div class="do">把各活动模块设成"章"，集满兑换终极大奖。</div>
+        <div class="why">用游戏化钩子拉动全模块参与，避免只参加单一环节。</div></div>
+      <div class="card"><span class="tag">02</span><h3>团队/中心排行榜</h3>
+        <div class="do">按团队实时展示参与率排名，群内每日播报。</div>
+        <div class="why">轻度竞争感拉齐参与率，且不点名落后避免内耗。</div></div>
+      <div class="card"><span class="tag">03</span><h3>早鸟加权</h3>
+        <div class="do">首日完成的抽奖权重翻倍。</div>
+        <div class="why">平滑参与曲线，避免最后一天挤兑。</div></div>
+      <div class="card"><span class="tag">04</span><h3>组队参战</h3>
+        <div class="do">以团队为单位报名，整体达标发团奖。</div>
+        <div class="why">利用同伴压力互相提醒，提升团队整体完成度。</div></div>
+      <div class="card"><span class="tag">05</span><h3>标杆/KOL 打样</h3>
+        <div class="do">提前约活跃同学发高质量"打样"内容并置顶。</div>
+        <div class="why">破解征集类冷启动，真实打样比官方稿更能带节奏。</div></div>
+      <div class="card"><span class="tag">06</span><h3>翻车故事会</h3>
+        <div class="do">设专门话题脱敏分享最惨事故，最佳故事给奖。</div>
+        <div class="why">真实失败最有传播力，直接营造"看到问题"的安全文化。</div></div>
+      <div class="card"><span class="tag">07</span><h3>反向幽默奖</h3>
+        <div class="do">设"最佳背锅侠"等趣味奖项。</div>
+        <div class="why">幽默命名降低严肃主题的参与心理门槛。</div></div>
+    </div>
+  </section>
+
+  <!-- 二、内容创意类 -->
+  <section class="cat cat-2">
+    <div class="cat-title"><span class="dot"></span>二、内容创意类</div>
+    <div class="grid">
+      <div class="card"><span class="tag">08</span><h3>双赛道征集</h3>
+        <div class="do">同一征集分两条赛道分别评。</div>
+        <div class="why">复合主题下两条线都吃到，不互相稀释。</div></div>
+      <div class="card"><span class="tag">09</span><h3>一键复盘卡</h3>
+        <div class="do">填 3 问自动生成可分享复盘卡。</div>
+        <div class="why">把复盘门槛降到最低，让一线愿意慢下来。</div></div>
+      <div class="card"><span class="tag">10</span><h3>口诀/Slogan 征集→印周边</h3>
+        <div class="do">征集一句话口诀，优秀者印上工卡套/鼠标垫发放。</div>
+        <div class="why">让理念随身带，延长活动记忆。</div></div>
+      <div class="card"><span class="tag">11</span><h3>冷知识日历</h3>
+        <div class="do">活动期每天一条主题冷知识配图日更。</div>
+        <div class="why">保持每日热度，轻量不掉链。</div></div>
+      <div class="card"><span class="tag">12</span><h3>AI 抛梗短视频</h3>
+        <div class="do">数字人配音 1 分钟吐槽短片开场，另剪 15s 朋友圈版。</div>
+        <div class="why">制造记忆点破冰，一鱼两吃覆盖启动会与社交传播。</div></div>
+      <div class="card"><span class="tag">13</span><h3>数字分身/照相馆打卡</h3>
+        <div class="do">现场用 AI 生成专属头像/海报带 slogan 打卡。</div>
+        <div class="why">提升活动出片率，驱动 UGC 自发传播。</div></div>
+      <div class="card"><span class="tag">14</span><h3>互动游戏化</h3>
+        <div class="do">茶水间设连线/找茬/套圈得星换礼。</div>
+        <div class="why">路过即玩，把知识点变成轻量好玩的体验。</div></div>
+    </div>
+  </section>
+
+  <!-- 三、体验实战类 -->
+  <section class="cat cat-3">
+    <div class="cat-title"><span class="dot"></span>三、体验实战类</div>
+    <div class="grid">
+      <div class="card"><span class="tag">15</span><h3>轻体验（预埋坑的测试项目）</h3>
+        <div class="do">测试沙箱预埋不规范项，让用户找茬即学。</div>
+        <div class="why">在真实场景里"做中学"，比听讲记忆深。</div></div>
+      <div class="card"><span class="tag">16</span><h3>跨团队协同结对</h3>
+        <div class="do">预约制邀请上下游/产研一起实操+复核+研讨，邀请方额外发小礼。</div>
+        <div class="why">跨团队对齐认知、收集共建建议，实测效果超预期。</div></div>
+      <div class="card"><span class="tag">17</span><h3>AI 实战 Workshop</h3>
+        <div class="do">给真实场景，两人结对用内部 AI 工具限时产出方案并 PK，最优进案例库。</div>
+        <div class="why">把"用 AI"从口号变成可演示实战，且直接沉淀可复用资产。</div></div>
+      <div class="card"><span class="tag">18</span><h3>留言板双轨</h3>
+        <div class="do">现场便利贴 + 同步电子问卷双路收反馈。</div>
+        <div class="why">实体与线上互补，避免漏收真实声音。</div></div>
+    </div>
+  </section>
+
+  <!-- 四、学习考试类 -->
+  <section class="cat cat-4">
+    <div class="cat-title"><span class="dot"></span>四、学习考试类</div>
+    <div class="grid">
+      <div class="card"><span class="tag">19</span><h3>先学后考</h3>
+        <div class="do">知识点配短视频+即时小测，闯关式学完即考。</div>
+        <div class="why">告别枯燥试卷，提升通过率与体验。</div></div>
+      <div class="card"><span class="tag">20</span><h3>情景题</h3>
+        <div class="do">给现象选处置，选项含典型误判并解析讲透。</div>
+        <div class="why">考能力而非背记，直指"会不会用方法"。</div></div>
+      <div class="card"><span class="tag">21</span><h3>两周催考</h3>
+        <div class="do">发布后 2 周拉群+每周五通报完成率，到点截止。</div>
+        <div class="why">持续跟进保障全员通过率，不靠一次性推送。</div></div>
+    </div>
+  </section>
+
+  <footer>文化活动通用 Idea 卡片版 · 仅收录前四类（引流参与 / 内容创意 / 体验实战 / 学习考试）共 21 个 idea</footer>
+</div>
+</body>
+</html>

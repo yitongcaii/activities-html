@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>质量稳定性文化活动方案分析 · 通用框架提炼</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif; background: #f4f6fb; color: #1f2430; line-height: 1.7; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 28px 80px; }
+  header { background: linear-gradient(135deg,#2b5876,#4e4376); color:#fff; border-radius:16px; padding:34px 38px; margin-bottom:30px; box-shadow:0 10px 30px rgba(43,88,118,.25); }
+  header h1 { font-size:26px; letter-spacing:1px; }
+  header .sub { margin-top:10px; font-size:14px; opacity:.9; }
+  header .tags { margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; }
+  header .tags span { background:rgba(255,255,255,.16); padding:4px 12px; border-radius:20px; font-size:12px; }
+  h2 { font-size:20px; margin:34px 0 14px; padding-left:12px; border-left:5px solid #4e4376; }
+  h3 { font-size:16px; margin:20px 0 8px; color:#2b5876; }
+  p { margin:8px 0; font-size:14.5px; }
+  .card { background:#fff; border-radius:12px; padding:22px 26px; margin:14px 0; box-shadow:0 4px 16px rgba(0,0,0,.05); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .item { background:#f7f9fc; border:1px solid #e7ebf2; border-radius:10px; padding:14px 16px; }
+  .item b { color:#2b5876; display:block; margin-bottom:4px; font-size:14px; }
+  .item span { font-size:13px; color:#555; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; background:#fff; }
+  th, td { border:1px solid #e3e8f0; padding:9px 12px; text-align:left; vertical-align:top; }
+  th { background:#eef2f8; color:#2b5876; font-weight:600; }
+  tr:nth-child(even) td { background:#fafbfd; }
+  .kv { display:flex; flex-wrap:wrap; gap:10px 30px; }
+  .kv div { font-size:14px; }
+  .kv b { color:#4e4376; }
+  .pill { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; }
+  .pill.g { background:#e6f7ee; color:#1a7f4b; }
+  .pill.o { background:#fff3e0; color:#b9700a; }
+  .pill.r { background:#fdeaea; color:#c0392b; }
+  .layer { border-left:4px solid #2b5876; background:#f7f9fc; padding:14px 18px; margin:12px 0; border-radius:0 10px 10px 0; }
+  .layer h3 { margin-top:0; }
+  .map { font-size:14px; }
+  .map li { margin:9px 0; }
+  .tip { background:#fff8e8; border:1px solid #ffe2a8; border-radius:10px; padding:14px 18px; margin:10px 0; font-size:13.5px; }
+  .tip b { color:#b9700a; }
+  .foot { margin-top:40px; font-size:12px; color:#99a; text-align:center; }
+  code { background:#eef2f8; padding:1px 6px; border-radius:5px; font-size:12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>质量稳定性文化活动方案 · 拆解与通用框架提炼</h1>
+    <div class="sub">对象文件：【云技服】质量稳定性文化活动.xlsx ｜ 主办：云技术运营服务部 ｜ 周期：2026.3.30–4.3（一周）</div>
+    <div class="tags">
+      <span>业务连续性文化周</span>
+      <span>Slogan：慢一点、想十分，AI赋能，一起稳稳的</span>
+      <span>线上+线下+学习+激励+复盘</span>
+      <span>11 个 Sheet 全闭环</span>
+    </div>
+  </header>
+
+  <h2>一、活动方案概览</h2>
+  <div class="card">
+    <div class="kv">
+      <div><b>主题</b>：云技术运营服务部——业务连续性文化周</div>
+      <div><b>Slogan</b>：慢一点、想十分，AI赋能，一起稳稳的！</div>
+      <div><b>覆盖</b>：部门全员（集团+云智）+ 产研 buddy</div>
+      <div><b>目标</b>：推动质量稳定性 / 业务连续性文化建设，让一线"看到问题、积极解决"</div>
+      <div><b>节奏</b>：周一启动会 → 周二~周四线上互动+线下体验 → 周五收尾+考试启动</div>
+      <div><b>配套</b>：学习考试（2 周持续跟进）、每半年激励评选</div>
+    </div>
+  </div>
+
+  <h2>二、活动结构拆解（模块地图）</h2>
+  <div class="grid">
+    <div class="item"><b>① 环境氛围建设（线下）</b><span>海报、KT板、电梯间/变更室门口标语、座位夹，随宣发铺设</span></div>
+    <div class="item"><b>② 线上文化活动</b><span>变更避坑大挑战（答题抽奖）、风险治理提案（点赞+采纳奖）、复盘者联盟·与AI审计对话</span></div>
+    <div class="item"><b>③ 线下体验活动</b><span>变更"新"动体验日：稳定性连连看、变更室轻体验、产研协同体验</span></div>
+    <div class="item"><b>④ 学习考试</b><span>自主学习专区资料包 + 测验（DDL 4.10，全员通过目标）</span></div>
+    <div class="item"><b>⑤ 激励发布</b><span>即时咖啡券/礼品 + 每半年评选1次稳定性标杆</span></div>
+    <div class="item"><b>⑥ 启动会（线上）</b><span>alan发言+年度重磅发布+文化周介绍，60min内</span></div>
+    <div class="item"><b>⑦ 总结复盘</b><span>总结海报、调研问卷、活动复盘会、留言板汇总</span></div>
+  </div>
+
+  <h2>三、这份方案自带的"运营 SOP 文档体系"（本身就是通用资产）</h2>
+  <p>文件之所以有 11 个 Sheet，本质是一套<strong>可复制的活动运营工具箱</strong>。每个 Sheet 都是一类标准文档：</p>
+  <table>
+    <tr><th>Sheet</th><th>文档类型</th><th>通用作用</th></tr>
+    <tr><td>Sheet2</td><td>活动策划总表</td><td>主题/Slogan + 活动类型×目的×形式×礼品×推送时间×物料 的矩阵</td></tr>
+    <tr><td>Sheet3</td><td>任务看板</td><td>事项 / 具体内容 / 输出物 / DDL / 责任人 / 进度，附现场分工</td></tr>
+    <tr><td>Sheet1 / Sheet4</td><td>活动日历 + 宣发节奏</td><td>按天、按时段、分渠道（企微/邮件/公告板）、分人群（集团/云智/深圳）的话术模板</td></tr>
+    <tr><td>Sheet5</td><td>现场分工与流程</td><td>体验路径、亮点功能宣讲、互动交流、问卷调研、留言板引导</td></tr>
+    <tr><td>Sheet6 / Sheet8</td><td>物料与礼品台账</td><td>单价/数量/总价/经费来源（部门/HR）、库存与发放清单</td></tr>
+    <tr><td>Sheet9</td><td>跟进与获奖名单</td><td>考试进度跟进、人气奖/采纳奖、奖品发放、礼品签收表</td></tr>
+    <tr><td>Sheet10</td><td>复盘&优化建议</td><td>按环节（整体运营/宣传/设计/物料/激励…）的复盘问题与改进</td></tr>
+    <tr><td>Sheet11</td><td>反馈汇总</td><td>留言板/问卷/QA 的实体+电子双轨收集</td></tr>
+  </table>
+
+  <h2>四、通用方面提炼（跨活动可复用）</h2>
+  <p>业务内容（变更室、AI审计、业务连续性）是领域专属的，但其<strong>结构、机制、节奏</strong>是通用的，可平移到任何部门文化类活动（含你的 AI 文化方案）。分六层：</p>
+
+  <div class="layer">
+    <h3>1. 框架层 · 五维活动骨架</h3>
+    <p><b>线上氛围 + 线下体验 + 学习考试 + 激励体系 + 总结复盘</b>，以"启动会引爆 → 一周集中 → 长期持续"为时间轴。无论什么主题，都能套这五个模块组合。</p>
+  </div>
+
+  <div class="layer">
+    <h3>2. 机制层 · 双轨激励</h3>
+    <p><span class="pill g">即时激励</span> 活动期间咖啡券/小礼品，即时兑现；<span class="pill g">长期激励</span> 每半年评选标杆。奖项设 <b>人气奖（点赞）+ 采纳奖（实质贡献）</b> 双轨，兼顾参与广度与质量深度。</p>
+  </div>
+
+  <div class="layer">
+    <h3>3. 参与层 · 三层参与梯度</h3>
+    <p><b>轻参与</b>（答题/投票/提案，线上、零门槛）→ <b>深体验</b>（预约制线下实操）→ <b>协同</b>（跨团队/产研邀请，额外奖励）。让不同意愿的人都能找到入口。</p>
+  </div>
+
+  <div class="layer">
+    <h3>4. 传播层 · 宣发节奏模板</h3>
+    <p>按 <code>周一发布/周二推进/周三预热/周四执行/周五收尾</code> 的日节奏 + <code>上午11:00 / 下午定点</code> 的时段节奏 + <code>集团/云智/深圳/已报名</code> 的人群分层话术。这种"时段×渠道×人群"三维话术库是可直接复刻的模板。</p>
+  </div>
+
+  <div class="layer">
+    <h3>5. 闭环层 · 反馈与复盘</h3>
+    <p><b>实体留言板 + 电子问卷 + 复盘会</b> 三路收集；复盘表按"环节—问题—优化建议—填写人"结构沉淀，形成可继承的经验库。</p>
+  </div>
+
+  <div class="layer">
+    <h3>6. 管控层 · 任务看板 + 预算台账</h3>
+    <p><b>事项/DDL/责任人/进度</b> 看板保证执行不漏；<b>物料单价×数量×经费来源</b> 台账控制成本。二者是任何活动的管理底座。</p>
+  </div>
+
+  <h2>五、直接迁移到你「AI 文化方案」的对应点</h2>
+  <table>
+    <tr><th>云技服方案的通用机制</th><th>可对应到你 AI 文化方案的模块</th></tr>
+    <tr><td>风险治理提案（框架+点赞+采纳奖）</td><td>↔ 案例征集 SOP（案例沉淀卡 + 双轨评选）</td></tr>
+    <tr><td>自主学习专区 + 测验（2周跟进通过率）</td><td>↔ 知识平台运营（READ 模型 + 学习考试）</td></tr>
+    <tr><td>即时咖啡券 + 每半年标杆评选</td><td>↔ 激励体系（Token 机制 + AI 布道师/标杆）</td></tr>
+    <tr><td>启动会 + 双线（线上互动/线下体验）</td><td>↔ 运营效率保障（主理人制 + 双轨沙龙）</td></tr>
+    <tr><td>一周集中文化周 + 半年评选</td><td>↔ 年度节奏（可设为"AI 文化周" + 季度/半年节奏）</td></tr>
+    <tr><td>复盘问题&优化建议表</td><td>↔ 风险控制（活动风险预案 + 持续迭代）</td></tr>
+  </table>
+
+  <h2>六、复盘沉淀的通用避坑清单（可直接继承）</h2>
+  <div class="tip"><b>① 筹备周期</b>：提前 1 个月筹备；提前征询各团队（尤其异地/私有化）总监对环节的意见。</div>
+  <div class="tip"><b>② 物料</b>：线下物料<strong>避免标注时间/地点</strong>（活动延期会作废），时间地点放线上宣发；总结海报文字要精简、字号够大。</div>
+  <div class="tip"><b>③ 礼品</b>：尽量用<strong>实物</strong>替代小额卡券（咖啡券需计税、需手动充值、麻烦）；小额卡券不如设大额或实物。</div>
+  <div class="tip"><b>④ 学习考试</b>：形式避免单一枯燥，把"学"融进"考"（先学后考、交互式），并提前请专家试测题库。</div>
+  <div class="tip"><b>⑤ 宣传</b>：AI 视频/重点物料提前准备；文案细节要核对（避免歧义导致用户只夸不提实质建议）。</div>
+  <div class="tip"><b>⑥ 激励评选</b>：提前评选，文化周当周发布结果、树立标杆并做标杆分享，放大影响力。</div>
+
+  <h2>七、结论</h2>
+  <div class="card">
+    <p>这份方案的价值不止于"质量稳定性"这个主题，而在于它提供了一套<strong>部门级文化活动的标准打法</strong>：</p>
+    <ul style="margin:8px 0 0 20px; font-size:14.5px;">
+      <li><b>结构通用</b>：五维骨架（线上+线下+学习+激励+复盘）+ 启动→集中→持续的时间轴；</li>
+      <li><b>文档通用</b>：策划总表 / 任务看板 / 宣发节奏 / 物料台账 / 礼品清单 / 复盘表 六类模板可直接复制；</li>
+      <li><b>机制通用</b>：双轨激励、三层参与梯度、三维话术库、反馈闭环；</li>
+      <li><b>避坑通用</b>：前述 6 条复盘经验是跨主题可继承的资产。</li>
+    </ul>
+    <p style="margin-top:12px;">对你正在做的 AI 文化方案，<strong>建议直接复用其"文档体系 + 五维骨架 + 双轨激励 + 宣发节奏模板"</strong>，只把领域内容（变更室/AI审计）替换成 AI 场景（案例征集/Skill库/双轨沙龙），即可快速成型且经过真实活动验证。</p>
+  </div>
+
+  <div class="foot">分析基于文件 11 个 Sheet 内容结构化提取 · 供 AI 文化方案对标参考</div>
+</div>
+</body>
+</html>

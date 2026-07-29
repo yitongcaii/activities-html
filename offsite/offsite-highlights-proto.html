@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🏕️ Offsite · 环节亮点交互原型</title>
+<style>
+  :root{
+    --pink:#FF4D8D; --orange:#FF7A3C; --purple:#FF5C5C; --cyan:#FFC24D;
+    --blue:#FF8FB8; --yellow:#FFD23D; --ink:#3A2418; --paper:#FFFFFF;
+    --shadow:0 18px 40px rgba(255,122,60,.20);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:linear-gradient(135deg,#FFEAD8 0%,#FFE2E8 48%,#FFF3DC 100%);
+    background-attachment:fixed;min-height:100vh;scroll-behavior:smooth}
+  a{color:inherit}
+  /* ===== 顶栏导航 ===== */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(255,255,255,.72);box-shadow:0 6px 24px rgba(124,77,255,.12)}
+  .topbar{display:flex;align-items:center;gap:14px;max-width:1180px;margin:0 auto;padding:12px 18px}
+  .logo{font-weight:900;font-size:18px;letter-spacing:.5px;
+    background:linear-gradient(90deg,var(--orange),var(--pink),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  nav.tabs{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+  .tab{padding:8px 14px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;
+    border:2px solid transparent;background:#fff;color:#6b6486;transition:.2s;white-space:nowrap}
+  .tab:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .tab.active{background:linear-gradient(90deg,var(--pink),var(--purple));color:#fff;border-color:#fff}
+  .ghost-btn{font-size:12px;padding:6px 10px;border-radius:999px;border:2px dashed var(--purple);
+    background:#fff;color:var(--purple);cursor:pointer;font-weight:700}
+
+  /* ===== 布局 ===== */
+  main{max-width:1180px;margin:0 auto;padding:26px 18px 80px}
+  .hero{background:linear-gradient(120deg,var(--orange),var(--pink) 55%,var(--cyan));
+    border-radius:26px;padding:30px 30px;color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .hero h1{font-size:30px;font-weight:900;letter-spacing:1px}
+  .hero p{margin-top:10px;font-size:14px;opacity:.95;max-width:680px;line-height:1.7}
+  .hero .badges{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);
+    padding:5px 12px;border-radius:999px;font-size:12px;font-weight:700}
+  .hero .deco{position:absolute;right:-40px;top:-40px;font-size:160px;opacity:.18;transform:rotate(-12deg)}
+
+  section.block{margin-top:34px;scroll-margin-top:80px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .sec-no{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:20px;
+    font-weight:900;color:#fff;box-shadow:var(--shadow)}
+  .sec-head h2{font-size:22px;font-weight:900}
+  .sec-head .sub{font-size:12px;color:#c0a08f;margin-top:2px}
+
+  /* ===== 卡片 ===== */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:880px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--paper);border-radius:20px;padding:18px;box-shadow:var(--shadow);
+    border:1px solid rgba(255,122,60,.12);position:relative;overflow:hidden}
+  .card h3{font-size:16px;font-weight:900;display:flex;align-items:center;gap:8px}
+  .card .tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;color:#fff}
+  .tag.new{background:linear-gradient(90deg,var(--pink),var(--orange))}
+  .tag.ref{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+  .tag.tip{background:linear-gradient(90deg,#ffb072,#ffd0a3)}
+  .tag.sug{background:linear-gradient(90deg,#9ad0a0,#cfe8b0);color:#2f5d36}
+  .card p.desc{font-size:13px;color:#6b6486;line-height:1.7;margin-top:8px}
+  .card .mini{font-size:11px;color:#c49a86;margin-top:6px}
+
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:13px;padding:9px 16px;border-radius:999px;
+    color:#fff;background:linear-gradient(90deg,var(--pink),var(--purple));transition:.18s;
+    box-shadow:0 8px 18px rgba(255,77,141,.28)}
+  .btn:hover{transform:translateY(-2px) scale(1.02)}
+  .btn:active{transform:scale(.97)}
+  .btn.cyan{background:linear-gradient(90deg,var(--cyan),var(--blue))}
+  .btn.ghost{background:#fff;color:var(--purple);border:2px solid var(--purple)}
+  .btn.sm{padding:6px 12px;font-size:12px}
+  .btn.green{background:linear-gradient(90deg,#56c596,#9ad0a0)}
+
+  /* selectable scenario cards */
+  .scn{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .scn .opt{flex:1;min-width:150px;background:#fff;border:2px solid #ffd9c2;border-radius:16px;
+    padding:14px;cursor:pointer;transition:.2s}
+  .scn .opt:hover{transform:translateY(-3px);border-color:var(--pink)}
+  .scn .opt.on{border-color:var(--pink);background:linear-gradient(135deg,#fff,#fff0f7);box-shadow:var(--shadow)}
+  .scn .opt .ic{font-size:32px}
+  .scn .opt .t{font-weight:900;font-size:14px;margin-top:6px}
+  .scn .opt .d{font-size:11px;color:#c49a86;margin-top:4px}
+  .player{margin-top:12px;background:#3A2418;color:#fff;border-radius:16px;padding:18px;display:none}
+  .player.show{display:block;animation:pop .4s ease}
+  .player h4{font-size:16px;font-weight:900;margin-bottom:6px}
+  .player .meta{font-size:12px;opacity:.7;margin-bottom:10px}
+  .player .line{font-size:13px;line-height:1.8;opacity:.95}
+  @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+
+  /* 鱼缸会议 */
+  .obs-row{display:flex;align-items:center;gap:8px;margin:7px 0}
+  .obs-row .name{width:96px;font-size:13px;font-weight:700}
+  .obs-row .tagmini{font-size:11px;color:#c49a86}
+  .fb-box{margin-top:10px;background:#fff5ef;border-radius:14px;padding:12px;font-size:13px}
+  .fb-box .q{font-weight:800;color:var(--purple)}
+  .fb-box .a{margin-top:6px;color:#555;background:#fff;padding:8px 10px;border-radius:10px}
+
+  /* 世界咖啡 */
+  .wc-round{display:flex;align-items:center;gap:10px;margin:10px 0}
+  .wc-badge{background:linear-gradient(90deg,var(--cyan),var(--orange));color:#fff;font-weight:900;
+    font-size:12px;padding:4px 12px;border-radius:999px}
+  .wc-topic{font-weight:800;font-size:14px}
+  .wc-groups{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .wc-grp{background:#fff0f7;border-radius:12px;padding:8px 12px;font-size:12px;font-weight:700;color:#a14d6b}
+
+  /* ORID steps */
+  .orid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  @media(max-width:700px){.orid{grid-template-columns:repeat(2,1fr)}}
+  .orid .st{background:linear-gradient(135deg,#fff,#fff3e9);border-radius:14px;padding:12px;border:1px solid rgba(255,122,60,.14)}
+  .orid .st .k{font-weight:900;font-size:13px;color:var(--pink)}
+  .orid .st .t{font-size:12px;color:#6b6486;margin-top:4px;line-height:1.6}
+
+  /* 情境身份卡 */
+  .idcard{margin:12px auto 0;max-width:320px;background:linear-gradient(135deg,#fff,#fff0f7);
+    border-radius:18px;padding:18px;text-align:center;border:2px solid #ffd0e0;box-shadow:var(--shadow)}
+  .idcard .role{font-size:30px}
+  .idcard .rk{font-weight:900;font-size:18px;margin-top:6px}
+  .idcard .goal{font-size:12px;color:#6b6486;margin-top:8px;line-height:1.6}
+
+  /* 时间展厅 timeline */
+  .timeline{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 14px}
+  .tl-card{flex:0 0 180px;background:#fff;border-radius:16px;padding:12px;border:2px solid #ffd9c2;
+    cursor:pointer;transition:.2s}
+  .tl-card:hover{border-color:var(--pink);transform:translateY(-3px)}
+  .tl-card .ph{height:90px;border-radius:12px;display:grid;place-items:center;font-size:34px;
+    background:linear-gradient(135deg,#ffe0cf,#ffd9ec)}
+  .tl-card .t{font-size:12px;font-weight:800;margin-top:8px}
+  .tl-card .d{font-size:11px;color:#c49a86}
+
+  /* 话题卡 */
+  .topic{background:#fff;border:2px solid #ffd9c2;border-radius:16px;padding:14px;cursor:pointer;transition:.2s}
+  .topic:hover{border-color:var(--pink);transform:translateY(-2px)}
+  .topic .q{font-weight:900;font-size:14px;display:flex;gap:8px;align-items:center}
+  .topic .prompts{display:none;margin-top:10px;font-size:13px;color:#6b6486;line-height:1.8}
+  .topic.open .prompts{display:block;animation:pop .35s ease}
+
+  /* 结尾 承诺书 */
+  .pledge-box{margin-top:10px;background:linear-gradient(135deg,#fff,#fff3e9);border-radius:14px;
+    padding:14px;border:1px dashed var(--orange)}
+  .pledge-box .pc{font-weight:900;color:var(--purple);margin-top:8px;font-size:14px;line-height:1.7}
+  .quote-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .quote{background:linear-gradient(135deg,#fff,#fff0f7);border-radius:16px;padding:14px;
+    font-weight:800;font-size:14px;line-height:1.5;border-left:5px solid var(--pink);
+    box-shadow:0 8px 18px rgba(255,77,141,.12);transition:.2s}
+  .quote:hover{transform:translateY(-4px) rotate(-1deg)}
+  .quote .by{display:block;margin-top:8px;font-size:11px;color:#c9a994;font-weight:600}
+
+  #fwCanvas{position:fixed;inset:0;pointer-events:none;z-index:60}
+  footer{text-align:center;color:#b09a8e;font-size:12px;margin-top:50px;line-height:1.8}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;
+    opacity:0;transition:.3s;z-index:80;box-shadow:var(--shadow)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .hint{font-size:11px;color:#c9a994;margin-top:8px}
+</style>
+</head>
+<body>
+<canvas id="fwCanvas"></canvas>
+<header>
+  <div class="topbar">
+    <div class="logo">🏕️ Offsite · 环节亮点原型</div>
+    <nav class="tabs">
+      <div class="tab active" data-go="s1">一·场景情节</div>
+      <div class="tab" data-go="s2">二·破冰</div>
+      <div class="tab" data-go="s3">三·话题参考</div>
+      <div class="tab" data-go="s4">四·茶歇互动</div>
+      <div class="tab" data-go="s5">五·结尾</div>
+    </nav>
+    <button class="ghost-btn" id="allFire">🎆 全屏烟花</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="deco">🏕️</div>
+    <h1>Offsite · 环节亮点交互原型 Demo</h1>
+    <p>这是一份<strong>可点击体验</strong>的原型：基于部门组织/业务定位与机遇&amp;卡点，在开放场域探讨、对齐未来。每个卡片都是真实可交互的小模块，演示「现场会是什么感觉」。配色走活泼暖阳路线，可按部门 IP 色一键替换。</p>
+    <div class="badges">
+      <span class="badge">💡 新鲜 idea</span>
+      <span class="badge">🤝 共创 · 人人发言</span>
+      <span class="badge">🎯 行动 · 明确行为</span>
+      <span class="badge">🔥 零依赖 · 离线可用</span>
+    </div>
+  </div>
+
+  <!-- ============ 一、场景/情节设计 ============ -->
+  <section class="block" id="s1">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--pink),var(--orange))">1</div>
+      <div><h2>场景 / 情节设计</h2><div class="sub">用「剧情」打破职级与孤岛，让人在角色里自然协作</div></div>
+    </div>
+
+    <div class="card">
+      <h3>🎭 选一条剧情线 <span class="tag new">新鲜idea</span></h3>
+      <p class="desc">点选一种开场剧情设定，下方展开它的角色机制与适用目标。可多条混用，作为整场 Offsite 的「母题」。</p>
+      <div class="scn" id="scn">
+        <div class="opt" data-k="hero">
+          <div class="ic">🦸</div><div class="t">英雄风云录</div>
+          <div class="d">用「英雄身份」代替职级，门派跨职能混编</div>
+        </div>
+        <div class="opt" data-k="expedition">
+          <div class="ic">🧭</div><div class="t">远征集结</div>
+          <div class="d">探险队出征前夜，校准罗盘、占据山盘</div>
+        </div>
+        <div class="opt" data-k="script">
+          <div class="ic">🕵️</div><div class="t">剧本解谜</div>
+          <div class="d">分组扮演角色破案，解决业务难题</div>
+        </div>
+        <div class="opt" data-k="starwar">
+          <div class="ic">🚀</div><div class="t">星球大战</div>
+          <div class="d">义军中队集结，制定摧毁「死星」计划</div>
+        </div>
+      </div>
+      <div class="player" id="scnPlayer">
+        <h4 id="scnTitle"></h4>
+        <div class="meta" id="scnMeta"></div>
+        <div class="line" id="scnLine"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>🧩 剧情线怎么用 <span class="tag tip">TIPS</span></h3>
+      <p class="desc">剧情只是「外壳」，内核是 <b>业务图景共享 → 战略对齐 → 研讨</b>。建议：开场用剧情破冰拉共识，中段切回真实业务议题，结尾用剧情收束（如「出征令」）。</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+        <div style="flex:1;min-width:140px;background:#fff0f7;border-radius:12px;padding:12px;font-size:12px;font-weight:700">🗺 业务图景共享<br><span style="color:#c49a86;font-weight:500">打破孤岛</span></div>
+        <div style="flex:1;min-width:140px;background:#fff0e0;border-radius:12px;padding:12px;font-size:12px;font-weight:700">🎯 战略对齐<br><span style="color:#c49a86;font-weight:500">上下同欲</span></div>
+        <div style="flex:1;min-width:140px;background:#fff3dc;border-radius:12px;padding:12px;font-size:12px;font-weight:700">💥 深度研讨<br><span style="color:#c49a86;font-weight:500">碰撞出行为</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 二、破冰环节 ============ -->
+  <section class="block" id="s2">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--purple),var(--blue))">2</div>
+      <div><h2>破冰环节（打开心扉、促进交流）</h2><div class="sub">打乱职级，在共同目标里达成「合作的快感」</div></div>
+    </div>
+
+    <div class="grid g2">
+      <!-- 情境设定 -->
+      <div class="card">
+        <h3>🎴 情境设定 <span class="tag new">新鲜idea</span></h3>
+        <p class="desc">把人带进角色情境，打乱原本组织职级，发身份卡 + 设共同目标，让大家在活动中达成合作。</p>
+        <div class="idcard" id="idcard">
+          <div class="role">🧙</div>
+          <div class="rk" id="idRole">点下方抽身份卡</div>
+          <div class="goal" id="idGoal">共同目标：一起赢下这场仗</div>
+        </div>
+        <div style="text-align:center;margin-top:10px">
+          <button class="btn" id="drawId">🎲 抽一张身份卡</button>
+        </div>
+      </div>
+
+      <!-- 鱼缸会议 -->
+      <div class="card">
+        <h3>🐟 鱼缸会议 <span class="tag new">新鲜idea</span> <span style="font-size:11px;color:#c49a86">10人/组</span></h3>
+        <p class="desc">一人/团队作被观察者（不能说话），其余人背后给「积极性 + 改进性」反馈，最后被观察者承诺改进行为。</p>
+        <div id="obsList"></div>
+        <input class="fld" id="fbInput" placeholder="给被观察者一句反馈（积极/改进）…" />
+        <button class="btn sm" style="margin-top:8px" id="fbBtn">📨 提交反馈</button>
+        <div class="fb-box" id="fbBox" style="display:none">
+          <div class="q" id="fbQ"></div>
+          <div class="a" id="fbA">被观察者承诺：…（现场口播整理改进行为）</div>
+        </div>
+      </div>
+
+      <!-- ORID -->
+      <div class="card">
+        <h3>💡 ORID 焦点讨论 <span class="tag new">新鲜idea</span> <span style="font-size:11px;color:#c49a86">20人/组</span></h3>
+        <p class="desc">围绕热点话题，按「事实→感受→启示→行动」四步推进。点卡片展开四步引导。</p>
+        <div class="orid">
+          <div class="st"><div class="k">O 事实</div><div class="t">你听到了/看到了什么？</div></div>
+          <div class="st"><div class="k">R 感受</div><div class="t">这让你有什么情绪反应？</div></div>
+          <div class="st"><div class="k">I 启示</div><div class="t">对你/团队意味着什么？</div></div>
+          <div class="st"><div class="k">D 行动</div><div class="t">回到工作能怎么做？</div></div>
+        </div>
+        <div class="mini" style="margin-top:10px">🌰 想象场景：针对马斯克某采访，主持人问「谁听过，介绍下」（提前安排氛围嘉宾），再引发讨论。</div>
+      </div>
+
+      <!-- 世界咖啡 -->
+      <div class="card">
+        <h3>☕ 世界咖啡 <span class="tag new">新鲜idea</span> <span style="font-size:11px;color:#c49a86">50人</span></h3>
+        <p class="desc">围绕具体议题，个人头脑风暴→分组给 3-5 方案；第二轮换议题、随机打乱分组继续。议题层层展开。</p>
+        <div id="wcArea"></div>
+        <button class="btn cyan" style="margin-top:10px;width:100%" id="wcNext">➡ 进入下一轮</button>
+      </div>
+
+      <!-- 时间展厅 -->
+      <div class="card">
+        <h3>🖼 时间展厅 <span class="tag new">新鲜idea</span> <span style="font-size:11px;color:#c49a86">10人/组</span></h3>
+        <p class="desc">每个团队分享过去关键节点成果 + 未来预计节点，也可作为年底员工大会素材。</p>
+        <div class="timeline" id="tl">
+          <div class="tl-card" data-t="里程碑 A" data-e="上半年关键版本上线，客户数 +40%"><div class="ph">🏁</div><div class="t">里程碑 A</div><div class="d">H1</div></div>
+          <div class="tl-card" data-t="攻坚 B" data-e="一次跨团队救火，3 天闭环 P0"><div class="ph">🔥</div><div class="t">攻坚 B</div><div class="d">Q2</div></div>
+          <div class="tl-card" data-t="未来节点 C" data-e="下半年新业务线立项"><div class="ph">🚀</div><div class="t">未来 C</div><div class="d">H2</div></div>
+          <div class="tl-card" data-t="未来节点 D" data-e="年度战役目标拆解"><div class="ph">🎯</div><div class="t">未来 D</div><div class="d">YE</div></div>
+        </div>
+        <div class="player" id="tlPlayer">
+          <div id="tlTitle" style="font-size:16px;font-weight:900"></div>
+          <div id="tlDesc" style="font-size:13px;margin-top:8px;opacity:.85"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 三、话题参考 ============ -->
+  <section class="block" id="s3">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--orange),var(--yellow))">3</div>
+      <div><h2>话题参考</h2><div class="sub">研讨环节可直接抛的真问题（点卡片展开引导提问）</div></div>
+    </div>
+    <div class="grid g2" id="topicGrid"></div>
+  </section>
+
+  <!-- ============ 四、茶歇互动（建议） ============ -->
+  <section class="block" id="s4">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--cyan),var(--blue))">4</div>
+      <div><h2>茶歇互动 <span style="font-size:11px;color:#2f5d36;background:#cfe8b0;padding:2px 8px;border-radius:999px">建议补充</span></h2><div class="sub">大纲未给具体 idea，以下为贴合「共创/行动」的补位建议</div></div>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <h3>🪧 灵感便利贴墙 <span class="tag sug">建议</span></h3>
+        <p class="desc">茶歇时每人贴一张「今年最想解决的问题 / 一个好点子」，下午研讨直接取用，保证人人发声。</p>
+        <button class="btn green sm" style="margin-top:10px" onclick="toast('真实场景：贴纸墙 → 下午分组认领议题')">📌 贴一张</button>
+      </div>
+      <div class="card">
+        <h3>🃏 主题桌签 / 破冰卡 <span class="tag sug">建议</span></h3>
+        <p class="desc">每桌放「灵魂拷问」卡（如：你最想和哪个团队深聊？），茶歇随手聊，自然跨组交流。</p>
+        <button class="btn green sm" style="margin-top:10px" onclick="toast('真实场景：随机换桌，避免小圈层')">🔄 换桌</button>
+      </div>
+      <div class="card">
+        <h3>⚡ 能量补给站 <span class="tag sug">建议</span></h3>
+        <p class="desc">咖啡/甜点 +「今日金句」立牌，休息也是情绪锚点，为下午深度研讨蓄能。</p>
+        <button class="btn green sm" style="margin-top:10px" onclick="toast('真实场景：补给站同步滚动上午结论')">☕ 补给</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 五、结尾（建议） ============ -->
+  <section class="block" id="s5">
+    <div class="sec-head">
+      <div class="sec-no" style="background:linear-gradient(135deg,var(--pink),var(--purple))">5</div>
+      <div><h2>结尾 <span style="font-size:11px;color:#2f5d36;background:#cfe8b0;padding:2px 8px;border-radius:999px">建议补充</span></h2><div class="sub">把「共识」落成「行为」——呼应加分项「行动」</div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>📝 行动承诺书 <span class="tag sug">建议</span></h3>
+        <p class="desc">每人写下「回去后第一个要做的动作」，投屏成承诺墙，让 Offsite 不止于聊。</p>
+        <input class="fld" id="pledgeInput" placeholder="我回去后要做的一件事…" />
+        <button class="btn" style="margin-top:8px;width:100%" id="pledgeBtn">✍ 立承诺</button>
+        <div class="pledge-box" id="pledgeBox" style="display:none">
+          <div style="font-size:11px;color:#c49a86;font-weight:700">我的 Offsite 行动承诺</div>
+          <div class="pc" id="pledgeText"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>💡 金句墙 + 大合影 <span class="tag sug">建议</span></h3>
+        <p class="desc">把全天金句做成墙，结束时大合影，余温延续到群里。</p>
+        <div class="quote-grid" id="quoteGrid"></div>
+        <button class="btn cyan" style="margin-top:12px;width:100%" id="groupPhoto">📸 全场大合影</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    🏕️ Offsite 环节亮点交互原型 · 零依赖离线 HTML<br>
+    配色变量集中在 <code>:root</code>，可一键换成部门 IP 色 ｜ 每个模块均可独立抽出成独立页
+  </footer>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800);}
+
+/* 导航 */
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.go).scrollIntoView({behavior:'smooth'});
+});
+
+/* 烟花 canvas */
+const cv=document.getElementById('fwCanvas'),ctx=cv.getContext('2d');
+let parts=[],rafOn=false;
+function resize(){cv.width=innerWidth;cv.height=innerHeight;}
+addEventListener('resize',resize);resize();
+function fireworksBurst(x,y){
+  x=x||innerWidth/2;y=y||innerHeight*0.4;
+  const colors=['#FF4D8D','#FF9F1C','#7C4DFF','#00D9C0','#4D96FF','#FFD93D'];
+  for(let i=0;i<90;i++){
+    const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;
+    parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,
+      life:1,color:colors[Math.floor(Math.random()*colors.length)],r:Math.random()*2+1.5});
+  }
+  if(!rafOn){rafOn=true;loop();}
+}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.vy+=0.06;p.life-=0.012;
+    ctx.globalAlpha=Math.max(p.life,0);ctx.fillStyle=p.color;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();
+  });
+  ctx.globalAlpha=1;parts=parts.filter(p=>p.life>0);
+  if(parts.length)requestAnimationFrame(loop);else rafOn=false;
+}
+document.getElementById('allFire').onclick=()=>{
+  for(let i=0;i<5;i++)setTimeout(()=>fireworksBurst(innerWidth*(0.2+Math.random()*0.6),innerHeight*(0.25+Math.random()*0.3)),i*220);
+};
+
+/* ===== 一、场景/情节 ===== */
+const scnData={
+  hero:{t:'🦸 英雄风云录',m:'角色：英雄身份（代替职级） · 编组：门派跨职能混编',
+    l:'用「英雄身份」代替真实职级做部门集结，再以「门派」跨职能混编队伍。人人都是某条故事线里的主角，自然跨过汇报线。'},
+  expedition:{t:'🧭 远征集结',m:'角色：探险队员 · 动作：出征前夜校准罗盘、占据山盘',
+    l:'设定为探险队出征前夜：各队制定探险计划、校准罗盘、占据山盘。把「业务目标」包装成「远征地图」，共识在铺地图时就达成了。'},
+  script:{t:'🕵️ 剧本解谜',m:'角色：分组扮演 · 任务：破一个业务难题/案件',
+    l:'分组扮演不同角色，去破一个真实的业务难题或「案件」。推理过程=业务研讨过程，结论顺带就产出了。'},
+  starwar:{t:'🚀 星球大战',m:'角色：义军中队 · 任务：复盘态势 + 制定摧毁「死星」计划',
+    l:'银河被「帝国」统治，各路义军中队集结开作战会议：复盘帝国态势、制定摧毁「死星」的作战计划，领取各自出征指令。适合「变革/打仗」语境。'}
+};
+document.querySelectorAll('#scn .opt').forEach(o=>o.onclick=()=>{
+  document.querySelectorAll('#scn .opt').forEach(x=>x.classList.remove('on'));
+  o.classList.add('on');
+  const d=scnData[o.dataset.k];
+  document.getElementById('scnTitle').textContent=d.t;
+  document.getElementById('scnMeta').textContent=d.m;
+  document.getElementById('scnLine').textContent=d.l;
+  document.getElementById('scnPlayer').classList.add('show');
+  fireworksBurst();
+});
+
+/* ===== 二、破冰 ===== */
+/* 情境身份卡 */
+const roles=[['🧙','战略先知','共同目标：看清明年往哪打'],['⚔️','破局骑士','共同目标：干掉一个老大难'],
+  ['🔧','工匠大师','共同目标：把体验打磨到极致'],['🌉','连接使者','共同目标：打通两个团队'],
+  ['🛡️','守夜人','共同目标：守住合规与风险底线'],['🚀','远航先锋','共同目标：探一条新业务线']];
+document.getElementById('drawId').onclick=()=>{
+  const r=roles[Math.floor(Math.random()*roles.length)];
+  document.getElementById('idRole').textContent=r[1];
+  document.getElementById('idGoal').textContent=r[2];
+  document.querySelector('#idcard .role').textContent=r[0];
+  toast('抽到身份：'+r[1]);
+};
+
+/* 鱼缸会议 */
+const observers=[{n:'团队 A',fb:[]},{n:'同事 小赵',fb:[]},{n:'Leader 老周',fb:[]}];
+const ol=document.getElementById('obsList');
+observers.forEach((o,i)=>{
+  const row=document.createElement('div');row.className='obs-row';
+  row.innerHTML=`<span class="name">${o.n}</span><span class="tagmini">被观察者（不发言）</span>`;
+  row.style.cursor='pointer';
+  row.onclick=()=>{document.querySelectorAll('.obs-row').forEach(x=>x.style.background='');row.style.background='#fff0f7';
+    document.getElementById('fbQ').textContent='正在观察：'+o.n;};
+  ol.appendChild(row);
+});
+document.getElementById('fbBtn').onclick=()=>{
+  const v=document.getElementById('fbInput').value.trim();if(!v){toast('先写句反馈～');return;}
+  document.getElementById('fbBox').style.display='block';
+  document.getElementById('fbA').textContent='被观察者承诺：整理「'+v+'」为改进行为（现场口播）。';
+  document.getElementById('fbInput').value='';
+  toast('反馈已提交，等待承诺 🐟');
+};
+
+/* 世界咖啡 */
+const wcRounds=[
+  {badge:'第一轮',topic:'我们业务最大的「孤岛」在哪？',groups:['狐组·渠道','狼组·研发','鹿组·售前','鹰组·运营']},
+  {badge:'第二轮',topic:'如果打通它，第一个动作是什么？',groups:['随机·A队','随机·B队','随机·C队','随机·D队']},
+  {badge:'第三轮',topic:'落到 Q3，谁牵头、怎么验收？',groups:['混编·X队','混编·Y队','混编·Z队','混编·W队']}
+];
+let wcIdx=0;
+function renderWc(){
+  const r=wcRounds[wcIdx];
+  document.getElementById('wcArea').innerHTML=
+    `<div class="wc-round"><span class="wc-badge">${r.badge}</span><span class="wc-topic">${r.topic}</span></div>
+     <div class="wc-groups">${r.groups.map(g=>`<span class="wc-grp">${g}</span>`).join('')}</div>
+     <div class="mini">每组产出 3-5 个方案 → 上墙</div>`;
+}
+renderWc();
+document.getElementById('wcNext').onclick=()=>{
+  wcIdx=(wcIdx+1)%wcRounds.length;renderWc();toast('已切换到 '+wcRounds[wcIdx].badge+'（分组已打乱）');
+};
+
+/* 时间展厅 */
+document.querySelectorAll('#tl .tl-card').forEach(c=>c.onclick=()=>{
+  const p=document.getElementById('tlPlayer');p.classList.add('show');
+  document.getElementById('tlTitle').textContent='🖼 '+c.dataset.t;
+  document.getElementById('tlDesc').textContent=c.dataset.e;
+  fireworksBurst();
+});
+
+/* ===== 三、话题参考 ===== */
+const topics=[
+  {q:'🤖 AI 大模型时代，主攻「用 AI 做安全」还是「防 AI 新威胁」？',
+   p:['两个方向是替代还是互补？','我们现有的能力更偏哪边？','如果只选一个，明年赌哪边？']},
+  {q:'⚖️ 合规（数据安全法/个保法/出海）对产品路线意味着什么约束与机会？',
+   p:['哪些功能会被「卡」？','合规能否变成卖点/壁垒？','出海第一站选哪？']},
+  {q:'🕊️ 如果给 2 周不做 KPI，你最想试什么？',
+   p:['抛开指标后，你真正想解决的问题是？','它现在为什么没做？','2 周能验证的最小动作是什么？']},
+  {q:'🥷 如果部门是一个门派，我们想成为武林里哪一派？',
+   p:['我们现在的「招牌武功」是什么？','想成为但还缺什么？','门派口号怎么写？']}
+];
+const tg=document.getElementById('topicGrid');
+topics.forEach(t=>{
+  const d=document.createElement('div');d.className='topic';
+  d.innerHTML=`<div class="q">${t.q}</div><div class="prompts">${t.p.map(x=>'· '+x).join('<br>')}</div>`;
+  d.onclick=()=>{d.classList.toggle('open');};
+  tg.appendChild(d);
+});
+
+/* ===== 五、结尾 ===== */
+document.getElementById('pledgeBtn').onclick=()=>{
+  const v=document.getElementById('pledgeInput').value.trim();if(!v){toast('先写个承诺～');return;}
+  document.getElementById('pledgeBox').style.display='block';
+  document.getElementById('pledgeText').textContent='「'+v+'」';
+  toast('承诺已立 📝 回去就做！');
+};
+const quotes=[['先对齐，再开打','— Offsite'],['孤岛是被走出来的','— 全员'],['每个人，都要发声','— 共创'],['聊完，得有动作','— 行动'],['我们是一支队伍','— 团队'],['明年，看我们的','— 出击']];
+const qg=document.getElementById('quoteGrid');
+quotes.forEach(q=>{const d=document.createElement('div');d.className='quote';
+  d.innerHTML=q[0]+'<span class="by">'+q[1]+'</span>';qg.appendChild(d);});
+document.getElementById('groupPhoto').onclick=()=>{
+  toast('📸 咔嚓！Offsite 全家福已生成');
+  for(let i=0;i<3;i++)setTimeout(()=>fireworksBurst(innerWidth*(0.3+Math.random()*0.4),innerHeight*0.3),i*200);
+};
+
+/* 开场自动来一发 */
+setTimeout(()=>fireworksBurst(innerWidth*0.5,innerHeight*0.35),600);
+</script>
+</body>
+</html>

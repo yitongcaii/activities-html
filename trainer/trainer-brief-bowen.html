@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>讲师小提纲 · 便签版（模板可编辑）</title>
+<style>
+  :root{
+    --pg:#f4f1ea; --ink:#2c2a26; --muted:#8a857c;
+    --y:#fff3b0; --b:#cdeffd; --g:#d6f5d6; --o:#ffe0c2; --p:#e8d8ff; --r:#ffd6d6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:24px 18px 60px; background:var(--pg);
+    font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif; color:var(--ink);
+  }
+  .top{display:flex; align-items:center; justify-content:space-between; max-width:1080px; margin:0 auto 18px; flex-wrap:wrap; gap:10px;}
+  .top h1{font-size:20px; margin:0; letter-spacing:1px;}
+  .top .sub{font-size:12px; color:var(--muted); margin-top:2px;}
+  .bar{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .btn{
+    border:none; background:var(--ink); color:#fff; padding:8px 14px; border-radius:20px;
+    font-size:13px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  .btn.ghost{background:#fff; color:var(--ink); border:1px solid #d8d3c8;}
+  .btn.on{background:#b9892f; color:#fff;}
+  .btn:hover{opacity:.88;}
+  .save{font-size:12px; color:#3a9d4e; min-width:72px;}
+  .grid{max-width:1080px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .note{
+    border-radius:4px; padding:14px 14px 12px; min-height:120px;
+    box-shadow:0 4px 10px rgba(0,0,0,.12); position:relative;
+  }
+  .note:nth-child(3n+1){transform:rotate(-.6deg);} .note:nth-child(3n+2){transform:rotate(.5deg);} .note:nth-child(3n){transform:rotate(-.3deg);}
+  .note .tag{font-size:11px; font-weight:700; letter-spacing:.5px; opacity:.7; display:block; margin-bottom:8px; text-transform:uppercase;}
+  .note label{font-size:13px; font-weight:600; display:block; margin-bottom:5px;}
+  .note input[type=text], .note textarea{
+    width:100%; border:none; background:rgba(255,255,255,.55); border-radius:4px;
+    padding:6px 8px; font-size:13px; color:var(--ink); font-family:inherit; resize:vertical;
+  }
+  .note input:focus, .note textarea:focus{outline:2px solid rgba(0,0,0,.18); background:#fff;}
+  .hint{font-size:11px; color:var(--muted); margin-top:6px; line-height:1.4;}
+  .c1{background:var(--y);} .c2{background:var(--b);} .c3{background:var(--g);}
+  .c4{background:var(--o);} .c5{background:var(--p);} .c6{background:var(--r);}
+  .menu{grid-column:1/-1; background:#fff; border-radius:8px; padding:14px 16px; box-shadow:0 4px 10px rgba(0,0,0,.1);}
+  .menu h3{margin:0 0 10px; font-size:14px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{background:var(--b); border:none; padding:6px 11px; border-radius:16px; font-size:12px; cursor:pointer; color:var(--ink); position:relative;}
+  .chip.sel{background:#7cc7e8; color:#fff;}
+  .chip small{opacity:.6; margin-left:3px; font-size:10px;}
+  .redline{grid-column:1/-1; background:var(--r); border-radius:8px; padding:12px 16px; box-shadow:0 4px 10px rgba(0,0,0,.1);}
+  .redline h3{margin:0 0 6px; font-size:14px;}
+  .redline ul{margin:0; padding-left:18px; font-size:12.5px; line-height:1.7; list-style:none; padding-left:0;}
+  .redline li{position:relative; padding:2px 0;}
+  .del{display:none; color:#c0392b; cursor:pointer; font-weight:700; margin-left:6px;}
+  .addbtn{display:none; margin-top:8px; background:#fff; border:1px dashed #b9892f; color:#b9892f; border-radius:16px; padding:5px 12px; font-size:12px; cursor:pointer;}
+  .addchip{margin-left:10px;}
+  /* 模板编辑模式 */
+  body.editing .tpl{outline:1px dashed #b9892f; border-radius:3px; padding:1px 3px;}
+  body.editing .tpl:hover{background:rgba(255,255,255,.45);}
+  body.editing .del{display:inline;}
+  body.editing .addbtn{display:inline-block;}
+  [contenteditable]:focus{outline:2px solid #2c7fb8 !important;}
+  #fileInput{display:none;}
+  @media print{
+    body{background:#fff; padding:0;}
+    .top .bar{display:none;}
+    .note{box-shadow:none; transform:none !important;}
+    .menu,.redline{box-shadow:none;}
+    .del,.addbtn{display:none !important;}
+  }
+  @media(max-width:780px){ .grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:520px){ .grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <h1>讲师小提纲 · 便签版</h1>
+      <div class="sub">填完自动保存 · 模板可改 · 可导出/导入 · A区HRBP填，B区讲师填</div>
+    </div>
+    <div class="bar">
+      <span class="save" id="saveTip">已载入你的模板</span>
+      <button class="btn ghost" id="editBtn" onclick="toggleEdit()">✎ 模板编辑</button>
+      <button class="btn ghost" onclick="exportJSON()">导出</button>
+      <button class="btn ghost" onclick="exportHTML()">导出共享HTML</button>
+      <button class="btn ghost" onclick="document.getElementById('fileInput').click()">导入</button>
+      <button class="btn ghost" onclick="clearAll()">清空</button>
+      <button class="btn" onclick="window.print()">打印 / 存PDF</button>
+      <input type="file" id="fileInput" accept="application/json" onchange="importJSON(event)">
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- A 区 -->
+    <div class="note c1">
+      <span class="tag tpl" data-tpl="tag-a1"> · 训前对齐</span>
+      <label class="tpl" data-tpl="lab-a1">这场培训的目的</label>
+      <textarea rows="2" data-key="a-purpose" placeholder="学完学员能____"></textarea>
+      <div class="hint tpl" data-tpl="hint-a1">只写1-2个</div>
+    </div>
+    <div class="note c2">
+      <span class="tag tpl" data-tpl="tag-a2"> · 面向对象</span>
+      <label class="tpl" data-tpl="lab-a2">谁 / 基础</label>
+      <textarea rows="2" data-key="a-audience" placeholder="新人 / 熟手 / 混合；已知____"></textarea>
+      <div class="hint tpl" data-tpl="hint-a2">内容深or浅</div>
+    </div>
+    <div class="note c3">
+      <span class="tag tpl" data-tpl="tag-a3"> · 为什么要培训</span>
+      <label class="tpl" data-tpl="lab-a3">不训会怎样？</label>
+      <textarea rows="2" data-key="a-value" placeholder="业务会____变差 / 出错"></textarea>
+      <div class="hint tpl" data-tpl="hint-a3">开场用来讲"为什么"</div>
+    </div>
+
+    <!-- B 区 -->
+    <div class="note c4">
+      <span class="tag tpl" data-tpl="tag-b1"> · 开场放钩子</span>
+      <label class="tpl" data-tpl="lab-b1">第1分钟抓注意</label>
+      <textarea rows="2" data-key="b-hook" placeholder="故事 / 数字 / 提问"></textarea>
+      <div class="hint tpl" data-tpl="hint-b1">通过讲小故事、说一个反常识的数字，或反问，来代替念标题</div>
+    </div>
+    <div class="note c5">
+      <span class="tag tpl" data-tpl="tag-b2"> · 一场培训只讲3件事</span>
+      <label class="tpl" data-tpl="lab-b2">① ② ③</label>
+      <textarea rows="3" data-key="b-three" placeholder="1.__&#10;2.__&#10;3.__"></textarea>
+      <div class="hint tpl" data-tpl="hint-b2">先把内容全部列出来，然后砍到3点，多了留到下次再分享</div>
+    </div>
+    <div class="note c6">
+      <span class="tag tpl" data-tpl="tag-b3"> · 每个内容对应至少1案例</span>
+      <label class="tpl" data-tpl="lab-b3">真实例子</label>
+      <textarea rows="2" data-key="b-case" placeholder="对应①②③各1个真事"></textarea>
+      <div class="hint tpl" data-tpl="hint-b3">1个真例＞10句定义</div>
+    </div>
+    <div class="note c1">
+      <span class="tag tpl" data-tpl="tag-b4"> · 注意每个环节的时间</span>
+      <label class="tpl" data-tpl="lab-b4">开场/点1/点2/点3/收尾</label>
+      <textarea rows="2" data-key="b-time" placeholder="__ / __ / __ / __ / __"></textarea>
+      <div class="hint tpl" data-tpl="hint-b4">单段别超20分钟连讲，中间有一写情节起伏</div>
+    </div>
+    <div class="note c2">
+      <span class="tag tpl" data-tpl="tag-b5"> · 穿插互动点</span>
+      <label class="tpl" data-tpl="lab-b5">设计互动点在哪节后</label>
+      <textarea rows="2" data-key="b-interact" placeholder="点1后→_&#10;点2后→_"></textarea>
+      <div class="hint tpl" data-tpl="hint-b5">可以设计投票选择题目、或者问关于xxx还有没有哪里不清楚的，如果有认识的学员在线，可以提名提问</div>
+    </div>
+    <div class="note c3">
+      <span class="tag tpl" data-tpl="tag-b6"> · 收尾+布置“作业”</span>
+      <label class="tpl" data-tpl="lab-b6">精华总结 + 动作</label>
+      <textarea rows="2" data-key="b-close" placeholder="回去先做____"></textarea>
+      <div class="hint tpl" data-tpl="hint-b6">告诉学员本场培训的目的，并阐述：学员回去后可以做什么</div>
+    </div>
+    <div class="note c4">
+      <span class="tag tpl" data-tpl="tag-b7"> · 验收</span>
+      <label class="tpl" data-tpl="lab-b7">了解学员是否掌握</label>
+      <textarea rows="2" data-key="b-check" placeholder="小测 / 邻座互讲 / 演练"></textarea>
+      <div class="hint tpl" data-tpl="hint-b7">别只问"听懂了吗"，可以设计一个情节让学员来答，如果现场没有人回答，可以放到云知上作为“课后讨论题”</div>
+    </div>
+
+    <!-- 互动菜单 -->
+    <div class="menu">
+      <h3 class="tpl" data-tpl="menu-title">互动方式菜单（提高培训互动率，有助于讲师评选部门优秀讲师🏆）</h3>
+      <div class="chips" id="chipList"><button class="chip" data-n="1"><span class="ctext tpl" data-tpl="chip-1">1 二选一举手<small>观点</small></span><span class="del" onclick="delChip(this)">×</span></button><button class="chip" data-n="2"><span class="ctext tpl" data-tpl="chip-2">2 邻座30秒<small>破冰</small></span><span class="del" onclick="delChip(this)">×</span></button><button class="chip" data-n="3"><span class="ctext tpl" data-tpl="chip-3">3 快速小测<small>验收</small></span><span class="del" onclick="delChip(this)">×</span></button><button class="chip" data-n="6"><span class="ctext tpl" data-tpl="chip-6">4 role-play<small>沟通</small></span><span class="del" onclick="delChip(this)">×</span></button><button class="chip" data-n="7"><span class="ctext tpl" data-tpl="chip-7">5 点名<small>拉齐</small></span><span class="del" onclick="delChip(this)">×</span></button><button class="chip" data-n="1784608852929"><span class="ctext tpl" data-tpl="chip-1784608852929">⭐ 设计“课后讨论题”放到云知，邀请大家在云知上留言</span><span class="del" onclick="delChip(this)">×</span></button></div>
+      <button class="addbtn addchip" onclick="addChip()">+ 加互动技法</button>
+    </div>
+
+    <!-- 红线 -->
+    <div class="redline">
+      <h3 class="tpl" data-tpl="rl-title">温馨提醒</h3>
+      <ul id="rl"><li><span class="tpl">❌ 不念PPT——PPT是提词不是台词</span><span class="del" onclick="delRL(this)">×</span></li><li><span class="tpl">❌ 少概念多举例——一个真例子顶十句定义</span><span class="del" onclick="delRL(this)">×</span></li><li><span class="tpl">⏱ 每15–20分钟可以互动一次，尽量别连讲超20分钟</span><span class="del" onclick="delRL(this)">×</span></li><li><span class="tpl">💡 先讲"为什么重要"再讲"怎么做"</span><span class="del" onclick="delRL(this)">×</span></li><li><span class="tpl">✅️ 留QA答疑时间</span><span class="del" onclick="delRL(this)">×</span></li></ul>
+      <button class="addbtn" onclick="addRL()">+ 加一条红线</button>
+    </div>
+  </div>
+
+<script>
+  const KEY = 'trainerBriefShared_v1';
+  let editing = false;
+
+  function toggleEdit(){
+    editing = !editing;
+    document.body.classList.toggle('editing', editing);
+    document.querySelectorAll('.tpl').forEach(el=>{ el.setAttribute('contenteditable', editing ? 'true':'false'); });
+    document.getElementById('editBtn').classList.toggle('on', editing);
+    document.getElementById('editBtn').textContent = editing ? '✓ 完成模板' : '✎ 模板编辑';
+  }
+
+  function collect(){
+    const d = {values:{}, tpl:{}, chips:{sel:[], items:[]}, rl:[]};
+    document.querySelectorAll('[data-key]').forEach(el=>d.values[el.dataset.key]=el.value);
+    document.querySelectorAll('.tpl[data-tpl]').forEach(el=>d.tpl[el.dataset.tpl]=el.innerText);
+    document.querySelectorAll('#chipList .chip').forEach(c=>{
+      d.chips.items.push({n:c.dataset.n, html:c.querySelector('.ctext').innerHTML});
+      if(c.classList.contains('sel')) d.chips.sel.push(c.dataset.n);
+    });
+    document.querySelectorAll('#rl li .tpl').forEach(el=>d.rl.push(el.innerText));
+    return d;
+  }
+  function save(){
+    localStorage.setItem(KEY, JSON.stringify(collect()));
+    document.getElementById('saveTip').textContent = '已保存 ' + new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+  }
+  function apply(d){
+    Object.entries(d.values||{}).forEach(([k,v])=>{ const el=document.querySelector(`[data-key="${k}"]`); if(el) el.value=v; });
+    Object.entries(d.tpl||{}).forEach(([k,v])=>{ const el=document.querySelector(`[data-tpl="${k}"]`); if(el) el.innerText=v; });
+    if(d.chips && d.chips.items){
+      const list=document.getElementById('chipList'); list.innerHTML='';
+      d.chips.items.forEach(it=>{
+        const b=document.createElement('button'); b.className='chip'; b.dataset.n=it.n;
+        b.innerHTML=`<span class="ctext tpl" data-tpl="chip-${it.n}">${it.html}</span><span class="del" onclick="delChip(this)">×</span>`;
+        if((d.chips.sel||[]).includes(it.n)) b.classList.add('sel');
+        list.appendChild(b);
+      });
+    }
+    if(d.rl){
+      const ul=document.getElementById('rl'); ul.innerHTML='';
+      d.rl.forEach(t=>{ const li=document.createElement('li'); li.innerHTML=`<span class="tpl">${t}</span><span class="del" onclick="delRL(this)">×</span>`; ul.appendChild(li); });
+    }
+    if(editing){ document.querySelectorAll('.tpl').forEach(el=>el.setAttribute('contenteditable','true')); }
+  }
+  function exportHTML(){
+    // 克隆当前页面（含你改好的模板），清空填空，导出为独立 HTML
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelectorAll('[data-key]').forEach(el=>el.value='');           // 填空清空，留给接收人填
+    clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable')); // 去掉临时编辑态
+    clone.body.classList.remove('editing');
+    let html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    html = html.replace("'trainerBriefSticky_v2'", "'trainerBriefShared_v1'"); // 独立缓存键，不和你本机冲突
+    html = html.replace(/<button class="btn ghost on" id="editBtn"[^>]*>[\s\S]*?<\/button>/,
+                        '<button class="btn ghost" id="editBtn" onclick="toggleEdit()">✎ 模板编辑</button>');
+    html = html.replace(/id="saveTip">[^<]*</, 'id="saveTip">已载入你的模板</');
+    const blob=new Blob([html],{type:'text/html'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='讲师小提纲_共享版.html'; a.click();
+    document.getElementById('saveTip').textContent='已生成共享HTML，去下载发给同事';
+  }
+  function load(){
+    const raw=localStorage.getItem(KEY); if(!raw) return;
+    try{ apply(JSON.parse(raw)); }catch(e){}
+  }
+  function exportJSON(){
+    const blob=new Blob([JSON.stringify(collect(),null,2)],{type:'application/json'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='讲师小提纲_'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+  }
+  function importJSON(e){
+    const f=e.target.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=()=>{ try{ apply(JSON.parse(r.result)); save(); }catch(err){ alert('文件格式不正确'); } };
+    r.readAsText(f); e.target.value='';
+  }
+  function clearAll(){
+    if(!confirm('确定清空所有已填内容（保留模板）？')) return;
+    document.querySelectorAll('[data-key]').forEach(el=>el.value='');
+    document.querySelectorAll('#chipList .chip').forEach(c=>c.classList.remove('sel'));
+    save();
+    document.getElementById('saveTip').textContent='已清空';
+  }
+  function delChip(x){ x.closest('.chip').remove(); save(); }
+  function addChip(){
+    const list=document.getElementById('chipList');
+    const n=Date.now();
+    const b=document.createElement('button'); b.className='chip'; b.dataset.n=n;
+    b.innerHTML=`<span class="ctext tpl" contenteditable="true">新互动技法</span><span class="del" onclick="delChip(this)">×</span>`;
+    list.appendChild(b); save();
+  }
+  function delRL(x){ x.closest('li').remove(); save(); }
+  function addRL(){
+    const ul=document.getElementById('rl');
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="tpl" contenteditable="true">新红线内容</span><span class="del" onclick="delRL(this)">×</span>`;
+    ul.appendChild(li); save();
+  }
+
+  document.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input', save));
+  document.querySelectorAll('#chipList').forEach(list=>{
+    list.addEventListener('click', e=>{
+      if(editing) return;
+      const chip=e.target.closest('.chip'); if(chip && !e.target.classList.contains('del')){ chip.classList.toggle('sel'); save(); }
+    });
+  });
+  document.querySelectorAll('.tpl').forEach(el=>el.addEventListener && el.addEventListener('input', ()=>{ if(editing) save(); }));
+  document.getElementById('rl').addEventListener('input', ()=>{ if(editing) save(); });
+  document.getElementById('chipList').addEventListener('input', ()=>{ if(editing) save(); });
+  load();
+</script>
+</body>
+</html>
