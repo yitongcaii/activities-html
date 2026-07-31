@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>下午茶研讨 · HRBP 活动锦囊</title>
+<style>
+  :root{
+    --brown:#7a4a23; --brown-mid:#b9763f; --brown-light:#f6ece1;
+    --ink:#2b2b2b; --muted:#8a7a68; --line:#d99a5c;
+    --green:#1f9e8f; --purple:#7a5cc9; --orange:#d07d1f; --pink:#d05a8c; --blue:#1f5fbf;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(122,74,35,.10) 1px, transparent 0) 0 0/22px 22px,
+      linear-gradient(180deg,#fbf4ea,#f3e6d6);
+    background-attachment: fixed;
+    color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:14px; line-height:1.6;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; display:flex; gap:8px; align-items:center;
+    padding:10px 20px; background:linear-gradient(120deg,var(--brown),var(--brown-mid)); color:#fff; flex-wrap:wrap;
+  }
+  .toolbar .t-title{font-weight:600; margin-right:auto; letter-spacing:.5px}
+  .toolbar button{
+    border:none; border-radius:999px; padding:6px 16px; cursor:pointer;
+    background:#fff; color:var(--brown); font-weight:600; font-size:13px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .toolbar button:hover{ transform: translateY(-2px); box-shadow:0 4px 12px rgba(122,74,35,.25) }
+  .toolbar button.ghost{background:rgba(255,255,255,.18); color:#fff}
+  .toolbar .save{font-size:12px; opacity:.85}
+  .wrap{max-width:1080px; margin:24px auto 60px; padding:0 20px}
+  .head{margin-bottom:18px}
+  .head h1{font-size:24px; margin:0 0 6px; font-weight:700; outline:none}
+  .head .sub{color:var(--muted); font-size:13px; outline:none}
+  .meta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+  .meta{background:var(--brown-light); border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:13px}
+  .meta b{color:var(--brown)}
+  .sec{margin:26px 0 8px}
+  .sec-title{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+  .sec-title .num{
+    flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+    background:var(--brown); color:#fff; font-weight:700; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sec-title h2{margin:0; font-size:19px; font-weight:700; outline:none}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:14px}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:14px 16px 14px; box-shadow:0 1px 0 rgba(122,74,35,.08);
+    position:relative; overflow:hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+    animation: riseIn .5s ease backwards;
+  }
+  .grid .card:nth-child(odd){animation-delay:.04s}
+  .grid .card:nth-child(even){animation-delay:.12s}
+  .card:hover{ transform: translateY(-5px); box-shadow: 0 10px 24px rgba(122,74,35,.18); }
+  @keyframes riseIn{ from{ opacity:0; transform: translateY(12px); } to{ opacity:1; transform: translateY(0); } }
+  .ctag{
+    display:inline-block; margin:0 0 8px; padding:2px 10px;
+    border-radius:999px; font-size:12px; font-weight:600; line-height:1.6;
+    background:var(--brown-light); color:var(--brown); outline:none;
+  }
+  .ctag.teal{background:#e6f6f2; color:var(--green)}
+  .ctag.purple{background:#efeafb; color:var(--purple)}
+  .ctag.orange{background:#fdf0e0; color:var(--orange)}
+  .ctag.pink{background:#fbeaf2; color:var(--pink)}
+  .ctag.blue{background:#e8f1fb; color:var(--blue)}
+  .card .badge{
+    position:absolute; top:10px; right:12px; width:26px; height:26px; border-radius:50%;
+    background:var(--brown-light); color:var(--brown); font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center; border:1px solid var(--line);
+  }
+  .card h3{margin:0 30px 8px 0; font-size:15px; font-weight:600; outline:none; color:var(--brown); line-height:1.4}
+  .card p{margin:0; outline:none; white-space:pre-wrap}
+  .tip{
+    background:var(--brown-light); border-left:3px solid var(--line);
+    border-radius:10px; padding:8px 10px; margin-top:10px; font-size:13px; outline:none; white-space:pre-wrap;
+  }
+  .tip b{color:var(--brown)}
+  .seminar{
+    background:#fff8f0; border:1px dashed var(--orange); border-radius:10px;
+    padding:8px 10px; margin-top:8px; font-size:12.5px; outline:none; white-space:pre-wrap;
+  }
+  .seminar b{color:var(--orange)}
+  .note{
+    background:#fbf4ea; border:1px dashed var(--brown); border-radius:18px;
+    padding:14px 18px; margin-top:24px;
+  }
+  .note h3{margin:0 0 6px; color:var(--brown); font-size:15px; outline:none}
+  .note p{margin:0; outline:none; white-space:pre-wrap}
+  [contenteditable]:focus{background:#f3e7d8; border-radius:6px; box-shadow:0 0 0 2px var(--brown-mid)}
+  .ph:empty:before{content:attr(data-ph); color:#bbb}
+  @media print{
+    body{background:#fff}
+    .toolbar{display:none}
+    .wrap{margin:0 auto}
+    .card,.note{break-inside:avoid; box-shadow:none; animation:none}
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <span class="t-title">下午茶研讨 · HRBP 活动锦囊</span>
+    <span class="save" id="saveTip">已自动保存</span>
+    <button onclick="exportHTML()">导出 HTML</button>
+    <button onclick="window.print()">打印 / PDF</button>
+    <button class="ghost" onclick="resetDoc()">重置</button>
+  </div>
+
+  <div class="wrap">
+    <div class="head" id="doc">
+      <h1 contenteditable="true" class="ph" data-ph="标题">下午茶研讨 · 小·频·轻</h1>
+      <div class="sub" contenteditable="true" class="ph" data-ph="副标题">把"轻互动"和"轻研讨"揉进茶歇：让人愿意来、来了有话说</div>
+      <div class="meta-row">
+        <span class="meta">节奏：<b>每周 / 双周</b></span>
+        <span class="meta">规模：<b>8–12 人</b></span>
+        <span class="meta">人均成本：<b>低</b></span>
+        <span class="meta">核心：<b>随机 + 轻 + 带话题</b></span>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title"><div class="num">☕</div><h2 contenteditable="true" class="ph" data-ph="小标题">一、轻互动茶歇（破冰 / 减压 / 破圈）</h2></div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="badge">1</div>
+            <div class="ctag" contenteditable="true">🎲 破冰</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">主题盲盒茶歇</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">每周换主题（家乡零食 / 低卡局 / 咖啡品鉴），每人带 1 样分享。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>控 8–12 人、跨组混搭，破冰成本最低。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>分享时顺带抛 1 个轻议题（如"本月最卡的一件事"），自然引出话题。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">2</div>
+            <div class="ctag teal" contenteditable="true">💡 轻互动</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">5 分钟微分享</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">每人带 1 个效率技巧或 AI 用法，当场演示。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>提前收 topic 避免冷场；可当「创新池」轻量预演。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>演示后留 3 分钟"谁来用、卡在哪"，把分享变小型共创。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">3</div>
+            <div class="ctag purple" contenteditable="true">💬 倾听</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">树洞茶话 / 限定吐槽</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">15min 匿名吐槽痛点，HRBP 现场记"待办"。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>只听不辩，会后给回应闭环——否则变纯发泄，信任反降。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>吐槽收敛成"TOP3 真痛点"，当场认领 1 个改进行动。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">6</div>
+            <div class="ctag orange" contenteditable="true">🎯 破圈</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">盲盒配对茶</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">抽签随机组 2–3 人喝茶，强制破圈。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>必须抽签而非自愿，否则永远熟人抱团。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>每对抽到 1 个互问卡（"你最想跨岗了解什么"），喝完互换答案。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">7</div>
+            <div class="ctag pink" contenteditable="true">🔁 反向带教</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">反向导师茶</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">新人教老兵 AI / 新工具用法（Reverse Mentoring）。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>主题钉死（如"教我用 Copilot 写周报"），别泛成闲聊。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>教完当场列"老兵下周试用 1 次"承诺，轻量化落地。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">8</div>
+            <div class="ctag teal" contenteditable="true">🤝 互助</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">技能交换市集</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">每人贴"我能教__ / 我想学__"，现场配对。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>提前收卡，现场直接约，不冷场。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>配对后顺开"技能缺口盘点"，沉淀成内部学习地图。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">9</div>
+            <div class="ctag" contenteditable="true">🧘 解压</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">解压手作局</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">流体熊 / 拼图 / 捏陶土 30min 放空。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>选"不用动脑"的，别变成又一个 KPI 任务。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>手作时放"无主题闲聊"权，反而最容易听到真声音。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">10</div>
+            <div class="ctag purple" contenteditable="true">📌 常驻</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">常驻情绪墙</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">便利贴贴"本周最爽 / 最烦 1 件事"，HRBP 周更回应。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>做成常驻墙比一次性茶话有积累，也方便抓真痛点。</div>
+            <div class="seminar ph" contenteditable="true" data-ph="研讨落点"><b>研讨落点：</b>墙上的高频词每周挑 1 个做"本周轻研讨"选题。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title"><div class="num">🍵</div><h2 contenteditable="true" class="ph" data-ph="小标题">二、轻研讨模块（带话题的茶歇）</h2></div>
+        <div class="grid">
+
+          <div class="card">
+            <div class="badge">1</div>
+            <div class="ctag blue" contenteditable="true">📝 议题池</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">滚动议题卡</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">建一个"可聊清单"（流程痛点 / AI 用法 / 跨岗协作），每次茶歇抽 1 张当主线。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>议题卡由 HRBP 维护，避免现场现想冷场。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">2</div>
+            <div class="ctag orange" contenteditable="true">⏱ 限时圆桌</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">20min 圆桌快研</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">1 个主持人 + 1 张议题卡，20 分钟"各说 1 招 + 认领 1 行动"，不写长报告。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>严格计时，到点收 1 条行动，否则变闲聊。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">3</div>
+            <div class="ctag teal" contenteditable="true">🔄 闭环</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">下期回音壁</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">上期认领的行动，下期茶歇开头 3 分钟"做到没、卡哪了"快速回音。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>有闭环才有下次 participation，否则信任流失。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">4</div>
+            <div class="ctag pink" contenteditable="true">🧩 世界咖啡</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">迷你世界咖啡</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">3 轮换桌、每桌 1 议题，每轮 8 分钟，最后 1 桌汇总。轻量版"世界咖啡"。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>控制在 30 分钟内，人少就 2 桌 2 轮，别硬套大流程。</div>
+          </div>
+
+          <div class="card">
+            <div class="badge">5</div>
+            <div class="ctag purple" contenteditable="true">🗳 投票</div>
+            <h3 contenteditable="true" class="ph" data-ph="标题">贴纸投票选真问题</h3>
+            <p contenteditable="true" class="ph" data-ph="描述">把候选议题贴墙上，每人 3 张贴纸投"最想聊"，得票高的下期开圆桌。</p>
+            <div class="tip ph" contenteditable="true" data-ph="tip"><b>Tip：</b>投票即报名，避免"大家都说想聊但没人来"。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="note">
+        <h3 contenteditable="true" class="ph" data-ph="标题">怎么选（一句话）</h3>
+        <p contenteditable="true" class="ph" data-ph="内容">轻互动让人"愿意来"，轻研讨让人"来了有话说"——先破冰再带话题，别一上来就开会。</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const KEY = 'afternoon_tea_hrbp_v1';
+  const doc = document.getElementById('doc');
+  const tip = document.getElementById('saveTip');
+  const saved = localStorage.getItem(KEY);
+  if (saved) doc.innerHTML = saved;
+  let timer;
+  doc.addEventListener('input', () => {
+    tip.textContent = '保存中…';
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      localStorage.setItem(KEY, doc.innerHTML);
+      tip.textContent = '已自动保存';
+    }, 400);
+  });
+  function exportHTML(){
+    const clone = doc.innerHTML;
+    const css = document.querySelector('style').innerHTML;
+    const html = '<!doctype html><html lang="zh"><head><meta charset="utf-8"><title>下午茶研讨</title><style>'+css+'</style></head><body><div class="wrap">'+clone+'</div></body></html>';
+    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '下午茶研讨.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+  function resetDoc(){
+    if (confirm('清空当前内容并恢复初始模板？')){
+      localStorage.removeItem(KEY);
+      location.reload();
+    }
+  }
+</script>
+
+<div style="max-width:1080px;margin:44px auto 0;padding:0 20px 40px;text-align:center;">
+  <a href="index.html" style="color:#7a4a23;font-weight:600;font-size:13px;text-decoration:none;">← 回到总目录</a>
+  ｜
+  <a href="openday.html" style="color:#7a4a23;font-weight:600;font-size:13px;text-decoration:none;">Open Day 互动设计 ↗</a>
+</div>
+<footer style="text-align:center;padding:22px 16px;font-size:13px;color:#8a8f98;border-top:1px solid rgba(0,0,0,.08);">
+  📌 本页由 <b style="color:#5b6ef5;">yitong</b> 沉淀整理 · 文化活动知识库 ｜ 可编辑模板 · 改动仅存本地浏览器
+</footer>
+</body>
+</html>
