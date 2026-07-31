@@ -54,6 +54,39 @@
   .backlink:hover{filter:brightness(1.1)}
   footer{text-align:center;color:var(--sub);font-size:12px;margin-top:40px;padding:0 20px;line-height:1.9}
   a{color:var(--teal)}
+  /* 责任人名单 */
+  .roster{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+  .roster-row{display:flex;align-items:center;gap:14px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fafdff;transition:.2s}
+  .roster-row:hover{transform:translateX(4px);box-shadow:0 6px 18px rgba(80,40,120,.1);border-color:#cfc6ee}
+  .roster-row .who{flex-shrink:0}
+  .role-desc{font-size:13.5px;color:var(--sub)}
+  /* 滚动进度条 */
+  #progress{position:fixed;top:0;left:0;height:4px;width:0;z-index:70;
+    background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple));transition:width .12s ease-out}
+  /* 入场动画 */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  /* 事项卡片交互 */
+  .item{position:relative;cursor:pointer;transition:box-shadow .2s,transform .2s,border-color .2s}
+  .item:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(80,40,120,.14);border-color:#cfc6ee}
+  .item .box{flex-shrink:0;position:relative;width:20px;height:20px;margin:3px 12px 0 0;border-radius:6px;border:2px solid #c9bfe8;background:#fff;transition:.2s}
+  .item.done{background:#eefcf3;border-color:#a6e3c4}
+  .item.done .box{background:var(--teal);border-color:var(--teal)}
+  .item.done .box::after{content:"✓";color:#fff;font-size:14px;font-weight:800;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .item.done .txt{color:#6b8a78;text-decoration:line-through;text-decoration-color:#9ccdb3}
+  /* 阶段导航 */
+  .flow.nav .chip{text-decoration:none;cursor:pointer;transition:.2s}
+  .flow.nav .chip:hover{filter:brightness(1.07);transform:translateY(-1px)}
+  /* 计数浮标 */
+  #counter{position:fixed;top:14px;right:16px;z-index:70;background:#fff;border:1px solid var(--line);
+    border-radius:30px;padding:7px 16px;font-size:13px;font-weight:800;color:var(--purple);
+    box-shadow:0 8px 22px rgba(80,40,120,.14)}
+  /* 回到顶部 */
+  #totop{position:fixed;right:16px;bottom:20px;z-index:70;width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+    background:linear-gradient(120deg,var(--teal),var(--blue));color:#fff;font-size:20px;font-weight:800;
+    box-shadow:0 8px 22px rgba(20,184,166,.4);opacity:0;pointer-events:none;transition:opacity .25s,transform .2s}
+  #totop.show{opacity:1;pointer-events:auto}
+  #totop:hover{filter:brightness(1.08);transform:scale(1.06)}
 </style>
 </head>
 <body>
@@ -65,34 +98,33 @@
 
 <main class="doc">
 
-  <div class="note">本页为员工大会全周期「注意事项（责任到人版）」，与 SOP / Rundown / Checklist <b>互补不替代</b>：SOP 定流程、Rundown 定分钟级剧本、Checklist 定打勾防漏，本页聚焦「容易翻车的点 + 谁盯」。⚠️ 为高风险项，务必落到人。</div>
+  <div class="note">本页为员工大会全周期「注意事项（责任到人版）」，聚焦「容易翻车的点 + 谁盯」。⚠️ 为高风险项，务必落到人。<b>点击任意事项可标记为「已确认」</b>，现场前逐项过一遍更稳。</div>
 
   <div class="chunk">
-    <h2>责任人图例</h2>
-    <div class="note legend">
-      <div class="legend-grid">
-        <span><i class="dot" style="background:var(--purple)"></i><b>主 PM</b>：总负责、对外决策</span>
-        <span><i class="dot" style="background:var(--blue)"></i><b>子 PM</b>：模块执行、落地推进</span>
-        <span><i class="dot" style="background:var(--teal)"></i><b>供应商</b>：设备 / 视频 / 现场支持</span>
-        <span><i class="dot" style="background:var(--orange)"></i><b>控台</b>：音视频 / 会议 / 抽奖技术</span>
-        <span><i class="dot" style="background:var(--pink)"></i><b>秘书</b>：预定 / 排位 / 物料协调</span>
-        <span><i class="dot" style="background:var(--gold)"></i><b>业务接口人</b>：异地同学驱动</span>
-      </div>
+    <h2>责任人名单</h2>
+    <div class="note legend">以下 6 类角色贯穿全周期，每条事项右侧标注对应责任人。点名到人，避免现场推诿。</div>
+    <div class="roster">
+      <div class="roster-row"><span class="who pm">主 PM</span><span class="role-desc">总负责、对外决策</span></div>
+      <div class="roster-row"><span class="who spm">子 PM</span><span class="role-desc">模块执行、落地推进</span></div>
+      <div class="roster-row"><span class="who sup">供应商</span><span class="role-desc">设备 / 视频 / 现场支持</span></div>
+      <div class="roster-row"><span class="who ctrl">控台</span><span class="role-desc">音视频 / 会议 / 抽奖技术</span></div>
+      <div class="roster-row"><span class="who sec">秘书</span><span class="role-desc">预定 / 排位 / 物料协调</span></div>
+      <div class="roster-row"><span class="who biz">业务接口人</span><span class="role-desc">异地同学驱动</span></div>
     </div>
   </div>
 
   <div class="chunk">
-    <h2>阶段划分（总览）</h2>
-    <div class="flow">
-      <span class="chip">A 筹备期（≥30 天）</span><span class="arrow">→</span>
-      <span class="chip">B 彩排前·设备调试</span><span class="arrow">→</span>
-      <span class="chip">C 彩排中（≥2 次）</span><span class="arrow">→</span>
-      <span class="chip">D 现场当天</span><span class="arrow">→</span>
-      <span class="chip">E 会后</span>
+    <h2>阶段划分（总览）<span class="sub">点击阶段可跳转</span></h2>
+    <div class="flow nav">
+      <a class="chip" href="#phase-a">A 筹备期（≥30 天）</a><span class="arrow">→</span>
+      <a class="chip" href="#phase-b">B 彩排前·设备调试</a><span class="arrow">→</span>
+      <a class="chip" href="#phase-c">C 彩排中（≥2 次）</a><span class="arrow">→</span>
+      <a class="chip" href="#phase-d">D 现场当天</a><span class="arrow">→</span>
+      <a class="chip" href="#phase-e">E 会后</a>
     </div>
   </div>
 
-  <div class="chunk">
+  <div class="chunk" id="phase-a">
     <h2>A. 筹备期 <span class="sub">提前至少 30 天</span></h2>
 
     <div class="item"><div class="txt">（如有）供应商招标：提前招标、多选几家对比</div><div class="whos"><span class="who pm">主 PM</span><span class="who spm">子 PM</span></div></div>
@@ -106,7 +138,7 @@
     <div class="item"><div class="txt">留念物料：准备报纸机等留念物料，创造朋友圈互动、提高大会声量</div><div class="whos"><span class="who spm">子 PM</span><span class="who sec">秘书</span></div></div>
   </div>
 
-  <div class="chunk">
+  <div class="chunk" id="phase-b">
     <h2>B. 彩排前 · 设备调试 <span class="sub">供应商完成</span></h2>
 
     <div class="item warn"><div class="txt"><span class="flag">⚠️</span>设备全调试：网络 / 音效 / 灯光 / 翻页笔 / 耳麦 在彩排前调试好</div><div class="whos"><span class="who sup">供应商</span><span class="who ctrl">控台</span></div></div>
@@ -118,7 +150,7 @@
     <div class="item"><div class="txt">合同保护：合同条款加保护条款，避免供应商现场失误</div><div class="whos"><span class="who pm">主 PM</span></div></div>
   </div>
 
-  <div class="chunk">
+  <div class="chunk" id="phase-c">
     <h2>C. 彩排中 <span class="sub">≥ 2 次正式彩排，供应商须真正熟悉流程</span></h2>
 
     <div class="item warn"><div class="txt"><span class="flag">⚠️</span>全员彩排：所有相关人员（含音效老师）都来彩排，严格把控时间和流程</div><div class="whos"><span class="who pm">主 PM</span><span class="who sup">供应商</span></div></div>
@@ -131,7 +163,7 @@
     <div class="item"><div class="txt">暖场设计：准备搞笑 / 轻松视频等暖场形式，活跃融合期稍紧的气氛</div><div class="whos"><span class="who spm">子 PM</span></div></div>
   </div>
 
-  <div class="chunk">
+  <div class="chunk" id="phase-d">
     <h2>D. 现场活动当天 <span class="sub">重点复核</span></h2>
 
     <div class="item warn"><div class="txt"><span class="flag">⚠️</span>现场人员责任到人：现场工作人员责任到人，以免现场推诿</div><div class="whos"><span class="who pm">主 PM</span></div></div>
@@ -143,7 +175,7 @@
     <div class="item"><div class="txt">抽奖复核：本地系统就绪；实体箱再次核对物料无混料 / 重名</div><div class="whos"><span class="who ctrl">控台</span><span class="who spm">子 PM</span></div></div>
   </div>
 
-  <div class="chunk">
+  <div class="chunk" id="phase-e">
     <h2>E. 会后</h2>
 
     <div class="item"><div class="txt">声量延续：用报纸机等留念物料推动朋友圈互动、回顾传播</div><div class="whos"><span class="who spm">子 PM</span><span class="who sec">秘书</span></div></div>
@@ -156,5 +188,32 @@
 <footer style="margin-top:56px;padding:20px 16px;text-align:center;font-size:13px;letter-spacing:.04em;color:#8a8f98;border-top:1px solid rgba(0,0,0,.08);background:transparent;">
   📌 本页由 <b style="color:#5b6ef5;">yitong</b> 沉淀整理 · 文化活动知识库
 </footer>
+
+<div id="progress"></div>
+<div id="counter">已确认 0 / 0</div>
+<button id="totop" title="回到顶部">↑</button>
+<script>
+(function(){
+  var items=document.querySelectorAll('.item');
+  var total=items.length, counter=document.getElementById('counter');
+  function upd(){counter.textContent='已确认 '+document.querySelectorAll('.item.done').length+' / '+total;}
+  upd();
+  items.forEach(function(it){
+    var box=document.createElement('span');box.className='box';
+    it.insertBefore(box,it.firstChild);
+    it.addEventListener('click',function(){it.classList.toggle('done');upd();});
+  });
+  var bar=document.getElementById('progress'),top=document.getElementById('totop');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    top.classList.toggle('show',h.scrollTop>400);
+  },{passive:true});
+  top.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.chunk').forEach(function(el){el.classList.add('reveal');io.observe(el);});
+})();
+</script>
 </body>
 </html>
