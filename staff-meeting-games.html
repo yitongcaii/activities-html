@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>员工大会 · 暖场互动库</title>
+<style>
+  :root{
+    --bg:#f6f4ff; --card:#ffffff; --ink:#1f1733; --sub:#6b6280;
+    --purple:#7c3aed; --pink:#ec4899; --accent:#06b6d4; --line:#ece8f7;
+    --orange:#fb923c; --teal:#14b8a6; --blue:#6366f1; --gold:#f59e0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+    background:radial-gradient(1100px 520px at 12% -8%,#e9fbff 0%,var(--bg) 52%) fixed,var(--bg);
+    color:var(--ink);line-height:1.7;padding-bottom:70px}
+  header{text-align:center;padding:50px 20px 42px;color:#fff;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 55%,var(--purple));
+    clip-path:polygon(0 0,100% 0,100% 88%,0 100%);box-shadow:0 14px 36px rgba(20,184,166,.2)}
+  header .kicker{font-size:13px;opacity:.9;letter-spacing:2px}
+  header h1{font-size:30px;font-weight:800;margin-top:8px;text-shadow:0 4px 18px rgba(0,0,0,.16)}
+  header p{opacity:.95;font-size:14px;margin-top:8px}
+  .doc{max-width:960px;margin:0 auto;padding:30px 22px 0}
+  .chunk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-top:22px;box-shadow:0 6px 20px rgba(80,40,120,.06)}
+  .chunk h2{font-size:21px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .chunk h2::before{content:"";width:6px;height:22px;border-radius:3px;background:linear-gradient(var(--teal),var(--blue))}
+  .chunk h3{font-size:16px;font-weight:700;margin:16px 0 6px;color:#1f5b53}
+  .note{background:#e6faf6;border-left:4px solid var(--teal);padding:12px 16px;border-radius:10px;color:#1f5b53;font-size:13.5px;margin:12px 0}
+  .note.warn{background:#fff3e6;border-left-color:var(--orange);color:#7a4b16}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;overflow:hidden;border-radius:12px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:linear-gradient(120deg,var(--teal),var(--blue));color:#fff;font-weight:700}
+  tbody tr:nth-child(even){background:#fafdff}
+  .card7{border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:14px 16px;margin:12px 0;background:#fafdff}
+  .card7 h4{font-size:15px;font-weight:800;color:var(--teal);margin-bottom:4px}
+  .card7 .meta{font-size:12px;color:var(--sub);margin-bottom:6px}
+  .card7 b{color:#1f5b53}
+  .backlink{display:inline-block;margin:26px 0 0;color:#fff;text-decoration:none;font-size:13px;font-weight:700;
+    background:linear-gradient(120deg,var(--teal),var(--blue));padding:9px 18px;border-radius:30px}
+  .backlink:hover{filter:brightness(1.1)}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:40px;padding:0 20px;line-height:1.9}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">员工大会 · 暖场互动库</div>
+  <h1>员工大会 · 暖场互动库</h1>
+  <p>黑话翻译官 / 领导才艺秀 / 轻量竞技 / AI·新工具上手</p>
+</header>
+
+<main class="doc">
+  <div class="note">来源：文化活动创意素材（员工大会暖场 / 破冰 / 茶歇互动）。标注 🌿 经验推断、📌 案例参考。本页仅作环节素材库，不替代员工大会 SOP / Rundown。</div>
+
+  <div class="chunk">
+    <h2>一、经典环节（全员破冰 / 拉近距离）</h2>
+
+    <div class="card7">
+      <h4>黑话翻译官</h4>
+      <div class="meta">定位：跨岗理解神器 ｜ 时长 10–15min ｜ 🌿</div>
+      <ol>
+        <li>收集各部门技术黑话 / 缩写（如「对齐」「拉通」「灰度」）</li>
+        <li>让非本岗同学把它翻成段子 / 表情包 / 大白话</li>
+        <li>现场投票「最离谱翻译」，颁奖</li>
+      </ol>
+      <p><b>产出</b>：一笑读懂的术语表 ｜ <b>坑点</b>：变吐槽大会→强调「翻译」非「diss」；提前筛敏感词</p>
+    </div>
+
+    <div class="card7">
+      <h4>领导才艺秀</h4>
+      <div class="meta">定位：反向展示领导不为人知的一面，拉近距离 ｜ 时长 10–20min ｜ 🌿</div>
+      <ol>
+        <li>提前私聊领导要「隐藏技能」（乐器 / 运动 / 厨艺 / 冷知识）</li>
+        <li>给主题 + 轻量彩排，配梗图 PPT</li>
+        <li>台下实时弹幕 / 举牌互动</li>
+      </ol>
+      <p><b>产出</b>：可传播金句 / 短视频素材 ｜ <b>坑点</b>：领导放不开→提前给「允许自黑」许可；别变念稿</p>
+    </div>
+  </div>
+
+  <div class="chunk">
+    <h2>二、轻量竞技（茶歇暖场 / 团队对抗）</h2>
+    <p>低门槛、快节奏，适合大会茶歇或开场热身，不挑体能、男女皆宜。</p>
+    <table>
+      <thead><tr><th>项目</th><th>玩法要点</th><th>适配</th></tr></thead>
+      <tbody>
+        <tr><td>乒乓球接力</td><td>拍／球传递或对打，茶歇快节奏</td><td>茶歇破冰</td></tr>
+        <tr><td>翻杯子 + 井字棋</td><td>翻水瓶组井字棋，叠加拔河</td><td>团队对抗</td></tr>
+        <tr><td>投乒乓球到水杯</td><td>谁投中多算赢</td><td>个人 / 小队</td></tr>
+        <tr><td>击鼓传花 + 翻水瓶</td><td>传花停→翻水瓶挑战</td><td>全员热身</td></tr>
+        <tr><td>气球推倒扣的水杯</td><td>用气球推倒扣的水杯，推得远算赢</td><td>趣味竞技</td></tr>
+        <tr><td>足球</td><td>小型对抗</td><td>户外团建</td></tr>
+        <tr><td>划龙舟</td><td>大型全员，河边／水上</td><td>大型周边（可选）</td></tr>
+      </tbody>
+    </table>
+    <div class="note warn">通用坑点：规则说不清→开赛前 30 秒 demo；器材不够→按人数备 1.5 倍；纯竞技易冷落旁观者→设「啦啦队」小任务。</div>
+  </div>
+
+  <div class="chunk">
+    <h2>三、AI·新工具上手（创新池拆入）</h2>
+    <p>推新工具 / 新流程时，用「找茬」「考能力」让全员在玩中上手，比宣讲有效。</p>
+
+    <div class="card7">
+      <h4>轻体验（预埋「坑」的测试沙箱）</h4>
+      <div class="meta">定位：给真实场景的测试沙箱，让用户「找茬」即学 ｜ 适用：推新工具 / 新流程 ｜ 🌿</div>
+      <ol>
+        <li>在测试项目里预埋不规范项（如错配权限、漏填字段）</li>
+        <li>参与同学来「找茬」，找出即算过关</li>
+        <li>复盘：为什么这些是坑、正确做法是什么</li>
+      </ol>
+      <p><b>产出</b>：一份「新手避坑清单」 ｜ <b>坑点</b>：坑太隐蔽→给提示梯度；只找不学→必须带复盘</p>
+    </div>
+
+    <div class="card7">
+      <h4>景题（给现象，选处置方案）</h4>
+      <div class="meta">定位：考「会不会用工具 / 方法」，而非背记 ｜ 适用：能力检验 ｜ 🌿</div>
+      <ol>
+        <li>给故障 / 异常现象（如某指标突降）</li>
+        <li>选项含正确方案 + 典型误判</li>
+        <li>解析讲透：为什么对、为什么错、该用哪个工具</li>
+      </ol>
+      <p><b>产出</b>：能力热力图（哪类误判最多） ｜ <b>坑点</b>：选项太明显→混入「看起来对其实错」的干扰项；不解析→等于猜题</p>
+    </div>
+  </div>
+
+  <div class="chunk">
+    <h2>四、选用建议</h2>
+    <div class="note"><b>开场破冰</b>：黑话翻译官 / 轻量竞技<br/><b>中场调节</b>：领导才艺秀（松情绪）<br/><b>新工具宣贯</b>：轻体验 + 景题（玩中上手）<br/><b>茶歇</b>：投乒乓 / 气球推杯 / 翻杯井字棋等快节奏小赛</div>
+  </div>
+
+  <a class="backlink" href="index.html">← 回到总目录</a>
+</main>
+
+<footer style="margin-top:56px;padding:20px 16px;text-align:center;font-size:13px;letter-spacing:.04em;color:#8a8f98;border-top:1px solid rgba(0,0,0,.08);background:transparent;">
+  📌 本页由 <b style="color:#5b6ef5;">yitong</b> 沉淀整理 · 文化活动知识库
+</footer>
+</body>
+</html>
