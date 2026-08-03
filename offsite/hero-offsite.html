@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>英雄风云录 · OFFSITE 方案海报</title>
+<style>
+  :root{
+    --paper:#f0e4cc;
+    --paper-warm:#e8d8b8;
+    --ink:#2d1a10;
+    --ink-light:#5a3f28;
+    --vermilion:#c24a32;
+    --verm-dark:#9e3522;
+    --gold:#b89438;
+    --gold-light:#d4b062;
+    --line-a:#c4aa7a;
+    --line-b:#a68b58;
+    --kai:"STKaiti","KaiTi","楷体","Kaiti SC",serif;
+    --sans:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Heiti SC","Source Han Sans SC",sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:#14100c;
+    font-family:var(--sans);
+    color:var(--ink);
+    padding:20px 12px 50px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .poster{
+    position:relative;
+    max-width:900px; margin:0 auto;
+    overflow:hidden;
+    /* 底层：宣纸底色 */
+    background:linear-gradient(175deg,#f5ead0 0%,#ede0c2 40%,#e5d4ad 70%,#dcc99c 100%);
+    border:1px solid var(--line-b);
+    box-shadow:0 18px 55px rgba(0,0,0,.65);
+  }
+
+  /* ══════ 顶部画卷头：水墨山水背景 ══════ */
+  .hero-art{
+    position:relative;
+    height:300px;
+    overflow:hidden;
+    /* 模拟水墨山水：朱砂红山+墨韵流云 */
+    background:
+      /* 云雾泛白 */
+      radial-gradient(ellipse at 25% 20%, rgba(255,250,240,.78) 0%, transparent 40%),
+      radial-gradient(ellipse at 72% 45%, rgba(255,250,235,.62) 0%, transparent 36%),
+      radial-gradient(ellipse at 48% 80%, rgba(255,245,225,.56) 0%, transparent 34%),
+      /* 金色流光 */
+      radial-gradient(ellipse at 60% 22%, rgba(184,148,56,.30) 0%, transparent 26%),
+      radial-gradient(ellipse at 15% 75%, rgba(212,176,98,.16) 0%, transparent 28%),
+      /* 墨韵暗流 */
+      radial-gradient(ellipse at 82% 12%, rgba(45,26,16,.42) 0%, transparent 34%),
+      radial-gradient(ellipse at 8% 35%, rgba(90,63,40,.28) 0%, transparent 30%),
+      radial-gradient(ellipse at 88% 88%, rgba(90,63,40,.22) 0%, transparent 26%),
+      /* 朱砂红山峦 */
+      linear-gradient(160deg,#c24a32 0%,#d66a4a 18%,#c85a38 35%,transparent 52%),
+      linear-gradient(200deg,#b33d28 0%,#cf6148 15%,#ab3522 34%,transparent 46%),
+      linear-gradient(170deg,#a83020 0%,#c04832 12%,#9a2818 28%,transparent 44%),
+      /* 宣纸底 */
+      linear-gradient(180deg,#ede0c2,#e0cca0);
+  }
+  /* 墨韵流动 SVG 纹理层 */
+  .ink-layer{
+    position:absolute; inset:0; pointer-events:none;
+    opacity:.55;
+  }
+  .ink-layer svg{ width:100%; height:100%; }
+
+  /* 头部文字浮于画卷之上 */
+  .header-overlay{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
+    z-index:2; padding:34px 24px 24px;
+  }
+  .tag{
+    display:inline-block; letter-spacing:.18em; font-size:12px; font-weight:bold;
+    color:#fff; background:rgba(194,74,50,.82);
+    border-radius:2px; padding:5px 16px;
+    margin-bottom:14px; text-shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  h1{
+    margin:4px 0; font-size:42px; letter-spacing:.15em;
+    font-family:var(--kai);
+    color:#fff; text-shadow:
+      0 2px 8px rgba(0,0,0,.55),
+      0 0 40px rgba(184,148,56,.25);
+  }
+  h2{
+    margin:0; font-size:36px; letter-spacing:.16em;
+    font-family:var(--kai);
+    color:#f2d98c; text-shadow:0 2px 10px rgba(0,0,0,.65), 0 0 30px rgba(184,148,56,.35);
+    font-weight:bold;
+  }
+
+  /* 流程条（画卷底部） */
+  .flow-bar{
+    position:absolute; bottom:0; left:0; right:0;
+    z-index:3;
+    background:rgba(13,8,4,.72);
+    backdrop-filter:blur(3px);
+    padding:12px 20px;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:3px 1px;
+    font-size:14px; color:var(--paper); letter-spacing:.02em;
+  }
+  .flow-bar b{ color:var(--gold-light); font-weight:bold; padding:0 2px; }
+  .flow-bar .lead{ color:var(--gold-light); font-weight:bold; margin-right:6px; letter-spacing:.04em; }
+  .flow-bar .arrow{ color:var(--line-a); opacity:.6; font-size:13px; }
+
+  /* ══════ 正文区 ══════ */
+  .body{
+    position:relative;
+    padding:32px 36px 44px;
+    z-index:2;
+  }
+  .frame{
+    border-top:3px double var(--line-a);
+    padding-top:24px;
+  }
+
+  /* 环节卡 */
+  .step{
+    margin:20px 0; padding:16px 18px 18px;
+    background:rgba(250,242,222,.42);
+    border:1px solid var(--line-a);
+    border-left:4px solid var(--vermilion);
+    position:relative;
+  }
+  .step-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:8px; }
+  .step-no{
+    font-size:21px; color:#fff; background:var(--vermilion);
+    width:34px; height:34px; line-height:34px; text-align:center;
+    border-radius:50%; flex:0 0 auto; box-shadow:0 2px 0 var(--verm-dark);
+  }
+  .step h3{ margin:0; font-size:19px; letter-spacing:.04em; color:var(--ink); }
+  .quote{
+    margin:10px 0 10px; padding:10px 14px;
+    font-family:var(--kai);
+    background:rgba(194,74,50,.07);
+    border-left:3px solid var(--vermilion);
+    font-size:14.5px; line-height:1.86; color:var(--ink-light);
+  }
+  .pt{ margin:6px 0; padding-left:2px; font-size:14.5px; line-height:1.8; color:var(--ink); }
+  .pt b{ color:var(--verm-dark); }
+  .tips{
+    margin-top:8px; font-size:13px; color:var(--ink-light);
+    background:rgba(90,63,40,.08); border:1px dashed var(--line-b);
+    padding:7px 11px;
+  }
+  .tips b{ color:var(--verm-dark); }
+
+  /* 门派网格 */
+  .sects{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:9px; margin:10px 0 2px; }
+  .sect{
+    border:1px solid var(--line-a); background:rgba(252,246,230,.55);
+    padding:8px 10px; font-size:13px; line-height:1.58;
+  }
+  .sect .nm{ font-weight:bold; color:var(--verm-dark); font-size:14.5px; }
+  .sect .hd{ color:var(--ink-light); font-size:12px; margin-top:2px; }
+
+  /* 勋章 */
+  .medals{ display:flex; flex-wrap:wrap; gap:9px; margin:10px 0 2px; }
+  .medal{
+    border:1.5px solid var(--vermilion); color:var(--verm-dark);
+    padding:7px 11px; font-size:13.5px; border-radius:3px;
+    background:rgba(194,74,50,.05); text-align:center; min-width:115px;
+  }
+  .medal b{ display:block; font-size:14.5px; margin-bottom:2px; }
+
+  /* 物料 */
+  .materials{
+    margin-top:24px; padding:16px 18px;
+    border:2px solid var(--line-b); background:rgba(250,242,222,.38);
+  }
+  .materials h3{ margin:0 0 10px; font-size:18px; color:var(--verm-dark); letter-spacing:.08em; text-align:center; }
+  .mat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mat{ display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.72; }
+  .mat .ico{ flex:0 0 auto; }
+  .mat b{ color:var(--verm-dark); }
+
+  /* 印章 */
+  .seal-stamp{
+    position:absolute; right:28px; bottom:28px; width:88px; height:88px;
+    transform:rotate(-10deg); opacity:.92; z-index:4;
+  }
+
+  footer{
+    text-align:center; margin-top:22px; font-size:12.5px; color:var(--ink-light);
+    letter-spacing:.12em; border-top:1px solid var(--line-a);
+    padding-top:12px;
+  }
+
+  @media (max-width:640px){
+    .poster{ max-width:100%; }
+    .hero-art{ height:220px; }
+    h1{ font-size:30px; } h2{ font-size:20px; }
+    .body{ padding:20px 14px 32px; }
+    .mat-grid{ grid-template-columns:1fr; }
+    .seal-stamp{ width:68px; height:68px; right:14px; bottom:14px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="poster">
+
+  <!-- ══ 水墨画卷头部 ══ -->
+  <div class="hero-art">
+    <!-- 墨韵流动 SVG -->
+    <div class="ink-layer">
+      <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <!-- 流云 / 墨韵曲线 -->
+        <defs>
+          <filter id="ink-blur"><feGaussianBlur stdDeviation="4"/></filter>
+        </defs>
+        <!-- 主墨流 -->
+        <path d="M-20,120 C150,40 280,190 450,110 S650,-10 800,80 S950,140 940,220"
+              fill="none" stroke="#2d1a10" stroke-width="3" stroke-linecap="round" filter="url(#ink-blur)" opacity=".45"/>
+        <path d="M-30,170 C120,260 320,130 500,200 S700,90 850,180 S950,250 940,310"
+              fill="none" stroke="#2d1a10" stroke-width="2.5" stroke-linecap="round" filter="url(#ink-blur)" opacity=".32"/>
+        <path d="M0,50 C200,-20 400,120 600,30 S820,100 920,40"
+              fill="none" stroke="#5a3f28" stroke-width="2" stroke-linecap="round" filter="url(#ink-blur)" opacity=".28"/>
+        <path d="M50,240 C250,290 420,210 620,270 S820,220 920,260"
+              fill="none" stroke="#5a3f28" stroke-width="2" stroke-linecap="round" filter="url(#ink-blur)" opacity=".22"/>
+        <!-- 金色流光 -->
+        <path d="M100,80 C250,10 380,100 520,60 S720,10 820,70"
+              fill="none" stroke="#b89438" stroke-width="1.5" stroke-linecap="round" filter="url(#ink-blur)" opacity=".35"/>
+        <!-- 朱砂点缀 -->
+        <circle cx="750" cy="195" r="3.5" fill="#c24a32" opacity=".5"/>
+        <circle cx="180" cy="95" r="2.5" fill="#c24a32" opacity=".4"/>
+        <circle cx="550" cy="145" r="2.8" fill="#c24a32" opacity=".35"/>
+        <!-- 飞白笔触 -->
+        <g opacity=".18">
+          <text x="120" y="60" font-family="STKaiti,KaiTi,serif" font-size="38" fill="#2d1a10" transform="rotate(-8,120,60)">风云</text>
+          <text x="680" y="115" font-family="STKaiti,KaiTi,serif" font-size="28" fill="#2d1a10" opacity=".5" transform="rotate(6,680,115)">论剑</text>
+        </g>
+      </svg>
+    </div>
+    <!-- 文字叠加 -->
+    <div class="header-overlay">
+      <div class="tag">offsite活动方案demo</div>
+      <h1>浙江湖州 · 莫干湖</h1>
+      <h2>英雄风云录</h2>
+    </div>
+    <!-- 流程条 -->
+    <div class="flow-bar">
+      <span class="lead">活动流程：</span>
+      <b>结盟</b><span class="arrow">→</span>
+      <b>论剑</b><span class="arrow">→</span>
+      <b>立誓</b><span class="arrow">→</span>
+      <b>混沌</b><span class="arrow">→</span>
+      <b>大同</b><span class="arrow">→</span>
+      <b>授勋</b><span class="arrow">→</span>
+      <b>篝火夜谈</b>
+    </div>
+  </div>
+
+  <!-- ══ 正文内容 ══ -->
+  <div class="body">
+    <div class="frame">
+
+    <!-- ① -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">①</span><h3>信物入场 · 入场发"英雄令"</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>签到时发一张带火漆印 / 图腾的英雄令卡，卡上写："持此令者，今日结同盟"。<span style="color:var(--vermilion)">」</span></div>
+    </section>
+
+    <!-- ② -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">②</span><h3>开场号令，英雄论剑</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>各位英雄，风云际会，一纸英雄令已到你手。单打独斗无人能破，唯有结同盟、亮真身，方能通关。持令者，向前——找到与你同频的盟友，立下你的名号！<span style="color:var(--vermilion)">」</span></div>
+      <div class="pt">● 所有人根据自己的<b>性格特点 / 长处</b>来介绍自己的"绝活"和弱点。</div>
+      <div class="pt">● 毛遂自荐当盟主，宣讲发英雄帖，招募其他人加入（一般一个盟 10 人左右，满 15 人即封）。</div>
+      <div class="tips"><b>Tips：</b>最好让新人 / 职级偏低者来自荐盟主。</div>
+    </section>
+
+    <!-- ③ -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">③</span><h3>血誓结盟，合照"立誓"</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>今日武林盟大会，不论文职武职、新秀长老，皆以英雄令入座。先由各派掌门露底，再议共御之敌，末了共订盟约、论功行赏。有案卷者，此刻呈上。<span style="color:var(--vermilion)">」</span></div>
+      <div class="pt">● 门派选好英雄后，所有门派根据成员的特点和喜好给自己在江湖选一个定位：</div>
+      <div class="sects">
+        <div class="sect"><div class="nm">青龙教</div><div>沉稳如山</div><div class="hd">隐藏命题：青龙出海，稳守八方</div></div>
+        <div class="sect"><div class="nm">白虎堂</div><div>锐不可当</div><div class="hd">隐藏命题：白虎出闸，所向披靡</div></div>
+        <div class="sect"><div class="nm">凤凰教</div><div>一呼百应</div><div class="hd">隐藏命题：战略对齐，大同天下</div></div>
+        <div class="sect"><div class="nm">逍遥教</div><div>创新应变</div><div class="hd">隐藏命题：不拘一格，别具新意</div></div>
+        <div class="sect"><div class="nm">朱雀门</div><div>燎原破局</div><div class="hd">隐藏命题：朱雀焚天，照见暗雷</div></div>
+      </div>
+      <div class="pt">● 摆一个同盟 pose / 碰拳合照，树战旗，立 slogan。</div>
+    </section>
+
+    <!-- ④ -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">④</span><h3>局势混沌，各门派如何抉择</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>风云突变，局势混沌！外敌未明，诸教当决。本座现抛四道江湖悬案，各教掌门率众议出应对之策；他教听之，一可"添砖"、二可"反对"——无评价区，只为共破此局。若有暗雷难言，焚密函一封，本座代呈，绝不追主。<span style="color:var(--vermilion)">」</span></div>
+      <div class="pt"><b>情境一：</b>「合规（数据安全法 / 个保法 / 出海）对我们的产品路线意味着什么约束与机会？」</div>
+      <div class="pt"><b>情境二：</b>「我们最大的潜在雷点（技术债 / 客户过度承诺 / 合规缺口）是哪个？」</div>
+      <div class="pt"><b>情境三：</b>「如果给 2 周不做 KPI，你最想试什么？」</div>
+      <div class="pt"><b>情境四：</b>「如果部门是一个"门派"，我们想成为武林里哪一派？」</div>
+    </section>
+
+    <!-- ⑤ -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">⑤</span><h3>统一目标，定军心</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>乱局既定，当思大同。诸教之志，终归一体——天下武林，本是一家。且看邻教之长，补本教之短……二次树旗！若有英雄不认同此间规矩，可自下英雄帖，转会他教——来去自由，方显同盟本色。旗起，同心！<span style="color:var(--vermilion)">」</span></div>
+      <div class="pt">● 对比其他门派的实力，找出本门派可提升之处；二次树战旗，不认同者可转会他教。</div>
+    </section>
+
+    <!-- ⑥ -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">⑥</span><h3>局势终成定局，武林盟主花落谁家</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>烽火散尽，论功行赏！今日本座不独断——各教以"论功令"共荐，票高者亲授令牌勋章，全凭众议，不凭位阶。唯服众者得盟主之位，执本届武林发言人印。授勋——开始！<span style="color:var(--vermilion)">」</span></div>
+      <div class="pt">● 投票选出盟主门派与盟主本人，票数最高者担任并分享理由；盟主作总结致辞。</div>
+      <div class="pt">● 论功令共荐 + 盟主宣分发令牌 / 受勋：</div>
+      <div class="medals">
+        <div class="medal"><b>运筹国手</b>想法获认同最多的大侠</div>
+        <div class="medal"><b>护法金刚</b>安全意识最重的大侠</div>
+        <div class="medal"><b>坦荡侠</b>最直率坦然的大侠</div>
+      </div>
+    </section>
+
+    <!-- ⑦ -->
+    <section class="step">
+      <div class="step-head"><span class="step-no">⑦</span><h3>武林篝火会（夜晚放下门派成见，扪心自问）</h3></div>
+      <div class="quote"><span style="color:var(--vermilion)">「</span>白日的旗鼓暂歇，今夜只留篝火与真心。卸下教派、卸下官职，你只是围火而坐的江湖客。举"过"牌便可沉默，今夜不拍照、不记录，言出火灭，无人追究。火起，言开。<span style="color:var(--vermilion)">」</span></div>
+      <div class="pt">● <b>门派互评：</b>分享与其他门派的异同，提出学习启示或改进建议。</div>
+      <div class="pt">● <b>自我定位：</b>你在武林盟中的定位和等级，为什么？</div>
+      <div class="pt">● <b>如果你是盟主：</b>你想下什么军令状，想要达成什么目的？</div>
+    </section>
+
+    <!-- 物料 -->
+    <div class="materials">
+      <h3>◆ 物 料 ◆</h3>
+      <div class="mat-grid">
+        <div class="mat">
+          <svg class="ico" width="32" height="32" viewBox="0 0 34 34"><rect x="6" y="3" width="22" height="28" rx="3" fill="#c24a32" stroke="#9e3522" stroke-width="1.5"/><rect x="10" y="7" width="14" height="20" rx="1.5" fill="#f0e4cc"/><circle cx="17" cy="6.5" r="2" fill="#2d1a10"/></svg>
+          <div><b>英雄令牌：</b>竹木令牌 / 铜牌挂红绳。</div>
+        </div>
+        <div class="mat">
+          <svg class="ico" width="32" height="32" viewBox="0 0 34 34"><rect x="5" y="6" width="24" height="22" rx="2" fill="#f0e4cc" stroke="#a68b58" stroke-width="1.5"/><circle cx="24" cy="11" r="3.5" fill="#c24a32"/><path d="M9 13h12M9 17h14M9 21h10" stroke="#5a3f28" stroke-width="1.2"/></svg>
+          <div><b>同盟令：</b>亚克力或卡纸 + 火漆手作。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 印章 -->
+    <svg class="seal-stamp" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#c24a32" stroke-width="4"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#c24a32" stroke-width="1.5"/>
+      <text x="50" y="40" font-size="22" fill="#c24a32" text-anchor="middle" font-family="STKaiti,KaiTi,serif" font-weight="bold">英雄</text>
+      <text x="50" y="66" font-size="22" fill="#c24a32" text-anchor="middle" font-family="STKaiti,KaiTi,serif" font-weight="bold">风云</text>
+    </svg>
+
+    <footer>浙江湖州 · 莫干湖 英雄风云录 · OFFSITE 执行方案</footer>
+
+    </div><!-- /frame -->
+  </div><!-- /body -->
+
+</main>
+</body>
+</html>
