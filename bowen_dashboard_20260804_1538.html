@@ -1,0 +1,429 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>博闻培训综合看板</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+body{background:#eef1f6;color:#1f2933;padding:24px 28px;max-width:1180px;margin:0 auto}
+h1{font-size:24px;color:#1f3a5f;margin-bottom:4px}
+.sub{color:#7b8794;font-size:13px;margin-bottom:22px}
+.section{margin:26px 0 4px}
+.sec-title{font-size:14px;font-weight:700;color:#1f3a5f;letter-spacing:1px;padding:0 0 8px 12px;border-left:4px solid #0e63b3;margin-bottom:14px}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.kpi{flex:1;min-width:160px;background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.kpi .n{font-size:26px;font-weight:700;color:#0e63b3}
+.kpi .t{font-size:12px;color:#7b8794;margin-top:4px}
+.kpi .d{font-size:11px;color:#9aa5b1;margin-top:2px}
+.card{background:#fff;border-radius:12px;padding:18px 20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid #eef2f7}
+.card.core{border-left:4px solid #0e63b3}
+.card.muted{background:#f3f5f8;box-shadow:none}
+.card h2{font-size:16px;color:#1f3a5f;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card h2 .tag{font-size:11px;background:#0e63b3;color:#fff;padding:2px 8px;border-radius:10px}
+.card h2 .fold{margin-left:auto;cursor:pointer;color:#9aa5b1;font-size:13px;user-select:none;transition:transform .15s;padding:2px 6px}
+.card h2 .fold:hover{color:#1f3a5f}
+.card.collapsed > *:not(h2){display:none}
+.card .note{font-size:12px;color:#9aa5b1;margin-bottom:14px}
+.row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+.lab{width:120px;flex-shrink:0;color:#3e4c59;text-align:right}
+.track{flex:1;background:#eef2f7;border-radius:6px;height:14px;overflow:hidden}
+.fill{height:100%;border-radius:6px}
+.val{width:200px;flex-shrink:0;color:#52606d;font-size:12px}
+.hl{background:#e8f1fb;border-left:4px solid #0e63b3;padding:10px 14px;border-radius:6px;margin:10px 0;font-size:13px;color:#0a4d8c}
+.grid2{display:flex;gap:18px;flex-wrap:wrap}.grid2>.card{flex:1;min-width:300px;margin-bottom:0}
+.grid3{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}.grid3>.card{flex:1;min-width:280px;margin-bottom:0}.grid-lr{display:flex;gap:18px;flex-wrap:wrap;align-items:stretch}.grid-lr>.card{flex:1;min-width:300px}.col-stack{display:flex;flex-direction:column;gap:18px;flex:1;min-width:300px}.col-stack>.card{margin-bottom:0}
+.ghead{font-size:13px;font-weight:600;color:#1f3a5f;margin:12px 0 4px}.gsub{font-weight:400;color:#9aa5b1;font-size:11px}
+.foot{font-size:11px;color:#9aa5b1;margin-top:8px;line-height:1.7}
+.big2{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 6px}
+.big{flex:1;min-width:120px;background:#f7f9fc;border-radius:10px;padding:14px 16px;text-align:center}
+.big .bn{font-size:32px;font-weight:700;line-height:1.1}
+.bd-hero{background:#0a4d8c;border-radius:12px;padding:18px 22px;color:#fff;margin:6px 0 14px;box-shadow:0 4px 16px rgba(10,77,140,.18)}
+.bd-h{font-size:13px;opacity:.85;margin-bottom:12px;letter-spacing:1px}
+.bd-grid{display:flex;gap:14px;flex-wrap:wrap}
+.bd-cell{flex:1;min-width:120px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px;text-align:center}
+.bd-cell .bn{font-size:34px;font-weight:800;color:#0e63b3;line-height:1.1}
+.bd-cell .bl{font-size:12px;opacity:.88;margin-top:6px;line-height:1.5}
+.cmp{background:#f7f9fc;border:1px solid #eef2f7;border-radius:10px;padding:12px 14px;margin:10px 0}
+.cmp-h{font-size:13px;font-weight:700;color:#1f3a5f;margin-bottom:10px}
+.cm-row{display:flex;align-items:center;gap:10px;margin:9px 0}
+.cm-lab{width:80px;flex-shrink:0;font-size:12px;color:#52606d;text-align:right}
+.cm-bars{flex:1;display:flex;flex-direction:column;gap:5px}
+.cm-bar{display:flex;align-items:center;gap:8px}
+.cm-tag{width:40px;font-size:10px;color:#9aa5b1;flex-shrink:0;text-align:right}
+.cm-track{flex:1;background:#eef2f7;border-radius:5px;height:16px;overflow:hidden}
+.cm-fill{height:100%;border-radius:5px;width:0;transition:width 1s ease}
+.cm-fill.cur{background:#0e63b3}
+.cm-fill.ref{background:#1f3a5f;opacity:.5}
+.cm-val{width:62px;flex-shrink:0;font-size:12px;font-weight:600;text-align:right;color:#3e4c59}
+.cm-delta{width:74px;flex-shrink:0;text-align:right;font-size:13px;font-weight:700}
+.cm-delta.up{color:#0a7d3b}.cm-delta.down{color:#c0392b}.cm-delta.flat{color:#9aa5b1}
+.big .btag{display:inline-block;margin-top:6px;font-size:11px;background:#fff1f0;color:#c0392b;padding:2px 8px;border-radius:10px}
+.big .bt{font-size:12px;color:#7b8794;margin-top:6px}
+.sub2{font-size:12px;color:#9aa5b1;margin-top:6px;line-height:1.7}
+.hero{background:#0a4d8c;color:#fff;border-radius:14px;padding:24px 30px;margin-bottom:22px;box-shadow:0 4px 16px rgba(10,77,140,.22)}
+.hero .hn{font-size:44px;font-weight:800;line-height:1.05;color:#fff}
+.hero .ht{font-size:16px;margin-top:8px;font-weight:600}
+.hero .hd{font-size:12px;margin-top:6px;opacity:.88;line-height:1.6}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.tbl th{text-align:left;color:#9aa5b1;font-weight:500;padding:6px 8px;border-bottom:1px solid #eef2f7}
+.tbl th.sortable{cursor:pointer;user-select:none}
+.tbl th.sortable:hover{color:#1f3a5f}
+.tbl th .ar{font-size:9px;opacity:.55;margin-left:3px}
+.tbl td{padding:6px 8px;border-bottom:1px solid #f5f7fa;color:#3e4c59}
+.tbl td.n{text-align:right;font-weight:600;color:#1f3a5f}
+.tbl tr.alert td{background:#fff1f0}
+.tbl tr.alert td:first-child{color:#c0392b;font-weight:700}
+.row.alert{background:#fff1f0;border-radius:6px}
+.row.alert .lab{color:#c0392b;font-weight:700}
+.spark{width:100%;height:64px;margin:6px 0 2px;display:block}
+.spark-x{display:flex;margin-top:5px}
+.spark-x .sx{text-align:center;font-size:9px;line-height:1.15;white-space:nowrap;overflow:visible}
+.spark .bar{cursor:pointer;transition:opacity .12s}
+.spark .bar:hover{opacity:1}
+.tip{position:fixed;pointer-events:none;background:rgba(31,41,51,.94);color:#fff;font-size:12px;padding:8px 11px;border-radius:8px;line-height:1.6;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:99;display:none;max-width:240px}
+.tip b{color:#bcd9f5}
+@media (max-width:720px){
+  body{padding:14px}
+  .lab{width:84px;font-size:12px}
+  .val{width:118px;font-size:11px}
+  .grid2{gap:14px}
+  .grid2>.card{min-width:100%}
+  .grid3{gap:14px}
+  .grid3>.card{min-width:100%}
+  .grid-lr{gap:14px}
+  .grid-lr>.card,.col-stack{min-width:100%}
+  .big{min-width:90px}
+  .hero .hn{font-size:34px}
+}
+
+:root{--navy:#0a4d8c;--blue:#0e63b3;--blue-d:#0a3f73;--orange:#0e63b3;--cyan:#0e63b3;--violet:#0e63b3;--pink:#0a4d8c;--lime:#36c46d;--amber:#ffb020;--bg:#eef5fb;--ink:#1f2d3d;--sub:#7a8aa0;--line:#d8e4f0}
+*{box-sizing:border-box;margin:0;padding:0;font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif}
+body{background:var(--bg);color:var(--ink);padding:24px 28px;max-width:1180px;margin:0 auto}
+h1{font-size:25px;color:var(--navy);margin-bottom:4px;letter-spacing:.5px}
+.sub{color:var(--sub);font-size:13px;margin-bottom:22px}
+.section{margin:28px 0 4px}
+.sec-title{font-size:14px;font-weight:800;color:#fff;background:var(--blue);display:inline-block;padding:6px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:1px;box-shadow:0 4px 12px rgba(14,99,179,.25)}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.kpi{flex:1;min-width:160px;background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 6px 18px rgba(14,99,179,.08);border:1px solid var(--line);transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:var(--blue)}
+.kpi:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(14,99,179,.16)}
+.kpi .n{font-size:28px;font-weight:800;color:var(--blue)}
+.kpi .t{font-size:12px;color:var(--sub);margin-top:4px}
+.kpi .d{font-size:11px;color:#aab0c0;margin-top:2px}
+.card{background:#fff;border-radius:18px;padding:18px 20px;margin-bottom:18px;box-shadow:0 6px 18px rgba(10,77,140,.07);border:1px solid var(--line);transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(10,77,140,.12)}
+.card.core{border-left:5px solid var(--blue)}
+.card.muted{background:#f4f9fd;box-shadow:none}
+.card h2{font-size:16px;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card h2 .tag{font-size:11px;background:var(--blue);color:#fff;padding:2px 10px;border-radius:12px;box-shadow:0 2px 6px rgba(14,99,179,.3)}
+.card h2 .fold{margin-left:auto;cursor:pointer;color:#aab0c0;font-size:13px;user-select:none;transition:transform .15s,color .15s;padding:2px 6px}
+.card h2 .fold:hover{color:var(--blue);transform:scale(1.15)}
+.card.collapsed > *:not(h2){display:none}
+.card .note{font-size:12px;color:#9aa3b5;margin-bottom:14px}
+.row{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
+.lab{width:120px;flex-shrink:0;color:#3e4c59;text-align:right}
+.track{flex:1;background:#e3ebf3;border-radius:8px;height:14px;overflow:hidden}
+.fill{height:100%;border-radius:8px;background:var(--blue)}
+.val{width:200px;flex-shrink:0;color:#52606d;font-size:12px}
+.hl{background:#eaf3fb;border-left:4px solid var(--blue);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:13px;color:#1d4e87}
+.grid2{display:flex;gap:18px;flex-wrap:wrap}.grid2>.card{flex:1;min-width:300px;margin-bottom:0}
+.grid3{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}.grid3>.card{flex:1;min-width:280px;margin-bottom:0}.grid-lr{display:flex;gap:18px;flex-wrap:wrap;align-items:stretch}.grid-lr>.card{flex:1;min-width:300px}.col-stack{display:flex;flex-direction:column;gap:18px;flex:1;min-width:300px}.col-stack>.card{margin-bottom:0}
+.ghead{font-size:13px;font-weight:700;color:var(--navy);margin:12px 0 4px}.gsub{font-weight:400;color:#aab0c0;font-size:11px}
+.foot{font-size:11px;color:#aab0c0;margin-top:8px;line-height:1.7}
+.big2{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 6px}
+.big{flex:1;min-width:120px;background:#fff;border-radius:14px;padding:14px 16px;text-align:center;border:1px solid var(--line)}
+.big .bn{font-size:32px;font-weight:800;line-height:1.1;color:var(--blue)}
+.bd-hero{background:var(--blue);border-radius:16px;padding:18px 22px;color:#fff;margin:6px 0 14px;box-shadow:0 8px 24px rgba(14,99,179,.3)}
+.bd-h{font-size:13px;opacity:.9;margin-bottom:12px;letter-spacing:1px}
+.bd-grid{display:flex;gap:14px;flex-wrap:wrap}
+.bd-cell{flex:1;min-width:120px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:14px;text-align:center}
+.bd-cell .bn{font-size:34px;font-weight:800;color:#fff;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+.bd-cell .bl{font-size:12px;opacity:.92;margin-top:6px;line-height:1.5}
+.cmp{background:#f4f9fd;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+.cmp-h{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:10px}
+.cm-row{display:flex;align-items:center;gap:10px;margin:9px 0}
+.cm-lab{width:80px;flex-shrink:0;font-size:12px;color:#52606d;text-align:right}
+.cm-bars{flex:1;display:flex;flex-direction:column;gap:5px}
+.cm-bar{display:flex;align-items:center;gap:8px}
+.cm-tag{width:40px;font-size:10px;color:#aab0c0;flex-shrink:0;text-align:right}
+.cm-track{flex:1;background:#e3ebf3;border-radius:6px;height:16px;overflow:hidden}
+.cm-fill{height:100%;border-radius:6px;width:0;transition:width 1s ease}
+.cm-fill.cur{background:#ff7a45}
+.cm-fill.ref{background:#9cc4e6;opacity:.7}
+.cm-val{width:62px;flex-shrink:0;font-size:12px;font-weight:600;text-align:right;color:#ff7a45}
+.cm-delta{width:74px;flex-shrink:0;text-align:right;font-size:13px;font-weight:800}
+.cm-delta.up{color:var(--lime)}.cm-delta.down{color:#e0414f}.cm-delta.flat{color:#aab0c0}
+.big .btag{display:inline-block;margin-top:6px;font-size:11px;background:#eaf3fb;color:#1d4e87;padding:2px 10px;border-radius:12px}
+.big .bt{font-size:12px;color:#8a93a6;margin-top:6px}
+.sub2{font-size:12px;color:#9aa3b5;margin-top:6px;line-height:1.7}
+.rt-row{display:flex;gap:12px;margin:2px 0 10px;flex-wrap:wrap}
+.rt{flex:1;min-width:120px;background:#eef5fb;border:1px solid #d4e6f7;border-radius:9px;padding:9px 12px}
+.rt .rl{font-size:11px;font-weight:600;color:#ff7a45;letter-spacing:.5px}
+.rt .rv{font-size:19px;font-weight:800;color:#ff7a45;margin-top:2px}
+.rt .rv small{font-size:11px;font-weight:600;color:#9aa3b5}
+.hero{background:var(--blue);color:#fff;border-radius:18px;padding:24px 30px;margin-bottom:22px;box-shadow:0 8px 26px rgba(14,99,179,.3)}
+.hero .hn{font-size:44px;font-weight:800;line-height:1.05;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.12)}
+.hero .ht{font-size:16px;margin-top:8px;font-weight:600}
+.hero .hd{font-size:12px;margin-top:6px;opacity:.92;line-height:1.6}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+.tbl th{text-align:left;color:#7a8aa0;font-weight:600;padding:8px;background:#eef5fb;border-bottom:2px solid var(--line)}
+.tbl th.sortable{cursor:pointer;user-select:none}
+.tbl th.sortable:hover{color:var(--blue)}
+.tbl th .ar{font-size:9px;opacity:.55;margin-left:3px}
+.tbl td{padding:8px;border-bottom:1px solid #e8eff6;color:#3e4c59}
+.tbl td.n{text-align:right;font-weight:700;color:var(--navy)}
+.tbl tr.alert td{background:#fff3f6}
+.tbl tr.alert td:first-child{color:#e0414f;font-weight:800}
+.row.alert{background:#fff3f6;border-radius:8px}
+.row.alert .lab{color:#e0414f;font-weight:800}
+.spark{width:100%;height:64px;margin:6px 0 2px;display:block}
+.spark-x{display:flex;margin-top:5px}
+.spark-x .sx{text-align:center;font-size:9px;line-height:1.15;white-space:nowrap;overflow:visible}
+.spark .bar{cursor:pointer;transition:opacity .12s,transform .12s}
+.spark .bar:hover{opacity:1;transform:scaleY(1.06)}
+.tip{position:fixed;pointer-events:none;background:rgba(10,77,140,.95);color:#fff;font-size:12px;padding:8px 11px;border-radius:10px;line-height:1.6;box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:99;display:none;max-width:240px}
+.tip b{color:#bcdcff}
+[contenteditable="true"]{outline:2px dashed #7fb3e0;border-radius:6px;transition:outline-color .15s;cursor:text}
+[contenteditable="true"]:hover{outline-color:var(--blue);background:rgba(14,99,179,.06)}
+[contenteditable="true"]:focus{outline:2px solid var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(14,99,179,.12)}
+#editbar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;gap:12px;align-items:center;background:var(--blue-d);color:#fff;font-size:13px;padding:9px 14px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+#editbar button{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;font-weight:600;transition:transform .12s,box-shadow .12s}
+#editbar button:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,99,179,.4)}
+#editbar button.ghost{background:rgba(255,255,255,.18)}
+#editbar button:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+#editbar .hint{opacity:.92;margin-right:auto}
+body{padding-top:46px}
+/* 归一化：压过主CSS残留的橙/渐变/SVG橙柱，确保整体纯湛蓝 */
+.sec-title{border-left:none!important}
+.hero,.bd-hero{background:var(--blue)!important}
+.spark .bar{fill:var(--blue)!important}
+.kpi .n{color:#ff7a45!important}
+.card.core{border-left-color:var(--blue)!important}
+.card h2 .tag{background:#ff7a45!important;color:#fff!important}
+.hl{border-left-color:#ff7a45!important;background:#fff7ed!important;color:#9c4221!important}
+.bd-cell .bn{color:#ff7a45!important}
+.bd-cell{border:1px solid rgba(255,255,255,.25)!important}
+.tip b{color:#ff7a45!important}
+.cm-fill.cur{background:#ff7a45!important}
+@media (max-width:720px){
+  body{padding:14px}
+  .lab{width:84px;font-size:12px}
+  .val{width:118px;font-size:11px}
+  .grid2{gap:14px}.grid2>.card{min-width:100%}
+  .grid3{gap:14px}.grid3>.card{min-width:100%}
+  .grid-lr{gap:14px}.grid-lr>.card,.col-stack{min-width:100%}
+  .big{min-width:90px}
+  .hero .hn{font-size:34px}
+}
+</style></head><body>
+<div id="editbar" contenteditable="false">
+  <span class="hint">✏️ 点任意文字编辑 → 改完点【保存为文件】下载留存（正式版）。WorkBuddy 预览若无法下载，请用系统浏览器打开 http://127.0.0.1:8123/bowen_dashboard.html</span>
+  <button onclick="bwDownload()">💾 保存为文件</button>
+  <button class="ghost" onclick="bwReset()">↺ 恢复默认</button>
+</div>
+
+<h1 contenteditable="true">博闻培训2025-2026看板</h1>
+
+<div class="hero">
+<div style="font-size:32px;font-weight:800;line-height:1.15;color:#fff" contenteditable="true">培训覆盖 508 人，渗透率 77.3%</div>
+<div style="font-size:12px;margin-top:6px;opacity:.9;line-height:1.6" contenteditable="true">部门约 77% 的人至少参与过一次培训</div>
+<div class="hd" contenteditable="true">看板抓取从2025.3-2026.7，集团正式&amp;云智正式的培训效果</div>
+</div>
+
+<div class="kpis">
+<div class="kpi"><div class="n" contenteditable="true">课程平均评分：4.66</div><div class="t" contenteditable="true">2026年课程评分：4.61</div><div class="d" contenteditable="true"><span style="color: rgb(122, 138, 160); font-size: 12px;">2025年课程评分：4.69</span></div></div>
+<div class="kpi"><div class="n" contenteditable="true">讲师平均评分：4.73</div><div class="t" contenteditable="true">2026年讲师评分：7.72</div><div class="d" contenteditable="true"><span style="color: rgb(122, 138, 160); font-size: 12px;">2025年讲师评分：7.74</span></div></div>
+<div class="kpi"><div class="n" contenteditable="true">培训组织评分：4.83</div><div class="t" contenteditable="true">2026年组织评分：4.85</div><div class="d" contenteditable="true"><span style="color: rgb(122, 138, 160); font-size: 12px;">2025年组织评分：4.82</span></div></div>
+
+</div>
+
+<div class="section">
+<div class="sec-title" contenteditable="true">培训覆盖与深度</div>
+<div class="grid2">
+<div class="card core">
+<h2 contenteditable="true">① 培训覆盖&amp;参与人次<span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+
+<div class="big2">
+  <div class="big"><div class="bn" style="color:#ff7a45" contenteditable="true">77.3%(去重)</div><div class="bt" contenteditable="true">覆盖率/渗透率（去重）</div><div class="bt" contenteditable="true">508 人 / 总 657 人</div></div>
+  <div class="big"><div class="bn" style="color:#ff7a45" contenteditable="true">174.6%(含重)</div><div class="bt" contenteditable="true">参与人次（含重复），人均参与1.75次</div><div class="bt" contenteditable="true">1147 人次/ 657 人</div></div>
+</div>
+<div class="sub2" contenteditable="true">去重后培训参与 <b>508</b> 人，渗透率 <b>77.3%</b>&nbsp;<div>—— 部门里约 4/5 的人参与过一次培训</div></div>
+<div class="note" contenteditable="true"><div><br></div>覆盖/渗透率=去重参与人数/总人数<br>参与人次=总人次/总人数<br></div>
+</div>
+<div class="card core">
+<h2 contenteditable="true">② 学员投入情况<span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+
+<div class="big2">
+  <div class="big"><div class="bn" style="color:#ff7a45" contenteditable="true">2.08(场/期)</div><div class="bt" contenteditable="true"><span style="color: rgb(154, 163, 181); text-align: start;">2025年</span>人均投入</div><div class="bt" contenteditable="true">平均每期2-3场培训</div></div>
+  <div class="big"><div class="bn" style="color:#ff7a45" contenteditable="true">1.97(场/期)</div><div class="bt" contenteditable="true"><span style="color: rgb(154, 163, 181); text-align: start;">2026年</span>人均投入</div><div class="bt" contenteditable="true">平均每期2-3场培训</div></div>
+</div>
+<div class="sub2" contenteditable="true">学员投入情况：<div><span style="color: rgb(170, 176, 192); font-size: 11px;">每期参与时长 ≤30min：75人（10.7%）</span></div><div><span style="color: rgb(170, 176, 192); font-size: 11px;">每期参与</span><span style="color: rgb(170, 176, 192); font-size: 11px;">时长&nbsp;</span><span style="color: rgb(170, 176, 192); font-size: 11px;">30-60min</span><span style="color: rgb(170, 176, 192); font-size: 11px;">：243人（34.8%）</span></div><div><div style="color: rgb(170, 176, 192); font-size: 11px;">每期参与 ≥60min：380人（54.4%）</div></div></div>
+<div class="note" contenteditable="true"><div><br>*时长空白，时长&gt;2h均不进公式（异常情况）</div></div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-title" contenteditable="true">部门覆盖 / 中心覆盖 / 司龄覆盖 / 员工类型 / 主题覆盖</div>
+<div class="grid-lr">
+<div class="card core">
+<h2 contenteditable="true">部门与中心覆盖（去重） <span class="tag">核心</span> <span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+<div class="note" contenteditable="true">部门覆盖率=去重人数 / 部门总人数<br>中心覆盖率=去重人数&nbsp;/ 中心总人数<br>中心在册合计 二部 261 / 三部 393<br><div>⚠️ 三部较部门在册 396 少 3 人，未归入列出的具体中心）<br>部分中心 &gt;100% 为参训含往期离职/跨部门中心归因，封顶显示 100%</div></div>
+<div class="big2"><div class="big"><div class="bn" style="color:#1f3a5f" data-dec="1" data-suffix="%" contenteditable="true">100.0%</div><div class="bt" contenteditable="true">安全产品二部覆盖率（去重）</div><div class="bt" contenteditable="true">去重 288 人 / 261 人</div><div class="btag" contenteditable="true">参训含往期离职 · 覆盖率封顶100%</div></div><div class="big"><div class="bn" style="color:#1f3a5f" data-dec="1" data-suffix="%" contenteditable="true">55.6%</div><div class="bt" contenteditable="true">安全产品三部覆盖率（去重）</div><div class="bt" contenteditable="true">去重 220 人 /&nbsp; 396 人</div></div></div>
+<div class="foot" contenteditable="true"><br></div>
+<div class="ghead" contenteditable="true">安全产品二部<span class="gsub" contenteditable="true">　总人数 261 人 · 去重参与 288 人 · 中心覆盖率 100.0%</span></div>
+<table class="tbl"><tbody><tr><th>中心</th><th style="text-align:right">去重参与</th><th style="text-align:right">覆盖率(占中心在册)</th></tr><tr><td contenteditable="true">海外业务组</td><td class="n" contenteditable="true">13 人</td><td class="n" contenteditable="true">144.4%</td></tr><tr><td contenteditable="true">业务风控产品中心</td><td class="n" contenteditable="true">79 人</td><td class="n" contenteditable="true">133.9%</td></tr><tr><td contenteditable="true">金融风控产品中心</td><td class="n" contenteditable="true">66 人</td><td class="n" contenteditable="true">108.2%</td></tr><tr><td contenteditable="true">产品管理组</td><td class="n" contenteditable="true">9 人</td><td class="n" contenteditable="true">100.0%</td></tr><tr><td contenteditable="true">风控平台中心</td><td class="n" contenteditable="true">75 人</td><td class="n" contenteditable="true">98.7%</td></tr><tr><td contenteditable="true">合规技术支持中心</td><td class="n" contenteditable="true">46 人</td><td class="n" contenteditable="true">97.9%</td></tr></tbody></table>
+<div class="ghead" contenteditable="true">安全产品三部<span class="gsub" contenteditable="true">　总人数 393 人 · 去重参与 219 人 · 中心覆盖率 55.7%</span></div>
+<table class="tbl"><tbody><tr><th>中心</th><th style="text-align:right">去重参与</th><th style="text-align:right">覆盖率(占中心在册)</th></tr><tr><td contenteditable="true">产品管理组</td><td class="n" contenteditable="true">4 人</td><td class="n" contenteditable="true">80.0%</td></tr><tr><td contenteditable="true">网络安全产品中心</td><td class="n" contenteditable="true">41 人</td><td class="n" contenteditable="true">68.3%</td></tr><tr><td contenteditable="true">云平台安全中心</td><td class="n" contenteditable="true">13 人</td><td class="n" contenteditable="true">56.5%</td></tr><tr><td contenteditable="true">主机安全产品中心</td><td class="n" contenteditable="true">45 人</td><td class="n" contenteditable="true">54.9%</td></tr><tr><td contenteditable="true">云安全技术中心</td><td class="n" contenteditable="true">45 人</td><td class="n" contenteditable="true">53.6%</td></tr><tr><td contenteditable="true">解决方案中心</td><td class="n" contenteditable="true">39 人</td><td class="n" contenteditable="true">51.3%</td></tr><tr><td contenteditable="true">云安全能力中心</td><td class="n" contenteditable="true">22 人</td><td class="n" contenteditable="true">51.2%</td></tr><tr><td contenteditable="true">入侵应急组</td><td class="n" contenteditable="true">10 人</td><td class="n" contenteditable="true">50.0%</td></tr></tbody></table>
+</div>
+<div class="col-stack">
+<div class="card">
+<h2 contenteditable="true">⑤ 司龄覆盖（去重） <span class="tag">关键发现</span> <span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+<div class="note" contenteditable="true">覆盖率=去重人数/各司龄段总人数（408/199/48/2）<br></div>
+<table class="tbl"><tbody><tr><th>司龄段</th><th style="text-align:right">去重人数</th><th style="text-align:right">覆盖率(占段总)</th><th style="text-align:right">参与强度(次/人)</th></tr><tr class="alert"><td contenteditable="true">5年以下</td><td class="n" contenteditable="true">289 人</td><td class="n" contenteditable="true">70.8%</td><td class="n" contenteditable="true">2.18 次/人</td></tr><tr><td contenteditable="true">5-10年</td><td class="n" contenteditable="true">170 人</td><td class="n" contenteditable="true">85.4%</td><td class="n" contenteditable="true">2.47 次/人</td></tr><tr><td contenteditable="true">10-20年</td><td class="n" contenteditable="true">47 人</td><td class="n" contenteditable="true">97.9%</td><td class="n" contenteditable="true">1.98 次/人</td></tr><tr><td contenteditable="true">20年以上</td><td class="n" contenteditable="true">2 人</td><td class="n" contenteditable="true">100.0%</td><td class="n" contenteditable="true">1.50 次/人</td></tr></tbody></table>
+</div>
+<div class="card">
+<h2 contenteditable="true">⑥ 员工类型覆盖（去重） <span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+<div class="note" contenteditable="true">覆盖率=去重人数/各用工类型总人数（云智271 / 集团386）<br>参与强度=总人次/正式总657人（人均约 1.75 场，含复参与）<br></div>
+<table class="tbl"><tbody><tr><th>用工类型</th><th style="text-align:right">去重人数</th><th style="text-align:right">覆盖率(占各自总)</th><th style="text-align:right">参与强度(次/人)</th></tr><tr><td contenteditable="true">云智正式</td><td class="n" contenteditable="true">187 人</td><td class="n" contenteditable="true">69.0%</td><td class="n" contenteditable="true">2.35 次/人</td></tr><tr><td contenteditable="true">集团正式</td><td class="n" contenteditable="true">321 人</td><td class="n" contenteditable="true">83.2%</td><td class="n" contenteditable="true">2.20 次/人</td></tr></tbody></table>
+</div>
+<div class="card">
+<h2 contenteditable="true">⑦ 主题分布 <span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+<table class="tbl"><tbody><tr><th class="sortable" onclick="sortTbl(this)">主题标签 <span class="ar">⇅</span></th><th style="text-align:right" class="sortable" onclick="sortTbl(this)">场次 <span class="ar">⇅</span></th><th style="text-align:right" class="sortable" onclick="sortTbl(this)">占比 <span class="ar">⇅</span></th></tr><tr><td contenteditable="true">安全技术</td><td class="n" contenteditable="true">20</td><td class="n" contenteditable="true">36%</td></tr><tr><td contenteditable="true">AI大模型</td><td class="n" contenteditable="true">12</td><td class="n" contenteditable="true">22%</td></tr><tr><td contenteditable="true">To B产品</td><td class="n" contenteditable="true">8</td><td class="n" contenteditable="true">15%</td></tr><tr><td contenteditable="true">产品技术</td><td class="n" contenteditable="true">7</td><td class="n" contenteditable="true">13%</td></tr><tr><td contenteditable="true">安全合规&amp;质量</td><td class="n" contenteditable="true">5</td><td class="n" contenteditable="true">9%</td></tr><tr><td contenteditable="true">通关宝典</td><td class="n" contenteditable="true">2</td><td class="n" contenteditable="true">4%</td></tr><tr><td contenteditable="true">新人指引</td><td class="n" contenteditable="true">1</td><td class="n" contenteditable="true">2%</td></tr></tbody></table>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="sec-title" contenteditable="true">每期培训火花线</div>
+<div class="card">
+<h2 contenteditable="true">⑨ 每期趋势 <span class="fold" onclick="toggleCard(this)" contenteditable="false">▾</span></h2>
+<div class="spark-wrap" style="position:relative;padding-top:32px;"><div class="spark-labels" style="position:absolute;left:0;right:0;top:0;height:30px;"><span style="position:absolute;left:1.483%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">92<br>—</span><span style="position:absolute;left:6.117%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">96<br>+4.3%</span><span style="position:absolute;left:10.717%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">96<br>0.0%</span><span style="position:absolute;left:15.350%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">85<br>-11.5%</span><span style="position:absolute;left:19.983%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">89<br>+4.7%</span><span style="position:absolute;left:24.583%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">43<br>-51.7%</span><span style="position:absolute;left:29.217%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">342<br>+695.3%</span><span style="position:absolute;left:33.817%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">101<br>-70.5%</span><span style="position:absolute;left:38.450%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">46<br>-54.5%</span><span style="position:absolute;left:43.083%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">78<br>+69.6%</span><span style="position:absolute;left:47.683%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">25<br>-67.9%</span><span style="position:absolute;left:52.317%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">44<br>+76.0%</span><span style="position:absolute;left:56.950%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">40<br>-9.1%</span><span style="position:absolute;left:61.550%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">35<br>-12.5%</span><span style="position:absolute;left:66.183%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">33<br>-5.7%</span><span style="position:absolute;left:70.817%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">22<br>-33.3%</span><span style="position:absolute;left:75.417%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">294<br>+1236.4%</span><span style="position:absolute;left:80.050%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">59<br>-79.9%</span><span style="position:absolute;left:84.650%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">33<br>-44.1%</span><span style="position:absolute;left:89.283%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">28<br>-15.2%</span><span style="position:absolute;left:93.917%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#0e63b3;font-weight:700" contenteditable="true">39<br>+39.3%</span><span style="position:absolute;left:98.517%;top:0;transform:translateX(-50%);text-align:center;font-size:7.5px;line-height:1.15;white-space:nowrap;color:#c0392b;font-weight:700" contenteditable="true">36<br>-7.7%</span></div><svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none"><rect class="bar" x="0.0" y="47.1" width="8.9" height="12.9" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·3月" data-courses="1" data-people="92" data-mom="None"></rect><rect class="bar" x="13.9" y="46.5" width="8.9" height="13.5" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·4月①" data-courses="1" data-people="96" data-mom="4.3"></rect><rect class="bar" x="27.7" y="46.5" width="8.9" height="13.5" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·4月②" data-courses="1" data-people="96" data-mom="0.0"></rect><rect class="bar" x="41.6" y="48.1" width="8.9" height="11.9" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·5月" data-courses="1" data-people="85" data-mom="-11.5"></rect><rect class="bar" x="55.5" y="47.5" width="8.9" height="12.5" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·6月" data-courses="1" data-people="89" data-mom="4.7"></rect><rect class="bar" x="69.3" y="54.0" width="8.9" height="6.0" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·7月" data-courses="1" data-people="43" data-mom="-51.7"></rect><rect class="bar" x="83.2" y="12.0" width="8.9" height="48.0" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·8月" data-courses="1" data-people="342" data-mom="695.3"></rect><rect class="bar" x="97.0" y="45.8" width="8.9" height="14.2" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·9月" data-courses="1" data-people="101" data-mom="-70.5"></rect><rect class="bar" x="110.9" y="53.5" width="8.9" height="6.5" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·10月①" data-courses="1" data-people="46" data-mom="-54.5"></rect><rect class="bar" x="124.8" y="49.1" width="8.9" height="10.9" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·10月②" data-courses="1" data-people="78" data-mom="69.6"></rect><rect class="bar" x="138.6" y="56.5" width="8.9" height="3.5" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·11月①" data-courses="1" data-people="25" data-mom="-67.9"></rect><rect class="bar" x="152.5" y="53.8" width="8.9" height="6.2" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="25·11月②" data-courses="1" data-people="44" data-mom="76.0"></rect><rect class="bar" x="166.4" y="54.4" width="8.9" height="5.6" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·12月①" data-courses="1" data-people="40" data-mom="-9.1"></rect><rect class="bar" x="180.2" y="55.1" width="8.9" height="4.9" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="25·12月②" data-courses="1" data-people="35" data-mom="-12.5"></rect><rect class="bar" x="194.1" y="55.4" width="8.9" height="4.6" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="26·1月" data-courses="1" data-people="33" data-mom="-5.7"></rect><rect class="bar" x="208.0" y="56.9" width="8.9" height="3.1" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="26·2月" data-courses="1" data-people="22" data-mom="-33.3"></rect><rect class="bar" x="221.8" y="18.7" width="8.9" height="41.3" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="26·3月①" data-courses="1" data-people="294" data-mom="1236.4"></rect><rect class="bar" x="235.7" y="51.7" width="8.9" height="8.3" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="26·3月②" data-courses="1" data-people="59" data-mom="-79.9"></rect><rect class="bar" x="249.5" y="55.4" width="8.9" height="4.6" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="26·4月" data-courses="1" data-people="33" data-mom="-44.1"></rect><rect class="bar" x="263.4" y="56.1" width="8.9" height="3.9" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="26·5月" data-courses="1" data-people="28" data-mom="-15.2"></rect><rect class="bar" x="277.3" y="54.5" width="8.9" height="5.5" rx="1.5" fill="#0e63b3" opacity="0.9" data-ym="26·6月" data-courses="1" data-people="39" data-mom="39.3"></rect><rect class="bar" x="291.1" y="54.9" width="8.9" height="5.1" rx="1.5" fill="#c0392b" opacity="0.9" data-ym="26·7月" data-courses="1" data-people="36" data-mom="-7.7"></rect><polyline points="4.4,47.1 18.3,46.5 32.2,46.5 46.0,48.1 59.9,47.5 73.8,54.0 87.6,12.0 101.5,45.8 115.3,53.5 129.2,49.1 143.1,56.5 156.9,53.8 170.8,54.4 184.7,55.1 198.5,55.4 212.4,56.9 226.2,18.7 240.1,51.7 254.0,55.4 267.8,56.1 281.7,54.5 295.6,54.9" fill="none" stroke="#ff7a45" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="0.95"></polyline></svg></div><div class="spark-x" style="gap:1.67%;margin-top:6px;align-items:flex-end"><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>3月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>4月①</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>4月②</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>5月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>6月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>7月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#c0392b;font-weight:700;line-height:1.15;text-align:center">25<br>8月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>9月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>10月①</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>10月②</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>11月①</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>11月②</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>12月①</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">25<br>12月②</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>1月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>2月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#c0392b;font-weight:700;line-height:1.15;text-align:center">26<br>3月①</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>3月②</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>4月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>5月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>6月</span><span class="sx" contenteditable="true" style="flex:0 0 2.95%;color:#9aa5b1;font-weight:400;line-height:1.15;text-align:center">26<br>7月</span></div>
+<div class="foot" contenteditable="true"><div>2025至今，共 22 期培训，每期参与人数火花线如上，悬停也可看该期参与人数，和参与人数环比。</div><div>环比=相邻期参与人数变化%，<b style="color: rgb(14, 99, 179);">蓝=参与人数环比≥0</b>，<b style="color: rgb(192, 57, 43);">红=环比&lt;0</b><br><div><b style="color:#c0392b">25年8月和26年3月第一期，由于该</b><b style="color: rgb(192, 57, 43);">期有合规培训强制参加（所以环比高）</b></div></div></div>
+</div>
+</div>
+<div id="tip" class="tip" style="display: none; left: 534px; top: 678px;"><b>25·8月</b><br>参与人数 342<br>环比(参与人数) +695.3%</div>
+<script>
+function toggleCard(el){
+  var card=el.closest('.card');
+  card.classList.toggle('collapsed');
+  el.classList.toggle('collapsed');
+  el.textContent = card.classList.contains('collapsed') ? '▸' : '▾';
+}
+function sortTbl(th){
+  var tbl=th.closest('table');
+  var head=tbl.querySelector('tr');
+  var col=Array.prototype.indexOf.call(head.children, th);
+  var rows=Array.prototype.slice.call(tbl.querySelectorAll('tr')).slice(1);
+  var asc = !th.classList.contains('asc');
+  rows.sort(function(a,b){
+    var an=parseFloat(a.children[col].textContent.replace(/[^\d.]/g,''));
+    var bn=parseFloat(b.children[col].textContent.replace(/[^\d.]/g,''));
+    if(!isNaN(an)&&!isNaN(bn)) return asc? an-bn : bn-an;
+    var at=a.children[col].textContent, bt=b.children[col].textContent;
+    return asc? at.localeCompare(bt,'zh') : bt.localeCompare(at,'zh');
+  });
+  rows.forEach(function(r){tbl.appendChild(r);});
+  Array.prototype.forEach.call(head.children,function(h){h.classList.remove('asc','desc');});
+  th.classList.add(asc?'asc':'desc');
+}
+(function(){
+  var tip=document.getElementById('tip');
+  document.querySelectorAll('.spark .bar').forEach(function(bar){
+    bar.addEventListener('mousemove', function(e){
+      tip.style.display='block';
+      tip.style.left=(e.clientX+12)+'px';
+      tip.style.top=(e.clientY+12)+'px';
+      var mom=bar.getAttribute('data-mom');
+      mom = (mom===null||mom==='None'||mom==='') ? '—' : (parseFloat(mom)>0?'+':'')+mom+'%';
+      var pe=bar.getAttribute('data-people');
+      pe = (pe==='0'||pe===null||pe==='None'||pe==='') ? '—' : pe;
+      tip.innerHTML='<b>'+bar.getAttribute('data-ym')+'</b><br>参与人数 '+pe+'<br>环比(参与人数) '+mom;
+    });
+    bar.addEventListener('mouseleave', function(){ tip.style.display='none'; });
+  });
+})();
+(function(){
+  function animate(el){
+    var to=parseFloat(el.getAttribute('data-to'));
+    var dec=parseInt(el.getAttribute('data-dec')||'0');
+    var suf=el.getAttribute('data-suffix')||'';
+    var dur=900,t0=null;
+    function step(ts){
+      if(el.__cancel) return;
+      if(!t0)t0=ts;
+      var p=Math.min((ts-t0)/dur,1);
+      var e=1-Math.pow(1-p,3);
+      var v=to*e;
+      el.textContent=(dec? v.toFixed(dec): Math.round(v).toLocaleString())+suf;
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent=(dec? to.toFixed(dec): to.toLocaleString())+suf;
+    }
+    requestAnimationFrame(step);
+  }
+  document.querySelectorAll('.bn[data-to]').forEach(animate);
+  document.querySelectorAll('.cm-fill').forEach(function(f){ requestAnimationFrame(function(){ f.style.width=f.getAttribute('data-w'); }); });
+})();
+
+(function(){
+  var KEY='bowen_dashboard_edits_v1';
+  function safeSet(v){ try{ localStorage.setItem(KEY,v); }catch(e){} }
+  function bindFold(){
+    document.querySelectorAll('.fold').forEach(function(f){
+      f.setAttribute('contenteditable','false');
+      f.addEventListener('click', function(e){ e.stopPropagation(); });
+    });
+  }
+  function makeEditable(){
+    var sel='h1,h2,.note,.sub2,.hl,.foot,.sec-title,.ghead,.gsub,.kpi .n,.kpi .t,.kpi .d,.big .bn,.big .bt,.big .btag,.tbl td,.hero div,.sx,.bd-h,.bd-cell .bn,.bd-cell .bt,.row,.lab,.val';
+    document.querySelectorAll(sel).forEach(function(el){
+      if(el.closest('.fold')) return;
+      el.setAttribute('contenteditable','true');
+    });
+    bindFold();
+  }
+  function bwDownload(){
+    var html='<!DOCTYPE html>'+document.documentElement.outerHTML;
+    html=html.replace(/document\.addEventListener\('input'[\s\S]*?\}\);/g,'');
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    var d=new Date(), pad=function(n){return (n<10?'0':'')+n;};
+    var ts=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes());
+    a.download='bowen_dashboard_'+ts+'.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    flash('已保存为文件（下载）');
+  }
+  function bwReset(){ if(confirm('确认恢复为初始内容？当前所有编辑将丢失。')){ try{ localStorage.removeItem(KEY); }catch(e){} location.reload(); } }
+  var ft;
+  function flash(msg){
+    var bar=document.getElementById('editbar'); if(!bar) return;
+    var s=bar.querySelector('.hint'); if(!s) return;
+    var old=s.getAttribute('data-old')||s.textContent;
+    s.setAttribute('data-old', old);
+    s.textContent='✅ '+msg;
+    clearTimeout(ft); ft=setTimeout(function(){ s.textContent=old; }, 1600);
+  }
+  
+  document.addEventListener('DOMContentLoaded', function(){
+    var inFrame=(window.self!==window.top);
+    var isWB=/workbuddy|electron|webview|wxwork|micromessenger/i.test(navigator.userAgent);
+    if(inFrame||isWB){
+      var bar=document.getElementById('editbar');
+      if(bar){
+        var hint=bar.querySelector('.hint');
+        if(hint) hint.textContent='⚠️ 内置预览中编辑不会保存——请复制本页地址到系统浏览器(Chrome/Edge)打开后再编辑保存';
+        var dl=bar.querySelector('button'); if(dl){ dl.disabled=true; }
+      }
+      return;
+    }
+    var saved=null; try{ saved=localStorage.getItem(KEY); }catch(e){}
+    if(saved){ document.body.innerHTML=saved; bindFold(); }
+    else { makeEditable(); }
+    document.querySelectorAll('[data-to]').forEach(function(el){ el.removeAttribute('data-to'); });
+  });
+  window.bwDownload=bwDownload; window.bwReset=bwReset;
+})();
+
+</script>
+</body></html>
