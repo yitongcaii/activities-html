@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>主持人注意事项 · 按重要性排序</title>
+<style>
+  :root{
+    --c1:#e5484d; --c2:#f76808; --c3:#f5b400; --c4:#0091ff; --c5:#12a150;
+    --ink:#1f2430; --sub:#6b7280; --bg:#f6f7fb; --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.75; padding:32px 16px 64px;
+  }
+  .wrap{max-width:880px;margin:0 auto}
+  header{
+    background:linear-gradient(120deg,#7c5cff 0%,#ff5c8a 55%,#ff9a3c 100%);
+    color:#fff;border-radius:22px;padding:34px 36px;margin-bottom:24px;
+    box-shadow:0 18px 40px -18px rgba(124,92,255,.6);
+  }
+  header h1{font-size:28px;letter-spacing:.5px;margin-bottom:8px}
+  header p{font-size:14px;opacity:.92}
+  .item{
+    background:var(--card);border-radius:18px;padding:20px 22px 20px 92px;
+    position:relative;margin-bottom:16px;box-shadow:0 8px 24px -16px rgba(31,36,48,.35);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .item:hover{transform:translateY(-3px);box-shadow:0 16px 32px -18px rgba(31,36,48,.45)}
+  .rank{
+    position:absolute;left:22px;top:20px;width:50px;height:50px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;
+  }
+  .r1{background:var(--c1)} .r2{background:var(--c1)} .r3{background:var(--c1)}
+  .r4{background:var(--c2)} .r5{background:var(--c2)} .r6{background:var(--c2)}
+  .r7{background:var(--c4)} .r8{background:var(--c4)}
+  .r9{background:var(--c5)} .r10{background:var(--c5)} .r11{background:var(--c5)}
+  .item h3{font-size:18px;margin-bottom:10px}
+  .row{font-size:14.5px;color:var(--sub)}
+  .row b{color:var(--ink)}
+  .rescue{list-style:none;margin:6px 0 0;padding:0}
+  .rescue li{
+    font-size:14px;color:var(--sub);padding:8px 0 8px 14px;
+    border-left:3px solid rgba(247,104,8,.45);margin-top:8px;
+  }
+  .rescue li b{color:var(--ink)}
+  .rescue .line{display:block;color:var(--ink);margin-top:3px;font-style:normal}
+  footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:30px}
+  .pgfooter{margin-top:14px;padding-top:14px;border-top:1px dashed #d8dbe6;
+    text-align:center;font-size:12.5px;color:var(--sub);letter-spacing:.3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎤 主持人注意事项</h1>
+    <p>按重要性从高到低排序</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="item">
+    <div class="rank r1">1</div>
+    <h3>彩排前拿到全部关键清单</h3>
+    <div class="row">获奖名单、领导致辞顺序、抽奖规则、视频素材清单。</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="item">
+    <div class="rank r2">2</div>
+    <h3>不念错名字与职务</h3>
+    <div class="row">念错领导或获奖者姓名、职务是主持大忌，上台前把易错字、职务全称单独写大；不确定读音现场小声确认，不硬念。</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="item">
+    <div class="rank r3">3</div>
+    <h3>彩排 + cue 点对齐</h3>
+    <div class="row">没走台、没对过音乐/视频/灯光切换信号、没试麦，至少走一遍全流程；台词本上标清"此处放视频/请人上台/切灯光"；试麦、试翻页笔、确认音控暗号。</div>
+  </div>
+
+  <!-- 4 救场话术库 -->
+  <div class="item">
+    <div class="rank r4">4</div>
+    <h3>救场话术库：快翻车 / 已翻车时的应对台词</h3>
+    <ul class="rescue">
+      <li><b>冷场（没人响应、掌声稀）</b>
+        <span class="line">点名下一位、自问自答、或直接切音乐/视频补位。可念："刚才这位说得特别好，掌声先给到他——好，那我们趁热打铁，接下来…"</span>
+      </li>
+      <li><b>领导 / 嘉宾讲超时</b>
+        <span class="line">趁换气的间隙用掌声自然截断，不硬打断。可念："感谢 X 总精彩的分享，让我们再次把掌声送给 X 总！"（掌声一起，顺势接下一环节）</span>
+      </li>
+      <li><b>设备故障（麦啸叫 / 视频播不出 / 抽奖系统卡）</b>
+        <span class="line">绝对不要让现场停滞超过 30 秒。可念："我们先请 X 总说两句 / 先来一个小互动热热身。"然后立刻切到别的环节。</span>
+      </li>
+      <li><b>嘉宾忘词、摔倒、说错话</b>
+        <span class="line">玩笑化解，不放大尴尬。可念："没事没事，我们给点鼓励的掌声！"</span>
+      </li>
+      <li><b>自己念错名字 / 职务</b>
+        <span class="line">当场自然纠正，不装没发生。可念："重新欢迎我们的 X 总！"</span>
+      </li>
+      <li><b>抽奖卡住 / 没人中奖 / 奖品发错</b>
+        <span class="line">用"系统复核"争取时间，不要现场干等。可念："大屏正在帮我们做最后一轮幸运复核，趁这会儿，先请上一位获奖伙伴～"</span>
+      </li>
+      <li><b>颁奖 / 领奖没人上台</b>
+        <span class="line">提前内定 1 个"托"先动，或主持人直接点名。可念："有请获奖的 X 团队，来，大家掌声指个路～"</span>
+      </li>
+      <li><b>时间失控（严重拖堂）</b>
+        <span class="line">灵活压缩，先砍致辞与回顾，保住颁奖 + 抽奖 + 温情三核心；别硬砍高潮。</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="item">
+    <div class="rank r5">5</div>
+    <h3>时间把控：用结束时间倒推</h3>
+    <div class="row">定好结束时间倒推各环节；若需压缩，优先砍致辞与回顾，保住颁奖、抽奖、温情三个核心。</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="item">
+    <div class="rank r6">6</div>
+    <h3>内容边界与过审</h3>
+    <div class="row">台词与视频提前过审；玩笑只停留在安全区；未官宣的数据、人事绝不提。</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="item">
+    <div class="rank r7">7</div>
+    <h3>称谓口径全文统一</h3>
+    <div class="row">开场定一种口径（庄重用领导/同事，欢乐用伙伴/家人），全程不中途切换。</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="item">
+    <div class="rank r8">8</div>
+    <h3>语速 / 眼神 / 站位</h3>
+    <div class="row">关键句后留 2 秒掌声空隙；眼神扫场照顾不同区域；站位不挡舞美，双人别抢中间。</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="item">
+    <div class="rank r9">9</div>
+    <h3>供应商 / 赞助点名感谢</h3>
+    <div class="row">在对应抽奖档口固定一句"特别感谢【供应商名】的支持"，写进台词本。</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="item">
+    <div class="rank r10">10</div>
+    <h3>单 / 双主持配合</h3>
+    <div class="row">单人靠自问自答 + 音乐补位 + 与音控暗号；双人互抛接话、男女反差、一人卡壳另一人救场、关键句合诵点题。</div>
+  </div>
+
+  <!-- 11 -->
+  <div class="item">
+    <div class="rank r11">11</div>
+    <h3>散场引导：别一结束人就散</h3>
+    <div class="row">谢幕口播感谢筹备组与工作人员；引导有序离场、至领奖处领奖、移步合影墙，收好随身物品。</div>
+  </div>
+
+  <footer>共 11 条 · 按"不做会翻车的程度"排序 · 适配年会 / 员工大会 / 表彰典礼</footer>
+  <div class="pgfooter">📌 本页由 yitong 沉淀整理 · 文化活动知识库</div>
+</div>
+</body>
+</html>
