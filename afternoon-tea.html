@@ -235,7 +235,8 @@
   function exportHTML(){
     const clone = doc.innerHTML;
     const css = document.querySelector('style').innerHTML;
-    const html = '<!doctype html><html lang="zh"><head><meta charset="utf-8"><title>下午茶研讨</title><style>'+css+'</style></head><body><div class="wrap">'+clone+'</div></body></html>';
+    const html = '<!doctype html><html lang="zh"><head><meta charset="utf-8"><title>下午茶研讨</title><style>'+css+'</style></head><body><div class="wrap">'+clone+'</div><footer style="text-align:center;padding:22px 16px;color:#999;font-size:13px;letter-spacing:.5px;">📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</body></html>';
     const blob = new Blob([html], {type:'text/html;charset=utf-8'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
