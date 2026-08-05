@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>双人主持稿 · 通用填空模板</title>
+<title>双人主持稿 · 通用精华版</title>
 <style>
   :root{
     --bg:#fdeef6;--card:#ffffff;--ink:#2b2b38;--muted:#7a7686;
-    --m:#3a8dff;--f:#ff5fa2;--he:#9b6bff;--gold:#ffb347;
+    --m:#3a8dff;--f:#ff5fa2;--he:#9b6bff;--gold:#ffb347;--teal:#1fb6a6;
     --line:#ffd9ec;--shadow:0 8px 24px rgba(255,95,162,.12);
   }
   *{box-sizing:border-box}
@@ -22,6 +22,7 @@
   button{font-family:inherit;font-size:13px;border:none;border-radius:999px;padding:8px 16px;
     cursor:pointer;background:var(--f);color:#fff;box-shadow:var(--shadow);transition:.15s}
   button.ghost{background:#fff;color:var(--f);border:1.5px solid var(--f)}
+  button.teal{background:var(--teal);color:#fff}
   button:active{transform:translateY(1px)}
   .wrap{max-width:820px;margin:0 auto;padding:26px 20px 80px}
   header.hero{background:linear-gradient(120deg,var(--f),var(--gold));
@@ -41,6 +42,9 @@
     font-weight:800;color:#fff;background:linear-gradient(135deg,var(--m),var(--he));font-size:18px}
   .card h2{margin:0;font-size:18px}
   .card .sub{font-size:12px;color:var(--muted);margin-top:2px}
+  .need{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+  .need.req{background:#ffe1ec;color:#e5484d}
+  .need.opt{background:#e8f0ff;color:#3a8dff}
   .info{display:grid;gap:8px}
   .info .row{display:flex;gap:8px;font-size:14.5px}
   .info .k{flex:none;color:var(--f);font-weight:600;min-width:96px}
@@ -52,6 +56,13 @@
   .role.m{background:var(--m)} .role.f{background:var(--f)} .role.he{background:var(--he)}
   .speech p.note{border-left-color:var(--gold);color:#9a7b3a;font-size:13.5px;
     background:#fff9ec;border-radius:0 10px 10px 0;padding:8px 12px}
+  .speech p.cue{border-left-color:var(--teal);color:#0f7d72;font-size:13.5px;font-weight:600;
+    background:#eafaf7;border-radius:0 10px 10px 0;padding:8px 12px}
+  .ros{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
+  .ros th,.ros td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  .ros th{color:var(--muted);font-weight:600;font-size:12.5px}
+  .ros td:last-child{text-align:center;font-weight:700}
+  .ros .o{color:#3a8dff}.ros .r{color:#e5484d}
   .tip{background:linear-gradient(120deg,#fdeef6,#eef3ff);border:1px solid var(--line);
     border-radius:14px;padding:14px 16px;margin-top:6px}
   .tip b{color:var(--he)}
@@ -73,175 +84,199 @@
   <div class="tag">✏️ 直接点文字改 · <b>自动保存</b> · 刷新不丢</div>
   <div class="btns">
     <button class="ghost" onclick="resetAll()">重置</button>
+    <button class="teal" onclick="downloadHtml()">下载填好版</button>
     <button onclick="window.print()">打印 / 导出PDF</button>
   </div>
 </div>
 
 <div class="wrap">
   <header class="hero">
-    <h1>👫 双人主持稿 · 通用填空模板</h1>
-    <p>适用：2 位主持人（默认 A/B 主持）。双人靠<strong>互抛接话 + AB反差</strong>制造节奏和笑点。</p>
+    <h1>👫 双人主持稿 · 通用精华版</h1>
+    <p>适用：2 位主持人（默认 A/B）。双人靠<strong>互抛接话 + AB反差</strong>制造节奏和笑点。四季通用，春节场次见各卡〔备选〕。</p>
   </header>
+
+  <div class="usage">
+    📐 <b>填写说明</b>：<b>【】</b>= 填空处　<b>〔〕</b>= 三选一　<b>▶</b>= 舞台指令（放视频 / 请人上台 / 切麦 / 倒数）。直接点文字修改，自动存本地。
+  </div>
 
   <div class="legend">
     <span><i class="dot" style="background:var(--m)"></i>A主持</span>
     <span><i class="dot" style="background:var(--f)"></i>B主持</span>
     <span><i class="dot" style="background:var(--he)"></i>合诵</span>
+    <span><i class="dot" style="background:var(--teal)"></i>▶ 舞台指令</span>
   </div>
 
   <!-- 0 -->
   <div class="card">
     <div class="hd"><div class="badge">0</div><div><h2>活动信息卡</h2><div class="sub">先填</div></div></div>
     <div class="info" contenteditable="true">
-      <div class="row"><span class="k">活动名称</span><span>【______年度 · ______ 盛典 / 年会】</span></div>
+      <div class="row"><span class="k">活动名称</span><span>【______年度 · ______ 盛典 / 年会 / 表彰典礼】</span></div>
       <div class="row"><span class="k">主题</span><span>【______】（例：同心同行 / 再出发 / 一家亲）</span></div>
       <div class="row"><span class="k">时间 / 地点</span><span>【____年__月__日 __:__】　地点：【______】</span></div>
       <div class="row"><span class="k">A主持</span><span>【______】　B主持：【______】</span></div>
-      <div class="row"><span class="k">称谓口径</span><span>〔家人 / 同事 / 伙伴 / 朋友〕</span></div>
+      <div class="row"><span class="k">称谓口径</span><span>〔家人 / 同事 / 伙伴 / 朋友〕（开场定一种，全程不切换·详见注意事项#7）</span></div>
+      <div class="row"><span class="k">供应商/赞助</span><span>【______】（抽奖/奖品赞助方，需在对应环节点名感谢）</span></div>
     </div>
+  </div>
+
+  <!-- R 流程时间轴 -->
+  <div class="card">
+    <div class="hd"><div class="badge" style="background:linear-gradient(135deg,var(--teal),var(--m))">⏱</div>
+      <div><h2>流程时间轴</h2><div class="sub">建议时长 · 可按结束时间倒推压缩</div></div></div>
+    <table class="ros" contenteditable="true">
+      <tr><th>环节</th><th>建议时长</th><th>必/选</th></tr>
+      <tr><td>暖场循环</td><td>开场前 10min</td><td class="r">必</td></tr>
+      <tr><td>开场白</td><td>3–5min</td><td class="r">必</td></tr>
+      <tr><td>领导致辞</td><td>8–15min</td><td class="r">必</td></tr>
+      <tr><td>工作回顾 / 战略展望</td><td>5–8min</td><td class="o">选</td></tr>
+      <tr><td>颁奖环节</td><td>10–15min</td><td class="r">必</td></tr>
+      <tr><td>互动游戏</td><td>5–8min / 轮</td><td class="r">必</td></tr>
+      <tr><td>抽奖环节</td><td>10–15min</td><td class="r">必</td></tr>
+      <tr><td>温情 / 视频</td><td>3–5min</td><td class="r">必</td></tr>
+      <tr><td>领导祝酒 + 宣誓</td><td>5min</td><td class="o">选</td></tr>
+      <tr><td>谢幕 + 散场引导</td><td>3–5min</td><td class="r">必</td></tr>
+    </table>
+    <p class="note">总控建议 90–120min；压缩时优先砍「工作回顾 / 领导致辞」，保住<b>颁奖 + 抽奖 + 温情</b>三核心（详见注意事项 #5）。</p>
   </div>
 
   <!-- 1 -->
   <div class="card">
-    <div class="hd"><div class="badge">1</div><div><h2>暖场</h2><div class="sub">开场前 10 分钟 · 循环播</div></div></div>
+    <div class="hd"><div class="badge">1</div><div><h2>暖场</h2><div class="sub">开场前 10 分钟 · 循环播</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
-      <p>亲爱的各位〔家人 / 同事们〕，我们的年会将在十分钟后准时开始，请将手机调到静音或关闭，感谢支持与配合。</p>
-      <p class="note">（五分钟 / 一分钟 / 30 秒 同上，最后：）各位亲爱的〔家人 / 同事们〕，我们的年会将于 30 秒后开始——请随我一同倒数，迎接我们的【____】年会！</p>
+      <p>亲爱的各位〔家人 / 同事 / 伙伴 / 朋友〕，我们的【活动全称】将在十分钟后准时开始，请将手机调到静音或关闭，感谢支持与配合。</p>
+      <p class="cue">▶ 5 分钟 / 1 分钟 / 30 秒 重复同上；最后 30 秒：▶ 请全体随我一同倒数 10·9·…·1，迎接【活动全称】！</p>
     </div>
   </div>
 
   <!-- 2 -->
   <div class="card">
-    <div class="hd"><div class="badge">2</div><div><h2>开场白</h2><div class="sub">AB轮替登台</div></div></div>
+    <div class="hd"><div class="badge">2</div><div><h2>开场白</h2><div class="sub">AB轮替登台</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
-      <p><span class="role m">A</span>歌声袅袅辞旧岁</p>
-      <p><span class="role f">B</span>舞姿翩翩贺新春</p>
-      <p><span class="role m">A</span>新的一年，新的征程</p>
-      <p><span class="role f">B</span>新的祝福，新的期待</p>
       <p><span class="role m">A</span>尊敬的各位领导、各位来宾</p>
-      <p><span class="role f">B</span>亲爱的同事们、朋友们</p>
-      <p><span class="role he">合</span>大家——【上午 / 下午 / 晚上】好！</p>
-      <p><span class="role m">A</span>我是主持人【______】，祝愿大家度过一个宁静祥和的新年。</p>
-      <p><span class="role f">B</span>我是主持人【______】，祝愿大家新年里莺歌燕舞、快乐幸福。</p>
-      <p><span class="role m">A</span>光阴似箭，岁月如梭，【上年度】在成长和收获的喜悦中奔腾远去。</p>
-      <p><span class="role f">B</span>承前启后，继往开来，【本年度】在期待和奋进的激情中款款走来。</p>
-      <p><span class="role m">A</span>在这【洒满阳光的金色午后 / 充满激情的夜晚】，我们相聚在【______】。</p>
-      <p><span class="role f">B</span>怀着丰收的喜悦和感恩的心情，我们高歌荣耀踏向更美好的明天。</p>
-      <p><span class="role he">合</span>【活动全称】——正·式·开·幕！</p>
-      <p class="note">双人开场定式：A抛"辞旧"B接"迎新"，最后合诵点题。避免两人各念半句不搭。</p>
+      <p><span class="role f">B</span>亲爱的〔家人 / 同事 / 伙伴 / 朋友〕们：大家——【上午 / 下午 / 晚上】好！</p>
+      <p><span class="role m">A</span>我是主持人【______】</p>
+      <p><span class="role f">B</span>我是主持人【______】</p>
+      <p><span class="role m">A</span>今天这场，不是一个人的舞台，是咱们一起把这一年写成的一本书——而此刻，正翻到最燃的那一章。</p>
+      <p><span class="role f">B</span>所以今天的高光，不属于舞台中央，属于台下每一个把事儿干成的你。</p>
+      <p><span class="role m">A</span>【上年度】，我们在拼搏与收获里走过</p>
+      <p><span class="role f">B</span>【本年度】，我们在期待与斗志中开启</p>
+      <p><span class="role he">合</span>因【活动主题】，我们相聚在【______】——【活动全称】正·式·开·幕！</p>
+      <p class="note">双人开场定式：A 抛"回望"、B 接"新程"，故事感定调句（第5–6行）替代老套的"心存感恩/满怀信心"，更真实。最后合诵点题。〔春节场次备选〕可加：歌声袅袅辞旧岁 / 舞姿翩翩贺新春。</p>
     </div>
   </div>
 
   <!-- 3 -->
   <div class="card">
-    <div class="hd"><div class="badge">3</div><div><h2>领导致辞</h2><div class="sub">AB交替报幕 + 接龙</div></div></div>
+    <div class="hd"><div class="badge">3</div><div><h2>领导致辞</h2><div class="sub">AB交替报幕 + 接龙</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
-      <p><span class="role m">A</span>首先，让我们掌声有请【职务—姓名】先生 / B士 为晚会致辞。</p>
+      <p><span class="role m">A</span>首先，让我们掌声有请【职务—姓名】先生 / 女士 为活动致辞。</p>
+      <p class="cue">▶ 领导登台、音乐渐弱、递麦</p>
       <p class="note">（讲话毕，B主持接）</p>
-      <p><span class="role f">B</span>感谢【姓名】先生的精彩讲话，接下来让我们掌声有请【职务—姓名】为晚会致辞。</p>
-      <p class="note">（多位领导：A→B→A 轮替，"感谢上一位→有请下一位"接龙）</p>
-      <p><span class="role m">A</span>让我们再次用热烈的掌声对领导们的讲话表示感谢！</p>
-      <p><span class="role f">B</span>未来，在他们的带领下，【公司名】一定会更加强大！</p>
+      <p><span class="role f">B</span>感谢【姓名】精彩的致辞，接下来让我们掌声有请【职务—姓名】致辞。</p>
+      <p class="note">（多位领导：A→B→A 轮替，"感谢上一位 → 有请下一位"接龙，避免冷场）</p>
+      <p><span class="role m">A</span>让我们再次用热烈的掌声，对领导们的讲话表示感谢！</p>
     </div>
   </div>
 
   <!-- 4 -->
   <div class="card">
-    <div class="hd"><div class="badge">4</div><div><h2>工作回顾 / 战略展望</h2><div class="sub">可选</div></div></div>
+    <div class="hd"><div class="badge">4</div><div><h2>工作回顾 / 战略展望</h2><div class="sub">可选</div></div><span class="need opt">选做</span></div>
     <div class="speech" contenteditable="true">
       <p><span class="role m">A</span>回顾【上年度】，千言万语汇成一个词——【感动 / 感恩 / 突破】。</p>
-      <p><span class="role f">B</span>接下来有请【市场 / 运营总监 姓名】为我们作【上年度】工作回顾及【本年度】工作展望，掌声有请！</p>
-      <p class="note">（汇报后）</p>
-      <p><span class="role m">A</span>感谢【姓名】总精彩的讲述，令人鼓舞、催人奋进。</p>
+      <p><span class="role f">B</span>接下来有请【职务 姓名】为我们作【上年度】回顾与【本年度】展望，掌声有请！</p>
+      <p class="cue">▶ 汇报 PPT 切屏 / 讲者上台</p>
+      <p class="note">（汇报后）感谢【姓名】精彩的讲述。进阶玩法：达成目标的负责人当场领奖，强化业绩导向。</p>
     </div>
   </div>
 
   <!-- 5 -->
   <div class="card">
-    <div class="hd"><div class="badge">5</div><div><h2>颁奖环节</h2><div class="sub">AB互抛，避免单调</div></div></div>
+    <div class="hd"><div class="badge">5</div><div><h2>颁奖环节</h2><div class="sub">AB互抛，避免单调</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
-      <p><span class="role f">B</span>接下来的环节是【公司名】【上年度】优秀表彰仪式，请看大屏幕！</p>
-      <p class="note">（播放视频 → 颁奖嘉宾登台 → 获奖代表上台）</p>
-      <p><span class="role m">A</span>首先颁发的是【上年度—年度感动团队奖】，请获奖团队代表上台领奖。</p>
-      <p><span class="role f">B</span>让我们掌声有请【职务—姓名】为优秀团队颁奖！</p>
-      <p><span class="role he">合</span>让我们用热烈的掌声，感谢优秀团队的卓越贡献，也感谢我们的颁奖嘉宾！</p>
-      <p class="note">（其余奖项：A/B交替念奖项名 + 引颁奖嘉宾，仅替换"奖项名 + 嘉宾"）</p>
-      <p class="note">颁奖分 2–3 轮穿插在游戏 / 抽奖之间；AB交替念词，比单人更有层次。</p>
+      <p><span class="role f">B</span>接下来的环节，是【公司名】【上年度】优秀表彰仪式，请看大屏幕！</p>
+      <p class="cue">▶ 播放表彰视频 → 颁奖嘉宾登台 → 获奖代表上台</p>
+      <p><span class="role m">A</span>先说句心里话：这一年，我们和身边人待在一起的日子，可能比和家里人还多。台下这些面孔，是比家人还熟的战友——今天，该轮到他们被看见了。</p>
+      <p><span class="role f">B</span>首先颁发【年度感动团队奖】。一张工位、一盏深夜的灯，你们把"不容易"熬成了"了不起"，有请获奖团队代表上台！</p>
+      <p><span class="role m">A</span>让我们掌声有请【职务—姓名】为优秀团队颁奖！</p>
+      <p><span class="role he">合</span>把最热烈的掌声，送给优秀团队，也送给颁奖嘉宾！</p>
+      <p class="note">其余奖项照此循环：<b>奖项名 + 2句画面感颁奖词（口语押韵都行，别写长篇抒情）+ 颁奖嘉宾</b>，仅替换三项。上面 B 的颁奖词即范例，直接改文案。分 2–3 轮穿插在游戏 / 抽奖之间，避免连续颁奖冗长。</p>
     </div>
   </div>
 
   <!-- 6 -->
   <div class="card">
-    <div class="hd"><div class="badge">6</div><div><h2>互动游戏</h2><div class="sub">AB一搭一唱，制造反差笑点</div></div></div>
+    <div class="hd"><div class="badge">6</div><div><h2>互动游戏</h2><div class="sub">AB一搭一唱，制造反差笑点</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
       <p><span class="role m">A</span>接下来到了大家最开心的互动游戏环节！</p>
-      <p><span class="role f">B</span>听说今天的游戏，输的人要接受"惩罚"哦，大家敢不敢上？</p>
+      <p><span class="role f">B</span>听说今天的游戏，输的人要接受小惩罚哦，大家敢不敢上？</p>
       <p><span class="role m">A</span>【游戏名】规则：______（规则自行拟定，或沿用往届成熟玩法）。</p>
       <p><span class="role f">B</span>有没有自告奋勇的同事？来，把掌声送给我们的游戏勇士！</p>
-      <p class="note">双人游戏控场：一人讲规则、一人调动气氛；用"没听到，再来一次"逼出欢呼。</p>
+      <p class="note">双人游戏控场：一人讲规则、一人调动气氛；用"没听到，再来一次"逼出欢呼；每轮控 5–8min。</p>
     </div>
   </div>
 
   <!-- 7 -->
   <div class="card">
-    <div class="hd"><div class="badge">7</div><div><h2>抽奖环节</h2><div class="sub">AB配合念名 + 造悬念</div></div></div>
+    <div class="hd"><div class="badge">7</div><div><h2>抽奖环节</h2><div class="sub">AB配合念名 + 造悬念</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
       <p><span class="role f">B</span>亲爱的朋友们！终于到了大家盼望已久的抽奖环节！</p>
       <p><span class="role m">A</span>首先抽取的是【幸运奖 __ 名】，分 __ 次抽取，每次 __ 个！有请抽奖嘉宾【姓名】——</p>
-      <p class="note">（嘉宾抽奖，B主持高声念名 + 礼仪引导上台）</p>
+      <p class="cue">▶ 嘉宾抽奖 / 砸金蛋 / 摸球，B主持高声念名 + 礼仪引导上台</p>
       <p><span class="role f">B</span>中奖号码是：______ ！祝贺他们！没抽到的朋友别灰心，大奖还在后面。</p>
       <p><span class="role m">A</span>三等奖 / 二等奖 / 一等奖 / 特等奖 依次抽取。</p>
-      <p><span class="role f">B</span>供应商赞助奖项，我们要特别感谢【供应商名】的支持！</p>
+      <p><span class="role f">B</span>特别感谢【供应商名】对本次抽奖的赞助支持！</p>
       <p class="note">双人抽奖：一人报"接下来抽什么奖"，一人念号造悬念，配合更顺。</p>
     </div>
   </div>
 
   <!-- 8 -->
   <div class="card">
-    <div class="hd"><div class="badge">8</div><div><h2>温情 / 视频环节</h2><div class="sub">AB合诵，推情绪峰值</div></div></div>
+    <div class="hd"><div class="badge">8</div><div><h2>温情 / 视频环节</h2><div class="sub">AB合诵，推情绪峰值</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
-      <p><span class="role m">A</span>时光飞逝，【公司名】见证了我们的成长，我们也见证了【公司名】的发展！</p>
-      <p><span class="role f">B</span>今晚，让我们通过视频重温奋斗历程（播放《我们的故事》/ 海外拜年视频）。</p>
-      <p><span class="role m">A</span>在地球另一边的海外同事仍坚守岗位——</p>
-      <p><span class="role f">B</span>让我们把掌声，献给这些【公司名】勇士！</p>
-      <p class="note">此环节是"峰值体验"关键，放在颁奖与抽奖之间，情绪从激昂回落温情再推高潮。</p>
+      <p><span class="role m">A</span>说了这么多高光时刻，我想请大家把目光从舞台，挪到屏幕里。</p>
+      <p><span class="role f">B</span>接下来这段视频，没有脚本，只有我们这一年真实的样子（播放《我们的故事》/ 海外同事拜年视频）。</p>
+      <p class="cue">▶ 播放视频，全场熄灯 / 聚光</p>
+      <p><span class="role m">A</span>你可能在屏幕里看到了自己，也看到了那个总帮你兜底的人。</p>
+      <p><span class="role f">B</span>此刻仍在地球另一端坚守的同事——把掌声，献给这些没能到场的【公司名】伙伴！</p>
+      <p class="note">峰值情绪环节，放在颁奖与抽奖之间：激昂 → 温情 → 再推高潮。视频别太长（3–5min），配乐压低，主持不抢词。</p>
     </div>
   </div>
 
   <!-- 9 -->
   <div class="card">
-    <div class="hd"><div class="badge">9</div><div><h2>领导祝酒 + 全员宣誓</h2><div class="sub">可选，偏庄重</div></div></div>
+    <div class="hd"><div class="badge">9</div><div><h2>领导祝酒 + 全员宣誓</h2><div class="sub">可选，偏庄重</div></div><span class="need opt">选做</span></div>
     <div class="speech" contenteditable="true">
       <p><span class="role he">合</span>【N】年来，梦想从未间断，热情从未退减，脚步从未停歇，斗志从未熄灭！</p>
       <p><span class="role m">A</span>下面，让我们用最热烈的掌声有请【总裁 / 董事长 姓名】登台，为我们开启胜利和荣耀的美酒！</p>
-      <p class="note">（祝酒后可选"全员宣誓"：起立、举右手握拳，念企业誓言）</p>
+      <p class="cue">▶ 举杯 / 全员起立</p>
+      <p class="note">（祝酒后可选"全员宣誓"：起立、举右手握拳，念企业誓言，强化归属感）</p>
     </div>
   </div>
 
   <!-- 10 -->
   <div class="card">
-    <div class="hd"><div class="badge">10</div><div><h2>谢幕 + 散场引导</h2><div class="sub">收尾</div></div></div>
+    <div class="hd"><div class="badge">10</div><div><h2>谢幕 + 散场引导</h2><div class="sub">收尾</div></div><span class="need req">必做</span></div>
     <div class="speech" contenteditable="true">
-      <p><span class="role m">A</span>欢乐的时光总是短暂，团聚的日子特别让人感动。</p>
-      <p><span class="role f">B</span>回首过去，我们思绪纷飞；立足今日，我们胸有成竹；展望未来，我们引吭高歌。</p>
-      <p><span class="role m">A</span>感谢所有部门的积极参与！　<span class="role f">B</span>感谢所有工作人员的辛苦付出！</p>
-      <p><span class="role m">A</span>感谢年会筹备组的精心部署！</p>
-      <p><span class="role he">合</span>【活动全称】——到·此·结·束！谢谢大家！〔备选收尾合唱：《相亲相爱一家人》/《同一首歌》〕</p>
-      <p class="note">（散场引导，主持可继续口播）<span class="role m">A</span>请各位有序离场，带好随身物品；<span class="role f">B</span>获奖未领奖品的同事请至【领奖处】领取，意犹未尽的朋友可移步〔茶歇区 / 合影墙〕继续交流。我们明年再见！</p>
+      <p><span class="role m">A</span>书翻到了这一页，但咱们的故事还没写完——下一章，留给明年的此刻。</p>
+      <p><span class="role f">B</span>感谢每一位〔家人 / 同事 / 伙伴〕的投入，也感谢筹备组和所有工作人员的兜底。</p>
+      <p><span class="role m">A</span>请各位有序离场、带好随身物品；</p>
+      <p><span class="role f">B</span>未领奖的同事请至【领奖处】，意犹未尽的朋友可移步〔合影墙 / 茶歇区〕继续交流。</p>
+      <p><span class="role he">合</span>【活动全称】——到·此·结·束！谢谢大家！</p>
+      <p class="note">〔春节场次备选〕收尾合唱：《相亲相爱一家人》/《同一首歌》。</p>
+      <p class="cue">▶ 谢幕后继续口播引导离场：A请有序离场带好物品；B未领奖至领奖处、移步合影墙。</p>
     </div>
   </div>
 
   <!-- 附录 F -->
   <div class="card">
     <div class="hd"><div class="badge" style="background:linear-gradient(135deg,var(--gold),var(--f))">F</div>
-      <div><h2>双人配合要点</h2><div class="sub">附录</div></div></div>
+      <div><h2>双人配合要点</h2><div class="sub">附录 · 原则详见《主持人注意事项》</div></div></div>
     <div class="tip" contenteditable="true">
+      <p style="margin:0 0 8px">本稿聚焦<strong>台词与流程</strong>；主持原则与救场话术统一见配套《主持人注意事项》：</p>
       <ul>
-        <li><b>互抛接话</b>：一人抛观点、一人接情绪，避免各念半句不搭。</li>
-        <li><b>AB反差</b>：用性别 / 性格反差制造笑点（严肃A + 活泼B）。</li>
-        <li><b>救场分工</b>：一人卡壳，另一人立刻接"刚才说到……"圆回来，别双双愣住。</li>
-        <li><b>站位与眼神</b>：侧台互给手势（OK = 放音乐），别两人均摊抢话。</li>
-        <li><b>合诵点题</b>：关键句（开场 / 谢幕）合诵，比单人更有气势。</li>
+        <li><b>互抛接话 / AB反差 / 救场分工</b>：见注意事项 #10、#4</li>
+        <li><b>站位与音控暗号 / 合诵点题</b>：见注意事项 #3、#8</li>
+        <li><b>冷场 / 设备故障 / 时间失控</b>：见注意事项 #4 救场话术库</li>
       </ul>
     </div>
   </div>
@@ -252,7 +287,7 @@
 <div class="saveflag" id="flag">✓ 已自动保存</div>
 
 <script>
-  const KEY="host_double_v1";
+  const KEY="host_double_refined_v1";
   const editables=[...document.querySelectorAll('[contenteditable]')];
   function save(){
     const data=editables.map(e=>e.innerHTML);
@@ -268,6 +303,13 @@
   function resetAll(){
     if(!confirm("确定重置为原稿？已填写的内容会清空。"))return;
     localStorage.removeItem(KEY);location.reload();
+  }
+  function downloadHtml(){
+    const html='<!DOCTYPE html>'+document.documentElement.outerHTML;
+    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);a.download='双人主持稿-填好版.html';
+    a.click();URL.revokeObjectURL(a.href);
   }
   editables.forEach(e=>e.addEventListener('input',save));
   load();
