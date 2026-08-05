@@ -86,19 +86,16 @@
 <div class="wrap">
   <header class="hero">
     <h1>🎤 单人主持稿 · 通用精华版</h1>
-    <p>适用：只有 1 位主持人的场次。单人无搭档接话，靠<strong>观众互动</strong>和<strong>自接自话</strong>推进，节奏更紧凑。四季通用，春节场次见各卡〔备选〕。</p>
+    <p>适用：只有 1 位主持人的场次。单人无搭档接话，靠<strong>观众互动</strong>和<strong>自接自话</strong>推进</p>
   </header>
 
-  <div class="usage">
-    📐 <b>填写说明</b>：<b>【】</b>= 填空处　<b>〔〕</b>= 三选一　<b>▶</b>= 舞台指令（放视频 / 请人上台 / 切麦 / 倒数）。直接点文字修改，自动存本地。主题示例：同心同行 / 再出发 / 一家亲。
-  </div>
 
   <!-- 0 -->
   <div class="card">
     <div class="hd"><div class="badge">0</div><div><h2>活动信息卡</h2><div class="sub">先填</div></div></div>
     <div class="info" contenteditable="true">
       <div class="row"><span class="k">活动名称</span><span>【______年度 · ______ 盛典 / 年会 / 表彰典礼】</span></div>
-      <div class="row"><span class="k">主题</span><span>【______】（例：同心同行 / 再出发 / 一家亲）</span></div>
+      <div class="row"><span class="k">主题</span><span>【______】</span></div>
       <div class="row"><span class="k">时间 / 地点</span><span>【____年__月__日 __:__】　地点：【______】</span></div>
       <div class="row"><span class="k">主持人</span><span>【______】（单人）</span></div>
       <div class="row"><span class="k">称谓口径</span><span>〔家人 / 同事 / 伙伴 / 朋友〕（开场定一种，全程不切换·详见注意事项#7）</span></div>
@@ -261,7 +258,7 @@
 <div class="saveflag" id="flag">✓ 已自动保存</div>
 
 <script>
-  const KEY="host_single_refined_v3";
+  const KEY="host_single_refined_v4";
   const editables=[...document.querySelectorAll('[contenteditable]')];
   function save(){
     const data=editables.map(e=>e.innerHTML);

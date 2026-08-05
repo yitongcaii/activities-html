@@ -92,12 +92,9 @@
 <div class="wrap">
   <header class="hero">
     <h1>👫 双人主持稿 · 通用精华版</h1>
-    <p>适用：2 位主持人（默认 A/B）。双人靠<strong>互抛接话 + AB反差</strong>制造节奏和笑点。四季通用，春节场次见各卡〔备选〕。</p>
+    <p>适用：2 位主持人（默认 A/B）。双人靠<strong>互抛接话 + AB反差</strong>制造节奏和笑点。</p>
   </header>
 
-  <div class="usage">
-    📐 <b>填写说明</b>：<b>【】</b>= 填空处　<b>〔〕</b>= 三选一　<b>▶</b>= 舞台指令（放视频 / 请人上台 / 切麦 / 倒数）。直接点文字修改，自动存本地。主题示例：同心同行 / 再出发 / 一家亲。
-  </div>
 
   <div class="legend">
     <span><i class="dot" style="background:var(--m)"></i>A主持</span>
@@ -111,7 +108,7 @@
     <div class="hd"><div class="badge">0</div><div><h2>活动信息卡</h2><div class="sub">先填</div></div></div>
     <div class="info" contenteditable="true">
       <div class="row"><span class="k">活动名称</span><span>【______年度 · ______ 盛典 / 年会 / 表彰典礼】</span></div>
-      <div class="row"><span class="k">主题</span><span>【______】（例：同心同行 / 再出发 / 一家亲）</span></div>
+      <div class="row"><span class="k">主题</span><span>【______】</span></div>
       <div class="row"><span class="k">时间 / 地点</span><span>【____年__月__日 __:__】　地点：【______】</span></div>
       <div class="row"><span class="k">A主持</span><span>【______】　B主持：【______】</span></div>
       <div class="row"><span class="k">称谓口径</span><span>〔家人 / 同事 / 伙伴 / 朋友〕（开场定一种，全程不切换·详见注意事项#7）</span></div>
@@ -285,7 +282,7 @@
 <div class="saveflag" id="flag">✓ 已自动保存</div>
 
 <script>
-  const KEY="host_double_refined_v3";
+  const KEY="host_double_refined_v4";
   const editables=[...document.querySelectorAll('[contenteditable]')];
   function save(){
     const data=editables.map(e=>e.innerHTML);
