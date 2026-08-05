@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>流程音乐库</title>
+<style>
+:root{--bg:#f7f8fc;--card:#ffffff;--ink:#23272f;--muted:#7a828f;--line:#e7e9f0;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);}
+header{background:linear-gradient(120deg,#6c5ce7,#00b894);color:#fff;padding:28px 22px 22px;}
+header h1{margin:0 0 6px;font-size:26px;letter-spacing:1px;}
+header .sub{opacity:.92;font-size:14px;}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px;}
+.bar{position:sticky;top:0;z-index:5;background:rgba(247,248,252,.92);backdrop-filter:blur(6px);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);}
+.bar input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;outline:none;}
+.bar input:focus{border-color:#6c5ce7;}
+.stats{font-size:13px;color:var(--muted);}
+.addbtn{border:none;background:#e17055;color:#fff;padding:9px 16px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
+.addbtn:hover{filter:brightness(1.08);}
+.cat{margin:18px 0;}
+.cat>summary{font-size:19px;font-weight:700;cursor:pointer;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);list-style:none;}
+.cat>summary::-webkit-details-marker{display:none;}
+.cat>summary::before{content:"▸ ";color:var(--muted);}
+.cat[open]>summary::before{content:"▾ ";}
+.subcat{margin:12px 0 12px 14px;}
+.subcat>summary{font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;list-style:none;padding:6px 0;}
+.subcat>summary::-webkit-details-marker{display:none;}
+.track{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0;flex-wrap:wrap;}
+.track .info{flex:1;min-width:180px;}
+.track .name{font-weight:600;font-size:14px;word-break:break-all;}
+.track .meta{font-size:12px;color:var(--muted);margin-top:2px;}
+.track audio{width:240px;max-width:46vw;height:36px;}
+.dlbtn{border:none;background:#6c5ce7;color:#fff;padding:9px 16px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;}
+.dlbtn:hover{filter:brightness(1.08);}
+.empty{color:var(--muted);padding:30px;text-align:center;}
+.note{font-size:12px;color:var(--muted);padding:10px 16px;text-align:center;}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:24px;}
+.modal{display:none;position:fixed;inset:0;background:rgba(20,22,30,.5);z-index:50;align-items:center;justify-content:center;}
+.modal.show{display:flex;}
+.modal-card{background:#fff;border-radius:16px;padding:22px;width:min(420px,92vw);box-shadow:0 12px 40px rgba(0,0,0,.25);}
+.modal-card h3{margin:0 0 14px;}
+.modal-card label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px;}
+.modal-card input{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px;outline:none;}
+.modal-card input:focus{border-color:#6c5ce7;}
+.modal-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;}
+.modal-btns button{border:none;padding:9px 18px;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600;}
+.modal-btns .ok{background:#6c5ce7;color:#fff;}
+.modal-btns .no{background:#eee;color:#444;}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>🎵 流程音乐库</h1>
+<div class="sub">按活动流程分类 · 点击 ▶ 播放，⬇ 下载（文件经 Git LFS 托管）</div>
+</div></header>
+<div class="bar"><div class="wrap" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;width:100%;">
+<input id="q" type="text" placeholder="搜索歌曲 / 场景，如：颁奖、孤勇者、暖场…" oninput="filter()">
+<button class="addbtn" onclick="openAdd()">＋ 新增音乐</button>
+<span class="stats" id="stat"></span>
+</div></div>
+<main class="wrap">
+<details class="cat" open>
+<summary style="border-left:5px solid #6c5ce7">📁 会议流程 <span style="font-weight:400;color:var(--muted);font-size:13px">（17 首）</span></summary>
+<details class="subcat" open>
+<summary>▸ 暖场音乐 <span style="font-weight:400">· 5 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">暖场音乐01.mp3</div><div class="meta">3443 KB</div></div>
+<audio id="a0" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m000.mp3"></audio>
+<button class="dlbtn" onclick="dl(0)">⬇ 下载</button>
+<span id="n0" data-fn="暖场音乐01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐02.mp3</div><div class="meta">3351 KB</div></div>
+<audio id="a1" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m001.mp3"></audio>
+<button class="dlbtn" onclick="dl(1)">⬇ 下载</button>
+<span id="n1" data-fn="暖场音乐02.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐03.mp3</div><div class="meta">8234 KB</div></div>
+<audio id="a2" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m002.mp3"></audio>
+<button class="dlbtn" onclick="dl(2)">⬇ 下载</button>
+<span id="n2" data-fn="暖场音乐03.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐04.mp3</div><div class="meta">6908 KB</div></div>
+<audio id="a3" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m003.mp3"></audio>
+<button class="dlbtn" onclick="dl(3)">⬇ 下载</button>
+<span id="n3" data-fn="暖场音乐04.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐05.mp3</div><div class="meta">7428 KB</div></div>
+<audio id="a4" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m004.mp3"></audio>
+<button class="dlbtn" onclick="dl(4)">⬇ 下载</button>
+<span id="n4" data-fn="暖场音乐05.mp3" style="display:none"></span>
+</div>
+</details>
+<details class="subcat" open>
+<summary>▸ 主持人上场 <span style="font-weight:400">· 2 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">主持人上场01.mp3</div><div class="meta">7978 KB</div></div>
+<audio id="a5" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m005.mp3"></audio>
+<button class="dlbtn" onclick="dl(5)">⬇ 下载</button>
+<span id="n5" data-fn="主持人上场01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">主持人上场02.mp3</div><div class="meta">8512 KB</div></div>
+<audio id="a6" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m006.mp3"></audio>
+<button class="dlbtn" onclick="dl(6)">⬇ 下载</button>
+<span id="n6" data-fn="主持人上场02.mp3" style="display:none"></span>
+</div>
+</details>
+<details class="subcat" open>
+<summary>▸ 嘉宾上场 <span style="font-weight:400">· 4 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">嘉宾上场01.mp3</div><div class="meta">5001 KB</div></div>
+<audio id="a7" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m007.mp3"></audio>
+<button class="dlbtn" onclick="dl(7)">⬇ 下载</button>
+<span id="n7" data-fn="嘉宾上场01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">嘉宾上场02.mp3</div><div class="meta">1922 KB</div></div>
+<audio id="a8" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m008.mp3"></audio>
+<button class="dlbtn" onclick="dl(8)">⬇ 下载</button>
+<span id="n8" data-fn="嘉宾上场02.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">嘉宾上场03.mp3</div><div class="meta">976 KB</div></div>
+<audio id="a9" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m009.mp3"></audio>
+<button class="dlbtn" onclick="dl(9)">⬇ 下载</button>
+<span id="n9" data-fn="嘉宾上场03.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">嘉宾上场04.mp3</div><div class="meta">7322 KB</div></div>
+<audio id="a10" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m010.mp3"></audio>
+<button class="dlbtn" onclick="dl(10)">⬇ 下载</button>
+<span id="n10" data-fn="嘉宾上场04.mp3" style="display:none"></span>
+</div>
+</details>
+<details class="subcat" open>
+<summary>▸ 颁奖 <span style="font-weight:400">· 6 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">颁奖01.mp3</div><div class="meta">13286 KB</div></div>
+<audio id="a11" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m011.mp3"></audio>
+<button class="dlbtn" onclick="dl(11)">⬇ 下载</button>
+<span id="n11" data-fn="颁奖01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">颁奖02.mp3</div><div class="meta">4146 KB</div></div>
+<audio id="a12" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m012.mp3"></audio>
+<button class="dlbtn" onclick="dl(12)">⬇ 下载</button>
+<span id="n12" data-fn="颁奖02.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">颁奖03.mp3</div><div class="meta">4035 KB</div></div>
+<audio id="a13" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m013.mp3"></audio>
+<button class="dlbtn" onclick="dl(13)">⬇ 下载</button>
+<span id="n13" data-fn="颁奖03.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">颁奖04.mp3</div><div class="meta">971 KB</div></div>
+<audio id="a14" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m014.mp3"></audio>
+<button class="dlbtn" onclick="dl(14)">⬇ 下载</button>
+<span id="n14" data-fn="颁奖04.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">颁奖05.mp3</div><div class="meta">1636 KB</div></div>
+<audio id="a15" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m015.mp3"></audio>
+<button class="dlbtn" onclick="dl(15)">⬇ 下载</button>
+<span id="n15" data-fn="颁奖05.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">颁奖06.mp3</div><div class="meta">19601 KB</div></div>
+<audio id="a16" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m016.mp3"></audio>
+<button class="dlbtn" onclick="dl(16)">⬇ 下载</button>
+<span id="n16" data-fn="颁奖06.mp3" style="display:none"></span>
+</div>
+</details>
+</details>
+
+<details class="cat" open>
+<summary style="border-left:5px solid #00b894">📁 晚宴流程 <span style="font-weight:400;color:var(--muted);font-size:13px">（35 首）</span></summary>
+<details class="subcat" open>
+<summary>▸ 暖场音乐 <span style="font-weight:400">· 5 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">暖场音乐01.mp3</div><div class="meta">3443 KB</div></div>
+<audio id="a17" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m017.mp3"></audio>
+<button class="dlbtn" onclick="dl(17)">⬇ 下载</button>
+<span id="n17" data-fn="暖场音乐01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐02.mp3</div><div class="meta">3351 KB</div></div>
+<audio id="a18" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m018.mp3"></audio>
+<button class="dlbtn" onclick="dl(18)">⬇ 下载</button>
+<span id="n18" data-fn="暖场音乐02.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐03.mp3</div><div class="meta">8234 KB</div></div>
+<audio id="a19" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m019.mp3"></audio>
+<button class="dlbtn" onclick="dl(19)">⬇ 下载</button>
+<span id="n19" data-fn="暖场音乐03.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐04.mp3</div><div class="meta">6908 KB</div></div>
+<audio id="a20" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m020.mp3"></audio>
+<button class="dlbtn" onclick="dl(20)">⬇ 下载</button>
+<span id="n20" data-fn="暖场音乐04.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">暖场音乐05.mp3</div><div class="meta">7428 KB</div></div>
+<audio id="a21" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m021.mp3"></audio>
+<button class="dlbtn" onclick="dl(21)">⬇ 下载</button>
+<span id="n21" data-fn="暖场音乐05.mp3" style="display:none"></span>
+</div>
+</details>
+<details class="subcat" open>
+<summary>▸ 主持人上场 <span style="font-weight:400">· 3 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">主持人上场01.mp3</div><div class="meta">7978 KB</div></div>
+<audio id="a22" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m022.mp3"></audio>
+<button class="dlbtn" onclick="dl(22)">⬇ 下载</button>
+<span id="n22" data-fn="主持人上场01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">主持人上场02.mp3</div><div class="meta">8512 KB</div></div>
+<audio id="a23" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m023.mp3"></audio>
+<button class="dlbtn" onclick="dl(23)">⬇ 下载</button>
+<span id="n23" data-fn="主持人上场02.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">主持人上场03.mp3</div><div class="meta">1729 KB</div></div>
+<audio id="a24" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m024.mp3"></audio>
+<button class="dlbtn" onclick="dl(24)">⬇ 下载</button>
+<span id="n24" data-fn="主持人上场03.mp3" style="display:none"></span>
+</div>
+</details>
+<details class="subcat" open>
+<summary>▸ 抽奖&amp;游戏 <span style="font-weight:400">· 5 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">抽奖&amp;游戏01.mp3</div><div class="meta">3361 KB</div></div>
+<audio id="a25" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m025.mp3"></audio>
+<button class="dlbtn" onclick="dl(25)">⬇ 下载</button>
+<span id="n25" data-fn="抽奖&amp;游戏01.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">抽奖&amp;游戏02.mp3</div><div class="meta">5413 KB</div></div>
+<audio id="a26" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m026.mp3"></audio>
+<button class="dlbtn" onclick="dl(26)">⬇ 下载</button>
+<span id="n26" data-fn="抽奖&amp;游戏02.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">抽奖&amp;游戏03.mp3</div><div class="meta">5627 KB</div></div>
+<audio id="a27" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m027.mp3"></audio>
+<button class="dlbtn" onclick="dl(27)">⬇ 下载</button>
+<span id="n27" data-fn="抽奖&amp;游戏03.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">抽奖&amp;游戏04.mp3</div><div class="meta">7917 KB</div></div>
+<audio id="a28" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m028.mp3"></audio>
+<button class="dlbtn" onclick="dl(28)">⬇ 下载</button>
+<span id="n28" data-fn="抽奖&amp;游戏04.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">抽奖&amp;游戏05.mp3</div><div class="meta">1445 KB</div></div>
+<audio id="a29" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m029.mp3"></audio>
+<button class="dlbtn" onclick="dl(29)">⬇ 下载</button>
+<span id="n29" data-fn="抽奖&amp;游戏05.mp3" style="display:none"></span>
+</div>
+</details>
+<details class="subcat" open>
+<summary>▸ 听歌识曲 <span style="font-weight:400">· 22 首</span></summary>
+<div class="track">
+<div class="info"><div class="name">BEYOND-海阔天空.mp3</div><div class="meta">12959 KB</div></div>
+<audio id="a30" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m030.mp3"></audio>
+<button class="dlbtn" onclick="dl(30)">⬇ 下载</button>
+<span id="n30" data-fn="BEYOND-海阔天空.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">G.E.M. 邓紫棋-多远都要在一起.mp3</div><div class="meta">8775 KB</div></div>
+<audio id="a31" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m031.mp3"></audio>
+<button class="dlbtn" onclick="dl(31)">⬇ 下载</button>
+<span id="n31" data-fn="G.E.M. 邓紫棋-多远都要在一起.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">五月天-倔强.mp3</div><div class="meta">10490 KB</div></div>
+<audio id="a32" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m032.mp3"></audio>
+<button class="dlbtn" onclick="dl(32)">⬇ 下载</button>
+<span id="n32" data-fn="五月天-倔强.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">修炼爱情.mp3</div><div class="meta">4485 KB</div></div>
+<audio id="a33" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m033.mp3"></audio>
+<button class="dlbtn" onclick="dl(33)">⬇ 下载</button>
+<span id="n33" data-fn="修炼爱情.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">周杰伦-晴天.mp3</div><div class="meta">10807 KB</div></div>
+<audio id="a34" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m034.mp3"></audio>
+<button class="dlbtn" onclick="dl(34)">⬇ 下载</button>
+<span id="n34" data-fn="周杰伦-晴天.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">大鱼.mp3</div><div class="meta">4903 KB</div></div>
+<audio id="a35" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m035.mp3"></audio>
+<button class="dlbtn" onclick="dl(35)">⬇ 下载</button>
+<span id="n35" data-fn="大鱼.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">好久不见.mp3</div><div class="meta">3916 KB</div></div>
+<audio id="a36" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m036.mp3"></audio>
+<button class="dlbtn" onclick="dl(36)">⬇ 下载</button>
+<span id="n36" data-fn="好久不见.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">孤勇者.mp3</div><div class="meta">4001 KB</div></div>
+<audio id="a37" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m037.mp3"></audio>
+<button class="dlbtn" onclick="dl(37)">⬇ 下载</button>
+<span id="n37" data-fn="孤勇者.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">张惠妹-身后.mp3</div><div class="meta">10683 KB</div></div>
+<audio id="a38" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m038.mp3"></audio>
+<button class="dlbtn" onclick="dl(38)">⬇ 下载</button>
+<span id="n38" data-fn="张惠妹-身后.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">张惠妹-连名带姓.mp3</div><div class="meta">13299 KB</div></div>
+<audio id="a39" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m039.mp3"></audio>
+<button class="dlbtn" onclick="dl(39)">⬇ 下载</button>
+<span id="n39" data-fn="张惠妹-连名带姓.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">张杰-逆战.mp3</div><div class="meta">9313 KB</div></div>
+<audio id="a40" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m040.mp3"></audio>
+<button class="dlbtn" onclick="dl(40)">⬇ 下载</button>
+<span id="n40" data-fn="张杰-逆战.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">方大同-特别的人.mp3</div><div class="meta">10390 KB</div></div>
+<audio id="a41" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m041.mp3"></audio>
+<button class="dlbtn" onclick="dl(41)">⬇ 下载</button>
+<span id="n41" data-fn="方大同-特别的人.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">曹操.mp3</div><div class="meta">3782 KB</div></div>
+<audio id="a42" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m042.mp3"></audio>
+<button class="dlbtn" onclick="dl(42)">⬇ 下载</button>
+<span id="n42" data-fn="曹操.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">杨千嬅-处处吻.mp3</div><div class="meta">8044 KB</div></div>
+<audio id="a43" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m043.mp3"></audio>
+<button class="dlbtn" onclick="dl(43)">⬇ 下载</button>
+<span id="n43" data-fn="杨千嬅-处处吻.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">演员-薛之谦.mp3</div><div class="meta">10207 KB</div></div>
+<audio id="a44" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m044.mp3"></audio>
+<button class="dlbtn" onclick="dl(44)">⬇ 下载</button>
+<span id="n44" data-fn="演员-薛之谦.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">潘玮柏,张韶涵-快乐崇拜.mp3</div><div class="meta">8290 KB</div></div>
+<audio id="a45" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m045.mp3"></audio>
+<button class="dlbtn" onclick="dl(45)">⬇ 下载</button>
+<span id="n45" data-fn="潘玮柏,张韶涵-快乐崇拜.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">爱情讯息.mp3</div><div class="meta">4386 KB</div></div>
+<audio id="a46" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m046.mp3"></audio>
+<button class="dlbtn" onclick="dl(46)">⬇ 下载</button>
+<span id="n46" data-fn="爱情讯息.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">王菲-世界赠予我的.mp3</div><div class="meta">9813 KB</div></div>
+<audio id="a47" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m047.mp3"></audio>
+<button class="dlbtn" onclick="dl(47)">⬇ 下载</button>
+<span id="n47" data-fn="王菲-世界赠予我的.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">稻香-周杰伦.mp3</div><div class="meta">8731 KB</div></div>
+<audio id="a48" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m048.mp3"></audio>
+<button class="dlbtn" onclick="dl(48)">⬇ 下载</button>
+<span id="n48" data-fn="稻香-周杰伦.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">红色高跟鞋-蔡健雅.mp3</div><div class="meta">32 KB</div></div>
+<audio id="a49" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m049.mp3"></audio>
+<button class="dlbtn" onclick="dl(49)">⬇ 下载</button>
+<span id="n49" data-fn="红色高跟鞋-蔡健雅.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">蔡健雅-红色高跟鞋.mp3</div><div class="meta">8340 KB</div></div>
+<audio id="a50" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m050.mp3"></audio>
+<button class="dlbtn" onclick="dl(50)">⬇ 下载</button>
+<span id="n50" data-fn="蔡健雅-红色高跟鞋.mp3" style="display:none"></span>
+</div>
+<div class="track">
+<div class="info"><div class="name">陈奕迅-圣诞结（伴奏）.mp3</div><div class="meta">4721 KB</div></div>
+<audio id="a51" controls preload="none" src="https://media.githubusercontent.com/media/yitongcaii/activities-html/main/music-gallery-assets/m051.mp3"></audio>
+<button class="dlbtn" onclick="dl(51)">⬇ 下载</button>
+<span id="n51" data-fn="陈奕迅-圣诞结（伴奏）.mp3" style="display:none"></span>
+</div>
+</details>
+</details>
+
+<div class="empty" id="empty" style="display:none">没有匹配的歌曲 🤔</div>
+</main>
+<div class="note">🎵 音乐文件由 Git LFS 托管，若下载缓慢可重试。</div>
+<footer>共 52 首 · 全部可从 GitHub 拉取</footer>
+<div id="modal" class="modal"><div class="modal-card">
+<h3>新增音乐</h3>
+<label>名称（含 .mp3）</label>
+<input id="nm-name" type="text" placeholder="如：暖场音乐- example.mp3">
+<label>场景 / 分类（留空则归入「我新增的音乐」）</label>
+<input id="nm-sub" type="text" placeholder="如：暖场音乐">
+<label>选择本地 mp3 文件</label>
+<input id="nm-file" type="file" accept="audio/mpeg,.mp3">
+<label>或填写已上传的媒体地址（LFS / 直链）</label>
+<input id="nm-url" type="text" placeholder="https://.../xxx.mp3">
+<div class="modal-btns">
+<button class="ok" onclick="addMusic()">添加</button>
+<button class="no" onclick="closeModal()">取消</button>
+</div>
+</div></div>
+<script>
+var TOTAL=52;
+document.getElementById('stat').textContent='共 '+TOTAL+' 首';
+function escHtml(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function dl(i){
+  var a=document.getElementById('a'+i);
+  var url=a.src;
+  var name=document.getElementById('n'+i).dataset.fn;
+  fetch(url).then(function(r){return r.blob();}).then(function(blob){
+    var burl=URL.createObjectURL(blob);
+    var link=document.createElement('a'); link.href=burl; link.download=name;
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    setTimeout(function(){URL.revokeObjectURL(burl);}, 2000);
+  }).catch(function(e){ alert('下载失败：'+e); });
+}
+function dlAdded(idx,name){
+  var a=document.getElementById(idx);
+  var src=a.src;
+  if(src.indexOf('blob:')===0){
+    var link=document.createElement('a'); link.href=src; link.download=name;
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+  } else {
+    fetch(src).then(function(r){return r.blob();}).then(function(blob){
+      var burl=URL.createObjectURL(blob);
+      var link=document.createElement('a'); link.href=burl; link.download=name;
+      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+      setTimeout(function(){URL.revokeObjectURL(burl);}, 2000);
+    }).catch(function(e){ alert('下载失败：'+e); });
+  }
+}
+function filter(){
+  var q=document.getElementById('q').value.trim().toLowerCase();
+  var shown=0;
+  document.querySelectorAll('.track').forEach(function(t){
+    var name=t.querySelector('.name').textContent.toLowerCase();
+    var ok=!q || name.indexOf(q)>=0;
+    t.style.display=ok?'':'none';
+    if(ok) shown++;
+  });
+  document.querySelectorAll('.subcat').forEach(function(s){
+    var any=[].slice.call(s.querySelectorAll('.track')).some(function(t){return t.style.display!=='none';});
+    s.style.display=any?'':'none';
+  });
+  document.querySelectorAll('.cat').forEach(function(c){
+    var any=[].slice.call(c.querySelectorAll('.track')).some(function(t){return t.style.display!=='none';});
+    c.style.display=any?'':'none';
+  });
+  document.getElementById('empty').style.display=shown?'none':'block';
+  document.getElementById('stat').textContent='匹配 '+shown+' / '+TOTAL+' 首';
+}
+function openAdd(){ document.getElementById('modal').classList.add('show'); }
+function closeModal(){
+  document.getElementById('modal').classList.remove('show');
+  document.getElementById('nm-name').value='';
+  document.getElementById('nm-sub').value='';
+  document.getElementById('nm-url').value='';
+  document.getElementById('nm-file').value='';
+}
+function addMusic(){
+  var name=document.getElementById('nm-name').value.trim();
+  if(!name) name='未命名音乐.mp3';
+  if(name.toLowerCase().indexOf('.mp3')<0) name+='.mp3';
+  var sub=document.getElementById('nm-sub').value.trim();
+  var file=document.getElementById('nm-file').files[0];
+  var url=document.getElementById('nm-url').value.trim();
+  if(!file && !url){ alert('请选择本地 mp3 文件，或填写已上传的媒体地址'); return; }
+  var src=file? URL.createObjectURL(file) : url;
+  var idx='x'+Date.now();
+  var cat=document.getElementById('cat-added');
+  if(!cat){
+    cat=document.createElement('details'); cat.id='cat-added'; cat.className='cat'; cat.open=true;
+    cat.innerHTML='<summary style="border-left:5px solid #e17055">📁 我新增的音乐</summary>';
+    document.querySelector('main.wrap').insertBefore(cat, document.getElementById('empty'));
+  }
+  var subEl=null;
+  if(sub){
+    var subs=cat.querySelectorAll('details.subcat');
+    for(var k=0;k<subs.length;k++){ if(subs[k].getAttribute('data-sub')===sub){ subEl=subs[k]; break; } }
+    if(!subEl){
+      subEl=document.createElement('details'); subEl.className='subcat'; subEl.setAttribute('data-sub',sub); subEl.open=true;
+      subEl.innerHTML='<summary>▸ '+escHtml(sub)+'</summary>';
+      cat.appendChild(subEl);
+    }
+  }
+  var track=document.createElement('div'); track.className='track';
+  track.innerHTML='<div class="info"><div class="name">'+escHtml(name)+'</div><div class="meta">新增</div></div>'+
+    '<audio id="'+idx+'" controls preload="none" src="'+src+'"></audio>'+
+    '<button class="dlbtn" onclick="dlAdded(\''+idx+'\',\''+escHtml(name)+'\')">⬇ 下载</button>';
+  if(subEl){ subEl.appendChild(track); } else { cat.appendChild(track); }
+  document.getElementById('stat').textContent='';
+  closeModal();
+}
+</script>
+</body>
+</html>
