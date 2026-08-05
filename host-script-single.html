@@ -103,32 +103,12 @@
     </div>
   </div>
 
-  <!-- R 流程时间轴 -->
-  <div class="card">
-    <div class="hd"><div class="badge" style="background:linear-gradient(135deg,var(--teal),var(--coral))">⏱</div>
-      <div><h2>流程时间轴</h2><div class="sub">建议时长 · 可按结束时间倒推压缩</div></div></div>
-    <table class="ros" contenteditable="true">
-      <tr><th>环节</th><th>建议时长</th></tr>
-      <tr><td>暖场循环</td><td>开场前 10min</td></tr>
-      <tr><td>开场白</td><td>3–5min</td></tr>
-      <tr><td>领导致辞</td><td>8–15min</td></tr>
-      <tr><td>工作回顾 / 战略展望</td><td>5–8min</td></tr>
-      <tr><td>颁奖环节</td><td>10–15min</td></tr>
-      <tr><td>互动游戏</td><td>5–8min / 轮</td></tr>
-      <tr><td>抽奖环节</td><td>10–15min</td></tr>
-      <tr><td>温情 / 视频</td><td>3–5min</td></tr>
-      <tr><td>领导祝酒 + 宣誓</td><td>5min</td></tr>
-      <tr><td>谢幕 + 散场引导</td><td>3–5min</td></tr>
-    </table>
-    <p class="note">总控建议 90–120min；压缩时优先砍「工作回顾 / 领导致辞」，保住<b>颁奖 + 抽奖 + 温情</b>三核心（详见注意事项 #5）。</p>
-  </div>
-
   <!-- 1 -->
   <div class="card">
     <div class="hd"><div class="badge">1</div><div><h2>暖场</h2><div class="sub">开场前 10 分钟 · 循环播</div></div></div>
     <div class="speech" contenteditable="true">
       <p>亲爱的各位〔家人 / 同事 / 伙伴 / 朋友〕，我们的【活动全称】将在十分钟后准时开始，请将手机调到静音或关闭，感谢支持与配合。</p>
-      <p class="cue">▶ 5 分钟 / 1 分钟 / 30 秒 重复同上；最后 30 秒：▶ 请全体随我一同倒数 10·9·…·1，迎接【活动全称】！</p>
+      <p class="cue">▶ 请全体随我一同倒数 10·9·…·1，迎接【活动全称】！</p>
     </div>
   </div>
 
@@ -258,7 +238,7 @@
 <div class="saveflag" id="flag">✓ 已自动保存</div>
 
 <script>
-  const KEY="host_single_refined_v4";
+  const KEY="host_single_refined_v5";
   const editables=[...document.querySelectorAll('[contenteditable]')];
   function save(){
     const data=editables.map(e=>e.innerHTML);
