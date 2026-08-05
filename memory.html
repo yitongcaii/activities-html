@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的 MEMORY.md · 协作记忆库</title>
+<style>
+:root{
+  --bg:#f5f7fb; --ink:#1f2937; --muted:#6b7280;
+  --c1:#6366f1; --c2:#ec4899; --c3:#06b6d4;
+  --card:#fff; --line:#eef0f6; --warn:#ef4444; --ok:#10b981;
+  --shadow:0 10px 30px rgba(31,41,55,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.72;}
+.hero{background:linear-gradient(120deg,var(--c1),var(--c2) 55%,var(--c3));color:#fff;padding:54px 22px 46px;text-align:center;}
+.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.5px}
+.hero p{margin:0;opacity:.92;font-size:14px}
+.wrap{max-width:920px;margin:0 auto;padding:30px 18px 10px}
+.group{margin:34px 0 10px;font-size:13px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;display:flex;align-items:center;gap:10px}
+.group::before{content:"";width:28px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;opacity:0;transform:translateY(14px);transition:.55s cubic-bezier(.2,.7,.3,1)}
+.card.show{opacity:1;transform:none}
+.card>summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:800;font-size:16.5px;display:flex;align-items:center;gap:11px;border-left:5px solid var(--c1)}
+.card>summary::-webkit-details-marker{display:none}
+.card>summary::after{content:"▸";margin-left:auto;color:var(--muted);transition:.3s;font-weight:700}
+.card[open]>summary::after{transform:rotate(90deg)}
+.card.warn>summary{border-left-color:var(--warn);color:var(--warn)}
+.card.proj>summary{border-left-color:var(--c3)}
+.card .body{padding:6px 22px 22px;color:#374151;font-size:14.5px}
+.card .body ul{margin:8px 0;padding-left:20px}
+.card .body li{margin:8px 0}
+.card .body b{color:#111827}
+.sub{font-weight:800;color:#374151;margin:14px 0 4px;display:flex;align-items:center;gap:7px}
+.sub::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c3);transform:rotate(45deg)}
+.tag{display:inline-block;background:#eef2ff;color:#4338ca;border-radius:6px;padding:1px 8px;font-size:12px;margin-right:4px;font-weight:600}
+.w{color:var(--warn);font-weight:800}
+.k{color:#be185d;font-weight:800}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#f3f4f6;border-radius:5px;padding:1px 6px;font-size:13px;color:#be185d}
+footer{text-align:center;padding:22px 16px;color:#999;font-size:13px;letter-spacing:.5px;border-top:1px solid #eee;margin-top:46px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>🧠 我的 MEMORY.md</h1>
+  <p>跨项目协作记忆库 · 最后核对 2026-08-05</p>
+</header>
+
+<div class="wrap">
+
+  <div class="group">跨项目 · 通用习惯与硬约束（权威总纲）</div>
+
+  <details class="card show" open>
+    <summary><span>沟通与协作偏好</span></summary>
+    <div class="body">
+      <ul>
+        <li>极简命令驱动、结论先行、结构化表格 + 定量验收。厌恶冗长解释与寒暄。改完必须验证闭环（<b>"改了吗"是硬关卡</b>）。</li>
+        <li>责任分工偏好<b>单一主责人</b>，避免多头（每条事项只挂 1 个主责人标签）。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary><span>交付物偏好（跨项目通用，高频）</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>成品尽量给 HTML</b>：凡可视化 / 展示型 / 参考型交付物，优先做<b>单文件自包含 HTML</b>（活泼交互：渐变 / 卡片 / 滚动动效），而非 MD / Word / PPT。能通过 preview 直接浏览。</li>
+        <li><b>每次交付必须给可点击链接</b>：成品交付时，必须同时提供"点开即看"的入口——已上线走 GitHub Pages，本地稿用 present_files 预览卡片。<span class="w">不接受"只丢个文件路径让你自己找"</span>。</li>
+        <li><b>最终版自动归档 Obsidian</b>：用户确认"定稿 / 最终版 / 不改了"的文件，复制到 <span class="mono">C:\Users\v_yitcai\Documents\Obsidian\活动\</span>（按类型建子目录，同名覆盖、源不删）；纯草稿 / 未定稿不动。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary><span>GitHub Pages 交付硬约束（权威总纲，唯一）</span></summary>
+    <div class="body">
+      <ul>
+        <li>文件名必须 <b>ASCII</b>（中文名 Pages 一律 404）；根目录放 <span class="mono">.nojekyll</span>。</li>
+        <li>每个 HTML <span class="mono">&lt;/body&gt;</span> 前必含页脚 <b>📌 本页由 yitong 沉淀整理 · 文化活动知识库</b>。验收：含页脚文件数 = HTML 总数。</li>
+        <li>推送走 <b>SSH</b>（yitongcaii 账号，key <span class="mono">C:\Users\v_yitcai\.ssh\id_ed25519</span>），不碰 PAT。</li>
+        <li><b>可编辑模板（contenteditable + localStorage）结构性改动必升 KEY</b>：凡改正文（增删 / 清批注），KEY 版本 +1，否则浏览器旧草稿（同 KEY）覆盖新模板，看到"旧版"。改完提醒用户<b>硬刷新</b>（Ctrl/Cmd+Shift+R）。</li>
+        <li><b>Pages CDN 10 分钟缓存</b>：<span class="mono">Cache-Control: max-age=600</span>，各节点失效不一。push 后用户若说"还是旧的"，先 curl 确认 raw/Pages 已是新版；是则让用户访问 <span class="mono">?v=N</span>（N=当次 KEY 版本）<b>绕过缓存立即看</b>，并说明约 10 分钟普通链接自动全节点更新。</li>
+        <li><b>git 提交用 <span class="mono">git add &lt;具体文件&gt;</span> 而非 <span class="mono">git add -A</span></b>：避免误带工作区遗留大文件（如 ppt-gallery-assets ~35MB）。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary><span>Git LFS 指针文件认知（适用于含二进制资源的仓库）</span></summary>
+    <div class="body">
+      <ul>
+        <li>走 Git LFS 的文件，clone / 网页看到每个文件仅 ~130 字节、内容是 <span class="mono">version https://git-lfs.github.com/...</span> 的<b>指针</b>，非真实内容。用户说"文件丢了 / 空的"先查是否 LFS 指针，主动说明这是正常机制；验证用 <span class="mono">curl -I media.githubusercontent.com/...</span> 看 Content-Length 是否真实大小。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card warn">
+    <summary><span>⚠️ 生成产物维护铁律（通用，2026-08-05 固化）</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>适用范围</b>：任何"脚本 / 工具 / 模板生成产物"的场景——构建脚本出 HTML、自动化报表出数据文件、模板渲染出文档、代码生成器等。不限于某个项目或某份看板。</li>
+        <li><b>根治铁律</b>：改动一律改<b>源</b>（脚本 / 模板 / 配置 / 数据源），<b>不碰产物</b>（生成的 HTML / 数据文件 / 输出文档 / 生成代码）。</li>
+        <li><b>根因</b>：手工改终产物 ↔ 重跑 / 重生成脚本<b>本质冲突</b>——① 重跑会覆盖手工改动（白改）；② 手工改让产物与源码漂移失准，下次重跑又回退，且改动无法追溯、无法复用。</li>
+        <li><b>验收</b>：需求落地后确认改动在源码、产物由脚本<b>重新生成</b>（不手动 edit 产物文件）。例外：仅当产物无对应源码 / 一次性手工产物且不重跑时，才允许直接改产物。</li>
+        <li>（博闻看板 <span class="mono">build_dashboard2.py</span> 即此铁律的典型案例，见项目级）</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card warn">
+    <summary><span>⚠️ 批量编辑 / 删除任务防漏验收铁律（2026-08-05 漏删返工后固化）</span></summary>
+    <div class="body">
+      <p><b>根因</b>：长串"删掉：A… B…"指令里，夹在正文中、外观不像 UI 标签的"编辑批注"（<span class="k">"替代老套的…"</span><span class="k">"〔XX备选〕可加…"</span><span class="k">"上一句即范例"</span>）易被误判为"修改说明"只执行显眼部分就收工 → 返工。</p>
+      <p><b>铁律</b>：</p>
+      <ul>
+        <li>1. 先拆<b>逐条 checklist</b>，每条 = 一个可验收项。</li>
+        <li>2. 每条执行后必须有验收证据（grep 关键词 / 对照），全绿才提交，<b>不靠"感觉做完了"</b>。</li>
+        <li>3. 做完<b>反向扫描</b>：用户列的所有删除项是否还有残留（不止查"我删的那个"）。</li>
+        <li>4. 识别"编辑批注"特征默认删：以"替代 / 可加 / 范例 / 进阶玩法 / 直接改"开头、带"〔XX备选〕"、或"（例：…）"——除非用户明确说保留。</li>
+        <li>5. 整文件通读 diff 或关键段落再收工，确认无"像注释但非正文"的东西漏网。</li>
+        <li>6. 凡整文件替换 / 重构，必须复查"页脚 / 统一装饰"没被覆盖丢。</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="group">项目专属 · 文化活动项目</div>
+
+  <details class="card proj">
+    <summary><span>用户稳定偏好（本项目）</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>SOP 必含 Why 层</b>：任何 SOP 先"厘清 Why"再定 How/What（2026-07-22 起）。</li>
+        <li><b>严格区分 SOP / 经验库 / 避坑点</b>：SOP = 环节-责任人-完成标准流程表；避坑点只是配套经验，不叫 SOP。</li>
+        <li><b>三件套形式铁律</b>：SOP = 「环节/内容/责任人/完成标准」表；Rundown = 当天分钟级剧本（时间/环节/负责人/时长/物料）；Checklist = 按阶段打勾防漏清单。三者各司其职，不混写。</li>
+        <li>责任分工单一主责人、交付物形式偏好 HTML（活泼交互）—— 见用户级。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card proj">
+    <summary><span>项目背景</span></summary>
+    <div class="body">
+      <ul>
+        <li>用户（y / 蔡依彤，云技服 HRBP+PM）在搭建<b>文化活动标准文档体系</b>。员工大会与 Offsite 是两类独立活动，各自 SOP/Rundown/Checklist 三件套。员工大会"对外扩·全员"；Offsite 定位"向内收·小圈·深度产出"且明确是<b>异地活动</b>（交通/住宿/跨城物料/应急预案）。文档地图见 <span class="mono">文化活动文档地图.html</span>。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card proj">
+    <summary><span>环境 / 工具</span></summary>
+    <div class="body">
+      <div class="sub">双 GitHub 账号</div>
+      <ul>
+        <li><b>yutttyi 已退役</b>（2026-07-29）：仓设为 PRIVATE + Pages 停用，对外 404（套餐不支持私有 Pages）。</li>
+        <li><b>yitongcaii 活跃</b>（公开站 <span class="mono">https://yitongcaii.github.io/activities-html/</span>）：本地源 <span class="mono">D:\activities-html-yitongcaii</span>，SSH 推送。文化活动 HTML 全部在此。</li>
+        <li>通用推送 / 文件名 / 页脚 / KEY / 缓存规则见用户级「GitHub Pages 交付硬约束」。</li>
+      </ul>
+      <div class="sub">PowerShell 5.1 本机坑（硬性）</div>
+      <ul>
+        <li>① 管道喂 token/长串给 gh/curl 会传脏 → 写文件+<span class="mono">@文件</span> 或 <span class="mono">--%</span> 透传；② <span class="mono">Set-Content</span> 默认 UTF8 <b>带 BOM</b>，GitHub 拒，写 JSON 用 <span class="mono">-Encoding ASCII</span>；③ <span class="mono">ssh-keygen -N ""</span> 空串被吞 → Git bash <span class="mono">ssh-keygen -N ''</span>；④ bash <span class="mono">-c</span> 内双引号在 PS 会 EOF → 单引号包裹或 <span class="mono">ssh --%</span>。</li>
+      </ul>
+      <div class="sub">winget 不可用</div>
+      <ul>
+        <li>Administrator 账户失效别名桩；装 CLI 改走 git 自带 curl（<span class="mono">D:\AI程序\Git\mingw64\bin\curl.exe</span>）抓 <span class="mono">/releases/latest</span> 302 → 下 zip → 解压。GitHub REST API 被共享出口 IP 限流，不走 API 查版本/建仓。</li>
+      </ul>
+      <div class="sub">乐享 MCP <span class="w">⚠️ 当前断开，信息待重连验证</span></div>
+      <ul>
+        <li>平台能力边界（无 iframe/embed 块、HTML 导入变静态快照）曾于 2026-07-24 验证；当前 connector 状态 disconnected，且索引页（entry 615f877）已失效。<b>重连后需重新验证再据此行动，勿直接信此处旧结论</b>。</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="card proj">
+    <summary><span>数据看板维护纪律（博闻看板，通用铁律的案例）</span></summary>
+    <div class="body">
+      <ul>
+        <li>通用铁律见用户级「⚠️ 生成产物维护铁律」：凡脚本 / 工具 / 模板生成产物，改动只改源、不碰产物。</li>
+        <li>博闻培训覆盖率看板由 <span class="mono">build_dashboard2.py</span>（源）+ <span class="mono">dashboard.py</span> 生成 HTML 产物（<span class="mono">bowen_dashboard*.html</span> / <span class="mono">bowen_overview*.html</span>）。任何口径 / 内容改动都改源码（不碰生成的 HTML）；产物由脚本重新生成。</li>
+      </ul>
+    </div>
+  </details>
+
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.1});
+document.querySelectorAll('.card').forEach((c,i)=>{c.style.transitionDelay=(i%6*40)+'ms';io.observe(c);});
+</script>
+</body>
+</html>
