@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人首玩包 · AI 工具直达站</title>
+<style>
+  :root{
+    --bg1:#fef6ff; --bg2:#eef4ff; --ink:#1f2330; --muted:#6b7280;
+    --ok:#16a34a; --run:#0ea5e9; --online:#f97316; --local:#8b5cf6;
+    --card:#ffffff; --line:#ececf2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(135deg,var(--bg1),var(--bg2) 60%,#eafaf3);
+    min-height:100vh; padding:32px 18px 60px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;}
+  header h1{
+    font-size:34px;margin:0 0 6px;font-weight:800;
+    background:linear-gradient(90deg,#7c3aed,#0ea5e9,#16a34a);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header p{color:var(--muted);margin:0 0 18px;font-size:15px;}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 22px;}
+  .chip{
+    border:1px solid #e3e3ee;background:#fff;border-radius:999px;
+    padding:6px 14px;font-size:13px;cursor:pointer;transition:.15s;user-select:none;
+  }
+  .chip.active{box-shadow:0 4px 14px rgba(124,58,237,.25);transform:translateY(-1px);font-weight:700;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+  .d-run{background:var(--run);} .d-online{background:var(--online);}
+  .d-local{background:var(--local);} .d-script{background:#6366f1;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;}
+  .card{
+    background:var(--card);border-radius:18px;padding:20px;position:relative;
+    box-shadow:0 8px 26px rgba(31,35,48,.08);border:1px solid #f0f0f6;
+    transition:.18s;overflow:hidden;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(31,35,48,.14);}
+  .badge{
+    position:absolute;top:16px;right:16px;font-size:12px;font-weight:700;color:#fff;
+    border-radius:999px;padding:4px 11px;
+  }
+  .b-run{background:var(--run);} .b-online{background:var(--online);}
+  .b-local{background:var(--local);} .b-script{background:#6366f1;}
+  .card h3{margin:4px 0 2px;font-size:19px;font-weight:800;}
+  .card .sub{color:var(--muted);font-size:13px;margin-bottom:12px;}
+  .card .desc{font-size:14px;line-height:1.6;margin:0 0 14px;}
+  .steps{font-size:13px;color:#374151;line-height:1.8;margin:0 0 14px;padding-left:18px;}
+  .btn{
+    display:inline-block;text-decoration:none;font-weight:700;font-size:14px;
+    border-radius:12px;padding:10px 16px;color:#fff;transition:.15s;
+    box-shadow:0 6px 16px rgba(14,165,233,.25);
+  }
+  .btn:hover{filter:brightness(1.05);transform:translateY(-1px);}
+  .btn-run{background:linear-gradient(90deg,#0ea5e9,#22d3ee);}
+  .btn-online{background:linear-gradient(90deg,#f97316,#fb923c);}
+  .btn-local{background:linear-gradient(90deg,#8b5cf6,#a78bfa);}
+  .btn-script{background:linear-gradient(90deg,#6366f1,#818cf8);}
+  .code{
+    margin-top:12px;background:#0f172a;color:#cbd5e1;border-radius:12px;
+    padding:12px 14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;
+    white-space:pre-wrap;line-height:1.6;
+  }
+  .note{font-size:12px;color:var(--muted);margin-top:10px;}
+  details.how{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:#fafbff;overflow:hidden;}
+  details.how summary{cursor:pointer;font-weight:700;font-size:13.5px;padding:11px 14px;color:#4f46e5;list-style:none;}
+  details.how summary::-webkit-details-marker{display:none;}
+  details.how summary::before{content:"▸ ";}
+  details.how[open] summary::before{content:"▾ ";}
+  details.how[open] summary{border-bottom:1px solid var(--line);}
+  .how-body{padding:12px 16px;font-size:13px;line-height:1.7;color:#374151;}
+  .how-body h4{margin:10px 0 5px;font-size:13px;color:#7c3aed;}
+  .how-body h4:first-child{margin-top:0;}
+  .how-body ul,.how-body ol{margin:0 0 4px;padding-left:18px;}
+  .how-body li{margin:3px 0;}
+  footer{
+    margin-top:40px;text-align:center;color:var(--muted);font-size:13px;
+    border-top:1px dashed #d8d8e6;padding-top:18px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎒 个人首玩包 · AI 工具直达站</h1>
+    <p>为 y 部署的 6 件 AI 利器 —— 开箱即用 / 一键脚本 / 在线直达 三种方式，点开就能玩。每张卡点「📖 能干啥 · 怎么用」看操作指引。</p>
+  </header>
+
+  <div class="legend" id="legend">
+    <span class="chip active" data-cat="all">全部</span>
+    <span class="chip" data-cat="run"><span class="dot d-run"></span>已上线（本机）</span>
+    <span class="chip" data-cat="script"><span class="dot d-script"></span>一键脚本</span>
+    <span class="chip" data-cat="online"><span class="dot d-online"></span>在线直达</span>
+    <span class="chip" data-cat="local"><span class="dot d-local"></span>本地资源</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 Ollama + Open WebUI -->
+    <div class="card" data-cat="script">
+      <span class="badge b-script">一键脚本</span>
+      <h3>Ollama + Open WebUI</h3>
+      <div class="sub">私人 ChatGPT · 免费 + 隐私</div>
+      <p class="desc">本地跑大模型（DeepSeek / Qwen / GLM…），数据不出本机。Open WebUI 是类 ChatGPT 的网页界面。</p>
+      <ol class="steps">
+        <li>双击 <b>setup-ollama-openwebui.bat</b></li>
+        <li>自动装 Ollama → 拉 qwen2.5:7b → 起 WebUI</li>
+        <li>浏览器开 <b>http://localhost:8080</b> 注册即用</li>
+      </ol>
+      <a class="btn btn-script" href="file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/setup-ollama-openwebui.bat">打开部署脚本</a>
+      <div class="code"># 手工最小命令
+winget install Ollama.Ollama
+ollama pull qwen2.5:7b
+pip install open-webui &amp;&amp; open-webui serve</div>
+      <details class="how">
+        <summary>📖 能干啥 · 怎么用</summary>
+        <div class="how-body">
+          <h4>有什么用</h4>
+          <ul>
+            <li><b>写东西</b>：沙龙文案、PPT 大纲、周报、邮件 —— 公司文档不传外部服务器，隐私归你</li>
+            <li><b>写代码</b>：帮你写 / 改 Python、批量处理表格</li>
+            <li><b>翻译润色</b>：中英互译、把口语改成正式稿</li>
+            <li><b>问答 / 头脑风暴</b>："团建方案怎么设计""活动 SOP 怎么写"，可连续追问</li>
+            <li><b>AI 沙龙 Demo</b>：现场给大家看"本地大模型长啥样"，离线可演示</li>
+          </ul>
+          <h4>怎么用（装完后）</h4>
+          <ol>
+            <li>浏览器开 <b>http://localhost:8080</b>（脚本跑完通常会自动弹）</li>
+            <li>首次注册：填任意邮箱（如 a@b.com）+ 密码 → 本地账号，不联网不发邮件</li>
+            <li>进首页，右上角模型选 <b>qwen2.5:7b</b>（中文最好）</li>
+            <li>直接打字聊天，跟用 ChatGPT 一模一样</li>
+          </ol>
+          <h4>日常开关</h4>
+          <ul>
+            <li><b>每次要用</b>：双击脚本 → 等它开新窗口 → 开 8080（Ollama 装完会自动后台运行，多数情况直接开网页就行）</li>
+            <li><b>关机</b>：直接关电脑；Ollama 后台自启</li>
+            <li><b>卡了打不开</b>：重新双击脚本一次</li>
+          </ul>
+          <p class="note">⚠️ 模型 qwen2.5:7b 占 ~4.5GB，首次回复会慢几秒（本地加载），不是坏了。</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- 2 ComfyUI -->
+    <div class="card" data-cat="script">
+      <span class="badge b-script">一键脚本</span>
+      <h3>ComfyUI</h3>
+      <div class="sub">本地 AI 画图 / 视频</div>
+      <p class="desc">节点式 Stable Diffusion 前端，最主流的出图/出视频工作流。推荐 NVIDIA 显卡。</p>
+      <ol class="steps">
+        <li>双击 <b>setup-comfyui.bat</b></li>
+        <li>克隆 + 装 CUDA 版 PyTorch + 依赖</li>
+        <li>浏览器开 <b>http://localhost:8188</b></li>
+      </ol>
+      <a class="btn btn-script" href="file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/setup-comfyui.bat">打开部署脚本</a>
+      <div class="code"># 无 N 卡也能跑（CPU，较慢）
+pip install torch torchvision
+pip install -r requirements.txt
+python main.py</div>
+      <details class="how">
+        <summary>📖 能干啥 · 怎么用</summary>
+        <div class="how-body">
+          <h4>有什么用</h4>
+          <ul>
+            <li><b>出图</b>：活动海报、头像、插画、概念图</li>
+            <li><b>出视频</b>：短视频素材、动态背景</li>
+            <li><b>可控生成</b>：节点式工作流，精确到每一步参数</li>
+          </ul>
+          <h4>怎么用（装完后）</h4>
+          <ol>
+            <li>浏览器开 <b>http://localhost:8188</b></li>
+            <li>左侧拖节点搭工作流，或加载现成工作流 JSON</li>
+            <li>在"CLIP Text Encode"节点填提示词（英文效果更好）→ 点"Queue Prompt"生成</li>
+            <li>右侧看结果，右键保存</li>
+          </ol>
+          <h4>日常开关</h4>
+          <ul>
+            <li><b>起服务</b>：双击脚本（会自动开 8188）</li>
+            <li><b>关机</b>：直接关；下次双击重启</li>
+            <li><b>无 N 卡</b>：脚本会自动走 CPU 版，出图慢但能跑</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <!-- 3 langflow -->
+    <div class="card" data-cat="script">
+      <span class="badge b-script">一键脚本</span>
+      <h3>Langflow</h3>
+      <div class="sub">拖拽搭 Agent · 零代码</div>
+      <p class="desc">可视化拖拽编排 RAG / Agent / 工作流。沙箱环境无法托管，本机双击脚本即可起服务（进去填个 LLM API Key 就能玩）。</p>
+      <ol class="steps">
+        <li>双击 <b>setup-langflow.bat</b></li>
+        <li>自动建环境 + 装 Langflow + 起服务</li>
+        <li>浏览器开 <b>http://localhost:7860</b>，设置里填 Key</li>
+      </ol>
+      <a class="btn btn-script" href="file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/setup-langflow.bat">打开部署脚本</a>
+      <div class="code"># 起好后手动重启
+lfenv\Scripts\activate
+langflow run</div>
+      <details class="how">
+        <summary>📖 能干啥 · 怎么用</summary>
+        <div class="how-body">
+          <h4>有什么用</h4>
+          <ul>
+            <li><b>不写代码搭 Agent</b>：拖节点连线就能组一个会调用工具 / 知识库的 AI</li>
+            <li><b>RAG 问答</b>：导入文档做本地知识库问答</li>
+            <li><b>工作流原型</b>：快速验证一个 AI 流程再决定要不要开发</li>
+          </ul>
+          <h4>怎么用（装完后）</h4>
+          <ol>
+            <li>浏览器开 <b>http://localhost:7860</b></li>
+            <li>从模板选一个（如"Basic Prompting"或"Chatbot"）</li>
+            <li>点设置 → 填 LLM API Key（DeepSeek / 通义 / OpenAI 都行）</li>
+            <li>拖节点连起来 → 点播放跑通</li>
+          </ol>
+          <h4>日常开关</h4>
+          <ul>
+            <li><b>起服务</b>：双击脚本（自动开 7860）</li>
+            <li><b>重启</b>：激活环境后 <code>langflow run</code></li>
+          </ul>
+          <p class="note">⚠️ 需要至少一个 LLM API Key 才能跑通（云端模型，按量计费）。</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- 4 Dify -->
+    <div class="card" data-cat="script">
+      <span class="badge b-script">一键脚本</span>
+      <h3>Dify</h3>
+      <div class="sub">企业级 AI 平台 · 自托管</div>
+      <p class="desc">不写代码搭 RAG + Agent + 工作流，带知识库与可视化编排。需先装 Docker。</p>
+      <ol class="steps">
+        <li>双击 <b>setup-dify.bat</b>（会先装 Docker）</li>
+        <li>启动 Docker 就绪后按任意键继续</li>
+        <li>浏览器开 <b>http://localhost</b> 注册即用</li>
+      </ol>
+      <a class="btn btn-script" href="file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/setup-dify.bat">打开部署脚本</a>
+      <div class="code"># 前置：Docker Desktop 已启动
+git clone https://github.com/langgenius/dify.git
+cd dify/docker &amp;&amp; docker compose up -d</div>
+      <details class="how">
+        <summary>📖 能干啥 · 怎么用</summary>
+        <div class="how-body">
+          <h4>有什么用</h4>
+          <ul>
+            <li><b>知识库问答</b>：导入公司文档 / 活动 SOP，做成可对话的知识助手</li>
+            <li><b>可视化 Agent / 工作流</b>：不写代码搭复杂 AI 流程</li>
+            <li><b>对外发布</b>：可生成 Web App / API 给团队用</li>
+          </ul>
+          <h4>怎么用（装完后）</h4>
+          <ol>
+            <li>确保 Docker Desktop 已启动（托盘有鲸鱼图标）</li>
+            <li>浏览器开 <b>http://localhost</b> → 注册管理员账号</li>
+            <li>左侧"知识库"导入文档 → 建"应用"选 Chatbot / 工作流</li>
+            <li>绑定知识库 → 发布 → 对话测试</li>
+          </ol>
+          <h4>日常开关</h4>
+          <ul>
+            <li><b>启动</b>：Docker 打开 → 进 dify/docker 目录 <code>docker compose up -d</code></li>
+            <li><b>停止</b>：<code>docker compose down</code></li>
+          </ul>
+          <p class="note">⚠️ 必须先装 Docker Desktop，否则脚本会停在"请先启动 Docker"。</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- 5 prompts.chat -->
+    <div class="card" data-cat="online">
+      <span class="badge b-online">在线直达</span>
+      <h3>f/prompts.chat</h3>
+      <div class="sub">提示词灵感库 · MIT+CC0</div>
+      <p class="desc">高质量提示词合集与玩法，最自由的开源协议，直接逛或自托管都行。</p>
+      <ol class="steps">
+        <li>点按钮直接逛官网</li>
+        <li>挑喜欢的提示词复制到你的 AI 里</li>
+        <li>想离线：已克隆到 prompts-chat/ 目录</li>
+      </ol>
+      <a class="btn btn-online" href="https://prompts.chat" target="_blank">逛 prompts.chat ↗</a>
+      <div class="note">本地副本：file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/prompts-chat/</div>
+      <details class="how">
+        <summary>📖 能干啥 · 怎么用</summary>
+        <div class="how-body">
+          <h4>有什么用</h4>
+          <ul>
+            <li>不会写提示词？这里有一堆现成的高质量模板</li>
+            <li>覆盖角色扮演、写作、分析、编程等场景</li>
+            <li>协议最自由（MIT + CC0），可商用、可改</li>
+          </ul>
+          <h4>怎么用</h4>
+          <ol>
+            <li>点"逛 prompts.chat"或打开本地副本</li>
+            <li>挑一个提示词 → 全选复制</li>
+            <li>粘贴到任意 AI（ChatGPT / 你的 Ollama / 通义等）→ 替换占位内容即可</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+
+    <!-- 6 generative-ai-for-beginners -->
+    <div class="card" data-cat="local">
+      <span class="badge b-local">本地资源</span>
+      <h3>generative-ai-for-beginners</h3>
+      <div class="sub">微软 21 课 · 系统学 AI</div>
+      <p class="desc">微软出品的 AI 入门课程（含生成式 AI / RAG / 微调 / 伦理），已克隆到本机随时看。</p>
+      <ol class="steps">
+        <li>点按钮打开课程 README</li>
+        <li>按 21 课顺序刷，每课有代码</li>
+        <li>零基础友好，纯学习用途</li>
+      </ol>
+      <a class="btn btn-local" href="file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/ai-learning/README.md">打开课程 README</a>
+      <div class="note">目录：file:///C:/Users/v_yitcai/WorkBuddy/2026-08-06-09-56-06/ai-learning/</div>
+      <details class="how">
+        <summary>📖 能干啥 · 怎么用</summary>
+        <div class="how-body">
+          <h4>有什么用</h4>
+          <ul>
+            <li>零基础系统搞懂生成式 AI（不只是会用，还懂原理）</li>
+            <li>覆盖 LLM / RAG / 微调 / 向量库 / 伦理与风险</li>
+            <li>每课配套可运行代码（Python）</li>
+          </ul>
+          <h4>怎么用</h4>
+          <ol>
+            <li>点"打开课程 README"看总览</li>
+            <li>按 00 ~ 20 课顺序刷，先看概念再看代码</li>
+            <li>想上手就把代码 clone 到本地跑</li>
+          </ol>
+          <p class="note">纯学习资源，无需部署、无需联网（已克隆到本机）。</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+  const chips=document.querySelectorAll('#legend .chip');
+  const cards=document.querySelectorAll('.card');
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    const cat=c.dataset.cat;
+    cards.forEach(card=>{
+      card.style.display=(cat==='all'||card.dataset.cat===cat)?'':'none';
+    });
+  }));
+</script>
+</body>
+</html>

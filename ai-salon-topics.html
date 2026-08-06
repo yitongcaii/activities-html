@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 沙龙选题库 · GitHub 开源工具热度 & 安全排查</title>
+<style>
+:root{
+  --bg:#f6f8fc; --card:#ffffff; --ink:#1f2937; --muted:#6b7280; --line:#e5e7eb;
+  --brand:#6d5efc; --brand2:#ff7a59; --safe:#16a34a; --notice:#d97706; --warn:#dc2626;
+  --chip:#eef0ff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+  background:linear-gradient(160deg,#eef1ff 0%,#f6f8fc 40%,#fff6f2 100%);color:var(--ink);min-height:100vh}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 64px}
+header.hero{background:linear-gradient(135deg,#6d5efc,#9b6bff 45%,#ff7a59);border-radius:22px;
+  padding:34px 34px 30px;color:#fff;box-shadow:0 18px 50px rgba(109,94,252,.25);position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.5px}
+header.hero p{margin:4px 0;opacity:.95;font-size:14px}
+.tagrow{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.tag{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:999px;font-size:13px}
+.stats{display:flex;gap:26px;margin-top:18px;flex-wrap:wrap}
+.stat b{font-size:24px}.stat span{font-size:12px;opacity:.9;display:block}
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:26px 0 18px}
+.controls input,.controls select{font-size:14px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.controls input{flex:1;min-width:220px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{cursor:pointer;border:1px solid var(--line);background:var(--chip);color:#4b46c4;padding:7px 13px;border-radius:999px;font-size:13px;transition:.15s}
+.chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;
+  box-shadow:0 6px 22px rgba(31,41,55,.06);transition:.18s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(109,94,252,.16);border-color:#cdd2ff}
+.c-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.rank{font-size:12px;color:var(--muted);font-weight:700}
+.name{font-size:16px;font-weight:800;color:#312e81;word-break:break-all;line-height:1.3}
+.name a{color:inherit;text-decoration:none}.name a:hover{text-decoration:underline}
+.cat{font-size:11px;color:#fff;background:linear-gradient(135deg,#6d5efc,#ff7a59);padding:3px 9px;border-radius:999px;white-space:nowrap}
+.flame{font-size:13px;margin:6px 0 2px}
+.desc{font-size:12.5px;color:var(--muted);line-height:1.55;margin:8px 0 10px;min-height:38px}
+.metrics{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#374151;margin-bottom:10px}
+.metrics b{color:#111}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.b{font-size:11px;padding:3px 8px;border-radius:8px;border:1px solid var(--line);background:#f8fafc}
+.b.lang{background:#eef0ff;color:#4b46c4}.b.lic{background:#f1f5f9}
+.sec{font-size:12px;padding:8px 10px;border-radius:10px;margin-top:auto;line-height:1.5}
+.sec.safe{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.sec.notice{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+.sec.warn{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+.sec .lv{font-weight:800}
+.hook{font-size:13px;color:#312e81;background:#f3f1ff;border-left:3px solid var(--brand);padding:9px 11px;border-radius:8px;margin:10px 0 0;line-height:1.55}
+.meta{font-size:11px;color:var(--muted);margin-top:8px;display:flex;justify-content:space-between}
+footer{margin-top:40px;text-align:center;font-size:12px;color:var(--muted);line-height:1.7}
+.empty{text-align:center;color:var(--muted);padding:40px}
+#disc{font-size:12px;color:#4b5563;background:#fff;border:1px dashed var(--line);border-radius:14px;padding:14px 16px;margin-top:22px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>🧠 AI 沙龙选题库</h1>
+    <p>GitHub 开源 AI 工具 · 热度榜单 + 安全性排查 — 为你的 AI 沙龙提供可落地选题</p>
+    <div class="tagrow">
+      <span class="tag">数据源：GitHub Public API</span>
+      <span class="tag" id="t-gen">生成时间：—</span>
+      <span class="tag" id="t-cnt">收录：— 个</span>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <input id="q" placeholder="🔍 搜索仓库名 / 描述 / 分类…" oninput="render()">
+    <select id="sort" onchange="render()">
+      <option value="stars">排序：按 Star 数</option>
+      <option value="sec">排序：安全等级（先排风险）</option>
+      <option value="recent">排序：最近更新</option>
+      <option value="cat">排序：按分类</option>
+    </select>
+    <select id="sev" onchange="render()">
+      <option value="all">安全：全部</option>
+      <option value="warn">仅看「警惕」</option>
+      <option value="notice">仅看「注意」</option>
+      <option value="safe">仅看「安全」</option>
+    </select>
+  </div>
+  <div class="chips" id="chips"></div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">没有匹配的仓库 🤔</div>
+
+  <div id="disc">
+    <b>🔎 排查口径说明</b>：① <b>热度</b>＝Stars / Forks / Watchers / 近期更新活跃度；② <b>安全</b>＝GitHub 官方安全公告（advisory）数量与最高严重度、仓库是否归档/停滞、开源协议清晰度。
+    <b>重要</b>：GitHub 无已发布公告 ≠ 绝对安全（仅代表 Advisory DB 暂无该仓库条目）；归档 / 长期停更仓库存在「无人修漏洞」的维护风险；AGPL/GPL 等强 Copyleft 协议在闭源商用场景需额外留意。本页为选题参考，落地前请结合实际场景二次评估。
+  </div>
+
+  <footer>
+    📌 本页由 yitong 沉淀整理 · 文化活动知识库<br>
+    数据快照基于 GitHub Public API 检索；开源项目演进较快，请以仓库最新状态为准。
+  </footer>
+</div>
+
+<script>
+const DATA = {"generated": "2026-08-06 00:00 CST", "count": 22, "categories": ["自主 Agent", "Agent 开发框架", "Agent 工程方法论", "低代码 Agent", "工作流编排", "本地模型部署", "本地模型 UI", "企业级 AI 平台", "模型/训练框架", "AI 编码助手", "AI 辅助研发", "提示词工程", "提示词/逆向", "图像/多模态生成", "数据抓取/RAG", "浏览器 Agent", "AI 应用后端", "个人 AI 助手", "学习资源"], "cards": [{"rank": 1, "name": "openclaw/openclaw", "url": "https://github.com/openclaw/openclaw", "homepage": "https://openclaw.ai", "desc": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ", "lang": "TypeScript", "topics": ["ai", "assistant", "crustacean", "molty", "openclaw"], "stars": 385266, "forks": 80986, "watchers": 0, "open_issues": 5505, "contributors": 372, "created": "2025-11-24", "pushed": "2026-08-06", "archived": false, "license": "NOASSERTION", "adv_count": 100, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["开源协议不明（商用前需确认）", "GitHub 安全公告 100 条（接口分页上限，实际可能更多）（近期最高 high）"], "category": "个人 AI 助手", "hook": "跨平台个人 AI 助手怎么选？开源方案 vs 商业产品的边界与体验", "active": "今天更新"}, {"rank": 2, "name": "obra/superpowers", "url": "https://github.com/obra/superpowers", "homepage": "", "desc": "An agentic skills framework & software development methodology that works.", "lang": "Shell", "topics": ["ai", "brainstorming", "coding", "obra", "sdlc"], "stars": 267336, "forks": 23885, "watchers": 0, "open_issues": 324, "contributors": 38, "created": "2025-10-09", "pushed": "2026-08-06", "archived": false, "license": "MIT", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "Agent 工程方法论", "hook": "Spec / Agent 驱动开发：让 AI 帮你写代码的新工作流与方法论", "active": "今天更新"}, {"rank": 3, "name": "affaan-m/ECC", "url": "https://github.com/affaan-m/ECC", "homepage": "https://ecc.tools", "desc": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.", "lang": "JavaScript", "topics": ["ai-agents", "anthropic", "claude", "claude-code", "developer-tools"], "stars": 238032, "forks": 36151, "watchers": 0, "open_issues": 114, "contributors": 289, "created": "2026-01-18", "pushed": "2026-08-05", "archived": false, "license": "MIT", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "AI 编码助手", "hook": "给 AI 编码助手装『外挂』：skills / 记忆 / 安全增强实战", "active": "今天更新"}, {"rank": 4, "name": "NousResearch/hermes-agent", "url": "https://github.com/NousResearch/hermes-agent", "homepage": "https://hermes-agent.nousresearch.com", "desc": "The agent that grows with you", "lang": "Python", "topics": ["ai", "ai-agent", "ai-agents", "anthropic", "chatgpt"], "stars": 226094, "forks": 44013, "watchers": 0, "open_issues": 28423, "contributors": 391, "created": "2025-07-22", "pushed": "2026-08-06", "archived": false, "license": "MIT", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "自主 Agent", "hook": "会『成长』的 Agent：长期记忆与个性化陪伴实践", "active": "今天更新"}, {"rank": 5, "name": "n8n-io/n8n", "url": "https://github.com/n8n-io/n8n", "homepage": "https://n8n.io", "desc": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.", "lang": "TypeScript", "topics": ["ai", "apis", "automation", "cli", "data-flow"], "stars": 199493, "forks": 59933, "watchers": 0, "open_issues": 1418, "contributors": 427, "created": "2019-06-22", "pushed": "2026-08-05", "archived": false, "license": "NOASSERTION", "adv_count": 100, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["开源协议不明（商用前需确认）", "GitHub 安全公告 100 条（接口分页上限，实际可能更多）（近期最高 critical）"], "category": "工作流编排", "hook": "用 n8n 把 AI 接进业务流程：400+ 集成可视化编排实战", "active": "今天更新"}, {"rank": 6, "name": "Significant-Gravitas/AutoGPT", "url": "https://github.com/Significant-Gravitas/AutoGPT", "homepage": "https://agpt.co", "desc": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.", "lang": "Python", "topics": ["agentic-ai", "agents", "ai", "artificial-intelligence", "autonomous-agents"], "stars": 185835, "forks": 46050, "watchers": 0, "open_issues": 529, "contributors": 428, "created": "2023-03-16", "pushed": "2026-08-05", "archived": false, "license": "NOASSERTION", "adv_count": 40, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["开源协议不明（商用前需确认）", "GitHub 安全公告 40 条（近期最高 critical）"], "category": "自主 Agent", "hook": "AutoGPT 五年回望：自主 Agent 的理想、泡沫与现实", "active": "今天更新"}, {"rank": 7, "name": "ollama/ollama", "url": "https://github.com/ollama/ollama", "homepage": "https://ollama.com", "desc": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.", "lang": "Go", "topics": ["deepseek", "gemma", "gemma3", "glm", "go"], "stars": 177876, "forks": 17278, "watchers": 0, "open_issues": 3613, "contributors": 452, "created": "2023-06-26", "pushed": "2026-08-05", "archived": false, "license": "MIT", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "本地模型部署", "hook": "本地大模型私有化：Ollama 一键部署与选型（Kimi/GLM/DeepSeek 等）", "active": "今天更新"}, {"rank": 8, "name": "f/prompts.chat", "url": "https://github.com/f/prompts.chat", "homepage": "https://prompts.chat", "desc": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.", "lang": "HTML", "topics": ["ai", "artificial-intelligence", "awesome-list", "chatgpt", "chatgpt-prompts"], "stars": 166785, "forks": 21535, "watchers": 0, "open_issues": 63, "contributors": 278, "created": "2022-12-05", "pushed": "2026-08-05", "archived": false, "license": "NOASSERTION", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "notice", "reasons": ["开源协议不明（商用前需确认）"], "category": "提示词工程", "hook": "提示词即生产力：企业内提示词库怎么搭、怎么管", "active": "今天更新"}, {"rank": 9, "name": "AUTOMATIC1111/stable-diffusion-webui", "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui", "homepage": "", "desc": "Stable Diffusion web UI", "lang": "Python", "topics": ["ai", "ai-art", "deep-learning", "diffusion", "gradio"], "stars": 164413, "forks": 30541, "watchers": 0, "open_issues": 2501, "contributors": 429, "created": "2022-08-22", "pushed": "2026-03-02", "archived": false, "license": "AGPL-3.0", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "notice", "reasons": ["156 天未更新（偏旧）", "强 Copyleft 协议（闭源商用需留意）"], "category": "图像/多模态生成", "hook": "AIGC 图像生成入门：Stable Diffusion WebUI 工作流", "active": "156 天前更新"}, {"rank": 10, "name": "huggingface/transformers", "url": "https://github.com/huggingface/transformers", "homepage": "https://huggingface.co/transformers", "desc": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ", "lang": "Python", "topics": ["audio", "deep-learning", "deepseek", "gemma", "glm"], "stars": 163377, "forks": 34125, "watchers": 0, "open_issues": 2342, "contributors": 436, "created": "2018-10-29", "pushed": "2026-08-06", "archived": false, "license": "Apache-2.0", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "模型/训练框架", "hook": "从 Transformers 看开源模型生态、微调门槛与落地成本", "active": "今天更新"}, {"rank": 11, "name": "firecrawl/firecrawl", "url": "https://github.com/firecrawl/firecrawl", "homepage": "https://firecrawl.dev", "desc": "The context API to search, scrape, and interact with the web at scale. 🔥", "lang": "TypeScript", "topics": ["ai", "ai-agents", "ai-crawler", "ai-scraping", "ai-search"], "stars": 161777, "forks": 9122, "watchers": 0, "open_issues": 480, "contributors": 159, "created": "2024-04-15", "pushed": "2026-08-05", "archived": false, "license": "AGPL-3.0", "adv_count": 4, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["强 Copyleft 协议（闭源商用需留意）", "GitHub 安全公告 4 条（近期最高 critical）"], "category": "数据抓取/RAG", "hook": "给 Agent 喂数据：Firecrawl 网页抓取 + RAG 知识库实战", "active": "今天更新"}, {"rank": 12, "name": "Snailclimb/JavaGuide", "url": "https://github.com/Snailclimb/JavaGuide", "homepage": "https://javaguide.cn", "desc": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发", "lang": "JavaScript", "topics": ["agent", "ai", "context-engineering", "deepseek", "interview"], "stars": 157549, "forks": 46177, "watchers": 0, "open_issues": 58, "contributors": 414, "created": "2018-05-07", "pushed": "2026-08-04", "archived": false, "license": "Apache-2.0", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "学习资源", "hook": "后端工程师的 AI 应用开发补课清单（面试 + 实战）", "active": "今天更新"}, {"rank": 13, "name": "langflow-ai/langflow", "url": "https://github.com/langflow-ai/langflow", "homepage": "http://www.langflow.org", "desc": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.", "lang": "Python", "topics": ["agents", "chatgpt", "generative-ai", "large-language-models", "multiagent"], "stars": 152866, "forks": 9809, "watchers": 0, "open_issues": 996, "contributors": 349, "created": "2023-02-08", "pushed": "2026-08-06", "archived": false, "license": "MIT", "adv_count": 26, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["GitHub 安全公告 26 条（近期最高 critical）"], "category": "低代码 Agent", "hook": "拖拽式搭建 AI Agent：Langflow 低代码实践", "active": "今天更新"}, {"rank": 14, "name": "langgenius/dify", "url": "https://github.com/langgenius/dify", "homepage": "https://dify.ai", "desc": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without reb", "lang": "TypeScript", "topics": ["agent", "agentic-ai", "agentic-framework", "agentic-workflow", "ai"], "stars": 151468, "forks": 23909, "watchers": 0, "open_issues": 943, "contributors": 457, "created": "2023-04-12", "pushed": "2026-08-06", "archived": false, "license": "NOASSERTION", "adv_count": 20, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["开源协议不明（商用前需确认）", "GitHub 安全公告 20 条（近期最高 high）"], "category": "企业级 AI 平台", "hook": "Dify 搭建企业级 AI 应用：RAG + Agent 一站式平台", "active": "今天更新"}, {"rank": 15, "name": "open-webui/open-webui", "url": "https://github.com/open-webui/open-webui", "homepage": "https://openwebui.com", "desc": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)", "lang": "Python", "topics": ["ai", "llm", "llm-ui", "llm-webui", "llms"], "stars": 147979, "forks": 21539, "watchers": 0, "open_issues": 483, "contributors": 391, "created": "2023-10-06", "pushed": "2026-08-05", "archived": false, "license": "NOASSERTION", "adv_count": 100, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["开源协议不明（商用前需确认）", "GitHub 安全公告 100 条（接口分页上限，实际可能更多）（近期最高 critical）"], "category": "本地模型 UI", "hook": "给团队一个本地 ChatGPT：Open WebUI 部署与权限治理", "active": "今天更新"}, {"rank": 16, "name": "langchain-ai/langchain", "url": "https://github.com/langchain-ai/langchain", "homepage": "https://docs.langchain.com/langchain/", "desc": "The agent engineering platform.", "lang": "Python", "topics": ["agents", "ai", "ai-agents", "anthropic", "chatgpt"], "stars": 143515, "forks": 23913, "watchers": 0, "open_issues": 457, "contributors": 467, "created": "2022-10-17", "pushed": "2026-08-06", "archived": false, "license": "MIT", "adv_count": 9, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["GitHub 安全公告 9 条（近期最高 critical）"], "category": "Agent 开发框架", "hook": "LangChain 还是纯代码？Agent 开发框架选型之争", "active": "今天更新"}, {"rank": 17, "name": "x1xhlol/system-prompts-and-models-of-ai-tools", "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools", "homepage": "", "desc": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, V", "lang": "—", "topics": ["ai", "bolt", "cluely", "copilot", "cursor"], "stars": 142600, "forks": 34827, "watchers": 0, "open_issues": 159, "contributors": 30, "created": "2025-03-05", "pushed": "2026-07-31", "archived": false, "license": "GPL-3.0", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "notice", "reasons": ["强 Copyleft 协议（闭源商用需留意）"], "category": "提示词/逆向", "hook": "扒开 AI 工具的『灵魂』：主流产品系统提示词大合集解读", "active": "5 天前更新"}, {"rank": 18, "name": "github/spec-kit", "url": "https://github.com/github/spec-kit", "homepage": "https://github.github.com/spec-kit/", "desc": "💫 Toolkit to help you get started with Spec-Driven Development", "lang": "Python", "topics": ["ai", "copilot", "development", "engineering", "prd"], "stars": 125479, "forks": 11209, "watchers": 0, "open_issues": 328, "contributors": 260, "created": "2025-08-21", "pushed": "2026-08-05", "archived": false, "license": "MIT", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "AI 辅助研发", "hook": "Spec-Driven Development：用规格文档驱动 AI 写代码", "active": "今天更新"}, {"rank": 19, "name": "Comfy-Org/ComfyUI", "url": "https://github.com/Comfy-Org/ComfyUI", "homepage": "https://www.comfy.org/", "desc": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.", "lang": "Python", "topics": ["ai", "comfy", "comfyui", "python", "pytorch"], "stars": 123989, "forks": 14664, "watchers": 0, "open_issues": 4444, "contributors": 323, "created": "2023-01-17", "pushed": "2026-08-06", "archived": false, "license": "GPL-3.0", "adv_count": 4, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["强 Copyleft 协议（闭源商用需留意）", "GitHub 安全公告 4 条（近期最高 high）"], "category": "图像/多模态生成", "hook": "ComfyUI 节点式工作流：从出图到出视频的模块化编排", "active": "今天更新"}, {"rank": 20, "name": "microsoft/generative-ai-for-beginners", "url": "https://github.com/microsoft/generative-ai-for-beginners", "homepage": "", "desc": "21 Lessons, Get Started Building with Generative AI ", "lang": "Jupyter Notebook", "topics": ["ai", "azure", "chatgpt", "dall-e", "generative-ai"], "stars": 116645, "forks": 61664, "watchers": 0, "open_issues": 20, "contributors": 149, "created": "2023-06-19", "pushed": "2026-08-04", "archived": false, "license": "MIT", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "学习资源", "hook": "零基础生成式 AI 课纲拆解（微软 21 课）", "active": "今天更新"}, {"rank": 21, "name": "browser-use/browser-use", "url": "https://github.com/browser-use/browser-use", "homepage": "https://browser-use.com", "desc": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.", "lang": "Python", "topics": ["ai-agents", "ai-tools", "browser-automation", "browser-use", "llm"], "stars": 107992, "forks": 11869, "watchers": 0, "open_issues": 346, "contributors": 332, "created": "2024-10-31", "pushed": "2026-08-05", "archived": false, "license": "MIT", "adv_count": 1, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "warn", "reasons": ["GitHub 安全公告 1 条（近期最高 critical）"], "category": "浏览器 Agent", "hook": "Browser Use：让 AI 自动操作网页干活的能与不能", "active": "今天更新"}, {"rank": 22, "name": "supabase/supabase", "url": "https://github.com/supabase/supabase", "homepage": "https://supabase.com", "desc": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.", "lang": "TypeScript", "topics": ["ai", "alternative", "auth", "database", "deno"], "stars": 107594, "forks": 13479, "watchers": 0, "open_issues": 1196, "contributors": 396, "created": "2019-10-12", "pushed": "2026-08-06", "archived": false, "license": "Apache-2.0", "adv_count": 0, "tier": "顶流", "flame": "🔥🔥🔥", "sec_level": "safe", "reasons": ["活跃维护 · 协议清晰"], "category": "AI 应用后端", "hook": "Supabase 做 AI 应用后端：向量库 + Auth + 数据库一体", "active": "今天更新"}]};
+const SEV_RANK = {warn:0, notice:1, safe:2};
+let activeCat = "全部";
+
+function init(){
+  document.getElementById('t-gen').textContent = "生成时间：" + DATA.generated;
+  document.getElementById('t-cnt').textContent = "收录：" + DATA.count + " 个";
+  const warns = DATA.cards.filter(c=>c.sec_level==='warn').length;
+  const notices = DATA.cards.filter(c=>c.sec_level==='notice').length;
+  const safes = DATA.cards.filter(c=>c.sec_level==='safe').length;
+  const topStars = Math.max(...DATA.cards.map(c=>c.stars));
+  document.getElementById('stats').innerHTML =
+    stat(DATA.count,'收录工具') + stat(fm(topStars),'最高 Star') +
+    stat(safes,'安全 ✅') + stat(notices,'注意 ⚠️') + stat(warns,'警惕 🛑');
+  // chips
+  const cats = ["全部", ...DATA.categories.filter(c=>DATA.cards.some(x=>x.category===c))];
+  document.getElementById('chips').innerHTML = cats.map(c=>
+    `<span class="chip ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</span>`).join('');
+  render();
+}
+function stat(v,l){return `<div class="stat"><b>${v}</b><span>${l}</span></div>`}
+function fm(n){return n>=1000?(n/1000).toFixed(1)+'k':n}
+function setCat(c){activeCat=c;document.querySelectorAll('.chip').forEach(el=>el.classList.toggle('active',el.textContent===c));render();}
+function render(){
+  const q=(document.getElementById('q').value||'').toLowerCase();
+  const sort=document.getElementById('sort').value;
+  const sev=document.getElementById('sev').value;
+  let list=DATA.cards.filter(c=>{
+    if(activeCat!=="全部"&&c.category!==activeCat)return false;
+    if(sev!=="all"&&c.sec_level!==sev)return false;
+    if(q&&!(c.name.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q)||c.category.toLowerCase().includes(q)||c.hook.toLowerCase().includes(q)))return false;
+    return true;
+  });
+  list.sort((a,b)=>{
+    if(sort==='stars')return b.stars-a.stars;
+    if(sort==='sec')return SEV_RANK[a.sec_level]-SEV_RANK[b.sec_level]||b.stars-a.stars;
+    if(sort==='recent')return b.pushed.localeCompare(a.pushed);
+    if(sort==='cat')return a.category.localeCompare(b.category)||b.stars-a.stars;
+    return 0;
+  });
+  const grid=document.getElementById('grid');
+  document.getElementById('empty').style.display = list.length?'none':'block';
+  grid.innerHTML = list.map(card).join('');
+}
+function card(c){
+  const sevc = {safe:'safe',notice:'notice',warn:'warn'}[c.sec_level];
+  const sevl = {safe:'安全 ✅',notice:'注意 ⚠️',warn:'警惕 🛑'}[c.sec_level];
+  const topics = c.topics.slice(0,4).map(t=>`<span class="b">#${t}</span>`).join('');
+  const adv = c.adv_count===null?'未知':(c.adv_count>=100?'100+':(c.adv_count>0?c.adv_count+' 条':'无'));
+  const reasons = c.reasons.map(r=>`· ${r}`).join('<br>');
+  return `<div class="card">
+    <div class="c-top">
+      <div><div class="rank">#${c.rank}</div><div class="name"><a href="${c.url}" target="_blank" rel="noopener">${c.name}</a></div></div>
+      <span class="cat">${c.category}</span>
+    </div>
+    <div class="flame">${c.flame} <b>${c.tier}</b> · ${c.active}</div>
+    <div class="desc">${esc(c.desc)}</div>
+    <div class="metrics">
+      <span>⭐ <b>${fm(c.stars)}</b></span><span>🍴 ${fm(c.forks)}</span>
+      <span>👁 ${fm(c.watchers)}</span><span>🛡 公告 <b>${adv}</b></span>
+      <span>👥 ${c.contributors??'—'}</span>
+    </div>
+    <div class="badges"><span class="b lang">${c.lang}</span><span class="b lic">${c.license}</span>${topics}</div>
+    <div class="sec ${sevc}"><span class="lv">${sevl}</span><br>${reasons}</div>
+    <div class="hook">💡 沙龙选题：${esc(c.hook)}</div>
+    <div class="meta"><span>创建 ${c.created}</span><span>更新 ${c.pushed}</span></div>
+  </div>`;
+}
+function esc(s){return (s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));}
+init();
+</script>
+</body>
+</html>
