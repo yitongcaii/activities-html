@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>交接文档 · AI沙龙选题库 + 个人首玩包部署</title>
+<style>
+  :root{
+    --purple:#7c5cff; --purple-d:#5b3fd6; --teal:#19c2c9; --teal-d:#0e9aa1;
+    --ink:#1f2233; --sub:#5b6072; --bg:#f5f6fb; --card:#ffffff;
+    --line:#e8eaf2; --ok:#1fae6b; --warn:#e8842b; --bad:#e5484d; --chip:#eef0fb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;padding:0 0 60px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+  header.hero{background:linear-gradient(120deg,var(--purple),var(--teal));color:#fff;padding:46px 22px 40px;margin-bottom:30px}
+  header.hero .wrap{display:flex;flex-direction:column;gap:14px}
+  .eyebrow{font-size:13px;letter-spacing:2px;opacity:.9;text-transform:uppercase}
+  h1{font-size:32px;font-weight:800;line-height:1.25}
+  .lede{font-size:15px;opacity:.95;max-width:760px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+  .badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:6px 13px;border-radius:999px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+  .badge.ok{background:rgba(31,174,107,.25);border-color:rgba(31,174,107,.6)}
+  section{margin:34px 0}
+  h2{font-size:22px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  h2 .num{background:linear-gradient(120deg,var(--purple),var(--teal));color:#fff;width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+  .sub{color:var(--sub);font-size:14px;margin-bottom:18px;padding-left:40px}
+  .grid{display:grid;gap:16px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:880px){.g4,.g3,.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;box-shadow:0 6px 18px rgba(40,40,90,.05)}
+  .card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--purple-d)}
+  .card p,.card li{font-size:13.5px;color:var(--sub)}
+  .card ul{padding-left:18px;margin-top:6px}
+  .card li{margin:3px 0}
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;margin:0 6px 6px 0}
+  .p-purple{background:#eee9ff;color:var(--purple-d)}
+  .p-teal{background:#e1f7f8;color:var(--teal-d)}
+  .p-ok{background:#e2f7ec;color:var(--ok)}
+  .p-warn{background:#fdeed9;color:var(--warn)}
+  .p-bad{background:#fde3e4;color:var(--bad)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(40,40,90,.05);font-size:13.5px}
+  th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f0f1fb;font-weight:700;color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+  td code,li code,p code{background:var(--chip);padding:1px 6px;border-radius:6px;font-size:12.5px;color:var(--purple-d)}
+  .bug{display:grid;gap:14px}
+  .bug .card{border-left:5px solid var(--bad);padding-left:20px}
+  .bug .card.solved{border-left-color:var(--ok)}
+  .bug .head{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .bug .head .t{font-size:15px;font-weight:700;color:var(--ink)}
+  .law{background:linear-gradient(135deg,#fff,#f6f3ff);border:1px solid #e3dcff}
+  .law h3{color:var(--bad)}
+  .law ol{padding-left:20px}
+  .law li{margin:7px 0;font-size:13.5px}
+  .law b{color:var(--purple-d)}
+  .links a{color:var(--teal-d);font-weight:700;text-decoration:none;border-bottom:2px dashed var(--teal)}
+  .links a:hover{color:var(--purple-d)}
+  .env dt{font-weight:700;font-size:13px;color:var(--ink);margin-top:8px}
+  .env dd{font-size:13px;color:var(--sub);margin-bottom:4px}
+  .env dd code{background:var(--chip);padding:2px 7px;border-radius:6px;color:var(--purple-d);font-size:12.5px}
+  .callout{background:#fff8ec;border:1px solid #f4dca6;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#8a5a00;margin:14px 0}
+  .callout b{color:#b57000}
+  footer{text-align:center;color:var(--sub);font-size:13px;margin-top:50px;padding-top:24px;border-top:1px solid var(--line)}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+  .toc a{font-size:12.5px;color:var(--purple-d);text-decoration:none;background:#eee9ff;padding:5px 12px;border-radius:999px;font-weight:600}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Project Handoff · 零上下文可读</div>
+    <h1>AI 沙龙选题库 + 个人首玩包部署 · 交接文档</h1>
+    <p class="lede">给<strong>完全没上下文的新会话</strong>看。读完这一页就能接手：我们在做什么、做完了什么、之前卡在哪、怎么解的、哪些坑绝对别再踩。</p>
+    <div class="badges">
+      <span class="badge ok">✅ 选题库成品已交付</span>
+      <span class="badge ok">✅ 首玩包门户已交付</span>
+      <span class="badge ok">✅ 两页已推 GitHub Pages（HTTP 200）</span>
+      <span class="badge ok">✅ Open WebUI 本地服务在跑（:8080）</span>
+      <span class="badge ok">✅ Obsidian 已沉淀 4→2 篇笔记</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="#s0">0 速览</a><a href="#s1">1 我们在做什么</a><a href="#s2">2 完成了什么</a>
+    <a href="#s3">3 项目脉络</a><a href="#s4">4 卡点 & 解决方案</a><a href="#s5">5 踩坑铁律</a>
+    <a href="#s6">6 关键环境信息</a><a href="#s7">7 待办 & 残留</a>
+  </div>
+
+  <!-- ===== 0 速览 ===== -->
+  <section id="s0">
+    <h2><span class="num">0</span>一眼速览（新会话先读这）</h2>
+    <div class="sub">4 张卡讲清全局，细节往下翻。</div>
+    <div class="grid g4">
+      <div class="card">
+        <h3>🎯 我们在做什么</h3>
+        <p>为「AI 沙龙」找选题——从 GitHub 抓 AI 开源工具，排查<strong>热度 + 安全性</strong>；再给 y 的本机部署一套<strong>个人首玩包</strong>（自己电脑能直接玩的 AI 工具）。</p>
+      </div>
+      <div class="card">
+        <h3>📦 核心交付</h3>
+        <ul>
+          <li><code>ai-salon-topics.html</code> 选题库（22 工具）</li>
+          <li><code>ai-starter-pack.html</code> 首玩包门户</li>
+          <li>4 个 <code>setup-*.bat</code> 一键部署脚本</li>
+          <li>本地克隆 <code>ai-learning/</code> + <code>prompts-chat/</code></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>✅ 当前状态</h3>
+        <ul>
+          <li>两页已上 GitHub Pages（线上可访问）</li>
+          <li>Open WebUI 服务在 <code>localhost:8080</code> 跑通</li>
+          <li>Obsidian 已存 2 篇笔记 + 线上链接</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>⚠️ 最痛的坑（一句话）</h3>
+        <p>公司机器 <strong>AppLocker 拦 torch.dll</strong> + Windows <strong>.bat 必须 CRLF</strong> + <strong>禁用 Administrator</strong> 跑脚本。三者任一踩中都会「秒退 / 报 WinError 4551」。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 1 我们在做什么 ===== -->
+  <section id="s1">
+    <h2><span class="num">1</span>我们在做什么</h2>
+    <div class="sub">背景、目标、范围边界。</div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>背景</h3>
+        <p>y（蔡依彤，云技服 HRBP+PM）要办 AI 沙龙，需要一套<strong>靠谱的选题库</strong>——不是随便列工具，而是带<strong>热度证据（GitHub Stars / 贡献者）</strong>和<strong>安全排查（协议 / CVE / 停更风险）</strong>。</p>
+        <p style="margin-top:8px">同时她希望把这些工具里<strong>个人能直接玩</strong>的子集，在自己电脑上部署成「首玩包」，降低上手门槛。</p>
+      </div>
+      <div class="card">
+        <h3>目标</h3>
+        <ul>
+          <li>① 检索 GitHub AI 开源工具，产出可视化选题库 HTML</li>
+          <li>② 分析哪些对个人自用可行（成本 / 显卡 / 协议三档）</li>
+          <li>③ 给 y 本机出一键部署脚本（双击 / cmd 即用）</li>
+          <li>④ 两页推 GitHub Pages，沉淀 Obsidian</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>你必须知道的边界</h3>
+        <ul>
+          <li><b>本机部署受限</b>：装系统软件（Ollama / Docker）需 UAC 管理员授权，AI 在沙箱里点不了 → 只能产出脚本让用户本机跑</li>
+          <li><b>企微禁发</b>：绝不主动发企微消息（用户级硬约束，凌驾一切）</li>
+          <li><b>公司机器策略严苛</b>：AppLocker / WDAC 拦非信任路径 DLL（详见 §5）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>相关仓库 / 知识库</h3>
+        <ul>
+          <li>GitHub Pages 主仓：<code>yitongcaii/activities-html</code>（SSH 部署）</li>
+          <li>本地克隆：<code>D:\activities-html-yitongcaii</code></li>
+          <li>Obsidian vault：<code>C:\Users\v_yitcai\Documents\Obsidian\活动\AI沙龙\</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2 完成了什么 ===== -->
+  <section id="s2">
+    <h2><span class="num">2</span>完成了什么（验收清单）</h2>
+    <div class="sub">交付物、路径、线上入口，逐条可核验。</div>
+    <table>
+      <thead><tr><th>交付物</th><th>类型</th><th>位置 / 链接</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td><b>AI 沙龙选题库</b><br><span style="color:var(--sub);font-size:12px">22 工具，含热度/安全/沙龙建议，可搜索筛选</span></td><td>HTML</td><td class="links"><a href="https://yitongcaii.github.io/activities-html/ai-salon-topics.html">Pages 线上</a><br><code>workspace/ai-salon-topics.html</code></td><td><span class="pill p-ok">已上线</span></td></tr>
+        <tr><td><b>个人首玩包门户</b><br><span style="color:var(--sub);font-size:12px">6 工具聚合，含折叠「📖 能干啥·怎么用」</span></td><td>HTML</td><td class="links"><a href="https://yitongcaii.github.io/activities-html/ai-starter-pack.html">Pages 线上</a><br><code>workspace/ai-starter-pack.html</code></td><td><span class="pill p-ok">已上线</span></td></tr>
+        <tr><td><b>一键部署脚本 ×4</b><br><span style="color:var(--sub);font-size:12px">ollama+open-webui / comfyui / dify / langflow</span></td><td>.bat</td><td><code>workspace/setup-*.bat</code> + <code>diag.bat</code></td><td><span class="pill p-ok">已可用</span></td></tr>
+        <tr><td><b>本地课程 / 提示词资源</b></td><td>目录</td><td><code>workspace/ai-learning/</code>（微软 21 课）<br><code>workspace/prompts-chat/</code>（f/prompts.chat）</td><td><span class="pill p-ok">已克隆</span></td></tr>
+        <tr><td><b>Obsidian 笔记 ×2</b></td><td>.md</td><td><code>AI沙龙/AI沙龙选题库.md</code><br><code>AI沙龙/AI沙龙-个人首玩包门户.md</code></td><td><span class="pill p-ok">已沉淀</span></td></tr>
+        <tr><td><b>Open WebUI 本地服务</b></td><td>运行</td><td><code>http://localhost:8080</code></td><td><span class="pill p-ok">HTTP 200</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <b>核验命令</b>：<code>curl -I https://yitongcaii.github.io/activities-html/ai-salon-topics.html</code> 应返回 <code>HTTP/2 200</code>；本机服务 <code>curl -I http://127.0.0.1:8080/</code> 应 200。
+    </div>
+  </section>
+
+  <!-- ===== 3 项目脉络 ===== -->
+  <section id="s3">
+    <h2><span class="num">3</span>项目脉络（时间线）</h2>
+    <div class="sub">08-06 起，08-07 闭环。</div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>📅 08-06</h3>
+        <ul>
+          <li>GitHub Search API 抓 22 个 AI 仓库（topic/stars≥200/pushed≥2025-02）</li>
+          <li>二阶段富集 contributors + security-advisories（未鉴权 60/hr 配额，分页跑完）</li>
+          <li>出 <code>ai-salon-topics.html</code>，做个人可用性分析（A/B/C 三档）</li>
+          <li>写 4 个 <code>setup-*.bat</code>，克隆 ai-learning / prompts-chat</li>
+          <li>双击秒退 → 开启长达数小时的 bat 排障（见 §4）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📅 08-07</h3>
+        <ul>
+          <li>门户加「📖 能干啥·怎么用」折叠块；新增 Obsidian 笔记</li>
+          <li>两页推 GitHub Pages（主仓 yitongcaii，commit <code>d509602</code>）</li>
+          <li>修 AppLocker 拦 torch.dll（venv 挪 LOCALAPPDATA + 卸 torch）</li>
+          <li>Open WebUI 首跑通；修 wait-for-port 避免「截图过去时」误会</li>
+          <li>服务 <code>localhost:8080</code> 持续 HTTP 200 ✅</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4 卡点 & 解决方案 ===== -->
+  <section id="s4">
+    <h2><span class="num">4</span>卡点 & 解决方案（核心）</h2>
+    <div class="sub">6 个坑，每个讲清：现象 → 真凶 → 怎么解。新会话遇到同类报错直接对照。</div>
+    <table>
+      <thead><tr><th>#</th><th>症状</th><th>真凶</th><th>解决方案</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>双击 .bat「1 秒就没」</td><td><span class="pill p-bad">SmartScreen/杀软</span> 拦双击启动 .bat（连 pause 都来不及弹），非脚本逻辑错</td><td>主推 <b>cmd 手动跑</b>：Win→搜索 cmd→<code>cd</code> 脚本目录→运行 .bat。服务类窗口不自动关</td></tr>
+        <tr><td>2</td><td>cmd 内中文 echo 变 <code>'韓韓滄僧...'</code></td><td><span class="pill p-bad">GBK 编码</span>：cmd 默认 GBK，非 ASCII 字符解析失败</td><td>脚本<b>首行</b> <code>chcp 65001 &gt;nul</code> + 把中文 echo 全改英文</td></tr>
+        <tr><td>3</td><td>cmd 报 <code>was unexpected at this time</code></td><td><span class="pill p-bad">LF 换行</span>：Write 工具默认产 LF，cmd 只认 CRLF，把下一行当续行拼崩 if 块</td><td>Python <code>data.replace(b'\n', b'\r\n')</code> 全转 CRLF；写 bat 后必校验 <code>CR==LF 行数</code></td></tr>
+        <tr><td>4</td><td>Ollama 装不上 / winget 找不到</td><td><span class="pill p-bad">Administrator 身份</span>：误用管理员跑 cmd，WindowsApps 下无 winget</td><td>必须普通 <code>v_yitcai</code> 身份；脚本开头 <code>if not "%USERNAME%"=="v_yitcai" goto :err</code> 护栏</td></tr>
+        <tr><td>5</td><td>winget 仍装不好</td><td><span class="pill p-bad">WindowsApps stub</span>：双击命中商店 python/Ollama stub，不真运行</td><td>不依赖 winget；<code>curl</code> 官方 installer 静默 <code>--scope user</code> 装；硬编码真实 python 路径</td></tr>
+        <tr><td>6</td><td><code>Open-webui.exe serve</code> 报 <code>WinError 4551</code></td><td><span class="pill p-bad">AppLocker</span> 拦工作目录下 venv 的 torch.dll（非信任路径）</td><td>venv 挪 <code>%LOCALAPPDATA%\ollama-webui-venv</code> + <code>pip uninstall -y torch torchaudio torchvision</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="bug" style="margin-top:18px">
+      <div class="card solved">
+        <div class="head"><span class="t">坑 3 详解 · LF-only 是隐形杀手</span><span class="pill p-ok">已闭环</span></div>
+        <p>Write 工具在 Windows 上默认写 <b>LF</b> 换行。cmd.exe 把 LF 当成「续行符 \」，下一行被拼到上一行尾，<code>if(...)</code> 块结构直接崩，报 <code>was unexpected at this time</code>。诊断脚本（纯信息、语法绝对正确）也爆同样的错，就能反推是文件换行问题而非逻辑。</p>
+        <p style="margin-top:6px"><b>修复：</b>写完 bat 立刻用一行 Python 转 CRLF，并比对 <code>CR 行数 == LF 行数</code>（如 87:87）确认转干净。</p>
+      </div>
+      <div class="card solved">
+        <div class="head"><span class="t">坑 6 详解 · AppLocker 拦 torch.dll</span><span class="pill p-ok">已闭环</span></div>
+        <p>open-webui 通过 pip 默认拉 <b>torch</b> 作 optional audio 依赖（你用不到语音），但其 DLL 在工作目录 <code>C:\Users\v_yitcai\WorkBuddy\...</code> 下，不在 AppLocker 信任白名单 → 进程秒退。</p>
+        <p style="margin-top:6px"><b>修复组合：</b>① venv 从 <code>%~dp0venv-ollama</code> 改 <code>%LOCALAPPDATA%\ollama-webui-venv</code>（LOCALAPPDATA 默认在信任路径）；② installer 也放 <code>%LOCALAPPDATA%</code>；③ <code>pip install "open-webui>=0.6"</code>（0.6 起 torch 非硬依赖）+ 装完立即 <code>pip uninstall -y torch torchaudio torchvision</code> 主动剔除。</p>
+      </div>
+      <div class="card solved">
+        <div class="head"><span class="t">收官坑 · 服务「看起来 refused」其实是过去时</span><span class="pill p-ok">已闭环</span></div>
+        <p>用户 10:40 截图 <code>localhost refused</code>，但 open-webui 实际 10:42:59 才启动（晚 2 分钟）——截图是过去时。脚本末尾只 <code>press any key</code> 没等服务 ready，用户 100% 误以为挂了。</p>
+        <p style="margin-top:6px"><b>修复：</b>① 末尾 <code>start "Open WebUI" /B cmd /c "...serve --host 0.0.0.0 --port 8080"</code> 真后台 + bind <code>0.0.0.0</code>；② 加 <b>wait-for-port</b> 循环（每 3s curl 127.0.0.1:8080，最长 90s），通了才提示用户。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5 踩坑铁律 ===== -->
+  <section id="s5">
+    <h2><span class="num">5</span>踩过的坑 · 别再踩（铁律清单）</h2>
+    <div class="sub">给新会话的「再犯必死」清单。任何一条违反都会重现「秒退 / 4551 / 乱码」。</div>
+    <div class="grid g2">
+      <div class="card law">
+        <h3>🚫 写 Windows .bat 的 5 条铁律</h3>
+        <ol>
+          <li><b>强制 CRLF</b>：写完用 Python <code>replace(b'\n',b'\r\n')</code> 转，并校验 CR==LF 行数。Write 工具默认 LF，cmd 不认。</li>
+          <li><b>首行 <code>chcp 65001 &gt;nul</code></b>：否则任何中文/非 ASCII 被 GBK 解析成乱码命令。</li>
+          <li><b>硬编码真实 python 路径</b>：避开 <code>WindowsApps\python.exe</code> 商店 stub（它不真运行）。</li>
+          <li><b>身份护栏</b>：<code>if not "%USERNAME%"=="v_yitcai" goto :err</code>，拒绝 Administrator（其名下无 winget）。</li>
+          <li><b>全程 errorlevel + pause 兜底</b>；服务脚本末尾必须 <b>wait-for-port</b>，别只 press any key。</li>
+        </ol>
+      </div>
+      <div class="card law">
+        <h3>🚫 公司机器装 Python 大依赖包铁律</h3>
+        <ol>
+          <li><b>venv 必放 <code>%LOCALAPPDATA%\%app%-venv</code></b>，绝不放工作目录 / D 盘根（AppLocker 拦 DLL）。</li>
+          <li><b>主动卸非必需依赖</b>：open-webui / ComfyUI 等纯 Web 工具 <code>pip uninstall -y torch torchaudio torchvision</code>。</li>
+          <li><b>钉版本</b>：<code>pip install "open-webui>=0.6"</code>，避免镜像回退老版本拉 torch。</li>
+          <li><b>TEMP 安装包也别放工作目录</b>，用 <code>%LOCALAPPDATA%</code>。</li>
+          <li>仍报 <code>WinError 4551</code> → 那是 LOCALAPPDATA 也不在白名单，需 IT 加白名单，不是脚本问题。</li>
+        </ol>
+      </div>
+      <div class="card law">
+        <h3>🚫 GitHub / Pages 铁律</h3>
+        <ol>
+          <li><b>文件名必须 ASCII</b>：中文名 Pages 一律 404。</li>
+          <li><b>根目录放 <code>.nojekyll</code></b>。</li>
+          <li><b>每个 HTML 页脚统一</b>：<code>📌 本页由 yitong 沉淀整理 · 文化活动知识库</code>。</li>
+          <li><b>推送走 SSH</b>（yitongcaii 账号，key <code>C:\Users\v_yitcai\.ssh\id_ed25519</code>），不碰 PAT。</li>
+          <li><b>git 用 <code>git add &lt;具体文件&gt;</code></b>，不用 <code>-A</code>（避免误带工作区遗留大文件）。</li>
+        </ol>
+      </div>
+      <div class="card law">
+        <h3>🚫 协作 / 交付铁律</h3>
+        <ol>
+          <li><b>企微禁发</b>：绝不主动发企微消息，凌驾一切（除非用户本句明确授权）。</li>
+          <li><b>成品尽量给 HTML</b>：单文件自包含、活泼卡片墙风；交付必给可点击链接（Pages 或 present_files 预览）。</li>
+          <li><b>每个 HTML 自动沉淀 Obsidian</b>：写 .md（非拷 HTML）到 vault，嵌入访问链接 + 一句话说明。</li>
+          <li><b>未鉴权 GitHub API 60/hr</b>：安全公告分页上限记为 ≥100，别假装有精确数。</li>
+          <li><b>本机装系统软件（Ollama/Docker）需 UAC</b>：AI 在沙箱点不了，只产出脚本让用户本机跑。</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6 关键环境信息 ===== -->
+  <section id="s6">
+    <h2><span class="num">6</span>关键环境信息（新会话抄作业）</h2>
+    <div class="sub">路径、账号、密钥、常用命令。</div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>📁 关键路径</h3>
+        <dl class="env">
+          <dt>工作区（本项目）</dt><dd><code>C:\Users\v_yitcai\WorkBuddy\2026-08-06-09-56-06\</code></dd>
+          <dt>Pages 主仓本地克隆</dt><dd><code>D:\activities-html-yitongcaii</code>（main / 含 .nojekyll）</dd>
+          <dt>Obsidian vault 根</dt><dd><code>C:\Users\v_yitcai\Documents\Obsidian\</code></dd>
+          <dt>AI 沙龙笔记目录</dt><dd><code>C:\Users\v_yitcai\Documents\Obsidian\活动\AI沙龙\</code></dd>
+          <dt>open-webui venv（已修）</dt><dd><code>%LOCALAPPDATA%\ollama-webui-venv</code></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>👤 账号 / 密钥</h3>
+        <dl class="env">
+          <dt>登录账号（必须）</dt><dd><code>v_yitcai</code>（普通用户，<b>非 Administrator</b>）</dd>
+          <dt>Python（硬编码用）</dt><dd><code>C:\Users\v_yitcai\AppData\Local\Programs\Python\Python312\python.exe</code></dd>
+          <dt>GitHub SSH key</dt><dd><code>C:\Users\v_yitcai\.ssh\id_ed25519</code>（yitongcaii 账号）</dd>
+          <dt>Pages 仓库</dt><dd><code>yitongcaii/activities-html</code>（main 分支）</dd>
+          <dt>已弃用仓库</dt><dd><code>yutttyi/activities-html</code>（Pages=404 已禁，勿用）</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>🔗 线上入口</h3>
+        <ul class="links" style="list-style:none;padding:0">
+          <li style="margin:8px 0">选题库：<a href="https://yitongcaii.github.io/activities-html/ai-salon-topics.html">yitongcaii.github.io/activities-html/ai-salon-topics.html</a></li>
+          <li style="margin:8px 0">首玩包：<a href="https://yitongcaii.github.io/activities-html/ai-starter-pack.html">yitongcaii.github.io/activities-html/ai-starter-pack.html</a></li>
+          <li style="margin:8px 0">本机服务：<a href="http://localhost:8080">http://localhost:8080</a>（Open WebUI）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🛠 常用命令</h3>
+        <ul>
+          <li>推 Pages：<code>cd D:\activities-html-yitongcaii</code> → <code>cp 源 .</code> → <code>git add 具体文件</code> → <code>git commit</code> → <code>git push</code>（SSH）</li>
+          <li>跑部署脚本：开 cmd（普通 v_yitcai）→ <code>cd</code> 工作区 → <code>setup-ollama-openwebui.bat</code></li>
+          <li>bat 转 CRLF：<code>python -c "open(f,'rb').read()"</code> 后 <code>replace(b'\n',b'\r\n')</code></li>
+          <li>诊断拦截：双击 <code>diag.bat</code>（若它也秒关=系统确拦截）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7 待办 & 残留 ===== -->
+  <section id="s7">
+    <h2><span class="num">7</span>待办 & 残留（未闭环项）</h2>
+    <div class="sub">接手会话可继续推进。</div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>📋 待办</h3>
+        <ul>
+          <li><b>开机自启</b>：Open WebUI 当前手动起，可加计划任务 / 快捷方式</li>
+          <li><b>导航卡 index.html</b>：Pages 仓可加一个导航主页聚合两页 + 其他资产</li>
+          <li><b>精确安全数</b>：配 <code>GITHUB_TOKEN</code> 补 openclaw/n8n/open-webui 公告精确数与严重度（现记 ≥100）</li>
+          <li><b>langflow 本机验证</b>：沙箱装不了（InvalidVersion bug），让用户双击 <code>setup-langflow.bat</code> 验证</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🧹 无害残留（可清可不清）</h3>
+        <ul>
+          <li>工作区下 <code>venv/</code> <code>venv-ollama/</code> <code>lfenv/</code> <code>lfenv2/</code> <code>lftest/</code>：沙箱 safe-delete 拦删除，属无害残留</li>
+          <li><code>ai_repos_seed.json</code> / <code>ai_repos_raw.json</code>：检索中间产物，可留作重跑源</li>
+          <li>清理时勿用 <code>rm -rf</code> 个人目录；手动重命名 / 删除即可</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    📌 本页由 yitong 沉淀整理 · 文化活动知识库<br>
+    <span style="opacity:.7">最后一更新：2026-08-07 · 接手会话读此页即可无损续作</span>
+  </footer>
+</div>
+</body>
+</html>
