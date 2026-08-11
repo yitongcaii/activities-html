@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI漫剧制作 SOP · 单页工作台</title>
+<style>
+  :root{--purple:#7F77DD;--purple-d:#534AB7;--cyan:#1D9E75;--cyan-l:#5DCAA5;--ink:#26215C;--txt:#2C2C2A;--mut:#6b6b73;--bg:#f6f5fb;--card:#fff;--line:#ece9f7;--post:#e4572e;--amber:#c77a18}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.62;padding-bottom:60px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;padding:32px 20px 28px;margin-bottom:24px}
+  header h1{font-size:25px;font-weight:700}
+  header p{opacity:.93;margin-top:7px;font-size:14px}
+  .pill{display:inline-block;font-size:12px;padding:3px 11px;border-radius:999px;background:rgba(255,255,255,.22);margin:10px 7px 0 0}
+  h2{font-size:19px;margin:32px 0 13px;padding-left:11px;border-left:5px solid var(--purple);color:var(--ink)}
+  h2 small{font-size:12px;color:var(--mut);font-weight:400;margin-left:8px}
+  .lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 18px;font-size:13.5px;color:var(--mut)}
+  .lead b{color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:15px;margin-top:13px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;margin-top:13px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;box-shadow:0 5px 16px rgba(83,74,183,.06)}
+  .card h3{font-size:14.5px;color:var(--purple-d);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .card .no{font-size:11px;font-weight:700;color:#fff;background:var(--purple);border-radius:7px;padding:2px 8px}
+  .card ul{margin:6px 0 0 18px;font-size:13px}
+  .card ul li{margin:4px 0}
+  .card p{font-size:13px;color:var(--txt)}
+  .chip{font-size:10.5px;padding:2px 9px;border-radius:999px;background:var(--line);color:var(--mut);margin-right:5px}
+  .chip.do{background:#e1f5ee;color:var(--cyan)}
+  .chip.tool{background:#e6f1fb;color:#3b6fb5}
+  .chip.chk{background:#f3e8ff;color:#8a4fd0}
+  .chip.bad{background:#fde8e8;color:#c0392b}
+  .chip.warn{background:#fff0e0;color:var(--amber)}
+  .law{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:13px}
+  .law .l{background:linear-gradient(135deg,#fff,#f3f1fc);border:1px solid var(--line);border-left:4px solid var(--post);border-radius:12px;padding:13px 15px}
+  .law .l b{color:var(--post);font-size:13.5px}
+  .law .l p{font-size:12.5px;color:var(--mut);margin-top:4px}
+  table{width:100%;border-collapse:collapse;margin-top:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13px}
+  table th{background:var(--purple);color:#fff;text-align:left;padding:9px 12px;font-weight:600;font-size:12.5px}
+  table td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+  table tr:nth-child(even) td{background:#faf9ff}
+  .stage{font-weight:700;color:var(--purple-d)}
+  .checks{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:13px;columns:2;column-gap:28px;font-size:13px}
+  .checks div{break-inside:avoid;margin:5px 0;padding-left:22px;position:relative}
+  .checks div:before{content:"☐";position:absolute;left:0;color:var(--purple)}
+  .checks.two{columns:1}
+  .checks.two div{font-size:13.5px;margin:7px 0}
+  .linkbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px;font-size:13px}
+  .linkbox a{color:var(--purple-d);font-weight:600;text-decoration:none;word-break:break-all}
+  .linkbox a:hover{text-decoration:underline}
+  footer{text-align:center;color:var(--mut);font-size:12.5px;margin-top:40px;padding-top:18px;border-top:1px solid var(--line)}
+  .tag{display:inline-block;background:var(--cyan);color:#fff;font-size:11px;padding:2px 9px;border-radius:6px;margin-right:6px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🎬 AI漫剧制作 SOP · 单页工作台</h1>
+    <p>从选题到发布的完整流水线 · 横屏 16:9 · 已有立绘锁角色参考 · 三处必后期</p>
+    <div>
+      <span class="pill">横屏 16:9</span>
+      <span class="pill">立绘锁脸</span>
+      <span class="pill">图生视频式</span>
+      <span class="pill">三处后期</span>
+      <span class="pill">先测后铺</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>用法：</b>这是 AI 漫剧（竖屏/横屏漫画风短剧）的通用制作规范。按「〇→一→二→…→六」顺序推进；<b>〇前置铁律</b>贯穿全程优先级最高；<b>分阶段 SOP</b>给每步的动作/工具/验收/避坑；<b>词库 + 机位表</b>是出图出视频时的速查；<b>五/六清单</b>是交付前勾选。本页配套文件见底部链接。
+  </div>
+
+  <!-- 〇 前置铁律 -->
+  <h2>〇、前置铁律 <small>贯穿全流程 · 优先级最高</small></h2>
+  <div class="law">
+    <div class="l"><b>🔒 立绘锁脸</b><p>企鹅立绘上传即梦/可灵做「角色参考/垫图」，提示词<strong>绝不写外貌词</strong>（圆胖/橙喙/披风色）。改脸=全片废。</p></div>
+    <div class="l"><b>📐 比例固定横屏 16:9</b><p>出图/视频均选 16:9；MJ 加 <code>--ar 16:9</code>。别中途改比例，后期蒙版和封面都按 16:9 设计。</p></div>
+    <div class="l"><b>🔥 三样交后期</b><p>火焰、飞刀轨迹、文字 logo —— <strong>别让 AI 画</strong>，硬画必糊必变形，统一剪映/PS 合成。</p></div>
+    <div class="l"><b>🧪 先测后铺</b><p>镜1+镜2 跑通流程 → 再批量 16 镜，省 credits 也省返工。不要一上来铺满。</p></div>
+  </div>
+
+  <!-- 一 总流程 -->
+  <h2>一、总流程（8 阶段）</h2>
+  <table>
+    <tr><th style="width:38px">#</th><th>阶段</th><th>核心产出</th><th>主工具</th></tr>
+    <tr><td class="stage">1</td><td>选题·剧本</td><td>题材 / 分镜脚本 / 集数</td><td>DeepSeek · 豆包写本 + 人工改卡点</td></tr>
+    <tr><td class="stage">2</td><td>角色视觉设定</td><td>立绘 + 角色参考锚</td><td>你的立绘 + 即梦角色参考</td></tr>
+    <tr><td class="stage">3</td><td>分镜·出图</td><td>每镜关键帧（锁一致）</td><td>即梦 / MJ（出图）</td></tr>
+    <tr><td class="stage">4</td><td>动态化</td><td>静图转视频</td><td>可灵 / 即梦 / 海螺（图生视频）</td></tr>
+    <tr><td class="stage">5</td><td>配音·音效</td><td>音色 + BGM + 音效</td><td>剪映AI配音 / 魔音工坊 / 智影</td></tr>
+    <tr><td class="stage">6</td><td>剪辑合成</td><td>拼接 + 转场 + 调色</td><td>剪映 / CapCut / PR</td></tr>
+    <tr><td class="stage">7</td><td>字幕·包装</td><td>台词字幕 + 封面</td><td>剪映 / 醒图 / Canva</td></tr>
+    <tr><td class="stage">8</td><td>发布·运营</td><td>上架 + 投流 + 复盘</td><td>平台后台 + 巨量 / 磁力</td></tr>
+  </table>
+  <div class="lead" style="margin-top:12px"><b>两条技术路线：</b>① <b>图生视频式</b>（漫画静图 → 让局部动起来）门槛低、风格统一易控，是主流；② <b>转绘式</b>（真人/3D 视频套漫画滤镜）质感更真但一致性更难。本 SOP 默认走 ①。</div>
+
+  <!-- 二 分阶段SOP -->
+  <h2>二、分阶段 SOP <small>动作 / 工具 / 验收 / 避坑</small></h2>
+  <div class="grid">
+
+    <div class="card"><h3><span class="no">1</span> 选题·剧本</h3>
+      <p><span class="chip do">动作</span>定赛道（文化mascot/战神/团宠等），写分镜脚本，规划集数（每集1–2分钟）。</p>
+      <p style="margin-top:7px"><span class="chip chk">验收</span>每镜有「景别+画面+动作+时长」；情绪曲线清晰。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>前3秒抛钩子；每15–20秒一个反转；结尾 slogan 留可编辑占位。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">2</span> 角色视觉设定</h3>
+      <p><span class="chip do">动作</span>立绘上传即梦/可灵建「角色参考」；反派若无立绘用文字兜底。</p>
+      <p style="margin-top:7px"><span class="chip chk">验收</span>同参考稳定生成英雄态/现实态不同服装但同脸。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>参考只锁脸+服装，<strong>别让 AI 改披风色/剑盾样式</strong>（服装道具一致也是铁律）。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">3</span> 分镜·出图</h3>
+      <p><span class="chip tool">公式</span><code>[角色参考锚] + [场景/动作/情绪] + [镜头/光影] + 画风后缀 + 负面词</code></p>
+      <p style="margin-top:7px"><span class="chip chk">验收</span>跨镜脸一致、服装道具一致、机位符合分镜表。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>出图就奔 8k/锐利/体积光（video 救不回清晰度）；场景也垫参考图锁光影。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">4</span> 动态化</h3>
+      <p><span class="chip do">动作</span>关键帧喂可灵/即梦；「运动笔刷」只圈想动区域（披风/草），其余锁死。</p>
+      <p style="margin-top:7px"><span class="chip chk">验收</span>temporal 一致（脸不漂、手不长）、动作流畅不抽搐。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>腾空/大幅动作必崩→拆近景小动作；视频提示词必加「角色与首帧一致 + temporal consistency」；30fps 起。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">5</span> 配音·音效</h3>
+      <p><span class="chip do">动作</span>旁白温暖中音（剪映「解说·温柔」），每句尾静音留白给转场；BGM 分段（现实钢琴→战斗鼓点→余韵弦乐→四季由沉转明→升华暖钢琴）。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>音效别盖旁白；必后期点（火焰/飞刀/logo）音效也要同步补。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">6</span> 剪辑合成</h3>
+      <p><span class="chip do">动作</span>拼接 + 转场（闪白/模糊/遮罩蒙版轮换，别全同款）+ 整片套一个 LUT 统一色板。</p>
+      <p style="margin-top:7px"><span class="chip warn">注意</span>转场/遮罩是<strong>剪辑操作不是提示词</strong>（剪映蒙版+关键帧）；环绕/升降运镜 AI 易晕，优先后期做。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">7</span> 字幕·包装</h3>
+      <p><span class="chip do">动作</span>台词字幕 + 横屏封面（每集做 3 版 A/B 测）。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>横屏封面仍决定首页点击；别用模板化字体。</p>
+    </div>
+
+    <div class="card"><h3><span class="no">8</span> 发布·运营</h3>
+      <p><span class="chip do">动作</span>上架抖音/快手/视频号/B站；投流测款；数据复盘迭代。</p>
+      <p style="margin-top:7px"><span class="chip bad">避坑</span>平台免费导出带水印→开会员下无水印原片最干净，别靠剪映抠。</p>
+    </div>
+
+  </div>
+
+  <!-- 三 提示词词库 -->
+  <h2>三、提示词词库速查 <small>挂到出图/视频公式里</small></h2>
+  <div class="grid2">
+    <div class="card"><h3>画质清晰</h3><p>8k、锐利对焦、极致细节、电影级画质、masterpiece</p></div>
+    <div class="card"><h3>光影氛围</h3><p>体积光、戏剧侧光、逆光剪影、丁达尔光、暖/冷调</p></div>
+    <div class="card"><h3>灵动（视频）</h3><p>自然物理感、流畅连贯、微动作、发丝飘动、缓急有致、动作有重量</p></div>
+    <div class="card"><h3>构图美术</h3><p>三分法、景深、前景虚化、负空间、黄金比例</p></div>
+    <div class="card"><h3>色彩调色</h3><p>电影感调色、青橙色调、莫兰迪、高对比</p></div>
+    <div class="card"><h3>质感材质</h3><p>金属质感、织物纹理、皮肤质感、玻璃通透、磨砂反光</p></div>
+  </div>
+  <div class="card" style="margin-top:13px"><h3>🚫 负面词（必贴每镜末尾）</h3>
+    <p>模糊，低质量，变形，多余肢体，手部畸形，抖动，闪烁，水印，文字，3D渲染，卡通塑料感，<strong>改变角色外貌</strong></p>
+    <p style="margin-top:6px;color:var(--mut);font-size:12.5px">英文：<code>blurry, low quality, deformed, extra limbs, mutated hands, jitter, flickering, watermark, text, 3d render, plastic look, changed character appearance</code></p>
+  </div>
+
+  <!-- 四 机位速查 -->
+  <h2>四、机位速查 <small>已单独成页</small></h2>
+  <div class="linkbox">
+    <p><span class="tag">机位表</span><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-camera-positions.html" target="_blank">https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-camera-positions.html</a></p>
+    <p style="margin-top:8px;color:var(--mut);font-size:12.5px">组合逻辑：角度（平视/仰拍/俯拍/顶拍/荷兰角）× 景别（大远景→大特写）× 方向（正面/侧面/斜侧/背面/过肩）× 运动（推拉横移手持环绕摇升降跟拍）。战斗段用仰拍显威、四季蒙太奇锁同机位同构图、收尾机位升维收束。</p>
+  </div>
+
+  <!-- 五 必后期清单 -->
+  <h2>五、必后期清单 <small>交付前勾</small></h2>
+  <div class="checks">
+    <div>火焰 / 飞刀轨迹（镜3/6，剪映/PS 合成）</div>
+    <div>披风 logo（镜15，后期贴图）</div>
+    <div>转场遮罩（镜1.5 入梦 / 镜15 出梦，剪映蒙版）</div>
+    <div>去水印（平台付费原片优先，别靠后期抠）</div>
+  </div>
+
+  <!-- 六 出片自检 -->
+  <h2>六、出片自检总清单 <small>发布前逐项过</small></h2>
+  <div class="checks two">
+    <div>角色脸全程一致（角色参考锁死）</div>
+    <div>服装 / 剑盾 / 披风跨镜一致</div>
+    <div>机位符合分镜表（四季蒙太奇同机位同构图）</div>
+    <div>色调统一（一个 LUT）</div>
+    <div>三处后期已完成（火焰/飞刀/logo）</div>
+    <div>旁白情绪对位、结尾 slogan 已填</div>
+    <div>横屏 16:9、无平台水印</div>
+  </div>
+
+  <!-- 配套文件 -->
+  <h2>配套文件 <small>同仓库 ai-manga/ 文件夹</small></h2>
+  <div class="linkbox">
+    <p><span class="tag">台本分镜</span><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank">ai-manga-penguin-storyboard.html</a></p>
+    <p style="margin-top:6px"><span class="tag">提示词 EN</span><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-prompts.html" target="_blank">ai-manga-penguin-prompts.html</a></p>
+    <p style="margin-top:6px"><span class="tag">提示词 CN</span><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-prompts-cn.html" target="_blank">ai-manga-penguin-prompts-cn.html</a></p>
+    <p style="margin-top:6px"><span class="tag">Final脚本</span><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-final-script.html" target="_blank">ai-manga-penguin-final-script.html</a></p>
+    <p style="margin-top:6px"><span class="tag">机位表</span><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-camera-positions.html" target="_blank">ai-manga-camera-positions.html</a></p>
+  </div>
+
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+</body>
+</html>
