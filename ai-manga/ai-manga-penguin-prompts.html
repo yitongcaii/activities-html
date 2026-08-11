@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI漫剧 · 企鹅英雄 · 提示词包</title>
+<style>
+  :root{--purple:#7F77DD;--purple-d:#534AB7;--cyan:#1D9E75;--cyan-l:#5DCAA5;--ink:#26215C;--txt:#2C2C2A;--mut:#6b6b73;--bg:#f6f5fb;--card:#fff;--line:#ece9f7}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding-bottom:60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;padding:32px 22px 28px;margin-bottom:24px}
+  header h1{font-size:25px;font-weight:700}
+  header p{opacity:.92;margin-top:7px;font-size:14px}
+  .pill{display:inline-block;font-size:12px;padding:3px 11px;border-radius:999px;background:rgba(255,255,255,.22);margin:10px 7px 0 0}
+  h2{font-size:19px;margin:30px 0 12px;padding-left:11px;border-left:5px solid var(--purple);color:var(--ink)}
+  .lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:13.5px;color:var(--mut)}
+  .lead b{color:var(--ink)}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-top:12px}
+  .box h3{font-size:14px;color:var(--purple-d);margin:10px 0 4px}
+  pre{background:#1f1b3a;color:#e9e6ff;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;font-family:"SFMono-Regular",Consolas,monospace;margin-top:6px}
+  .lbl{font-size:11px;font-weight:700;color:#fff;background:var(--purple);padding:2px 9px;border-radius:6px;display:inline-block;margin-top:10px}
+  .lbl.v{background:var(--cyan)}
+  .lbl.n{background:var(--blue)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:15px;margin-top:12px}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:0 5px 16px rgba(83,74,183,.06)}
+  .shot .top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .shot .no{font-weight:700;color:var(--purple-d);font-size:14px}
+  .shot .ph{font-size:10.5px;padding:1px 8px;border-radius:999px;background:var(--line);color:var(--mut)}
+  .shot .ph.fan{background:#e1f5ee;color:var(--cyan)}
+  .shot .ph.dre{background:#e6f1fb;color:var(--blue)}
+  .shot .note{font-size:12px;color:var(--mut);margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
+  .tool{font-size:13px;color:var(--txt);margin-top:8px}
+  .tool b{color:var(--purple-d)}
+  footer{text-align:center;color:var(--mut);font-size:12.5px;margin-top:38px;padding-top:18px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🐧 AI漫剧 · 企鹅英雄 · 提示词包</h1>
+    <p>16镜出图 EN + 视频 CN · 横屏 16:9 · 已有立绘用角色参考</p>
+    <div><span class="pill">出图 EN</span><span class="pill">视频 CN</span><span class="pill">横屏 16:9</span><span class="pill">已有立绘·角色参考</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>Usage:</b> You already have character art, so no base-face generation. ① Upload your penguin art to 即梦/可灵 as <b>「角色参考 / 垫图」</b> (or Midjourney <code>--cref</code>). ② Prefix every image prompt with <b>"the penguin hero (consistent with reference character art)"</b> and never describe the penguin's looks. ③ Feed keyframes to 可灵/即梦 for video. ④ 剪映 for edit. The villain has no art by default — short description below as fallback.
+  </div>
+
+  <h2>Zero · Character Reference (existing art, do NOT describe looks in words)</h2>
+  <div class="box">
+    <h3>🐧 Penguin hero / 🧑‍💻 Casual-form (you have the art)</h3>
+    <pre>Upload your art to 即梦/可灵 as 「角色参考」or「垫图」. Prefix each prompt:
+the penguin hero (consistent with reference character art, keep appearance, cape, sword, shield, colors unchanged)
+For office scenes use:
+the penguin in casual outfit (consistent with reference character art)</pre>
+    <h3>🔥 Burning black-clad villain (use if no art)</h3>
+    <pre>A tall humanoid figure, not a penguin, entirely wrapped in tattered black robe and dark armor, holding a large greatsaber, menacing oppressive aura, dark red and orange accents</pre>
+    <div class="tool"><b>🔑 Consistency rule:</b> Lock the character via your art + reference feature. Never write body shape / orange beak / cape color in prompts — it makes the model alter the face. Fire, knife, and cape logo stay in post-production.</div>
+  </div>
+
+  <h2>One · Style suffix & Negative</h2>
+  <div class="box">
+    <span class="lbl">Style suffix (append)</span>
+    <pre>comic book style, flat vibrant colors, clean line art, cinematic composition, horizontal 16:9, soft dramatic lighting, keep character consistent with reference --ar 16:9</pre>
+    <span class="lbl n">Negative</span>
+    <pre>blurry, low quality, extra limbs, deformed hands, extra fingers, messy, realistic photo, 3d render, watermark, text, logo glare, altering character appearance --no text</pre>
+    <div class="tool"><b>Aspect ratio:</b> 即梦 pick 16:9 (landscape); 可灵 video 16:9; Midjourney <code>--ar 16:9</code>.</div>
+  </div>
+
+  <h2>Two · Shot prompts (image EN / video CN)</h2>
+  <div class="grid">
+
+    <div class="shot"><div class="top"><span class="no">Shot1</span><span class="ph dre">Real</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin in casual outfit (consistent with reference character art), sitting at a computer desk typing code, calm focused expression, office with city view through window, comic book style, flat vibrant colors, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>企鹅安静打字，偶尔眨眼，屏幕微光映在脸上，镜头缓慢推近</pre>
+      <div class="note">Casual-form art; reconnect at Shot16.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot1.5</span><span class="ph dre">Trans</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin at desk, eyes slowly closing, screen reflection blurring, abstract white ripple transition, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>画面逐渐模糊，视线失焦，一道白色光晕涟漪扩散，淡出转场</pre>
+      <div class="note">Post transition only.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot2</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art), standing in a vast desert facing a tall burning black-clad swordsman, tense standoff, swirling sand and dust, serious expression, a drop of sweat on forehead, wind blowing cape, low angle, dramatic, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>风沙吹动企鹅披风，双方对峙，企鹅神情紧绷，额角一滴汗滑落，镜头微摇</pre>
+      <div class="note">Fire post; villain as dark-robed figure.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot3</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>The burning black-clad man leaps into the air, raising his greatsaber high above his head, about to strike down, dynamic upward pose, ember particles trailing, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>黑衣人持焰刃跃起，刀高举过顶，火焰拖尾，镜头跟随上扬</pre>
+      <div class="note">Flame blade post.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot4</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art) swings his greatsword and raises his round shield, charging forward toward the enemy, determined expression, motion speed lines, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>企鹅挥剑举盾向前冲，披风扬起，速度线掠过</pre>
+      <div class="note">Same gear as Shot2.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot5</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>Close upper-body shot of the penguin hero (consistent with reference character art) and the burning black-clad man clashing in mid-air, weapons crossing with sparks, dynamic aerial battle, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>两人武器交击火花四溅，近景快速剪辑，镜头轻微震动</pre>
+      <div class="note">🔴 Close-up to avoid full-body mid-air warp.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot6</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>The burning black-clad man falling from the air, a small knife flying from his waist toward the penguin, mid-action, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>黑衣人下坠中，腰间射出小刀飞向企鹅</pre>
+      <div class="note">🔴 Knife trajectory post.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot7</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>Close-up of the penguin hero (consistent with reference character art) twisting his shield to block a small knife, the knife bouncing off and falling to the ground, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>盾牌翻转挡刀，小刀弹开落地</pre>
+      <div class="note">Shield logo post.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot8</span><span class="ph fan">Fight</span></div>
+      <span class="lbl">🎨 Image</span><pre>The burning black-clad man lying defeated on the desert ground, the penguin hero (consistent with reference character art) standing victorious, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>黑衣人轰然倒地扬起沙尘，企鹅静立</pre>
+      <div class="note">Static dark robe is fine.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot9</span><span class="ph">Echo</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art) standing alone, behind him a sprawling city skyline with millions of glowing lights at night, triumphant calm, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>镜头从企鹅背后缓缓拉远，城市灯火闪烁</pre>
+      <div class="note">City night plate unified.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot10</span><span class="ph">Seasons</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art) in side profile at left 1/5 of frame, thunderstorm with heavy rain, drenched, gray gloomy desert ruins, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>雷雨倾盆，企鹅被淋湿，闪电划过天空</pre>
+      <div class="note">Inner seasons·same pose plate.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot11</span><span class="ph">Seasons</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art) same side profile at left 1/5, heavy snow falling, snow on body and head, white snowy ground, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>大雪纷飞，雪花落在企鹅身上堆积</pre>
+      <div class="note">Same frame as Shot10.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot12</span><span class="ph">Seasons</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art) same side profile at left 1/5, blue sky with white clouds, cape fluttering in wind, green ground with small flowers and grass sprouting, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>蓝天微风，披风飘扬，草地小花摇曳生长</pre>
+      <div class="note">Echoes Shot16 blue sky.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot13</span><span class="ph">Rise</span></div>
+      <span class="lbl">🎨 Image</span><pre>Close-up of a small white flower on the ground, the penguin hero (consistent with reference character art) flipper gently touching it, soft focus background, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>镜头聚焦小白花，企鹅轻柔抚摸，花瓣微动</pre>
+      <div class="note">Flower as visual anchor, fine render.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot14</span><span class="ph">Rise</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin hero (consistent with reference character art) standing up, looking up at the sky, side profile, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>企鹅起身仰望天空，云缓缓飘过</pre>
+      <div class="note">Side silhouette, emotional space.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot15</span><span class="ph">Rise</span></div>
+      <span class="lbl">🎨 Image</span><pre>Close-up of the penguin hero cape (consistent with reference character art), a team logo emblem waving gently in the breeze, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>特写披风，logo随微风轻摆</pre>
+      <div class="note">🔴 Logo post; AI only the cape.</div>
+    </div>
+
+    <div class="shot"><div class="top"><span class="no">Shot16</span><span class="ph dre">End</span></div>
+      <span class="lbl">🎨 Image</span><pre>The penguin in casual outfit (consistent with reference character art), smiling and tilting head to look out the window, background city aerial view with blue sky and white clouds, freeze-frame, comic book style, horizontal 16:9 --ar 16:9</pre>
+      <span class="lbl v">🎬 Video</span><pre>工位企鹅微笑偏头望窗外，蓝天城市，画面缓缓定格</pre>
+      <div class="note">Casual-form reconnects Shot1, closes loop.</div>
+    </div>
+
+  </div>
+
+  <div class="tool" style="margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px">
+    <b>🔧 Tools:</b> Image＝即梦 (CN-friendly·character reference, upload art first) / Midjourney (EN fine, <code>--cref</code>). Video＝可灵 (stable camera·supports image reference) / 即梦 / 海螺. Edit＝剪映. Fire, knife, cape logo = post-production only.
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>

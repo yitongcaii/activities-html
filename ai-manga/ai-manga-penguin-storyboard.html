@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI漫剧 · 企鹅英雄 · 台本 / 分镜 / 角色卡</title>
+<style>
+  :root{
+    --purple:#7F77DD; --purple-d:#534AB7; --cyan:#1D9E75; --cyan-l:#5DCAA5;
+    --blue:#378ADD; --ink:#26215C; --txt:#2C2C2A; --mut:#6b6b73;
+    --bg:#f6f5fb; --card:#ffffff; --line:#ece9f7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;padding:0 0 60px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;padding:34px 22px 30px;margin-bottom:26px}
+  header .wrap{padding:0 22px}
+  header h1{font-size:26px;font-weight:700;letter-spacing:.5px}
+  header p{opacity:.92;margin-top:8px;font-size:14px}
+  .pill{display:inline-block;font-size:12px;padding:3px 11px;border-radius:999px;background:rgba(255,255,255,.22);margin-right:7px;margin-top:10px}
+  h2{font-size:20px;margin:34px 0 14px;padding-left:11px;border-left:5px solid var(--purple);color:var(--ink)}
+  h3{font-size:15px;margin:18px 0 8px;color:var(--purple-d)}
+  .lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--mut)}
+  .lead b{color:var(--ink)}
+  .fixgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
+  .fix{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:0 4px 14px rgba(83,74,183,.06)}
+  .fix .tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;display:inline-block;margin-bottom:8px}
+  .fix h4{font-size:14px;color:var(--ink);margin-bottom:5px}
+  .fix p{font-size:12.5px;color:var(--mut)}
+  /* timeline */
+  .tl{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 18px 14px;margin-top:12px}
+  .shot{border-left:3px solid var(--line);padding:11px 0 11px 16px;position:relative}
+  .shot::before{content:"";position:absolute;left:-7px;top:16px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--purple)}
+  .shot.r::before{border-color:var(--cyan)}
+  .shot.d::before{border-color:var(--blue)}
+  .shot .no{font-size:12px;font-weight:700;color:var(--purple-d);margin-right:8px}
+  .shot .ph{font-size:11px;padding:1px 8px;border-radius:999px;background:var(--line);color:var(--mut);margin-right:8px}
+  .shot .ph.fan{background:#e1f5ee;color:var(--cyan)}
+  .shot .ph.dre{background:#e6f1fb;color:var(--blue)}
+  .shot .tx{font-size:14px;color:var(--txt);display:block;margin-top:4px}
+  /* table */
+  .tbl{overflow-x:auto;margin-top:12px;border-radius:14px;border:1px solid var(--line);background:var(--card)}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:760px}
+  th{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;text-align:left;padding:11px 12px;font-weight:600;white-space:nowrap}
+  td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;color:var(--txt)}
+  tr:hover td{background:#faf9ff}
+  td .dur{font-weight:700;color:var(--cyan)}
+  td .ai{font-size:12px;color:var(--mut)}
+  .rk{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:6px;color:#fff;margin-left:6px}
+  .rk.h{background:#e24b4a}.rk.m{background:#ba7517}.rk.l{background:#639922}
+  /* bento chars */
+  .bento{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:14px}
+  .ch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(83,74,183,.07)}
+  .ch .hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .ch .av{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#fff}
+  .ch .nm{font-size:16px;font-weight:700;color:var(--ink)}
+  .ch .rl{font-size:12px;color:var(--mut)}
+  .ch .row{display:flex;gap:8px;margin:9px 0;font-size:13px}
+  .ch .row b{color:var(--purple-d);min-width:64px;flex-shrink:0}
+  .sw{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+  .sw span{width:26px;height:26px;border-radius:7px;border:1px solid rgba(0,0,0,.06);box-shadow:inset 0 0 0 2px #fff}
+  .note{background:#faf9ff;border:1px dashed var(--purple);border-radius:12px;padding:12px 14px;font-size:12.5px;color:var(--mut);margin-top:10px}
+  footer{text-align:center;color:var(--mut);font-size:12.5px;margin-top:40px;padding-top:18px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🐧 AI漫剧 · 企鹅英雄</h1>
+    <p>修订台本 + 分镜表 + 角色设定卡 · 一页看懂、拿去出图</p>
+    <div>
+      <span class="pill">双线叙事</span>
+      <span class="pill">打工人 × 白日梦英雄</span>
+      <span class="pill">横屏 16:9</span>
+      <span class="pill">图生视频式</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>一句话定调：</b>工位上的企鹅盯着屏幕发呆，脑内却住着一名披风持剑的战士——荒漠对决是它平凡白天里的英雄白日梦，结尾回神看窗外蓝天，与四季蒙太奇收口。本页已把原稿的<b>4个硬伤全部修复</b>：①身份歧义（同一只企鹅的幻想）②入梦/出梦转场 ③四季空间逻辑 ④3处笔误。
+  </div>
+
+  <h2>一、修订要点（4硬伤已修）</h2>
+  <div class="fixgrid">
+    <div class="fix"><span class="tag" style="background:#e24b4a">硬伤1</span><h4>角色身份歧义</h4><p>原「另一只企鹅」改为「同一只企鹅（幻想中）」。开篇+结尾双锚定，杜绝双主角误读。</p></div>
+    <div class="fix"><span class="tag" style="background:#ba7517">硬伤2</span><h4>转场缺失</h4><p>新增「入梦转场」（发呆→视线模糊→闪白）与「出梦」（淡出回工位），现实/幻想界限清晰。</p></div>
+    <div class="fix"><span class="tag" style="background:#ba7517">硬伤3</span><h4>四季空间断裂</h4><p>镜10–12统一标注「〔内心四季·同一片土地〕」，地面从荒漠残址过渡，跳变有依据。</p></div>
+    <div class="fix"><span class="tag" style="background:#639922">硬伤4</span><h4>3处笔误</h4><p>「看下去→砍下去」「填空→天空」「在波浪→在飘动」，已逐处改正。</p></div>
+  </div>
+
+  <h2>二、修订版完整台本（时间线）</h2>
+  <div class="tl">
+    <div class="shot d"><span class="no">镜1</span><span class="ph dre">现实·引子</span><span class="tx">工位上的企鹅安静敲代码，氛围宁静、认真。</span></div>
+    <div class="shot d"><span class="no">镜1.5</span><span class="ph dre">转场·入梦</span><span class="tx">企鹅盯着屏幕，眼皮渐沉，视线模糊——画面涟漪／闪白——（切入幻想）。</span></div>
+    <div class="shot r"><span class="no">镜2</span><span class="ph fan">幻想·战斗</span><span class="tx">同一只企鹅（幻想中）披着披风、持大剑与盾牌，立于荒漠，与手握大刀的<b>燃烧黑衣人</b>对峙，气氛焦灼。荒漠风尘滚滚，企鹅神情严肃，额角滴落一滴汗。</span></div>
+    <div class="shot r"><span class="no">镜3</span><span class="ph fan">幻想</span><span class="tx">黑衣人持大刀跃起，大刀朝企鹅<b>砍</b>下。</span></div>
+    <div class="shot r"><span class="no">镜4</span><span class="ph fan">幻想</span><span class="tx">企鹅持剑盾迎向黑衣人挥击。</span></div>
+    <div class="shot r"><span class="no">镜5</span><span class="ph fan">幻想</span><span class="tx">两人在空中交汇。</span></div>
+    <div class="shot r"><span class="no">镜6</span><span class="ph fan">幻想</span><span class="tx">黑衣人自空中坠落时，腰间飞出一把小刀刺向企鹅。</span></div>
+    <div class="shot r"><span class="no">镜7</span><span class="ph fan">幻想</span><span class="tx">企鹅调转盾牌挡住小刀，小刀落地。</span></div>
+    <div class="shot r"><span class="no">镜8</span><span class="ph fan">幻想</span><span class="tx">黑衣人最终倒地。</span></div>
+    <div class="shot"><span class="no">镜9</span><span class="ph">余韵</span><span class="tx">企鹅立于原地，背后是万家灯火的城市夜景。</span></div>
+    <div class="shot"><span class="no">镜10</span><span class="ph">内心四季</span><span class="tx">〔内心四季·同一片土地〕企鹅侧身立于画面1/5处，天空雷雨，被淋湿，地面灰蒙蒙（荒漠残址）。</span></div>
+    <div class="shot"><span class="no">镜11</span><span class="ph">内心四季</span><span class="tx">同站位，天空落雪，企鹅身头覆雪，地面白茫茫。</span></div>
+    <div class="shot"><span class="no">镜12</span><span class="ph">内心四季</span><span class="tx">同站位，蓝天白云，披风飞扬，地面转绿，小花小草破土而出。</span></div>
+    <div class="shot"><span class="no">镜13</span><span class="ph">升华</span><span class="tx">企鹅蹲下，轻抚身前小白花（镜头特写小白花）。</span></div>
+    <div class="shot"><span class="no">镜14</span><span class="ph">升华</span><span class="tx">企鹅起身，望向<b>天空</b>（镜头侧面）。</span></div>
+    <div class="shot"><span class="no">镜15</span><span class="ph">升华</span><span class="tx">披风上的logo随微风<b>飘动</b>（镜头特写披风）。</span></div>
+    <div class="shot d"><span class="no">镜16</span><span class="ph dre">出梦·收尾</span><span class="tx">画面淡出——工位企鹅微笑偏头，望向窗外，背景蓝天白云城市俯瞰，缓缓定格。</span></div>
+  </div>
+
+  <h2>三、分镜表（拿去出图 / 出视频）</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>镜</th><th>景别</th><th>画面内容</th><th>动作</th><th>时长</th><th>AI生成备注</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>中景</td><td>工位企鹅敲代码</td><td>手指敲击，宁静</td><td class="dur">4s</td><td class="ai">便装同脸锚点；工牌/格子衫定调</td></tr>
+        <tr><td>1.5</td><td>特写+特效</td><td>视线模糊→闪白</td><td>眼皮沉，画面涟漪</td><td class="dur">1.5s</td><td class="ai">后期转场，AI只需工位静态</td></tr>
+        <tr><td>2</td><td>全景</td><td>荒漠对峙</td><td>风沙，一滴汗</td><td class="dur">3s</td><td class="ai"><span class="rk h">高</span>角色参考锁脸+战甲LoRA；火后期</td></tr>
+        <tr><td>3</td><td>中景</td><td>黑衣人跃起砍下</td><td>跃起，刀落</td><td class="dur">1.5s</td><td class="ai"><span class="rk m">中</span>只出人形黑袍，焰刃后期</td></tr>
+        <tr><td>4</td><td>中景</td><td>企鹅挥剑盾</td><td>迎击</td><td class="dur">1.5s</td><td class="ai"><span class="rk m">中</span>同镜2脸/装备</td></tr>
+        <tr><td>5</td><td>近景</td><td>空中交汇</td><td>对砍瞬间</td><td class="dur">1.5s</td><td class="ai"><span class="rk h">高</span>拆近景分切，避全身腾空大动作</td></tr>
+        <tr><td>6</td><td>中近景</td><td>腰间飞刀</td><td>坠落中掷刀</td><td class="dur">1.5s</td><td class="ai"><span class="rk h">高</span>飞刀单独做，后期合成轨迹</td></tr>
+        <tr><td>7</td><td>特写</td><td>盾挡刀落地</td><td>调盾，刀落</td><td class="dur">1.5s</td><td class="ai"><span class="rk l">低</span>盾面logo后期贴图</td></tr>
+        <tr><td>8</td><td>全景</td><td>黑衣人倒地</td><td>倒下</td><td class="dur">2s</td><td class="ai"><span class="rk l">低</span>黑袍静态即可</td></tr>
+        <tr><td>9</td><td>全景</td><td>夜景城市背景</td><td>屹立</td><td class="dur">2.5s</td><td class="ai"><span class="rk m">中</span>城市夜景垫图统一</td></tr>
+        <tr><td>10</td><td>中景</td><td>雷雨·灰地</td><td>淋湿</td><td class="dur">1.5s</td><td class="ai"><span class="rk m">中</span>同姿态垫图，只换天空/地</td></tr>
+        <tr><td>11</td><td>中景</td><td>落雪·白地</td><td>覆雪</td><td class="dur">1.5s</td><td class="ai"><span class="rk m">中</span>同上，保持1/5构图</td></tr>
+        <tr><td>12</td><td>中景</td><td>蓝天·绿草地开花</td><td>披风飞扬</td><td class="dur">2s</td><td class="ai"><span class="rk m">中</span>草地生长可做轻微动效</td></tr>
+        <tr><td>13</td><td>特写</td><td>小白花</td><td>蹲下轻抚</td><td class="dur">2.5s</td><td class="ai"><span class="rk l">低</span>花为视觉锚点，精细出图</td></tr>
+        <tr><td>14</td><td>侧中景</td><td>望天空</td><td>起身</td><td class="dur">2s</td><td class="ai"><span class="rk l">低</span>侧面轮廓，情绪留白</td></tr>
+        <tr><td>15</td><td>特写</td><td>披风logo飘动</td><td>微风</td><td class="dur">2.5s</td><td class="ai"><span class="rk m">中</span>logo后期贴，AI出披风飘</td></tr>
+        <tr><td>16</td><td>中景→定格</td><td>回神看窗外</td><td>微笑偏头</td><td class="dur">3.5s</td><td class="ai"><span class="rk l">低</span>便装同脸回接镜1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">⏱ 合计动作时长 ≈ 35s，配合镜头停留/转场可拉长至 60–90s（单集标准）。风险等级：<b>高</b>=需拆镜或后期合成，<b>中</b>=需垫图/参考锁一致性，<b>低</b>=AI可直接出。</div>
+
+  <h2>四、角色设定卡（出图锚点）</h2>
+  <div class="bento">
+
+    <div class="ch">
+      <div class="hd"><div class="av">🐧</div><div><div class="nm">企鹅 · 现实形态</div><div class="rl">工位打工人 / 同一主角</div></div></div>
+      <div class="row"><b>物种</b><span>帝企鹅，直立坐姿，圆润憨厚</span></div>
+      <div class="row"><b>着装</b><span>格子衬衫 + 工牌挂绳，可加圆框眼镜</span></div>
+      <div class="row"><b>气质</b><span>安静、认真，结尾温柔微笑</span></div>
+      <div class="row"><b>同脸锚</b><span>脸型/喙色(橙)/眼型 与英雄态完全一致</span></div>
+      <div class="row"><b>配色</b><div class="sw"><span style="background:#1a1a1a"></span><span style="background:#fafafa"></span><span style="background:#e8821e"></span><span style="background:#5b7fb0"></span></div></div>
+      <div class="note">已有立绘：直接用你的立绘做「角色参考」，战甲态/便装态共用此脸，无需再文字描述外貌。</div>
+    </div>
+
+    <div class="ch">
+      <div class="hd"><div class="av">⚔️</div><div><div class="nm">企鹅 · 英雄形态</div><div class="rl">白日梦中的战士 / 同一主角</div></div></div>
+      <div class="row"><b>装备</b><span>深蓝渐变黑披风 + 银灰金属大剑 + 圆盾</span></div>
+      <div class="row"><b>盾牌</b><span>盾面中央嵌团队logo（后期贴图）</span></div>
+      <div class="row"><b>披风</b><span>左胸/后背中央印logo，随风飘动</span></div>
+      <div class="row"><b>气质</b><span>坚毅、严肃、肩宽挺拔</span></div>
+      <div class="row"><b>配色</b><div class="sw"><span style="background:#1a1a1a"></span><span style="background:#2a3a8f"></span><span style="background:#5DCAA5"></span><span style="background:#c9cdd6"></span></div></div>
+      <div class="note">logo务必后期贴，AI直接生成文字/标志易糊。披风内衬可用青色描边提亮。</div>
+    </div>
+
+    <div class="ch">
+      <div class="hd"><div class="av">🔥</div><div><div class="nm">燃烧的黑衣人</div><div class="rl">反派 / 压迫感来源</div></div></div>
+      <div class="row"><b>形态</b><span>人形（非企鹅），全身黑袍裹甲</span></div>
+      <div class="row"><b>武器</b><span>大刀（焰刃，后期火焰合成）</span></div>
+      <div class="row"><b>火焰</b><span>边缘灼烧感——<b>后期合成</b>，别让AI硬画火</span></div>
+      <div class="row"><b>气质</b><span>高大、沉默、压迫、危险</span></div>
+      <div class="row"><b>配色</b><div class="sw"><span style="background:#0d0d0d"></span><span style="background:#3a0d0d"></span><span style="background:#e24b4a"></span><span style="background:#ff8a3c"></span></div></div>
+      <div class="note">与企鹅英雄形成「黑红压迫 vs 蓝青守护」的色调对立，强化正邪对比。</div>
+    </div>
+
+    <div class="ch">
+      <div class="hd"><div class="av">🏙️</div><div><div class="nm">场景 · 双世界</div><div class="rl">现实工位 / 幻想荒漠·四季地</div></div></div>
+      <div class="row"><b>现实</b><span>明亮工位，窗外城市俯瞰（蓝天白云）</span></div>
+      <div class="row"><b>幻想</b><span>荒漠风沙 → 同一片土地四季流转</span></div>
+      <div class="row"><b>四季</b><span>雷灰 → 雪白 → 春绿（小白花破土）</span></div>
+      <div class="row"><b>呼应</b><span>镜12蓝天 ↔ 镜16窗外蓝天，闭环</span></div>
+      <div class="row"><b>配色</b><div class="sw"><span style="background:#caa46a"></span><span style="background:#6b7785"></span><span style="background:#eef3f7"></span><span style="background:#5DCAA5"></span></div></div>
+      <div class="note">四季三镜必须「同姿态垫图」，只换天空与地面的色温与植被。</div>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>

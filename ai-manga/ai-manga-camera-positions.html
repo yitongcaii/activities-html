@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI漫剧 · 机位表 · 镜头机位速查</title>
+<style>
+  :root{--purple:#7F77DD;--purple-d:#534AB7;--cyan:#1D9E75;--cyan-l:#5DCAA5;--ink:#26215C;--txt:#2C2C2A;--mut:#6b6b73;--bg:#f6f5fb;--card:#fff;--line:#ece9f7;--orange:#e8923a;--red:#d9544f}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;padding-bottom:56px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;padding:30px 20px 26px;margin-bottom:22px}
+  header h1{font-size:24px;font-weight:700}
+  header p{opacity:.92;margin-top:6px;font-size:14px}
+  .pill{display:inline-block;font-size:12px;padding:3px 11px;border-radius:999px;background:rgba(255,255,255,.22);margin:10px 7px 0 0}
+  h2{font-size:19px;margin:30px 0 12px;padding-left:11px;border-left:5px solid var(--purple);color:var(--ink)}
+  h2 small{font-size:12px;color:var(--mut);font-weight:400;margin-left:8px}
+  .lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:13.5px;color:var(--mut);margin-bottom:6px}
+  .lead b{color:var(--ink)}
+  .formula{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:12px;font-size:13.5px}
+  .formula .axis{font-weight:700;color:var(--purple-d);background:#f1eefe;padding:4px 12px;border-radius:8px}
+  .formula .op{color:var(--mut);font-size:18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:15px;margin-top:12px}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;box-shadow:0 5px 16px rgba(83,74,183,.06)}
+  .shot .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .shot .cn{font-weight:700;color:var(--ink);font-size:16px}
+  .shot .en{font-size:11px;color:var(--mut)}
+  .shot .desc{font-size:12.5px;color:var(--txt);margin:4px 0 8px}
+  .shot .tag{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:999px;margin-right:5px}
+  .tag.safe{background:#e1f5ee;color:var(--cyan)}
+  .tag.warn{background:#fdf0e2;color:var(--orange)}
+  .tag.risk{background:#fbe6e5;color:var(--red)}
+  pre{background:#1f1b3a;color:#e9e6ff;border-radius:9px;padding:9px 11px;font-size:11.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word;font-family:Consolas,monospace;margin-top:6px}
+  .plbl{font-size:10.5px;font-weight:700;color:#fff;background:var(--purple);padding:2px 8px;border-radius:6px;display:inline-block;margin-top:9px}
+  .plbl.en{background:#3b6fb5}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-top:12px}
+  .box h3{font-size:14px;color:var(--purple-d);margin-bottom:7px}
+  .box ul{margin-left:18px;font-size:13px;color:var(--txt)}
+  .box li{margin:5px 0}
+  .box li b{color:var(--ink)}
+  .combos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:10px}
+  .combo{background:#faf9ff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .combo .t{font-weight:700;color:var(--purple-d);font-size:13.5px}
+  .combo .d{font-size:12px;color:var(--mut);margin-top:4px}
+  footer{text-align:center;color:var(--mut);font-size:12.5px;margin-top:38px;padding-top:18px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🎥 AI漫剧 · 镜头机位速查表</h1>
+    <p>机位 = 角度 × 景别 × 方向 三轴组合 · 每个机位附中文提示词写法 + AI 生成风险</p>
+    <div><span class="pill">角度</span><span class="pill">景别</span><span class="pill">方向</span><span class="pill">运动</span><span class="pill">横屏 16:9</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>用法：</b>机位决定"镜头站在哪、看多远、从哪边看"。写提示词时，在「场景/动作」后补一句机位描述即可（如「低角度仰拍，全景」）。<b>角度 × 景别 × 方向</b> 三者自由组合，下面四类分开列，实际用是叠加的。
+  </div>
+
+  <div class="formula">
+    <span class="axis">角度</span><span class="op">×</span>
+    <span class="axis">景别</span><span class="op">×</span>
+    <span class="axis">方向</span><span class="op">=</span>
+    <span style="color:var(--ink);font-weight:600">一个完整机位</span>
+    <span class="op">＋</span><span class="axis">运动</span>
+    <span style="color:var(--mut)">（可选，让镜头动起来）</span>
+  </div>
+
+  <!-- 一、角度 -->
+  <h2>一、按高度角度 <small>最影响"压迫感 / 情绪"</small></h2>
+  <div class="grid">
+
+    <div class="shot"><div class="top"><span class="cn">平视</span><span class="en">eye level</span></div>
+      <div class="desc">客观、代入感，最常用默认视角。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>平视镜头，水平视角</pre>
+      <div class="plbl en">EN</div><pre>eye-level shot, horizontal angle</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">仰拍</span><span class="en">low angle</span></div>
+      <div class="desc">从下往上，显主体高大、威武、压迫感 —— 战斗/英雄段首选。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>低角度仰拍，从下往上拍摄</pre>
+      <div class="plbl en">EN</div><pre>low angle, shot from below</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">俯拍</span><span class="en">high angle</span></div>
+      <div class="desc">从上往下，显渺小、脆弱、孤立感。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>俯拍，从上往下看</pre>
+      <div class="plbl en">EN</div><pre>high angle, looking down</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">顶拍 / 鸟瞰</span><span class="en">top / bird's-eye</span></div>
+      <div class="desc">正上方俯瞰，上帝视角、格局感、收束情绪。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎨 中文</div><pre>俯瞰视角，航拍视角，从正上方看</pre>
+      <div class="plbl en">EN</div><pre>top-down view, bird's-eye view, aerial</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">荷兰角</span><span class="en">dutch angle</span></div>
+      <div class="desc">画面倾斜，制造失衡、紧张不安。偶尔用，别全程歪。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎨 中文</div><pre>倾斜镜头，荷兰角，画面微歪</pre>
+      <div class="plbl en">EN</div><pre>dutch angle, tilted frame</pre>
+    </div>
+
+  </div>
+
+  <!-- 二、景别 -->
+  <h2>二、按景别（远近） <small>决定信息量</small></h2>
+  <div class="grid">
+
+    <div class="shot"><div class="top"><span class="cn">大远景</span><span class="en">EWS</span></div>
+      <div class="desc">广阔场景，人物极小，交代环境气势。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>大远景，广阔场景，人物极小</pre>
+      <div class="plbl en">EN</div><pre>extreme wide shot, tiny figure</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">全景</span><span class="en">FS</span></div>
+      <div class="desc">全身入镜 + 环境，看动作与空间关系。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>全景，全身入镜，环境完整</pre>
+      <div class="plbl en">EN</div><pre>full shot, entire body visible</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">中景</span><span class="en">MS</span></div>
+      <div class="desc">膝以上，叙事主力，动作 + 表情兼顾。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>中景，膝部以上</pre>
+      <div class="plbl en">EN</div><pre>medium shot, knees up</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">近景</span><span class="en">CU</span></div>
+      <div class="desc">胸以上，抓表情与情绪。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>近景，胸部以上</pre>
+      <div class="plbl en">EN</div><pre>close-up, chest up</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">特写</span><span class="en">ECU</span></div>
+      <div class="desc">局部极致，情绪 / 细节放大（花、logo、汗）。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎨 中文</div><pre>特写，局部细节</pre>
+      <div class="plbl en">EN</div><pre>extreme close-up, detail focus</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">大特写</span><span class="en">MCU</span></div>
+      <div class="desc">眼睛 / 手等极致细节，冲击力强。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎨 中文</div><pre>大特写，眼睛/手部极致细节</pre>
+      <div class="plbl en">EN</div><pre>macro close-up, eyes/hands</pre>
+    </div>
+
+  </div>
+
+  <!-- 三、方向 -->
+  <h2>三、按水平方向 <small>正 / 侧 / 背</small></h2>
+  <div class="grid">
+
+    <div class="shot"><div class="top"><span class="cn">正面</span><span class="en">front</span></div>
+      <div class="desc">直接对视观众，代入最强。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>正面视角，正面朝向镜头</pre>
+      <div class="plbl en">EN</div><pre>front view, facing camera</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">侧面</span><span class="en">side</span></div>
+      <div class="desc">纯侧面，适合蒙太奇同机位系列（如 1/5 侧身）。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>侧面，侧身，位于画面左1/5</pre>
+      <div class="plbl en">EN</div><pre>side profile, left 1/5 of frame</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">斜侧 3/4</span><span class="en">three-quarter</span></div>
+      <div class="desc">最常用，立体不死板。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>四分之三侧视角</pre>
+      <div class="plbl en">EN</div><pre>three-quarter view</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">背面</span><span class="en">back</span></div>
+      <div class="desc">从背后拍，孤独感 / 引出环境。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎨 中文</div><pre>背影，从背后拍摄</pre>
+      <div class="plbl en">EN</div><pre>from behind, back view</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">过肩</span><span class="en">OTS</span></div>
+      <div class="desc">越过一肩拍另一人，双人对话 / 对峙。</div>
+      <span class="tag risk">AI风险 高</span>
+      <div class="plbl">🎨 中文</div><pre>过肩镜头，越过一人肩膀拍另一人</pre>
+      <div class="plbl en">EN</div><pre>over-the-shoulder shot</pre>
+    </div>
+
+  </div>
+
+  <!-- 四、运动 -->
+  <h2>四、按镜头运动 <small>让镜头"活"起来（视频提示词里写）</small></h2>
+  <div class="grid">
+
+    <div class="shot"><div class="top"><span class="cn">推近</span><span class="en">push-in</span></div>
+      <div class="desc">镜头向主体靠近，强调 / 聚焦。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎬 中文</div><pre>镜头缓慢推近</pre>
+      <div class="plbl en">EN</div><pre>slow push-in</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">拉远</span><span class="en">pull-out</span></div>
+      <div class="desc">镜头后退，显环境 / 收束。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎬 中文</div><pre>镜头缓缓拉远</pre>
+      <div class="plbl en">EN</div><pre>slow pull-out</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">横移</span><span class="en">tracking</span></div>
+      <div class="desc">平行移动跟拍主体。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎬 中文</div><pre>镜头横向平移跟拍</pre>
+      <div class="plbl en">EN</div><pre>lateral tracking shot</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">手持微晃</span><span class="en">handheld</span></div>
+      <div class="desc">纪实感、临场感，幅度要小。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎬 中文</div><pre>手持微晃跟拍</pre>
+      <div class="plbl en">EN</div><pre>handheld camera, subtle shake</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">环绕</span><span class="en">orbit</span></div>
+      <div class="desc">绕主体转圈，炫但易晕易漂。</div>
+      <span class="tag risk">AI风险 高</span>
+      <div class="plbl">🎬 中文</div><pre>镜头环绕主体</pre>
+      <div class="plbl en">EN</div><pre>orbiting camera</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">摇镜头</span><span class="en">pan</span></div>
+      <div class="desc">固定点左右 / 上下扫。</div>
+      <span class="tag safe">AI风险 低</span>
+      <div class="plbl">🎬 中文</div><pre>镜头缓慢摇摄</pre>
+      <div class="plbl en">EN</div><pre>slow pan</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">升降</span><span class="en">crane</span></div>
+      <div class="desc">镜头上升 / 下降，电影感强。</div>
+      <span class="tag risk">AI风险 高</span>
+      <div class="plbl">🎬 中文</div><pre>镜头缓缓升起 / 下降</pre>
+      <div class="plbl en">EN</div><pre>crane shot, rising/falling</pre>
+    </div>
+
+    <div class="shot"><div class="top"><span class="cn">跟拍</span><span class="en">follow</span></div>
+      <div class="desc">跟随主体移动。</div>
+      <span class="tag warn">AI风险 中</span>
+      <div class="plbl">🎬 中文</div><pre>镜头跟随主体移动</pre>
+      <div class="plbl en">EN</div><pre>camera follows subject</pre>
+    </div>
+
+  </div>
+
+  <!-- 组合建议 -->
+  <h2>五、组合建议 <small>机位叠加示例</small></h2>
+  <div class="combos">
+    <div class="combo"><div class="t">战斗段</div><div class="d">仰拍全景（显威）→ 近景特写（抓汗/刀）→ 低角度跟拍冲锋</div></div>
+    <div class="combo"><div class="t">四季蒙太奇</div><div class="d">固定同一「侧面 1/5」机位 + 只换天/地，机位锁死才像蒙太奇</div></div>
+    <div class="combo"><div class="t">收尾</div><div class="d">中景平视 → 切俯瞰城市定格，机位升维收束情绪</div></div>
+    <div class="combo"><div class="t">对峙</div><div class="d">低角度正面全景（双方）+ 近景斜侧抓表情</div></div>
+  </div>
+
+  <!-- 翻车高发 -->
+  <div class="box">
+    <h3>⚠️ AI 翻车高发机位（优先后期 / 拆镜）</h3>
+    <ul>
+      <li><b>大幅环绕 / 升降</b>：AI 视频易晕、易漂 → 拆成小幅或后期做。</li>
+      <li><b>过肩双人</b>：两人易互穿、脸漂 → 优先单主体近景，或用角色参考锁双脸。</li>
+      <li><b>荷兰角</b>：偶尔用，全程歪会显廉价。</li>
+      <li><b>特写 / 大特写</b>：放大后手部畸形、眼睛歪斜更明显 → 出图负面词补全 + 锐利对焦。</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</body>
+</html>
