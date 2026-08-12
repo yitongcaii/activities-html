@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>资深 HR 活动发电手册</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#22d3ee; --ink:#1f2330; --sub:#5b6172;
+    --bg:#f6f7fb; --card:#ffffff; --soft:#eef0fb; --warn:#ff7a59; --ok:#22c55e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;padding:0 0 60px}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;padding:48px 24px 40px;text-align:center}
+  header h1{font-size:30px;font-weight:800;letter-spacing:1px}
+  header p{margin-top:12px;font-size:15px;opacity:.95;max-width:780px;margin-left:auto;margin-right:auto}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+  .layer-bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:26px 0 8px}
+  .pill{font-size:13px;padding:6px 14px;border-radius:999px;font-weight:700;color:#fff}
+  .pill.m{background:linear-gradient(120deg,#7c5cff,#9b7bff)}
+  .pill.w{background:linear-gradient(120deg,#22d3ee,#38bdf8)}
+  .pill.e{background:linear-gradient(120deg,#ff7a59,#ff9472)}
+  section{margin-top:38px}
+  h2{font-size:21px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  h2 .tag{font-size:12px;background:var(--soft);color:var(--purple);padding:3px 10px;border-radius:8px;font-weight:700}
+  .lead{color:var(--sub);font-size:14px;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+  .card{background:var(--card);border-radius:18px;padding:18px 18px 16px;box-shadow:0 6px 20px rgba(70,80,160,.08);border:1px solid #eef0fb;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--purple),var(--cyan))}
+  .card h3{font-size:17px;margin-bottom:4px}
+  .card .meta{font-size:12px;color:var(--sub);margin-bottom:10px}
+  .card .blk{margin:10px 0;font-size:13.5px}
+  .card .blk b{color:var(--purple);display:block;margin-bottom:3px;font-size:12.5px;letter-spacing:.5px}
+  .card ul{margin:0;padding-left:18px}
+  .card li{margin:3px 0}
+  .card .avoid{background:#fff4f0;border-radius:10px;padding:8px 10px;font-size:12.5px}
+  .card .avoid b{color:var(--warn)}
+  .ed{background:var(--soft);border-radius:8px;padding:6px 8px;font-size:12px;margin-top:8px}
+  .ed span{color:var(--sub)}
+  .script{background:#f3f0ff;border:1px solid #e3dffb;border-radius:10px;padding:10px 12px;margin:10px 0;font-size:13px}
+  .script>b{color:#7c5cff;display:block;margin-bottom:6px;font-size:12.5px;letter-spacing:.5px}
+  .script>div{margin:5px 0;padding:3px 0}
+  .script .tip{color:var(--sub);font-size:12px;margin-top:6px}
+  [contenteditable="true"]{outline:none;border-bottom:1px dashed #b9bedb;min-width:40px;display:inline-block;padding:0 4px}
+  .checksec{background:var(--card);border-radius:18px;padding:22px;box-shadow:0 6px 20px rgba(70,80,160,.08)}
+  .chk{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px dashed #eef0fb;font-size:14px}
+  .chk input{margin-top:4px;width:18px;height:18px;accent-color:var(--purple)}
+  .redline{background:#fff4f0;border-left:4px solid var(--warn);border-radius:10px;padding:14px 16px;margin:10px 0;font-size:14px}
+  .redline b{color:var(--warn)}
+  .ratio{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+  .ratio div{background:var(--soft);border-radius:14px;padding:14px 18px;text-align:center;min-width:120px}
+  .ratio b{font-size:22px;color:var(--purple);display:block}
+  .savebar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);padding:10px 18px;display:flex;gap:10px;justify-content:flex-end;z-index:5;border-bottom:1px solid #eef0fb}
+  .btn{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:700;cursor:pointer;font-size:13px}
+  .btn.ghost{background:#fff;color:var(--purple);border:1px solid var(--purple)}
+  footer{text-align:center;color:var(--sub);font-size:13px;margin-top:40px;padding:0 18px}
+  .reveal{opacity:0;transform:translateY(14px);transition:.6s}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>活动发电手册</h1>
+  <p>HR 不是在"办活动"，是在"任务系统"里为人性开口子。三层各司其职——<b>机制托底、微活动保湿、事件型活动只在关键时刻造浪</b>。下面 18 项均可勾选 + 可编辑，照着办。</p>
+</header>
+
+<div class="savebar">
+  <button class="btn ghost" onclick="resetDraft()">清空草稿</button>
+  <button class="btn" onclick="saveDraft()">保存草稿</button>
+</div>
+
+<div class="wrap">
+  <div class="layer-bar">
+    <span class="pill m">一层 · 常驻机制（最托底，不是"活动"）</span>
+    <span class="pill w">二层 · 微活动 / 轻触点</span>
+    <span class="pill e">三层 · 事件型活动（造浪用）</span>
+  </div>
+  <div class="ratio reveal">
+    <div><b>7</b>机制（托底）</div>
+    <div><b>5</b>微活动（保湿）</div>
+    <div><b>6</b>事件（造浪）</div>
+  </div>
+
+  <!-- ============ 一层 ============ -->
+  <section>
+    <h2>一层 · 常驻机制 <span class="tag">无集会 · 持续转 · 最托底</span></h2>
+    <p class="lead">严格说不是"活动"，是把"被看见 / 被听 / 被记得"日常化。没活动时人也不断电。</p>
+    <div class="grid">
+
+      <div class="card reveal">
+        <h3>异步点赞墙</h3>
+        <div class="meta">层：机制 ｜ 背景：远程致疏离，贡献隐形</div>
+        <div class="blk"><b>什么时候办</b>团队跨地/远程常态化，或发现"有人干了活没人知道"。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>在企微建群话题/文档页，命名「今日份闪光」，置顶。</li>
+            <li>HR 周一发首条模板：`感谢@张三 昨天半夜帮我定位了那个诡异 bug，救了我的上线`。</li>
+            <li>规则一句"看到谁干活了随手夸"，鼓励跨地 @。</li>
+            <li>周五 HR 把墙上拎 2 条到周会念一句。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>变 KPI 打卡假夸→明文"不考核数量，宁缺毋滥"；只老板发变谄媚墙→HR 先发平级互夸带节奏+允许匿名；发了没人看变凉→HR 每周点火+周会念；流程太重→就一个群话题别搞表单。</div>
+      </div>
+
+      <div class="card reveal">
+        <h3>透明沟通节奏（直说时间）</h3>
+        <div class="meta">层：机制 ｜ 背景：不确定/变动期，信息真空生谣言</div>
+        <div class="blk"><b>什么时候办</b>双周固定；组织变动期加密到每周。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>leader 日历锁每两周周四 17:00「直说时间」30min（recurring）。</li>
+            <li>提前 2 天发匿名提问收集（腾讯文档/乐享表单）。</li>
+            <li>会上 leader 先讲"已知 X / 不知 Y / 预计何时补"，再念匿名问题逐条答，不挑软的。</li>
+            <li>坏消息也照说。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>只发不对话→必须同步会+当场答；只报喜→主动说"有个坏消息也要同步"；HR 挡前面→明文"leader 亲自讲"；频率不稳→锁日历 recurring。</div>
+        <div class="ed"><span>负责人：</span><span contenteditable="true" data-k="m2-owner"></span> ｜ <span>频率：</span><span contenteditable="true" data-k="m2-freq"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>小确幸习惯</h3>
+        <div class="meta">层：机制 ｜ 背景：降期/日常，员工怕"被当人看"缺失</div>
+        <div class="blk"><b>什么时候办</b>日常高频；困难期加密。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>建「生日/周年」表，系统前 1 天提醒。</li>
+            <li>HR/leader 手写或真人语音一句「XX，入职3年辛苦了，谢谢你上次救火」发私信（非系统推送）。</li>
+            <li>困难期买奶茶/补给包放工位区，便签写具体感谢。</li>
+            <li>谢谢必须带事由：「谢谢你昨天协调了客户投诉」。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>降期奢华→单价控 &lt;50；群发形式→必须带具体事由+真人发；忽略远程→远程同款寄到家/线上同步。</div>
+        <div class="ed"><span>负责人：</span><span contenteditable="true" data-k="m3-owner"></span> ｜ <span>预算/人：</span><span contenteditable="true" data-k="m3-budget"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>情绪出口（安全倒垃圾）</h3>
+        <div class="meta">层：机制 ｜ 背景：负面情绪无组织出口，正面活动也假</div>
+        <div class="blk"><b>什么时候办</b>长期常驻；高压期 / 事故后加密。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>建匿名倾诉入口（企微匿名表单 / 树洞频道），明文"只倾听不追责不溯源"。</li>
+            <li>HR 每周固定"减压时段"，开放 1v1 倾听（预约制，不录音）。</li>
+            <li>联合 EAP 做正念 / 减压小组（季度 1 次，外部带教）。</li>
+            <li>吐槽闭门会：小范围"只倒不解决"，HR 只听不辩解。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>变监控→明文"匿名不溯源"，绝不据此追责；只倒不解决被嫌→标注"这是倾听场不是解决场"；HR 当传声筒→听到的烂肚子里（守保密红线）；变吐槽大会泄愤→ facilitator 控节奏不升级对立。</div>
+        <div class="ed"><span>负责人：</span><span contenteditable="true" data-k="m4-owner"></span> ｜ <span>入口：</span><span contenteditable="true" data-k="m4-where"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>远程同步弱连接</h3>
+        <div class="meta">层：机制 ｜ 背景：远程缺"碰巧聊上"的偶遇感（异步给不了）</div>
+        <div class="blk"><b>什么时候办</b>远程 / 跨地团队协作常态化。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>随机配对：每 2 周把两人随机配对，发"虚拟咖啡"邀请，15min 随便聊（不聊工作）。</li>
+            <li>线上游戏夜 / 共创局（月度 1 次，低门槛）。</li>
+            <li>周会留 5 分钟"非工作闲聊"破冰。</li>
+            <li>跨时区留异步入口（录播 / 留言墙）。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>变汇报→明文"不聊工作"；强制配对变负担→可 skip 不罚；只同步忽略异步→必留录播；算法尬聊→配对允许"换人一次"。</div>
+        <div class="ed"><span>负责人：</span><span contenteditable="true" data-k="m5-owner"></span> ｜ <span>频率：</span><span contenteditable="true" data-k="m5-freq"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>向上反馈通道（双向透明）</h3>
+        <div class="meta">层：机制 ｜ 背景：透明不能只 leader 向下，员工敢说真话才是真安全</div>
+        <div class="blk"><b>什么时候办</b>常驻 + 季度"反向反馈周"。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>匿名"给老板的一句话"通道（固定入口，leader 必须逐条回）。</li>
+            <li>反向导师制：junior 教 senior 新东西（新工具 / 新语境），翻转让 senior 也当学生。</li>
+            <li>季度反向反馈周：leader 主动问"我哪里该改"，公开认领 1 条。</li>
+            <li>回应规则明文"不辩解不记仇"。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>提了没回→leader 必须逐条公开回；变谄媚 / 甩锅→ facilitator 控"对事不对人"；senior 摆架子→反向导师制先让老板当学生；记仇→红线"不溯源不追责"。</div>
+        <div class="ed"><span>负责人：</span><span contenteditable="true" data-k="m6-owner"></span> ｜ <span>入口：</span><span contenteditable="true" data-k="m6-where"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>兴趣社团 / ERG（自生长载体）</h3>
+        <div class="meta">层：机制 ｜ 背景：活动自己长出来的终极形态，HR 只给土壤</div>
+        <div class="blk"><b>什么时候办</b>团队稳定、有自发热情的人。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>HR 发起"想搞啥社团"征集，凑够 3-5 人即立项。</li>
+            <li>每个社团配小额预算池 + 一个 owner（员工自己当，HR 不承包）。</li>
+            <li>给"失败免责"：搞砸算 HR 的，大胆试。</li>
+            <li>季度社团集市展示，互相引流。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>HR 包办变任务→明文"员工 own，HR 只给钱兜底"；只有外向人举→私下找"默默张罗"的人；预算失控→封顶小额；变小圈子排他→鼓励跨团队混编。</div>
+        <div class="ed"><span>对接 HR：</span><span contenteditable="true" data-k="m7-owner"></span> ｜ <span>预算池：</span><span contenteditable="true" data-k="m7-budget"></span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 二层 ============ -->
+  <section>
+    <h2>二层 · 微活动 / 轻触点 <span class="tag">小 · 短 · 低成本</span></h2>
+    <p class="lead">排进固定节奏，做成可拼装模块。保湿用，不是造浪。</p>
+    <div class="grid">
+
+      <div class="card reveal">
+        <h3>命名仪式</h3>
+        <div class="meta">层：微活动 ｜ 背景：新人"透明人感"</div>
+        <div class="blk"><b>什么时候办</b>新人入职第一周内（越早越安定）。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>Day1 群发：「本周新伙伴：XX，来自XX，平时爱XX」，全组先知道、见面不尬。</li>
+            <li>给新人 3 个标签模板填（如"咖啡上头/周末爬山/做前端"），不背简历。</li>
+            <li>全组每人写一句欢迎便利贴/文档，Day3 装订成册给新人。</li>
+            <li>第一次周会留 5 分钟：「请XX讲讲之前干过最酷的一件事」。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>形式点名没温度→用"三个标签"代替背简历；逼表演→提前给上方剧本；只线上无实物→远程也寄实体卡；搞太大→控 15 分钟内。</div>
+        <div class="ed"><span>新人：</span><span contenteditable="true" data-k="w1-name"></span> ｜ <span>日期：</span><span contenteditable="true" data-k="w1-date"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>buddy 三触点</h3>
+        <div class="meta">层：微活动 ｜ 背景：新人怕问傻问题、怕格格不入</div>
+        <div class="blk"><b>什么时候办</b>新人入职即启动（配对先于 Day1）。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>HR 入职前配对：选半年~1年、刚熬过、愿照顾人的同大部门不同小团队的人。</li>
+            <li>Day1 buddy 递手写便签"有任何傻问题随时戳我"+带认路吃饭。</li>
+            <li>Week1 约 easy lunch，buddy 先说"我刚来也懵/踩过这坑"。</li>
+            <li>Week4 buddy 帮引荐第 3 个人，闭环"≥3 熟人"。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>buddy 变摊派敷衍→选"刚熬过愿照顾"的+给认可；只配不运营→HR 第4周跟进"引荐了没"；选迷茫期 buddy→入职&gt;半年才选。</div>
+        <div class="ed"><span>新人：</span><span contenteditable="true" data-k="w2-name"></span> ｜ <span>buddy：</span><span contenteditable="true" data-k="w2-buddy"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>周五茶</h3>
+        <div class="meta">层：微活动 ｜ 背景：日常士气 / 季度中点低迷</div>
+        <div class="blk"><b>什么时候办</b>每周五 / 月度中点。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>固定周五 16:30 工位区旁摆水果奶茶。</li>
+            <li>群发"周五茶，路过拿一杯，不占下班"。</li>
+            <li>可选参与，不组织话题。</li>
+            <li>leader 偶尔露面拿杯就走不讲话；顺手提一句"本周闪光"。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>变例会→明文"不谈工作"，有人谈就喊停；强制→写"自愿"；只吃不说→顺手提一句闪光即可。</div>
+        <div class="ed"><span>负责人：</span><span contenteditable="true" data-k="w3-owner"></span> ｜ <span>预算/周：</span><span contenteditable="true" data-k="w3-budget"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>带家属日</h3>
+        <div class="meta">层：微活动 ｜ 背景：有家庭员工长期缺席，家庭不被看见</div>
+        <div class="blk"><b>什么时候办</b>半年 1 次，周末半天。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>提前 2 周问卷征询家属偏好（小孩年龄/饮食）。</li>
+            <li>场地选家庭友好（有孩子空间，不喝酒不熬夜）。</li>
+            <li>设一个"员工向家人介绍同事"的轻环节。</li>
+            <li>单身可带朋友，不边缘化。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>纯应酬→内容围绕家庭不喝酒；只照顾有娃→明确"朋友也欢迎"；强制携家属→写"欢迎不带压力"。</div>
+        <div class="ed"><span>日期：</span><span contenteditable="true" data-k="w4-date"></span> ｜ <span>地点：</span><span contenteditable="true" data-k="w4-place"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>生命周期节点仪式</h3>
+        <div class="meta">层：微活动 ｜ 背景：晋升 / 转正 / 回归 / 调岗等转折节点人最敏感</div>
+        <div class="blk"><b>什么时候办</b>对应节点触发（系统 / HR 提醒）。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>晋升：周会 3 分钟"为什么是 TA"（具体事迹，不空泛），全组鼓掌。</li>
+            <li>转正：buddy + leader 一句"你通过了，欢迎正式成为我们"。</li>
+            <li>回归（产假 / 病假）：回来第一天群里"欢迎回来" + 补一封近况摘要，不让人怕脱节。</li>
+            <li>调岗 / 新 leader：反向 onboarding——团队向新人 / 新老板介绍"我们怎么干活"。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>晋升名不副实→必须绑具体事迹；回归被遗忘→系统自动提醒 + 近况包；调岗变查户口→团队主动介绍而非审问；过度仪式加压→每个节点控 3-5 分钟。</div>
+        <div class="ed"><span>对象：</span><span contenteditable="true" data-k="w5-name"></span> ｜ <span>节点：</span><span contenteditable="true" data-k="w5-node"></span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 三层 ============ -->
+  <section>
+    <h2>三层 · 事件型活动 <span class="tag">造浪用 · 最易假 · 性价比最低</span></h2>
+    <p class="lead">只在关键时刻用，且必须真。不是日常，是"浪"。</p>
+    <div class="grid">
+
+      <div class="card reveal">
+        <h3>庆功放松局</h3>
+        <div class="meta">层：事件 ｜ 背景：攻坚后疲惫，需被犒劳被看见</div>
+        <div class="blk"><b>什么时候办</b>大项目交付 / 攻坚结束 48h 内。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>订舒服餐馆包间（非公司会议室）。</li>
+            <li>老板到场说一句「辛苦了」就吃，<b>禁发言&gt;1句、不颁奖</b>。</li>
+            <li>不设拍照环节（谁想拍自己拍）。</li>
+            <li>HR 提前打招呼：次日全组上午不排会/可调休半天。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>变表彰大会→议程就"吃"，老板禁讲话超1句；拍照主目的→不统一组织；没给真休息→调休/不排会是关键。</div>
+        <div class="ed"><span>日期：</span><span contenteditable="true" data-k="e1-date"></span> ｜ <span>地点：</span><span contenteditable="true" data-k="e1-place"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>跨线协作修复</h3>
+        <div class="meta">层：事件 ｜ 背景：两线对峙不说话（破冰游戏太假）</div>
+        <div class="blk"><b>什么时候办</b>两线因摩擦/抢资源互不说话时。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>找两方都头疼的真实问题（联合复盘跨线故障/共建小工具）。</li>
+            <li>混编分组，对峙双方进同组。</li>
+            <li>给 1 周时限 + 交付物（一份复盘报告）。</li>
+            <li>结束有"我们真一起搞定了"瞬间；leader 不站队只 facilitator。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>变比赛→明确"协作交付物不是PK"；任务假→必须真实痛点不凑；站队→leader 只提问不评判。</div>
+        <div class="ed"><span>牵头：</span><span contenteditable="true" data-k="e2-owner"></span> ｜ <span>议题：</span><span contenteditable="true" data-k="e2-topic"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>送别（好好送一程）</h3>
+        <div class="meta">层：事件/微 ｜ 背景：离职冷清/尴尬，送法决定留存者观感</div>
+        <div class="blk"><b>什么时候办</b>有人离职，last day 前。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>先私下问离职者"想低调走还是聚一下"。</li>
+            <li>全组写留言册"你留下最牛的一笔"。</li>
+            <li>小范围（原团队）分享"TA 最牛一次"。</li>
+            <li>leader 一句真心话不挽留绑架；远程连线参与。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>逼低调人→尊其选择，只发留言册也行；政绩秀→不讲"你走我们很难过"式表演；忽略远程→必开视频。</div>
+        <div class="ed"><span>离职者：</span><span contenteditable="true" data-k="e3-name"></span> ｜ <span>日期：</span><span contenteditable="true" data-k="e3-date"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>真实故事局</h3>
+        <div class="meta">层：事件 ｜ 背景：价值观落地不像喊口号</div>
+        <div class="blk"><b>什么时候办</b>价值观宣贯期 / 季度文化 moment。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>定 1 个价值观主题。</li>
+            <li>邀 3-4 人讲真实小故事（模板：`那天客户X，我们Y，因为信Z`）。</li>
+            <li>听众接龙自己见过的。</li>
+            <li>HR 只串场不拔高不评优。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>先进事迹→强调"真实小故事不是汇报"；念 PPT→禁 PPT 纯口述；强制写心得→不布置作业。</div>
+        <div class="ed"><span>主题：</span><span contenteditable="true" data-k="e4-topic"></span> ｜ <span>日期：</span><span contenteditable="true" data-k="e4-date"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>团建 / 年会（大活动）</h3>
+        <div class="meta">层：事件 ｜ 背景：年度记忆点（⚠️ 降期忌办，是讽刺）</div>
+        <div class="blk"><b>什么时候办</b>一年 1-2 次，年度/半年节点。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>目的单一（造记忆点，不是解决所有）。</li>
+            <li>问卷给选择（地点/是否携家属/周末否）。</li>
+            <li>老板出现 + 认真听即可不表演。</li>
+            <li>留 2h 无流程自由互动；事后发照片+故事沉淀。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>频率高→锁一年≤2次；强制携家属/占周末→问卷定不强制；全程表演→留自由互动；降期办→降期改小确幸。</div>
+        <div class="ed"><span>主题：</span><span contenteditable="true" data-k="e5-topic"></span> ｜ <span>日期：</span><span contenteditable="true" data-k="e5-date"></span> ｜ <span>预算：</span><span contenteditable="true" data-k="e5-budget"></span></div>
+      </div>
+
+      <div class="card reveal">
+        <h3>小范围对话（变动专项）</h3>
+        <div class="meta">层：机制+事件 ｜ 背景：合并/换帅/架构调整后信任真空</div>
+        <div class="blk"><b>什么时候办</b>变动后 1 周内启动，多场覆盖。</div>
+        <div class="blk"><b>具体怎么做</b>
+          <ul>
+            <li>拆成 &lt;15 人小场，多场覆盖。</li>
+            <li>匿名提问墙 + "问任何问题"。</li>
+            <li>leader 亲答不挑软。</li>
+            <li>每人开口机会；不群发大宣贯。</li>
+          </ul>
+        </div>
+        <div class="blk avoid"><b>翻车→避：</b>同直说时间——只发不对话→必须当场答；只报喜→主动说坏消息；HR 挡前面→leader 亲自讲。</div>
+        <div class="ed"><span>牵头：</span><span contenteditable="true" data-k="e6-owner"></span> ｜ <span>首场：</span><span contenteditable="true" data-k="e6-date"></span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 防翻车 ============ -->
+  <section>
+    <h2>防翻车系统 <span class="tag">三道防线 + 红线 + 临办5问</span></h2>
+    <p class="lead">翻车有固定根因，可控。把下面变成默认动作，活动从"赌不崩"变"不容易崩"。</p>
+
+    <div class="checksec reveal">
+      <h3 style="margin-bottom:10px">① 临办前 5 问（pre-flight，逐条勾）</h3>
+      <label class="chk"><input type="checkbox" data-c="c1"/> 能用一句关系动词说清目的吗？（否→别办，假目的）</label>
+      <label class="chk"><input type="checkbox" data-c="c2"/> 这形式匹配当前背景吗？降期还搞大→否，改形式</label>
+      <label class="chk"><input type="checkbox" data-c="c3"/> 沉默者 / 远程 / 家庭有入口吗？否→加入口</label>
+      <label class="chk"><input type="checkbox" data-c="c4"/> 老板知道"只听不演"吗？否→先给剧本</label>
+      <label class="chk"><input type="checkbox" data-c="c5"/> 最坏情况有预案吗？（冷场/少人/失言/崩）否→先写</label>
+
+      <h3 style="margin:18px 0 10px">② 三道防线（办前 / 办中 / 办后）</h3>
+      <label class="chk"><input type="checkbox" data-c="c6"/> 前置：收口句检验 + 真目的显性化 + 背景约束形式 + 多入口设计 + 风险预案 + 给 leader 剧本</label>
+      <label class="chk"><input type="checkbox" data-c="c7"/> 现场：流程为人体验让路 + HR 先稳 + 不强制不绑架 + 当事人尊严优先 + 留真心话时间 + leader 失言立刻接</label>
+      <label class="chk"><input type="checkbox" data-c="c8"/> 后置：看领先信号（有人留/主动提/搭话）非 NPS + 复盘三句话 + 区分不行vs拉胯 + 假热闹识别</label>
+
+      <h3 style="margin:18px 0 10px">③ 不可碰的红线（一碰就崩）</h3>
+      <div class="redline">⛔ <b>逼暴露隐私 / 灌酒文化</b> ｜ ⛔ <b>道德绑架</b>（"不来=不团结"） ｜ ⛔ <b>出口不保密</b>（活动里听到的传出界→信任归零） ｜ ⛔ <b>降期办奢华大团建</b>（像嘲讽） ｜ ⛔ <b>用活动掩盖制度问题</b>（不肯加薪却肯搞团建）</div>
+
+      <div class="redline" style="border-left-color:#7c5cff;background:#f3f0ff">
+        <b style="color:#7c5cff">④ 该划边界、不进活动手册</b>：⛔ 深度冲突调解（OD 范畴，非协作游戏能修） ｜ ⛔ 危机 / 创伤疗愈（需专业 EAP / 外部，HR 只陪伴转介，别当活动办） ｜ ⛔ 制度性窟窿（薪酬 / 晋升黑箱——推制度不是办活动）
+      </div>
+      <div style="background:#f3f0ff;border-radius:18px;padding:18px 22px;margin-top:14px;box-shadow:0 6px 20px rgba(70,80,160,.08)">
+        <h3 style="margin:0 0 10px;font-size:16px;color:#7c5cff">⑤ 克制智慧（知道不办也是答案）</h3>
+        <label class="chk"><input type="checkbox" data-c="c9"/> 活动疲劳识别：连续办 + 参与率掉 + 有人抱怨 → 停一期或减频</label>
+        <label class="chk"><input type="checkbox" data-c="c10"/> 去仪式化：形式大于温度时，主动砍流程留核心</label>
+        <label class="chk"><input type="checkbox" data-c="c11"/> 该停就停：一项连续 2 期假热闹（道具式笑）→ 直接下线不勉强</label>
+        <label class="chk"><input type="checkbox" data-c="c12"/> 留白也是机制：一段时间"什么都不办"本身是被尊重的信号</label>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    📌 本页由 yitong 沉淀整理 · 文化活动知识库
+  </footer>
+</div>
+
+<script>
+const KEY="hrActivityPlaybook_v3";
+function saveDraft(){
+  const d={};
+  document.querySelectorAll('[contenteditable="true"]').forEach(e=>d[e.dataset.k]=e.innerText);
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>d[c.dataset.c]=c.checked);
+  localStorage.setItem(KEY,JSON.stringify(d));
+  alert("草稿已保存（本地浏览器）");
+}
+function resetDraft(){
+  localStorage.removeItem(KEY);
+  location.reload();
+}
+(function restore(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KEY)||"{}");
+    document.querySelectorAll('[contenteditable="true"]').forEach(e=>{if(d[e.dataset.k]!==undefined)e.innerText=d[e.dataset.k];});
+    document.querySelectorAll('input[type=checkbox]').forEach(c=>{if(d[c.dataset.c]!==undefined)c.checked=d[c.dataset.c];});
+  }catch(e){}
+})();
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
