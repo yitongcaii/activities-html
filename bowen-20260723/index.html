@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>博闻多识一堂课 · 7.23期</title>
+<style>
+:root{--blue:#2E86DE;--blue-d:#1B5FA8;--bg:#F4F8FE}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',sans-serif;
+  background:var(--bg); max-width:480px; margin:0 auto; min-height:100vh;
+  -webkit-font-smoothing:antialiased; padding-bottom:78px;
+}
+.poster img{width:100%; display:block}
+
+/* entrance fade for each block */
+.reveal{opacity:0; transform:translateY(16px);
+  transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* sticky CTA bar */
+.cta-bar{position:fixed; left:0; right:0; bottom:0; display:flex; justify-content:center;
+  padding:12px 16px; background:linear-gradient(to top,rgba(244,248,254,.96) 60%,rgba(244,248,254,0));
+  max-width:480px; margin:0 auto; z-index:10}
+.cta-btn{background:linear-gradient(135deg,var(--blue),var(--blue-d)); color:#fff; border:none;
+  font-size:15px; font-weight:600; letter-spacing:1px; padding:13px 42px; border-radius:999px;
+  box-shadow:0 6px 20px rgba(46,134,222,.42); cursor:pointer}
+.cta-btn:active{transform:scale(.97)}
+
+/* editable footer note */
+.note{text-align:center; font-size:11px; color:#9AA7B8; padding:18px 16px 4px; line-height:1.7}
+.note[contenteditable]:focus{outline:none; color:#5A6B82}
+</style>
+</head>
+<body>
+<div class="poster">
+  <img class="reveal" src="assets/hero.png"   alt="头部 · 卡通/盾牌/纸飞机/标题/CTA">
+  <img class="reveal" src="assets/topic1.png" alt="课题一 · 标题+讲者真人照片+文字">
+  <img class="reveal" src="assets/topic2.png" alt="课题二 · 标题+讲者真人照片+文字">
+  <img class="reveal" src="assets/footer.png" alt="底部 · 卡通人物+CTA">
+</div>
+
+<div class="note" contenteditable="true">📌 本页由 yitong 沉淀整理 · 文化活动知识库</div>
+
+<div class="cta-bar">
+  <button class="cta-btn" onclick="alert('报名功能待接入，链接配置后此处跳转')">📢 点击报名 + 锁定日程</button>
+</div>
+
+<script>
+// staggered entrance on scroll
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// fallback paint on load (covers blocks already in view)
+window.addEventListener('load',()=>{
+  document.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*120));
+});
+</script>
+</body>
+</html>
