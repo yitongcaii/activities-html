@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>两栏式简历模板</title>
+<style>
+:root{
+  --purple:#6C5CE7; --purple-d:#5849c4; --purple-l:#f4f3ff;
+  --teal:#00B8D9; --teal-d:#0098b7; --teal-l:#e6f8fc;
+  --ink:#1f2430; --sub:#5a6478; --mut:#9aa3b5;
+  --bg:#f5f6fb; --card:#ffffff; --line:#eef0f6;
+  --radius:18px; --shadow:0 8px 24px rgba(40,48,90,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.62;
+  -webkit-font-smoothing:antialiased; padding:28px 16px 60px;
+}
+.wrap{max-width:960px; margin:0 auto; background:var(--card); border-radius:24px;
+  box-shadow:var(--shadow); overflow:hidden}
+
+/* ---- header (full width) ---- */
+.hd{background:linear-gradient(120deg,var(--purple),var(--teal)); color:#fff;
+  padding:34px 38px 30px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap}
+.hd .name{font-size:34px; font-weight:800; letter-spacing:1px}
+.hd .role{font-size:15px; opacity:.92; margin-top:4px}
+.hd .contact{display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:14px; font-size:13px; opacity:.95}
+.hd .contact span{display:inline-flex; align-items:center; gap:5px}
+.hd .tagline{font-size:14px; opacity:.95; max-width:320px; line-height:1.5}
+
+/* ---- two-column layout ---- */
+.layout{display:flex; gap:0}
+.col-left{width:34%; background:#fbfcff; border-right:1px solid var(--line); padding:26px 24px}
+.col-right{flex:1; padding:26px 30px}
+.col-title{font-size:13px; font-weight:800; letter-spacing:1px; color:var(--purple-d);
+  text-transform:uppercase; margin:0 0 14px; display:flex; align-items:center; gap:8px}
+.col-title::before{content:""; width:18px; height:3px; border-radius:2px; background:linear-gradient(90deg,var(--purple),var(--teal))}
+.col-block{margin-bottom:26px}
+
+/* ---- ability matrix (left) ---- */
+.mat-row{margin-bottom:13px}
+.mat-row .top{display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px}
+.mat-row .top b{font-weight:700; color:var(--ink)}
+.mat-row .top em{font-style:normal; color:var(--mut); font-size:12px}
+.track{height:7px; border-radius:4px; background:var(--line); overflow:hidden}
+.fill{height:100%; border-radius:4px; background:linear-gradient(90deg,var(--purple),var(--teal))}
+
+/* ---- key stats (left, big numbers) ---- */
+.stat{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.stat .box{background:var(--purple-l); border-radius:14px; padding:12px 14px; text-align:center}
+.stat .box .n{font-size:24px; font-weight:800; color:var(--purple-d); line-height:1.1}
+.stat .box .l{font-size:11.5px; color:var(--sub); margin-top:3px}
+
+/* ---- skill tags (left) ---- */
+.tags{display:flex; flex-wrap:wrap; gap:7px}
+.tags .t{font-size:12px; padding:5px 11px; border-radius:20px; background:var(--teal-l);
+  color:var(--teal-d); font-weight:600}
+
+/* ---- timeline (right) ---- */
+.tl{position:relative; padding-left:22px}
+.tl::before{content:""; position:absolute; left:5px; top:6px; bottom:6px; width:2px;
+  background:linear-gradient(180deg,var(--purple),var(--teal)); border-radius:2px}
+.node{position:relative; margin-bottom:22px}
+.node::before{content:""; position:absolute; left:-22px; top:5px; width:12px; height:12px;
+  border-radius:50%; background:#fff; border:3px solid var(--purple); box-shadow:0 0 0 3px var(--purple-l)}
+.node .meta{display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap}
+.node .org{font-size:15px; font-weight:700; color:var(--ink)}
+.node .date{font-size:12px; color:var(--mut); white-space:nowrap}
+.node .pos{font-size:13px; color:var(--purple-d); font-weight:600; margin:2px 0 8px}
+.node .desc{font-size:13.5px; color:var(--sub)}
+.node .desc p{margin-bottom:5px}
+.node .desc b{color:var(--ink)}
+.caps{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px}
+.caps .c{font-size:11.5px; padding:3px 10px; border-radius:14px; background:var(--purple-l);
+  color:var(--purple-d); font-weight:600}
+
+/* ---- footer ---- */
+.ft{padding:14px 30px; font-size:12px; color:var(--mut); text-align:center; border-top:1px solid var(--line)}
+[contenteditable]:focus{outline:2px dashed var(--teal); outline-offset:2px; border-radius:4px}
+.ph{font-size:11px; color:var(--mut); font-style:italic}
+
+/* ---- print ---- */
+@media print{
+  body{background:#fff; padding:0}
+  .wrap{box-shadow:none; border-radius:0; max-width:100%}
+  [contenteditable]:focus{outline:none}
+}
+/* ---- mobile ---- */
+@media(max-width:680px){
+  .layout{flex-direction:column}
+  .col-left{width:100%; border-right:none; border-bottom:1px solid var(--line)}
+  .hd{flex-direction:column; align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== Header ===== -->
+  <div class="hd">
+    <div>
+      <div class="name" contenteditable="true">蔡依彤</div>
+      <div class="role" contenteditable="true">HRBP · 项目运营 · 企业文化</div>
+      <div class="contact">
+        <span contenteditable="true">📍 深圳</span>
+        <span contenteditable="true">📧 v_yitcai</span>
+        <span contenteditable="true">💬 企微 v_yitcai</span>
+      </div>
+    </div>
+    <div class="tagline" contenteditable="true">✎ 示例·替换：以活动与项目为载体，做 HR 流程产品化与 AI 文化运营，把零散经历收成一条清晰主线。</div>
+  </div>
+
+  <div class="layout">
+
+    <!-- ===== Left column：人设 + 能力矩阵 + 关键数据 ===== -->
+    <div class="col-left">
+
+      <div class="col-block">
+        <div class="col-title">核心能力矩阵</div>
+        <div class="mat-row">
+          <div class="top"><b contenteditable="true">活动策划与执行</b><em contenteditable="true">精通</em></div>
+          <div class="track"><div class="fill" style="width:92%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b contenteditable="true">HR 流程产品化</b><em contenteditable="true">熟练</em></div>
+          <div class="track"><div class="fill" style="width:85%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b contenteditable="true">项目管理 / BP 协同</b><em contenteditable="true">熟练</em></div>
+          <div class="track"><div class="fill" style="width:80%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b contenteditable="true">AI 文化运营</b><em contenteditable="true">精通</em></div>
+          <div class="track"><div class="fill" style="width:88%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b contenteditable="true">跨部门沟通</b><em contenteditable="true">熟练</em></div>
+          <div class="track"><div class="fill" style="width:82%"></div></div>
+        </div>
+      </div>
+
+      <div class="col-block">
+        <div class="col-title">关键数据</div>
+        <div class="stat">
+          <div class="box"><div class="n" contenteditable="true">50+</div><div class="l" contenteditable="true">活动/项目操盘</div></div>
+          <div class="box"><div class="n" contenteditable="true">3k+</div><div class="l" contenteditable="true">覆盖员工人次</div></div>
+          <div class="box"><div class="n" contenteditable="true">2</div><div class="l" contenteditable="true">自动化工具落地</div></div>
+          <div class="box"><div class="n" contenteditable="true">100%</div><div class="l" contenteditable="true">文化落地覆盖</div></div>
+        </div>
+      </div>
+
+      <div class="col-block">
+        <div class="col-title">技能标签</div>
+        <div class="tags">
+          <span class="t" contenteditable="true">活动策划</span>
+          <span class="t" contenteditable="true">流程设计</span>
+          <span class="t" contenteditable="true">MCP 编排</span>
+          <span class="t" contenteditable="true">数据分析</span>
+          <span class="t" contenteditable="true">内容运营</span>
+          <span class="t" contenteditable="true">PPT/视觉</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Right column：紧凑时间线 ===== -->
+    <div class="col-right">
+      <div class="col-title">工作履历</div>
+      <div class="tl">
+
+        <div class="node">
+          <div class="meta">
+            <span class="org" contenteditable="true">腾讯云 · 云技术运营服务部</span>
+            <span class="date" contenteditable="true">2024 — 至今</span>
+          </div>
+          <div class="pos" contenteditable="true">HRBP / 项目运营</div>
+          <div class="desc">
+            <p contenteditable="true"><b>文化运营：</b>策划并落地 H1 业务连续性文化周、H2 质量稳定性文化活动，覆盖技术团队全员。</p>
+            <p contenteditable="true"><b>流程产品化：</b>将新人发展答辩从人工流程重构为 MCP 自动化应用，月级触发、建会建群看板回填一体化。</p>
+            <p contenteditable="true"><b>AI 文化：</b>搭建英语角智能体 Loop、AI 提效打卡等运营机制，沉淀可复用活动 SOP。</p>
+          </div>
+          <div class="caps">
+            <span class="c" contenteditable="true">文化策划</span>
+            <span class="c" contenteditable="true">流程自动化</span>
+            <span class="c" contenteditable="true">AI 运营</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="meta">
+            <span class="org" contenteditable="true">跨部门协作项目 · 抽奖平台</span>
+            <span class="date" contenteditable="true">2025</span>
+          </div>
+          <div class="pos" contenteditable="true">产品 / 前端负责人</div>
+          <div class="desc">
+            <p contenteditable="true"><b>0→1 搭建：</b>主导抽奖 Web 应用（Vue3+Vite / Express+SQLite），支撑大型活动抽奖场景。</p>
+            <p contenteditable="true"><b>部署运维：</b>走 Railway + GitHub Pages 双通道，保障高并发时段稳定可用。</p>
+          </div>
+          <div class="caps">
+            <span class="c" contenteditable="true">产品定义</span>
+            <span class="c" contenteditable="true">全栈协作</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="meta">
+            <span class="org" contenteditable="true">知识管理专项</span>
+            <span class="date" contenteditable="true">2025 — 至今</span>
+          </div>
+          <div class="pos" contenteditable="true">知识库主理</div>
+          <div class="desc">
+            <p contenteditable="true"><b>体系搭建：</b>用 Obsidian + ima 双库沉淀活动策划、企业文化指南，形成可检索知识资产。</p>
+            <p contenteditable="true"><b>方法论：</b>建立 READ 知识运营模型与案例沉淀卡，把经验产品化为复用流程。</p>
+          </div>
+          <div class="caps">
+            <span class="c" contenteditable="true">知识运营</span>
+            <span class="c" contenteditable="true">方法论</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="meta">
+            <span class="org" contenteditable="true">早期经历 · 示例占位</span>
+            <span class="date" contenteditable="true">2022 — 2024</span>
+          </div>
+          <div class="pos" contenteditable="true">✎ 示例·替换为你的真实经历</div>
+          <div class="desc">
+            <p contenteditable="true">每段经历不长时，用「动词 + 量化成果」写 2–3 行，短经历也能显分量。把不同内容翻译成能力胶囊，主线在左栏已立住。</p>
+          </div>
+          <div class="caps">
+            <span class="c" contenteditable="true">✎ 标签</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="ft">📌 本页由 yitong 沉淀整理 · 文化活动知识库</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>能力簇分组简历模板</title>
+<style>
+:root{
+  --purple:#6C5CE7; --purple-d:#5849c4;
+  --teal:#00B8D9; --teal-d:#0098b7;
+  --ink:#1f2430; --sub:#5a6478; --mut:#9aa3b5;
+  --bg:#f5f6fb; --card:#ffffff; --line:#eef0f6;
+  --radius:18px; --shadow:0 8px 24px rgba(40,48,90,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.6;
+  -webkit-font-smoothing:antialiased; padding:28px 16px 60px;
+}
+.wrap{max-width:920px; margin:0 auto; background:var(--card); border-radius:24px;
+  box-shadow:var(--shadow); overflow:hidden}
+
+/* ---- header ---- */
+.hd{background:linear-gradient(120deg,var(--purple),var(--teal)); color:#fff; padding:34px 36px 30px}
+.hd .name{font-size:34px; font-weight:800; letter-spacing:1px}
+.hd .role{font-size:15px; opacity:.92; margin-top:4px}
+.hd .contact{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:16px; font-size:13px; opacity:.95}
+.hd .contact span{display:inline-flex; align-items:center; gap:6px}
+
+/* ---- summary ---- */
+.sum{padding:22px 36px; font-size:14.5px; color:var(--sub);
+  border-bottom:1px solid var(--line); background:#fbfcff}
+.sum b{color:var(--purple-d)}
+
+/* ---- ability matrix ---- */
+.mat{padding:22px 36px; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
+.chip{background:#f4f3ff; border:1px solid #e8e6ff; border-radius:14px; padding:12px 14px}
+.chip .k{font-size:13px; font-weight:700; color:var(--purple-d)}
+.chip .v{margin-top:6px; font-size:11px; color:var(--mut)}
+.bar{height:6px; border-radius:6px; background:#e8e6ff; margin-top:8px; overflow:hidden}
+.bar i{display:block; height:100%; background:linear-gradient(90deg,var(--purple),var(--teal)); border-radius:6px}
+
+/* ---- cluster ---- */
+.clu{padding:8px 36px 4px}
+.clu-h{display:flex; align-items:center; gap:10px; margin:22px 0 12px}
+.clu-h .dot{width:12px; height:12px; border-radius:4px}
+.clu-h h2{font-size:17px; font-weight:800}
+.clu-h .tag{font-size:11px; color:var(--mut); margin-left:auto}
+
+.card{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--purple);
+  border-radius:14px; padding:16px 18px; margin-bottom:12px; box-shadow:0 2px 8px rgba(40,48,90,.04)}
+.card.t{border-left-color:var(--teal)}
+.card .top{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px}
+.card .tt{font-size:15px; font-weight:700}
+.card .meta{font-size:12px; color:var(--mut)}
+.card .pill{font-size:11px; font-weight:600; color:var(--purple-d); background:#f0eeff;
+  padding:2px 10px; border-radius:999px; margin-left:auto}
+.card.t .pill{color:var(--teal-d); background:#e6f9fd}
+.card ul{margin:10px 0 0; padding-left:18px}
+.card li{font-size:13.5px; color:var(--sub); margin:4px 0}
+.card li b{color:var(--ink)}
+
+.hint{font-size:11px; color:var(--mut); font-style:italic}
+
+/* ---- footer ---- */
+.ft{text-align:center; font-size:11px; color:var(--mut); padding:18px 16px 8px}
+[contenteditable]:focus{outline:2px dashed var(--teal); outline-offset:3px; border-radius:6px}
+
+/* ---- print ---- */
+@media print{
+  body{background:#fff; padding:0}
+  .wrap{box-shadow:none; border-radius:0; max-width:100%}
+  .hd{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  .card{box-shadow:none; break-inside:avoid}
+}
+@media (max-width:560px){
+  .hd{padding:26px 20px} .hd .name{font-size:27px}
+  .sum,.mat,.clu{padding-left:20px; padding-right:20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="hd">
+    <div class="name" contenteditable="true">你的名字</div>
+    <div class="role" contenteditable="true">HRBP · 项目管理 · 文化运营　|　云技术运营服务部</div>
+    <div class="contact">
+      <span contenteditable="true">📱 电话：138-xxxx-xxxx</span>
+      <span contenteditable="true">✉️ 邮箱：name@tencent.com</span>
+      <span contenteditable="true">💬 微信：v_yitcai</span>
+      <span contenteditable="true">📍 城市：深圳</span>
+    </div>
+  </header>
+
+  <!-- SUMMARY 主线 -->
+  <section class="sum">
+    <b contenteditable="true">一句话主线（把杂经历收成一句话人设）：</b>
+    <span contenteditable="true">以活动与项目为载体，做 HR 流程产品化与文化运营，擅长把零散需求落地为可复用机制。</span>
+  </section>
+
+  <!-- ABILITY MATRIX -->
+  <section class="mat">
+    <div class="chip"><div class="k" contenteditable="true">活动策划</div><div class="v" contenteditable="true">0→1 活动设计 / 主持</div><div class="bar"><i style="width:90%"></i></div></div>
+    <div class="chip"><div class="k" contenteditable="true">HR 产品化</div><div class="v" contenteditable="true">流程自动化 / MCP</div><div class="bar"><i style="width:80%"></i></div></div>
+    <div class="chip"><div class="k" contenteditable="true">项目管理</div><div class="v" contenteditable="true">多线并行 / 跨团队</div><div class="bar"><i style="width:85%"></i></div></div>
+    <div class="chip"><div class="k" contenteditable="true">文化运营</div><div class="v" contenteditable="true">AI 文化 / 社群</div><div class="bar"><i style="width:75%"></i></div></div>
+  </section>
+
+  <!-- CLUSTER 1 -->
+  <section class="clu">
+    <div class="clu-h"><span class="dot" style="background:var(--purple)"></span><h2 contenteditable="true">簇一 · 活动策划与文化运营</h2><span class="tag">把"短且杂"的活动经历收进同一主题</span></div>
+
+    <div class="card">
+      <div class="top">
+        <span class="tt" contenteditable="true">博闻多识一堂课（7.23 期）</span>
+        <span class="meta" contenteditable="true">2026.07　|　云技服</span>
+        <span class="pill" contenteditable="true">活动策划 / 主持</span>
+      </div>
+      <ul>
+        <li><b contenteditable="true">挑战：</b><span contenteditable="true">双课题分享活动需快速落地，跨部门协调资源。</span></li>
+        <li><b contenteditable="true">动作：</b><span contenteditable="true">独立设计活动流程、产出主持稿与 H5 邀请页，统筹两位讲者。</span></li>
+        <li><b contenteditable="true">结果：</b><span contenteditable="true">✎ 示例·替换为真实数据，如"到场 XX 人 / 满意度 X%"。</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="top">
+        <span class="tt" contenteditable="true">质量稳定性文化活动（H2）</span>
+        <span class="meta" contenteditable="true">2026　|　云技服</span>
+        <span class="pill" contenteditable="true">方案策划</span>
+      </div>
+      <ul>
+        <li><b contenteditable="true">成果：</b><span contenteditable="true">✎ 示例·写清你做了什么 + 量化影响。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CLUSTER 2 -->
+  <section class="clu">
+    <div class="clu-h"><span class="dot" style="background:var(--teal)"></span><h2 contenteditable="true">簇二 · HR 流程产品化</h2><span class="tag">把"运营动作"翻译成"可复用机制"</span></div>
+
+    <div class="card t">
+      <div class="top">
+        <span class="tt" contenteditable="true">新人发展答辩自动化</span>
+        <span class="meta" contenteditable="true">2026　|　MCP 编排</span>
+        <span class="pill" contenteditable="true">流程设计 / 自动化</span>
+      </div>
+      <ul>
+        <li><b contenteditable="true">动作：</b><span contenteditable="true">✎ 示例·搭建建会/建群/看板回填/归档的自动化链路。</span></li>
+        <li><b contenteditable="true">结果：</b><span contenteditable="true">✎ 示例·如"月均节省 X 人时 / 0 漏档"。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CLUSTER 3 -->
+  <section class="clu">
+    <div class="clu-h"><span class="dot" style="background:var(--purple)"></span><h2 contenteditable="true">簇三 · 项目管理与 BP 协同</h2><span class="tag">体现多线并行与跨团队推进力</span></div>
+
+    <div class="card">
+      <div class="top">
+        <span class="tt" contenteditable="true">多线并行运营</span>
+        <span class="meta" contenteditable="true">2026　|　BP</span>
+        <span class="pill" contenteditable="true">项目统筹</span>
+      </div>
+      <ul>
+        <li><b contenteditable="true">动作：</b><span contenteditable="true">✎ 示例·同时推进抽奖 / AI 文化 / AICamp / 英语角等线，建统一节奏。</span></li>
+        <li><b contenteditable="true">结果：</b><span contenteditable="true">✎ 示例·量化你交付的产出。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CLUSTER 4 -->
+  <section class="clu">
+    <div class="clu-h"><span class="dot" style="background:var(--teal)"></span><h2 contenteditable="true">簇四 · AI 文化运营与提效</h2><span class="tag">贴合你的差异化标签</span></div>
+
+    <div class="card t">
+      <div class="top">
+        <span class="tt" contenteditable="true">AI 提效达人比赛 / HR 英语角</span>
+        <span class="meta" contenteditable="true">2026　|　文化运营</span>
+        <span class="pill" contenteditable="true">运营 + 智能体</span>
+      </div>
+      <ul>
+        <li><b contenteditable="true">动作：</b><span contenteditable="true">✎ 示例·用智能体做每日提醒 / 打卡闭环。</span></li>
+        <li><b contenteditable="true">结果：</b><span contenteditable="true">✎ 示例·参与人数 / 活跃度提升。</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="ft">📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
