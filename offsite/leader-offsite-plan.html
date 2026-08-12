@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>团队 Offsite 活动方案（异地·融合）· 云技服</title>
+<style>
+  :root{
+    --bg:#f7f5ff; --card:#ffffff; --ink:#1f1733; --sub:#6b6280; --line:#ece8f7;
+    --purple:#7c3aed; --pink:#ec4899; --teal:#14b8a6; --blue:#6366f1; --gold:#f59e0b; --orange:#fb923c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,"Microsoft YaHei","PingFang SC",sans-serif;
+    background:radial-gradient(1200px 540px at 10% -10%,#ffe9f6 0%,var(--bg) 50%) fixed,var(--bg);
+    color:var(--ink);line-height:1.7;padding-bottom:60px}
+  header{text-align:center;padding:54px 20px 46px;color:#fff;
+    background:linear-gradient(120deg,var(--purple),var(--blue) 55%,var(--teal));
+    clip-path:polygon(0 0,100% 0,100% 86%,0 100%);box-shadow:0 16px 40px rgba(124,58,237,.22)}
+  header .kicker{font-size:13px;opacity:.9;letter-spacing:3px}
+  header h1{font-size:30px;font-weight:800;margin-top:8px;text-shadow:0 4px 18px rgba(0,0,0,.16)}
+  header p{opacity:.95;font-size:14px;margin-top:8px}
+  .pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+  .pill{font-size:12px;font-weight:700;padding:6px 14px;border-radius:30px;background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(4px)}
+  .doc{max-width:1180px;margin:0 auto;padding:30px 22px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 24px;
+    box-shadow:0 8px 24px rgba(80,40,120,.07);display:flex;flex-direction:column}
+  .card.full{grid-column:1/-1}
+  .card h2{font-size:19px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .card h2::before{content:"";width:6px;height:22px;border-radius:3px;background:linear-gradient(var(--purple),var(--teal))}
+  .card h3{font-size:15px;font-weight:700;margin:14px 0 6px;color:var(--purple)}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin:2px 4px 2px 0}
+  .t-src{background:#eef9ff;color:#0369a1}
+  .t-case{background:#e8fbf4;color:#0f766e}
+  .t-warn{background:#fff2e6;color:#b45309}
+  .note{background:#eef9ff;border-left:4px solid var(--blue);padding:10px 14px;border-radius:10px;color:#1e3a8a;font-size:13px;margin:10px 0}
+  .note.warn{background:#fff3e6;border-left-color:var(--orange);color:#7a4b16}
+  .edit{background:#fffbe6;border-bottom:1.5px dashed var(--gold);padding:0 4px;border-radius:3px;min-width:60px;display:inline-block}
+  [contenteditable]:focus{outline:2px solid var(--purple);outline-offset:2px;border-radius:4px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;overflow:hidden;border-radius:12px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:linear-gradient(120deg,var(--purple),var(--teal));color:#fff;font-weight:700}
+  tbody tr:nth-child(even){background:#fafdff}
+  ul,ol{margin:6px 0 6px 20px}
+  li{margin:4px 0}
+  .mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:10px}
+  .mini .m{border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:12px;padding:12px 14px;background:#fafdff}
+  .mini .m h4{font-size:14px;font-weight:800;color:var(--teal);margin-bottom:3px}
+  .mini .m .meta{font-size:11.5px;color:var(--sub);margin-bottom:5px}
+  .mini .m b{color:#0f766e}
+  .legend{font-size:12px;color:var(--sub);margin:6px 0 0}
+  footer{text-align:center;color:var(--sub);font-size:12px;margin-top:42px;padding:0 20px;line-height:1.9}
+  .src-note{font-size:12.5px;color:var(--sub);background:#fff;border:1px dashed var(--line);border-radius:12px;padding:14px 18px;margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">云技服 · 团队文化活动</div>
+  <h1>团队 Offsite 活动方案（异地 · 融合 · 2026 版）</h1>
+  <p>100 人以内 · 跨层级异地融合 · 建信任、破壁垒、沉淀共同记忆</p>
+  <div class="pills">
+    <span class="pill">关系档：②上下级（跨层级融合）</span>
+    <span class="pill">规模：≤100 人（manager + 成员混编）</span>
+    <span class="pill">形式：线下异地 + 线上分会场（混合）</span>
+  </div>
+</header>
+
+<main class="doc">
+
+  <div class="src-note">
+    <b>数据来源说明：</b>本方案融合 ① culture-event-sop 技能内置 SOP（<b>原始数据</b>，含会前/会中/会后 checklist 与 Sheet6 真实排期）+ ② 本地知识采集 Offsite 案例库（承载<b>乐享</b>+外部采集沉淀的「七大环节设计卡」与云技服/安全/医疗真实案例）。
+    本次会话<b>乐享 live MCP 处于 disconnected</b>，未做实时在线检索；如需刷新乐享最新内容，请重连后让我再拉一遍。
+  </div>
+
+  <!-- 一、定位与目标 -->
+  <section class="card full">
+    <h2>一、活动定位与目标</h2>
+    <p><b>活动类型：</b>团队 offsite（异地·融合）— 让一个部门/业务团队的 <span class="edit" contenteditable="true">50 人（上限 100）</span>（含 manager 与一线成员，跨层级混编）离开日常办公地，在抽离日常的异地场域里做<b>团队融合</b>。<b>不是纯玩团建、不是小型员工大会、不是纯 leader 闭门研讨。</b></p>
+    <p><b>举办日期：</b><span class="edit" contenteditable="true">2026-09-02（周三）</span>（异地）　|　<b>形式：</b>线下异地 + 线上分会场（混合，线上同步接入）</p>
+    <p><b>本轮核心目的（Why）：团队融合优先</b> — 跨层级破壁、建立信任、沉淀共同记忆；叠加 <b>1 个</b>对齐类目标（已选 ✅），不再叠加解决/探索，避免贪多。</p>
+    <ul>
+      <li><b>融合类（本轮主目标）</b>：跨层级对话、manager 与成员破冰建信任、低门槛协作共创、共同记忆锚点 <span class="tag t-src">原始数据·融合期</span></li>
+      <li><b>对齐类（本轮选定 ✅）</b>：战略解码、新方向对齐、跨团队依赖梳理</li>
+      <li><b>解决类</b>（可叠加）：方向/协作卡点、组织效率</li>
+      <li><b>探索类</b>：共谈发展机遇（如「AI+人如何放大团队战斗力」） <span class="tag t-case">案例参考·云技服</span></li>
+    </ul>
+    <div class="note warn"><b>选型红线（经验推断）：</b>目的不清 = 直接停办；融合期关键 manager 必须到（否则上下级融合无从谈起）；只玩不落地 = 失败（融合也要产出带 owner+截止日的行动项，哪怕只 1 条）。</div>
+    <p class="legend">🟣 <b>②上下级（跨层级融合）</b>：尊重、不隐私暴露、建信任不越界；融合环节仅取协作挑战赛/主题跑步/愿景墙等<b>商务轻体验</b>，<b>全程不含平级/朋友向内容</b>（两真一假、互画肖像、现场寻宝等一律剔除）。</p>
+  </section>
+
+  <!-- 二、筹备时间线 -->
+  <section class="card full">
+    <h2>二、筹备时间线（按 <span class="edit" contenteditable="true">4 周</span> 完整版，T-4 周 → T+90 天）</h2>
+    <table>
+      <thead><tr><th>时间节点</th><th>事项</th><th>负责人</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td>T-4 周</td><td>立项：明确 Why（本轮=团队融合，叠加≤1 个对齐/解决/探索）写入 brief；定人（manager+核心成员，上限 100，跨层级混编）、定预算、角色分工（Leader 内容 owner / HRBP 设计+引导+跟进 / Facilitator / PM 异地 logistics）</td><td>HRBP &amp; Leader</td><td>brief 含目的、预期产出、成功标准；关键 manager 出席承诺</td></tr>
+        <tr><td>T-3 周</td><td>场地选址与踩点（异地场域：容量/隔音/投屏兼容/网络/茶歇/住宿可达）；交通接驳与住宿排房预案</td><td>PM &amp; HRBP</td><td>踩点报告（含照片）+ 合同签署</td></tr>
+        <tr><td>T-2 周</td><td>内容主线设计（see→align→act）；发 pre-read / 小问卷同步「当前机遇&amp;卡点」；引导者 brief；高管谈参准备；线上容量确认（如需分会场，腾讯会议研讨会模式）</td><td>HRBP &amp; Facilitator</td><td>环节逻辑自洽、rundown 雏形；pre-work 回收</td></tr>
+        <tr><td>T-1 周</td><td>rundown 定稿 sign-off；物料最终清单+跨城运输；餐饮/住宿最终确认；行动项模板、承诺墙卡片就绪</td><td>PM &amp; HRBP</td><td>定稿 sign-off；物料到货签收</td></tr>
+        <tr><td>T-1 天</td><td>场地布置（愿景墙/承诺墙/KT 板）、设备联调、报到物料装袋、接驳确认、应急预案（医疗/天气/关键人 B 角/备用投屏）</td><td>PM &amp; HRBP</td><td>现场就绪、可彩排关键衔接</td></tr>
+        <tr><td>当天</td><td>开场立规则（保密/可 disagreement/发言机会均等，姓名卡不写头衔）→ 图景共享 → 战略对齐 → 轻研讨 → 脱口秀 → 体验环节 → 承诺墙收口</td><td>Facilitator &amp; HRBP</td><td>参与者真产出（带 owner+截止日）</td></tr>
+        <tr><td>T+48h</td><td>发纪要（结论 + 行动项 + owner + 截止日）；关联员工大会广播（先 Offsite 对齐→再员工大会扩散）</td><td>HRBP</td><td>48h 内发出</td></tr>
+        <tr><td>T+90 天</td><td>回溯行动/承诺兑现，做「承诺兑现」回顾</td><td>HRBP &amp; Leader</td><td>90 天内完成回溯</td></tr>
+      </tbody>
+    </table>
+    <p class="legend">⚠️ 线上超 300 人需提前申请 Webinar 扩容（qflow.woa.com）；异地同事线上接入用「研讨会」模式（嘉宾/观众分离、一键移出、禁聊天）。</p>
+  </section>
+
+  <!-- 三、通用筹备清单 -->
+  <section class="card full">
+    <h2>三、通用筹备清单（会前 / 会中 / 会后）</h2>
+    <div class="grid" style="margin-top:6px">
+      <div class="card">
+        <h3>会前（内容优先 ⭐⭐⭐⭐⭐）</h3>
+        <ul>
+          <li>【会议框架】形式/目标/设计思路/环节/期望结果，提前≥1 周与 BP leader 对齐 <span class="tag t-src">原始数据</span></li>
+          <li>【发言人稿件】所有发言人材料与逐字稿把关（主持稿可借元宝辅助）</li>
+          <li>【前置 pre-work】会前 1–2 周发 pre-read/问卷，基线信息回收</li>
+          <li>【场地时间预定】联动秘书提前≥半个月确认；线下日历不带会议码、白名单发送 <span class="tag t-src">原始数据</span></li>
+          <li>【技术侧保障】腾讯会议/Webinar 联调、多地连线彩排、有线网络+收音清晰度</li>
+          <li>【场地布置】主 KV 包边、易拉宝（议程/指引）、KT 板、嘉宾椅贴+座次图、饮品 <span class="tag t-src">原始数据</span></li>
+          <li>【rundown&amp;彩排】打印人手一份；关键发言彩排 2–3 次脱稿</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>会中（现场引导）</h3>
+        <ul>
+          <li>【签到与暖场】提前 30min 播放暖场音乐/视频；引导靠前就坐；线上开等候室、监控静音</li>
+          <li>【纪律宣导】台侧强调手机静音、不截屏录屏、保密</li>
+          <li>【互动同步】线上嘉宾/员工在 QA 或扫码互动时，公告栏同步发<b>链接</b>（非二维码）提升体感</li>
+          <li>【引导纪律红线】HRBP 退幕后让对话发生；只讨论不落地=失败</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>会后（跟进·回溯）</h3>
+        <ul>
+          <li>【48h 纪要】结论+行动项+owner+截止日，覆盖率 100%</li>
+          <li>【录屏沉淀】保留录屏，3 天内（剪辑则 1 周内）上传云知/KM</li>
+          <li>【二次传播】纪要提炼+金句海报，经老板确认后第 2–3 天发出；最佳发布 11:00–12:00 / 16:30–17:30</li>
+          <li>【行动跟进】关联员工大会广播，先 Offsite 对齐→再扩散</li>
+          <li>【90 天回溯】承诺兑现回顾</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 四、专项补充 -->
+  <section class="card full">
+    <h2>四、leader offsite 专项补充清单</h2>
+    <div class="grid" style="margin-top:6px">
+      <div class="card">
+        <h3>异地 Logistics（成败基础）</h3>
+        <ul>
+          <li><b>【100 人规模专项】</b>主会场（全员）+ 多间分会场（并行 workshop/分组）+ 大空间茶歇区；容量按 1.2× 预留</li>
+          <li>分组策略：manager 分散入组（8–10 人/组，桌长制），避免同层级抱团，强制跨层级对话</li>
+          <li>场地踩点：实地/视频确认容量、隔音、投屏兼容、网络、茶歇、住宿可达</li>
+          <li>交通接驳：跨城统一订票或大巴；落地接驳；异地同事行程同步</li>
+          <li>住宿分配：按名单排房，预留 1–2 间机动；敏感场层级混住降低距离感</li>
+          <li>餐饮确认：正餐（含忌口/过敏登记）、茶歇、晚宴；不强竞技</li>
+          <li>跨城物料运输：便利贴/KT 板/拍立得/姓名卡/奖品提前寄达或随行，留备份</li>
+          <li>应急预案：医疗、天气/交通延误备选、关键人 B 角、设备备用投屏</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>内容设计（产出导向）</h3>
+        <ul>
+          <li>【前置 pre-work】会前 1–2 周发 pre-read / 小问卷同步机遇&amp;卡点</li>
+          <li>【主线】see→align→act：图景共享→战略对齐→轻研讨；能量曲线设计</li>
+          <li>【环节取用】愿景墙 / 图景共享 / 战略对齐 / 轻研讨 / 脱口秀 / 挑战赛 / 跑步 / 承诺墙</li>
+          <li>【引导者 brief】目的、红线、敏感点、期望产出</li>
+          <li>【产出机制】预设「带 owner + 截止日」行动项模板、承诺墙卡片</li>
+        </ul>
+        <div class="note warn">专项补充项均为专业/商务/轻量体验类，<b>不含平级朋友向游戏</b>（如两真一假、互画肖像、现场寻宝等）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 五、七大环节设计卡 -->
+  <section class="card full">
+    <h2>五、七大环节设计卡（可直接取用）</h2>
+    <p class="legend">来源：乐享+外部采集沉淀的 Offsite 环节创意库，标注 📌 案例参考、🌿 经验推断。</p>
+    <div class="mini">
+      <div class="m"><h4>1. 业务图景共享</h4><div class="meta">40–60min ｜ 📌 安全一部&科恩</div><p>分单元讲：2025 亮点+待提升 → 2026 方向+里程碑 → 对兄弟团队的需要；现场画关联地图。<b>产出：</b>跨团队依赖地图</p></div>
+      <div class="m"><h4>2. 战略对齐</h4><div class="meta">30–45min ｜ 🌿</div><p>高管 1 页讲「上层战略压到本层的 3 个必然」；分组贴<b>坚持/要砍/要新做</b>；当场回应形成落点清单。<b>产出：</b>战略落点清单</p></div>
+      <div class="m"><h4>3. 轻研讨</h4><div class="meta">45–60min ｜ 📌 云技服</div><p>世界咖啡轮转（4–5 桌，15min/轮，留桌长）；投票选 Top3 动作+认领负责人。<b>产出：</b>Top3 行动项+owner</p></div>
+      <div class="m"><h4>4. 总监/高管脱口秀</h4><div class="meta">15–20min/人 ｜ 📌 云技服 AI 畅想</div><p>选 1–2 位有表达欲的总监，脱稿+金句+自黑梗+梗图 PPT；收尾抛 1 个问题给下环节。<b>产出：</b>金句/短视频素材</p></div>
+      <div class="m"><h4>5. 协作挑战赛</h4><div class="meta">60–90min ｜ 🌿</div><p>随机混编 4–6 人/队，任务设「信息分散」强制沟通；观察员记协作模式；复盘一句话。<b>产出：</b>协作观察笔记</p></div>
+      <div class="m"><h4>6. 主题跑步</h4><div class="meta">半天/打卡 ｜ 📌 医疗「医群人一起跑」</div><p>设弹性距离（3/5/10km）、配速员+补给+终点合影+完赛徽章；跑后小圈分享隐喻。<b>产出：</b>合影+团队隐喻</p></div>
+      <div class="m"><h4>7. 承诺墙</h4><div class="meta">10–15min ｜ 🌿</div><p>每人 1 卡「回到岗位我会做的<b>一件具体小事</b>」（要求可验证）；贴墙拍照；可选 3 月后回溯。<b>产出：</b>可回溯承诺清单</p></div>
+    </div>
+    <div class="note">融合主线：<b>共创愿景墙（破冰锚点）→ 图景共享（跨层级互通）→ 协作挑战赛/主题跑步（强关系、破壁垒）→ 轻研讨（出 1 条落地动作）→ 脱口秀（松情绪）→ 承诺墙（锁落地）</b>；100 人规模下挑战赛/跑步/轻研讨<b>分组并行</b>（8–10 人/组，manager 分散入组，桌长制）。</div>
+  </section>
+
+  <!-- 六、预算 -->
+  <section class="card">
+    <h2>六、预算使用建议</h2>
+    <p>当前预算：<span class="edit" contenteditable="true">【待确认：中-高预算】</span></p>
+    <table>
+      <thead><tr><th>维度</th><th>中预算（100–200/人）</th><th>高预算（≥200/人）</th></tr></thead>
+      <tbody>
+        <tr><td>场地</td><td>公司会议室/简装场地</td><td>外部酒店/宴会厅（异地）</td></tr>
+        <tr><td>住宿交通</td><td>本地或近郊</td><td>跨城统一订票+接驳+住宿</td></tr>
+        <tr><td>餐饮</td><td>茶歇+简餐</td><td>正餐+晚宴+茶歇</td></tr>
+        <tr><td>视觉物料</td><td>复用模板+少量定制</td><td>专业 KV+全套+愿景墙</td></tr>
+        <tr><td>引导者</td><td>内部 Facilitator</td><td>外部专业引导师（可选）</td></tr>
+      </tbody>
+    </table>
+    <div class="note warn">Offsite 异地属性：默认需预留交通/住宿/跨城物料运输/应急预案成本，Logistics 占比明显高于普通会议；预算明显不足时先砍「视觉物料」而非「引导与产出机制」。</div>
+  </section>
+
+  <!-- 七、高管安排 -->
+  <section class="card">
+    <h2>七、高管参与安排</h2>
+    <p>GM / 线负责人 / 总监参与情况：<span class="edit" contenteditable="true">【不在现场】</span>（以下用录制视频致辞替代，参考历史 dowson 录制视频方案）</p>
+    <ul>
+      <li>【高管谈参】提前准备发言要点建议（Dowson/线负责人/GM） <span class="tag t-src">原始数据</span></li>
+      <li>【参会指引】明确参与哪些环节、需回答什么，提前≥3 天与 BP leader 对齐并发送相关方</li>
+      <li>【高管照片/职位描述】提前与秘书对齐确认展示</li>
+      <li>【接送安排】异地场落地接驳、座次图、嘉宾椅贴</li>
+      <li>【无法现场】替代方案：录制视频致辞（参考历史 dowson 录制视频、wang 现场）</li>
+    </ul>
+    <p class="legend">📌 历史参考：云技服 2025 Offsite「破浪前行」= dowson 已录制视频 + wang 现场；安全二三部员工大会 = dowson+wang 双现场。</p>
+  </section>
+
+  <!-- 八、案例参考 -->
+  <section class="card full">
+    <h2>八、同类活动案例参考</h2>
+    <table>
+      <thead><tr><th>部门</th><th>活动</th><th>适用阶段</th><th>可借鉴点</th></tr></thead>
+      <tbody>
+        <tr><td><b>云技服 / CPT</b></td><td>Offsite + 员工大会「破浪前行，聚力赢未来」（安吉·莫干山 11/21–23）</td><td>常规</td><td>Alan 发言 → 总监脱口秀（AI 畅想）→ 轻研讨「AI+人如何放大团队战斗力」 <span class="tag t-case">本 dept 直接复用</span></td></tr>
+        <tr><td>安全产品一部&科恩</td><td>共享业务图景 Offsite「一心同科，共攀新高」</td><td>战略对齐</td><td>单元小结+对兄弟团队的需要；iOA 轻量交付/安全能力 SDK 化等落点 <span class="tag t-case">案例参考</span></td></tr>
+        <tr><td>安全</td><td>安全直通车 / 产品体验营</td><td>组织变革期</td><td>讲清「为什么调 / 怎么调 / 调完变啥」 <span class="tag t-case">案例参考</span></td></tr>
+        <tr><td>医疗&生命科学</td><td>「医」群人·一起跑</td><td>组织融合期</td><td>用跑步传递「一起奔赴」目标感，低门槛运动 <span class="tag t-case">案例参考</span></td></tr>
+        <tr><td>医疗&生命科学</td><td>我有美酒你有故事吗</td><td>使命愿景发布后</td><td>愿景活动入脑入心、二次传播 <span class="tag t-case">案例参考</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 九、风险 -->
+  <section class="card full">
+    <h2>九、风险提示 &amp; 注意事项</h2>
+    <div class="grid" style="margin-top:6px">
+      <div class="card">
+        <h3>内容红线</h3>
+        <ul>
+          <li>目的不清直接停办；只讨论不落地=失败（必须带 owner+截止日）</li>
+          <li>🟣🟡 全程不含平级/朋友向内容（破冰/团建类轻量环节仅取愿景墙、协作挑战赛、主题跑步等商务轻体验）</li>
+          <li>高管讲完就散→必须留「回应+落点清单」；战略别沦为口号墙</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Logistics 风险</h3>
+        <ul>
+          <li>异地天气/交通延误→备选方案+关键人 B 角</li>
+          <li>跨城物料漏带→提前寄达+随行备份</li>
+          <li>设备故障→备用投屏+有线网络</li>
+          <li>线上超 300 人→提前 Webinar 扩容</li>
+          <li>混合场（线上线下都）：线上分会场用腾讯会议研讨会模式（嘉宾/观众分离、等候室+静音、公告栏发<b>链接</b>而非二维码）；固定 1 位线上主持人防同频不同步</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>合规与传播</h3>
+        <ul>
+          <li>保密：台侧强调不截屏录屏；敏感内容仅限现场</li>
+          <li>部门公邮默认免打扰→发布前 check 是否被归类</li>
+          <li>录屏/纪要经老板确认后再发；最佳发布时段 11:00–12:00 / 16:30–17:30</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="src-note">
+    <b>可编辑字段（黄色高亮）：</b>人数、筹备周数、预算、高管参与情况 已设为 contenteditable，保留你的修改所有权，AI 不自动改。<br/>
+    <b>已确认关键项（2026-09-02 版）：</b>① 日期与地点：2026-09-02（异地）　② 叠加目标：对齐类（已选 ✅）　③ 人数：50 人　④ GM/线负责人：不在现场（录制视频致辞）　⑤ 形式：线上线下混合（需线上分会场）。<br/>
+    <b>仍待你确认：</b>确切异地地点、预算档（中/高）、线上接入人数规模。
+  </div>
+
+</main>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库<br/>
+  数据来源：culture-event-sop 技能内置 SOP（原始数据）+ 本地知识采集 Offsite 案例库（乐享+外部采集沉淀）· 本次会话乐享 live MCP 未连接
+</footer>
+</body>
+</html>
