@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>蔡女士 · 个人简历</title>
+<style>
+:root{
+  --purple:#0D9488; --purple-d:#0F766E; --purple-l:#F0FDFA;
+  --teal:#0891B2; --teal-d:#0E7490; --teal-l:#ECFEFF;
+  --ink:#1A2B2B; --sub:#4A5B5B; --mut:#8A9A9A;
+  --bg:#FAF7F2; --card:#ffffff; --line:#E8E5DF;
+  --radius:18px; --shadow:0 8px 24px rgba(13,148,136,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.62;
+  -webkit-font-smoothing:antialiased; padding:28px 16px 60px;
+}
+.wrap{max-width:960px; margin:0 auto; background:var(--card); border-radius:24px;
+  box-shadow:var(--shadow); overflow:hidden}
+
+/* ---- header (full width) ---- */
+.hd{background:linear-gradient(120deg,var(--purple),var(--teal)); color:#fff;
+  padding:34px 38px 30px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap}
+.hd .name{font-size:34px; font-weight:800; letter-spacing:1px}
+.hd .role{font-size:15px; opacity:.92; margin-top:4px}
+.hd .contact{display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:14px; font-size:13px; opacity:.95}
+.hd .contact span{display:inline-flex; align-items:center; gap:5px}
+.hd .tagline{font-size:14px; opacity:.95; max-width:340px; line-height:1.5}
+.hd-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.35);box-shadow:0 4px 16px rgba(0,0,0,.15);flex-shrink:0}
+
+/* ---- two-column layout ---- */
+.layout{display:flex; gap:0}
+.col-left{width:34%; background:#FBF9F5; border-right:1px solid var(--line); padding:26px 24px}
+.col-right{flex:1; padding:26px 30px}
+.col-title{font-size:13px; font-weight:800; letter-spacing:1px; color:var(--purple-d);
+  text-transform:uppercase; margin:0 0 14px; display:flex; align-items:center; gap:8px}
+.col-title::before{content:""; width:18px; height:3px; border-radius:2px; background:linear-gradient(90deg,var(--purple),var(--teal))}
+.col-block{margin-bottom:26px}
+
+/* ---- ability matrix (left) ---- */
+.mat-row{margin-bottom:13px}
+.mat-row .top{display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px}
+.mat-row .top b{font-weight:700; color:var(--ink)}
+.mat-row .top em{font-style:normal; color:var(--mut); font-size:12px}
+.track{height:7px; border-radius:4px; background:var(--line); overflow:hidden}
+.fill{height:100%; border-radius:4px; background:linear-gradient(90deg,var(--purple),var(--teal))}
+
+/* ---- key stats (left, big numbers) ---- */
+.stat{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.stat .box{background:var(--purple-l); border-radius:14px; padding:12px 14px; text-align:center}
+.stat .box .n{font-size:24px; font-weight:800; color:var(--purple-d); line-height:1.1}
+.stat .box .l{font-size:11.5px; color:var(--sub); margin-top:3px}
+
+/* ---- skill tags (left) ---- */
+.tags{display:flex; flex-wrap:wrap; gap:7px}
+.tags .t{font-size:12px; padding:5px 11px; border-radius:20px; background:var(--teal-l);
+  color:var(--teal-d); font-weight:600}
+
+/* ---- education (left) ---- */
+.edu{font-size:13px; color:var(--sub); line-height:1.7}
+.edu .school{font-weight:700; color:var(--ink); font-size:14px}
+.edu .major{color:var(--purple-d); font-weight:600; margin:2px 0}
+.edu .meta{font-size:12px; color:var(--mut); margin-top:3px}
+.edu .awards{margin-top:8px; font-size:12px; color:var(--sub)}
+.edu .awards li{margin-bottom:3px; list-style:none; padding-left:14px; position:relative}
+.edu .awards li::before{content:"🏅"; position:absolute; left:0; font-size:11px}
+
+/* ---- timeline (right) ---- */
+.tl{position:relative; padding-left:22px}
+.tl::before{content:""; position:absolute; left:5px; top:6px; bottom:6px; width:2px;
+  background:linear-gradient(180deg,var(--purple),var(--teal)); border-radius:2px}
+.node{position:relative; margin-bottom:22px}
+.node::before{content:""; position:absolute; left:-22px; top:5px; width:12px; height:12px;
+  border-radius:50%; background:#fff; border:3px solid var(--purple); box-shadow:0 0 0 3px var(--purple-l)}
+.node .meta{display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap}
+.node .org{font-size:15px; font-weight:700; color:var(--ink)}
+.node .date{font-size:12px; color:var(--mut); white-space:nowrap}
+.node .pos{font-size:13px; color:var(--purple-d); font-weight:600; margin:2px 0 8px}
+.node .desc{font-size:13.5px; color:var(--sub)}
+.node .desc p{margin-bottom:5px}
+.node .desc ol{padding-left:18px; margin-bottom:5px}
+.node .desc li{margin-bottom:3px}
+.node .desc b{color:var(--ink)}
+.caps{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px}
+.caps .c{font-size:11.5px; padding:3px 10px; border-radius:14px; background:var(--purple-l);
+  color:var(--purple-d); font-weight:600}
+
+/* ---- internships compact list ---- */
+.intern-list{padding-left:22px}
+.intern-item{display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap;
+  padding:8px 0; border-bottom:1px dashed var(--line); font-size:13px}
+.intern-item:last-child{border-bottom:none}
+.intern-item .i-org{font-weight:600; color:var(--ink)}
+.intern-item .i-role{color:var(--teal-d); font-weight:600; font-size:12px; margin-left:4px}
+.intern-item .i-date{font-size:12px; color:var(--mut); white-space:nowrap}
+.intern-item .i-desc{font-size:12.5px; color:var(--sub); margin-top:3px; width:100%}
+
+/* ---- self eval ---- */
+.eval{font-size:13.5px; color:var(--sub); line-height:1.7}
+.eval .e-item{margin-bottom:8px; padding:10px 14px; background:var(--purple-l); border-radius:12px}
+.eval .e-item b{color:var(--purple-d); font-weight:700}
+
+/* ---- footer ---- */
+.ft{padding:14px 30px; font-size:12px; color:var(--mut); text-align:center; border-top:1px solid var(--line)}
+
+/* ---- print ---- */
+@media print{
+  body{background:#fff; padding:0}
+  .wrap{box-shadow:none; border-radius:0; max-width:100%}
+}
+/* ---- mobile ---- */
+@media(max-width:680px){
+  .layout{flex-direction:column}
+  .col-left{width:100%; border-right:none; border-bottom:1px solid var(--line)}
+  .hd{flex-direction:column; align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== Header ===== -->
+  <div class="hd">
+    <div>
+      <div class="name">蔡女士</div>
+      <div class="role">HR全模块·BP协同·文化活动·HR流程产品化</div>
+      <div class="contact">
+        <span>📍 深圳</span>
+        <span>📞 18665138212（可添加微信）</span>
+        <span>🎓 2024 届 · 全日制统招本科 · 工商管理专业</span>
+      </div>
+    </div>
+    <img class="hd-photo" src="resume-cai-photo.jpeg" alt="蔡女士照片">
+  </div>
+
+  <div class="layout">
+
+    <!-- ===== Left column ===== -->
+    <div class="col-left">
+
+      <div class="col-block">
+        <div class="col-title">核心能力矩阵</div>
+        <div class="mat-row">
+          <div class="top"><b>BP协同</b><em>1年</em></div>
+          <div class="track"><div class="fill" style="width:55%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b>文化活动</b><em>2年</em></div>
+          <div class="track"><div class="fill" style="width:72%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b>AI产品化</b><em>1年</em></div>
+          <div class="track"><div class="fill" style="width:55%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b>招聘运营</b><em>3年</em></div>
+          <div class="track"><div class="fill" style="width:90%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b>激励培训</b><em>3年</em></div>
+          <div class="track"><div class="fill" style="width:90%"></div></div>
+        </div>
+        <div class="mat-row">
+          <div class="top"><b>薪酬SSC</b><em>2年</em></div>
+          <div class="track"><div class="fill" style="width:72%"></div></div>
+        </div>
+      </div>
+
+      <div class="col-block">
+        <div class="col-title">关键数据</div>
+        <div class="stat">
+          <div class="box"><div class="n">40+</div><div class="l">独立交付岗位</div></div>
+          <div class="box"><div class="n">1000+</div><div class="l">文化活动覆盖人数</div></div>
+          <div class="box"><div class="n">300</div><div class="l">SSC 全盘管理人数</div></div>
+          <div class="box"><div class="n">90%</div><div class="l">招聘留存率</div></div>
+        </div>
+      </div>
+
+      <div class="col-block">
+        <div class="col-title">技能标签</div>
+        <div class="tags">
+          <span class="t">招聘全流程</span>
+          <span class="t">企业文化</span>
+          <span class="t">AI 流程产品化</span>
+          <span class="t">SSC 全盘</span>
+          <span class="t">培训运营</span>
+          <span class="t">PR 视频剪辑</span>
+          <span class="t">数据分析</span>
+          <span class="t">内推运营</span>
+          <span class="t">雇主品牌</span>
+        </div>
+      </div>
+
+      <div class="col-block">
+        <div class="col-title">教育背景</div>
+        <div class="edu">
+          <div class="school">中山大学新华学院</div>
+          <div class="major">工商管理（统招全日制本科）</div>
+          <div class="meta">2020.09 - 2024.06 · 成绩排名前 15%</div>
+          <div class="awards">
+            <li>「挑战杯」中国大学生创业计划竞赛 省奖</li>
+            <li>电子商务三创大赛 省奖</li>
+            <li>「互联网+」大学生创新创业大赛 校奖</li>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-block">
+        <div class="col-title">自我评价</div>
+        <div class="eval">
+          <div class="e-item"><b>人力素质：</b>通读劳动法、合同法，热爱人力工作，有跨文化工作经验；掌握问卷设计分析、海报设计、视频剪辑（PR）。</div>
+          <div class="e-item"><b>数据分析：</b>具有良好数据意识，曾负责部门数据分析工作，有独立考勤和算薪经验。</div>
+          <div class="e-item"><b>性格模型：</b>外向积极，有亲和力；行动力高，逻辑性强，结果型人。</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-right">
+      <div class="col-title">工作履历</div>
+      <div class="tl">
+
+        <div class="node">
+          <div class="meta">
+            <span class="org">腾讯（派遣）</span>
+            <span class="date">2025.9 - 至今</span>
+          </div>
+          <div class="pos">BP 协同 / AI 流程产品化 / 文化活动</div>
+          <div class="desc">
+            <p><b>BP 协同：</b></p>
+            <ol>
+              <li>支持BP完成公司激励评选全流程跟进，包括申报收集、评审排序、奖金分配及宣发。</li>
+              <li>推动部门AI文化建设，参与公司级人才培养项目。</li>
+              <li>搭建部门SOP与台账资料库，沉淀流程规范与历史数据，降低协作成本。</li>
+            </ol>
+            <p style="margin-top:8px"><b>AI 流程产品化：</b><a href="https://yitongcaii.github.io/activities-html/" target="_blank" style="color:var(--teal-d);font-size:12px;font-weight:600;text-decoration:none;margin-left:6px;">作品集（可点击预览）</a></p>
+            <ol>
+              <li>0-1搭建新人转正自动化流程，实现从人工跟催到系统自动推进的转变，减少手动统计工作量。</li>
+              <li>主导建设HR文化活动知识库，实现知识自动检索与沉淀，形成部门公共学习资产。</li>
+              <li>搭建积分平台与抽奖平台，以游戏化机制驱动员工参与，提升活动活跃度。</li>
+            </ol>
+            <p style="margin-top:8px"><b>文化活动：</b></p>
+            <ol>
+              <li>参与策划并落地多场跨部门文化活动，包括部门学习平台、员工大会等，覆盖1000+人技术团队。</li>
+              <li>独立负责活动全流程：方案设计、物料筹备、现场执行及效果复盘。</li>
+            </ol>
+          </div>
+          <div class="caps">
+            <span class="c">流程自动化</span>
+            <span class="c">文化策划</span>
+            <span class="c">0→1 产品搭建</span>
+            <span class="c">BP 协同</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="meta">
+            <span class="org">联志工业有限公司（港资上市跨国集团）</span>
+            <span class="date">2024.10 - 2025.9</span>
+          </div>
+          <div class="pos">人才招募</div>
+          <div class="desc">
+            <p><b>招聘交付：</b>独立交付 20+ 岗位（含 1 个高级经理、4 个经理级、4 个海外岗位含 1 位印尼当地人），总留存率 90%；覆盖财务、内审、CSR、IE、质量、供应链、高管助理等。</p>
+            <p><b>内推运营：</b>0→1 推行公司内推制度，制定年度宣导计划与奖品制度，达成 20+ 内推人选入职，降低招聘成本。</p>
+          </div>
+          <div class="caps">
+            <span class="c">高端招聘</span>
+            <span class="c">海外招聘</span>
+            <span class="c">内推体系搭建</span>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="meta">
+            <span class="org">广东乐心医疗电子股份有限公司（上市）</span>
+            <span class="date">2024.3 - 2024.10</span>
+          </div>
+          <div class="pos">HR（招聘 / 企业文化 / 全盘 SSC）</div>
+          <div class="desc">
+            <p><b>招聘：</b>独立交付 15+ 主管级岗位（新媒体、产品、销售、研发、职能等），简历通过率 60%，面试通过率 46%，入职率 64%。</p>
+            <p><b>企业文化：</b>设计面向部门长的企业文化调研问卷，收集率 53%；拆解分析公司价值观。</p>
+            <p><b>全盘 SSC：</b>独立负责深圳分公司 300 人 SSC（入离职、EHR 系统、考勤异常、员工档案）；独立办理外籍员工《在华工作许可证》。</p>
+          </div>
+          <div class="caps">
+            <span class="c">全盘 SSC</span>
+            <span class="c">文化调研</span>
+            <span class="c">主管级招聘</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-block" style="margin-top:6px">
+        <div class="col-title">实习经历（4 段）</div>
+        <div class="intern-list">
+          <div class="intern-item">
+            <div>
+              <span class="i-org">康诺思腾科技（上市）</span><span class="i-role">培训</span>
+              <div class="i-desc">优化新员工入职培训课件与视频；运营培训系统，制作海报、剪辑视频、组织培训；主导年会礼品方案并采购</div>
+            </div>
+            <span class="i-date">2023.12-2024.3</span>
+          </div>
+          <div class="intern-item">
+            <div>
+              <span class="i-org">安芯易电子商务（行业头部）</span><span class="i-role">招聘 & 雇主品牌</span>
+              <div class="i-desc">全流程跟进招聘（销售、职能、市场）；参与搭建雇主品牌，协作制作海报/推文/视频，公众号粉丝增长 500+</div>
+            </div>
+            <span class="i-date">2023.10-2023.12</span>
+          </div>
+          <div class="intern-item">
+            <div>
+              <span class="i-org">马士基供应链（世界五百强）</span><span class="i-role">招聘 & 员工关系</span>
+              <div class="i-desc">招聘交付入职 15 人（文员、仓库、物流）；参与制定新业务人力方案；独立完成月度考勤与算薪</div>
+            </div>
+            <span class="i-date">2023.7-2023.10</span>
+          </div>
+          <div class="intern-item">
+            <div>
+              <span class="i-org">如祺出行（网约车平台总部）</span><span class="i-role">培训</span>
+              <div class="i-desc">完成周报与会议数据分析；独立制作培训课件与视频剪辑，满意度 90%；独立完成近 100 名加盟商培训报名</div>
+            </div>
+            <span class="i-date">2022.7-2023.1</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
