@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>面试备考补充包 · 血肉与肌肉</title>
+<style>
+  :root{
+    --violet:#7c5cff; --cyan:#2dd4bf; --ink:#1f2330; --muted:#6b7280;
+    --bg1:#f6f3ff; --bg2:#ecfeff; --card:#ffffff; --line:#eceef5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink); background:linear-gradient(135deg,var(--bg1),var(--bg2)); min-height:100vh;
+  }
+  header{
+    padding:38px 28px 18px; text-align:center;
+    background:linear-gradient(120deg,rgba(124,92,255,.10),rgba(45,212,191,.10));
+  }
+  header h1{
+    margin:0; font-size:30px; font-weight:800;
+    background:linear-gradient(90deg,var(--violet),var(--cyan));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{margin:8px 0 0; color:var(--muted); font-size:14px;}
+  .toolbar{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.80); border-bottom:1px solid var(--line);
+    padding:12px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;
+  }
+  .search{
+    border:1px solid var(--line); border-radius:999px; padding:9px 16px; font-size:14px;
+    width:min(320px,72vw); outline:none; background:#fff; color:var(--ink);
+  }
+  .search:focus{border-color:var(--violet); box-shadow:0 0 0 3px rgba(124,92,255,.12);}
+  .chips{display:flex; flex-wrap:wrap; gap:7px; justify-content:center;}
+  .chip{
+    cursor:pointer; border:1px solid var(--line); background:#fff; color:var(--muted);
+    border-radius:999px; padding:6px 13px; font-size:13px; transition:.18s; user-select:none;
+  }
+  .chip:hover{border-color:var(--violet); color:var(--violet);}
+  .chip.active{background:linear-gradient(90deg,var(--violet),var(--cyan)); color:#fff; border-color:transparent;}
+  .grid{
+    max-width:1180px; margin:22px auto 8px; padding:0 18px 40px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 18px 16px;
+    box-shadow:0 6px 20px rgba(31,35,48,.06); opacity:0; transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease, box-shadow .2s;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .card.in{opacity:1; transform:translateY(0);}
+  .card:hover{box-shadow:0 10px 28px rgba(124,92,255,.14); transform:translateY(-3px);}
+  .pill{
+    align-self:flex-start; font-size:12px; font-weight:700; padding:4px 11px; border-radius:999px;
+    letter-spacing:.3px;
+  }
+  .card h3{margin:0; font-size:16px; font-weight:800; line-height:1.4;}
+  .ans{
+    font-size:14px; line-height:1.7; color:#374151; border-radius:10px; padding:8px 10px;
+    background:#fafbff; border:1px dashed transparent; transition:.15s; outline:none;
+    white-space:pre-wrap; word-break:break-word;
+  }
+  .ans:focus{background:#fff; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(45,212,191,.12);}
+  .ans:empty:before{content:"点击补充…"; color:#b9bfce;}
+  .meta{font-size:12px; color:var(--muted); margin-top:2px;}
+  .count{text-align:center; color:var(--muted); font-size:13px; padding:4px 0 10px;}
+  footer{
+    text-align:center; padding:22px 16px; color:#6b7280; font-size:13px;
+    background:linear-gradient(120deg,rgba(124,92,255,.06),rgba(45,212,191,.06));
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>面试备考补充包 · 血肉与肌肉</h1>
+  <p>数字台账 / STAR库 / 薪资剧本 / 逐字稿 / 作品包 / 观点库 / 战役日志 ｜ 红色卡=待你回填真实值，点开即填，自动本地保存</p>
+</header>
+
+<div class="toolbar" id="toolbar">
+  <input id="search" class="search" placeholder="搜索，如 答辩 / 采纳率 / 薪资 /  STAR / 作品" />
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="count" id="count"></div>
+<main class="grid" id="grid"></main>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+
+<script>
+const CATS = {
+  '数字台账':{c:'#0ea5e9', bg:'rgba(14,165,233,.14)'},
+  '弱点预案':{c:'#ef4444', bg:'rgba(239,68,68,.14)'},
+  'STAR库':{c:'#8b5cf6', bg:'rgba(139,92,246,.14)'},
+  '薪资剧本':{c:'#f97316', bg:'rgba(249,115,22,.14)'},
+  '电梯演讲':{c:'#14b8a6', bg:'rgba(20,184,166,.14)'},
+  '逐字稿':{c:'#6366f1', bg:'rgba(99,102,241,.14)'},
+  '目标公司':{c:'#a855f7', bg:'rgba(168,85,247,.14)'},
+  '战役日志':{c:'#64748b', bg:'rgba(100,116,139,.14)'},
+  '观点库':{c:'#ec4899', bg:'rgba(236,72,153,.14)'},
+  '作品包':{c:'#22c55e', bg:'rgba(34,197,94,.14)'},
+  '档案优化':{c:'#3b82f6', bg:'rgba(59,130,246,.14)'}
+};
+
+const cards = [
+  // ===== 数字台账（唯一真相源：所有对外材料从此取数，必须一致）=====
+  {cat:'数字台账', title:'新人答辩自动化·核心数字', body:'已跑通场次：【待补】\n首例会议号：835334680（已知）\n覆盖新人数量：【待补】\n触发节点：月1主任务 / 转正前5天跟进 / 周一探活\n来源：会议记录 + 看板回填\n状态：⚠️场次/人数待回填，与简历一致'},
+  {cat:'数字台账', title:'博闻看板·核心数字', body:'覆盖中心数：【待补】\n去重参与人数：【待补】\n参与人次：【待补】\n人均参与深度值：【待补】小时\n剔除<15min占比：【待补】%\n指标：去重人数 / 参与人次 / 人均深度 三分离\n来源：学员明细（Python脚本比对）\n状态：⚠️核心值待回填'},
+  {cat:'数字台账', title:'AI文化落地·核心数字', body:'AISee实战沙龙：场次【待补】 / 人数【待补】\n采纳率（前→后）：【待补】→【待补】\n布道师人数：【待补】\n激励模块：独立负责\n定义「采纳」=用AI完成工作并复盘（非点击）\n状态：⚠️采纳率口径对齐中，但需一个可说出口的小样本值'},
+  {cat:'数字台账', title:'英语角Loop·核心数字', body:'运行起始：2026-07起（MigraQ）\n每日触发：10:00 自动提醒（D-17）\n累计运行天数：【待补】\n参与/互动人数：【待补】\n状态：⚠️天数/人数待回填'},
+  {cat:'数字台账', title:'文化周/H2·核心数字', body:'质量稳定性文化周：场次【待补】 / 人数【待补】\nH2云技服文化周：方案主导设计，场次【待补】\n反馈回收份数：【待补】\n状态：⚠️参与与反馈数待回填'},
+  {cat:'数字台账', title:'简历总量词·核心数字', body:'团建方案池：57套（结构化沉淀，按关系/场景分层，已剔除平级向）\n交互资产：34+（GitHub Pages）\n知识采集：index 48→25 条（关系分层硬过滤）\n状态：✅数量已知，准备一句「数量是框架结果，更想讲X套逻辑」反客为主'},
+  {cat:'数字台账', title:'求职参数（终面用）', body:'期望薪资/总包：【待补】\n现薪资：【待补】\n可接受的base城市：【待补】\n出差/relocation可接受度：【待补】\n状态：🔴终面必用，提前填，不现场编'},
+
+  // ===== 弱点预案（被深挖时的具体接法，非泛泛而谈）=====
+  {cat:'弱点预案', title:'弱点①多线做浅（框架快、收尾拖）', body:'面试官可能问：「你怎么保证不都做浅？」\n接法三连：\n1 分层——P0主干(答辩/看板)我深度跟；P1运营(英语角Loop)自动化兜底不占人力；P2储备(57套)是沉淀不等同在做。\n2 自动化兜底低价值重复，把时间腾给高判断事。\n3 收尾强制数据验收闭环：不只看办没办，看指标对不对、业务认不认。\n关键句：不是做得多就浅，是用机制保证主干做透、长尾自动跑。'},
+  {cat:'弱点预案', title:'弱点②技术实现边界估不足', body:'面试官可能问：「需求是你写还是技术写？你技术到哪？」\n接法：坦诚早期「想到就冲」——曾以为某自动化节点简单，技术说有坑，回头改PRD。\n现在机制：任何需求开工前先跟技术对齐「能不能做/边界在哪」再写定稿，不凭感觉估。\n关键句：这让我从「想到就冲」变「冲之前先验证边界」——和审批闸门是同一套克制。'},
+  {cat:'弱点预案', title:'弱点③采纳率无数据（最大软肋）', body:'面试官必问：「激励了什么？采纳率多少？拿数据说话。」\n接法：不虚报。先坦白「口径还在和leader对齐」，再定义我的「采纳」=实际用AI完成工作并复盘，非活跃点击。\n补刀：准备一个可说出口的小样本（哪怕单场沙龙的复盘人数）兜底，别空着。\n关键句：松了口径就变「热闹」，我宁肯暂时没数也不虚报——HR碰数据诚信是底线。'},
+
+  // ===== STAR库（8-10个完整故事，能扛三连问）=====
+  {cat:'STAR库', title:'STAR①答辩自动化0→跑通（主导）', body:'S：之前答辩全人工——建会建群、手动催跟进、看板回填，盯几十新人漏一个就事故。\nT：把它产品化，不靠人盯。\nA：写PRD v1.1拆可触发节点(月1/转正前5天/周一探活)；用MCP串企微+会议+看板自动跑；坚持审批闸门——系统能准备，发不发人判断，绝不自动对外。\nR：首例会议号835334680跑通，【待补】场稳定。\n反思：我的贡献=需求100%/验收100%/代码0%，不抢技术功但保证按业务真实需要长出来。'},
+  {cat:'STAR库', title:'STAR②看板指标口径设计（负责一块）', body:'S：培训看板人人做，但只看参与人次，数字虚高。\nT：定义能反推业务真相的指标。\nA：去重人数与参与人次分离；剔除<15min无效参会；定义人均参与深度=总有效时长÷去重人数；用Python脚本比对源数据一致性；口径先跟业务leader对齐。\nR：暴露覆盖盲区，指导资源往缺口投，而非交「覆盖率95%」漂亮报告。\n反思：不一样在口径不在工具，HR也得讲结构。'},
+  {cat:'STAR库', title:'STAR③AI布道师机制（独立负责）', body:'S：推AI文化怕变成「自上而下压」，技术人最反感被管理。\nT：设计能真落地的采纳推动方式。\nA：从一线选愿尝鲜者做布道师，peer影响peer；激励锚在「用AI真干完并复盘」非报名人数；配套积分/认证【待补】。\nR：AISee沙龙【待补】场，采纳率【待补】→【待补】。\n反思：HR是赋能不是考核，压出来的采纳是假的。'},
+  {cat:'STAR库', title:'STAR④知识采集关系分层硬过滤（失败/纠偏）', body:'S：知识采集自动化初期为「内容丰富」大量采平级朋友向破冰(两真一假/互画肖像)。\nT：发现内容错位需纠偏。\nA：根因复盘——这类放领导↔员工、领导↔领导场景根本不能用；建立关系分层过滤(按权力距离三档)，平级向一律剔除，只留上下级+高管间两档；index 48→25条，宁少勿错。\nR：内容适配关系对了，噪音清零。\n反思：HR内容不是多就好，错层即噪音；现在做任何采集第一件事先定受众分层。'},
+  {cat:'STAR库', title:'STAR⑤质量稳定性文化周（负责一块）', body:'S：安全产品业务节奏紧、合规重，通用团建没记忆点。\nT：做贴业务真痛的文化活动。\nA：贴「稳定性」这个业务关键词长，不做通用团建；用行为可观察+机制兜底设计。\nR：场次【待补】/人数【待补】/反馈【待补】。\n反思：文化活动必须贴业务痛点才有意义，否则是成本。'},
+  {cat:'STAR库', title:'STAR⑥英语角Loop自动化（执行落地）', body:'S：英语角需每天提醒、长期运营，人工易断。\nT：用自动化保证不断更、不占人力。\nA：设每天10:00自动提醒(D-17逻辑)，智能表格+自动Loop托管；我定规则，系统跑。\nR：自【待补】起连续运行【待补】天无断更。\n反思：低价值重复交给系统，人去做高判断事——自动化初心的活样本。'},
+  {cat:'STAR库', title:'STAR⑦推动技术leader配合（影响力/无下属）', body:'S：推AI文化遇技术leader「我团队不需要别添乱」。\nT：无汇报关系下推动配合。\nA：先诊断(真抵触/没看到价值/怕增负担解法不同)；用其团队参与数据说话指盲区；在他团队找布道师peer影响；给最小可行动作先出成绩。\nR：不靠KPI压，用结果吸引。\n反思：HR是赋能不是考核，尊重业务节奏，压出来的配合也是假的。'},
+  {cat:'STAR库', title:'STAR⑧H2文化周方案主导设计（主导）', body:'S：云技服H2需一场能承载质量稳定性主题的文化活动。\nT：从0主导方案设计。\nA：我拍板三件事——主题锚定业务痛点、活动形式分层(上下级/高管间，已剔除平级向)、验收用反馈而非场次。\nR：方案定稿待落地，结构已评审。\n反思：主导项要能说出「我具体拍了哪三块板」，面试官专挑主导项捅。'},
+  {cat:'STAR库', title:'STAR⑨审批闸门决策（决策/边界）', body:'S：答辩自动化要自动建会建群发消息，HR动作自动发出去收不回。\nT：定自动化的边界。\nA：坚持所有对外动作过审批闸门(wecom_gate)，系统可自动准备但发不发人判断，绝不自动发含个人信息消息。\nR：零误发事故，合规第一约束落地。\n反思：自动化≠自动对外，HR自动化的边界判断比技术更难也更重要。'},
+  {cat:'STAR库', title:'STAR⑩多线并行用机制兜底（个人方法论）', body:'S：同时推答辩/看板/文化周/英语角，易摊浅。\nT：在多线环境里保证主干做透。\nA：分层P0/P1/P2 + 自动化兜底低价值重复 + 收尾强制数据验收闭环。\nR：主干稳定产出，长尾自动跑。\n反思：下一个阶段比「搭得多」更重要的是「哪个值得做透」。'},
+
+  // ===== 薪资剧本（终面必用，目前零覆盖）=====
+  {cat:'薪资剧本', title:'怎么先问范围', body:'话术：「想先了解贵司这个职级的薪酬带宽和总包结构(基薪/奖金/股权)，我好给一个合理的区间，不漫天要价。」\n原则：先问架构再报价，不第一个亮底牌；把球先给面试官。'},
+  {cat:'薪资剧本', title:'怎么给区间', body:'话术：「我基于【待补：市场/职级对标】给一个区间，不漫天要价也不自贬。」\n给区间而非单点，留谈判空间；区间别太宽显没底，别太窄显死板。'},
+  {cat:'薪资剧本', title:'被压价怎么接', body:'话术：「我理解预算有带宽。比起单看月薪，我更看总包和这个岗位能不能让我长出长不出来的能力。如果结构上能体现成长空间，薪资我愿意灵活。」\n原则：不卑微不硬刚，把议题从「钱」升到「成长+价值」。'},
+  {cat:'薪资剧本', title:'低于期望来不来', body:'话术：「小幅差异但匹配度和成长够，我倾向来；差太多我坦诚聊，不勉强。」\n原则：不 preemptively 拒绝也不空承诺，先确认清楚范围再给准话。'},
+  {cat:'薪资剧本', title:'现薪资怎么答', body:'话术：「现薪资我如实说【待补】，但我更看总包和成长空间，不是单看月薪。」\n原则：如实说但立即把框架拉到总包+成长，避免被锚定在现薪。'},
+
+  // ===== 电梯演讲（不同场景三版）=====
+  {cat:'电梯演讲', title:'30秒版（候场/群面破冰）', body:'我是云技服HRBP，但我把HR动作当产品做——把最重复的新人答辩做成自动编排系统、把培训覆盖做成能自定义口径的看板、独立负责AI文化落地的激励设计。一句话：我是HR业务和工具化之间的桥梁。'},
+  {cat:'电梯演讲', title:'1分钟版（正试开场备用）', body:'我是云技服HRBP，工作方式跟传统不太一样——把HR动作产品化。基础盘做培训文化，但我更关心「这事能不能不靠人盯」。转折在：把答辩重做成自动编排系统(PRD+MCP+审批闸门)、把培训做成自定义口径看板、再往上推AI文化(布道师机制)。稀缺位：HR业务×工具化的桥梁。下一步想把这能力放更重场景。'},
+  {cat:'电梯演讲', title:'3分钟版（正式自我介绍）', body:'见「逐字稿·自我介绍」。三版一致：人设锚=桥梁型；主线=痛点→产品化→数据化→AI文化→下一步；差异化=对HRBP多产品化脑子、对PM多业务痛点与人的边界。'},
+
+  // ===== 逐字稿（高频题写定，练到自然）=====
+  {cat:'逐字稿', title:'自我介绍逐字稿', body:'我是云技服的HRBP，但我的工作方式跟传统HRBP不太一样——我把HR动作当产品来做。\n基础盘上，我负责培训、文化落地、活动策划，但我不满足于「办完」，我更关心「这件事能不能不靠人盯」。\n转折点在产品化：把新人答辩从人工建会建群、手动催跟进，重做成一套自动编排系统——写PRD、用MCP串企微和会议、所有对外动作过审批闸门；又把培训覆盖做成能自定义指标口径的看板，剔除无效参会、算人均参与深度。\n再往上是AI文化：独立负责激励设计模块，搭了AI布道师机制，推真实采纳而不是热闹。\n所以我的稀缺位一句话概括——HR业务和工具化之间的桥梁。下一步想把这能力放到更重的场景里。'},
+  {cat:'逐字稿', title:'核心竞争力逐字稿', body:'如果我跟纯HRBP比，我多一样东西——产品化和自动化的脑子。我不只是办活动做跟进，我会把重复动作写成PRD、用MCP编排串系统、用看板定义指标口径。\n如果我跟纯PM比，我多一样东西——我懂HR业务的真实痛点和人的边界。我知道哪些能自动化、哪些必须人判断(比如我坚持审批闸门不自动发消息)。技术同学容易做成自嗨工具，我不会，因为需求是我从业务里长出来的。\n所以我卡在一个稀缺位：HR业务和工具化之间的桥梁。'},
+  {cat:'逐字稿', title:'动机逐字稿', body:'我不避讳看机会，但原因不是对现状不满——我在现团队把HR流程产品化、AI文化落地几条线从0搭起来了，这段我很珍惜。\n我看的不是换个单位，是能力边界的下一步：我现在最强的是把HR动作产品化、用自动化兜底执行，但我想找【待补：更重数据驱动/更前沿AI应用/更大业务盘子】的环境，把能力放更重场景。\n为什么是现在——【待补：真实时间线】。\n关键一句：我找工作看的是下一段能不能长出我长不出来的东西，不是逃离什么。(红线：全程不评价原公司/领导)'},
+
+  // ===== 目标公司研究（每投一家填一张）=====
+  {cat:'目标公司', title:'研究模板（复制填）', body:'公司/岗位：【待补】\n①业务判断：核心业务/团队定位/最可能的HR痛点(人才密度/技术retention/组织扩张)【待补】\n②我的能力对应JD哪几条：【待补】\n③反向提问定制版：背什么指标/最大痛点/在推的数字化项目【待补】\n④我该重点讲的1个故事：【待补】\n用法：每投一家复制此卡填一份，比通用准备强十倍。'},
+  {cat:'目标公司', title:'填写示例（占位）', body:'示例框架(真实内容你填)：\n业务：技术驱动型，重研发效率→HR痛点可能在技术retention与成长路径可见性。\n我对位：看板(成长可见化)+答辩自动化(技术新人融入)+布道师(技术采纳)。\n反向提问：贵司技术团队当前retention的核心抓手是什么？\n重点故事：STAR②看板(用数据反推盲区)或STAR⑦(推动技术leader)。'},
+
+  // ===== 战役日志（每次面完复盘，越面越强）=====
+  {cat:'战役日志', title:'日志模板（每次面完填）', body:'日期：【待补】 公司/岗位：【待补】 轮次：【待补】\n①被问到的题(尤其没准备的)：【待补】\n②我答得好/卡壳的点：【待补】\n③对方反复追问/最关注的：【待补】\n④我的数字漏洞/待补项：【待补】\n⑤下一步迭代动作：【待补】\n用法：面完24h内填，反哺题库与数字台账。'},
+  {cat:'战役日志', title:'复盘维度说明', body:'四个复盘角度：\n1 覆盖率——题库里哪类题没被问、哪类被问爆，调整准备权重。\n2 数字——每次被追问的数字，回填进台账，下次不再虚。\n3 人设一致性——不同面试官听到的「你是谁」是否一致(桥梁型)。\n4 反向情报——从面试官回答判断这岗值不值得去(背什么指标/数字化热情)。'},
+
+  // ===== 观点库（认知题展开讲+可发社交）=====
+  {cat:'观点库', title:'观点①AI+HR落地瓶颈在采纳不在工具', body:'核心：发工具容易，让人真用起来难。未来HR核心能力变「变革管理」，帮组织跨过采纳坎。所以坚持布道师机制而非自上而下压。面试可展开，也可发LinkedIn/脉脉当个人内容。'},
+  {cat:'观点库', title:'观点②HR是组织效能设计师', body:'三层价值：降摩擦(人岗错配/冲突/流程卡顿)、放杠杆(培训工具化放大产出)、承载文化(机制立住默认待人方式)。我不把自己当办活动的HR，是用系统设计释放组织效能的人。'},
+  {cat:'观点库', title:'观点③文化是压力下的默认选择', body:'落地三件事：行为可观察(定义具体怎么做)、机制兜底(激励晋升往文化靠)、领导以身作则(从上往下漏)。反面教训：平级向内容放上下级场景是噪音——文化内容错层即失效。'},
+  {cat:'观点库', title:'观点④预测性People Analytics是下一步', body:'我现在做的是描述性(覆盖了多少)，下一步该是预测性(谁有流失风险、哪个团队需介入)，从看后视镜到看前视镜。这是给3倍资源会投的方向之一。'},
+  {cat:'观点库', title:'观点⑤自动化要克制(审批闸门哲学)', body:'AI应用本质该增强人的判断不是替代决策。关键决策留人——系统能准备，发不发人判断。HR自动化边界判断比技术更难也更重要，合规是第一约束不是流程尾巴。'},
+
+  // ===== 作品包（现场被要求看一个时甩出来）=====
+  {cat:'作品包', title:'作品包清单（往里放真实文件）', body:'①博闻看板截图/录屏(展示口径:去重人数/人均深度/剔除<15min)\n②答辩自动化PRD v1.1(节点触发+MCP串联+审批闸门)\n③AI文化落地方案/布道师机制一页纸\n④知识采集关系分层说明(48→25逻辑)\n⑤AI漫剧《企鹅》分镜HTML(展示内容生产力)\n用法：存一个文件夹，面试前确认能30秒打开。被要求「现场看一个」主动说「我带了」。'},
+  {cat:'作品包', title:'30秒讲解词模板', body:'以看板为例：「多数培训看板只看参与人次数字虚高。我重定义三指标：去重人数与参与人次分离、剔除<15min无效参会、算人均参与深度。技术用Python脚本比对源数据一致性——脚本不是我写，但我能读逻辑、能验证数据。您看到的不是覆盖率95%漂亮报告，是覆盖率背后每个数字我敢解释怎么来的。」\n(PRD切换：节点触发+MCP串联+审批闸门，同样「我定需求定验收」逻辑)'},
+
+  // ===== 档案优化（长期资产，外部动作你执行）=====
+  {cat:'档案优化', title:'LinkedIn/脉脉优化清单', body:'①一句话头衔：HRBP × HR科技/产品化(桥梁型)，别写「资深HR」泛称。\n②成就量化：用台账真实数字，动词开头(从0搭建/提升/降低)。\n③技能标签：People Analytics、HR Automation(MCP)、AI Adoption、组织效能。\n④活跃内容：把观点库5篇发出来，显思考深度与自驱。\n⑤公开主页：用Pages仓做个人方法论站(resume专区)，链接放档案。\n注：此为外部动作，需你本人在平台操作；内容可直接复用本包。'}
+];
+
+const grid = document.getElementById('grid');
+const chipsBox = document.getElementById('chips');
+const search = document.getElementById('search');
+const countEl = document.getElementById('count');
+let activeCat = '全部';
+
+const cats = ['全部', ...Object.keys(CATS)];
+cats.forEach(c=>{
+  const b = document.createElement('span');
+  b.className = 'chip' + (c==='全部'?' active':'');
+  b.textContent = c;
+  b.dataset.cat = c;
+  chipsBox.appendChild(b);
+});
+
+function render(){
+  const kw = search.value.trim().toLowerCase();
+  grid.innerHTML = '';
+  let n = 0;
+  cards.forEach((c, i)=>{
+    if(activeCat!=='全部' && c.cat!==activeCat) return;
+    if(kw && !(c.title.toLowerCase().includes(kw) || c.body.toLowerCase().includes(kw) || c.cat.toLowerCase().includes(kw))) return;
+    n++;
+    const col = CATS[c.cat] || {c:'#888', bg:'#eee'};
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<span class="pill" style="color:'+col.c+';background:'+col.bg+'">'+c.cat+'</span>'+
+      '<h3>'+c.title+'</h3>'+
+      '<div class="ans editable" id="m'+i+'">'+c.body+'</div>';
+    grid.appendChild(card);
+  });
+  countEl.textContent = '共 '+n+' 张补充卡';
+  bindEditable();
+  observe();
+}
+
+function bindEditable(){
+  document.querySelectorAll('.editable').forEach(t=>{
+    const k = 'supp_'+t.id;
+    const v = localStorage.getItem(k);
+    if(v!==null) t.textContent = v;
+    t.addEventListener('input', ()=>localStorage.setItem(k, t.textContent));
+  });
+}
+
+let io;
+function observe(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.08});
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+}
+
+chipsBox.addEventListener('click', e=>{
+  if(e.target.classList.contains('chip')){
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    e.target.classList.add('active');
+    activeCat = e.target.dataset.cat;
+    render();
+  }
+});
+search.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
