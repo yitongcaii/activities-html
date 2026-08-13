@@ -6,13 +6,13 @@
 <title>蔡女士 · 个人简历</title>
 <style>
 :root{
-  /* 荧光加强+毛玻璃版：电光紫→超荧光紫 / 薄荷荧光→霓虹青 / 荧光珊瑚→荧光玫红 */
-  --lav:#B347FF; --lav-d:#8B2DFF; --lav-l:rgba(179,71,255,.08);
-  --aq:#00FFC8; --aq-l:rgba(0,255,200,.10);
-  --pink:#FF4D6D; --pink-d:#E63956; --pink-l:rgba(255,77,109,.08);
+  /* 内容区降荧光：紫→柔紫 / 霓虹青→薄荷青 / 荧光玫红→暖玫粉（header 不动） */
+  --lav:#A458E0; --lav-d:#7A40D0; --lav-l:rgba(164,88,224,.08);
+  --aq:#22E0B8; --aq-l:rgba(34,224,184,.10);
+  --pink:#E87A8C; --pink-d:#CC6677; --pink-l:rgba(204,102,119,.08);
   --ink:#2D2A28; --sub:#5C5450; --mut:#9B9390;
-  --bg:#FFF8FA; --card:rgba(255,255,255,.72); --line:rgba(179,71,255,.15);
-  --radius:18px; --shadow:0 8px 32px rgba(179,71,255,.18);
+  --bg:#FFF8FA; --card:rgba(255,255,255,.72); --line:rgba(164,88,224,.13);
+  --radius:18px; --shadow:0 8px 32px rgba(164,88,224,.15);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -20,9 +20,9 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
   background:var(--bg);
   background-image:
-    radial-gradient(circle at 15% 20%,rgba(179,71,255,.14),transparent 40%),
-    radial-gradient(circle at 85% 70%,rgba(0,255,200,.12),transparent 40%),
-    radial-gradient(circle at 50% 90%,rgba(255,77,109,.10),transparent 35%);
+    radial-gradient(circle at 15% 20%,rgba(164,88,224,.10),transparent 40%),
+    radial-gradient(circle at 85% 70%,rgba(34,224,184,.08),transparent 40%),
+    radial-gradient(circle at 50% 90%,rgba(204,102,119,.07),transparent 35%);
   background-attachment:fixed;
   color:var(--ink); line-height:1.62;
   -webkit-font-smoothing:antialiased; padding:28px 16px 60px;
@@ -45,7 +45,7 @@ body{
 
 /* ---- layout ---- */
 .layout{display:flex; gap:0}
-.col-left{width:34%; background:rgba(179,71,255,.05); border-right:1px solid var(--line); padding:26px 24px;
+.col-left{width:34%; background:rgba(164,88,224,.05); border-right:1px solid var(--line); padding:26px 24px;
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
 .col-right{flex:1; padding:26px 30px}
 .col-title{font-size:13px; font-weight:800; letter-spacing:1px; color:var(--lav-d);
@@ -63,16 +63,16 @@ body{
 
 /* ---- key stats ---- */
 .stat{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-.stat .box{background:rgba(0,255,200,.10); border-radius:14px; padding:12px 14px; text-align:center;
-  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(0,255,200,.18)}
+.stat .box{background:rgba(34,224,184,.10); border-radius:14px; padding:12px 14px; text-align:center;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(34,224,184,.16)}
 .stat .box .n{font-size:24px; font-weight:800; color:var(--pink-d); line-height:1.1}
 .stat .box .l{font-size:11.5px; color:var(--sub); margin-top:3px}
 
 /* ---- skill tags ---- */
 .tags{display:flex; flex-wrap:wrap; gap:7px}
-.tags .t{font-size:12px; padding:5px 11px; border-radius:20px; background:rgba(255,77,109,.10);
+.tags .t{font-size:12px; padding:5px 11px; border-radius:20px; background:rgba(204,102,119,.10);
   color:var(--pink-d); font-weight:600; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-  border:1px solid rgba(255,77,109,.20)}
+  border:1px solid rgba(204,102,119,.18)}
 
 /* ---- education ---- */
 .edu{font-size:13px; color:var(--sub); line-height:1.7}
@@ -100,9 +100,9 @@ body{
 .node .desc li{margin-bottom:3px}
 .node .desc b{color:var(--ink)}
 .caps{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px}
-.caps .c{font-size:11.5px; padding:3px 10px; border-radius:14px; background:rgba(255,77,109,.10);
+.caps .c{font-size:11.5px; padding:3px 10px; border-radius:14px; background:rgba(204,102,119,.10);
   color:var(--pink-d); font-weight:600; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-  border:1px solid rgba(255,77,109,.18)}
+  border:1px solid rgba(204,102,119,.16)}
 
 /* ---- internships ---- */
 .intern-list{padding-left:22px}
@@ -116,8 +116,8 @@ body{
 
 /* ---- self eval ---- */
 .eval{font-size:13.5px; color:var(--sub); line-height:1.7}
-.eval .e-item{margin-bottom:8px; padding:10px 14px; background:rgba(0,255,200,.08); border-radius:12px;
-  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(0,255,200,.15)}
+.eval .e-item{margin-bottom:8px; padding:10px 14px; background:rgba(34,224,184,.08); border-radius:12px;
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(34,224,184,.13)}
 .eval .e-item b{color:var(--lav-d); font-weight:700}
 
 /* ---- print ---- */
