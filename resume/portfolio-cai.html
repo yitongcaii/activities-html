@@ -363,9 +363,9 @@ body{
     </article>
 
     <article class="card" id="card-kb-dir">
-      <div class="card-media" data-type="image" data-full="portfolio-assets/knowledge-base-02.jpg">
-        <img src="portfolio-assets/knowledge-base-02.jpg" alt="知识库目录截图">
-      </div>
+      <a class="card-media" href="https://yitongcaii.github.io/activities-html/index-trimmed.html" target="_blank" rel="noopener" title="打开文化活动知识库完整目录">
+        <img src="portfolio-assets/kb-cover.jpg" alt="文化活动知识库目录封面">
+      </a>
       <div class="card-body">
         <h2 class="card-title">知识库目录</h2>
         <div class="tags">
@@ -380,8 +380,7 @@ body{
           <li><b>创意实验室</b>玩法与灵感库</li>
         </ul>
         <div class="card-foot">
-          <span>📂 点击封面看大图</span>
-          <span>📩 完整内容可私戳</span>
+          <span>📩 点击封面看知识库完整内容</span>
         </div>
       </div>
     </article>
@@ -404,7 +403,7 @@ body{
             <span>📍 深圳</span>
           </div>
         </div>
-        <a class="kb-btn" href="#card-kb-dir" title="如有乐享/知识库真实链接，可替换此处 href">📂 查看知识库目录 →</a>
+        <a class="kb-btn" href="https://yitongcaii.github.io/activities-html/index-trimmed.html" target="_blank" rel="noopener">📚 查看知识库完整内容 →</a>
       </div>
     </article>
     </div>
@@ -440,7 +439,7 @@ body{
     stage.innerHTML = '';
   }
 
-  document.querySelectorAll('.card-media').forEach(function(el){
+  document.querySelectorAll('.card-media[data-type]').forEach(function(el){
     el.addEventListener('click', function(){
       openLb(el.dataset.type, el.dataset.full, el.dataset.poster);
     });
