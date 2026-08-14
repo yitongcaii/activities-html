@@ -116,9 +116,9 @@ body{
 
 /* ---- contact button ---- */
 .contact-row{display:flex; justify-content:center; padding:10px 38px 36px}
-.contact-btn{display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:30px; text-decoration:none;
-  font-weight:800; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--lav),var(--aq));
-  box-shadow:0 8px 22px rgba(164,88,224,.30); transition:transform .18s, box-shadow .18s; white-space:nowrap}
+.contact-btn{display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:30px; border:none;
+  font-family:inherit; font-weight:800; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--lav),var(--aq));
+  box-shadow:0 8px 22px rgba(164,88,224,.30); transition:transform .18s, box-shadow .18s; white-space:nowrap; cursor:default}
 .contact-btn:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(164,88,224,.42)}
 
 /* ---- responsive ---- */
@@ -386,7 +386,7 @@ body{
   </section>
 
   <div class="contact-row">
-    <a class="contact-btn" href="https://yitongcaii.github.io/activities-html/index-trimmed.html" target="_blank" rel="noopener">📩 联系依彤，查看更多作品</a>
+    <button class="contact-btn" type="button">📩 联系依彤，查看更多作品</button>
   </div>
 
   <footer class="ft">
