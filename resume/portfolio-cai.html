@@ -99,6 +99,11 @@ body{
 
 /* ---- end card ---- */
 .card-end{background:linear-gradient(135deg,rgba(164,88,224,.10),rgba(34,224,184,.08)); border:1px dashed var(--lav)}
+.kb-mini{margin-top:12px; padding:13px 15px; border-radius:12px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.65)}
+.kb-mini-h{font-size:12.5px; font-weight:800; color:var(--lav-d); margin-bottom:9px}
+.kb-link{display:block; font-size:12px; color:var(--sub); text-decoration:none; padding:4px 0; line-height:1.55; transition:color .15s, transform .15s}
+.kb-link:hover{color:var(--lav-d); transform:translateX(3px)}
+.kb-link b{color:var(--ink)}
 
 /* ---- responsive ---- */
 @media (max-width:980px){ .bento{grid-template-columns:repeat(2,1fr)} .type-grid{grid-template-columns:repeat(2,1fr)} }
@@ -147,7 +152,7 @@ body{
         <span class="ti">🎉</span>
         <span class="tn">文化活动策划</span>
         <span class="tc">3 个案例</span>
-        <span class="tlist">AI See 实战沙龙 · 业务连续性文化周 · English Corner</span>
+        <span class="tlist">AI 线下&amp;线上实战沙龙 · 部门文化周活动 · English Corner</span>
       </a>
       <a class="type-tile lav" href="#card-contest" data-jump="card-contest">
         <span class="ti">🤖</span>
@@ -159,13 +164,13 @@ body{
         <span class="ti">🏆</span>
         <span class="tn">激励培训体系</span>
         <span class="tc">2 个案例</span>
-        <span class="tlist">博闻多识一堂课 · 培训积分商城</span>
+        <span class="tlist">部门学习平台 · 培训积分商城</span>
       </a>
       <a class="type-tile gold" href="#card-kb" data-jump="card-kb">
         <span class="ti">📚</span>
         <span class="tn">知识沉淀与管理</span>
         <span class="tc">2 个案例</span>
-        <span class="tlist">文化活动知识库 · 博闻多识一堂课</span>
+        <span class="tlist">文化活动知识库 · 部门学习平台</span>
       </a>
     </div>
   </section>
@@ -178,12 +183,12 @@ body{
         <img src="portfolio-assets/salon-gifts.jpg" alt="沙龙活动奖品物料">
       </div>
       <div class="card-body">
-        <h2 class="card-title">第四期 AI See 实战沙龙</h2>
+        <h2 class="card-title">AI 线下&线上实战沙龙</h2>
         <div class="tags">
           <span class="t pink">文化活动</span>
           <span class="t lav">AI 赋能</span>
         </div>
-        <p class="card-desc">「不讲概念，只练真功」——本期主题《从用 AI 写代码到把 AI 当同事》，通过项目工作环境与记忆系统演示，让 AI Coding 从贴身协作走向独立协同；线下实操与线上同步结合，并配套 AI 布道师征集与茶歇好礼。</p>
+        <p class="card-desc">AI实战沙龙「不讲概念，只练真功」，通过线下实操与线上同步结合，带着大家学习AI提效技巧。</p>
         <div class="card-foot">
           <span>📍 深圳腾大 1911 / 线上</span>
           <span>🎤 研发实战分享</span>
@@ -196,12 +201,12 @@ body{
         <img src="portfolio-assets/culture-week.jpg" alt="业务连续性文化周海报">
       </div>
       <div class="card-body">
-        <h2 class="card-title">业务连续性文化周</h2>
+        <h2 class="card-title">部门文化周活动</h2>
         <div class="tags">
           <span class="t pink">文化活动</span>
           <span class="t aq">跨部门协同</span>
         </div>
-        <p class="card-desc">云技术运营服务部主办，围绕"慢一点、想十分、AI 赋能、一起稳稳的"主题，设计启动会、学习专区、激励专区与活动时间线，包含避坑挑战、风险治理、稳定性连连看等线上线下玩法。</p>
+        <p class="card-desc">每半年度开启文化周活动，设计启动会、学习专区、激励专区与活动时间线，包含避坑挑战、风险治理、稳定性连连看等线上线下玩法。</p>
         <div class="card-foot">
           <span>🗓 2026.3-4</span>
           <span>🌐 线上 + 线下</span>
@@ -214,13 +219,13 @@ body{
         <img src="portfolio-assets/ai-contest.jpg" alt="AI 提效达人比赛海报">
       </div>
       <div class="card-body">
-        <h2 class="card-title">第一届 AI 提效达人比赛</h2>
+        <h2 class="card-title">AI 提效达人比赛</h2>
         <div class="tags">
           <span class="t lav">AI 产品化</span>
           <span class="t pink">激励机制</span>
           <span class="t aq">跨部门协作</span>
         </div>
-        <p class="card-desc">面向安全产品二部、安全产品三部全体同学，搭建「Prompt / Skills / MCP / Agent / Plugin」五类作品提交通道；设置研发效能、业务提效、通用工具提效三大赛道，配套奖金池与抽奖机制，推动 AI 从"尝鲜"落到真实工作流。</p>
+        <p class="card-desc">面向部门，搭建「Prompt / Skills / MCP / Agent / Plugin」五类作品提交通道；设置研发效能、业务提效、通用工具提效三大赛道，配套奖金池与抽奖机制，推动 AI 从"尝鲜"落到真实工作流。</p>
         <div class="card-foot">
           <span>🏢 安全产品二部 × 三部</span>
           <span>🎯 研发 / 业务 / 通用工具三赛道</span>
@@ -233,12 +238,12 @@ body{
         <img src="portfolio-assets/training-class.jpg" alt="博闻多识一堂课海报">
       </div>
       <div class="card-body">
-        <h2 class="card-title">博闻多识一堂课</h2>
+        <h2 class="card-title">部门学习平台</h2>
         <div class="tags">
           <span class="t pink">激励培训</span>
           <span class="t aq">知识沉淀</span>
         </div>
-        <p class="card-desc">7 月第一期培训，邀请内部技术专家围绕《大模型工程实践：让 AI 跑得更快、更稳、更透明》与《AI 如何成为客户运营的幕后搭档》两门课程分享，覆盖模型优化、推理稳定性、可解释性与业务落地方法。</p>
+        <p class="card-desc">每月1-2期培训分享，邀请内部技术专家围绕多个主题进行业务分享。</p>
         <div class="card-foot">
           <span>🗓 2026.7.23</span>
           <span>💻 线上 + 线下</span>
@@ -314,7 +319,7 @@ body{
           <span class="t pink">文化活动</span>
           <span class="t aq">国际化</span>
         </div>
-        <p class="card-desc">「Speak Tech. Speak English. Speak Up.」技术英语角，围绕 Andon、TSA、MigraQ 等全球技术解决方案主题开展分享，手绘风格海报设计与茶歇准备，提升技术团队英语表达与国际沟通氛围。</p>
+        <p class="card-desc">每月部门英语角，邀请host围绕实际工作场景为主题开展分享，轻松交流的氛围营造与茶歇准备，提升团队英语表达与国际沟通氛围。</p>
         <div class="card-foot">
           <span>🌍 全球技术方案</span>
           <span>☕ 茶歇 + 交流</span>
@@ -330,7 +335,14 @@ body{
           <span class="t pink">文化活动</span>
           <span class="t aq">AI 产品化</span>
         </div>
-        <p class="card-desc">欢迎就文化活动策划、HR 流程产品化与 AI 赋能方向交流；更多完整作品与素材可私戳查阅。</p>
+        <p class="card-desc">欢迎就文化活动策划、HR 流程产品化与 AI 赋能方向交流；下方为文化活动知识库精简目录，完整内容可私戳查阅。</p>
+        <div class="kb-mini">
+          <div class="kb-mini-h">📚 知识库目录（精简版）</div>
+          <a class="kb-link" href="#card-kb">▸ <b>高频活动场景</b>：员工大会 / Offsite / Open Day / 下午茶研讨 / 破冰</a>
+          <a class="kb-link" href="#card-kb">▸ <b>方法沉淀</b>：SOP / Checklist / Rundown 模板</a>
+          <a class="kb-link" href="#card-kb">▸ <b>素材专区</b>：PPT / 音乐素材包 / Banner 物料</a>
+          <a class="kb-link" href="#card-kb">▸ <b>创意实验室</b></a>
+        </div>
         <div class="card-foot">
           <span>📱 18665138212（微信同号）</span>
           <span>📍 深圳</span>
