@@ -93,9 +93,14 @@ body{
 .tags .t.pink{background:rgba(204,102,119,.11); color:var(--pink-d); border:1px solid rgba(204,102,119,.18)}
 .tags .t.lav{background:rgba(164,88,224,.11); color:var(--lav-d); border:1px solid rgba(164,88,224,.18)}
 .tags .t.aq{background:rgba(34,224,184,.12); color:#15a589; border:1px solid rgba(34,224,184,.2)}
+.tags .t.gold{background:rgba(224,162,58,.14); color:#B97E1C; border:1px solid rgba(224,162,58,.22)}
 .card-desc{font-size:13px; color:var(--sub); line-height:1.75; flex:1}
 .card-foot{display:flex; gap:14px; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); font-size:12px; color:var(--mut)}
 .card-foot span{display:inline-flex; align-items:center; gap:4px}
+.kb-dir{list-style:none; margin:4px 0 2px; font-size:12.5px; color:var(--sub); line-height:1.5}
+.kb-dir li{padding:7px 0; border-bottom:1px dashed var(--line)}
+.kb-dir li:last-child{border-bottom:none}
+.kb-dir b{display:inline-block; min-width:92px; color:var(--lav-d); font-weight:800}
 
 /* ---- section block ---- */
 .block{padding:2px 0 4px}
@@ -176,8 +181,8 @@ body{
       <a class="type-tile gold" href="#blk-kb" data-jump="blk-kb">
         <span class="ti">📚</span>
         <span class="tn">知识库</span>
-        <span class="tc">1 个案例</span>
-        <span class="tlist">文化活动知识库</span>
+        <span class="tc">2 个案例</span>
+        <span class="tlist">文化活动知识库 · 知识库目录</span>
       </a>
     </div>
   </section>
@@ -287,7 +292,6 @@ body{
         </div>
         <p class="card-desc">每半年度开启文化周活动，设计启动会、学习专区、激励专区与活动时间线，包含避坑挑战、风险治理、稳定性连连看等线上线下玩法。</p>
         <div class="card-foot">
-          <span>🗓 2026.3-4</span>
           <span>🌐 线上 + 线下</span>
         </div>
       </div>
@@ -305,7 +309,6 @@ body{
         </div>
         <p class="card-desc">每月1-2期培训分享，邀请内部技术专家围绕多个主题进行业务分享。</p>
         <div class="card-foot">
-          <span>🗓 2026.7.23</span>
           <span>💻 线上 + 线下</span>
         </div>
       </div>
@@ -359,6 +362,30 @@ body{
       </div>
     </article>
 
+    <article class="card" id="card-kb-dir">
+      <div class="card-media" data-type="image" data-full="portfolio-assets/knowledge-base-02.jpg">
+        <img src="portfolio-assets/knowledge-base-02.jpg" alt="知识库目录截图">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">知识库目录</h2>
+        <div class="tags">
+          <span class="t gold">场景索引</span>
+          <span class="t aq">模板</span>
+          <span class="t pink">素材</span>
+        </div>
+        <ul class="kb-dir">
+          <li><b>高频活动场景</b>员工大会 / Offsite / Open Day / 下午茶研讨 / 破冰</li>
+          <li><b>方法沉淀</b>SOP / Checklist / Rundown 模板</li>
+          <li><b>素材专区</b>PPT / 音乐素材包 / Banner 物料</li>
+          <li><b>创意实验室</b>玩法与灵感库</li>
+        </ul>
+        <div class="card-foot">
+          <span>📂 点击封面看大图</span>
+          <span>📩 完整内容可私戳</span>
+        </div>
+      </div>
+    </article>
+
     </div>
   </section>
 
@@ -377,7 +404,7 @@ body{
             <span>📍 深圳</span>
           </div>
         </div>
-        <a class="kb-btn" href="#card-kb" title="如有乐享/知识库真实链接，可替换此处 href">📚 查看完整文化活动知识库 →</a>
+        <a class="kb-btn" href="#card-kb-dir" title="如有乐享/知识库真实链接，可替换此处 href">📂 查看知识库目录 →</a>
       </div>
     </article>
     </div>
