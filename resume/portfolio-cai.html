@@ -69,7 +69,7 @@ body{
 .type-tile.gold .tc{background:rgba(224,162,58,.16); color:#B97E1C}
 
 /* ---- bento grid ---- */
-.bento{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:22px; padding:22px 38px 36px}
+.bento{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:22px 38px 36px}
 .card{background:var(--card); border-radius:var(--radius); overflow:hidden;
   border:1px solid rgba(255,255,255,.55); box-shadow:0 6px 24px rgba(164,88,224,.11);
   backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2);
@@ -97,9 +97,12 @@ body{
 .card-foot{display:flex; gap:14px; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); font-size:12px; color:var(--mut)}
 .card-foot span{display:inline-flex; align-items:center; gap:4px}
 
-/* ---- wide card ---- */
-.wide{grid-column:span 2}
-@media (max-width:860px){ .wide{grid-column:span 1} .bento{grid-template-columns:1fr} .type-grid{grid-template-columns:1fr} }
+/* ---- end card ---- */
+.card-end{background:linear-gradient(135deg,rgba(164,88,224,.10),rgba(34,224,184,.08)); border:1px dashed var(--lav)}
+
+/* ---- responsive ---- */
+@media (max-width:980px){ .bento{grid-template-columns:repeat(2,1fr)} .type-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:620px){ .bento{grid-template-columns:1fr} .type-grid{grid-template-columns:1fr} }
 
 /* ---- footer ---- */
 .ft{padding:18px 38px 26px; text-align:center; font-size:12px; color:var(--mut); border-top:1px solid var(--line)}
@@ -169,7 +172,7 @@ body{
 
   <main class="bento">
 
-    <article class="card wide" id="card-salon">
+    <article class="card" id="card-salon">
       <div class="card-media two" data-type="image" data-full="portfolio-assets/ai-salon.jpg">
         <img src="portfolio-assets/ai-salon.jpg" alt="AI See 实战沙龙海报">
         <img src="portfolio-assets/salon-gifts.jpg" alt="沙龙活动奖品物料">
@@ -262,7 +265,7 @@ body{
       </div>
     </article>
 
-    <article class="card wide" id="card-kb">
+    <article class="card" id="card-kb">
       <div class="card-media two is-video" data-type="video" data-full="portfolio-assets/knowledge-base.mp4" data-poster="portfolio-assets/knowledge-base-01.jpg">
         <img src="portfolio-assets/knowledge-base-01.jpg" alt="文化活动知识库主页">
         <img src="portfolio-assets/knowledge-base-02.jpg" alt="创意实验室目录">
@@ -315,6 +318,22 @@ body{
         <div class="card-foot">
           <span>🌍 全球技术方案</span>
           <span>☕ 茶歇 + 交流</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card card-end">
+      <div class="card-body">
+        <h2 class="card-title">📮 联系 · 更多作品</h2>
+        <div class="tags">
+          <span class="t lav">可承接方向</span>
+          <span class="t pink">文化活动</span>
+          <span class="t aq">AI 产品化</span>
+        </div>
+        <p class="card-desc">欢迎就文化活动策划、HR 流程产品化与 AI 赋能方向交流；更多完整作品与素材可私戳查阅。</p>
+        <div class="card-foot">
+          <span>📱 18665138212（微信同号）</span>
+          <span>📍 深圳</span>
         </div>
       </div>
     </article>
