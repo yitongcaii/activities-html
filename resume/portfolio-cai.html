@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>蔡女士 · 文化运营与 AI 产品化作品集</title>
+<style>
+:root{
+  --lav:#A458E0; --lav-d:#7A40D0; --lav-l:rgba(164,88,224,.08);
+  --aq:#22E0B8; --aq-l:rgba(34,224,184,.10);
+  --pink:#E87A8C; --pink-d:#CC6677; --pink-l:rgba(204,102,119,.08);
+  --ink:#2D2A28; --sub:#5C5450; --mut:#9B9390;
+  --bg:#FFF8FA; --card:rgba(255,255,255,.74); --line:rgba(164,88,224,.13);
+  --radius:18px; --shadow:0 8px 32px rgba(164,88,224,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 10% 15%,rgba(164,88,224,.10),transparent 40%),
+    radial-gradient(circle at 90% 75%,rgba(34,224,184,.09),transparent 40%),
+    radial-gradient(circle at 50% 95%,rgba(204,102,119,.07),transparent 35%);
+  background-attachment:fixed;
+  color:var(--ink); line-height:1.6;
+  -webkit-font-smoothing:antialiased; padding:28px 16px 60px;
+}
+.wrap{max-width:1180px; margin:0 auto; background:var(--card); border-radius:24px;
+  box-shadow:var(--shadow); overflow:hidden;
+  backdrop-filter:blur(22px) saturate(1.35); -webkit-backdrop-filter:blur(22px) saturate(1.35);
+  border:1px solid rgba(255,255,255,.45);
+}
+
+/* ---- header ---- */
+.hd{background:linear-gradient(135deg,rgba(179,71,255,.88),rgba(0,255,200,.75)); color:#fff;
+  padding:34px 38px 30px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+.hd .name{font-size:34px; font-weight:800; letter-spacing:1px}
+.hd .role{font-size:15px; opacity:.94; margin-top:5px; max-width:520px; line-height:1.55}
+.hd .contact{display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:14px; font-size:13px; opacity:.96}
+.hd .contact span{display:inline-flex; align-items:center; gap:5px}
+
+/* ---- intro ---- */
+.intro{padding:26px 38px 10px; color:var(--sub); font-size:14px; line-height:1.8}
+.intro b{color:var(--lav-d)}
+
+/* ---- bento grid ---- */
+.bento{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:22px; padding:22px 38px 36px}
+.card{background:var(--card); border-radius:var(--radius); overflow:hidden;
+  border:1px solid rgba(255,255,255,.55); box-shadow:0 6px 24px rgba(164,88,224,.11);
+  backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  transition:transform .2s ease, box-shadow .2s ease; display:flex; flex-direction:column}
+.card:hover{transform:translateY(-4px); box-shadow:0 12px 36px rgba(164,88,224,.18)}
+.card-media{height:200px; width:100%; display:flex; overflow:hidden; background:#f3f0f7}
+.card-media img{height:100%; object-fit:cover; flex:1 1 auto; min-width:0}
+.card-media.two img{width:50%}
+.card-body{padding:18px 20px 20px; flex:1; display:flex; flex-direction:column}
+.card-title{font-size:17px; font-weight:800; color:var(--lav-d); margin-bottom:10px; line-height:1.35}
+.tags{display:flex; flex-wrap:wrap; gap:6px 8px; margin-bottom:12px}
+.tags .t{font-size:11px; padding:4px 10px; border-radius:20px; font-weight:700; letter-spacing:.3px}
+.tags .t.pink{background:rgba(204,102,119,.11); color:var(--pink-d); border:1px solid rgba(204,102,119,.18)}
+.tags .t.lav{background:rgba(164,88,224,.11); color:var(--lav-d); border:1px solid rgba(164,88,224,.18)}
+.tags .t.aq{background:rgba(34,224,184,.12); color:#15a589; border:1px solid rgba(34,224,184,.2)}
+.card-desc{font-size:13px; color:var(--sub); line-height:1.75; flex:1}
+.card-foot{display:flex; gap:14px; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); font-size:12px; color:var(--mut)}
+.card-foot span{display:inline-flex; align-items:center; gap:4px}
+
+/* ---- wide card ---- */
+.wide{grid-column:span 2}
+@media (max-width:860px){ .wide{grid-column:span 1} .bento{grid-template-columns:1fr} }
+
+/* ---- footer ---- */
+.ft{padding:18px 38px 26px; text-align:center; font-size:12px; color:var(--mut); border-top:1px solid var(--line)}
+.ft p{margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hd">
+    <div>
+      <h1 class="name">蔡女士 · 作品集</h1>
+      <p class="role">聚焦文化活动运营、HR 流程产品化与 AI 赋能：把单场活动经验沉淀为可复用的体系与工具。</p>
+      <div class="contact">
+        <span>📍 深圳</span>
+        <span>📱 18665138212（可添加微信）</span>
+        <span>💼 HRBP · 文化活动 · AI产品化</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p>以下是近一年主导或深度参与的代表性项目，涵盖 <b>文化活动策划、AI 产品化实践、培训激励体系、知识库搭建</b> 等方向。完整视频/高清海报文件较大，可单独私戳查阅。</p>
+  </section>
+
+  <main class="bento">
+
+    <article class="card wide">
+      <div class="card-media two">
+        <img src="portfolio-assets/ai-salon.jpg" alt="AI See 实战沙龙海报">
+        <img src="portfolio-assets/salon-gifts.jpg" alt="沙龙活动奖品物料">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">第四期 AI See 实战沙龙</h2>
+        <div class="tags">
+          <span class="t pink">文化活动</span>
+          <span class="t lav">AI 赋能</span>
+        </div>
+        <p class="card-desc">「不讲概念，只练真功」——本期主题《从用 AI 写代码到把 AI 当同事》，通过项目工作环境与记忆系统演示，让 AI Coding 从贴身协作走向独立协同；线下实操与线上同步结合，并配套 AI 布道师征集与茶歇好礼。</p>
+        <div class="card-foot">
+          <span>📍 深圳腾大 1911 / 线上</span>
+          <span>🎤 研发实战分享</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <img src="portfolio-assets/culture-week.jpg" alt="业务连续性文化周海报">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">业务连续性文化周</h2>
+        <div class="tags">
+          <span class="t pink">文化活动</span>
+          <span class="t aq">跨部门协同</span>
+        </div>
+        <p class="card-desc">云技术运营服务部主办，围绕"慢一点、想十分、AI 赋能、一起稳稳的"主题，设计启动会、学习专区、激励专区与活动时间线，包含避坑挑战、风险治理、稳定性连连看等线上线下玩法。</p>
+        <div class="card-foot">
+          <span>🗓 2026.3-4</span>
+          <span>🌐 线上 + 线下</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <img src="portfolio-assets/ai-contest.jpg" alt="AI 提效达人比赛海报">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">第一届 AI 提效达人比赛</h2>
+        <div class="tags">
+          <span class="t lav">AI 产品化</span>
+          <span class="t pink">激励机制</span>
+          <span class="t aq">跨部门协作</span>
+        </div>
+        <p class="card-desc">面向安全产品二部、安全产品三部全体同学，搭建「Prompt / Skills / MCP / Agent / Plugin」五类作品提交通道；设置研发效能、业务提效、通用工具提效三大赛道，配套奖金池与抽奖机制，推动 AI 从"尝鲜"落到真实工作流。</p>
+        <div class="card-foot">
+          <span>🏢 安全产品二部 × 三部</span>
+          <span>🎯 研发 / 业务 / 通用工具三赛道</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <img src="portfolio-assets/training-class.jpg" alt="博闻多识一堂课海报">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">博闻多识一堂课</h2>
+        <div class="tags">
+          <span class="t pink">激励培训</span>
+          <span class="t aq">知识沉淀</span>
+        </div>
+        <p class="card-desc">7 月第一期培训，邀请内部技术专家围绕《大模型工程实践：让 AI 跑得更快、更稳、更透明》与《AI 如何成为客户运营的幕后搭档》两门课程分享，覆盖模型优化、推理稳定性、可解释性与业务落地方法。</p>
+        <div class="card-foot">
+          <span>🗓 2026.7.23</span>
+          <span>💻 线上 + 线下</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media two">
+        <img src="portfolio-assets/training-points-01.jpg" alt="积分商城兑换页">
+        <img src="portfolio-assets/training-points-02.jpg" alt="积分明细">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">培训积分商城 Demo</h2>
+        <div class="tags">
+          <span class="t lav">产品化</span>
+          <span class="t pink">激励培训</span>
+        </div>
+        <p class="card-desc">将培训参与、课程完成等行为转化为积分，搭建可兑换礼品的积分商城原型；支持积分明细查询、库存管理、线下深圳腾讯大厦领取与异地邮寄两种方式，形成培训-激励闭环。</p>
+        <div class="card-foot">
+          <span>🛒 积分兑换</span>
+          <span>📦 线下/邮寄双通道</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <div class="card-media two">
+        <img src="portfolio-assets/knowledge-base-01.jpg" alt="文化活动知识库主页">
+        <img src="portfolio-assets/knowledge-base-02.jpg" alt="创意实验室目录">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">文化活动知识库</h2>
+        <div class="tags">
+          <span class="t lav">AI 产品化</span>
+          <span class="t aq">知识管理</span>
+          <span class="t pink">内容沉淀</span>
+        </div>
+        <p class="card-desc">基于乐享搭建 HRBP 文化活动知识库，覆盖员工大会、Offsite、Open Day、下午茶研讨、破冰等高频场景；沉淀活动知识卡片，并配套 SOP、Checklist、Rundown 模板与 PPT/音乐素材包，设置创意实验室与 Banner&PPT 物料专区，支持团队快速复用。</p>
+        <div class="card-foot">
+          <span>📚 多场景 SOP 模板</span>
+          <span>🎨 创意实验室 / 素材库</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media two">
+        <img src="portfolio-assets/ai-comic-01.jpg" alt="AI 漫剧工作场景">
+        <img src="portfolio-assets/ai-comic-02.jpg" alt="AI 漫剧战斗场景">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">AI 漫剧创作</h2>
+        <div class="tags">
+          <span class="t lav">AI 内容</span>
+          <span class="t pink">文化传播</span>
+        </div>
+        <p class="card-desc">使用 AI 生成以企鹅形象为主角的漫剧内容，将代码攻坚、稳定守护等技术场景转化为轻松有趣的故事画面，用于文化活动预热与氛围传播。</p>
+        <div class="card-foot">
+          <span>🎬 AI 生成视频</span>
+          <span>🐧 技术文化 IP</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-media">
+        <img src="portfolio-assets/english-corner.jpg" alt="English Corner 海报">
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">English Corner 英语角</h2>
+        <div class="tags">
+          <span class="t pink">文化活动</span>
+          <span class="t aq">国际化</span>
+        </div>
+        <p class="card-desc">「Speak Tech. Speak English. Speak Up.」技术英语角，围绕 Andon、TSA、MigraQ 等全球技术解决方案主题开展分享，手绘风格海报设计与茶歇准备，提升技术团队英语表达与国际沟通氛围。</p>
+        <div class="card-foot">
+          <span>🌍 全球技术方案</span>
+          <span>☕ 茶歇 + 交流</span>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="ft">
+    <p>📌 本页由 yitong 沉淀整理 · 文化活动知识库</p>
+    <p>完整视频 / 高清海报文件较大，可单独私戳查阅</p>
+  </footer>
+</div>
+</body>
+</html>
