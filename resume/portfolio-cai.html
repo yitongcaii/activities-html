@@ -114,18 +114,16 @@ body{
 #blk-kb .block-head h2{color:#B97E1C}
 #blk-kb .block-head{border-color:rgba(224,162,58,.28)}
 
-/* ---- end card ---- */
-.card-end{grid-column:1/-1; background:linear-gradient(135deg,rgba(164,88,224,.10),rgba(34,224,184,.08)); border:1px dashed var(--lav)}
-.end-body{display:flex; align-items:center; justify-content:space-between; gap:22px; flex-wrap:wrap}
-.end-body .card-desc{margin:8px 0 12px; flex:1 1 300px}
-.kb-btn{display:inline-flex; align-items:center; gap:8px; padding:14px 24px; border-radius:14px; text-decoration:none;
+/* ---- contact button ---- */
+.contact-row{display:flex; justify-content:center; padding:10px 38px 36px}
+.contact-btn{display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:30px; text-decoration:none;
   font-weight:800; font-size:14px; color:#fff; background:linear-gradient(135deg,var(--lav),var(--aq));
   box-shadow:0 8px 22px rgba(164,88,224,.30); transition:transform .18s, box-shadow .18s; white-space:nowrap}
-.kb-btn:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(164,88,224,.42)}
+.contact-btn:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(164,88,224,.42)}
 
 /* ---- responsive ---- */
 @media (max-width:980px){ .bento{grid-template-columns:repeat(2,1fr)} .type-grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:620px){ .bento{grid-template-columns:1fr} .type-grid{grid-template-columns:1fr} .end-body{flex-direction:column; align-items:flex-start} }
+@media (max-width:620px){ .bento{grid-template-columns:1fr} .type-grid{grid-template-columns:1fr} }
 
 /* ---- footer ---- */
 .ft{padding:18px 38px 26px; text-align:center; font-size:12px; color:var(--mut); border-top:1px solid var(--line)}
@@ -255,7 +253,7 @@ body{
         </div>
         <p class="card-desc">AI实战沙龙「不讲概念，只练真功」，通过线下实操与线上同步结合，带着大家学习AI提效技巧。</p>
         <div class="card-foot">
-          <span>📍 深圳腾大 1911 / 线上</span>
+          <span>🌐 线上 + 线下</span>
           <span>🎤 研发实战分享</span>
         </div>
       </div>
@@ -290,7 +288,7 @@ body{
         </div>
         <p class="card-desc">每月1-2期培训分享，邀请内部技术专家围绕多个主题进行业务分享。</p>
         <div class="card-foot">
-          <span>💻 线上 + 线下</span>
+          <span>🌐 线上 + 线下</span>
         </div>
       </div>
     </article>
@@ -326,7 +324,6 @@ body{
         </div>
         <p class="card-desc">面向部门，搭建「Prompt / Skills / MCP / Agent / Plugin」五类作品提交通道；设置研发效能、业务提效、通用工具提效三大赛道，配套奖金池与抽奖机制，推动 AI 从"尝鲜"落到真实工作流。</p>
         <div class="card-foot">
-          <span>🏢 安全产品二部 × 三部</span>
           <span>🎯 研发 / 业务 / 通用工具三赛道</span>
         </div>
       </div>
@@ -388,29 +385,11 @@ body{
     </div>
   </section>
 
-  <section class="block">
-    <div class="block-head">
-      <h2>📮 联系 · 更多作品</h2>
-    </div>
-    <div class="bento">
-    <article class="card card-end">
-      <div class="card-body end-body">
-        <div>
-          <h2 class="card-title">📮 联系 · 更多作品</h2>
-          <p class="card-desc">欢迎就文化活动策划、HR 流程产品化与 AI 赋能方向交流；下方为文化活动知识库入口，完整内容可私戳查阅。</p>
-          <div class="card-foot">
-            <span>📱 18665138212（微信同号）</span>
-            <span>📍 深圳</span>
-          </div>
-        </div>
-        <a class="kb-btn" href="https://yitongcaii.github.io/activities-html/index-trimmed.html" target="_blank" rel="noopener">📚 查看知识库完整内容 →</a>
-      </div>
-    </article>
-    </div>
-  </section>
+  <div class="contact-row">
+    <a class="contact-btn" href="https://yitongcaii.github.io/activities-html/index-trimmed.html" target="_blank" rel="noopener">📩 联系依彤，查看更多作品</a>
+  </div>
 
   <footer class="ft">
-    <p>📌 本页由 yitong 沉淀整理 · 文化活动知识库</p>
     <p>点击任意作品可放大查看海报 / 在线播放视频</p>
   </footer>
 </div>
