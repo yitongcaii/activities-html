@@ -14,7 +14,7 @@
   --radius:18px; --shadow:0 8px 32px rgba(164,88,224,.15);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
   background:var(--bg);
@@ -42,8 +42,31 @@ body{
 .hd .contact span{display:inline-flex; align-items:center; gap:5px}
 
 /* ---- intro ---- */
-.intro{padding:26px 38px 10px; color:var(--sub); font-size:14px; line-height:1.8}
+.intro{padding:26px 38px 8px; color:var(--sub); font-size:14px; line-height:1.8}
 .intro b{color:var(--lav-d)}
+
+/* ---- type overview ---- */
+.types{padding:6px 38px 18px}
+.types-h{font-size:20px; font-weight:800; color:var(--lav-d); margin-bottom:4px}
+.types-sub{font-size:13px; color:var(--mut); margin-bottom:16px}
+.type-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px}
+.type-tile{display:block; text-decoration:none; padding:16px 18px; border-radius:16px;
+  background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 4px 18px rgba(164,88,224,.10); transition:transform .18s ease, box-shadow .18s ease;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px)}
+.type-tile:hover{transform:translateY(-3px); box-shadow:0 10px 28px rgba(164,88,224,.18)}
+.type-tile .ti{font-size:24px; display:block; margin-bottom:6px}
+.type-tile .tn{font-size:16px; font-weight:800; display:block}
+.type-tile .tc{font-size:12px; font-weight:700; display:inline-block; padding:2px 9px; border-radius:20px; margin:6px 0 8px}
+.type-tile .tlist{font-size:11.5px; color:var(--sub); line-height:1.6; display:block}
+.type-tile.lav{border-left:4px solid var(--lav)}
+.type-tile.lav .tc{background:rgba(164,88,224,.13); color:var(--lav-d)}
+.type-tile.pink{border-left:4px solid var(--pink)}
+.type-tile.pink .tc{background:rgba(204,102,119,.13); color:var(--pink-d)}
+.type-tile.aq{border-left:4px solid var(--aq)}
+.type-tile.aq .tc{background:rgba(34,224,184,.16); color:#15a589}
+.type-tile.gold{border-left:4px solid #E0A23A}
+.type-tile.gold .tc{background:rgba(224,162,58,.16); color:#B97E1C}
 
 /* ---- bento grid ---- */
 .bento{display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:22px; padding:22px 38px 36px}
@@ -52,9 +75,17 @@ body{
   backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2);
   transition:transform .2s ease, box-shadow .2s ease; display:flex; flex-direction:column}
 .card:hover{transform:translateY(-4px); box-shadow:0 12px 36px rgba(164,88,224,.18)}
-.card-media{height:200px; width:100%; display:flex; overflow:hidden; background:#f3f0f7}
-.card-media img{height:100%; object-fit:cover; flex:1 1 auto; min-width:0}
+.card.flash{animation:flash 1.4s ease}
+@keyframes flash{0%,100%{box-shadow:0 6px 24px rgba(164,88,224,.11)} 30%{box-shadow:0 0 0 3px var(--lav),0 12px 36px rgba(164,88,224,.3)}}
+.card-media{height:200px; width:100%; display:flex; overflow:hidden; background:#f3f0f7; position:relative; cursor:pointer}
+.card-media img{height:100%; object-fit:cover; flex:1 1 auto; min-width:0; transition:transform .3s ease}
+.card-media:hover img{transform:scale(1.04)}
 .card-media.two img{width:50%}
+.card-media::after{content:"🔍 点击查看"; position:absolute; right:10px; bottom:10px;
+  background:rgba(45,42,40,.72); color:#fff; font-size:11px; padding:5px 10px; border-radius:20px;
+  opacity:0; transition:opacity .2s; backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px)}
+.card-media.is-video::after{content:"▶ 点击播放"}
+.card-media:hover::after{opacity:1}
 .card-body{padding:18px 20px 20px; flex:1; display:flex; flex-direction:column}
 .card-title{font-size:17px; font-weight:800; color:var(--lav-d); margin-bottom:10px; line-height:1.35}
 .tags{display:flex; flex-wrap:wrap; gap:6px 8px; margin-bottom:12px}
@@ -68,11 +99,23 @@ body{
 
 /* ---- wide card ---- */
 .wide{grid-column:span 2}
-@media (max-width:860px){ .wide{grid-column:span 1} .bento{grid-template-columns:1fr} }
+@media (max-width:860px){ .wide{grid-column:span 1} .bento{grid-template-columns:1fr} .type-grid{grid-template-columns:1fr} }
 
 /* ---- footer ---- */
 .ft{padding:18px 38px 26px; text-align:center; font-size:12px; color:var(--mut); border-top:1px solid var(--line)}
 .ft p{margin-bottom:4px}
+
+/* ---- lightbox ---- */
+.lb{position:fixed; inset:0; background:rgba(28,18,38,.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  display:none; align-items:center; justify-content:center; z-index:999; padding:24px}
+.lb.open{display:flex}
+.lb-stage{max-width:94vw; max-height:90vh; display:flex; align-items:center; justify-content:center}
+.lb-stage img{max-width:94vw; max-height:90vh; border-radius:14px; box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.lb-stage video{max-width:94vw; max-height:90vh; border-radius:14px; box-shadow:0 24px 70px rgba(0,0,0,.5); background:#000}
+.lb-close{position:absolute; top:20px; right:26px; width:42px; height:42px; border-radius:50%;
+  background:rgba(255,255,255,.15); color:#fff; font-size:20px; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border:none; transition:background .2s}
+.lb-close:hover{background:rgba(255,255,255,.3)}
 </style>
 </head>
 <body>
@@ -90,13 +133,44 @@ body{
   </header>
 
   <section class="intro">
-    <p>以下是近一年主导或深度参与的代表性项目，涵盖 <b>文化活动策划、AI 产品化实践、培训激励体系、知识库搭建</b> 等方向。完整视频/高清海报文件较大，可单独私戳查阅。</p>
+    <p>近一年主导或深度参与的代表性项目，覆盖 <b>文化活动策划、AI 产品化实践、培训激励体系、知识库搭建</b> 四大方向，共 8 个案例。点击任意作品可放大查看海报 / 在线播放视频。</p>
+  </section>
+
+  <section class="types">
+    <h2 class="types-h">活动类型总览</h2>
+    <p class="types-sub">点击类型直达对应项目 · 共 8 个代表性案例</p>
+    <div class="type-grid">
+      <a class="type-tile pink" href="#card-salon" data-jump="card-salon">
+        <span class="ti">🎉</span>
+        <span class="tn">文化活动策划</span>
+        <span class="tc">3 个案例</span>
+        <span class="tlist">AI See 实战沙龙 · 业务连续性文化周 · English Corner</span>
+      </a>
+      <a class="type-tile lav" href="#card-contest" data-jump="card-contest">
+        <span class="ti">🤖</span>
+        <span class="tn">AI 赋能与产品化</span>
+        <span class="tc">3 个案例</span>
+        <span class="tlist">AI 提效达人比赛 · 文化活动知识库 · AI 漫剧</span>
+      </a>
+      <a class="type-tile aq" href="#card-class" data-jump="card-class">
+        <span class="ti">🏆</span>
+        <span class="tn">激励培训体系</span>
+        <span class="tc">2 个案例</span>
+        <span class="tlist">博闻多识一堂课 · 培训积分商城</span>
+      </a>
+      <a class="type-tile gold" href="#card-kb" data-jump="card-kb">
+        <span class="ti">📚</span>
+        <span class="tn">知识沉淀与管理</span>
+        <span class="tc">2 个案例</span>
+        <span class="tlist">文化活动知识库 · 博闻多识一堂课</span>
+      </a>
+    </div>
   </section>
 
   <main class="bento">
 
-    <article class="card wide">
-      <div class="card-media two">
+    <article class="card wide" id="card-salon">
+      <div class="card-media two" data-type="image" data-full="portfolio-assets/ai-salon.jpg">
         <img src="portfolio-assets/ai-salon.jpg" alt="AI See 实战沙龙海报">
         <img src="portfolio-assets/salon-gifts.jpg" alt="沙龙活动奖品物料">
       </div>
@@ -114,8 +188,8 @@ body{
       </div>
     </article>
 
-    <article class="card">
-      <div class="card-media">
+    <article class="card" id="card-week">
+      <div class="card-media" data-type="image" data-full="portfolio-assets/culture-week.jpg">
         <img src="portfolio-assets/culture-week.jpg" alt="业务连续性文化周海报">
       </div>
       <div class="card-body">
@@ -132,8 +206,8 @@ body{
       </div>
     </article>
 
-    <article class="card">
-      <div class="card-media">
+    <article class="card" id="card-contest">
+      <div class="card-media" data-type="image" data-full="portfolio-assets/ai-contest.jpg">
         <img src="portfolio-assets/ai-contest.jpg" alt="AI 提效达人比赛海报">
       </div>
       <div class="card-body">
@@ -151,8 +225,8 @@ body{
       </div>
     </article>
 
-    <article class="card">
-      <div class="card-media">
+    <article class="card" id="card-class">
+      <div class="card-media" data-type="image" data-full="portfolio-assets/training-class.jpg">
         <img src="portfolio-assets/training-class.jpg" alt="博闻多识一堂课海报">
       </div>
       <div class="card-body">
@@ -169,8 +243,8 @@ body{
       </div>
     </article>
 
-    <article class="card">
-      <div class="card-media two">
+    <article class="card" id="card-points">
+      <div class="card-media two is-video" data-type="video" data-full="portfolio-assets/training-points.mp4" data-poster="portfolio-assets/training-points-01.jpg">
         <img src="portfolio-assets/training-points-01.jpg" alt="积分商城兑换页">
         <img src="portfolio-assets/training-points-02.jpg" alt="积分明细">
       </div>
@@ -188,8 +262,8 @@ body{
       </div>
     </article>
 
-    <article class="card wide">
-      <div class="card-media two">
+    <article class="card wide" id="card-kb">
+      <div class="card-media two is-video" data-type="video" data-full="portfolio-assets/knowledge-base.mp4" data-poster="portfolio-assets/knowledge-base-01.jpg">
         <img src="portfolio-assets/knowledge-base-01.jpg" alt="文化活动知识库主页">
         <img src="portfolio-assets/knowledge-base-02.jpg" alt="创意实验室目录">
       </div>
@@ -208,8 +282,8 @@ body{
       </div>
     </article>
 
-    <article class="card">
-      <div class="card-media two">
+    <article class="card" id="card-comic">
+      <div class="card-media two is-video" data-type="video" data-full="portfolio-assets/ai-comic.mp4" data-poster="portfolio-assets/ai-comic-01.jpg">
         <img src="portfolio-assets/ai-comic-01.jpg" alt="AI 漫剧工作场景">
         <img src="portfolio-assets/ai-comic-02.jpg" alt="AI 漫剧战斗场景">
       </div>
@@ -227,8 +301,8 @@ body{
       </div>
     </article>
 
-    <article class="card">
-      <div class="card-media">
+    <article class="card" id="card-eng">
+      <div class="card-media" data-type="image" data-full="portfolio-assets/english-corner.jpg">
         <img src="portfolio-assets/english-corner.jpg" alt="English Corner 海报">
       </div>
       <div class="card-body">
@@ -249,8 +323,59 @@ body{
 
   <footer class="ft">
     <p>📌 本页由 yitong 沉淀整理 · 文化活动知识库</p>
-    <p>完整视频 / 高清海报文件较大，可单独私戳查阅</p>
+    <p>点击任意作品可放大查看海报 / 在线播放视频</p>
   </footer>
 </div>
+
+<div class="lb" id="lb">
+  <button class="lb-close" id="lbClose" aria-label="关闭">✕</button>
+  <div class="lb-stage" id="lbStage"></div>
+</div>
+
+<script>
+(function(){
+  var lb = document.getElementById('lb');
+  var stage = document.getElementById('lbStage');
+  var closeBtn = document.getElementById('lbClose');
+
+  function openLb(type, full, poster){
+    if(type === 'video'){
+      stage.innerHTML = '<video src="'+full+'"'+(poster?' poster="'+poster+'"':'')+' controls playsinline></video>';
+    } else {
+      stage.innerHTML = '<img src="'+full+'" alt="预览">';
+    }
+    lb.classList.add('open');
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    stage.innerHTML = '';
+  }
+
+  document.querySelectorAll('.card-media').forEach(function(el){
+    el.addEventListener('click', function(){
+      openLb(el.dataset.type, el.dataset.full, el.dataset.poster);
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
+
+  // 类型总览跳转高亮
+  document.querySelectorAll('.type-tile').forEach(function(tile){
+    tile.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = tile.dataset.jump;
+      var target = document.getElementById(id);
+      if(target){
+        target.scrollIntoView({behavior:'smooth', block:'center'});
+        target.classList.remove('flash');
+        void target.offsetWidth;
+        target.classList.add('flash');
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
