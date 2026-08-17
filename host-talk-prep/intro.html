@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>host-talk-prep · Skill 介绍</title>
+<style>
+  :root{
+    --purple:#534AB7; --purple-l:#EEEDFE; --teal:#0F6E56; --teal-l:#E1F5EE;
+    --ink:#2C2C2A; --mut:#5F5E5A; --bg:#FBFAF8; --card:#fff;
+    --line:#E7E4DC; --warn:#993C1D; --warn-l:#FAECE7; --ok:#3B6D11; --ok-l:#EAF3DE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;padding:0 0 60px}
+  header{background:linear-gradient(120deg,#534AB7,#0F6E56);color:#fff;padding:40px 24px 32px;text-align:center}
+  header h1{font-size:26px;font-weight:700;letter-spacing:.5px}
+  header p{margin-top:10px;font-size:14px;opacity:.92;max-width:760px;margin-left:auto;margin-right:auto}
+  nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;z-index:9}
+  nav a{font-size:12.5px;color:var(--purple);text-decoration:none;padding:4px 11px;border:1px solid var(--purple-l);border-radius:999px;background:var(--purple-l)}
+  nav a:hover{background:var(--purple);color:#fff}
+  main{max-width:880px;margin:0 auto;padding:0 20px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;margin:22px 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  section h2{font-size:18px;color:var(--purple);margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  section h2 .no{background:var(--purple);color:#fff;width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  section .sub{color:var(--mut);font-size:13px;margin-bottom:16px}
+  .lead{font-size:15px;background:var(--purple-l);border-left:4px solid var(--purple);padding:14px 16px;border-radius:0 10px 10px 0;margin-bottom:8px}
+  .pill{display:inline-block;font-size:12px;padding:4px 11px;margin:4px 5px 0 0;border-radius:999px;background:var(--teal-l);color:var(--teal);border:1px solid #9FE1CB}
+  .pill.p{background:var(--purple-l);color:var(--purple);border-color:#CECBF6}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .box{border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:#FCFBF9}
+  .box h3{font-size:14px;color:var(--teal);margin-bottom:6px}
+  .box ul{list-style:none;font-size:13px}
+  .box li{padding:3px 0 3px 16px;position:relative}
+  .box li:before{content:"·";position:absolute;left:4px;color:var(--purple)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--purple-l);color:var(--purple);font-weight:600}
+  tr:nth-child(even) td{background:#FCFBF9}
+  .warn{border-left:4px solid var(--warn);background:var(--warn-l);padding:12px 15px;border-radius:0 10px 10px 0;font-size:13.5px;margin:7px 0}
+  .ok{border-left:4px solid var(--ok);background:var(--ok-l);padding:12px 15px;border-radius:0 10px 10px 0;font-size:13.5px;margin:7px 0}
+  code{background:#F1EFE8;padding:1px 6px;border-radius:5px;font-size:12px;color:#26215C}
+  .path{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--teal);background:var(--teal-l);padding:2px 7px;border-radius:5px}
+  footer{text-align:center;color:var(--mut);font-size:12px;margin-top:30px}
+</style>
+</head>
+<body>
+<header>
+  <h1>host-talk-prep</h1>
+  <p>文化活动「主持稿 + 高管谈参」双模块准备助手 · 通用版 · 去私有化 · 供内部同事复用</p>
+</header>
+
+<nav>
+  <a href="#s1">① 定位</a><a href="#s2">② 触发场景</a><a href="#s3">③ 方法论</a>
+  <a href="#s4">④ 避雷清单</a><a href="#s5">⑤ 案例</a><a href="#s6">⑥ 边界依赖</a><a href="#s7">⑦ 配套资源</a>
+</nav>
+
+<main>
+
+<!-- ① -->
+<section id="s1">
+  <h2><span class="no">1</span>一句话定位</h2>
+  <div class="sub">它到底是个啥</div>
+  <div class="lead">
+    文化活动里最难、最容易踩坑、又最高频的两类交付——<b>「写给人看的高管谈参」</b>和<b>「主持人串词」</b>，
+    本 skill 把 9 份真实主持稿抽象成一套<b>通用方法论资产库</b>，让你按场合 10 分钟产出一版
+    <b>干净、有温度、可读</b>的初稿 + 一张把关清单。所有部门 / 公司 / 人名 / 奖项都是占位符，由你填。
+  </div>
+  <div class="grid">
+    <div class="box"><h3>模块 A · 主持稿</h3><ul><li>员工大会 / Leader Offsite / 专项颁奖</li><li>单主持 / 双主持脱口秀式</li><li>产出：串词 + 三色阅读版</li></ul></div>
+    <div class="box"><h3>模块 B · 谈参</h3><ul><li>高管谈参（发言要点）</li><li>高管致辞逐字稿</li><li>轻量版：目标分层 + 四要素 + 致辞骨架</li></ul></div>
+  </div>
+</section>
+
+<!-- ② -->
+<section id="s2">
+  <h2><span class="no">2</span>触发场景（关键词清单）</h2>
+  <div class="sub">跟它说这些话，它就接活</div>
+  <h3 style="font-size:13.5px;color:var(--teal);margin:4px 0 6px">模块 A · 主持稿</h3>
+  <span class="pill p">主持稿</span><span class="pill p">主持人串词</span><span class="pill p">大会串词</span>
+  <span class="pill p">活动主持</span><span class="pill p">颁奖主持</span><span class="pill p">Offsite 主持</span>
+  <span class="pill p">双人主持</span>
+  <h3 style="font-size:13.5px;color:var(--teal);margin:14px 0 6px">模块 B · 谈参</h3>
+  <span class="pill">谈参</span><span class="pill">高管谈参</span><span class="pill">发言要点</span>
+  <span class="pill">致辞稿</span><span class="pill">活动发言准备</span><span class="pill">大会纪律提醒</span>
+  <div class="ok" style="margin-top:14px">说「写一份{部门}员工大会主持稿（双人）」或「给{领导}准备{场合}谈参」即可触发对应模块。</div>
+</section>
+
+<!-- ③ -->
+<section id="s3">
+  <h2><span class="no">3</span>核心方法论（结构化）</h2>
+  <div class="sub">它怎么干活的</div>
+  <h3 style="font-size:14px;color:var(--purple);margin-bottom:6px">① 两遍生成引擎（解决"满屏括号 / 没温度"）</h3>
+  <div class="grid">
+    <div class="box"><h3>第一遍 · 规划（不打印）</h3><ul><li>套活动骨架、选互动（只 supervisor/exec）</li><li>定隐喻意象、设计情绪起伏</li><li>只在脑内完成，不出现在成品</li></ul></div>
+    <div class="box"><h3>第二遍 · 交付</h3><ul><li>只写干净口语脚本</li><li>读者看不到任何规划痕迹</li><li>温度靠写法，不靠编数据</li></ul></div>
+  </div>
+  <h3 style="font-size:14px;color:var(--purple);margin:16px 0 6px">② 模块 A · 主持稿</h3>
+  <table>
+    <tr><th>环节</th><th>做法</th></tr>
+    <tr><td>8 节骨架</td><td>暖场 → 开场点题 → 领导致辞 → 业务 Talk → 能力篇 → 高管压轴 → 荣耀时刻 → 结尾三件套</td></tr>
+    <tr><td>互动分层</td><td>只选 ②上下级 / ③高管 向，自动剔除 ①平级朋友向</td></tr>
+    <tr><td>双主持变体</td><td>甲乙分工 + 脱口秀式互接梗，台词标 <code>{甲}/{乙}</code></td></tr>
+    <tr><td>双产物</td><td>Markdown 干净稿 + HTML 三色阅读版</td></tr>
+  </table>
+  <h3 style="font-size:14px;color:var(--purple);margin:16px 0 6px">③ 模块 B · 谈参（轻量 3 样）</h3>
+  <table>
+    <tr><th>资产</th><th>作用</th></tr>
+    <tr><td>目标分层</td><td>从员工 / 高管 / 部门三档勾选本场适用目标</td></tr>
+    <tr><td>核心信息四要素</td><td>定调 / 肯定 / 战役 / CTA，每要素配示例提示</td></tr>
+    <tr><td>致辞骨架</td><td>开场 / 主体 / 收尾 + 场景节奏（不带重型 QA 护栏）</td></tr>
+  </table>
+</section>
+
+<!-- ④ -->
+<section id="s4">
+  <h2><span class="no">4</span>约束 / 避雷清单</h2>
+  <div class="sub">这些红线踩了就不合格</div>
+  <div class="warn"><b>不产平级朋友向内容</b>——上下级 / 高管场合绝不用朋友互损型破冰。</div>
+  <div class="warn"><b>不杜撰</b>——你没给的真实信息一律 <code>{ }</code> 占位，最多写「比如：xx」提示，绝不编活动名 / 人名 / 奖项。</div>
+  <div class="warn"><b>零元标注</b>——成品禁止出现 <code>(通用模板)</code> <code>(示例)</code> <code>[引用iX]</code> 这类记号。</div>
+  <div class="warn"><b>cue 单行</b>——舞台提示用 <code>【cue: …】</code> 独占一行，不黏在台词前。</div>
+  <div class="warn"><b>隐喻贯穿</b>——开场定一个比喻，全篇同一意象回扣，不中途换。</div>
+  <div class="warn"><b>双向挥手</b>——混合会场异地打招呼用镜头两边互相挥手，绝不写单向「让我们看见你」。</div>
+  <div class="warn"><b>职位 / 保密必确认</b>——领导职位与保密范围（截屏 / 录屏限制）由你跟秘书核对后填。</div>
+  <div class="ok"><b>必过自检闸</b>——交付前逐项确认（通读顺 / 无元标注 / cue 单行 / 关系分层 / 已出 HTML 三色）。</div>
+  <div class="ok"><b>HTML 不带 yitong 页脚</b>——本 skill 生成的网页版一律用中性页脚「颜色仅为阅读辅助标注」，非个人沉淀发布。</div>
+</section>
+
+<!-- ⑤ -->
+<section id="s5">
+  <h2><span class="no">5</span>案例 ×N</h2>
+  <div class="sub">随包样例 + 实测跨场景</div>
+  <table>
+    <tr><th>类型</th><th>案例</th><th>说明</th></tr>
+    <tr><td>随包样例</td><td>双人员工大会主持稿</td><td><span class="path">examples/staff-meeting-dual-demo.md</span> + 三色 HTML 标杆</td></tr>
+    <tr><td>随包样例</td><td>单人员工大会主持稿</td><td><span class="path">examples/staff-meeting-single-demo-colored.html</span></td></tr>
+    <tr><td>随包样例</td><td>谈参 demo（3 样轻量）</td><td><span class="path">examples/talk-prep-demo.md</span></td></tr>
+    <tr><td>实测跨场景</td><td>颁奖 / 干部 Offsite</td><td>同一框架仅换场景槽位即适用，证明零场景锁入</td></tr>
+  </table>
+  <div class="ok" style="margin-top:12px">三场景对照（员工大会 / 颁奖 / Offsite）证明：目标分层 + 四要素 + 致辞骨架对任何文化活动通用，不是只能写员工大会。</div>
+</section>
+
+<!-- ⑥ -->
+<section id="s6">
+  <h2><span class="no">6</span>边界与依赖</h2>
+  <div class="sub">啥能搞、啥搞不定、要啥环境</div>
+  <div class="grid">
+    <div class="box"><h3>依赖 / 模型要求</h3><ul>
+      <li>通用对话大模型即可，无需额外算力</li>
+      <li>放 <span class="path">~/.workbuddy/skills/</span> 重启生效</li>
+      <li>资产库为 JSON，加载即用</li>
+    </ul></div>
+    <div class="box"><h3>不适用场景</h3><ul>
+      <li>平级朋友向破冰（受众分层硬约束剔除）</li>
+      <li>涉及编制 / 晋升 / 去留等敏感 QA 的高风险场合（谈参为轻量版，无应答护栏）</li>
+      <li>对外正式发布稿（需人工复核脱敏与口径）</li>
+    </ul></div>
+  </div>
+  <div class="warn" style="margin-top:12px">所有 <code>{ }</code> 留空由你填，AI 不替你写真实部门 / 人名 —— 人工所有权不变。</div>
+</section>
+
+<!-- ⑦ -->
+<section id="s7">
+  <h2><span class="no">7</span>配套资源</h2>
+  <div class="sub">包里都有啥、指哪</div>
+  <table>
+    <tr><th>路径</th><th>内容</th></tr>
+    <tr><td><span class="path">SKILL.md</span></td><td>总说明 + 成品硬规则 + 自检闸（兜底）</td></tr>
+    <tr><td><span class="path">README.md</span></td><td>给同事的极简上手说明</td></tr>
+    <tr><td><span class="path">examples/</span></td><td>双主持稿 / 单主持稿 / 谈参 demo + 两份三色 HTML 标杆（共 4 份）</td></tr>
+    <tr><td><span class="path">references/asset_library.json</span></td><td>主持稿核心资产：话术 6 / 衔接 6 / 互动 12 / 骨架 3 / 物料 7</td></tr>
+    <tr><td><span class="path">references/talk_prep_assets.json</span></td><td>谈参轻量 3 样：目标分层 / 四要素 / 致辞骨架</td></tr>
+    <tr><td><span class="path">references/raw-corpus/</span></td><td>脱敏原始主持稿全集（7 份 docx，部门名已占位）</td></tr>
+    <tr><td><span class="path">references/corpus.md</span></td><td>9 份稿抽象摘要（去私有部门名）</td></tr>
+    <tr><td><span class="path">references/voice_samples.md</span></td><td>脱敏真腔样本（语气模仿）</td></tr>
+    <tr><td><span class="path">references/save_scene.md</span></td><td>救场话术库（冷场 / 超时 / 设备卡…）</td></tr>
+    <tr><td><span class="path">prompts/draft_host_script.md</span></td><td>主持稿规范 + 模板（含双主持变体 + HTML 渲染规范）</td></tr>
+    <tr><td><span class="path">prompts/draft_talk_prep.md</span></td><td>谈参 / 致辞模板（3 样轻量版）</td></tr>
+  </table>
+</section>
+
+<footer>host-talk-prep · 通用版 · 去私有化 · 供内部同事复用 · 颜色仅为阅读辅助标注，不影响正文</footer>
+</main>
+</body>
+</html>
