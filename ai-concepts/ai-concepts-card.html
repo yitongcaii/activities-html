@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI 协作概念卡 · 六词入门</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#1fc8db; --purple-soft:#efeaff; --cyan-soft:#e6f9fc;
+    --ink:#1f2230; --muted:#6b7185; --card:#ffffff; --bg:#f6f5ff;
+    --shadow:0 8px 24px rgba(80,70,160,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    color:var(--ink); background:
+      radial-gradient(1200px 500px at 10% -5%, var(--purple-soft), transparent),
+      radial-gradient(1000px 500px at 100% 0%, var(--cyan-soft), transparent),
+      var(--bg);
+    padding:40px 20px 70px; line-height:1.6;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  header{text-align:center;margin-bottom:8px}
+  h1{
+    font-size:34px;letter-spacing:1px;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{color:var(--muted);margin-top:8px;font-size:15px}
+  .lead{
+    max-width:760px;margin:18px auto 34px;background:#fff;border-radius:16px;
+    padding:18px 22px;box-shadow:var(--shadow);font-size:14.5px;color:#444;
+    border:1px solid #f0eefb;
+  }
+  .lead b{color:var(--purple)}
+  /* Bento grid */
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  @media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{
+    background:var(--card);border-radius:18px;padding:20px 18px 6px;
+    box-shadow:var(--shadow);border:1px solid #f0eefb;
+    transition:transform .18s ease, box-shadow .18s ease;overflow:hidden;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(80,70,160,.18)}
+  .icon{
+    width:56px;height:56px;border-radius:14px;display:flex;align-items:center;
+    justify-content:center;font-size:28px;margin-bottom:12px;
+  }
+  .i-prompt{background:linear-gradient(135deg,#7c5cff,#a78bff)}
+  .i-skill{background:linear-gradient(135deg,#1fc8db,#5fe0d0)}
+  .i-mcp{background:linear-gradient(135deg,#ff7eb6,#ffa3c4)}
+  .i-cli{background:linear-gradient(135deg,#ffb454,#ffd08a)}
+  .i-api{background:linear-gradient(135deg,#5b8def,#86a9ff)}
+  .i-auto{background:linear-gradient(135deg,#8a6cff,#c08bff)}
+  .ctitle{font-size:20px;font-weight:700}
+  .csub{font-size:12px;color:var(--muted);letter-spacing:.5px;margin-top:2px}
+  .pill{
+    display:inline-block;margin-top:10px;font-size:11.5px;padding:3px 10px;
+    border-radius:999px;background:var(--purple-soft);color:var(--purple);font-weight:600;
+  }
+  .one{margin:12px 0 4px;font-size:14.5px;color:#333;font-weight:600}
+  details{margin:6px 0 0}
+  summary{
+    cursor:pointer;font-size:13px;color:var(--purple);font-weight:600;
+    list-style:none;padding:8px 0;user-select:none;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"▾";float:right;transition:transform .2s}
+  details[open] summary::after{transform:rotate(180deg)}
+  .body{font-size:13.2px;color:#4a4f63;padding:4px 0 14px}
+  .body .row{margin-bottom:8px}
+  .body .k{color:var(--purple);font-weight:700}
+  .body code{background:#f3f1fc;padding:1px 6px;border-radius:6px;font-size:12.5px}
+  /* Relation section */
+  .rel{
+    margin-top:42px;background:#fff;border-radius:18px;padding:26px 22px;
+    box-shadow:var(--shadow);border:1px solid #f0eefb;
+  }
+  .rel h2{font-size:22px;margin-bottom:6px;text-align:center}
+  .rel p{color:var(--muted);font-size:13.5px;text-align:center;margin-bottom:18px}
+  .rel svg{width:100%;height:auto;display:block}
+  .note{
+    margin-top:26px;font-size:13px;color:var(--muted);text-align:center;
+    background:#fff;border-radius:14px;padding:16px;border:1px dashed #d9d4f5;
+  }
+  .note b{color:var(--purple)}
+  footer{
+    margin-top:36px;text-align:center;font-size:12.5px;color:var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>AI 协作概念卡</h1>
+    <div class="sub">六个词，看一遍就懂 · 点开卡片看比喻和例子</div>
+  </header>
+
+  <div class="lead">
+    先把 AI 想成你的<b>数字搭档 / 实习生</b>。你天天在 WorkBuddy 里撞见的词，其实就是它身上的几样装备——
+    <b>说话、卡、插头、黑框、定时</b>。下面六张卡，每张一句话讲清它是啥、像啥、跟别的啥关系。
+  </div>
+
+  <div class="grid">
+    <!-- prompt -->
+    <div class="card">
+      <div class="icon i-prompt">💬</div>
+      <div class="ctitle">Prompt</div>
+      <div class="csub">提示词</div>
+      <span class="pill">沟通 · 一次性</span>
+      <div class="one">你随口跟实习生说的那一段话。</div>
+      <details>
+        <summary>展开：比喻 / 例子 / 关系</summary>
+        <div class="body">
+          <div class="row"><span class="k">像啥：</span>你临时给实习生布置任务说的那句要求，说完这次就完了，不存。</div>
+          <div class="row"><span class="k">例子：</span>"给张三写封婉拒邮件，语气客气、别太长。"</div>
+          <div class="row"><span class="k">关系：</span>只做一次用 prompt 就够了；发现要做第二遍，就该升级成 skill。</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- skill -->
+    <div class="card">
+      <div class="icon i-skill">📇</div>
+      <div class="ctitle">Skill</div>
+      <div class="csub">技能 / 标准作业卡</div>
+      <span class="pill">沟通 · 可复用</span>
+      <div class="one">你贴实习生桌上的标准作业卡，下次直接说"按卡做"。</div>
+      <details>
+        <summary>展开：比喻 / 例子 / 关系</summary>
+        <div class="body">
+          <div class="row"><span class="k">像啥：</span>把"怎么做"写进一张卡存起来，换会话换项目还能用，AI 自动加载。</div>
+          <div class="row"><span class="k">例子：</span>你建的「腾讯会议纪要」skill——建会改会取纪要一套流程存好，随时叫。</div>
+          <div class="row"><span class="k">关系：</span>skill 内部往往就是塞好的一段段 prompt + 模板 + 工具红线；是 prompt 的"升级收纳盒"。</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- mcp -->
+    <div class="card">
+      <div class="icon i-mcp">🔌</div>
+      <div class="ctitle">MCP</div>
+      <div class="csub">连接器 / 外部插头</div>
+      <span class="pill">能力 · 授权</span>
+      <div class="one">给 AI 开的"外接插头"，插上它才能碰你公司系统。</div>
+      <details>
+        <summary>展开：比喻 / 例子 / 关系</summary>
+        <div class="body">
+          <div class="row"><span class="k">像啥：</span>AI 本来只会动嘴，MCP 是给它开的外部系统权限——插"企微"能发消息，插"腾讯会议"能建会。</div>
+          <div class="row"><span class="k">例子：</span>连接器列表里的「企微 disconnected」= 插头没装，AI 用不了；点亮信任 = 装好插头。</div>
+          <div class="row"><span class="k">关系：</span>MCP 是盖在 API 之上的"AI 专用标准插头"，它底下调的就是各系统的 API。</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- cli -->
+    <div class="card">
+      <div class="icon i-cli">⌨️</div>
+      <div class="ctitle">CLI</div>
+      <div class="csub">命令行</div>
+      <span class="pill">操作 · 黑框</span>
+      <div class="one">不点鼠标，改成打字写一行指令让电脑照做。</div>
+      <details>
+        <summary>展开：比喻 / 例子 / 关系</summary>
+        <div class="body">
+          <div class="row"><span class="k">像啥：</span>平时你用手指点图标（看着点）；CLI 是写张纸条递给管家「关灯·锁门·倒垃圾」，它按顺序做。</div>
+          <div class="row"><span class="k">例子：</span>AI 说"跑这个脚本汇总表格"，给你一行字，你打开黑窗口粘贴回车就出结果。</div>
+          <div class="row"><span class="k">关系：</span>你基本不用自己写命令，AI 生成好给你；CLI 是 AI 在你电脑上真正"动手"的方式之一。</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- api -->
+    <div class="card">
+      <div class="icon i-api">🪟</div>
+      <div class="ctitle">API</div>
+      <div class="csub">接口 / 软件隔窗点单</div>
+      <span class="pill">底层 · 通道</span>
+      <div class="one">两个软件之间"隔窗点单、互相传话"的通用通道。</div>
+      <details>
+        <summary>展开：比喻 / 例子 / 关系</summary>
+        <div class="body">
+          <div class="row"><span class="k">像啥：</span>天气 APP 不是自己测的，是给气象局发"北京啥天？"气象局回"晴26度"——这来回就是 API。</div>
+          <div class="row"><span class="k">例子：</span>扫码支付、查快递、登录授权，背后全是 API，你天天用但看不见。</div>
+          <div class="row"><span class="k">关系：</span>API 是地基（大类别），MCP 是给 AI 接这些地基的"国标插头"；不是 API 包含 MCP，是 MCP 调用 API。</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- automation -->
+    <div class="card">
+      <div class="icon i-auto">⏰</div>
+      <div class="ctitle">Automation</div>
+      <div class="csub">自动化 / 定时任务</div>
+      <span class="pill">运行 · 不盯</span>
+      <div class="one">你定"每天10点做XX"，电脑自己跑，不用你盯。</div>
+      <details>
+        <summary>展开：比喻 / 例子 / 关系</summary>
+        <div class="body">
+          <div class="row"><span class="k">像啥：</span>给管家设了个闹钟任务，到点自己干，不用你每次提醒。</div>
+          <div class="row"><span class="k">例子：</span>你已有的每6小时知识采集、每天10点英语角提醒，都是 automation。</div>
+          <div class="row"><span class="k">关系：</span>automation 是"什么时候跑"，跑的内容往往是某个 skill / prompt；定时 + 卡 = 全自动。</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Relation map -->
+  <div class="rel">
+    <h2>全家福关系图</h2>
+    <p>把六个词套进"数字搭档"身上，一眼看清谁是谁的装备</p>
+    <svg viewBox="0 0 760 360" role="img" aria-label="AI 协作概念关系图">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#1fc8db"/>
+        </linearGradient>
+        <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 Z" fill="#9a93d6"/>
+        </marker>
+      </defs>
+      <!-- center -->
+      <circle cx="380" cy="180" r="62" fill="url(#g)"/>
+      <text x="380" y="174" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">AI 数字</text>
+      <text x="380" y="196" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">搭档</text>
+      <!-- nodes -->
+      <g font-size="14" font-weight="600" text-anchor="middle">
+        <circle cx="130" cy="60"  r="40" fill="#efeaff"/><text x="130" y="56" fill="#7c5cff">Prompt</text><text x="130" y="74" fill="#9b93c9" font-size="11">说话</text>
+        <circle cx="630" cy="60"  r="40" fill="#e6f9fc"/><text x="630" y="56" fill="#1f9fb0">Skill</text><text x="630" y="74" fill="#79b9c4" font-size="11">作业卡</text>
+        <circle cx="130" cy="300" r="40" fill="#ffe9f3"/><text x="130" y="296" fill="#e85a9b">MCP</text><text x="130" y="314" fill="#e69bc0" font-size="11">插头</text>
+        <circle cx="630" cy="300" r="40" fill="#fff1dd"/><text x="630" y="296" fill="#d98a2b">CLI</text><text x="630" y="314" fill="#d9b27c" font-size="11">黑框</text>
+        <circle cx="380" cy="40"  r="40" fill="#e9f0ff"/><text x="380" y="36" fill="#5b8def">API</text><text x="380" y="54" fill="#9bb0e0" font-size="11">地基</text>
+        <circle cx="380" cy="330" r="40" fill="#f1ebff"/><text x="380" y="326" fill="#8a6cff">Auto</text><text x="380" y="344" fill="#b3a0e8" font-size="11">定时</text>
+      </g>
+      <g stroke="#b9b2e6" stroke-width="2" fill="none" marker-end="url(#arrow)">
+        <line x1="168" y1="78" x2="328" y2="148"/>
+        <line x1="592" y1="78" x2="432" y2="148"/>
+        <line x1="168" y1="282" x2="328" y2="212"/>
+        <line x1="592" y1="282" x2="432" y2="212"/>
+        <line x1="380" y1="80" x2="380" y2="118"/>
+        <line x1="380" y1="290" x2="380" y2="242"/>
+      </g>
+      <!-- api to mcp -->
+      <path d="M340,70 Q220,150 175,268" stroke="#c9b9ef" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+      <text x="250" y="160" font-size="11" fill="#a99fd6">MCP 调用</text>
+    </svg>
+  </div>
+
+  <div class="note">
+    🧭 <b>一句话记死：</b> <b>Prompt</b>=说话，<b>Skill</b>=卡，<b>MCP</b>=插头，<b>CLI</b>=黑框，<b>API</b>=地基，<b>Automation</b>=定时。
+    碰到这些词不慌，套"数字搭档"就想得通。
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
