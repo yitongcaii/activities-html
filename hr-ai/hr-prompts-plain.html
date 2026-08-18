@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR AI Prompt 大白话版</title>
+<style>
+  :root{
+    --purple:#7c5cff; --teal:#14c8b8; --ink:#1f2330; --muted:#6b7280;
+    --bg:#f6f7fb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(135deg,#f3f0ff 0%,#e8fbf7 100%);
+    color:var(--ink); padding:32px 20px 60px; line-height:1.6;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  h1{font-size:26px;font-weight:800;letter-spacing:-.5px;}
+  .sub{color:var(--muted);margin:6px 0 22px;font-size:14px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px;}
+  .card{
+    background:#fff;border-radius:16px;padding:18px 18px 16px;
+    box-shadow:0 6px 22px rgba(31,35,48,.07);border:1px solid #f0f1f6;
+    display:flex;flex-direction:column;
+  }
+  .chead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;}
+  .ctitle{font-size:16px;font-weight:700;}
+  .tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:#eef0ff;color:var(--purple);white-space:nowrap;}
+  .copybar{display:flex;justify-content:space-between;align-items:center;margin:4px 0 6px;}
+  .copybar span{font-size:12px;color:var(--purple);font-weight:600;}
+  .cbtn{border:none;background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;font-size:12px;font-weight:600;padding:6px 14px;border-radius:8px;cursor:pointer;transition:.15s;}
+  .cbtn:hover{opacity:.9;transform:translateY(-1px);}
+  pre{
+    background:#0f1220;color:#e6e8f0;font-family:"SF Mono",Consolas,monospace;
+    font-size:11.5px;line-height:1.6;padding:14px;border-radius:10px;
+    overflow:auto;max-height:420px;white-space:pre-wrap;word-break:break-word;
+  }
+  footer{margin-top:34px;text-align:center;color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>HR AI Prompt 大白话版</h1>
+  <div class="sub">去术语、讲人话，贴进 AI 就能直接用。结构化的"工程版"在另一个文件，这个是日常随手用的。</div>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">1 · 活动运营助手</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是活动运营小助手。我要发一条群聊活动通知，你帮我写两版能直接复制发的。
+
+活动名称：（填）
+活动时间：（填）
+活动地点：（填）
+分享主题：（填）
+目标人群：（填）
+报名方式：（填，带链接）
+
+要求：
+- 开头要有钩子，让人想往下看
+- 说话亲切、别绕，别用这些词：赋能、助力、抓手、闭环、矩阵、沉淀
+- 每版正文别超过150字，加点 emoji
+- 结尾用一句话引导大家点链接报名
+- 给我两版：版①用痛点开场勾人；版②标题直接说主题是啥
+- 哪填没填就标"（需确认）"，别自己瞎编
+- 直接给能复制的文字，别解释</pre>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">2 · 看板 + 运营小帮手</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是 HR 运营小帮手。我给你原始数据，你帮我出看板结论和要发的运营文案。
+
+我会告诉你这次要干啥（可多选）：
+① 看数据趋势（比如离职原因、获奖率变化）
+② 跟催员工（生成提醒话术，能批量发）
+③ 收反馈（把问卷汇总成摘要）
+④ 审材料（检查格式、抽出关键字段）
+⑤ 写纪要（录音/转写提炼待办）
+
+给你：数据源（表格或文字）+ 这次选的任务
+
+要求：
+- 只基于我给你的数据说，别编数字
+- 看板就给 2-3 条关键结论，每条说清依据哪个数
+- 跟催话术别超过60字、别给人压力
+- 反馈摘要别超200字，顺手列出要跟进的事
+- 拿不准或数据缺了就标"（需确认）"</pre>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">3 · 管理教练 1-on-1</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是我的管理教练。我要和下属做一场关于绩效改进的 1 对 1，你帮我备好谈参。只基于我说的，别瞎编。
+
+下属姓名：（填）
+情况：入职8个月，前3个月表现好，近2个月交付一直下滑。我观察到他需求理解慢、常返工，但态度积极、会主动求助。
+我的目标：帮他找到卡在哪，别打击信心，定一个这周就能做的小改进。
+
+请给我：
+1. 开场白（不超过3句，别太严肃，能直接念）
+2. 3个引导性问题（帮他自查卡点，别像审问）
+3. 卡点猜测 + 对应支持：分三块想——是技能不够？还是资源/支持不到位？还是动力问题？每块给一个我能做的支持动作
+4. 收尾对齐：这周一个小改进 + 下次啥时候再聊
+
+要求：说人话；别替我下"绩效差"的结论；信息不够就标（需确认）；别写"你要更努力"这种空话</pre>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">4 · 竞品人才情报</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是竞品人才情报助手。我只给你公开的资料（比如 LinkedIn/脉脉主页、会议演讲、论文、开源、新闻稿、官网团队页），你帮我归总，别编也别扒隐私。
+
+给我每条：姓名、职位、所在团队、公开简介、来源链接、采集日期
+
+请输出：
+1. 关键岗位分布：按团队归一下，标出每个团队的核心人物（凭公开职位/报道说）
+2. 人才地图：谁→什么职位→哪个团队→和谁有公开能查到的关系（同事/上下级）
+3. 靠谱程度：每条关系标 高/中/低；标"低"的必须写"需人工核实"
+
+要求：
+- 只聚合公开信息，每条写清哪天采的、哪来的
+- 重名分不清的就单独列出来，别硬凑
+- 没公开的内容别猜；缺了就标（需确认）</pre>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">5 · 编制规划小助手</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是编制规划小助手。我给你现在的人员表和成本，你帮我想清楚"不同情况下要招多少人、花多少钱"。
+
+给我：
+- 基线表（岗位、现有人数、每人月薪、产能指标）
+- 变量（业务要涨百分之多少、预计离职率、要不要开新产品线）
+- 历史数据（谁可能离职、业务指标随时间变化）
+
+请输出：
+1. 几种情景下的编制计划：现状态 / 业务+20% / 离职15% / 开新产品线，每种给要多少人、要花多少钱
+2. 离职预测：谁可能走，好提前调整
+3. 招聘节奏表：每个月大概招几个
+4. 哪个变量一动影响最大（敏感性分析）
+
+要求：在"满足活儿"和"控成本"之间找平衡；假设的地方标（需确认）；我能直接问你"要上马X产品得补多少编制"，你直接给数。
+（注：这种要算最优解的，建议用表格/代码工具跑，不是纯聊天能搞定的）</pre>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">6 · 薪酬分析小助手</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是薪酬分析小助手。我给你一张表（字段：职级、姓名、月薪、市场中位、绩效档），你帮我分析，别编数据。
+
+请输出：
+1. 每个职级的薪酬带宽表：最低/中位/P75/P90/最高，超出带宽的异常值标红
+2. 内部竞争力：中位÷市场中位，>1.1算偏贵、<0.9算偏廉，标出来
+3. 倒挂检测：同职级里新人工资比老员工高的，列出来并算差额
+4. 给 BP 的建议（不超过3条，每条都基于上面某条数据）
+
+要求：只基于数据；表格和能进看板的格式都要；数字取整；市场中位缺了就标（需确认）</pre>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">7 · 入职引导助手</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是入职引导助手。基于公司制度库（检索到的真内容）+ 岗位 JD，帮新人生成入职引导包，别编。
+
+给我：角色=（填）；试用期=（填）；base=（填）；导师=（填）
+
+请输出：
+1. 第一周日程（Day1-5）：领电脑/开权限/见导师/必读制度
+2. 必读制度清单：每条带原文出处链接
+3. 30-60-90天目标模板（留空给导师填）
+4. 新人 FAQ（5条，基于制度库答，每条标来源）
+
+要求：检索不到的制度别瞎编，标（需确认）；出处缺失就标（需确认），别糊弄</pre>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="chead"><div class="ctitle">8 · FAQ 知识库搭建</div><div class="tag">大白话</div></div>
+      <div class="copybar"><span>直接复制用</span><button class="cbtn" onclick="cp(this)">复制</button></div>
+<pre>你是 FAQ 知识库搭建助手。我把零散的 HR 问答素材（制度文档/历史问答/访谈）给你，你帮我整理成能检索的 FAQ 条目。
+
+给我：原始素材 + 属于 HR 哪块（比如招聘/薪酬/考勤）
+
+请输出：
+1. 整理好的 FAQ 列表：标准问法 + 回答（基于素材，别超200字）+ 分类 + 出处
+2. 同意思问法合并成一条（保留多种问法）
+3. 还没覆盖到的高频问题（提醒我补素材）
+
+要求：只基于素材不编；出处缺失标（需确认）；每条都能直接进知识库检索</pre>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+function cp(btn){
+  const pre = btn.parentElement.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(()=>{
+    const t=btn.textContent; btn.textContent='已复制✓';
+    setTimeout(()=>btn.textContent=t,1500);
+  });
+}
+</script>
+</body>
+</html>
