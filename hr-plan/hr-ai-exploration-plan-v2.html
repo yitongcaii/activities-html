@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR AI 探索方案（全新设计版）</title>
+<style>
+  :root{
+    --purple:#7c5cff; --teal:#19c3c9; --ink:#1f2330; --sub:#5b6172;
+    --line:#e8eaf2; --soft:#f6f7fb; --warn:#ffb020; --ok:#27c281;
+    --pill:#eef0ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:linear-gradient(160deg,#f4f1ff 0%,#eafafb 100%);min-height:100vh;line-height:1.65;padding:32px 18px 60px}
+  .wrap{max-width:920px;margin:0 auto}
+  header{background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;border-radius:22px;
+    padding:30px 32px;box-shadow:0 14px 38px rgba(124,92,255,.28)}
+  header h1{font-size:26px;letter-spacing:.5px}
+  header p{opacity:.92;margin-top:8px;font-size:14px}
+  .tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;padding:3px 12px;font-size:12px;margin:10px 8px 0 0}
+  .meta{margin-top:14px;font-size:12.5px;opacity:.9}
+  [contenteditable]{outline:none;border-bottom:1.5px dashed var(--warn);padding:0 2px;cursor:text;color:#b8860b}
+  [contenteditable]:focus{background:#fff8e6;border-radius:4px}
+  section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 26px;margin-top:20px;
+    box-shadow:0 6px 20px rgba(31,35,48,.05)}
+  h2{font-size:18px;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  h2 .n{background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;width:28px;height:28px;
+    border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+  h3{font-size:14.5px;color:var(--purple);margin:16px 0 8px}
+  p,li{font-size:14px;color:var(--sub)}
+  ul{padding-left:20px}
+  li{margin:6px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .card b{color:var(--ink);font-size:14px}
+  .pill{display:inline-block;background:var(--pill);color:var(--purple);border-radius:999px;font-size:11.5px;
+    padding:2px 10px;margin:2px 4px 2px 0;font-weight:600}
+  .pill.p0{background:#ffe9e9;color:#e0413e}
+  .pill.p1{background:#fff3df;color:#d98300}
+  .pill.p2{background:#e8f7f0;color:#1c9e6b}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--soft);color:var(--ink);font-weight:600}
+  td b{color:var(--ink)}
+  .callout{background:linear-gradient(135deg,#fff6e9,#eafafb);border-left:4px solid var(--teal);
+    border-radius:10px;padding:12px 16px;margin-top:14px;font-size:13.5px;color:var(--ink)}
+  .callout.warn{border-left-color:var(--warn);background:#fff8ea}
+  .matrix td:first-child{font-weight:600;color:var(--ink);background:var(--soft)}
+  .mx-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px}
+  .matrix{font-size:12px;min-width:1080px}
+  .matrix th,.matrix td{padding:7px 8px;line-height:1.45}
+  .sub{margin-top:18px}
+  .sub h3{font-size:14px;color:var(--ink);margin:6px 0 8px}
+  .mini{display:block;margin-top:6px;font-size:11.5px;color:var(--sub);line-height:1.5}
+  footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:28px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>HR AI 探索实施方案（全新设计版）</h1>
+  <p>从「HR 职能该解决什么」出发重新设计，而非整合既有项目</p>
+  <div>
+    <span class="tag">定位：<span contenteditable="true">系统建设</span></span>
+    <span class="tag">范围：<span contenteditable="true">HR 内部先跑</span></span>
+    <span class="tag">资源：<span contenteditable="true">可拉 1–2 人，0 预算起步</span></span>
+    <span class="tag">阶段：<span contenteditable="true">先出方案定路径</span></span>
+  </div>
+  <div class="meta">发起部门：<span contenteditable="true">［填写部门名］</span> ｜ 版本：v2（全新设计）｜ 制定：<span contenteditable="true">［负责人］</span></div>
+</header>
+
+<section>
+  <h2><span class="n">1</span>为什么是现在做（背景与目标）</h2>
+  <p>通用 AI 能力已成熟，HR 正处职能重构窗口：事务性工作（筛简历、写通知、做看板、整理纪要）正快速被 AI 接管。
+  如果只把 AI 当"写文案工具"，价值有限；真正该探索的是<b>用 AI 重构 HR 的运作方式</b>——让人从重复劳动里抽身，去做只有人能做的关系、判断、共情。</p>
+  <div class="callout"><b>一句话目标：</b><span contenteditable="true">让［部门］的同学真用上 AI，把重复劳动时间省出来，转去做更高价值的员工关系与文化工作。</span></div>
+  <p style="margin-top:10px">本方案为<b>从零设计</b>，不预设任何既有项目；仅在最后一节把「已有能力可作为加速项」一笔带过，避免重复建设。</p>
+</section>
+
+<section>
+  <h2><span class="n">2</span>设计原则（5 条，贯穿全程）</h2>
+  <div class="grid">
+    <div class="card"><b>① 问题优先</b><br>从业务痛点出发，不为 AI 而 AI。每个课题先写清「解决什么麻烦」。</div>
+    <div class="card"><b>② 人机协同</b><br>AI 做初稿/重复/搜集，人做判断/共情/拍板。人、钱、隐私、对外发声必须由人定。</div>
+    <div class="card"><b>③ 小步验证</b><br>每个课题 ≤2 周出一个可验证结论（省时？提质？没人用？），不成早停。</div>
+    <div class="card"><b>④ 安全内嵌</b><br>隐私/公平/透明从设计第一天就进方案，不是事后补丁。</div>
+    <div class="card"><b>⑤ 价值可视</b><br>每个课题必须能量化产出（省 X 小时 / 覆盖 Y 人 / 满意度 +Z），否则不做。</div>
+    <div class="card"><b>⑥ 探索常态化</b><br>不止一次运动，而是建机制让探索持续发生（见第 5 节）。</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>探索框架：HR 场景 × AI 杠杆矩阵</h2>
+  <p>不列「我们有什么」，而用矩阵设计「该探索什么」。每个 HR 场景（行，11 类）× 每类 AI 杠杆（列，9 类）交叉＝一个值得做的课题，形成完整选题池；再叠加「决策维度」把选题推进到落地排序（见矩阵下方）。</p>
+  <div class="mx-wrap">
+  <table class="matrix">
+    <tr><th>HR 场景 ＼ AI 杠杆</th><th>文本生成</th><th>多模态生成<br>（图/视频/海报）</th><th>检索问答<br>(RAG)</th><th>诊断分析</th><th>预测</th><th>智能匹配<br>推荐</th><th>规则自动化</th><th>自主 Agent</th><th>仿真沙盒</th></tr>
+    <tr><td>招聘</td><td>JD 多口吻 / 面试题库 / 拒信</td><td>招聘短视频 / 雇主品牌海报</td><td>候选人智能检索</td><td>招聘公平性审计（各阶段通过率偏差）</td><td>渠道质量 / 入职留存预测</td><td>人岗匹配 / 内推推荐</td><td>初筛 + 面试自动安排</td><td>招聘流程自主跟办（邀约→排期→跟进）</td><td>模拟面试 / 候选人体验推演</td></tr>
+    <tr><td>入职</td><td>个性化引导包 / 欢迎信</td><td>入职引导短视频</td><td>新人政策问答中台</td><td>入职体验满意度诊断</td><td>试用期通过率预测</td><td>导师 / buddy 匹配</td><td>入职旅程定时触发提醒</td><td>入职待办自主跟进</td><td>入职首日体验推演</td></tr>
+    <tr><td>培训</td><td>微课脚本 / 课程框架</td><td>培训短视频 / 知识卡片图</td><td>学习资源推荐问答</td><td>培训效果四级评估（行为/结果层）</td><td>学习完成度 / 断层预测</td><td>个性化学习路径推荐</td><td>报名 / 提醒 / 看板自动</td><td>培训运营自主巡检（催办/补录）</td><td>培训场景演练沙盒</td></tr>
+    <tr><td>员工体验</td><td>关怀话术 / 生日祝福</td><td>关怀卡片 / 节日海报</td><td>制度 / 政策中台</td><td>eNPS / 敬业度诊断</td><td>情绪 / 流失预警</td><td>内部活水 / 转岗推荐</td><td>问卷 / 通知分发</td><td>员工诉求自动分流派单</td><td>员工旅程体验推演</td></tr>
+    <tr><td>文化</td><td>内容工厂 / 员工故事</td><td>文化短视频 / 漫剧 / 海报</td><td>案例知识库检索</td><td>AI 采纳率度量诊断</td><td>文化活动参与度预测</td><td>荣誉 / 表彰人选推荐</td><td>活动全流程串联</td><td>文化内容自主排期发布</td><td>文化活动推演</td></tr>
+    <tr><td>管理数据</td><td>报告自动成文</td><td>数据看板图 / 汇报配图</td><td>NL 数据问答（"Q2 离职率?"）</td><td>编制 / 薪酬带宽诊断</td><td>人力成本 / 编制趋势预测</td><td>人才盘点九宫格推荐</td><td>定时看板推送</td><td>经营数据自主监控预警</td><td>组织变革推演</td></tr>
+    <tr><td>绩效</td><td>面谈提纲 / 反馈话术</td><td>绩效宣导短视频</td><td>绩效政策问答</td><td>评分分布异常诊断 / 校准辅助</td><td>高潜识别预测</td><td>高潜 / 继任推荐</td><td>绩效周期提醒 / 催办</td><td>绩效流程自主跟进</td><td>绩效校准推演</td></tr>
+    <tr><td>薪酬福利</td><td>薪酬沟通话术 / 福利推文</td><td>福利图解 / 薪酬带海报</td><td>薪酬福利问答</td><td>薪酬竞争力 / 带宽诊断</td><td>薪酬趋势 / 留任成本预测</td><td>福利个性化推荐</td><td>调薪 / 发薪校验提醒</td><td>薪酬异常巡检</td><td>调薪方案推演</td></tr>
+    <tr><td>离职与保留</td><td>离职面谈提纲 / 保留话术</td><td>保留沟通物料</td><td>离职政策问答</td><td>流失根因诊断</td><td>离职风险预测（提前预警）</td><td>保留方案 / 内部机会推荐</td><td>离职流程自动触发</td><td>保留干预自动跟进</td><td>离职影响推演</td></tr>
+    <tr><td>组织发展 / 继任</td><td>岗位说明书 / 职级体系文档</td><td>组织架构图自动生成</td><td>岗位谱系问答</td><td>技能图谱 / 编制健康度诊断</td><td>人才缺口预测</td><td>继任者 / 接班人匹配</td><td>架构调整发文自动生成</td><td>组织盘点自主更新</td><td>组织变革 / 架构调整推演</td></tr>
+    <tr><td>员工关系与合规</td><td>关怀通知 / 纪律沟通稿</td><td>合规宣导图</td><td>劳动法规问答</td><td>合规风险诊断（合同到期/制度版本）</td><td>劳动争议风险预测</td><td>外部顾问 / 资源匹配</td><td>合同到期 / 培训完成度自动催办</td><td>合规巡检自主跟办</td><td>劳动争议证据链推演</td></tr>
+  </table>
+  </div>
+  <div class="callout">这矩阵就是「选题池」（11 场景 × 9 杠杆 = 99 个交叉课题）。第 4 节从中挑首批，不局限于任何既有资产。表格较宽，可横向滚动查看完整列。</div>
+  <div class="sub">
+    <h3>决策维度：让矩阵从「发散选题」走到「落地排序」</h3>
+    <p>矩阵只回答「这格能做什么课题」。要决定「先做什么、谁拍板」，再加两层横切视角（按你的要求本框架不依赖就绪度标签，改以价值与协同模式定位）：</p>
+    <div class="grid">
+      <div class="card"><b>① 价值 × 难度 优先级地图</b><br>每个交叉课题用「业务价值（纵）× 落地难度（横）」定位：<b>高价值×低难度＝优先做</b>（如员工问答中台、招聘初筛）；高价值×高难度＝立项但拆里程碑；低价值×任何难度＝不单独做、并入其他课题。<span class="mini">用法：左上格先打、右上格排期、下方格暂缓，直接对接第 4 节 P0/P1/P2。</span></div>
+      <div class="card"><b>② 人机协同模式三档</b><br>按「谁拍板」分档，档位越高治理越重：<br>• <b>AI 辅助</b>——AI 出初稿/信息，人决策（文案、初筛、报告）<br>• <b>人机共创</b>——来回迭代共定（谈参、内容工厂、校准）<br>• <b>AI 自主</b>——AI 按目标自调工具跑（Agent 跟办、自动催办），须沙盒化 + 人工 checkpoint<span class="mini">治理含义：自主档必须设「先问人」闸门；涉及人/钱/隐私/对外发声一律不自动。</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span>首批探索课题（全新设计，含优先级）</h2>
+  <table>
+    <tr><th>课题</th><th>优先级</th><th>解决什么麻烦</th><th>核心做法</th><th>怎么算成</th></tr>
+    <tr><td><b>员工智能问答中台</b></td><td><span class="pill p0">P0</span></td><td>制度/政策天天被问，HR 重复答</td><td>把制度文档喂知识库(RAG)，员工自然语言提问，答案带出处</td><td>月咨询量降__%；HR 答疑工时省__h</td></tr>
+    <tr><td><b>招聘初筛辅助</b></td><td><span class="pill p0">P0</span></td><td>简历量大、标准漂移、易带偏见</td><td>锚点评分 + JSON 输出 + 偏见护栏，人只复核黄红</td><td>初筛耗时降__%；公平性审计通过</td></tr>
+    <tr><td><b>管理者 AI 教练</b></td><td><span class="pill p1">P1</span></td><td>一线 leader 不会做 1:1 / 反馈</td><td>给场景生成谈参提纲 + 反馈话术，leader 直接用</td><td>覆盖__名 leader；满意度≥__</td></tr>
+    <tr><td><b>自动报告与看板</b></td><td><span class="pill p1">P1</span></td><td>周报/月报/参与率靠人手攒</td><td>数据自动汇总 + 成稿 + 定时推送</td><td>报告工时从__h→__h</td></tr>
+    <tr><td><b>员工情绪与流失预警</b></td><td><span class="pill p2">P2</span></td><td>离职/低士气事后才发现</td><td>调研开放题情感聚类 + 信号预警，BP 主动介入</td><td>预警准确率__%；提前__周</td></tr>
+    <tr><td><b>AI 内容工厂</b></td><td><span class="pill p2">P2</span></td><td>文化/雇主品牌内容产出慢</td><td>选题→脚本→图文/短视频半自动流水线</td><td>内容产出提速__倍</td></tr>
+  </table>
+  <div class="callout warn"><b>建议起步：</b>先打 P0 两个（问答中台 + 招聘初筛），2 周内见数，再扩 P1/P2。别一上来 6 个全铺。</div>
+</section>
+
+<section>
+  <h2><span class="n">5</span>探索机制（让探索持续发生，本版新增亮点）</h2>
+  <p>方案不只列课题，更建「探索怎么持续」的机制——这是与「整合存量」方案最大的区别。</p>
+  <div class="grid">
+    <div class="card"><b>AI 沙盒日</b><br>每月固定半天，任何人拿来试 AI 工具、分享踩坑，不考核产出。</div>
+    <div class="card"><b>探索提案机制</b><br>员工提「这个活能不能让 AI 做」，HR 季度评审排期。</div>
+    <div class="card"><b>内部 AI 黑客松</b><br>每季度 1 天，围绕一个 HR 痛点组队做出原型。</div>
+    <div class="card"><b>双周复盘</b><br>什么成了、什么没成、为什么，沉淀为可复用经验。</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">6</span>组织与节奏</h2>
+  <table>
+    <tr><th>角色</th><th>职责</th><th>人员</th></tr>
+    <tr><td><b>发起 / 赞助人</b></td><td>定方向、给资源、对外汇报</td><td><span contenteditable="true">［HR 负责人］</span></td></tr>
+    <tr><td><b>探索小组组长</b></td><td>排课题、盯节奏、写复盘</td><td><span contenteditable="true">［你］</span></td></tr>
+    <tr><td><b>协作者 A / B</b></td><td>分课题执行、试用反馈</td><td><span contenteditable="true">［可拉 1–2 人］</span></td></tr>
+    <tr><td><b>业务伙伴(BP)</b></td><td>提供真实场景与验证</td><td><span contenteditable="true">［相关中心 BP］</span></td></tr>
+  </table>
+  <p style="margin-top:10px"><b>范围：</b>HR 内部先跑，验证有效再向业务团队扩。资源：0 预算起步，靠免费 AI 工具 + 现有人力。</p>
+</section>
+
+<section>
+  <h2><span class="n">7</span>度量体系（探索成败怎么看）</h2>
+  <div class="grid">
+    <div class="card"><b>效率类</b><br>单环节耗时降幅（如初筛 __h→__h）</div>
+    <div class="card"><b>质量类</b><br>员工满意度 / eNPS 变化</div>
+    <div class="card"><b>采纳类</b><br>活跃用户数 / 周活 / 采纳率</div>
+    <div class="card"><b>创新类</b><br>孵化课题数 / 转化为常态数</div>
+  </div>
+  <div class="callout">度量不是「用了多少 AI」，而是「AI 让 HR 和员工得到了什么」。空话「提升效率」一律不接受。</div>
+</section>
+
+<section>
+  <h2><span class="n">8</span>治理与风险（探索本身的安全）</h2>
+  <ul>
+    <li><b>探索沙盒化：</b>试错环境不接生产员工数据，避免隐私泄露。</li>
+    <li><b>算法公平：</b>招聘 / 绩效类课题必须含偏见护栏与定期审计，不得放大歧视。</li>
+    <li><b>透明知情：</b>员工知情 AI 参与哪些决策（如初筛、关怀），保留人复核。</li>
+    <li><b>对外发声红线：</b>任何群 / 企微消息必须经人确认才发，AI 不自动发。</li>
+    <li><b>没人跟的风险：</b>70% 的 AI 落地死在「没人用」——靠机制(第5节)+故事化传播化解。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">9</span>30–60–90 天计划（占位）</h2>
+  <table>
+    <tr><th>阶段</th><th>关键动作</th><th>产出</th><th>时间</th></tr>
+    <tr><td><b>0–30 天</b></td><td>P0 两课题启动 + 建问答知识库 + 首次沙盒日</td><td><span contenteditable="true">［可验证结论］</span></td><td><span contenteditable="true">__</span></td></tr>
+    <tr><td><b>31–60 天</b></td><td>P1 课题 + 提案机制上线 + 黑客松</td><td><span contenteditable="true">［可验证结论］</span></td><td><span contenteditable="true">__</span></td></tr>
+    <tr><td><b>61–90 天</b></td><td>度量复盘 + 外扩准备 + 固化 skill</td><td><span contenteditable="true">［体系雏形］</span></td><td><span contenteditable="true">__</span></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2><span class="n">10</span>下一步 & 已有能力加速项（可选）</h2>
+  <p><b>下一步：</b><span contenteditable="true">确认 P0 课题负责人与启动周，安排首次沙盒日。</span></p>
+  <div class="callout"><b>已有能力可作加速项（不主导本方案）：</b>若组织内已有可复用的技能/自动化（如纪要、知识采集、活动文案等），可在对应课题直接调用，避免重复造轮子——但本方案的设计不依赖它们，即使从零也有完整路径。</div>
+</section>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
