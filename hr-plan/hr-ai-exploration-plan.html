@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR AI 探索实施方案</title>
+<style>
+  :root{
+    --purple:#7c5cff; --teal:#19c3c9; --ink:#1f2430; --soft:#f5f6fb;
+    --line:#e7e9f3; --green:#1faa6b; --orange:#f0883e; --red:#e0556b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);
+    background:linear-gradient(160deg,#f3f0ff 0%,#eafafb 100%);line-height:1.65;padding:0 0 60px}
+  header{background:linear-gradient(120deg,var(--purple),var(--teal));color:#fff;
+    padding:38px 32px 30px;box-shadow:0 8px 30px rgba(124,92,255,.25)}
+  header h1{font-size:26px;letter-spacing:.5px}
+  header p{opacity:.92;margin-top:8px;font-size:14px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    padding:5px 12px;border-radius:999px;font-size:12.5px}
+  section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 26px;
+    margin-top:22px;box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  h2{font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  h2 .no{background:linear-gradient(120deg,var(--purple),var(--teal));color:#fff;
+    width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:15px;margin:16px 0 8px;color:var(--purple)}
+  p,li{font-size:14px}
+  ul{padding-left:20px;margin:6px 0}
+  .edit{background:#fff6d6;border-bottom:2px dashed #e0b400;padding:1px 5px;border-radius:4px;cursor:text}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--soft);font-weight:600}
+  .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600}
+  .t-green{background:#e3f7ee;color:var(--green)}
+  .t-orange{background:#fdeee0;color:var(--orange)}
+  .t-red{background:#fde7ec;color:var(--red)}
+  .t-blue{background:#e6f0ff;color:#3a6fd8}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:13px;padding:15px}
+  .card b{color:var(--purple)}
+  .note{background:#fbf7ff;border-left:4px solid var(--purple);padding:11px 14px;border-radius:0 10px 10px 0;
+    font-size:13.5px;margin-top:12px}
+  footer{text-align:center;color:#889;font-size:12.5px;margin-top:34px}
+  .kbd{font-family:ui-monospace,monospace;background:#eef;padding:1px 6px;border-radius:5px;font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>HR AI 探索实施方案</h1>
+    <p>适用部门：<span class="edit" contenteditable="true">〔请填写部门/团队名称〕</span> ｜ 版本：v0.1 草案 ｜ 状态：待领导确认</p>
+    <div class="meta">
+      <span class="pill">范围：HR 内部先跑</span>
+      <span class="pill">资源：可拉 1-2 人</span>
+      <span class="pill">目标：系统建设（文化+效率+治理）</span>
+      <span class="pill">节奏：先出方案，排期另定</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2><span class="no">1</span>目标与定位</h2>
+    <h3>一句话目标</h3>
+    <p>把 HR 手里已经跑通的零散 AI 应用，串成 <span class="edit" contenteditable="true">〔部门〕</span> 一套"让人愿意用、真能省工时、且用得安全"的 AI 工作体系，并能对外讲出成果。</p>
+    <div class="cards">
+      <div class="card"><b>让人用起来</b><br>推 AI 采纳，改变团队习惯（文化落地）</div>
+      <div class="card"><b>真省工时</b><br>用数据证明降本提效（效率）</div>
+      <div class="card"><b>汇报亮点</b><br>出可展示、可上台的成果（品牌）</div>
+      <div class="card"><b>系统建设</b><br>文化+效率+治理一起推（体系）</div>
+    </div>
+    <h3>HR 的角色定位</h3>
+    <p>HR 不是"用 AI 写文案的事务员"，而是组织 AI 转型的 <b>转换器</b>——业务同学不是不想用，是不知道怎么用、怕用错、没人带。HR 来做培训、造激励、建文化、划红线，把"公司想推 AI"变成"每个人真用起来"。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">2</span>现状盘点（已有弹药，不重造）</h2>
+    <table>
+      <tr><th>已有项目</th><th>类型</th><th>状态</th><th>本方案怎么用</th></tr>
+      <tr><td>博闻培训覆盖率看板</td><td>效率</td><td><span class="tag t-green">已跑通</span></td><td>作为"真省工时"的数据样板</td></tr>
+      <tr><td>新人答辩自动化</td><td>效率/流程</td><td><span class="tag t-green">已跑通</span></td><td>多环节工作流成熟样板，可复制到其它流程</td></tr>
+      <tr><td>知识采集自动化</td><td>效率/知识</td><td><span class="tag t-green">已跑通</span></td><td>外部好案例自动进知识库，喂给 RAG</td></tr>
+      <tr><td>AI 文化周 / 激励设计</td><td>文化</td><td><span class="tag t-green">已跑通</span></td><td>"让人愿意用"的核心抓手</td></tr>
+      <tr><td>AI 漫剧《企鹅英雄》</td><td>文化/传播</td><td><span class="tag t-green">已跑通</span></td><td>变革传播武器，把"要用 AI"变故事</td></tr>
+      <tr><td>AI 布道师机制</td><td>人才/文化</td><td><span class="tag t-green">已跑通</span></td><td>新角色引入，带动他人</td></tr>
+      <tr><td>会议预约与纪要 skill</td><td>效率</td><td><span class="tag t-green">已跑通</span></td><td>直接复用，待腾讯会议 MCP 连接</td></tr>
+      <tr><td>主持稿/高管致辞/谈参 skill</td><td>效率</td><td><span class="tag t-green">已跑通</span></td><td>文化活动直接复用</td></tr>
+      <tr><td>活动文案 skill</td><td>效率</td><td><span class="tag t-green">已跑通</span></td><td>三阶段宣传文案直接复用</td></tr>
+    </table>
+    <div class="note">注：以上 9 项均为已验证资产，本方案重点是"串联+补缺口"，<b>不是从零新建</b>。</div>
+  </section>
+
+  <section>
+    <h2><span class="no">3</span>整体框架（四支柱 + 一个底座）</h2>
+    <div class="cards">
+      <div class="card"><b>① 文化支柱</b><br>让人愿意用、敢用。采纳激励、漫剧、沙龙、故事化传播。</div>
+      <div class="card"><b>② 效率支柱</b><br>真省工时。看板、自动化、纪要、初评，每条带数据。</div>
+      <div class="card"><b>③ 治理支柱</b><br>用得安全。隐私红线、算法公平、人机责任边界。</div>
+      <div class="card"><b>④ 人才支柱</b><br>HR 自身+对内布道。AI 素养标准、布道师、技能图谱。</div>
+      <div class="card" style="grid-column:1/-1"><b>底座：变革管理</b><br>沟通节奏、化解阻力、里程碑、故事化传播。AI 落地 70% 死在"没人跟"，HR 是变革 owner。</div>
+    </div>
+    <div class="note">当前最强是<b>文化支柱</b>，缺口在<b>治理制度</b>和<b>人才标准</b>显性化——这两块补上，就能讲成完整体系。</div>
+  </section>
+
+  <section>
+    <h2><span class="no">4</span>三阶段路线</h2>
+    <table>
+      <tr><th>阶段</th><th>目标</th><th>关键动作</th><th>产出</th></tr>
+      <tr><td><b>阶段1 试点</b><br><span class="edit" contenteditable="true">〔时间占位〕</span></td><td>跑通 2-3 个，留数据</td><td>表彰初评+颁奖词、纪要自动化、知识采集扩面</td><td>可量化省时数据 + 1 个样板间</td></tr>
+      <tr><td><b>阶段2 推广</b><br><span class="edit" contenteditable="true">〔时间占位〕</span></td><td>HR 内部全覆盖</td><td>拉 1-2 人分工；把试点 skill 化；制度库 RAG 上线</td><td>员工 FAQ、入职引导包等可复用 skill</td></tr>
+      <tr><td><b>阶段3 固化</b><br><span class="edit" contenteditable="true">〔时间占位〕</span></td><td>变成组织能力</td><td>治理制度发文、AI 素养进能力模型、知识库常态化</td><td>制度 + 指标 + 可持续运转机制</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="no">5</span>首批动作清单（基于已有，标状态）</h2>
+    <table>
+      <tr><th>动作</th><th>执行者</th><th>工具</th><th>状态</th><th>预计省时</th></tr>
+      <tr><td>表彰初评+颁奖词</td><td>AI+人复核</td><td>通用生成+加固 prompt</td><td><span class="tag t-green">今天能跑</span></td><td>10h→2h</td></tr>
+      <tr><td>会议预约与纪要</td><td>AI+人确认</td><td>tencent-meeting-minutes</td><td><span class="tag t-orange">待连 MCP</span></td><td>每次 1h→10min</td></tr>
+      <tr><td>知识采集扩面</td><td>自动化</td><td>knowledge-collection</td><td><span class="tag t-green">已跑（每6h）</span></td><td>持续</td></tr>
+      <tr><td>员工 FAQ（制度问答）</td><td>AI+RAG</td><td>本地 Obsidian / ima</td><td><span class="tag t-orange">待建</span></td><td>咨询 5h→0.5h</td></tr>
+      <tr><td>入职引导包</td><td>AI+人</td><td>模板库+腾讯文档</td><td><span class="tag t-orange">待建</span></td><td>每人 1h→10min</td></tr>
+      <tr><td>招聘公平性审计</td><td>AI+人</td><td>xlsx+通用生成</td><td><span class="tag t-orange">待建</span></td><td>审计 1 天→2h</td></tr>
+    </table>
+    <div class="note">真正卡点的不是写法，是 <b>MCP 没连</b>（企微/腾讯会议/问卷/ima 当前 disconnected）。连上才能真跑，否则只是本地 prompt。</div>
+  </section>
+
+  <section>
+    <h2><span class="no">6</span>组织与资源（可拉 1-2 人）</h2>
+    <ul>
+      <li><b>方案 Owner</b>：<span class="edit" contenteditable="true">〔你的名字/角色〕</span> —— 整体设计、对外汇报、红线把关</li>
+      <li><b>协作者 A</b>：<span class="edit" contenteditable="true">〔待填〕</span> —— 内容生产（文案/纪要/沉淀）</li>
+      <li><b>协作者 B</b>：<span class="edit" contenteditable="true">〔待填〕</span> —— 数据看板 / 试点运维</li>
+      <li><b>不需要采购</b>：靠现有免费 AI 工具 + 已建 skill，0 预算启动。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">7</span>里程碑与排期</h2>
+    <p>本方案先定路径，具体排期待确认后填入：</p>
+    <table>
+      <tr><th>里程碑</th><th>时间</th><th>验收标志</th></tr>
+      <tr><td>方案确认</td><td><span class="edit" contenteditable="true">__</span></td><td>领导签字/邮件确认</td></tr>
+      <tr><td>阶段1 试点跑通</td><td><span class="edit" contenteditable="true">__</span></td><td>≥2 个试点留数据</td></tr>
+      <tr><td>阶段2 内部推广</td><td><span class="edit" contenteditable="true">__</span></td><td>≥3 个 skill 复用</td></tr>
+      <tr><td>阶段3 固化制度</td><td><span class="edit" contenteditable="true">__</span></td><td>治理制度发文</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="no">8</span>量化验收（领导最爱看这条）</h2>
+    <ul>
+      <li><b>AI 工具采纳率</b>：用过的人数 ÷ 团队总数 = <span class="edit" contenteditable="true">__%</span></li>
+      <li><b>人均 AI 提效时长</b>：周报原 2h → AI 后 <span class="edit" contenteditable="true">__h</span></li>
+      <li><b>覆盖人数 / 场次</b>：博闻看板已有去重人数口径，直接复用 = <span class="edit" contenteditable="true">__人/__场</span></li>
+      <li><b>可汇报亮点</b>：≥1 个上台/发文案例（漫剧/文化周/答辩自动化）</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">9</span>红线与风险</h2>
+    <table>
+      <tr><th>红线/风险</th><th>应对</th></tr>
+      <tr><td>隐私泄露（薪资/身份证/未公开评语）</td><td>绝不喂 AI；敏感字段脱敏；本机知识库控访问</td></tr>
+      <tr><td>AI 编造（人名/数据/法条）</td><td>验证闭环：发出去前人工核对，要出处</td></tr>
+      <tr><td>对外发声越界（企微/群消息）</td><td>必须人点头才发，AI 不替发</td></tr>
+      <tr><td>没人跟（落地死在推广）</td><td>变革管理：故事化传播+里程碑+激励</td></tr>
+      <tr><td>算法不公平（招聘/绩效）</td><td>加 fairness 护栏，人复核，定期审计</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="no">10</span>下一步</h2>
+    <ul>
+      <li>领导确认本方案方向 → 填排期与占位字段</li>
+      <li>点亮必要 MCP（企微/腾讯会议/ima）授权</li>
+      <li>阶段1 挑"表彰初评"或"纪要自动化"先跑，留数据</li>
+      <li>每阶段结束复盘，数据进验收表</li>
+    </ul>
+    <div class="note">提示：黄色高亮字段（<span class="kbd">带虚线底</span>）均可直接双击编辑，填完即定稿，无需另存。</div>
+  </section>
+
+</div>
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</body>
+</html>
