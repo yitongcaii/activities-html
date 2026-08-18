@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRBP 助理岗位说明书 · 含 AI 协同职责重构</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#00c2d1; --ink:#1f2330; --muted:#6b7280;
+    --bg:#f6f7fb; --card:#ffffff; --line:#eef0f6; --soft:#f3f4fb;
+    --grad:linear-gradient(135deg,#7c5cff 0%,#00c2d1 100%);
+    --shadow:0 6px 24px rgba(40,40,90,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 80px}
+  .hero{padding:54px 22px 40px;text-align:center;
+    background:radial-gradient(1200px 400px at 50% -120px,rgba(124,92,255,.18),transparent),var(--bg)}
+  .hero .kicker{display:inline-block;font-size:13px;letter-spacing:2px;color:var(--purple);
+    background:rgba(124,92,255,.1);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:38px;font-weight:800;letter-spacing:-.5px;line-height:1.25;margin-bottom:14px}
+  .hero h1 .em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);max-width:760px;margin:0 auto;font-size:16px}
+  .org{outline:none;display:inline-block;padding:2px 8px;border-radius:8px;border:1px dashed transparent;font-size:14px}
+  .org:focus{border-color:var(--purple);background:#fff}
+  .nav{position:sticky;top:0;z-index:20;background:rgba(246,247,251,.85);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);margin-bottom:34px}
+  .nav ul{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;list-style:none;padding:11px 0;max-width:1180px;margin:0 auto}
+  .nav a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 13px;border-radius:999px;transition:.18s}
+  .nav a:hover{color:#fff;background:var(--grad)}
+  section{margin:42px 0}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .sec-no{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;
+    font-weight:800;font-size:15px;background:var(--grad);box-shadow:var(--shadow)}
+  .sec-head h2{font-size:23px;font-weight:800}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{color:var(--muted);margin-bottom:20px;font-size:15px;max-width:880px}
+  .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+  .c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}
+  .c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
+  @media(max-width:860px){.card{grid-column:span 12!important}}
+  .card h3{font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .card p,.card li{font-size:14px;color:#3a3f4d}
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .card li{padding-left:18px;position:relative}
+  .card li:before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--grad)}
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:999px;letter-spacing:.3px}
+  .p0{background:#ffe9ec;color:#e0455e}.p1{background:#fff3e0;color:#e08a2b}.p2{background:#e8f6ff;color:#1f8fd6}
+  .tag{background:var(--soft);color:var(--purple);font-size:11.5px;padding:3px 10px;border-radius:999px;font-weight:600}
+  .metric{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+  .metric div{flex:1;min-width:130px;background:var(--soft);border-radius:12px;padding:12px 14px}
+  .metric b{display:block;font-size:22px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .metric span{font-size:12px;color:var(--muted)}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;background:var(--card);
+    border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  th{background:#fafbff;text-align:left;padding:13px 14px;font-weight:700;color:#444;border-bottom:1px solid var(--line)}
+  td{padding:12px 14px;border-bottom:1px solid var(--line);color:#3a3f4d;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:860px){.roles{grid-template-columns:1fr}}
+  .role{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+  .role .av{width:42px;height:42px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:800;margin-bottom:10px}
+  .role h4{font-size:15px;margin-bottom:4px}.role .d{font-size:12px;color:var(--purple);font-weight:600;margin-bottom:8px}
+  .role p{font-size:13px;color:var(--muted)}
+  .note{background:#fff;border-left:4px solid var(--purple);border-radius:0 12px 12px 0;padding:14px 18px;margin:18px 0;
+    font-size:14px;color:#3a3f4d;box-shadow:var(--shadow)}
+  .note b{color:var(--purple)}
+  .shift{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:860px){.shift{grid-template-columns:1fr}}
+  .shift .col{border-radius:14px;padding:16px 18px;border:1px solid var(--line)}
+  .shift .old{background:linear-gradient(135deg,#fff5f6,#ffeef0);border-color:#ffd9de}
+  .shift .new{background:linear-gradient(135deg,#eef8ff,#e6f4ff);border-color:#cfe8ff}
+  .shift h4{font-size:14px;font-weight:700;margin-bottom:8px}
+  .shift ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .shift li{font-size:13px;color:#3a3f4d;padding-left:14px;position:relative}
+  .shift .old li:before{content:"✕";position:absolute;left:0;color:#e0455e;font-weight:800}
+  .shift .new li:before{content:"✓";position:absolute;left:0;color:#1f8fd6;font-weight:800}
+  .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px;padding-top:18px;border-top:1px solid var(--line)}
+  .edithint{font-size:12px;color:var(--muted);text-align:center;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="hero">
+  <span class="kicker">HR · 岗位说明书</span>
+  <h1>HRBP 助理岗位说明书<br><span class="em">含 AI 协同职责重构</span></h1>
+  <p>适用部门：<span class="org" contenteditable="true" spellcheck="false" id="org">［请填写部门名称］</span>（双击编辑，自动保存）　|　汇报对象：HRBP　|　定位：HRBP 的「延伸手臂」</p>
+</div>
+
+<div class="nav">
+  <ul>
+    <li><a href="#s1">① 岗位概览</a></li>
+    <li><a href="#s2">② 核心职责</a></li>
+    <li><a href="#s3">③ 任职要求</a></li>
+    <li><a href="#s4">④ AI 协同重构</a></li>
+    <li><a href="#s5">⑤ 考核指标</a></li>
+    <li><a href="#s6">⑥ 边界与落地</a></li>
+  </ul>
+</div>
+
+<div class="wrap">
+
+  <!-- ① 概览 -->
+  <section id="s1">
+    <div class="sec-head"><div class="sec-no">1</div><h2>岗位概览</h2><span class="sub">定位 · 价值 · 与 SSC 区别</span></div>
+    <p class="lead">HRBP 助理不是「纯事务外包」（那是 SSC），而是<strong>贴着业务 BP 跑、什么杂活细活都接、且要懂业务语境</strong>的执行+数据+协调角色。AI 协同后，从「做表跑流程的人」转型为「管 AI 工具 + 做判断的人」。</p>
+    <div class="bento">
+      <div class="card c4">
+        <h3>🎯 核心价值</h3>
+        <ul>
+          <li>把 BP 从重复事务里解放出来</li>
+          <li>做业务与 HR 职能（薪酬/培训/SSC）的桥</li>
+          <li>保证 HR 数据口径一致、可追溯</li>
+        </ul>
+      </div>
+      <div class="card c4">
+        <h3>👥 协作关系</h3>
+        <ul>
+          <li>向上：汇报 HRBP，承接其所有落地动作</li>
+          <li>横向：对接业务 admin / 项目接口人</li>
+          <li>向下游：对接 SSC / 薪酬 / 培训 / 招聘</li>
+        </ul>
+      </div>
+      <div class="card c4">
+        <h3>🔑 关键差异</h3>
+        <ul>
+          <li><b>SSC</b>：标准化事务集中处理（算薪、系统操作）</li>
+          <li><b>HRBP 助理</b>：贴业务、懂语境、接非标杂活</li>
+          <li>边界模糊处由 BP 裁定归属</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② 核心职责 -->
+  <section id="s2">
+    <div class="sec-head"><div class="sec-no">2</div><h2>核心职责（六大模块）</h2><span class="sub">职责描述 · 频率 · 关键产出</span></div>
+    <p class="lead">以下为 AI 协同前的「基准职责」，是岗位的日常基本盘；模块 ④ 展示这些职责在引入 AI 后如何被替代 / 增强 / 升级。</p>
+    <table>
+      <thead><tr><th style="width:15%">模块</th><th style="width:45%">职责描述</th><th style="width:12%">频率</th><th style="width:28%">关键产出</th></tr></thead>
+      <tbody>
+        <tr><td><b>① 事务与流程</b></td><td>入职/转正/调岗/离职手续跑动、材料收集、节点提醒；BP 日历/会议/差旅安排</td><td>日 / 周</td><td>流程台账、待办清单、考勤异常跟进</td></tr>
+        <tr><td><b>② 会议与文档</b></td><td>业务 review、1:1、人才盘点会的组织+纪要与行动项追踪；制度/SOP/汇报 PPT 整理</td><td>周 / 月</td><td>会议纪要、行动项看板、汇报材料</td></tr>
+        <tr><td><b>③ 招聘协同</b></td><td>简历初筛、面试排期、候选人沟通、面试反馈回收；招聘数据台账维护</td><td>日 / 周</td><td>招聘周报、漏斗数据、面试安排表</td></tr>
+        <tr><td><b>④ 员工关系与活动</b></td><td>员工访谈/调研发放回收、首问接待（FAQ）；团建/文化活动的落地执行</td><td>周 / 项目</td><td>访谈记录、活动执行清单、问题库</td></tr>
+        <tr><td><b>⑤ 数据与分析支撑</b></td><td>月度 HR 数据看板更新（人头数/离职率/入职率）、人才盘点材料准备、敬业度数据整理</td><td>月 / 季度</td><td>月度报表、盘点包、数据透视</td></tr>
+        <tr><td><b>⑥ 项目推进助手</b></td><td>文化落地/培训运营（排期、报名、签到、反馈）/ 系统性项目（如 AI 文化采纳）进度跟踪</td><td>项目制</td><td>项目周报、运营数据、风险清单</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ③ 任职要求 -->
+  <section id="s3">
+    <div class="sec-head"><div class="sec-no">3</div><h2>任职要求（能力模型）</h2><span class="sub">硬技能 · 软技能 · 工具</span></div>
+    <div class="roles">
+      <div class="role"><div class="av">技</div><h4>硬技能</h4><div class="d">能把数据做对</div>
+        <p>Excel 透视表/VLOOKUP 熟练；数据敏感度（看得出异常）；基础 PPT 排版；文档结构化能力。</p></div>
+      <div class="role"><div class="av">软</div><h4>软技能</h4><div class="d">能扛事、靠得住</div>
+        <p>沟通协调强、保密意识（接触薪酬/人才敏感信息）、条理性与闭环习惯、主动补位意识。</p></div>
+      <div class="role"><div class="av">具</div><h4>工具与认知</h4><div class="d">会用新东西</div>
+        <p>企微/腾讯文档/日历熟练；愿意用 AI 提效（提示词基础）；理解业务语境，不只是执行。</p></div>
+    </div>
+  </section>
+
+  <!-- ④ AI 协同重构 -->
+  <section id="s4">
+    <div class="sec-head"><div class="sec-no">4</div><h2>AI 协同后职责重构（核心亮点）</h2><span class="sub">替代 / 增强 / 新增 · 对应 HR AI 方案场景</span></div>
+    <p class="lead">把本岗六大模块映射到《HR AI 探索方案》的 AI 场景：哪些被 AI 替代、哪些被增强、以及由此<strong>新增</strong>的职责。结论——助理的价值从「体力」转向「判断力 + AI 治理」。</p>
+    <table>
+      <thead><tr><th style="width:20%">原工作模块</th><th style="width:22%">对应 AI 场景</th><th style="width:14%">转型</th><th style="width:44%">转型后角色</th></tr></thead>
+      <tbody>
+        <tr><td>首问接待 / FAQ</td><td>智能问答与共享服务</td><td><span class="pill p0">替代</span></td><td>日常问答交给 AI 助手；助理转向复杂/敏感 case 处理与例外升级</td></tr>
+        <tr><td>手工月度报表</td><td>报表 / People Analytics 自助问答</td><td><span class="pill p0">替代</span></td><td>BP/业务自助出数；助理转做「数据口径校验 + 异常解读」</td></tr>
+        <tr><td>会议记录 + 行动项</td><td>管理者 Copilot</td><td><span class="pill p0">替代</span></td><td>AI 出纪要/备料；助理做事实核对与行动项闭环追踪</td></tr>
+        <tr><td>调研开放题整理</td><td>调研自动洞察</td><td><span class="pill p0">替代</span></td><td>AI 聚类主题情感；助理做结论把关与业务语言转译</td></tr>
+        <tr><td>培训运营（报名签到反馈）</td><td>培训推荐 + 运营自动化</td><td><span class="pill p1">增强</span></td><td>系统跑流程；助理做体验设计与效果跟踪</td></tr>
+        <tr><td>简历初筛 / 面试安排</td><td>招聘筛选自动化</td><td><span class="pill p1">增强</span></td><td>AI 初筛；助理聚焦候选人体验与面试协调</td></tr>
+        <tr><td>人才盘点材料准备</td><td>继任高潜 + ONA</td><td><span class="pill p1">增强</span></td><td>AI 整合多源数据；助理做数据治理与校准会支撑</td></tr>
+        <tr><td>文化落地项目推进</td><td>管理者 Copilot / 内容生成</td><td><span class="pill p2">新增</span></td><td><b>用 AI 生产物料</b>（文案/海报/话术），助理做创意把关与落地节奏</td></tr>
+      </tbody>
+    </table>
+    <div class="shift" style="margin-top:16px">
+      <div class="col old"><h4>🚫 AI 前重心</h4><ul>
+        <li>做表、拉数、排版</li>
+        <li>跑流程、催节点</li>
+        <li>记纪要、收反馈</li>
+        <li>重复问答、事务兜底</li>
+      </ul></div>
+      <div class="col new"><h4>✅ AI 后重心</h4><ul>
+        <li><b>管 AI 工具</b>：提示词、校验、权限</li>
+        <li><b>数据治理</b>：保证喂给 AI 的数据质量</li>
+        <li><b>做判断</b>：情绪、敏感沟通、例外</li>
+        <li><b>译结果</b>：把 AI 产出讲给 BP/业务听</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- ⑤ 考核指标 -->
+  <section id="s5">
+    <div class="sec-head"><div class="sec-no">5</div><h2>考核指标（定量验收）</h2><span class="sub">事务质量 · 效率 · AI 协同</span></div>
+    <p class="lead">指标分三档：保底（事务不出错）、进阶（效率提升）、战略（AI 协同贡献）。建议试用期看前两项，转正后纳入第三项。</p>
+    <div class="metric">
+      <div><b>0</b><span>流程遗漏 / 数据差错（红线，0 容忍）</span></div>
+      <div><b>≥40%</b><span>重复事务提效（AI 协同后工时下降）</span></div>
+      <div><b>100%</b><span>月度报表准时率</span></div>
+      <div><b>≥90%</b><span>BP / 业务满意度</span></div>
+    </div>
+    <table style="margin-top:16px">
+      <thead><tr><th style="width:24%">维度</th><th style="width:38%">指标</th><th style="width:38%">口径 / 验收</th></tr></thead>
+      <tbody>
+        <tr><td><b>事务质量</b></td><td>流程节点按时闭环率、数据差错次数</td><td>关键流程 100% 闭环；差错月度 ≤1 次</td></tr>
+        <tr><td><b>响应效率</b></td><td>员工/业务问询平均响应时长</td><td>常规咨询 ≤4 小时响应（AI 接管后进一步压缩）</td></tr>
+        <tr><td><b>数据支撑</b></td><td>月度看板准时率、盘点材料一次通过率</td><td>100% 准时；材料 BP 无需大改即过</td></tr>
+        <tr><td><b>AI 协同贡献</b></td><td>已落地 AI 场景采用率、人工工时节约</td><td>本岗可自动化事项 ≥60% 跑在 AI 上；季度节约工时记录</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ⑥ 边界与落地 -->
+  <section id="s6">
+    <div class="sec-head"><div class="sec-no">6</div><h2>边界划分与落地建议</h2><span class="sub">谁做什么 · 怎么招 · 怎么培养</span></div>
+    <div class="bento">
+      <div class="card c6">
+        <h3>📐 三方边界（避免抢活 / 漏活）</h3>
+        <table>
+          <thead><tr><th>角色</th><th>负责</th><th>不负责</th></tr></thead>
+          <tbody>
+            <tr><td><b>SSC</b></td><td>标准化系统操作（算薪、入职系统录入）</td><td>业务语境判断、非标协调</td></tr>
+            <tr><td><b>HRBP 助理</b></td><td>业务侧落地执行、数据整合、协调、AI 工具运营</td><td>最终人事决策、薪酬核定</td></tr>
+            <tr><td><b>HRBP</b></td><td>策略、决策、关键人才与敏感沟通</td><td>事务跑动、手工报表</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card c6">
+        <h3>🧭 落地三步走</h3>
+        <ul>
+          <li><b>招</b>：看「数据敏感度 + 条理 + 愿用 AI」，不唯年限；给一份真实数据表让其当场做透视作为笔试。</li>
+          <li><b>带</b>：前 1 个月跟 BP 跑全流程，把六大模块拆成 SOP 卡片；第 2 个月引入 1-2 个 AI 场景（问答/报表）减负。</li>
+          <li><b>养</b>：季度复盘 AI 协同贡献，逐步把「做表」时间转移到「管 AI + 做判断」，晋升通道指向 HRBP / HR 数据。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">💡 <b>一句话总结</b>：HRBP 助理的岗位演进方向 = <b>事务执行者 → AI 协同运营者 → HR 数据/业务伙伴</b>。写岗位说明书时，建议把「AI 工具运营」作为一项正式职责写进去，否则招来的人会继续陷在手工表里。</div>
+  </section>
+
+  <div class="footer">📌 本页由 yitong 沉淀整理 · 文化活动知识库</div>
+  <div class="edithint">提示：顶部部门名称可双击编辑，关闭页面后自动保留（本地存储）。</div>
+</div>
+
+<script>
+  const KEY='hrbp_jd_v1';
+  const el=document.getElementById('org');
+  const saved=localStorage.getItem(KEY);
+  if(saved) el.textContent=saved;
+  el.addEventListener('input',()=>localStorage.setItem(KEY,el.textContent.trim()));
+  el.addEventListener('blur',()=>{ if(!el.textContent.trim()) el.textContent='［请填写部门名称］'; });
+</script>
+</body>
+</html>
