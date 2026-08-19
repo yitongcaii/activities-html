@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳具身智能 · 薪酬对标与带宽诊断报告</title>
+<style>
+  :root{
+    --bg:#f4f5fb; --card:#ffffff; --ink:#1a1d2e; --muted:#6b7280;
+    --purple:#7c5cff; --cyan:#22d3ee; --line:#eceef5;
+    --risk:#ef4444; --risk-bg:#fef2f2;
+    --high:#f59e0b; --high-bg:#fffbeb;
+    --over:#f97316; --over-bg:#fff7ed;
+    --under:#3b82f6; --under-bg:#eff6ff;
+    --inv:#8b5cf6; --inv-bg:#f5f3ff;
+    --ok:#10b981; --ok-bg:#ecfdf5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; padding:32px 20px 60px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#7c5cff 0%,#22d3ee 100%);
+    border-radius:24px; padding:34px 36px; color:#fff; margin-bottom:22px;
+    box-shadow:0 14px 40px rgba(124,92,255,.28);
+  }
+  .hero .role{font-size:13px;letter-spacing:1px;opacity:.92;font-weight:600}
+  .hero h1{font-size:30px;font-weight:800;margin:8px 0 6px;letter-spacing:.5px}
+  .hero p{font-size:14px;opacity:.95;max-width:760px}
+  .hero .meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px}
+  .hero .meta span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+    padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+  /* Pills */
+  .pill{display:inline-block;padding:3px 11px;border-radius:999px;font-size:12px;font-weight:700;line-height:1.7;white-space:nowrap}
+  .pill.risk{background:var(--risk-bg);color:var(--risk)}
+  .pill.high{background:var(--high-bg);color:var(--high)}
+  .pill.over{background:var(--over-bg);color:var(--over)}
+  .pill.under{background:var(--under-bg);color:var(--under)}
+  .pill.inv{background:var(--inv-bg);color:var(--inv)}
+  .pill.ok{background:var(--ok-bg);color:var(--ok)}
+  .pill.dim{background:#eef0f7;color:var(--muted)}
+  .pill.tag{background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff}
+  /* Grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:16px}
+  .card{background:var(--card);border-radius:18px;padding:20px 22px;box-shadow:0 4px 20px rgba(20,20,40,.06);border:1px solid var(--line)}
+  .card h3{font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .card h3 .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#7c5cff,#22d3ee)}
+  .stat{font-size:30px;font-weight:800;letter-spacing:.5px}
+  .stat small{font-size:13px;font-weight:600;color:var(--muted);margin-left:4px}
+  .sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+  /* Job family bars */
+  .jf{margin-bottom:12px}
+  .jf .top{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px}
+  .jf .top .dev{font-weight:700}
+  .bar{height:9px;border-radius:999px;background:#eef0f7;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(135deg,#7c5cff,#22d3ee)}
+  /* Tables */
+  .full{background:var(--card);border-radius:18px;padding:22px 24px;box-shadow:0 4px 20px rgba(20,20,40,.06);border:1px solid var(--line);margin-bottom:16px}
+  .full h2{font-size:17px;font-weight:800;margin-bottom:4px}
+  .full .cap{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  th{font-size:12px;color:var(--muted);font-weight:700;background:#fafbff}
+  tbody tr:hover{background:#fafbff}
+  td.num{font-variant-numeric:tabular-nums;font-weight:600}
+  .anom{display:flex;flex-direction:column;gap:10px}
+  .anom .row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:12px;background:#fafbff;border:1px solid var(--line)}
+  .anom .row .txt{font-size:13px;color:#374151}
+  .anom .row .txt b{color:var(--ink)}
+  .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px}
+  .summary-grid .box{text-align:center;padding:14px 8px;border-radius:14px;border:1px solid var(--line);background:#fafbff}
+  .summary-grid .box .n{font-size:22px;font-weight:800;line-height:1.25}
+  .summary-grid .box .l{font-size:12px;color:var(--muted);margin-top:2px}
+  .note{font-size:12.5px;color:var(--muted);background:#fafbff;border:1px dashed var(--line);border-radius:12px;padding:12px 14px;margin-top:12px}
+  .note b{color:var(--ink)}
+  /* Flip table highlight */
+  .flip td.chg{font-weight:800}
+  .flip td .arrow{color:var(--over);font-weight:800}
+  /* Footer */
+  footer{margin-top:24px;text-align:center;font-size:12.5px;color:var(--muted);padding:18px;border-top:1px solid var(--line)}
+  footer .disc{max-width:820px;margin:0 auto 10px;line-height:1.7}
+  footer .disc span{color:var(--purple);font-weight:700}
+  .warn{background:var(--inv-bg);border:1px solid #e3d9ff;color:#5b3aa6;font-size:12.5px;padding:10px 14px;border-radius:12px;margin-top:12px;font-weight:600}
+  .exec{border:2px solid var(--purple)!important;background:linear-gradient(135deg,#faf8ff,#f3fbff)!important}
+  .exec h2{color:var(--purple)}
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:560px){.hero{padding:24px}.hero h1{font-size:23px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero reveal">
+    <div class="role">深圳 · 具身智能行业 ｜ 薪酬对标与带宽诊断助手</div>
+    <h1>薪酬对标与带宽诊断报告</h1>
+    <p>服务 HRBP / 薪酬 / OD。三件事:市场竞争力诊断 · 内部带宽合规 · 潜在倒挂检测。本报告由虚拟测试数据跑通流程,市场分位为<b>软基准(近似、非报告分位、置信中-低)</b>,仅作量级参考。职族已收敛至行业 5 大主干(研发算法 · 硬件结构 · 控制嵌入式 · 软件系统 · 测试)。</p>
+    <div class="meta">
+      <span>样本 N=11</span>
+      <span>职族:5 大主干</span>
+      <span>含市场分位:是(软基准)</span>
+      <span>含带宽基准:是</span>
+      <span>生成日期 2026-08-19</span>
+    </div>
+  </div>
+
+  <!-- Executive summary (CORE CONCLUSION, placed first) -->
+  <div class="full exec reveal">
+    <h2>📌 核心结论 · 执行摘要(先看这里)</h2>
+    <div class="cap">先给结论,再给证据。异常清单仅代号对,⚠️ 仅限授权薪酬/BP 角色可见。</div>
+    <div class="anom">
+      <div class="row"><span class="pill risk">竞争力风险 1</span><div class="txt"><b>E01</b> 52万 vs 市场 P50 90万 → 缺口 <b>42.2%</b></div></div>
+      <div class="row"><span class="pill high">薪酬偏高 2</span><div class="txt"><b>E09</b> 88万 vs P50 58万(偏高 51.7%) ｜ <b>E02</b> 145万 vs P50 110万(偏高 31.8%)</div></div>
+      <div class="row"><span class="pill over">超上限 2</span><div class="txt"><b>E09</b> 88万 超内部带宽 [40,75](+17.3%) ｜ <b>E02</b> 145万 超 [70,140](+3.6%)</div></div>
+      <div class="row"><span class="pill inv">潜在倒挂 1</span><div class="txt"><b>E02</b>(145万,下级·控制L8) &gt; <b>E16</b>(130万,上级·控制总监L9) → 差值 <b>15万</b></div></div>
+      <div class="row"><span class="pill dim">低于下限 0</span><div class="txt">本次无低于下限条目</div></div>
+    </div>
+    <div class="note">
+      <b>关键发现:</b>① 共 11 条样本,分布 5 主干职族;检出异常 — 竞争力风险 1、薪酬偏高 2、超上限 2、低于下限 0、潜在倒挂 1 对。<br>
+      ② 职族内部公平性待关注:控制嵌入式中位 130万(+47.7%)显著偏高,测试族 38万(-56.8%)显著偏低,落差近一档。<br>
+      ③ <b>市场分位为软基准(近似、非报告分位、置信中-低)</b>,推算项(E11/E14)置信更低;来源年份 2025–2026、城市 深圳、行业 AI/机器人(具身智能为代理口径)。<b>正式调薪决策须以你授权的 licensed 报告分位为准。</b>职族已收敛至行业 5 主干(研发算法/硬件结构/控制嵌入式/软件系统/测试),原职能、产品、数据闭环族不在核心诊断范围。
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card reveal">
+      <h3><span class="dot"></span>样本概览</h3>
+      <div class="stat">11<small>条</small></div>
+      <div class="sub">研发算法 3 · 硬件结构 2 · 控制嵌入式 3 · 软件系统 2 · 测试 1</div>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">
+        <span class="pill tag">脱敏代号</span>
+        <span class="pill dim">无姓名/工号</span>
+        <span class="pill dim">深圳 2026</span>
+      </div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="dot"></span>异常总览</h3>
+      <div class="summary-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="box"><div class="n" style="color:var(--risk)">1</div><div class="l">竞争力风险</div></div>
+        <div class="box"><div class="n" style="color:var(--high)">2</div><div class="l">薪酬偏高</div></div>
+        <div class="box"><div class="n" style="color:var(--over)">2</div><div class="l">超上限</div></div>
+        <div class="box"><div class="n" style="color:var(--under)">0</div><div class="l">低于下限</div></div>
+      </div>
+      <div class="warn" style="margin-top:12px">潜在倒挂 1 对(E02 &gt; E16)｜异常清单仅代号对,仅限授权薪酬/BP 角色可见</div>
+    </div>
+    <div class="card reveal">
+      <h3><span class="dot"></span>职族薪酬中位数</h3>
+      <div class="jf">
+        <div class="top"><span>研发算法</span><span class="dev">88万 · 0.0%</span></div>
+        <div class="bar"><i style="width:68%"></i></div>
+      </div>
+      <div class="jf">
+        <div class="top"><span>硬件结构</span><span class="dev" style="color:var(--under)">73万 · -17.0%</span></div>
+        <div class="bar"><i style="width:56%"></i></div>
+      </div>
+      <div class="jf">
+        <div class="top"><span>控制嵌入式</span><span class="dev" style="color:var(--ok)">130万 · +47.7%</span></div>
+        <div class="bar"><i style="width:100%"></i></div>
+      </div>
+      <div class="jf">
+        <div class="top"><span>软件系统</span><span class="dev" style="color:var(--ok)">95万 · +8.0%</span></div>
+        <div class="bar"><i style="width:73%"></i></div>
+      </div>
+      <div class="jf">
+        <div class="top"><span>测试</span><span class="dev" style="color:var(--under)">38万 · -56.8%</span></div>
+        <div class="bar"><i style="width:29%"></i></div>
+      </div>
+      <div class="sub">整体中位 88万 ｜ 控制嵌入式显著偏高、测试族显著偏低,内部公平性待关注</div>
+    </div>
+  </div>
+
+  <!-- Input sample (sorted by code DESC) -->
+  <div class="full reveal">
+    <h2>输入样本(虚拟 · 代号脱敏 · 按代号降序)</h2>
+    <div class="cap">年薪单位:万元/年 ｜ 市场分列为软基准近似 P25/P50/P75 ｜ 带宽为内部 [min/mid/max] ｜ 职族已收敛至行业 5 主干</div>
+    <table>
+      <thead><tr><th>代号</th><th>职族/级</th><th>岗位</th><th>年薪</th><th>市场 P25/P50/P75</th><th>带宽[min,mid,max]</th><th>管理</th><th>上下级</th></tr></thead>
+      <tbody>
+        <tr><td class="num">E16</td><td>控制嵌入式L9</td><td>控制总监</td><td class="num">130</td><td class="num">110/140/170</td><td class="num">80/110/145</td><td>是</td><td>上级←E02</td></tr>
+        <tr><td class="num">E15</td><td>测试L6</td><td>机器人测试</td><td class="num">38</td><td class="num">30/42/55</td><td class="num">28/40/55</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E14</td><td>软件系统L9</td><td>ROS2系统架构</td><td class="num">120</td><td class="num">85/115/150</td><td class="num">80/110/145</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E13</td><td>软件系统L7</td><td>仿真系统开发</td><td class="num">70</td><td class="num">50/68/88</td><td class="num">48/65/85</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E12</td><td>控制嵌入式L6</td><td>嵌入式软件</td><td class="num">45</td><td class="num">35/48/62</td><td class="num">32/45/60</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E11</td><td>硬件结构L8</td><td>机械结构工程师</td><td class="num">58</td><td class="num">40/55/72</td><td class="num">38/52/70</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E10</td><td>研发算法L7</td><td>算法工程师</td><td class="num">88</td><td class="num">70/90/110</td><td class="num">50/80/110</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E09</td><td>硬件结构L6</td><td>硬件工程师</td><td class="num">88</td><td class="num">44/58/74</td><td class="num">40/55/75</td><td>否</td><td>—</td></tr>
+        <tr><td class="num">E03</td><td>研发算法L10</td><td>首席科学家</td><td class="num">260</td><td class="num">160/200/260</td><td class="num">160/220/300</td><td>否(专家)</td><td>—</td></tr>
+        <tr><td class="num">E02</td><td>控制嵌入式L8</td><td>机器人控制</td><td class="num">145</td><td class="num">90/110/130</td><td class="num">70/100/140</td><td>否</td><td>下级→E16</td></tr>
+        <tr><td class="num">E01</td><td>研发算法L7</td><td>算法工程师</td><td class="num">52</td><td class="num">70/90/110</td><td class="num">50/80/110</td><td>否</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Soft benchmark (sorted by code DESC) -->
+  <div class="full reveal">
+    <h2>软基准来源与近似(深圳 · 2025-2026 · AI/机器人 · 按代号降序)</h2>
+    <div class="cap">近似方法:区间 [L,H] 与中位 M(来源给则取,不给取中点),P25≈mid(L,M)、P75≈mid(M,H)。<b>非真实分位报告</b>。职族已对应行业主干。</div>
+    <table>
+      <thead><tr><th>代号</th><th>职族/级</th><th>锚点来源</th><th>P25</th><th>P50</th><th>P75</th><th>置信</th></tr></thead>
+      <tbody>
+        <tr><td class="num">E16</td><td>控制嵌入式L9 总监</td><td>尚贤达架构总监80-200(中位140)</td><td class="num">110</td><td class="num">140</td><td class="num">170</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E15</td><td>测试L6</td><td>机器人测试招聘锚点</td><td class="num">30</td><td class="num">42</td><td class="num">55</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E14</td><td>软件系统L9 ROS2</td><td>系统架构锚点 + 总监区间推算</td><td class="num">85</td><td class="num">115</td><td class="num">150</td><td><span class="pill dim">中(推算)</span></td></tr>
+        <tr><td class="num">E13</td><td>软件系统L7 仿真</td><td>仿真系统开发招聘锚点</td><td class="num">50</td><td class="num">68</td><td class="num">88</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E12</td><td>控制嵌入式L6 嵌入式</td><td>嵌入式软件通用锚点(招聘口径)</td><td class="num">35</td><td class="num">48</td><td class="num">62</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E11</td><td>硬件结构L8 机械</td><td>机械结构均值≈26.8万/年 + 招聘live结构岗推算</td><td class="num">40</td><td class="num">55</td><td class="num">72</td><td><span class="pill dim">中(推算)</span></td></tr>
+        <tr><td class="num">E10</td><td>研发算法L7 算法</td><td>尚贤达高级50-120 + irenshi模型训练调优70-130(中位90)</td><td class="num">70</td><td class="num">90</td><td class="num">110</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E09</td><td>硬件结构L6 硬件</td><td>尚贤达中级30-60 + 招聘live运动控制52-97</td><td class="num">44</td><td class="num">58</td><td class="num">74</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E03</td><td>研发算法L10 科学家</td><td>尚贤达科学家120-300(中位200)</td><td class="num">160</td><td class="num">200</td><td class="num">260</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E02</td><td>控制嵌入式L8 控制</td><td>尚贤达高级50-120 + 招聘live具身算法90-120 + 模型训练70-130</td><td class="num">90</td><td class="num">110</td><td class="num">130</td><td><span class="pill ok">中</span></td></tr>
+        <tr><td class="num">E01</td><td>研发算法L7 算法</td><td>尚贤达高级50-120 + irenshi模型训练调优70-130(中位90)</td><td class="num">70</td><td class="num">90</td><td class="num">110</td><td><span class="pill ok">中</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Competitiveness (anomalies DESC, normals DESC) -->
+  <div class="full reveal">
+    <h2>【竞争力诊断】当前薪酬 vs 市场 P50(基于软基准)</h2>
+    <div class="cap">低于 P25 标【竞争力风险】;P25~P75 正常;高于 P75 标【偏高】。缺口% = (P50−当前)/P50。</div>
+    <div class="anom">
+      <div class="row"><span class="pill high">偏高</span><div class="txt"><b>E09</b> 88万 vs P50 58万 → 偏高 <b>51.7%</b></div></div>
+      <div class="row"><span class="pill high">偏高</span><div class="txt"><b>E02</b> 145万 vs P50 110万 → 偏高 <b>31.8%</b></div></div>
+      <div class="row"><span class="pill risk">竞争力风险</span><div class="txt"><b>E01</b> 52万 vs P50 90万 → 缺口 <b>42.2%</b></div></div>
+      <div class="row"><span class="pill ok">正常</span><div class="txt"><b>E16</b> 130万 ｜ <b>E15</b> 38万 ｜ <b>E14</b> 120万 ｜ <b>E13</b> 70万 ｜ <b>E12</b> 45万 ｜ <b>E11</b> 58万 ｜ <b>E10</b> 88万 ｜ <b>E03</b> 260万(=软P75边界),共 8 条落 P25~P75 区间内</div></div>
+    </div>
+  </div>
+
+  <!-- Band compliance (anomalies DESC, normals DESC) -->
+  <div class="full reveal">
+    <h2>【带宽合规】当前薪酬 vs 内部带宽 [min,max]</h2>
+    <div class="cap">区间内正常;超 max 标【超上限】;低于 min 标【低于下限】。超出幅度 = 差值 / 边界。</div>
+    <div class="anom">
+      <div class="row"><span class="pill over">超上限</span><div class="txt"><b>E09</b> 88万 超 [40,75] → 超出 <b>13万 (17.3%)</b></div></div>
+      <div class="row"><span class="pill over">超上限</span><div class="txt"><b>E02</b> 145万 超 [70,140] → 超出 <b>5万 (3.6%)</b></div></div>
+      <div class="row"><span class="pill ok">正常</span><div class="txt">E16 · E15 · E14 · E13 · E12 · E11 · E10 · E03 · E01 均落区间内</div></div>
+    </div>
+  </div>
+
+  <!-- Inversion -->
+  <div class="full reveal">
+    <h2>【潜在倒挂】下属 vs 上级(仅给代号对)</h2>
+    <div class="cap">⚠️ 仅限授权薪酬/BP 角色可见 ｜ 若给上下级代号且下属 &gt; 上级 标【潜在倒挂】</div>
+    <div class="anom">
+      <div class="row"><span class="pill inv">潜在倒挂</span><div class="txt"><b>E02</b>(145万,下级·控制L8) vs <b>E16</b>(130万,上级·控制总监L9) → 差值 <b>15万</b></div></div>
+    </div>
+    <div class="note">本批仅 E02/E16 提供上下级关系,倒挂检测覆盖不全;其余条目未提供上级代号,暂不判定。</div>
+  </div>
+
+  <!-- Flip comparison -->
+  <div class="full reveal">
+    <h2>⚠️ 关键提示:基准来源直接翻转结论</h2>
+    <div class="cap">对比"旧版(含职能/产品·虚拟基准)"与"本版(5 主干·软基准)"的竞争力判定差异——证明竞争力结论高度依赖基准来源。</div>
+    <table class="flip">
+      <thead><tr><th>条目</th><th>旧版基准</th><th>本版软基准</th><th>原因</th></tr></thead>
+      <tbody>
+        <tr><td class="num">E02 控制嵌入式L8</td><td><span class="pill ok">正常</span></td><td class="chg"><span class="arrow">→</span> <span class="pill high">偏高</span></td><td>真实资深控制/算法岗上限更高(130万),145万超了</td></tr>
+        <tr><td class="num">E09 硬件结构L6</td><td><span class="pill ok">正常</span></td><td class="chg"><span class="arrow">→</span> <span class="pill high">偏高</span></td><td>真实硬件工程师基准中位58万,88万偏高</td></tr>
+        <tr><td class="num">职能/产品族</td><td><span class="pill risk">含多项异常</span></td><td class="chg"><span class="arrow">→</span> <span class="pill dim">移出主干</span></td><td>非行业核心族,无具身专属薪酬锚点,不再进入核心诊断</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">软基准是二手近似,只该用作"量级参考/兜底";正式调薪决策必须以你授权的 licensed 报告分位为准。</div>
+  </div>
+
+  <footer>
+    <div class="disc">
+      <span>纪律:</span>输入须脱敏(代号/工号哈希),出现姓名/真实工号即退;市场分位只认你提供的外部报告,绝不臆造;异常清单仅给代号对、不落姓名,提示"仅限授权薪酬/BP角色可见";不自动通知员工/主管;不做单方不利决策(不自动降薪/淘汰);结论只给数据依据。<br>
+      本报告为虚拟测试数据 + 软基准跑通演示,非真实员工薪酬结论。
+    </div>
+    📌 本页由 yitong 沉淀整理 · 文化活动知识库
+  </footer>
+
+</div>
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
