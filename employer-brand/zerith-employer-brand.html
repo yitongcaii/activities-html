@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZERITH 零次方机器人 · 雇主品牌建设全案</title>
+<style>
+  :root{
+    --purple:#7C5CFC; --purple-d:#5B3FD6; --cyan:#22D3EE; --cyan-d:#06B6D4;
+    --ink:#1E1B3A; --sub:#5B5870; --line:#ECE9F7; --bg:#F7F6FE; --card:#FFFFFF;
+    --g1:linear-gradient(135deg,#7C5CFC 0%,#22D3EE 100%);
+    --g2:linear-gradient(135deg,#A78BFA 0%,#67E8F9 100%);
+    --shadow:0 10px 30px rgba(124,92,252,.10); --shadow-h:0 16px 44px rgba(124,92,252,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:var(--purple-d);text-decoration:none}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:84px 0 70px;color:#fff;background:radial-gradient(120% 120% at 10% 0%,#5B3FD6 0%,#7C5CFC 40%,#22D3EE 120%)}
+  .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.12);filter:blur(8px)}
+  .hero::before{content:"";position:absolute;left:-80px;bottom:-140px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .hero .wrap{position:relative;z-index:2}
+  .kicker{display:inline-flex;gap:8px;align-items:center;font-size:13px;letter-spacing:.5px;background:rgba(255,255,255,.16);padding:7px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+  .hero h1{font-size:42px;line-height:1.25;margin:22px 0 14px;font-weight:800;letter-spacing:-.5px}
+  .hero h1 .hl{background:linear-gradient(90deg,#fff,#D9FBFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{font-size:18px;opacity:.95;max-width:680px}
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .pill{font-size:13px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:6px 13px;border-radius:999px}
+  .meta{margin-top:30px;font-size:13px;opacity:.85}
+
+  /* SECTION */
+  section{padding:54px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-no{font-size:14px;font-weight:800;color:#fff;background:var(--g1);padding:5px 12px;border-radius:10px;letter-spacing:.5px}
+  .sec-head h2{font-size:27px;font-weight:800;letter-spacing:-.3px}
+  .sec-head .en{font-size:13px;color:var(--sub);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+  .lead{color:var(--sub);font-size:15.5px;max-width:760px;margin-bottom:26px}
+
+  /* BENTO */
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow);transition:.25s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
+  .card .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:var(--g2);margin-bottom:14px}
+  .card h3{font-size:18px;font-weight:800;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--sub)}
+  .c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}
+  .feat{border-left:4px solid var(--purple)}
+
+  /* WHY NOW list */
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .why .card .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--purple-d);background:#EFEBFF;padding:4px 10px;border-radius:8px;margin-bottom:12px}
+
+  /* PERSONA */
+  .persona{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .persona .card{padding:26px}
+  .persona .av{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:26px;color:#fff;background:var(--g1);margin-bottom:14px}
+  .persona ul{list-style:none;margin-top:12px}
+  .persona li{font-size:14px;color:var(--sub);padding:7px 0 7px 22px;position:relative}
+  .persona li::before{content:"▹";position:absolute;left:0;color:var(--cyan-d);font-weight:800}
+
+  /* CHANNEL */
+  .chan{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .chan .card .h{font-weight:800;font-size:16px;margin-bottom:4px}
+  .chan .card .d{font-size:13px;color:var(--sub);margin-bottom:14px}
+  .chan .chip{display:inline-block;font-size:12px;background:#EEF9FC;color:#0E7490;padding:5px 11px;border-radius:999px;margin:0 6px 8px 0}
+
+  /* ROADMAP */
+  .road{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .road .card{position:relative;padding-top:30px}
+  .road .q{position:absolute;top:-14px;left:24px;font-size:13px;font-weight:800;color:#fff;background:var(--g1);padding:5px 13px;border-radius:999px}
+  .road li{font-size:13.5px;color:var(--sub);list-style:none;padding:6px 0 6px 18px;position:relative}
+  .road li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:50%;background:var(--cyan-d)}
+
+  /* METRICS */
+  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .kpi .card{text-align:center;padding:26px 18px}
+  .kpi .n{font-size:30px;font-weight:800;background:var(--g1);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* SLOGAN board */
+  .slogan{background:var(--g1);border-radius:22px;padding:34px;color:#fff;box-shadow:var(--shadow-h)}
+  .slogan h3{font-size:16px;opacity:.9;margin-bottom:18px;font-weight:700;letter-spacing:.5px}
+  .slogan .row{display:flex;flex-wrap:wrap;gap:14px}
+  .slogan .s{flex:1;min-width:220px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:18px;font-size:17px;font-weight:700}
+  .slogan .s small{display:block;font-size:12.5px;font-weight:500;opacity:.85;margin-top:6px}
+
+  .note{background:#FFF7E6;border:1px solid #FFE2A8;border-radius:14px;padding:14px 18px;font-size:13.5px;color:#8A5B00;margin-top:18px}
+  .note b{color:#7A4E00}
+
+  footer{padding:40px 0 56px;text-align:center;color:var(--sub);font-size:13px;border-top:1px solid var(--line);margin-top:30px}
+  footer .ft{display:inline-block;background:#EFEBFF;color:var(--purple-d);padding:7px 16px;border-radius:999px;font-weight:600}
+
+  @media(max-width:780px){
+    .bento,.why,.chan,.road,.kpi,.persona{grid-template-columns:1fr}
+    .c2,.c3,.c4,.c6{grid-column:span 1}
+    .hero h1{font-size:30px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">● EMPLOYER BRAND · 雇主品牌全案</span>
+    <h1>与「零」一起，<span class="hl">定义具身智能的下一个十年</span></h1>
+    <p class="sub">合肥零次方机器人（Zerith Robotics）雇主品牌建设方案 —— 从「被看见」到「被选择」，把硬核技术故事变成人才吸引力。</p>
+    <div class="pill-row">
+      <span class="pill">具身智能 · 人形机器人</span>
+      <span class="pill">清华 AI&Robot 实验室孵化</span>
+      <span class="pill">00后极客团队</span>
+      <span class="pill">亿元级融资（A轮）</span>
+      <span class="pill">合肥 / 深圳 / 东京 三地</span>
+    </div>
+    <div class="meta">方案版本 v1.0 · 2026.08 · 战略框架草案（内容可编辑，公司事实基于公开资料）</div>
+  </div>
+</header>
+
+<!-- 1 WHY NOW -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">01</span><h2>为什么是现在</h2><span class="en">Why Now</span></div>
+    <p class="lead">具身智能在 2025–2026 进入爆发期，人形机器人从论文走向真实场景。但顶尖算法与硬件人才极度稀缺，初创公司<strong>不是靠薪资堆，而是靠「品牌」抢人</strong>。零次方的故事已经够硬，缺的是「被知道」。</p>
+    <div class="why">
+      <div class="card"><span class="tag">赛道窗口</span><h3>风口正盛，但噪音也大</h3><p>人形机器人融资与关注度空前，候选人每天被大厂、独角兽、研究院三面夹击，初创必须有一个「非你不可」的理由。</p></div>
+      <div class="card"><span class="tag">零次方资产</span><h3>成立 18 个月的成绩够讲</h3><p>亿元级融资、三地布局、国内首家实现专项场景长序列多任务连贯操作——这是真实的技术叙事，不是包装。</p></div>
+      <div class="card"><span class="tag">当前痛点</span><h3>曝光被大厂碾压</h3><p>校招端学生先投大厂；社招端「稳定性叙事」难破。雇主品牌要补的，正是「知道你、信你、想来」这一环。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 POSITIONING -->
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">02</span><h2>雇主品牌定位</h2><span class="en">Positioning</span></div>
+    <p class="lead">一句话说清「在零次方工作意味着什么」。我们不跟大厂拼流程与稳定，我们拼<strong>决策权、速度、真实落地</strong>。</p>
+    <div class="bento">
+      <div class="card c4 feat"><div class="ic">🎯</div><h3>品牌内核</h3><p>让极客把脑子里的想法，变成真实世界里会走路、会干活的动作。代码不只跑在服务器，更跑在机器人身上。</p></div>
+      <div class="card c2"><div class="ic">🧬</div><h3>品牌人格</h3><p>年轻的硬核极客 · 不说套话 · 把人当合伙人。年轻不等于不靠谱，是敢给机会、敢让想法当天验证。</p></div>
+    </div>
+    <div class="slogan" style="margin-top:16px">
+      <h3>SLOGAN 候选（三选一或组合，可编辑）</h3>
+      <div class="row">
+        <div class="s">与「零」一起，逐梦远方<small>现有校招 slogan，年轻热血，建议沿用做校招主线</small></div>
+        <div class="s">你的能力，自己定价<small>直击薪资无上限、不看学历看实战，社招破局利器</small></div>
+        <div class="s">版本以周迭代，想法当天验证<small>把「极速」做成记忆点，区别于大厂流程</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 EVP -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">03</span><h2>EVP 价值主张</h2><span class="en">Employer Value Proposition</span></div>
+    <p class="lead">六大支柱，把「为什么来零次方」拆成可感知、可传播的六件事。每一项都对应真实福利与现有文化，不是空头承诺。</p>
+    <div class="bento">
+      <div class="card c2"><div class="ic">💰</div><h3>薪酬 · 能力定价</h3><p>年薪 + 项目奖 + 期权，不看学历只看实战，薪资无上限——你的能力自己定价。</p></div>
+      <div class="card c2"><div class="ic">🚀</div><h3>技术 · 天花板</h3><p>自研硬件、算力、数据工厂全链路开放，打样费无限制申请，想做什么放手做。</p></div>
+      <div class="card c2"><div class="ic">⚡</div><h3>成长 · 极速验证</h3><p>扁平管理，版本迭代以周计，好想法当天启动验证，不做螺丝钉。</p></div>
+      <div class="card c2"><div class="ic">🤝</div><h3>文化 · 极客同行</h3><p>清华 00 后团队带队，与顶尖者同行；活力文化，快乐战斗，不定期团建旅游。</p></div>
+      <div class="card c2"><div class="ic">🛡️</div><h3>保障 · 安心搞事</h3><p>六险一金 + 年度体检 + 补充医疗 + 重疾险；夜宵投喂、深夜打车全包。</p></div>
+      <div class="card c2"><div class="ic">🌏</div><h3>地点 · 三地舞台</h3><p>合肥研发 / 深圳前沿 / 东京国际化；高比例公积金 + 人才安居补贴。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PERSONA -->
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">04</span><h2>目标人才画像</h2><span class="en">Talent Persona</span></div>
+    <p class="lead">两套核心人群分开打。校招要「热血 + 成长」，社招要「天花板 + 决策权」。</p>
+    <div class="persona">
+      <div class="card">
+        <div class="av">🎓</div><h3>Persona A · 校招极客型</h3>
+        <p style="font-size:14px;color:var(--sub)">26 届本硕博，AI / Robot 实验室背景，抗拒大厂螺丝钉。</p>
+        <ul>
+          <li>核心诉求：我写的算法真的能让机器人走路、干活</li>
+          <li>怕什么：进去只调参数、碰不到真机</li>
+          <li>触发点：清华团队光环、周更速度、能力定价</li>
+          <li>渠道：牛客 / 小红书 / B站技术号 / 校友圈</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="av">💼</div><h3>Persona B · 社招大厂型</h3>
+        <p style="font-size:14px;color:var(--sub)">百度 / 字节 / 讯飞 / 美的 3–8 年，遇到天花板想换赛道。</p>
+        <ul>
+          <li>核心诉求：决策权 + 期权 + 真实落地场景</li>
+          <li>怕什么：初创不稳定、画饼无兑现</li>
+          <li>触发点：亿元融资背书、全链路资源、技术天花板</li>
+          <li>渠道：脉脉 / Boss / 行业峰会 / 技术博客</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 CHANNEL -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">05</span><h2>传播矩阵与渠道</h2><span class="en">Communication</span></div>
+    <p class="lead">内容策略核心：<strong>「机器人真的在干活」</strong>——用真实落地视频代替精美宣传片，用工程师访谈代替 HR 话术。</p>
+    <div class="chan">
+      <div class="card"><div class="h">校招渠道</div><div class="d">抢年轻人心智</div>
+        <span class="chip">牛客</span><span class="chip">小红书</span><span class="chip">B站技术号</span><span class="chip">清华校友圈</span><span class="chip">目标实验室定向</span></div>
+      <div class="card"><div class="h">社招渠道</div><div class="d">撬动资深人才</div>
+        <span class="chip">脉脉</span><span class="chip">Boss直聘</span><span class="chip">行业峰会</span><span class="chip">技术博客</span><span class="chip">猎头定向</span></div>
+      <div class="card"><div class="h">品牌内容钩子</div><div class="d">让人想转发</div>
+        <span class="chip">落地短视频</span><span class="chip">00后工程师访谈</span><span class="chip">周更技术随笔</span><span class="chip">开放日</span><span class="chip">黑客松</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ROADMAP -->
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">06</span><h2>落地节奏与里程碑</h2><span class="en">Roadmap</span></div>
+    <p class="lead">四个季度滚动推进，先立内容中台，再放大声量，最后沉淀为可复用的雇主品牌资产。</p>
+    <div class="road">
+      <div class="card"><span class="q">Q3 2026</span><ul>
+        <li>品牌基建立项 + 内容中台</li><li>校招视觉体系（26届延续）</li><li>官方招聘号矩阵搭建</li></ul></div>
+      <div class="card"><span class="q">Q4 2026</span><ul>
+        <li>首支「真实落地」短视频系列</li><li>线下开放日 + 体验</li><li>脉脉 / 小红书种草启动</li></ul></div>
+      <div class="card"><span class="q">Q1 2027</span><ul>
+        <li>雇主品牌官网专区</li><li>首届零次方黑客松</li><li>校招复盘 + 素材库</li></ul></div>
+      <div class="card"><span class="q">Q2 2027</span><ul>
+        <li>行业榜单 / 媒体曝光</li><li>社招专项战役</li><li>效果度量迭代</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 METRICS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-no">07</span><h2>效果度量</h2><span class="en">Metrics</span></div>
+    <p class="lead">雇主品牌不能只凭感觉，用六个指标闭环验证「被看见 → 被选择」。</p>
+    <div class="kpi">
+      <div class="card"><div class="n">量</div><p>校 / 社招投递量环比<br>主动投递占比</p></div>
+      <div class="card"><div class="n">率</div><p>简历→面试转化率<br>Offer 接受率</p></div>
+      <div class="card"><div class="n">声</div><p>雇主品牌搜索指数<br>员工 NPS / 留存</p></div>
+    </div>
+    <div class="note"><b>说明：</b>本方案的公司事实（成立时间、融资、团队、福利、产品）均来自公开资料与官方招聘信息；定位、Slogan、传播节奏、KPI 为<strong>战略框架草案</strong>，标注「可编辑」处请由零次方 HR / 品牌负责人按实际预算与政策校准后使用。</div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft">📌 本页由 yitong 沉淀整理 · 雇主品牌知识库</span>
+  <div style="margin-top:14px">ZERITH 零次方机器人 · 雇主品牌建设全案 v1.0 · 2026.08</div>
+</footer>
+
+</body>
+</html>
