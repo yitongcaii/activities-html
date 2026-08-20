@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>具身智能行业绩效管理框架</title>
+<style>
+  :root {
+    --purple: #7c5cff;
+    --cyan: #22d3ee;
+    --ink: #1e2138;
+    --sub: #5b6079;
+    --bg: #f6f7fc;
+    --card: #ffffff;
+    --line: #ecedf5;
+    --grad: linear-gradient(120deg, #7c5cff 0%, #22d3ee 100%);
+    --warn: #ff7a59;
+    --warn-bg: #fff3ee;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* Header */
+  header {
+    padding: 64px 24px 40px;
+    text-align: center;
+    background:
+      radial-gradient(900px 400px at 20% -10%, rgba(124,92,255,.16), transparent 60%),
+      radial-gradient(800px 380px at 90% 0%, rgba(34,211,238,.16), transparent 60%);
+  }
+  .kicker {
+    display: inline-block;
+    font-size: 13px; letter-spacing: 2px; font-weight: 700;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(28px, 4.6vw, 46px);
+    font-weight: 800; line-height: 1.2; letter-spacing: -.5px;
+  }
+  h1[contenteditable]:focus { outline: 2px dashed var(--purple); outline-offset: 6px; border-radius: 8px; }
+  .lede {
+    max-width: 720px; margin: 18px auto 0; color: var(--sub); font-size: 16px;
+  }
+
+  /* Section */
+  section { margin-top: 56px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; }
+  .sec-no {
+    font-size: 13px; font-weight: 800; color: #fff; background: var(--grad);
+    width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; flex: none;
+    box-shadow: 0 6px 16px rgba(124,92,255,.35);
+  }
+  .sec-title { font-size: 22px; font-weight: 800; }
+  .sec-sub { color: var(--sub); font-size: 14px; margin-left: auto; }
+
+  /* Pills */
+  .pill {
+    display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px;
+    background: linear-gradient(120deg, rgba(124,92,255,.12), rgba(34,211,238,.14));
+    color: #5a4bd6; border: 1px solid rgba(124,92,255,.18);
+  }
+  .pill.cy { color: #0d8fa8; border-color: rgba(34,211,238,.28); }
+  .pill.warn { color: #d8542f; background: var(--warn-bg); border-color: rgba(255,122,89,.3); }
+
+  /* Bento grid */
+  .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 22px; box-shadow: 0 8px 24px rgba(30,33,56,.05);
+    transition: transform .25s ease, box-shadow .25s ease;
+    opacity: 0; transform: translateY(18px);
+  }
+  .card.in { opacity: 1; transform: none; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 38px rgba(124,92,255,.14); }
+  .card h3 { font-size: 17px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .card .ico { font-size: 20px; }
+  .card p { color: var(--sub); font-size: 14px; }
+  .card .fail { margin-top: 10px; font-size: 13px; color: #b4421f; background: var(--warn-bg);
+    border-radius: 10px; padding: 8px 10px; border: 1px solid rgba(255,122,89,.22); }
+
+  .span2 { grid-column: span 2; }
+  .span3 { grid-column: span 3; }
+
+  /* Tabs */
+  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+  .tab {
+    cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--sub);
+    font-size: 14px; font-weight: 700; padding: 10px 18px; border-radius: 999px;
+    transition: all .2s ease;
+  }
+  .tab:hover { border-color: var(--purple); color: var(--purple); }
+  .tab.active { background: var(--grad); color: #fff; border-color: transparent; box-shadow: 0 8px 20px rgba(124,92,255,.3); }
+  .panel { display: none; }
+  .panel.active { display: block; animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+  .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .role-box { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+    box-shadow: 0 6px 18px rgba(30,33,56,.05); }
+  .role-box h4 { font-size: 15px; margin-bottom: 10px; color: var(--ink); display:flex; align-items:center; gap:8px; }
+  .role-box ul { list-style: none; }
+  .role-box li { font-size: 13.5px; color: var(--sub); padding: 4px 0 4px 18px; position: relative; }
+  .role-box li::before { content: "›"; position: absolute; left: 2px; color: var(--purple); font-weight: 800; }
+  .role-box .tag { margin-top: 12px; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px;
+    position: relative; box-shadow: 0 6px 18px rgba(30,33,56,.05);
+    opacity: 0; transform: translateY(18px); }
+  .step.in { opacity: 1; transform: none; }
+  .step .n { font-size: 30px; font-weight: 900; line-height: 1;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .step h4 { font-size: 15px; margin: 10px 0 6px; }
+  .step p { font-size: 13px; color: var(--sub); }
+
+  /* Pitfalls */
+  .pit { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  .pit .card { border-left: 4px solid var(--warn); }
+
+  footer { margin-top: 64px; text-align: center; color: #9aa0b8; font-size: 13px; }
+
+  @media (max-width: 860px) {
+    .bento, .pit { grid-template-columns: 1fr; }
+    .span2, .span3 { grid-column: span 1; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .role-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">HR · 绩效管理框架</div>
+  <h1 contenteditable="true" spellcheck="false">具身智能行业绩效管理怎么开展</h1>
+  <p class="lede">研发周期长、学科跨度大、结果高度不确定——用互联网那套 KPI/OKR 一刀切，会把硬件和算法团队一起逼疯。框架核心：<b>分层分角色、双轨评价、拉长窗口</b>。</p>
+</header>
+
+<div class="wrap">
+
+  <!-- 1. 行业现实 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-no">1</div>
+      <div class="sec-title">先认清楚的 3 个现实</div>
+      <div class="sec-sub">绩效设计的前提，不是指标怎么写</div>
+    </div>
+    <div class="bento">
+      <div class="card">
+        <h3><span class="ico">⏳</span>长周期 + 高不确定性</h3>
+        <p>一个本体从立项到量产常 2–3 年，年底看"交付量"没意义，要管里程碑和过程。</p>
+        <div class="fail">翻车点：拿季度营收考核算法研究员</div>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🧩</span>强跨学科耦合</h3>
+        <p>算法 / 软件 / 硬件 / 结构 / 电控 / 供应链，单一指标无法横向比较，必须分层分角色。</p>
+        <div class="fail">翻车点：用同一张表考核机械工程师和强化学习研究员</div>
+      </div>
+      <div class="card span1">
+        <h3><span class="ico">🔗</span>软硬一体难归因</h3>
+        <p>单人贡献难拆分，要靠"集成结果 + 模块质量"双视角看人。</p>
+        <div class="fail">翻车点：只奖上层 Demo，底层踩坑的人没得分</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 角色分桶 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-no">2</div>
+      <div class="sec-title">按角色分层设计指标</div>
+      <div class="sec-sub">research + engineering + manufacturing 三股绳</div>
+    </div>
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-t="a">① 算法 / 智能层</div>
+      <div class="tab" data-t="b">② 软件 / 系统层</div>
+      <div class="tab" data-t="c">③ 硬件 / 结构 / 电控</div>
+      <div class="tab" data-t="d">④ 产品 / 量产 / 项目</div>
+    </div>
+
+    <div class="panel active" id="pa">
+      <div class="role-grid">
+        <div class="role-box">
+          <h4>📊 量化指标</h4>
+          <ul>
+            <li>任务成功率 / 泛化场景覆盖数</li>
+            <li>仿真-实机落差（sim2real gap）</li>
+            <li>迭代周期缩短率</li>
+            <li>数据闭环贡献度</li>
+          </ul>
+        </div>
+        <div class="role-box">
+          <h4>🛠 过程 + 评价方式</h4>
+          <ul>
+            <li>论文 / 专利 / 开源贡献</li>
+            <li>复现性与可迁移性</li>
+            <li>评价：<b>OKR 为主</b>，容忍失败</li>
+            <li>重"技术突破信号"而非交付量</li>
+          </ul>
+          <div class="tag"><span class="pill">感知算法</span> <span class="pill">运动控制</span> <span class="pill">VLA 大模型</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="pb">
+      <div class="role-grid">
+        <div class="role-box">
+          <h4>📊 量化指标</h4>
+          <ul>
+            <li>系统稳定性 MTBF</li>
+            <li>端到端延迟</li>
+            <li>数据管线吞吐</li>
+            <li>接口交付准时率</li>
+          </ul>
+        </div>
+        <div class="role-box">
+          <h4>🛠 过程 + 评价方式</h4>
+          <ul>
+            <li>代码质量 / 文档完整度</li>
+            <li>oncall 响应与故障恢复</li>
+            <li>评价：<b>KPI + 交付承诺</b></li>
+            <li>重可靠，不鼓励花活</li>
+          </ul>
+          <div class="tag"><span class="pill cy">机器人系统</span> <span class="pill cy">嵌入式</span> <span class="pill cy">数据平台</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="pc">
+      <div class="role-grid">
+        <div class="role-box">
+          <h4>📊 量化指标</h4>
+          <ul>
+            <li>BOM 成本下降幅度</li>
+            <li>良率 / 故障率</li>
+            <li>减重 / 续航达标</li>
+            <li>DFM 可制造性评分</li>
+          </ul>
+        </div>
+        <div class="role-box">
+          <h4>🛠 过程 + 评价方式</h4>
+          <ul>
+            <li>设计评审通过节点</li>
+            <li>供应商导入与爬坡</li>
+            <li>评价：<b>里程碑 + 质量门</b></li>
+            <li>重实物落地，不重 PPT</li>
+          </ul>
+          <div class="tag"><span class="pill">机械结构</span> <span class="pill">硬件电路</span> <span class="pill">供应链</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="pd">
+      <div class="role-grid">
+        <div class="role-box">
+          <h4>📊 量化指标</h4>
+          <ul>
+            <li>样机 → 量产转化周期</li>
+            <li>爬坡良率</li>
+            <li>客户 POC 转化率</li>
+            <li>客户 NPS</li>
+          </ul>
+        </div>
+        <div class="role-box">
+          <h4>🛠 过程 + 评价方式</h4>
+          <ul>
+            <li>节点风控与跨部门拉通</li>
+            <li>评价：<b>结果导向 KPI</b></li>
+            <li>拉长评价窗口（≥ 半年）</li>
+            <li>避免短视砍长期投入</li>
+          </ul>
+          <div class="tag"><span class="pill cy">产品经理</span> <span class="pill cy">项目经理</span> <span class="pill cy">量产负责人</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 落地流程 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-no">3</div>
+      <div class="sec-title">推荐落地流程（4 步）</div>
+      <div class="sec-sub">从目标到发放，匹配长周期</div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h4>定层级目标</h4>
+        <p>公司技术路线 → 产品线里程碑 → 团队季度承诺，自上而下拆，且允许自下而上提 OKR。</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h4>双轨评价</h4>
+        <p>个人贡献（模块质量/技术深度）× 集成结果（整机 Demo/量产节点）加权，避免只做自己舒服的。</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h4>拉长窗口 + 里程碑发放</h4>
+        <p>奖金不与月/季强绑定，按关键节点达成释放，匹配 2–3 年研发节奏。</p>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h4>失败可记录</h4>
+        <p>设"有价值失败"通道，踩坑沉淀进知识库也算产出，否则没人敢碰硬骨头。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 坑点 -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-no">4</div>
+      <div class="sec-title">最容易踩的 3 个坑</div>
+      <div class="sec-sub">⚠️ 高发，建议写进制度红线</div>
+    </div>
+    <div class="pit">
+      <div class="card">
+        <h3><span class="pill warn">坑 1</span></h3>
+        <p>用互联网人效思维压具身团队。硬件试错成本极高，盲目提效只会让样机永远不敢上线。</p>
+      </div>
+      <div class="card">
+        <h3><span class="pill warn">坑 2</span></h3>
+        <p>算法岗唯论文 / 唯 Demo。Demo 能走 10 步 ≠ 产品能用，要加鲁棒性 / 泛化硬指标。</p>
+      </div>
+      <div class="card">
+        <h3><span class="pill warn">坑 3</span></h3>
+        <p>忽视供应链与制造角色。他们决定能不能赚钱，绩效权重不能远低于算法。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+  // 角色切换
+  const tabs = document.getElementById('tabs');
+  tabs.addEventListener('click', e => {
+    const t = e.target.closest('.tab'); if (!t) return;
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('p' + t.dataset.t).classList.add('active');
+  });
+
+  // 滚动揭示
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: .15 });
+  document.querySelectorAll('.card, .step').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
