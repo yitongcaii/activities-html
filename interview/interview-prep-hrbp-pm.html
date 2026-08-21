@@ -195,7 +195,11 @@
         <div contenteditable="true" data-k="r" placeholder="量化结果？影响了什么指标/人？"></div>
         <div class="lab">L 学习：</div>
         <div contenteditable="true" data-k="l" placeholder="复盘沉淀了什么机制/认知？"></div>
-        <button class="savebtn" onclick="saveStar()">保存草稿</button><span class="saved" id="savedTip"></span>
+        <button class="savebtn" onclick="saveStar()">保存草稿</button>
+        <button class="savebtn" onclick="exportStar()">导出</button>
+        <button class="savebtn" onclick="document.getElementById('importFile').click()">导入</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importStar(this.files[0])">
+        <span class="saved" id="savedTip"></span>
       </div>
       <div class="note">提示：按"专业力/行为力/情景题"各填 2-3 个真实故事，面试前朗读一遍。别编，面试官一追问细节就露。</div>
     </div>
@@ -218,6 +222,41 @@ function saveStar(){
     document.getElementById('savedTip').innerText='已保存 ✓';
     setTimeout(()=>document.getElementById('savedTip').innerText='',2000);
   }catch(e){}
+}
+function exportStar(){
+  const keys=['s','t','a','r','l'];
+  const data={savedAt:new Date().toISOString(), type:'hrbp-star-draft'};
+  keys.forEach(k=>{
+    const el=document.querySelector('[data-k="'+k+'"]');
+    if(el) data[k]=el.innerText;
+  });
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='hrbp-star-draft.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  document.getElementById('savedTip').innerText='已导出 ✓';
+  setTimeout(()=>document.getElementById('savedTip').innerText='',2000);
+}
+function importStar(file){
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      const data=JSON.parse(e.target.result);
+      ['s','t','a','r','l'].forEach(k=>{
+        const el=document.querySelector('[data-k="'+k+'"]');
+        if(el && data[k]!==undefined) el.innerText=data[k];
+      });
+      localStorage.setItem('hrbp_star_draft', JSON.stringify(data));
+      document.getElementById('savedTip').innerText='已导入 ✓';
+    }catch(err){
+      document.getElementById('savedTip').innerText='导入失败：文件格式不对';
+    }
+    setTimeout(()=>document.getElementById('savedTip').innerText='',2500);
+  };
+  reader.readAsText(file);
 }
 (function(){
   try{
