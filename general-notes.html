@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>通用注意事项 · AI协作与项目落地</title>
+<style>
+  :root{
+    --purple:#7F77DD; --teal:#1D9E75; --coral:#D85A30;
+    --amber:#BA7517; --blue:#378ADD;
+    --ink:#1f2330; --muted:#6b7280; --line:#eceef3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    color:var(--ink); background:#f7f8fc;
+    background-image:radial-gradient(1200px 500px at 80% -10%, #7F77DD14, transparent),
+                     radial-gradient(1000px 500px at 0% 0%, #1D9E7514, transparent);
+    line-height:1.6; padding:0 0 60px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  header{padding:54px 0 26px}
+  h1{
+    font-size:34px;font-weight:800;letter-spacing:-.5px;
+    background:linear-gradient(120deg,var(--purple),var(--teal));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{color:var(--muted);margin-top:10px;font-size:15px;max-width:680px}
+  .stat{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+  .stat .chip{
+    background:#fff;border:1px solid var(--line);border-radius:999px;
+    padding:7px 15px;font-size:13px;color:var(--muted);
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .stat .chip b{color:var(--ink)}
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 8px}
+  .filters button{
+    border:1px solid var(--line);background:#fff;color:var(--muted);
+    padding:8px 16px;border-radius:999px;font-size:13px;cursor:pointer;
+    transition:.18s;font-family:inherit;
+  }
+  .filters button:hover{border-color:var(--purple);color:var(--purple)}
+  .filters button.active{
+    background:linear-gradient(120deg,var(--purple),var(--teal));
+    color:#fff;border-color:transparent;box-shadow:0 4px 14px #7F77DD33;
+  }
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:18px;margin-top:20px;
+  }
+  .card{
+    background:#fff;border-radius:18px;padding:20px 20px 22px;
+    box-shadow:0 2px 10px rgba(20,20,40,.06);
+    border:1px solid var(--line);
+    transition:transform .2s, box-shadow .2s, opacity .5s;
+    opacity:0;transform:translateY(14px);
+    position:relative;overflow:hidden;
+  }
+  .card.show{opacity:1;transform:none}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(20,20,40,.12)}
+  .card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;
+    background:var(--cat,#ccc)}
+  .pill{
+    display:inline-block;font-size:12px;font-weight:600;
+    padding:3px 11px;border-radius:999px;margin-bottom:12px;
+  }
+  .card h3{font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.4}
+  .card p{font-size:13.5px;color:#444;line-height:1.65}
+  .cat-req{--cat:var(--purple)} .pill-req{background:#EEEAFE;color:#534AB7}
+  .cat-conc{--cat:var(--teal)} .pill-conc{background:#E1F5EE;color:#0F6E56}
+  .cat-sec{--cat:var(--coral)} .pill-sec{background:#FAECE7;color:#993C1D}
+  .cat-auto{--cat:var(--amber)} .pill-auto{background:#FAEEDA;color:#854F0B}
+  .cat-act{--cat:var(--blue)} .pill-act{background:#E6F1FB;color:#185FA5}
+  footer{
+    text-align:center;color:var(--muted);font-size:13px;
+    margin-top:48px;padding-top:22px;border-top:1px dashed var(--line);
+  }
+  @media (max-width:560px){h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>通用注意事项</h1>
+    <p class="sub">AI 协作与项目落地里，最容易翻车、但提前知道就能避开的坑。不绑定任何具体项目，随时拿来对照。</p>
+    <div class="stat">
+      <span class="chip"><b>5</b> 大类</span>
+      <span class="chip"><b>17</b> 条注意事项</span>
+      <span class="chip">覆盖 <b>原型 · 高并发 · 安全 · 自动化 · 活动</b></span>
+    </div>
+  </header>
+
+  <div class="filters" id="filters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="req">原型与需求</button>
+    <button data-f="conc">高并发</button>
+    <button data-f="sec">安全凭证</button>
+    <button data-f="auto">自动化</button>
+    <button data-f="act">活动策划</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="card cat-req" data-cat="req">
+      <span class="pill pill-req">原型与需求</span>
+      <h3>原型只是草稿</h3>
+      <p>先对齐"长相和流程对不对"，别在原型阶段纠结功能细节——那是后续开发的事。</p>
+    </div>
+
+    <div class="card cat-req" data-cat="req">
+      <span class="pill pill-req">原型与需求</span>
+      <h3>评审必须拉技术</h3>
+      <p>"好看"不等于"能做"。评审时让开发确认：能实现吗？大概多久？有没有坑？</p>
+    </div>
+
+    <div class="card cat-req" data-cat="req">
+      <span class="pill pill-req">原型与需求</span>
+      <h3>验收标准提前写</h3>
+      <p>怎样算"做对了"要在动手前逐条列清，别等做完再扯皮。</p>
+    </div>
+
+    <div class="card cat-conc" data-cat="conc">
+      <span class="pill pill-conc">高并发</span>
+      <h3>高并发会卡崩乱</h3>
+      <p>同一时刻大量用户涌入，系统可能卡顿、崩溃、数据错乱（例如重复中奖）。</p>
+    </div>
+
+    <div class="card cat-conc" data-cat="conc">
+      <span class="pill pill-conc">高并发</span>
+      <h3>压力峰值在"开奖/开场"</h3>
+      <p>抽奖、秒杀、大会互动，平时没人，到点一窝蜂——这才是真正的压力高峰。</p>
+    </div>
+
+    <div class="card cat-conc" data-cat="conc">
+      <span class="pill pill-conc">高并发</span>
+      <h3>别用文件库扛并发</h3>
+      <p>高并发写入别用 SQLite 这类文件数据库，换成能并发写的（PostgreSQL / Redis）或加队列。</p>
+    </div>
+
+    <div class="card cat-sec" data-cat="sec">
+      <span class="pill pill-sec">安全凭证</span>
+      <h3>密钥绝不上前端</h3>
+      <p>任何密码 / API key 不写进前端代码，也不提交到公开仓库（GitHub Pages 源码谁都能看）。</p>
+    </div>
+
+    <div class="card cat-sec" data-cat="sec">
+      <span class="pill pill-sec">安全凭证</span>
+      <h3>secret 只放后端</h3>
+      <p>前端只调接口，密钥和数据库连接串只在服务端环境变量里，绝不出现在客户端。</p>
+    </div>
+
+    <div class="card cat-sec" data-cat="sec">
+      <span class="pill pill-sec">安全凭证</span>
+      <h3>隐私脱敏存</h3>
+      <p>用户手机号、姓名等个人信息脱敏存储，谁能看列白名单，别明文乱放。</p>
+    </div>
+
+    <div class="card cat-auto" data-cat="auto">
+      <span class="pill pill-auto">自动化</span>
+      <h3>失败要重试</h3>
+      <p>定时 / 自动化配"失败自动重试 3 次，间隔递增"，挡掉临时抽风。</p>
+    </div>
+
+    <div class="card cat-auto" data-cat="auto">
+      <span class="pill pill-auto">自动化</span>
+      <h3>重试完要告警</h3>
+      <p>重试耗尽仍失败，必须通知人——绝不静默结束，否则出事你最后一个知道。</p>
+    </div>
+
+    <div class="card cat-auto" data-cat="auto">
+      <span class="pill pill-auto">自动化</span>
+      <h3>加心跳检查</h3>
+      <p>怕"根本没触发"：任务跑成写一笔"最后成功时间"，另一任务每天查，没记录就告警。</p>
+    </div>
+
+    <div class="card cat-auto" data-cat="auto">
+      <span class="pill pill-auto">自动化</span>
+      <h3>多步要回执</h3>
+      <p>建会→建群→回填→归档这类多步流程，每步确认成功，任一步挂就停 + 告警。</p>
+    </div>
+
+    <div class="card cat-act" data-cat="act">
+      <span class="pill pill-act">活动策划</span>
+      <h3>受众分层写</h3>
+      <p>给领导看的尊重不越界、不幼稚；给员工看的轻松但不暴露隐私。语气别混用。</p>
+    </div>
+
+    <div class="card cat-act" data-cat="act">
+      <span class="pill pill-act">活动策划</span>
+      <h3>报名设上限</h3>
+      <p>报名人数超场地容量就尴尬，提前设上限，满了就关。</p>
+    </div>
+
+    <div class="card cat-act" data-cat="act">
+      <span class="pill pill-act">活动策划</span>
+      <h3>排期避撞车</h3>
+      <p>定档前查公司日历，别和别的大活动撞期，资源会被稀释。</p>
+    </div>
+
+    <div class="card cat-act" data-cat="act">
+      <span class="pill pill-act">活动策划</span>
+      <h3>物料提前锁</h3>
+      <p>供应商 / 场地 / 物料提前确认，别临期才定，临时掉链最难救。</p>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+  // 筛选
+  const filters=document.getElementById('filters');
+  const cards=document.querySelectorAll('.card');
+  filters.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b)return;
+    filters.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const f=b.dataset.f;
+    cards.forEach(c=>{
+      c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';
+    });
+  });
+  // 滚动渐入
+  const io=new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);} });
+  },{threshold:.12});
+  cards.forEach(c=>io.observe(c));
+</script>
+</body>
+</html>
