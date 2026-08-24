@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR 四岗真实面试问答 · 问题/回答/逻辑</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.7;padding:0 0 60px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .q .tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+  .tag.base{background:#e7f7ff;color:#1f8fd6}
+  .tag.press{background:#fff0ea;color:var(--warn)}
+  .q h3{margin:0 0 10px;font-size:16px;line-height:1.5}
+  .q h3 .qm{color:var(--purple)}
+  .blk{margin-top:12px;border-radius:12px;padding:12px 14px}
+  .blk.a{background:#f3fbff;border:1px solid #d6ecff}
+  .blk.l{background:#fbf7ff;border:1px solid #e6dcff}
+  .blk .h{font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .blk.a .h{color:#1f8fd6}
+  .blk.l .h{color:var(--purple)}
+  .blk p{margin:0;font-size:14px}
+  .blk .k{color:var(--ok);font-weight:700}
+  .blk .w{color:var(--warn);font-weight:700}
+  .edit{background:#fffdf5;border-bottom:1px dashed #f0c000;cursor:text}
+  .edit:focus{outline:none;background:#fffce8}
+  .pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:middle}
+  .p0{background:#e7f7ff;color:#1f8fd6}
+  .p1{background:#fff4e0;color:#d98b00}
+  .p2{background:#ffe9e3;color:#e0552f}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  .note{font-size:12px;color:var(--warn);margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+  <h1>企业文化岗 · 真实面试问答手册</h1>
+  <div class="sub">问题（考官真实会问）／ 回答（y 第一人称·诚实版）／ 逻辑（锚点·接招·避雷）</div>
+  <div class="dept" contenteditable="true" id="dept" data-key="qa-culture">部门 / 目标公司：（双击编辑）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc"><a href="hr-interview-qa.html">← 四岗总览</a><a href="hr-interview-training.html">培训岗（L&D）</a><a href="hr-interview-regional.html">区域 HR（兼行政）</a><a href="hr-interview-hrbp.html">HRBP 岗</a></div>
+
+  <div class="lead"><b>使用说明：</b>每张卡 = 一个真实面试问题，含三部分——<b>考官真实问</b>、<b>y 真实答</b>（第一人称，<span class="edit">黄色字段</span>是可编辑的数字/案例占位，请填真实数据，<u>严禁编造</u>）、<b>回答逻辑</b>（锚点·接招·避雷）。核心原则：<span class="k">认短 + 给路径/锚点</span>，绝不用方法论掩盖没经历。</div>
+
+  <div class="sec-head"><div class="sec-no">2</div><h2>企业文化岗</h2><span class="sub">基础行为题 3 + 压力深挖题 3</span></div>
+
+    <div class="q">
+      <span class="tag base">基础题</span>
+      <h3><span class="qm">Q：</span>文化怎么不变成口号？</h3>
+      <div class="blk a"><div class="h">✅ y 真实答</div>
+        <p>我理解文化的核心一句话：文化是被奖励和被容忍的行为，不是墙上的字。所以我不搞贴标语，而是把虚的做成实的闭环——比如推 AI 采纳，我不是喊"大家要用 AI"，而是三端同时发力：激励端（做了有记录有奖励）、活动端（有参与场景）、内容端（做了 AI 漫剧《企鹅英雄》让大家愿意看、愿意聊）。员工是真参与、真有反馈渠道，文化才落得下去。</p></div>
+      <div class="blk l"><div class="h">🧠 回答逻辑</div>
+        <p><span class="k">锚点：</span>AI 采纳三端闭环 + 漫剧（真实差异化素材）。<span class="k">接招：</span>问"那如果业务 leader 不配合呢"→答"说明这导向和他奖金逻辑冲突，我先去对齐激励，不是硬推活动——活动推了也没人真做"。<span class="w">避雷：</span>别空谈"增强凝聚力"，要给抓手。</p></div>
+    </div>
+
+    <div class="q">
+      <span class="tag base">基础题</span>
+      <h3><span class="qm">Q：</span>新人怎么快速融入？</h3>
+      <div class="blk a"><div class="h">✅ y 真实答</div>
+        <p>我不会发完手册就完事。我的融入设计是三段：①入职引导做扎实（流程清晰、有人接、前两周有节奏）；②用活动和社群把人"塞进关系网"——团建、文化周、兴趣小组，不是为热闹，是让新人在非正式场合认识关键的人；③给一个"小任务"让他快速出成果、建立存在感。我沉淀的 57 套团建方案、员工大会脚本，本质都是帮新人快速找到"我是谁、我归属哪"的抓手。</p></div>
+      <div class="blk l"><div class="h">🧠 回答逻辑</div>
+        <p><span class="k">锚点：</span>57 套团建 / 主持脚本（真实资产）。<span class="k">接招：</span>问"融入快慢你怎么衡量"→答"看他第一周有没有被记住、第一个月有没有朋友、第一个项目有没有出成果"。<span class="w">避雷：</span>别只讲活动热闹，要讲"关系网 + 存在感"的设计意图。</p></div>
+    </div>
+
+    <div class="q">
+      <span class="tag base">基础题</span>
+      <h3><span class="qm">Q：</span>文化怎么考核？</h3>
+      <div class="blk a"><div class="h">✅ y 真实答</div>
+        <p>我的观点：文化不考核就等于没文化。但考核别搞成背价值观考试那种虚的，要挂到"行为"上。我做的 AI 采纳激励设计就是例子——把"用 AI 提效"变成可量化的参与动作、可奖励的行为，轻的进团队表彰、重的进晋升 / 绩效校准会，让"符合文化的行为"真的被看见。如果贵司文化当前只是宣传，我可以帮它从"宣传"走到"挂钩"。</p></div>
+      <div class="blk l"><div class="h">🧠 回答逻辑</div>
+        <p><span class="k">锚点：</span>AI 采纳激励（真实设计经验）。<span class="k">接招：</span>问"你真把它落进晋升了吗"→见下方压力题 Q4。<span class="w">避雷：</span>别说"我们靠价值观考核"，大厂都知道那是虚的。</p></div>
+    </div>
+
+    <div class="q">
+      <span class="tag press">压力题</span>
+      <h3><span class="qm">Q：</span>你"独立负责"AI 文化激励，决策权多大？是列席还是拍板？</h3>
+      <div class="blk a"><div class="h">✅ y 真实答（讲清边界）</div>
+        <p>我得讲清楚边界：在 AI 文化落地这个项目里，我是<b>激励设计模块的设计者和推进者</b>——规则怎么定、活动怎么搭、内容怎么产，是我主责；但涉及预算和最终拍板的决策层，是部门负责人。我能讲清哪些是我定的（比如激励记录机制、表彰规则），哪些是上层定的（比如奖励额度）。我不夸大"独立负责"成"我一个人说了算"。</p></div>
+      <div class="blk l"><div class="h">🧠 回答逻辑</div>
+        <p><span class="k">锚点：</span>把"独立负责模块"精准拆成"设计者 + 推进者 vs 最终决策人"。<span class="k">接招：</span>问"那你没决策权怎么落地"→答"我靠把方案做得让决策人愿意签，这是推动能力不是权力"。<span class="w">避雷：</span>别把"参与 / 设计"说成"我决定"，考官会顺藤摸瓜问"那你拍板过什么"，答不上就穿。</p></div>
+    </div>
+
+    <div class="q">
+      <span class="tag press">压力题</span>
+      <h3><span class="qm">Q：</span>AI 漫剧真实曝光 / 完播数据？年轻人爱看 ≠ 真看真信。</h3>
+      <div class="blk a"><div class="h">✅ y 真实答（没埋点就认）</div>
+        <p>我诚实：漫剧目前是内容资产沉淀（6+ 个 HTML 分镜卡），我还没做正式的曝光 / 完播埋点。我能说的是它<b>作为文化渗透载体的设计逻辑</b>和内部传播的动作（比如进知识库、进活动物料）。如果到岗，第一件事就是补数据埋点——曝光、完播、转发、有没有人因它改行为，这四个数我不靠感觉。现在说"年轻人爱看"是我的判断，不是实测，我不把它当成绩报。</p></div>
+      <div class="blk l"><div class="h">🧠 回答逻辑</div>
+        <p><span class="k">锚点：</span>"判断 ≠ 实测"的诚实 + 补埋点动作。<span class="k">接招：</span>问"没数据你怎么证明它有用"→答"我证明不了传播效果，我只证明我做了内容 + 有传播动作；效果数据是我到岗要补的第一块"。<span class="w">避雷：</span>严禁编 PV/完播，考官一问"多少"就死。</p>
+        <div class="note">⚠️ 面试前能补就补：漫剧至少加个简单计数器 / 内部访问记录。</div></div>
+    </div>
+
+    <div class="q">
+      <span class="tag press">压力题</span>
+      <h3><span class="qm">Q：</span>你说过"沉默对抗最毒"，你真遇到过吗？怎么发现的？</h3>
+      <div class="blk a"><div class="h">✅ y 真实答（真实素材 + 诚实边界）</div>
+        <p>我有过近似经验：做博闻看板和员工访谈时，我发现"打分还行但开放题文本里全是冷话"的信号——比如某团队调研分不低，但文本反复出现"说了也没用""反正都定好了"。这就是沉默对抗的苗头，我是靠<b>文本情绪 + 亚文化信号</b>读出来的，不是靠问卷总分。但我得诚实：这是总部场景的弱信号捕捉，真正的"私下群聊嘲讽"我没亲历过，我的方法是迁移——日常泡着、靠信得过的人私下透，比问卷早一步。</p></div>
+      <div class="blk l"><div class="h">🧠 回答逻辑</div>
+        <p><span class="k">锚点：</span>博闻"感受维度" + 访谈文本分析（真实素材）。<span class="k">接招：</span>问"你真处理过一次沉默对抗吗"→答"我识别过信号并标记给 leader，但完整处置是 leader 做的；我的价值在'早发现'，不抢处置功"。<span class="w">避雷：</span>别把"思维"说成"我处理过一次"，考官要你讲细节必穿。</p></div>
+    </div>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+
+<script>
+(function(){
+  var KEY='qa-culture';
+  var el=document.getElementById('dept');
+  var saved=localStorage.getItem(KEY);
+  if(saved!==null) el.textContent=saved;
+  el.addEventListener('input',function(){ localStorage.setItem(KEY, el.textContent); });
+})();
+</script>
+</body>
+</html>
