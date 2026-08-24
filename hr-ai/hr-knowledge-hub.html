@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR 知识点集 · 总入口</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.7;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .lead{font-size:13.5px;color:var(--muted);margin:22px 0 10px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .sec-head{display:flex;align-items:center;gap:12px;margin:30px 0 14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .bento{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05);display:flex;flex-direction:column}
+  .card h3{margin:0 0 6px;font-size:16px;color:var(--purple)}
+  .card p{margin:0 0 12px;font-size:13px;color:var(--muted);flex:1}
+  .card .go{text-decoration:none;font-size:13px;font-weight:700;color:#fff;background:var(--grad);
+    padding:8px 14px;border-radius:999px;text-align:center;box-shadow:0 4px 12px rgba(124,92,255,.25)}
+  .card .go:hover{opacity:.9}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600}
+  .p-live{background:var(--ok)} .p-soon{background:var(--warn)}
+  .tagrow{margin-bottom:10px}
+  .mini{font-size:12.5px;color:var(--ink);background:var(--soft);border-radius:10px;padding:10px 12px;margin-top:8px}
+  .mini b{color:var(--purple)}
+  .card.soon{background:linear-gradient(180deg,#fffdf7,#fff)}
+  .card.soon h3{color:var(--warn)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.bento{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>HR 知识点集 · 总入口</h1>
+  <div class="sub">面试备战 + 工具模块 + 速览卡 —— 一个入口跳全部</div>
+</header>
+
+<div class="wrap">
+  <div class="lead"><b>怎么用：</b>绿色「已上线」卡片点开即跳对应页；橙色「完整页筹备中」是已就绪的速览要点，深砸版做成独立页后补链。所有页面同 Bento 风格、可本地保存。</div>
+
+  <!-- ===== 面试备战 ===== -->
+  <div class="sec-head"><div class="sec-no">1</div><h2>面试备战（四岗 + 认知）</h2><span class="sub">按岗位拆解的问答与话术</span></div>
+  <div class="bento">
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>HRBP 岗</h3><p>业务陪跑 + 组织风险；含人才盘点、校准会等深度问答与真实回答逻辑。</p><a class="go" href="hr-interview-hrbp.html">打开 →</a></div>
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>培训 / L&amp;D 岗</h3><p>运营 vs 设计边界、参与深度口径、行为转化等高频题与避坑。</p><a class="go" href="hr-interview-training.html">打开 →</a></div>
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>企业文化岗</h3><p>文化落地 IP、从 0 搭框架 vs 活水运营、真实案例话术。</p><a class="go" href="hr-interview-culture.html">打开 →</a></div>
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>区域 HR 兼行政</h3><p>HR + 行政双肩挑、轻行政重业务、异地入职闭环等。</p><a class="go" href="hr-interview-regional.html">打开 →</a></div>
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>岗位认知话术（心态）</h3><p>新手 vs 资深的观念差异，转成面试能直接说的语言。</p><a class="go" href="hr-interview-mindset.html">打开 →</a></div>
+  </div>
+
+  <!-- ===== 工具模块 ===== -->
+  <div class="sec-head"><div class="sec-no">2</div><h2>工具模块（可复用）</h2><span class="sub">带完整示例的参考版</span></div>
+  <div class="bento">
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>人才管理三件套</h3><p>岗位模型 / 人才画像 / 人才盘点——完整示意示例 + 流程 + 常见坑 + 填空版。</p><a class="go" href="talent-modules.html">打开 →</a></div>
+    <div class="card"><span class="tagrow"><span class="pill p-live">已上线</span></span><h3>HR 高 ROI 事项</h3><p>7 项高杠杆 + 3 项伪高 ROI，每项含机制 / 示意收益 / 落地步骤 / 常见坑。</p><a class="go" href="hr-high-roi.html">打开 →</a></div>
+  </div>
+
+  <!-- ===== 速览卡（待做页） ===== -->
+  <div class="sec-head"><div class="sec-no">3</div><h2>速览卡（完整页筹备中）</h2><span class="sub">要点已就绪，点开对话沉淀即出页</span></div>
+  <div class="bento">
+    <div class="card soon"><span class="tagrow"><span class="pill p-soon">完整页筹备中</span></span><h3>薪酬结构</h3><p>四块拆解 + 固浮比按序列 + 带宽 + 3P 付薪逻辑。</p>
+      <div class="mini"><b>四块：</b>固定 / 浮动 / 中长期激励 / 福利。<br><b>关键：</b>固浮比按序列（销售 3:7、产研 7:3、职能 8:2）；带宽（最小/中位/最大+级差+重叠）；3P（岗位定基准、能力定档位、绩效定浮动）。</div>
+    </div>
+    <div class="card soon"><span class="tagrow"><span class="pill p-soon">完整页筹备中</span></span><h3>校准会逐人话术</h3><p>盘点会一人一人过的固定说法与提问。</p>
+      <div class="mini"><b>逐人 4 步：</b>①经理陈述带证据（禁形容词）②facilitator 挑战 3 把刀 ③定格消偏（强制分布+反向提名）④出动作三表（继任/风险/IDP）。<br><b>4 类人：</b>张三防流失 / 小周调岗 / 老王留任别误当高潜 / 老陈激活。</div>
+    </div>
+    <div class="card soon"><span class="tagrow"><span class="pill p-soon">完整页筹备中</span></span><h3>招聘平台打招呼话术</h3><p>高吸引力公式 + 四角色钩子。</p>
+      <div class="mini"><b>公式：</b>①点对方岗位具体词 ②可验证战功做钩子 ③痛点抛视角/选择题 ④给选择题降回复成本。<br><b>钩子：</b>HRBP(三中心敏感个案闭环) / 培训(参与深度剔&lt;15min) / 文化(AI 漫剧 IP) / 区域(轻行政重业务)。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+</body>
+</html>

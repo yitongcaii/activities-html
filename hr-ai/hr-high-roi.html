@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR 高 ROI 事项 · 杠杆清单（带细节参考版）</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+  .col{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--soft)}
+  .col h4{margin:0 0 8px;font-size:14px}
+  .col ul{margin:0;padding-left:18px;font-size:13px}
+  .col li{margin:6px 0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-lev{background:var(--purple)} .p-fix{background:var(--cyan)} .p-bad{background:var(--red)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .pillbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.cols,.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>HR 高 ROI 事项 · 杠杆清单（带细节参考版）</h1>
+  <div class="sub">选对人 / 留对人 / 赋能经理 / 内部活水 —— 每个事项都给「机制 + 示意收益 + 落地步骤 + 常见坑」</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="talent-modules.html">← 人才管理三件套</a>
+    <a href="hr-interview-hrbp.html">HRBP 岗</a>
+    <a href="hr-interview-training.html">培训岗</a>
+    <a href="hr-interview-culture.html">企业文化岗</a>
+    <a href="hr-interview-regional.html">区域 HR</a>
+    <a href="hr-interview-mindset.html">岗位认知话术</a>
+  </div>
+
+  <div class="lead"><b>核心观点：</b>HR 的 ROI 不按"做多少"算，按"卡对杠杆"算。下面 7 项是<b>前置杠杆</b>（成本小、放大效应大）；而大班课培训、花哨福利常是<b>伪高 ROI</b>（行为转化弱、留存贡献低）。每项都填了示意数字、具体落地动作、常见坑反例，黄色字段可本地保存。<u>所有数字标"示意"，请代入你真实数据，严禁编造。</u></div>
+
+  <!-- ============ 1. 结构化精准选人 ============ -->
+  <section id="hire">
+    <div class="sec-head"><div class="sec-no">1</div><h2>结构化精准选人</h2><span class="sub"><span class="pill p-lev">杠杆最高</span> 前置 · 一次性成本，长期回本</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">错配代价 = 数年薪资；结构化面试预测效度远高于直觉</p>
+      <div class="why">
+        <b>机制：</b>一个 misfit 在岗 1 年，浪费的是薪资 + 机会成本 + 团队磨损；而把面试从"聊得投缘"改成"按标尺打分"，几乎零边际成本，却能把选错率砍掉一大截。这是<b>杠杆最高</b>的动作——一次流程改造，影响之后每一场招聘。</div>
+
+      <div class="ex">
+        <span class="lab">示意收益（行业常见区间，非你司数据）</span>
+        <table>
+          <tr><th>指标</th><th>非结构化（凭感觉）</th><th>结构化（按标尺）</th></tr>
+          <tr><td>选错率（示意）</td><td>~50%</td><td>~30%</td></tr>
+          <tr><td>单个 misfit 代价</td><td colspan="2">≈ 6–12 个月薪资（招聘费+爬坡+重招）</td></tr>
+          <tr><td>改造边际成本</td><td colspan="2">极低（建题库+评分表+校准，一次性）</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步，可照抄）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>建标尺：</b>从绩优者 BEI 萃取 3–5 条行为锚（参考人才三件套的岗位模型），不写"沟通好"这种形容词。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>统一题库 + 评分量表：</b>每题配评分锚点（1–4 分各长啥样），所有面试官用同一套，避免"各聊各的"。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>面试官校准：</b>面完即时独立打分再合议，杜绝"最会说的那個赢"；样本≥5 人回测命中率 &gt;70% 才立住。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>录用后 90 天回测：</b>用实际绩效反推面试分，淘汰预测失效的题目，题库每半年迭代一次。</span></div>
+
+      <div class="pit"><b>常见坑：</b>用"聊得投缘"代替评分；题库跟岗位模型脱节（问的是 A 能力、筛的是 B 能力）；面试官不校准，结果变成"谁话术好谁赢"。</div>
+      <div class="ok"><b>正确做法：</b>把"我觉得行"变成"有证据、有量表才算行"——这正是校准会话术的底层逻辑（见人才三件套盘点模块）。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 本岗选人最痛的点</span><span class="edit" contenteditable="true" id="r1-pain">__（如：业务面和技术面标准打架 / 面试官凭感觉 / 招进来的待不久）</span></div>
+      <div class="field"><span class="lbl">你的填空 · 准备落地的 1 个动作</span><span class="edit" contenteditable="true" id="r1-act">__</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 2. 关键人保留 ============ -->
+  <section id="retain">
+    <div class="sec-head"><div class="sec-no">2</div><h2>关键人保留（高宠高危）</h2><span class="sub"><span class="pill p-lev">杠杆高</span> 前置 · 防业务断档</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">失一个高绩效高潜 = 业务断档 + 招替更贵（对应人才画像里的「张三」）</p>
+      <div class="why"><b>机制：</b>高宠高危的人一旦走，损失的不是"一个 HC"，是客户关系、技术Know-how、团队士气，且招替成本远高于留人成本。保留是<b>花小钱防大亏</b>的典型。</div>
+
+      <div class="ex">
+        <span class="lab">示意收益</span>
+        <table>
+          <tr><th>动作</th><th>成本</th><th>收益（示意）</th></tr>
+          <tr><td>留一个关键人</td><td>中（发展/轮岗/认可，未必加薪）</td><td>省招聘费+爬坡 ≈ 1–3 月薪资/年</td></tr>
+          <tr><td>流失一个高潜</td><td colspan="2">代价 ≈ 50–200% 年薪（招聘+爬坡+业务断档）</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>先标红：</b>九宫格落位后，把"高绩效高潜 + 高宠"的人单列风险清单（参考人才三件套）。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>一对一留人访谈：</b>问"你在这最舍不得什么 / 最想走因为什么"，别一上来就谈钱——很多人走是因为"没成长 / 不被看见"。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>定制方案：</b>发展型（给挑战项目/轮岗）、认可型（曝光关键业务）、转岗型（如张三"想转架构"→ 内部转架构通道 + IDP 补架构能见度）。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>风险预警看板：</b>盯敬业度下滑、加班突变、面试动向等信号，提前 1–2 月干预，别等提离职才动。</span></div>
+
+      <div class="pit"><b>常见坑：</b>只有年终才谈保留（晚了）；以为加钱解决一切（掩盖了"没成长"真因）；把"想转岗"误判成"想离职"一刀切劝留。</div>
+      <div class="ok"><b>正确做法：</b>保留是"诊断因"不是"撒钱"——先搞清楚他为什么想走，再对症下药。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 当前高宠高危名单</span><span class="edit" contenteditable="true" id="r2-list">__（人名/岗位/风险原因，标红）</span></div>
+      <div class="field"><span class="lbl">你的填空 · 最该先动的 1 人</span><span class="edit" contenteditable="true" id="r2-top">__：因 __，动作 __</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 一线 manager 赋能 ============ -->
+  <section id="manager">
+    <div class="sec-head"><div class="sec-no">3</div><h2>一线 manager 赋能</h2><span class="sub"><span class="pill p-lev">杠杆高</span> 前置 · 一个好经理放大整队</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">manager 解释 ~70% 敬业度方差；"离职因 manager 非公司"</p>
+      <div class="why"><b>机制：</b>HR 直接触达员工有限，但每个 manager 管着一队人。赋能一个经理 = 撬动整队的留存与绩效。这是<b>杠杆的杠杆</b>——HR 不当"流程警察"，而当 manager 的"外脑"。</div>
+
+      <div class="ex">
+        <span class="lab">示意收益</span>
+        <table>
+          <tr><th>指标</th><th>好经理 vs 差经理（示意）</th></tr>
+          <tr><td>团队 1 年留存</td><td>+15–25%</td></tr>
+          <tr><td>团队绩效</td><td>+10–20%</td></tr>
+          <tr><td>赋能成本</td><td>低–中（培训+陪跑，非高薪）</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>新经理 90 天陪跑：</b>上任首季每周 1on1，帮他把"业务高手"切换成"团队 leader"。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>给工具箱不是给课：</b>1on1 模板、反馈话术、绩效面谈脚本、难带员工应对清单——拿来就能用。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>经理自测 + 反馈闭环：</b>下属匿名给经理打分（敬业度/管理方式），经理看到差距才愿改。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>HR 定位转型：</b>从"审流程"变成"陪你搞定这个人"——经理遇到问题第一个想到找你，不是躲你。</span></div>
+
+      <div class="pit"><b>常见坑：</b>只给大班培训不给陪跑（学完不会用）；HR 当警察不当事（经理躲着走）；一套通用课打所有经理（新经理和资深经理需求不同）。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 本团队最弱的 manager 能力</span><span class="edit" contenteditable="true" id="r3-weak">__（如：不会做绩效面谈 / 不给反馈）</span></div>
+      <div class="field"><span class="lbl">你的填空 · 准备推的赋能动作</span><span class="edit" contenteditable="true" id="r3-act">__</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 4. 内部活水/晋升 ============ -->
+  <section id="mobility">
+    <div class="sec-head"><div class="sec-no">4</div><h2>内部活水 / 晋升</h2><span class="sub"><span class="pill p-lev">杠杆中高</span> 前置 · 比外招快且便宜</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">内部填补比外招快、便宜、留存高（你做过活水 / 答辩 MCP 自动化）</p>
+      <div class="why"><b>机制：</b>内部人懂业务、零爬坡、留存高；外招要猎头费+3–6 月爬坡+高风险。把"机会透明 + 晋升标准清晰"做成机制，好人不被外面挖走。</div>
+
+      <div class="ex">
+        <span class="lab">示意收益</span>
+        <table>
+          <tr><th>维度</th><th>内部填补</th><th>外部招聘</th></tr>
+          <tr><td>成本</td><td>低 30–50%</td><td>基准</td></tr>
+          <tr><td>1 年留存</td><td>高 1.5–2×</td><td>基准</td></tr>
+          <tr><td>爬坡周期</td><td>短（懂业务）</td><td>3–6 月</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>机会透明：</b>内推通道 + 活水看板，让好岗先被内部人看到，再外发。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>晋升标准清晰：</b>用答辩机制（你做过新人答辩 MCP：建会/建群/看板回填/归档，月 1 日触发），标准摆台上，减少"凭关系"争议。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>跨岗流动通道：</b>允许内部转岗试水，保留核心人才的同时满足成长欲（对应张三"想转架构"）。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>填补后跟踪：</b>转岗/晋升后 90 天复盘适应度，避免"升上去却水土不服"。</span></div>
+
+      <div class="pit"><b>常见坑：</b>内部机会不透明→好人都被外面挖；晋升标准模糊→争议不断、寒了人心；只升不跟踪→"彼得原理"（被提到不胜任的位子）。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 当前内部机会透明度的卡点</span><span class="edit" contenteditable="true" id="r4-pain">__</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 5. 入职前 90 天 ============ -->
+  <section id="onboard">
+    <div class="sec-head"><div class="sec-no">5</div><h2>入职前 90 天（Onboarding）</h2><span class="sub"><span class="pill p-fix">杠杆中</span> 前置 · 留存与爬坡的窗口</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">体验好 → 1 年留存↑、产能爬坡快；前 90 天定调</p>
+      <div class="why"><b>机制：</b>新人前 90 天是"留 or 走"的决策窗口。好的 onboarding 让产能提前爬坡、降低早期流失，等于在"最贵的学习期"少浪费。</div>
+
+      <div class="ex">
+        <span class="lab">示意收益</span>
+        <table>
+          <tr><th>指标</th><th>好 onboarding vs 差（示意）</th></tr>
+          <tr><td>1 年留存</td><td>+~80%</td></tr>
+          <tr><td>产能爬坡</td><td>快 30–50%</td></tr>
+          <tr><td>成本</td><td>低（系统化，非高投入）</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>D-1 准备：</b>入职前一天账号/设备/导师/首周计划就位，第一天不尴尬。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>首周结构化：</b>30/60/90 天里程碑 + 导师制，新人知道"第 1 月要达成什么"。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>检查点复盘：</b>30/60/90 各一次 1on1，早发现"想走"信号。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>融入而非填表：</b>把文化/业务语境在首月灌进去，别只发员工手册。</span></div>
+
+      <div class="pit"><b>常见坑：</b>只发手册不配导师；90 天无检查点（等到 6 个月才发现有问题）；首日设备没好、新人无所事事。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 当前 onboarding 最弱的一环</span><span class="edit" contenteditable="true" id="r5-weak">__</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 6. 薪酬带宽/公平 ============ -->
+  <section id="pay">
+    <div class="sec-head"><div class="sec-no">6</div><h2>薪酬带宽 / 公平</h2><span class="sub"><span class="pill p-fix">杠杆中</span> 修饰 · 降流失 + 避合规</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">修正倒挂 / 不公 → 降流失 + 避合规风险；成本低（测算）</p>
+      <div class="why"><b>机制：</b>薪酬不公是"静默离职"的温床——干一样的活拿得少，人不会说但会走。建带宽体系 + 倒挂扫描，是一次性测算、长期稳压的动作。</div>
+
+      <div class="ex">
+        <span class="lab">示意做法</span>
+        <table>
+          <tr><th>动作</th><th>说明</th></tr>
+          <tr><td>建职级带宽</td><td>每职级 最小/中位/最大 + 级差 + 带宽重叠度（控同岗不同酬）</td></tr>
+          <tr><td>市场对标</td><td>对标市场 50/75 分位（不只看中位）</td></tr>
+          <tr><td>倒挂扫描</td><td>同岗新人比老人高 → 列表整改</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>建带宽：</b>每个职级三数（最小/中位/最大）+ 级差，重叠度控制在合理区间。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>市场对标：</b>用 50/75 分位定中位与最大，对外有竞争力。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>倒挂扫描：</b>找"同岗新人有倒挂"的名单，优先整改高风险岗。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>调薪规则透明：</b>让经理和员工懂"为什么是这个数"，减少猜疑。</span></div>
+
+      <div class="pit"><b>常见坑：</b>带宽重叠度失控（同岗薪资乱飞）；对标只看中位不看分位（关键岗用 75 才留得住）；调薪黑箱（员工不知怎么涨）。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 当前最明显的倒挂</span><span class="edit" contenteditable="true" id="r6-gap">__（岗位/倒挂幅度）</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 7. People Analytics 看板 ============ -->
+  <section id="analytics">
+    <div class="sec-head"><div class="sec-no">7</div><h2>People Analytics 看板</h2><span class="sub"><span class="pill p-fix">杠杆中</span> 放大器 · 让前面动作提前</span></div>
+    <div class="card">
+      <h3>为什么高 ROI（机制）</h3>
+      <p class="tag">早期预警流失 / 异常，把"事后救火"变"事前"（你博闻看板思路）</p>
+      <div class="why"><b>机制：</b>前面 6 项动作都依赖"看得见问题"。看板把散落数据（离职率/入职周期/敬业度/异动）聚成仪表盘 + 阈值报警，让保留、选人、赋能都从"感觉"变"信号驱动"。</div>
+
+      <div class="ex">
+        <span class="lab">示意收益</span>
+        <table>
+          <tr><th>维度</th><th>有看板 vs 无（示意）</th></tr>
+          <tr><td>风险发现时点</td><td>提前 1–2 月</td></tr>
+          <tr><td>决策依据</td><td>数据信号 vs 拍脑袋</td></tr>
+          <tr><td>成本</td><td>中（一次性建，复用）</td></tr>
+        </table>
+      </div>
+
+      <div class="block-h"><span class="b">▶</span>落地动作（4 步）</div>
+      <div class="step"><span class="n">1</span><span class="t"><b>定指标：</b>离职率、入职周期、敬业度、关键人异动——少而准，别堆 50 个。</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>取数自动化：</b>打通考勤/绩效/系统，周级更新，不靠人工 Excel 月月搬。</span></div>
+      <div class="step"><span class="n">3</span><span class="t"><b>设阈值报警：</b>某组离职率破线、某关键人敬业度连降 2 月→自动标红推送。</span></div>
+      <div class="step"><span class="n">4</span><span class="t"><b>周/月例行走查：</b>看板有人看才有用，纳入例行 HR 复盘。</span></div>
+
+      <div class="pit"><b>常见坑：</b>建了看板没人看（没进例会议程）；指标多无阈值（满屏数字无重点）；数据不准（垃圾进垃圾出，经理不信）。</div>
+
+      <div class="field"><span class="lbl">你的填空 · 最想先盯的 1 个指标</span><span class="edit" contenteditable="true" id="r7-metric">__（如：关键人敬业度 / 某组离职率）</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 伪高 ROI ============ -->
+  <section id="fake">
+    <div class="sec-head"><div class="sec-no">!</div><h2>慎投的「伪高 ROI」</h2><span class="sub"><span class="pill p-bad">警惕</span> 行为转化弱 / 留存贡献低</span></div>
+    <div class="card">
+      <div class="pit"><b>① 大班通用培训：</b>脱离工作场景，行为转化率常 &lt;15%。钱花了、热闹了，回到岗位还是老样子。→ 改法：小场景、高转化、带陪跑（见事项 1、3）。</div>
+      <div class="pit"><b>② 花哨文化活动 / 低相关福利：</b>感知强但留存贡献弱，且难量化 ROI。→ 改法：文化要落到"活水运营/IP 玩法"（见事项 4、你 AI 文化案例），不是办场热闹就完。</div>
+      <div class="pit"><b>③ 复杂系统 / 流程无 adoption：</b>建了没人用，等于沉没成本。→ 改法：先小范围跑通再推广，把"被复用"当验收标准（参考岗位模型里"做完被别中心抄走"）。</div>
+    </div>
+  </section>
+
+  <!-- ============ ROI 判断框架 ============ -->
+  <section id="framework">
+    <div class="sec-head"><div class="sec-no">∑</div><h2>怎么判断 ROI（面试能讲清的框架）</h2><span class="sub">影响面 × 可逆成本</span></div>
+    <div class="card">
+      <div class="why"><b>判断公式：</b>ROI ≈ <b>影响面</b>（能撬动多少人/多少业务）× <b>可逆成本</b>（做错了损失多大、好不好收）。<b>前置杠杆永远优先</b>——选人、留人、赋能经理、内部活水，这四项成本低、放大效应大、错了也好调；反之后置补救（救火式招聘、离职后重招）贵且被动。</div>
+      <div class="say">
+        <span class="q">面试能直接说：</span><br>
+        <span class="a">「我不按'做多少'看 ROI，按'杠杆点'看——选对人、留对关键人、赋能一线经理、让内部活水转起来，这四样成本低、放大效应大。反过来大班培训和花哨福利我慎投，因为行为转化和留存贡献弱。判断 ROI 我习惯用'影响面 × 可逆成本'，前置杠杆永远优先。」</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="lead" style="margin-top:18px"><b>一页速记（面试前扫一眼）：</b>①结构化选人=建标尺+题库+校准+90天回测，选错率~50%→~30%。②关键人保留=标红高宠高危+一对一诊断因+定制方案+预警看板，流失代价50–200%年薪。③经理赋能=90天陪跑+工具箱+自测闭环，撬整队留存绩效。④内部活水=机会透明+答辩晋升+跨岗通道，成本省30–50%、留存高1.5–2×。⑤入职90天=里程碑+导师+检查点，留存+~80%。⑥薪酬带宽=建带宽+对标+倒挂扫描，降静默离职。⑦看板=指标+自动化+阈值报警，让前面动作提前1–2月。慎投：大班培训/花哨福利/无adoption系统。</div>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+
+<script>
+(function(){
+  var KEY='hr_high_roi_v1';
+  function load(){
+    try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}
+  }
+  var data=load();
+  document.querySelectorAll('[contenteditable][id]').forEach(function(el){
+    if(el.id in data) el.textContent=data[el.id];
+    el.addEventListener('input',function(){
+      data[el.id]=el.textContent;
+      localStorage.setItem(KEY,JSON.stringify(data));
+    });
+  });
+})();
+</script>
+</body>
+</html>
