@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI报告数据核查 · 防错手册</title>
+<style>
+  :root{
+    --purple:#7C3AED;
+    --cyan:#06B6D4;
+    --grad:linear-gradient(135deg,#7C3AED,#06B6D4);
+    --bg:#FFFFFF;
+    --bg2:#F8FAFC;
+    --txt:#1E293B;
+    --sub:#64748B;
+    --line:rgba(124,58,237,.12);
+    --shadow:0 8px 24px rgba(124,58,237,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:var(--bg2);color:var(--txt);line-height:1.65;
+    padding:32px 20px 80px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;}
+
+  /* HERO */
+  .hero{
+    background:var(--grad);border-radius:24px;padding:40px 36px;color:#fff;
+    box-shadow:0 18px 40px rgba(124,58,237,.25);margin-bottom:28px;position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12);}
+  .hero h1{font-size:clamp(30px,5vw,40px);font-weight:700;letter-spacing:-.5px;margin-bottom:10px;}
+  .hero p{font-size:16px;opacity:.95;max-width:780px;}
+  .hero .pill{display:inline-block;background:rgba(255,255,255,.2);border-radius:999px;padding:5px 14px;font-size:13px;margin-top:14px;backdrop-filter:blur(2px);}
+
+  /* SECTION TITLE */
+  .sec{display:flex;align-items:center;gap:10px;margin:34px 4px 16px;}
+  .sec .bar{width:6px;height:24px;border-radius:6px;background:var(--grad);}
+  .sec h2{font-size:22px;font-weight:700;}
+  .sec .sub{color:var(--sub);font-size:13px;margin-left:auto;}
+
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:18px;}
+  .grid.wide{grid-template-columns:repeat(auto-fit,minmax(330px,1fr));}
+
+  .card{
+    background:var(--bg);border-radius:16px;padding:22px;box-shadow:var(--shadow);
+    border:1px solid var(--line);transition:.25s;opacity:0;transform:translateY(12px);
+  }
+  .card.in{opacity:1;transform:translateY(0);}
+  .card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(124,58,237,.14);}
+  .card h3{font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .card .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--grad);color:#fff;font-size:13px;font-weight:700;flex:0 0 auto;}
+  .card p{font-size:14px;color:var(--txt);}
+  .card .ex{margin-top:10px;font-size:13px;color:var(--sub);background:var(--bg2);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:8px 12px;}
+  .card .ex b{color:var(--purple);}
+
+  .pill{display:inline-block;border-radius:999px;padding:4px 12px;font-size:13px;background:rgba(124,58,237,.1);color:var(--purple);margin:0 6px 6px 0;}
+  .pill.c{background:rgba(6,182,212,.12);color:#0891b2;}
+
+  /* CODE BLOCK */
+  .codebox{background:#1E1B2E;border-radius:16px;padding:22px;color:#E2E8F0;position:relative;box-shadow:var(--shadow);}
+  .codebox .tag{position:absolute;top:12px;right:14px;font-size:12px;color:#94a3b8;}
+  .codebox pre{white-space:pre-wrap;font-size:13.5px;line-height:1.7;font-family:"SFMono-Regular",Consolas,monospace;}
+  .codebox .copy{position:absolute;bottom:14px;right:14px;background:var(--grad);color:#fff;border:none;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:inherit;}
+  .codebox .copy:active{transform:scale(.96);}
+
+  .editable{outline:none;border-bottom:1px dashed var(--purple);padding:1px 3px;color:var(--purple);cursor:text;}
+  .editable:focus{background:rgba(124,58,237,.06);border-bottom-style:solid;}
+
+  /* 3 招 */
+  .tip{display:flex;gap:14px;align-items:flex-start;}
+  .tip .ic{flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;}
+  .tip .tx{font-size:14px;}
+  .tip .tx b{color:var(--purple);}
+
+  footer{margin-top:46px;text-align:center;color:var(--sub);font-size:13px;padding-top:22px;border-top:1px dashed var(--line);}
+  @media(max-width:560px){.hero{padding:28px 22px;}.wrap{padding:0;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>AI 报告数据核查 · 防错手册</h1>
+    <p>agent 出的分析报告，数据错不错——判断盯 4 件事（源 / 算 / 口径 / 编），避免靠 6 招前置卡死。本页所有<span class="editable" data-key="src" contenteditable="true">源文件 / 口径</span>占位都可点开直接改，自动本地保存。</p>
+    <span class="pill">结论先行 · 结构化速查</span>
+  </section>
+
+  <!-- 判断：4 维度 -->
+  <div class="sec"><span class="bar"></span><h2>一、怎么判断数据有没有错</h2><span class="sub">逐条对照 · 拿源文件复核</span></div>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="num">1</span>源对不对</h3>
+      <p>报告里的数，是不是从你说的那份文件来的？agent 常偷偷读错 sheet 或拿旧文件。</p>
+      <div class="ex">例：博闻看板读的是 <b>最新学员明细.xlsx</b>，还是上个月那版？活动人数拉的是<b>智能表格</b>还是群接龙截图？</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">2</span>算对没</h3>
+      <p>抽 1 个数自己拿源文件手算：加总 / 去重 / 人均 / 占比，逐项核对。</p>
+      <div class="ex">例：人均参与深度 = <b>总人次 ÷ 去重人数</b>，手算一次；简历"覆盖__人"对不对得上原始名单行数。</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">3</span>口径守没守</h3>
+      <p>你定的规则它有没有偷换？没写清口径的报告，默认当错。</p>
+      <div class="ex">例：博闻"<b>&lt;15min 剔除 + 空白排除</b>"有没有真去掉；简历数字先用__占位、定稿标【待补】。</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">4</span>有没有编</h3>
+      <p>看有没有无中生有的案例 / 数字 / 引用——你从没给过却出现在报告里。</p>
+      <div class="ex">例：冒出一个你从没办过的<b>活动名称</b>、一个漂亮得可疑的<b>达标率 100%</b>。</div>
+    </div>
+  </div>
+
+  <!-- 30秒验错 -->
+  <div class="sec"><span class="bar"></span><h2>二、30 秒快速验错 3 招</h2><span class="sub">不用全查，先扫这三处</span></div>
+  <div class="grid">
+    <div class="card"><div class="tip"><span class="ic">⚡</span><div class="tx"><b>抽一个你心里有数的数</b><br>你知道某场来了 23 人，报告写 23 就对，写 32 就是算错或读错源。</div></div></div>
+    <div class="card"><div class="tip"><span class="ic">⚠️</span><div class="tx"><b>警惕"太整齐"的数字</b><br>全员达标率 100%、人均恰好 2.0，大概率是 agent 圆出来的，不是真算的。</div></div></div>
+    <div class="card"><div class="tip"><span class="ic">📌</span><div class="tx"><b>看口径说明在不在</b><br>正规报告会写"已剔除&lt;15min"。没写就是没做，默认当错。</div></div></div>
+  </div>
+
+  <!-- 让 agent 自查话术 -->
+  <div class="sec"><span class="bar"></span><h2>三、让 agent 自己复查的话术</h2><span class="sub">直接丢给它 · 答不出来源即不可信</span></div>
+  <div class="codebox">
+    <span class="tag">点复制 → 发给 agent</span>
+    <pre>这是你出的报告。请逐条说明：
+① 每个核心数字来自哪个源文件哪一行；
+② 计算口径（去重 / 剔除规则）是什么；
+③ 标出 3 个你最没把握、建议我手算复核的数字。
+
+👉 它如果答不出"来自哪一行"，这条数据就不可信。</pre>
+    <button class="copy" onclick="copy(this)">复制</button>
+  </div>
+
+  <!-- 防错 6 招 -->
+  <div class="sec"><span class="bar"></span><h2>四、怎么尽量让数据没错（前置防错）</h2><span class="sub">做报告前就卡死 · 比事后查省 10 倍</span></div>
+  <div class="grid wide">
+    <div class="card">
+      <h3><span class="num">1</span>锁源</h3>
+      <p>指定精确文件路径 + sheet，明令"不准自己找别的"。</p>
+      <div class="ex">例：博闻看板只许读 <b><span class="editable" data-key="lock" contenteditable="true">学员明细_2026Q2.xlsx</span></b> 的"明细"sheet，别拿旧版或截图。</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">2</span>写死口径</h3>
+      <p>把你的规则逐条变白纸黑字，别让它"自己理解"。</p>
+      <div class="ex">例：<b>"&lt;15min 且空白剔除；去重按工蜂 ID；人均 = 总人次 ÷ 去重人数"</b></div>
+    </div>
+    <div class="card">
+      <h3><span class="num">3</span>先确认再干</h3>
+      <p>让它先用一句话复述口径，你点头再出数——逼它把误解暴露在前。</p>
+      <div class="ex">例：防止它把"去重人数"理解成"参与人次"。</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">4</span>埋基准数</h3>
+      <p>给 1 个你 100% 确定的数当试金石，让它先对上再信其他。</p>
+      <div class="ex">例：<b>"你知道 3 月那场来了 23 人，先对这个数"</b>，对了再信其余。</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">5</span>内嵌溯源</h3>
+      <p>每个核心数字后标来源行 / 单元格，你一眼能复核。</p>
+      <div class="ex">例：报告写 <b>"覆盖 312 人（源：明细!B2:B313 去重）"</b>。</div>
+    </div>
+    <div class="card">
+      <h3><span class="num">6</span>占位防编</h3>
+      <p>没给真实值的数用 __ 或【待补】，不许估算填写——正是你定稿口径逻辑。</p>
+      <div class="ex">例：简历数字、活动反馈份数一律留白，定稿时你亲自填。</div>
+    </div>
+  </div>
+
+  <!-- 防错指令模板 -->
+  <div class="sec"><span class="bar"></span><h2>五、可直接复制的防错指令模板</h2><span class="sub">做报告前发它 · 填空即可</span></div>
+  <div class="codebox">
+    <span class="tag">填空后复制 → 发 agent</span>
+    <pre>做之前先做到这 6 条：
+① 只使用我指定的文件 <span class="editable" data-key="tpl_src" contenteditable="true">__</span> 的 sheet <span class="editable" data-key="tpl_sh" contenteditable="true">__</span>，不准用其他来源；
+② 严格按口径：<span class="editable" data-key="tpl_rule" contenteditable="true">__</span>（逐条写）；
+③ 先用你自己的话复述一遍口径，等我确认再动手；
+④ 报告里每个核心数字后标注来源行号；
+⑤ 凡是我没给真实值的数字，用 __ 占位，<b>不许估算填写</b>；
+⑥ 最后单独列一段"本次我做了哪些假设"，供我核对。</pre>
+    <button class="copy" onclick="copy(this)">复制</button>
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+  // 滚动揭示
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+
+  // 可编辑字段本地保存
+  document.querySelectorAll('.editable').forEach(el=>{
+    const k='dc_'+el.dataset.key;
+    const v=localStorage.getItem(k); if(v!==null) el.textContent=v;
+    el.addEventListener('input',()=>localStorage.setItem(k,el.textContent));
+  });
+
+  // 复制
+  function copy(btn){
+    const txt=btn.previousElementSibling.innerText.trim();
+    navigator.clipboard.writeText(txt).then(()=>{
+      const o=btn.textContent;btn.textContent='已复制 ✓';setTimeout(()=>btn.textContent=o,1400);
+    });
+  }
+</script>
+</body>
+</html>
