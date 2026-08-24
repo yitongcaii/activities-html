@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "skills": {
+    "quick4prd": {
+      "name": "产品经理AI-PRD助手",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=quick4prd",
+      "source": "community",
+      "version": "1.0.3",
+      "installedAt": "2026-08-10T07:33:53Z"
+    },
+    "ppt-generator-skill": {
+      "name": "ppt-generator-skill",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=ppt-generator-skill",
+      "source": "community",
+      "version": "1.0.2",
+      "installedAt": "2026-08-10T07:36:46Z"
+    },
+    "openclaw-v3": {
+      "name": "视频生成",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=openclaw-v3",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-08-10T07:39:40Z"
+    },
+    "douyin-pro": {
+      "name": "自动化克隆数字人口播混剪视频",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=douyin-pro",
+      "source": "community",
+      "version": "2.1.0",
+      "installedAt": "2026-08-10T07:40:59Z"
+    },
+    "frontend-spec": {
+      "name": "前端开发规范",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=frontend-spec",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-08-10T07:43:35Z"
+    },
+    "video-cinematography": {
+      "name": "电影感拍摄与镜头运动",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=video-cinematography",
+      "source": "community",
+      "version": "1.0.2",
+      "installedAt": "2026-08-10T07:44:40Z"
+    },
+    "all-translate": {
+      "name": "多语种翻译（支持语音）",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=all-translate",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-08-10T07:45:47Z"
+    },
+    "learning-feynman": {
+      "name": "费曼·学习表达",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=learning-feynman",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-08-10T07:47:29Z"
+    },
+    "fullstack-companion": {
+      "name": "全栈开发伴侣",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=fullstack-companion",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-08-10T07:48:51Z"
+    },
+    "seedance-creator": {
+      "name": "Seedance Creator — 即梦创作助手",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=seedance-creator",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-08-10T07:50:18Z"
+    }
+  }
+}
