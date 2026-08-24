@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRBP+PM 面试备战手册</title>
+<style>
+  :root{
+    --purple:#7C3AED; --cyan:#06B6D4;
+    --bg1:#f5f3ff; --bg2:#ecfeff;
+    --ink:#1f2430; --sub:#5b6270; --line:#e7e3f3;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink); line-height:1.6;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    padding:32px 20px 60px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  header.hero{
+    background:linear-gradient(120deg,var(--purple),var(--cyan));
+    color:#fff;border-radius:22px;padding:34px 34px 28px;
+    box-shadow:0 18px 40px -18px rgba(124,58,237,.55);
+    margin-bottom:26px;
+  }
+  header.hero h1{font-size:30px;letter-spacing:.5px;margin-bottom:8px}
+  header.hero p{opacity:.94;font-size:14.5px;max-width:840px}
+  .tagrow{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{
+    font-size:12.5px;font-weight:600;padding:5px 12px;border-radius:999px;
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    backdrop-filter:blur(2px);
+  }
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  @media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{
+    background:var(--card);border-radius:16px;padding:20px 18px;
+    box-shadow:0 10px 26px -16px rgba(31,36,48,.28);
+    border:1px solid var(--line);
+    transition:transform .18s ease, box-shadow .18s ease;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 22px 40px -18px rgba(124,58,237,.4)}
+  .card h3{
+    font-size:16.5px;margin-bottom:4px;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .card .kicker{font-size:11.5px;color:var(--sub);margin-bottom:12px;font-weight:600;letter-spacing:.3px}
+  .q{
+    border-left:3px solid var(--purple);padding:7px 0 7px 12px;margin:9px 0;
+    font-size:13.5px;
+  }
+  .q b{color:var(--purple)}
+  .q .why{display:block;color:var(--sub);font-size:12px;margin-top:3px}
+  .q .tip{display:block;color:#b45309;font-size:12px;margin-top:3px}
+  .trend{font-size:13.3px;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .trend:last-child{border-bottom:none}
+  .trend b{color:var(--cyan)}
+  .flag{font-size:13.3px;padding:6px 0;display:flex;gap:8px;align-items:flex-start}
+  .flag .x{color:#dc2626;font-weight:800;flex:0 0 auto}
+  .flag .ok{color:#059669;font-weight:800;flex:0 0 auto}
+  .star-box{
+    background:linear-gradient(135deg,#faf5ff,#ecfeff);
+    border:1.5px dashed var(--purple);border-radius:14px;padding:14px;margin-top:6px;
+  }
+  [contenteditable]{outline:none;min-height:30px;border-bottom:1px dotted #c4b5fd;margin:6px 0 2px;padding:3px 6px;border-radius:6px}
+  [contenteditable]:focus{background:#fff;border-bottom:1.5px solid var(--cyan)}
+  .star-box .lab{font-size:12.5px;font-weight:700;color:var(--purple)}
+  .savebtn{
+    margin-top:10px;align-self:flex-start;cursor:pointer;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));color:#fff;border:none;
+    padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;
+  }
+  .savebtn:active{transform:scale(.96)}
+  .saved{font-size:11.5px;color:#059669;margin-left:10px;align-self:center}
+  .note{font-size:12px;color:var(--sub);margin-top:8px;font-style:italic}
+  footer{
+    margin-top:34px;text-align:center;font-size:13px;color:var(--sub);
+    padding:18px;border-top:1px solid var(--line);
+  }
+  .span2{grid-column:span 2}
+  @media(max-width:880px){.span2{grid-column:span 2}}
+  @media(max-width:560px){.span2{grid-column:span 1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>HRBP + PM 面试备战手册</h1>
+    <p>面向云技服 HRBP+PM 复合岗的模拟题库 + 2026 趋势 + 面试官雷区 + 可填 STAR 模板。本手册本身由「多 agent 协作框架」练手产出（并行调研趋势 / 串行整理 / 主 agent 兜底合成）—— 面试聊多 agent 时可直接拿它当案例。</p>
+    <div class="tagrow">
+      <span class="pill">专业力</span><span class="pill">行为力·STAR</span>
+      <span class="pill">AI 文化认知</span><span class="pill">活动策划实战</span>
+      <span class="pill">面试官雷区</span><span class="pill">可填模板</span>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- 专业力 HRBP -->
+    <div class="card">
+      <div class="kicker">专业力 · HRBP 线</div>
+      <h3>HRBP 高频题</h3>
+      <div class="q"><b>如何快速摸清一个新业务部门的运作？</b><span class="why">考察：业务洞察 / 快速学习。框架：年报财报 + 关键人访谈 + 人效数据 + 现场观察 → 业务诊断报告。</span></div>
+      <div class="q"><b>业务业绩下滑，HR 角度怎么支持？</b><span class="why">考察：归因与业务联动。先归因（市场/产品/团队）→ 差异化 HR 干预 → 数据驱动 + 可衡量指标。</span></div>
+      <div class="q"><b>怎么把 HR 策略和业务战略对齐？</b><span class="why">考察：战略思维。识别关键组织/人才能力 → 针对性项目（招聘/培训/激励）→ 定期校准。</span></div>
+      <div class="q"><b>manager 与成员冲突怎么调解？</b><span class="why">考察：中立调解。listen 分离事实/情绪/诉求 → 查政策 → 记录 → 闭环时讲清能/不能保密。</span></div>
+      <div class="q"><b>你最看重的 HR 指标？</b><span class="why">考察：数据敏感度。关键岗流失、内部流动、管理者效能、敬业风险、人才缺口。</span><span class="tip">雷区：只说"做了几场培训"，要说 impact metric。</span></div>
+    </div>
+
+    <!-- 专业力 PM -->
+    <div class="card">
+      <div class="kicker">专业力 · PM 线</div>
+      <h3>PM 高频题</h3>
+      <div class="q"><b>模糊需求怎么拆成可落地项目？</b><span class="why">考察：需求拆解。目标 → 用户/干系人 → MVP → 里程碑 → 验收指标。</span></div>
+      <div class="q"><b>跨部门推动卡住怎么办？</b><span class="why">考察：无授权影响力。找共同目标 → 拆小胜利 → 拉关键人背书（你带新人答辩自动化 MCP 是直接素材）。</span></div>
+      <div class="q"><b>怎么管项目风险？</b><span class="why">考察：风险管理。识别 → 概率×影响矩阵 → 预案 → 周知干系人。</span></div>
+      <div class="q"><b>怎么证明项目 ROI？</b><span class="why">考察：价值量化。基线对比，用 impact metric（如转化率/人效）而非 activity metric（如培训场次）。</span></div>
+      <div class="q"><b>优先级冲突怎么排？</b><span class="why">考察：取舍判断。业务价值 × 紧迫度矩阵，敢于说"不"并给依据。</span></div>
+    </div>
+
+    <!-- 行为力 STAR -->
+    <div class="card">
+      <div class="kicker">行为力 · STAR</div>
+      <h3>必准备的经历故事</h3>
+      <div class="q"><b>从 0 到 1 带项目的经历</b><span class="why">素材：新人发展答辩自动化 MCP / 抽奖 Web 应用，讲清你定框架、拉资源、验证闭环。</span></div>
+      <div class="q"><b>一次冲突处理</b><span class="why">员工关系或跨部门扯皮，突出"对事不对人 + 找共同目标"。</span></div>
+      <div class="q"><b>推动不下去怎么破局</b><span class="why">讲替代路径（如机器人加不了人 → 群消息 @），体现灵活不硬刚。</span></div>
+      <div class="q"><b>一次失败 / 复盘</b><span class="why">用成长思维：某次活动复盘发现目标用户错位，已建需求预判校验机制。</span><span class="tip">别塑完美人设，面试官更看应对困境的策略。</span></div>
+      <div class="q"><b>用数据说服别人的一次</b><span class="why">把"我觉得"换成 dashboard，讲清数据怎么改变决策。</span></div>
+    </div>
+
+    <!-- 情景题 -->
+    <div class="card">
+      <div class="kicker">情景题 · 你的主场</div>
+      <h3>三道情景压轴</h3>
+      <div class="q"><b>AI 文化运营怎么做？</b><span class="why">human-led：AI 释放时间做更高价值，别用 AI 替代人的连接；可搭员工体验助手/平台。</span></div>
+      <div class="q"><b>活动出事故怎么救？</b><span class="why">分级预案（下雨/物资没到/有人受伤）+ 透明沟通 + 事后复盘沉淀 SOP。</span></div>
+      <div class="q"><b>上下级团建怎么设计不越界？</b><span class="why">只采 SUPERVISOR 档（尊重、不暴露隐私、建信任）；leader 放下身段类（神笔马良/厨神/公益）> 剔 peer 向。</span><span class="tip">这是你的硬约束，主动讲出来是加分项。</span></div>
+    </div>
+
+    <!-- AI x EX 趋势 -->
+    <div class="card">
+      <div class="kicker">2026 趋势 · AI×EX</div>
+      <h3>面试官会挖的认知</h3>
+      <div class="trend"><b>human-led design：</b>AI 是副驾/autopilot，判断与伦理留给人（IndiGo、Cadila 案例）。</div>
+      <div class="trend"><b>员工体验平台：</b>Kent "Frank" 打通 13000 人、CSAT 89%；IndiGo HR 助手年处理 4.5 万请求、4 秒响应。</div>
+      <div class="trend"><b>7×24 员工助手：</b>米其林"米知道"、联合利华"Una"整合人事/IT/行政。</div>
+      <div class="trend"><b>反向导师制：</b>senior 向年轻人学，练 relational intelligence。</div>
+      <div class="trend"><b>金句：</b>"AI should feel like an experience, not technology"——效率不能压倒人的判断与连接。</div>
+    </div>
+
+    <!-- 活动新玩法 -->
+    <div class="card">
+      <div class="kicker">2026 趋势 · 文化活动</div>
+      <h3>90/00 后新玩法</h3>
+      <div class="trend"><b>拒绝：</b>信任背摔 / 毕业墙 / 军训式拓展——被动服从，出片率为零。</div>
+      <div class="trend"><b>四类主流：</b>沉浸式剧本 / 综艺同款 / 城市探索定向 / 露营音乐节 / 手工共创。</div>
+      <div class="trend"><b>判断标准：</b>员工主动参与 > 被动配合；自带传播属性（出片率）。</div>
+      <div class="trend"><b>半天轻团建：</b>暖心故事分享 / 便利贴心愿 / 纳斯卡共创，也能落文化。</div>
+      <div class="trend"><b>你的红线：</b>上下级团建只采 SUPERVISOR 档，peer 向全剔除。</div>
+    </div>
+
+    <!-- 面试官雷区 -->
+    <div class="card">
+      <div class="kicker">面试官雷区 · 踩中即扣分</div>
+      <h3>12 条避雷清单</h3>
+      <div class="flag"><span class="x">✕</span><span>"我没经验但我可以学" → 换成"接触不多，但 XX 经验让我能快速上手"。</span></div>
+      <div class="flag"><span class="x">✕</span><span>结尾"没什么问题" → 准备 2-3 个高质量问题（前 3 月核心 KPI？团队最大挑战？）。</span></div>
+      <div class="flag"><span class="x">✕</span><span>吐槽前公司/领导 → 客观 + 聚焦个人成长需求。</span></div>
+      <div class="flag"><span class="x">✕</span><span>背模板/喊口号 → 讲身边真实实例。</span></div>
+      <div class="flag"><span class="x">✕</span><span>假大空无案例 → 具体事件 + 你的行动 + 量化结果。</span></div>
+      <div class="flag"><span class="x">✕</span><span>过早问薪资福利 / 对公司岗位一问三不知 / 夸大个人作用。</span></div>
+      <div class="flag"><span class="ok">✓</span><span>用 STAR-L（加 Learning）讲失败，展示成长性思维。</span></div>
+    </div>
+
+    <!-- STAR 可填模板 -->
+    <div class="card span2">
+      <div class="kicker">可填模板 · 你的专属故事库</div>
+      <h3>STAR 填空（自动存本地草稿）</h3>
+      <div class="star-box">
+        <div class="lab">S 情境：</div>
+        <div contenteditable="true" data-k="s" placeholder="当时面临什么背景？团队/业务处于什么状态？"></div>
+        <div class="lab">T 任务：</div>
+        <div contenteditable="true" data-k="t" placeholder="你接到什么目标或挑战？"></div>
+        <div class="lab">A 行动：</div>
+        <div contenteditable="true" data-k="a" placeholder="你具体做了什么？和别人不同的动作在哪？"></div>
+        <div class="lab">R 结果：</div>
+        <div contenteditable="true" data-k="r" placeholder="量化结果？影响了什么指标/人？"></div>
+        <div class="lab">L 学习：</div>
+        <div contenteditable="true" data-k="l" placeholder="复盘沉淀了什么机制/认知？"></div>
+        <button class="savebtn" onclick="saveStar()">保存草稿</button><span class="saved" id="savedTip"></span>
+      </div>
+      <div class="note">提示：按"专业力/行为力/情景题"各填 2-3 个真实故事，面试前朗读一遍。别编，面试官一追问细节就露。</div>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+function saveStar(){
+  const keys=['s','t','a','r','l'];
+  const data={};
+  keys.forEach(k=>{
+    const el=document.querySelector('[data-k="'+k+'"]');
+    if(el) data[k]=el.innerText;
+  });
+  try{
+    localStorage.setItem('hrbp_star_draft', JSON.stringify(data));
+    document.getElementById('savedTip').innerText='已保存 ✓';
+    setTimeout(()=>document.getElementById('savedTip').innerText='',2000);
+  }catch(e){}
+}
+(function(){
+  try{
+    const raw=localStorage.getItem('hrbp_star_draft');
+    if(!raw) return;
+    const data=JSON.parse(raw);
+    ['s','t','a','r','l'].forEach(k=>{
+      const el=document.querySelector('[data-k="'+k+'"]');
+      if(el && data[k]) el.innerText=data[k];
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

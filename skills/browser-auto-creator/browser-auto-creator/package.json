@@ -1,0 +1,27 @@
+{
+  "name": "browser-auto-creator",
+  "version": "1.0.0",
+  "description": "浏览器操作记录器 - 通过录制浏览器操作自动生成技能代码",
+  "main": "scripts/index.js",
+  "bin": {
+    "browser-auto-creator": "./scripts/index.js"
+  },
+  "scripts": {
+    "start": "node scripts/index.js",
+    "record": "node scripts/index.js record",
+    "generate": "node scripts/index.js generate"
+  },
+  "keywords": [
+    "browser-automation",
+    "playwright",
+    "skill-generator",
+    "recorder"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2"
+  }
+}

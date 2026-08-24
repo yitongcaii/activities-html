@@ -1,0 +1,103 @@
+{
+  "description": "文化活动SOP相关资源链接汇总（由用户补充）",
+  "last_updated": "2026-04-23",
+  "links": [
+    {
+      "id": "link_01",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAoxaP2u2SAaUAsQZIADc",
+      "type": "wechat_drive",
+      "title": "2024三部员工大会-dowson谈参.docx",
+      "category": "高管谈参模板",
+      "description": "Dowson过往谈参参考，用于高管发言要点建议"
+    },
+    {
+      "id": "link_02",
+      "url": "https://doc.weixin.qq.com/sheet/e3_AaUAsQZIADcCNesWnJRvgQEOBDg0r?scode=AJEAIQdfAAoSnf1cbZAaUAsQZIADc&tab=BB08J2",
+      "type": "wechat_doc",
+      "title": "【Wang参会指引】三部2025员工大会圆桌会环节",
+      "category": "高管参会指引模板",
+      "description": "GM参会指引参考，明确参与环节和回答内容"
+    },
+    {
+      "id": "link_03",
+      "url": "https://doc.weixin.qq.com/doc/w3_AD0ABQY5ACgyJDPqFbgRpOxjl1sKe?scode=AJEAIQdfAAo1eOgagvAD0ABQY5ACg",
+      "type": "wechat_doc",
+      "title": "腾讯会议Webinar操作指引",
+      "category": "技术操作文档",
+      "description": "腾讯会议Webinar操作指引（适用于全员沟通会）"
+    },
+    {
+      "id": "link_04",
+      "url": "https://doc.weixin.qq.com/doc/w3_AN0AxQYPACobi0w7oodSpa0eMBkZQ?scode=AJEAIQdfAAoCnxGjIHAD0ABQY5ACg",
+      "type": "wechat_doc",
+      "title": "CSIG正发声直播技术SOP（乐享）",
+      "category": "技术操作文档",
+      "description": "乐享直播技术SOP，BG技术接口人hakaichen(陳夏鍇)"
+    },
+    {
+      "id": "link_05",
+      "url": "https://doc.weixin.qq.com/sheet/e3_AD0ABQY5ACgUOJ6B50WSb0JXLlI9z?scode=AJEAIQdfAAopt9xE7yAD0ABQY5ACg&tab=857unm",
+      "type": "wechat_doc",
+      "title": "会议rundown参考模板",
+      "category": "流程模板",
+      "description": "活动流程分工表rundown参考模板，明确分工和整个流程"
+    },
+    {
+      "id": "link_06",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAoYD0w01cAaUAsQZIADc",
+      "type": "wechat_drive",
+      "title": "颁奖ppt模版.zip",
+      "category": "视觉物料模板",
+      "description": "颁奖环节PPT模板，含获奖个人/团队照片展示"
+    },
+    {
+      "id": "link_07",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAomAG7keGAaUAsQZIADc",
+      "type": "wechat_drive",
+      "title": "流程音乐.zip（BGM包）",
+      "category": "音视频素材",
+      "description": "活动暖场/颁奖/流程切换背景音乐包"
+    },
+    {
+      "id": "link_08",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAodYZsNCJAMEAAQZ5ACo",
+      "type": "wechat_drive",
+      "title": "抽奖系统.zip",
+      "category": "互动工具",
+      "description": "现场大屏抽奖系统工具"
+    },
+    {
+      "id": "link_09",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAoOknzQpHAD0ABQY5ACg",
+      "type": "wechat_drive",
+      "title": "团建小游戏汇总.pdf",
+      "category": "互动工具",
+      "description": "团建/破冰/暖场小游戏合集"
+    },
+    {
+      "id": "link_10",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAo5oP8YUPAD0ABQY5ACg",
+      "type": "wechat_drive",
+      "title": "训练游戏大全.pdf",
+      "category": "互动工具",
+      "description": "培训/工作坊结构化团队训练游戏"
+    },
+    {
+      "id": "link_11",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAoFiMmNV3AaUAsQZIADc",
+      "type": "wechat_drive",
+      "title": "简单数智人音视频制作教程.docx",
+      "category": "技术操作文档",
+      "description": "数智人主持形象制作教程，可用于大会开场介绍"
+    },
+    {
+      "id": "link_12",
+      "url": "https://drive.weixin.qq.com/s?k=AJEAIQdfAAonSApCIhAaUAsQZIADc",
+      "type": "wechat_drive",
+      "title": "数智人平台-播报模块产品操作手册.pptx",
+      "category": "技术操作文档",
+      "description": "数智人平台播报模块操作指南"
+    }
+  ],
+  "missing": []
+}
