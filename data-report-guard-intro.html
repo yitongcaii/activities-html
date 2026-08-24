@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>data-report-guard · 防错出报告 Skill 说明书</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#22d3ee; --ink:#1f2330; --sub:#6b7180;
+    --bg:#f6f5ff; --card:#ffffff; --line:#eceafe;
+    --grad:linear-gradient(120deg,#7c5cff 0%,#22d3ee 100%);
+    --shadow:0 10px 30px rgba(124,92,255,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(34,211,238,.12),transparent),
+               radial-gradient(1000px 500px at -10% 10%,rgba(124,92,255,.14),transparent),
+               var(--bg);
+    color:var(--ink); line-height:1.6; padding:40px 20px 80px;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  /* HERO */
+  .hero{
+    background:var(--grad); border-radius:26px; padding:42px 38px; color:#fff;
+    box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;
+    background:rgba(255,255,255,.16);border-radius:50%}
+  .hero h1{font-size:34px;letter-spacing:-.5px;margin-bottom:10px}
+  .hero .en{font-size:14px;opacity:.85;font-family:ui-monospace,Menlo,monospace}
+  .hero p{margin-top:14px;font-size:15px;opacity:.95;max-width:680px}
+  .pills{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);
+    padding:6px 14px;border-radius:999px;font-size:13px;backdrop-filter:blur(4px)}
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:22px;box-shadow:0 6px 18px rgba(31,35,48,.05);
+    opacity:0;transform:translateY(18px);transition:.6s cubic-bezier(.2,.7,.3,1)}
+  .card.in{opacity:1;transform:none}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .card h3{font-size:17px;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .card h3 .dot{width:10px;height:10px;border-radius:50%;background:var(--grad)}
+  .card p,.card li{font-size:14px;color:var(--sub)}
+  .card ul{margin:6px 0 0 18px}
+  .card li{margin:5px 0}
+  .span3{grid-column:span 3}.span4{grid-column:span 4}.span5{grid-column:span 5}
+  .span6{grid-column:span 6}.span7{grid-column:span 7}.span8{grid-column:span 8}
+  .span12{grid-column:span 12}
+  @media(max-width:820px){.card{grid-column:span 12!important}}
+  /* FLOW */
+  .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  @media(max-width:820px){.flow{grid-template-columns:repeat(2,1fr)}}
+  .step{background:linear-gradient(180deg,#faf9ff,#fff);border:1px solid var(--line);
+    border-radius:16px;padding:14px;text-align:center;position:relative}
+  .step .n{width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 8px}
+  .step b{font-size:13px;color:var(--ink)}
+  .step small{display:block;font-size:11px;color:var(--sub);margin-top:4px}
+  /* TEMPLATE */
+  .tpl{background:#0f1226;color:#e7e9ff;border-radius:18px;padding:20px;
+    font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.9;position:relative}
+  .tpl .copy{position:absolute;right:14px;top:14px;background:var(--grad);border:none;
+    color:#fff;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:12px}
+  .tpl .copy:active{transform:scale(.95)}
+  .tpl b{color:#8be9fd}
+  .tag{display:inline-block;font-size:11px;color:var(--purple);background:#efeaff;
+    padding:2px 8px;border-radius:6px;margin-right:6px}
+  .x{color:#ff7a90}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="en">skill · data-report-guard</div>
+    <h1>🛡️ 防错出报告 Skill</h1>
+    <p>出数据报告前，自动卡死「源错 / 算错 / 口径换 / 编」四大雷区。每个核心数字可溯源、口径白纸黑字、假设全暴露、未知值不编造。</p>
+    <div class="pills">
+      <span class="pill">⚡ 显式触发</span>
+      <span class="pill">📁 user 级</span>
+      <span class="pill">🔁 6 招流程</span>
+      <span class="pill">✅ 强制自查</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- 目标 -->
+    <div class="card span5">
+      <h3><span class="dot"></span>目标</h3>
+      <p>出一份<strong>每个核心数字都可溯源、计算口径白纸黑字、假设全暴露、未知值不编造</strong>的数据报告。在出数前把错误摁死，而不是事后逐条查。</p>
+    </div>
+    <!-- 触发判断 -->
+    <div class="card span7">
+      <h3><span class="dot"></span>触发判断（代理怎么判）</h3>
+      <ul>
+        <li>✅ <b>激活</b>：原话含「防错 / 按模板 / 出报告要防错」且任务是出数据/报告</li>
+        <li>⛔ <span class="x">不激活</span>：只说「出个报告」无「防错」字样 → 按普通任务</li>
+        <li>⛔ <span class="x">不激活</span>：只问「这个数对吗」→ 这是核查不是出报告</li>
+        <li>⚠️ 激活后<strong>未指定源文件</strong> → 必须反问，禁止自己找/用旧文件</li>
+      </ul>
+    </div>
+
+    <!-- 6 步流程 -->
+    <div class="card span12">
+      <h3><span class="dot"></span>执行流程（6 步：动作 → 工具 → 产出）</h3>
+      <div class="flow">
+        <div class="step"><div class="n">1</div><b>锁源</b><small>Glob/Read 验文件</small></div>
+        <div class="step"><div class="n">2</div><b>写死口径</b><small>纯撰写 bullet</small></div>
+        <div class="step"><div class="n">3</div><b>复述确认</b><small>停住等点头</small></div>
+        <div class="step"><div class="n">4</div><b>埋基准数</b><small>Bash+python 重算</small></div>
+        <div class="step"><div class="n">5</div><b>溯源+占位</b><small>Write 标行号</small></div>
+        <div class="step"><div class="n">6</div><b>出报告</b><small>Write 四段</small></div>
+      </div>
+    </div>
+
+    <!-- 边界 -->
+    <div class="card span6">
+      <h3><span class="dot"></span>边界（不做什么）</h3>
+      <ul>
+        <li>❌ 不自动触发（无「防错」不跑）</li>
+        <li>❌ 不替你填估算值（未知一律占位）</li>
+        <li>❌ 不改源数据文件</li>
+        <li>❌ 不主动推 Pages / 不发企微</li>
+        <li>❌ 源找不到不硬编，必反问</li>
+        <li>❌ 单次只服务一个报告任务</li>
+      </ul>
+    </div>
+    <!-- 验证 -->
+    <div class="card span6">
+      <h3><span class="dot"></span>结果验证（强制自查）</h3>
+      <ul>
+        <li>① 每个核心数字 → 来自哪个源文件哪一行（答不出=不可信）</li>
+        <li>② 计算口径逐条复述</li>
+        <li>③ 标出 <b>3 个最没把握、建议手算复核</b>的数字</li>
+        <li>④ 断言：无 <code>__</code> 被自动填充、口径段存在</li>
+        <li>🔬 可选：python 抽样重算交叉比对，不符标红</li>
+      </ul>
+    </div>
+
+    <!-- 交付物 -->
+    <div class="card span12">
+      <h3><span class="dot"></span>最终交付物（4 段结构）</h3>
+      <p>
+        <span class="tag">数据段</span>每个数带溯源标注
+        <span class="tag">口径段</span>白纸黑字的规则
+        <span class="tag">假设段</span>本次所有假设（抓偷偷脑补）
+        <span class="tag">自查段</span>3 个待手算复核数 + 无编造断言
+        <br><br>格式默认 <b>md</b>；要展示型复用已上线 Bento 卡片墙逻辑（不打包 HTML 资产）。
+      </p>
+    </div>
+
+    <!-- 模板 -->
+    <div class="card span12">
+      <h3><span class="dot"></span>防错指令模板（可直接套用）</h3>
+      <div class="tpl">
+        <button class="copy" onclick="copyTpl(this)">复制</button>
+做之前先做到这 6 条：<br>
+① 只使用我指定的文件 <b>__</b> 的 sheet <b>__</b>，不准用其他来源；<br>
+② 严格按口径：<b>__</b>（逐条写）；<br>
+③ 先用你自己的话复述一遍口径，等我确认再动手；<br>
+④ 报告里每个核心数字后标注来源行号；<br>
+⑤ 凡是我没给真实值的数字，用 <b>__</b> 占位，<b>不许估算填写</b>；<br>
+⑥ 最后单独列一段"本次我做了哪些假设"，供我核对。
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:30px">📌 本页由 yitong 沉淀整理 · 文化活动知识库</p>
+</div>
+
+<script>
+  // 滚动渐入
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+  // 复制
+  function copyTpl(btn){
+    const t=btn.parentElement.innerText.replace('复制','').trim();
+    navigator.clipboard.writeText(t).then(()=>{btn.textContent='已复制✓';setTimeout(()=>btn.textContent='复制',1500)});
+  }
+</script>
+</body>
+</html>
