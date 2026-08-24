@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校准会逐人话术 · 模块参考（带细节版）</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  .quote{background:#eef6ff;border:1px solid #d4e6ff;border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .quote b{color:var(--cyan)}
+  .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px}
+  .col{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--soft)}
+  .col h4{margin:0 0 8px;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p1{background:var(--purple)} .p2{background:var(--cyan)} .p3{background:var(--warn)} .p4{background:var(--ok)} .p-red{background:var(--red)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>校准会逐人话术 · 模块参考（带细节版）</h1>
+  <div class="sub">盘点会一人一人过九宫格的固定说法与提问 —— 把「我觉得他行」变成「有证据才算行」</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="hr-knowledge-hub.html">← 知识点集总入口</a>
+    <a href="talent-modules.html">人才三件套</a>
+    <a href="hr-high-roi.html">HR 高 ROI</a>
+    <a href="hr-comp-structure.html">薪酬结构</a>
+    <a href="hr-greeting-script.html">招聘打招呼</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>校准会（Calibration Meeting）是人才盘点的「终审环节」——经理初评后，HRBP/facilitator 带着业务 leader 一个一个人过，目的是<b>消偏、定格、出动作</b>。下面给的是<b>可直接照着开的逐人话术</b>和<b>4 类人处理模板</b>，人名用你页面里的张三/小周/老王/老陈当例子。黄色字段本地自动保存。</div>
+
+  <!-- ============ ① 是什么 ============ -->
+  <section id="what">
+    <div class="sec-head"><div class="sec-no">1</div><h2>校准会是什么 + 会前准备</h2><span class="sub">没准备就开=走过场</span></div>
+    <div class="card">
+      <h3>① 目的（一句话）</h3>
+      <div class="ok"><b>形容词→证据：</b>把「我觉得他不错/挺有潜力」逼成「他做过 X，所以评 Y」。同时消除经理个人偏好、跨组同岗对齐、锁定高宠高危。</div>
+      <h3>② 会前准备清单（必做）</h3>
+      <div class="step"><div class="n">1</div><div class="t"><b>材料：</b>每人九宫格初评表 + 绩效数据（达成率/排名）+ 关键事件记录（1–2 件硬战功）+ ONA/360 摘要（如有）。缺证据的初评，会上退回补。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>参会人：</b>直接经理 + 隔级 leader + HRBP（facilitator）+ 记录员。<b>隔级必须在</b>，否则校准失去权威性。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>时长控制：</b>每人 8–10 min，一组 12 人约 2 小时。超时就砍闲聊，只走 4 步。</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>定规则前置：</b>开场先说「今天只认证据，形容词当场要例子；本组高潜名额有限，要取舍」。</div></div>
+      <div class="pit"><b>❌ 经理单独评完直接归档：</b>无校准=经理偏好最大化，同岗不同组标准乱。</div>
+    </div>
+  </section>
+
+  <!-- ============ ② 逐人4步 ============ -->
+  <section id="steps">
+    <div class="sec-head"><div class="sec-no">2</div><h2>逐人 4 步固定话术</h2><span class="sub">每个人走同一套，不即兴</span></div>
+    <div class="card">
+      <h3>① 经理陈述（必须带证据，禁形容词）</h3>
+      <div class="quote">「我先说 <span class="edit" contenteditable="true" id="s1-name">[姓名]</span> 初评：绩效 <span class="edit" contenteditable="true" id="s1-perf">__（达成率/X）</span>，潜力 <span class="edit" contenteditable="true" id="s1-pot">__（依据__）</span>，放在 <span class="edit" contenteditable="true" id="s1-pos">[九宫格位置]</span>。证据：①硬战功 <span class="edit" contenteditable="true" id="s1-ev1">__</span> ②行为信号 <span class="edit" contenteditable="true" id="s1-ev2">__</span> ③跨级评价 <span class="edit" contenteditable="true" id="s1-ev3">__</span>。我的判断是 <span class="edit" contenteditable="true" id="s1-judge">__</span>。」</div>
+      <div class="pit"><b>红线：</b>说「我觉得他不错/挺有潜力」→ facilitator 当场打断：「请给一件具体事。」无证据不进入下一步。</div>
+
+      <h3>② facilitator 挑战（3 把刀，逐条逼证据）</h3>
+      <div class="step"><div class="n">刀1</div><div class="t"><b>「这条高潜，拿得出哪件具体事？」</b>——无证据就当场降级，不默认通过。</div></div>
+      <div class="step"><div class="n">刀2</div><div class="t"><b>「同岗隔壁组 [某人] 跟他比呢？」</b>——跨组同岗对比，消经理个人偏好。</div></div>
+      <div class="step"><div class="n">刀3</div><div class="t"><b>「他离职谁顶、能顶多久？」+「这是绩效真差，还是放错项目了？」+「你评中潜力但他 ONA 中心度 top8%，怎么解释？」</b>——分别逼出继任风险、防误杀、数据与直觉冲突。</div></div>
+
+      <h3>③ 定格 + 消偏</h3>
+      <div class="step"><div class="n">A</div><div class="t"><b>强制分布：</b>「本组 12 人已 3 个高潜，业务只有 2 个重点名额——必须舍一个，凭证据舍谁？」</div></div>
+      <div class="step"><div class="n">B</div><div class="t"><b>反向提名：</b>「谁离开你最慌？（不一定在初评高潜里）」→ 捞被埋没的苗子。</div></div>
+      <div class="step"><div class="n">C</div><div class="t"><b>确认落位 + 标红：</b>高宠（高绩效高潜）高危（离职风险高）全员共识标红。</div></div>
+
+      <h3>④ 出动作（每人必填三表一行）</h3>
+      <div class="cols">
+        <div class="col"><h4>继任</h4><div class="field">关键岗谁可替 / 能顶 <span class="edit" contenteditable="true" id="s4-suc">__ 久</span></div></div>
+        <div class="col"><h4>风险</h4><div class="field">高宠高危标红 + 留人动作 <span class="edit" contenteditable="true" id="s4-risk">__</span></div></div>
+      </div>
+      <div class="field" style="margin-top:8px"><span class="lbl">IDP（一条发展动作 + owner + 时限）</span><span class="edit" contenteditable="true" id="s4-idp">__ / __ / __</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ③ 4类人 ============ -->
+  <section id="types">
+    <div class="sec-head"><div class="sec-no">3</div><h2>4 类人处理话术（落到你页面人物）</h2><span class="sub">同一套 4 步，但每类的「重点」不同</span></div>
+    <div class="card">
+      <div class="cols">
+        <div class="col"><h4><span class="pill p1">张三</span> 高绩效高潜</h4>
+          <div class="quote">重点不是评，是<b>防流失</b>：「他落 9 宫格 top，风险清单写『薪酬到顶+想转架构』。留人方案给内部转架构通道，IDP 补架构能见度。今天不谈评，谈怎么别让他走。」</div>
+        </div>
+        <div class="col"><h4><span class="pill p2">小周</span> 低绩效高潜</h4>
+          <div class="quote">先问<b>「放错项目还是真不行」</b>：「低绩效但高潜，先排除项目错配——调岗到匹配赛道试半年，不轻易淘汰。若调岗后仍低，再议。」</div>
+        </div>
+        <div class="col"><h4><span class="pill p3">老王</span> 高绩效低潜</h4>
+          <div class="quote"><b>稳定骨干，确认留任，别误当高潜</b>占名额：「他绩效稳但潜力到顶，是压舱石。明确不列入高潜池，避免挤占真苗子的发展资源。」</div>
+        </div>
+        <div class="col"><h4><span class="pill p4">老陈</span> 中绩效低潜</h4>
+          <div class="quote"><b>激活或转岗，别留成温吞层</b>：「中绩效低潜最危险——不差但也不长。给 90 天激活期，无起色则转岗或优化，别让团队出现『温吞夹层』。」</div>
+        </div>
+      </div>
+      <div class="pit"><b>❌ 把老王当高潜：</b>稳住的业务骨干误列高潜 → 挤掉小周这类真苗子的发展名额。</div>
+    </div>
+  </section>
+
+  <!-- ============ ④ 常见坑 ============ -->
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>常见坑 · 反例</h2></div>
+    <div class="card">
+      <div class="pit"><b>❌ 经理一言堂：</b>经理说完就过，facilitator 不挑战 → 校准会=通报会，失去意义。</div>
+      <div class="pit"><b>❌ 走过场：</b>初评直接照单全收，没人降级/升级 → 盘点白做。</div>
+      <div class="pit"><b>❌ 只评不留动作：</b>盘完只有九宫格，没有继任/风险/IDP 三表 → 等于没盘，三个月后一切照旧。</div>
+      <div class="pit"><b>❌ 高潜通胀：</b>人人都高潜（「我们组都很优秀」）→ 强制分布 + 反向提名破。</div>
+      <div class="ok"><b>✅ 收尾硬标准：</b>盘完必出三张表（继任覆盖 / 风险清单 / IDP），高宠高危全员共识标红，否则会议结论不归档。</div>
+    </div>
+  </section>
+
+  <!-- ============ ⑤ 三表模板 ============ -->
+  <section id="tables">
+    <div class="sec-head"><div class="sec-no">5</div><h2>收尾三表模板（照填）</h2><span class="sub">会后再补即无效，会上当场出</span></div>
+    <div class="card">
+      <h3>① 继任覆盖表（示意）</h3>
+      <table>
+        <tr><th>关键岗</th><th>继任者</th><th>就绪度</th><th>能顶多久</th></tr>
+        <tr><td>__ 岗</td><td><span class="edit" contenteditable="true" id="t1-a">__</span></td><td>__（已就绪/半年/1年+）</td><td><span class="edit" contenteditable="true" id="t1-b">__</span></td></tr>
+      </table>
+      <h3>② 风险清单（高宠高危标红）</h3>
+      <table>
+        <tr><th>姓名</th><th>类型</th><th>风险点</th><th>留人/动作</th></tr>
+        <tr><td><span class="pill p-red">张三</span></td><td>高宠高危</td><td>薪酬到顶+想转架构</td><td><span class="edit" contenteditable="true" id="t2-a">内部转架构通道</span></td></tr>
+      </table>
+      <h3>③ IDP 表</h3>
+      <table>
+        <tr><th>姓名</th><th>发展动作</th><th>owner</th><th>时限</th></tr>
+        <tr><td>__</td><td><span class="edit" contenteditable="true" id="t3-a">__</span></td><td><span class="edit" contenteditable="true" id="t3-b">__</span></td><td><span class="edit" contenteditable="true" id="t3-c">__</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 速记 ============ -->
+  <section id="recap">
+    <div class="sec-head"><div class="sec-no">★</div><h2>一页速记</h2></div>
+    <div class="card">
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「校准会我的角色是 facilitator，不是记录员。核心就一句——把『我觉得他行』逼成『有证据才算行』。固定走 4 步：经理带证据陈述→我三把刀挑战（要具体事/跨组对比/继任与误杀）→强制分布+反向提名定格→每人出继任/风险/IDP 三表。盘完没有这三表、高宠高危没标红，等于没盘。」</span></div>
+      <div class="why"><b>记忆锚：</b>校准会=形容词转证据 + 4 步固定动作 + 4 类人差异化处理 + 三表收尾。面试官听的是「你敢不敢挑战经理」，不是「你会不会填表」。</div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+<script>
+(function(){
+  var KEY='cal_meeting_v1';
+  try{
+    var saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+    Object.keys(saved).forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=saved[id];});
+  }catch(e){}
+  function save(){
+    var o={};document.querySelectorAll('.edit[contenteditable]').forEach(function(el){
+      if(el.id)o[el.id]=el.textContent;
+    });
+    try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  }
+  document.querySelectorAll('.edit[contenteditable]').forEach(function(el){
+    el.addEventListener('blur',save);el.addEventListener('input',save);
+  });
+})();
+</script>
+</body>
+</html>

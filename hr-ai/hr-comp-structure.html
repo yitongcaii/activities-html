@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>薪酬结构 · 模块参考（带细节版）</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px}
+  .col{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--soft)}
+  .col h4{margin:0 0 8px;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-fix{background:#7c5cff} .p-float{background:#36c6ff} .p-long{background:#2bbf8a} .p-ben{background:#ff7a59}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>薪酬结构 · 模块参考（带细节版）</h1>
+  <div class="sub">固定 / 浮动 / 中长期 / 福利 + 固浮比 + 带宽 + 3P —— 每个模块都给「示意示例 + 设计逻辑 + 常见坑」</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="hr-knowledge-hub.html">← 知识点集总入口</a>
+    <a href="talent-modules.html">人才三件套</a>
+    <a href="hr-high-roi.html">HR 高 ROI</a>
+    <a href="cal-meeting-script.html">校准会话术</a>
+    <a href="hr-greeting-script.html">招聘打招呼</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>薪酬结构面试常翻车在「背组件名」——说出来四块就停了。资深要能讲清<b>固浮比怎么定</b>、<b>带宽怎么控公平</b>、<b>3P 钱往哪倾斜</b>。下面每块都填了示意数字，标「示意」处请代入你真实团队数据，<u>严禁编造</u>。黄色字段本地自动保存。</div>
+
+  <!-- ============ ① 四块拆解 ============ -->
+  <section id="four">
+    <div class="sec-head"><div class="sec-no">1</div><h2>四块拆解：钱从哪来、往哪去</h2><span class="sub">先认全组件，再谈设计</span></div>
+    <div class="card">
+      <h3>① 四块对照表（含谁最敏感、示意占比）</h3>
+      <p class="tag">占比为「示意」行业常见区间，非你司数据；不同序列差异极大</p>
+      <table>
+        <tr><th>模块</th><th>含什么</th><th>典型形式</th><th>谁最敏感</th><th>示意占总包</th></tr>
+        <tr><td><span class="pill p-fix">固定</span></td><td>基本工资、岗位/职务工资、司龄工资、津补贴（交通/餐/房/高温/异地）</td><td>月薪里不动的部分</td><td>全员，尤其职能/产研</td><td>55–75%</td></tr>
+        <tr><td><span class="pill p-float">浮动</span></td><td>绩效工资、奖金（年/季/项目/专项）、提成、计件</td><td>跟结果挂钩</td><td>销售、交付、项目岗</td><td>20–45%</td></tr>
+        <tr><td><span class="pill p-long">中长期</span></td><td>RSU / 期权 / 限制性股票 / 利润分享 / 递延奖金</td><td>锁 2–4 年分期归属</td><td>核心/高潜/管理层</td><td>5–30%</td></tr>
+        <tr><td><span class="pill p-ben">福利</span></td><td>法定（五险一金）、补充（商保/年金/体检/带薪假/餐车）、弹性福利</td><td>不进工资单但算总包</td><td>已婚育、异地员工</td><td>10–20%</td></tr>
+      </table>
+      <div class="why"><b>为什么分这四块：</b>固定=保底线（留人下限），浮动=拉差距（激励上限），中长期=锁核心（防被挖），福利=补感知（不占现金但影响体验）。四块比例一变，人才结构就变。</div>
+    </div>
+  </section>
+
+  <!-- ============ ② 固浮比 ============ -->
+  <section id="ratio">
+    <div class="sec-head"><div class="sec-no">2</div><h2>固浮比：按序列定，不是一刀切</h2><span class="sub">同样的钱，结构错了=白花</span></div>
+    <div class="card">
+      <h3>① 示意固浮比（按序列差异）</h3>
+      <p class="tag">以下为「示意」区间，定错比会让「该冲的人没动力、该稳的人天天焦虑」</p>
+      <table>
+        <tr><th>序列</th><th>固:浮</th><th>逻辑</th><th>错了会怎样</th></tr>
+        <tr><td>销售 / 商务</td><td>3 : 7</td><td>结果直接兑现，强刺激</td><td>固太高→没冲劲；固太低→人员流动大不敢留</td></tr>
+        <tr><td>产研 / 技术</td><td>7 : 3</td><td>稳定为主，少量跟绩效/项目奖</td><td>浮太高→短视、忽视长期质量</td></tr>
+        <tr><td>职能（HR/财务/行政）</td><td>8 : 2</td><td>保稳定，绩效小幅浮动</td><td>浮太高→打乱协作、互相抢功</td></tr>
+        <tr><td>交付 / 项目制</td><td>5 : 5 ~ 6 : 4</td><td>项目里程碑兑现</td><td>固太低→项目间隙焦虑</td></tr>
+      </table>
+      <div class="block-h"><span class="b">②</span>设计固浮比的 4 步</div>
+      <div class="step"><div class="n">1</div><div class="t"><b>定序列：</b>先把岗位归序列（销售/产研/职能/交付），同序列同口径，别按个人谈。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>看业务阶段：</b>扩张期销售可更浮（冲增长），收缩期产研也加浮动（逼人效）。阶段变，比跟着变。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>定浮动发放节奏：</b>年奖太远没感知→拆季/项目节点；销售提成月结才有冲劲。</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>算总包一致性：</b>同职级总包相近，固浮比不同。避免「他总包高是因为浮多」引发不公平感。</div></div>
+      <div class="pit"><b>❌ 一刀切：</b>全公司统一 7:3 → 销售没动力、交付岗却嫌风险高。</div>
+      <div class="pit"><b>❌ 只调固定不调浮：</b>涨薪只加基本工资 → 激励钝化，钱花了没效果。</div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「固浮比我按序列定——销售 3:7、产研 7:3、职能 8:2，不是一刀切。定错比会让该冲的人没动力、该稳的人天天焦虑。而且固浮比要跟着业务阶段走，扩张期销售更浮、收缩期产研也加浮动逼人效。光涨固定不调浮，激励会钝化。」</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ③ 带宽 ============ -->
+  <section id="band">
+    <div class="sec-head"><div class="sec-no">3</div><h2>薪酬带宽（Salary Band）：控公平 + 对标市场</h2><span class="sub">同岗不同酬怎么解释，外部怎么不亏</span></div>
+    <div class="card">
+      <h3>① 示意带宽表（某职级 P7）</h3>
+      <p class="tag">数字为「示意」，用于讲清「最小/中位/最大 + 级差 + 重叠度」三个概念</p>
+      <table>
+        <tr><th>职级</th><th>最小值</th><th>中位值</th><th>最大值</th><th>级差(相邻职级)</th><th>带宽重叠</th></tr>
+        <tr><td>P6</td><td>28k</td><td>35k</td><td>44k</td><td rowspan="2">~25%</td><td rowspan="2">~30%（P6 最大 > P7 最小，允许交叉）</td></tr>
+        <tr><td>P7</td><td>35k</td><td>45k</td><td>58k</td></tr>
+        <tr><td>P8</td><td>46k</td><td>60k</td><td>78k</td><td>~30%</td><td>~25%</td></tr>
+      </table>
+      <div class="block-h"><span class="b">②</span>三个关键概念（面试必讲）</div>
+      <div class="step"><div class="n">1</div><div class="t"><b>最小值/中位值/最大值：</b>同职级工资不能无限拉。低于最小=薪酬倒挂风险；高于最大=超带宽，需特批或升职级。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>级差：</b>相邻职级中位值差距（示意 25–30%）。太小→晋升没动力；太大→跨级难、断层。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>带宽重叠度：</b>下级最大高于上级最小（示意 30%）。重叠大=晋升不一定涨薪（能力强可留在原级高位）；重叠小=强制晋升才涨，易通胀。</div></div>
+      <div class="block-h"><span class="b">③</span>怎么用带宽（两个动作）</div>
+      <div class="step"><div class="n">A</div><div class="t"><b>内部公平：</b>同岗两人差 20k → 查是否一个在带宽顶、一个在底；底位者表现好→调薪进中位，而不是盲目加。</div></div>
+      <div class="step"><div class="n">B</div><div class="t"><b>外部竞争：</b>对标市场 50/75 分位。关键岗对标 75 分位防被挖；非关键岗 50 分位控成本。</div></div>
+      <div class="pit"><b>❌ 重叠失控：</b>重叠 >50% → 职级形同虚设，老员工躺原级高位不晋升。</div>
+      <div class="pit"><b>❌ 只看中位：</b>不查落位 → 新人一进来就顶到最大，次年无空间。</div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「带宽我看成三件事——最小/中位/最大控同岗差距、级差（25–30%）定晋升动力、重叠度（~30%）决定晋升是否必涨薪。它有两个用处：内部查同岗差 20k 是不是一个在顶一个在底；外部对标市场 50/75 分位，关键岗对标 75 防被挖。带宽重叠失控>50% 职级就失效了。」</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ④ 3P ============ -->
+  <section id="3p">
+    <div class="sec-head"><div class="sec-no">4</div><h2>3P 付薪逻辑：钱往哪倾斜</h2><span class="sub">岗位定基准、能力定档位、绩效定浮动</span></div>
+    <div class="card">
+      <h3>① 3P 三维度（权重示意）</h3>
+      <p class="tag">不同序列权重不同；这是「为什么这么分」的底层逻辑</p>
+      <table>
+        <tr><th>维度</th><th>回答</th><th>体现在</th><th>示意权重（产研）</th></tr>
+        <tr><td><b>Position 岗位</b></td><td>这个岗值多少钱</td><td>职级体系、带宽基准</td><td>50%</td></tr>
+        <tr><td><b>Person 能力</b></td><td>这个人能力值多少</td><td>胜任度档位、晋升</td><td>25%</td></tr>
+        <tr><td><b>Performance 绩效</b></td><td>干得怎么样</td><td>浮动、奖金</td><td>25%</td></tr>
+      </table>
+      <div class="why"><b>为什么讲 3P：</b>面试官能透过它看你「会不会分配薪酬资源」。销售序列 Performance 权重更高（浮多）；职能序列 Position 权重高（稳）。权重定错=激励错位。</div>
+      <div class="pit"><b>❌ 只讲 Position：</b>「按岗定薪」→ 忽略能力和绩效，干好干坏一个价。</div>
+      <div class="pit"><b>❌ 绩效权重过高全序列：</b>职能岗也强绩效 → 协作变抢功。</div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「薪酬底层是 3P——为岗位付薪（职级定基准）、为能力付薪（胜任度定档位）、为绩效付薪（结果定浮动）。三块权重随序列变：销售绩效权重大、职能岗位权重大。权重定错激励就错位，所以固浮比和带宽其实是 3P 的落地工具。」</span></div>
+    </div>
+  </section>
+
+  <!-- ============ ⑤ 你的填空版 ============ -->
+  <section id="fill">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 薪酬结构卡</h2><span class="sub">填你真实团队数据，本地自动保存</span></div>
+    <div class="card">
+      <h3>④ 照结构填你的情况</h3>
+      <div class="ex">
+        <span class="lab">目标团队 / 序列：<span class="edit" contenteditable="true" id="c-team">__ 序列（如产研 / 销售 / 职能）</span></span>
+        <div class="cols" style="margin-top:10px">
+          <div class="col"><h4>固浮比（示意）</h4>
+            <div class="field"><span class="lbl">固定占比</span><span class="edit" contenteditable="true" id="c-fix">__%</span></div>
+            <div class="field"><span class="lbl">浮动占比</span><span class="edit" contenteditable="true" id="c-float">__%</span></div>
+            <div class="field"><span class="lbl">中长期激励形式</span><span class="edit" contenteditable="true" id="c-long">__（RSU / 期权 / 无）</span></div>
+          </div>
+          <div class="col"><h4>带宽（示意）</h4>
+            <div class="field"><span class="lbl">目标职级</span><span class="edit" contenteditable="true" id="c-level">__（如 P7）</span></div>
+            <div class="field"><span class="lbl">中位值</span><span class="edit" contenteditable="true" id="c-mid">__</span></div>
+            <div class="field"><span class="lbl">对标市场分位</span><span class="edit" contenteditable="true" id="c-pct">__（50/75）</span></div>
+          </div>
+        </div>
+        <div class="field" style="margin-top:10px"><span class="lbl">3P 权重（岗位 / 能力 / 绩效）</span><span class="edit" contenteditable="true" id="c-3p">__ / __ / __</span></div>
+        <div class="field"><span class="lbl">你最想讲的 1 个设计点（面试钩子）</span><span class="edit" contenteditable="true" id="c-hook">__</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 速记 ============ -->
+  <section id="recap">
+    <div class="sec-head"><div class="sec-no">★</div><h2>一页速记</h2></div>
+    <div class="card">
+      <div class="say"><span class="q">面试一句话版本：</span><span class="a">「薪酬结构我看四块——固定保底、浮动拉差、中长期锁核心、福利补感知。但真正要设计的是固浮比（按序列：销售 3:7、产研 7:3、职能 8:2）、带宽（最小/中位/最大+级差+重叠控公平+对标市场）、和 3P 逻辑（岗位定基准、能力定档位、绩效定浮动）。光背组件名没用，得说清钱往哪倾斜、为什么这么分。」</span></div>
+      <div class="why"><b>记忆锚：</b>四块=钱去哪 → 固浮比=怎么分刺激 → 带宽=怎么控公平 → 3P=为什么这么分。四步走完，薪酬结构就从名词变成设计能力。</div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+<script>
+(function(){
+  var KEY='hr_comp_v1';
+  try{
+    var saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+    Object.keys(saved).forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=saved[id];});
+  }catch(e){}
+  function save(){
+    var o={};document.querySelectorAll('.edit[contenteditable]').forEach(function(el){
+      if(el.id)o[el.id]=el.textContent;
+    });
+    try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  }
+  document.querySelectorAll('.edit[contenteditable]').forEach(function(el){
+    el.addEventListener('blur',save);el.addEventListener('input',save);
+  });
+})();
+</script>
+</body>
+</html>

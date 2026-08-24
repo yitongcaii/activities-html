@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>招聘平台打招呼话术 · 模块参考（带细节版）</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  .quote{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 14px;margin:8px 0;font-size:13px}
+  .quote b{color:var(--cyan)}
+  .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:8px}
+  .col{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--soft)}
+  .col h4{margin:0 0 8px;font-size:14px}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p1{background:var(--purple)} .p2{background:var(--cyan)} .p3{background:var(--warn)} .p4{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>招聘平台打招呼话术 · 模块参考（带细节版）</h1>
+  <div class="sub">高吸引力公式 + 四角色多场景话术 —— 不像群发、对方愿意回</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="hr-knowledge-hub.html">← 知识点集总入口</a>
+    <a href="talent-modules.html">人才三件套</a>
+    <a href="hr-high-roi.html">HR 高 ROI</a>
+    <a href="hr-comp-structure.html">薪酬结构</a>
+    <a href="cal-meeting-script.html">校准会话术</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>招聘平台上「打招呼」是 HR 找机会的第一触点。之前那版没吸引力，因为三处致命——开头「我是谁」、亮点用形容词、结尾「求机会聊」甩问答题。下面给<b>高吸引力公式 + 4 角色 × 多场景话术（BOSS/猎头/内推）</b>，钩子用你真实战功。黄色字段本地自动保存。</div>
+
+  <!-- ============ ① 致命点 ============ -->
+  <section id="bad">
+    <div class="sec-head"><div class="sec-no">1</div><h2>为什么之前没吸引力（3 致命点）</h2><span class="sub">先知道错在哪</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 开头「我是谁」：</b>「您好，我有 X 年 HR 经验」——平台上海量这种，零记忆点，一秒划走。</div>
+      <div class="pit"><b>❌ 亮点是形容词：</b>「擅长薪酬、熟悉员工关系」——不可验证，等于没说，谁都这么写。</div>
+      <div class="pit"><b>❌ 结尾「求机会聊」：</b>把问答题甩给对方（「期待您的回复」）→ 回复成本太高，直接不回。</div>
+    </div>
+  </section>
+
+  <!-- ============ ② 公式 ============ -->
+  <section id="formula">
+    <div class="sec-head"><div class="sec-no">2</div><h2>高吸引力公式（4 步）</h2><span class="sub">照改你的每一条</span></div>
+    <div class="card">
+      <div class="step"><div class="n">1</div><div class="t"><b>点对方岗位的具体词：</b>第一句提到对方公司/岗位的具体词（如「服务安全产品三中心」「AI 文化落地」）→ 证明不是群发。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>一句可验证战功做钩子：</b>「做成过 X → 带来 Y」（做成答辩 MCP → 月级自动闭环新人发展），数字可验。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>针对痛点抛视角/选择题：</b>展示你懂行——「这岗当前最卡的是业务陪跑，还是组织风险？」不是来要工作的。</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>给选择题降回复成本：</b>对方回一个词就能接（「A 还是 B？」），不是「您看我合适吗」这种大问答题。</div></div>
+      <div class="quote"><b>示例（HRBP·BOSS）：</b>「看到您在招 XX 业务线 HRBP，这条线我刚好熟——之前在云技服做服务安全产品三中心的 HR 接口，半年闭环过 ≥3 起敏感个案零升级。您这岗当前最卡的是业务陪跑，还是组织风险？我手上有两个思路可聊。」</div>
+    </div>
+  </section>
+
+  <!-- ============ ③ 四角色话术 ============ -->
+  <section id="roles">
+    <div class="sec-head"><div class="sec-no">3</div><h2>四角色 × 多场景话术</h2><span class="sub">钩子用你的真实战功</span></div>
+    <div class="card">
+      <div class="cols">
+        <div class="col"><h4><span class="pill p1">HRBP</span> 技术/业务团队</h4>
+          <div class="quote"><b>BOSS：</b>「看到您在招 XX 业务线 HRBP，这条线我刚好熟——之前在云技服做服务安全产品三中心的 HR 接口，半年闭环过 ≥3 起敏感个案零升级。您这岗当前最卡的是业务陪跑，还是组织风险？我手上有两个思路可聊。」</div>
+          <div class="quote"><b>猎头：</b>「岗位我看了，三中心+强业务耦合这点跟我过去最像。我补 JD 没写的一块：技术团队 HRBP 最被低估的是『把业务语言翻成 HR 动作』——我有把新人答辩、AI 采纳做成自动化流程的经验（月级触发、看板回填），能直接复用。方便发我业务负责人背景？我捋一版贴合的视角。」</div>
+          <div class="quote"><b>内推：</b>「XX 团队在招 HRBP 那个岗，我对照过：他们卡的点（业务陪跑+组织风险）刚好是我过去两年干最多的。不递简历，先发你 200 字『我怎么看这岗』，你判断值不值得推。」</div>
+        </div>
+        <div class="col"><h4><span class="pill p2">培训 / L&D</span></h4>
+          <div class="quote"><b>BOSS：</b>「您在招的培训岗，我猜当前最痛的是『培训做了但行为不转化』——我运营博闻多识平台不堆课时，而是盯『人均参与深度、剔掉<15min 水课』，覆盖率+深度双抓。您这边是体系搭建优先，还是先打爆一个高转化场景？」</div>
+          <div class="quote"><b>猎头：</b>「我看到 JD 强调学习项目设计。我手上有现成的『参与深度口径』——不考核时数考核行为改变，这恰是多数培训岗落地失败的点。我可以带这套口径来聊怎么搭您这边的体系。」</div>
+        </div>
+        <div class="col"><h4><span class="pill p3">企业文化</span></h4>
+          <div class="quote"><b>BOSS：</b>「看到您在招文化岗，我手上有现成『AI 文化落地』案例库——AISee 沙龙、MigraQ 英语角、连 AI 漫剧《企鹅英雄》都做过，不是喊口号那套。您这岗是要『从 0 搭框架』，还是『已有框架缺活水运营』？前者我给体系，后者我给玩法。」</div>
+          <div class="quote"><b>猎头：</b>「文化岗我理解最怕做成活动执行。我做过的是把文化变成可传播 IP（漫剧/沙龙/英语角三件套），自带参与率。这跟您 JD 里『文化感知度』那条是对得上的。」</div>
+        </div>
+        <div class="col"><h4><span class="pill p4">区域 HR 兼行政</span></h4>
+          <div class="quote"><b>BOSS：</b>「区域 HR 兼行政最怕『表格填得勤但业务不认』。我过去多地协作练的是『用最小行政动作换业务安心』——比如 57 套团建方案池、异地入职当天闭环。您这区域卡的是『人多管不过来』，还是『老板要你既当 HR 又当大管家』？」</div>
+          <div class="quote"><b>内推：</b>「这岗我熟——区域最难的不是专业，是『轻行政重业务』的平衡。我 57 套团建池就是为这种场景攒的，复用成本低。先发你我对这岗的 3 条打法？」</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ④ 素材库 ============ -->
+  <section id="kit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>通用钩子素材库（填进任意话术）</h2><span class="sub">数字你填真实值，别照抄</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">你的战功钩子（按岗位挑 1–2 条用）</span>
+        <div class="field">① 云技服 HRBP·服务安全产品三中心 HR 接口，敏感个案闭环零升级 → <span class="edit" contenteditable="true" id="k1">__（填具体数字）</span></div>
+        <div class="field">② HR 流程产品化——新人答辩 MCP 自动化（建会/建群/看板回填/归档，月 1 日触发）</div>
+        <div class="field">③ AI 文化 IP：AISee 沙龙 / MigraQ 英语角 / AI 漫剧《企鹅英雄》/ H2 文化周</div>
+        <div class="field">④ 培训「参与深度」口径（剔 <15min 水课）</div>
+        <div class="field">⑤ 57 套团建方案池 / 员工大会 / Open Day</div>
+        <div class="field">⑥ 数据看板思维（博闻看板、流失预警）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ⑤ 禁忌 ============ -->
+  <section id="dont">
+    <div class="sec-head"><div class="sec-no">5</div><h2>禁忌清单（对照改）</h2></div>
+    <div class="card">
+      <div class="pit"><b>❌ 不说「期望有机会」</b> → 改「我有个思路可聊」。</div>
+      <div class="pit"><b>❌ 不列「熟悉薪酬/员工关系」</b> → 改「做过 X → 带 Y」。</div>
+      <div class="pit"><b>❌ 不群发同一条</b> → 每条第一句必须含对方公司/岗位具体词。</div>
+      <div class="pit"><b>❌ 不甩问答题</b> → 结尾用「A 还是 B？」选择题。</div>
+      <div class="ok"><b>✅ 自检三问：</b>①第一句有对方具体词吗？②有「做成 X→带 Y」的数字吗？③结尾对方回一个词就能接吗？三条都过才发。</div>
+    </div>
+  </section>
+
+  <!-- ============ ⑥ 填空 ============ -->
+  <section id="fill">
+    <div class="sec-head"><div class="sec-no">6</div><h2>你的填空版 · 自定义话术</h2><span class="sub">套公式写你自己的，本地自动保存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">目标岗位：<span class="edit" contenteditable="true" id="g-role">__ 岗 / 平台（BOSS/猎头/内推）</span></span>
+        <div class="field" style="margin-top:8px"><span class="lbl">① 点对方具体词</span><span class="edit" contenteditable="true" id="g-1">__</span></div>
+        <div class="field"><span class="lbl">② 可验证战功钩子（做成 X→带 Y）</span><span class="edit" contenteditable="true" id="g-2">__</span></div>
+        <div class="field"><span class="lbl">③ 痛点选择题（A 还是 B？）</span><span class="edit" contenteditable="true" id="g-3">__</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 速记 ============ -->
+  <section id="recap">
+    <div class="sec-head"><div class="sec-no">★</div><h2>一页速记</h2></div>
+    <div class="card">
+      <div class="say"><span class="q">面试能直接说（证明你会写钩子）：</span><span class="a">「招聘平台打招呼我不是群发模板——公式就四步：第一句点对方岗位具体词证非群发；一句可验证战功（做成 X→带 Y）做钩子；针对痛点抛选择题展示我懂行；结尾给选择题降回复成本。之前那版没吸引力，就是因为开头写『我是谁』、亮点用形容词、结尾甩『求机会聊』。改完对方回一个词就能接。」</span></div>
+      <div class="why"><b>记忆锚：</b>致命点（我是谁/形容词/求聊）→ 公式（具体词/战功/选择题/选择题）→ 四角色钩子 → 禁忌三改。一句话：把「要工作」变成「来聊思路」。</div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+<script>
+(function(){
+  var KEY='greeting_v1';
+  try{
+    var saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+    Object.keys(saved).forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=saved[id];});
+  }catch(e){}
+  function save(){
+    var o={};document.querySelectorAll('.edit[contenteditable]').forEach(function(el){
+      if(el.id)o[el.id]=el.textContent;
+    });
+    try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  }
+  document.querySelectorAll('.edit[contenteditable]').forEach(function(el){
+    el.addEventListener('blur',save);el.addEventListener('input',save);
+  });
+})();
+</script>
+</body>
+</html>
