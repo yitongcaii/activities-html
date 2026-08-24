@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>便签提纲 · 模板</title>
+<style>
+:root{
+  --pg:#f4f1ea; --ink:#2c2a26; --muted:#8a857c;
+  --y:#fff3b0; --b:#cdeffd; --g:#d6f5d6; --o:#ffe0c2; --p:#e8d8ff; --r:#ffd6d6;
+  --accent:#b9892f; --sel:#7cc7e8;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:24px 18px 60px;background:var(--pg);
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;color:var(--ink)}
+.wrap{max-width:1080px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin:0 auto 18px;flex-wrap:wrap;gap:10px}
+.top h1{font-size:20px;margin:0;letter-spacing:1px}
+.top .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{border:none;background:var(--ink);color:#fff;padding:8px 14px;border-radius:20px;
+  font-size:13px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid #d8d3c8}
+.btn.on{background:var(--accent);color:#fff}
+.btn:hover{opacity:.88}
+.save{font-size:12px;color:#3a9d4e;min-width:72px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:780px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.note{border-radius:4px;padding:14px 14px 12px;min-height:120px;
+  box-shadow:0 4px 10px rgba(0,0,0,.12);position:relative}
+.note:nth-child(3n+1){transform:rotate(-.6deg)}
+.note:nth-child(3n+2){transform:rotate(.5deg)}
+.note:nth-child(3n){transform:rotate(-.3deg)}
+.note:hover{transform:rotate(0) translateY(-4px);box-shadow:0 8px 16px rgba(0,0,0,.16)}
+.note .tag{font-size:11px;font-weight:700;letter-spacing:.5px;opacity:.7;display:block;margin-bottom:8px}
+.note label{font-size:13px;font-weight:600;display:block;margin-bottom:5px}
+.note textarea,.note input[type=text]{width:100%;border:none;background:rgba(255,255,255,.55);
+  border-radius:4px;padding:6px 8px;font-size:13px;color:var(--ink);font-family:inherit;resize:vertical}
+.note textarea:focus,.note input:focus{outline:2px solid rgba(0,0,0,.18);background:#fff}
+.note .hint{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
+.c1{background:var(--y)} .c2{background:var(--b)} .c3{background:var(--g)}
+.c4{background:var(--o)} .c5{background:var(--p)} .c6{background:var(--r)}
+.menu{grid-column:1/-1;background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.menu h3{margin:0 0 10px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--b);border:none;padding:6px 11px;border-radius:16px;font-size:12px;cursor:pointer;color:var(--ink);position:relative}
+.chip.sel{background:var(--sel);color:#fff}
+.chip small{opacity:.6;margin-left:3px;font-size:10px}
+.redline{grid-column:1/-1;background:var(--r);border-radius:8px;padding:12px 16px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.redline h3{margin:0 0 6px;font-size:14px}
+.redline ul{margin:0;padding:0;font-size:12.5px;line-height:1.7;list-style:none}
+.redline li{position:relative;padding:2px 0}
+.del{display:none;color:#c0392b;cursor:pointer;font-weight:700;margin-left:6px}
+.addbtn{display:none;margin-top:8px;background:#fff;border:1px dashed var(--accent);color:var(--accent);border-radius:16px;padding:5px 12px;font-size:12px;cursor:pointer}
+body.editing .tpl{outline:1px dashed var(--accent);border-radius:3px;padding:1px 3px}
+body.editing .tpl:hover{background:rgba(255,255,255,.45)}
+body.editing .del{display:inline}
+body.editing .addbtn{display:inline-block}
+[contenteditable]:focus{outline:2px solid #2c7fb8 !important}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+@media print{
+  body{background:#fff;padding:0}
+  .top .bar{display:none}
+  .note{box-shadow:none;transform:none !important}
+  .menu,.redline{box-shadow:none}
+  .del,.addbtn{display:none !important}
+}
+</style></head><body>
+<div class="wrap">
+  <div class="top">
+    <div><h1 contenteditable="true">便签提纲 · 模板</h1><div class="sub" contenteditable="true">每张便签一个准备点，直接改字 / 填框，自动存本地。</div></div>
+    <div class="bar">
+      <span class="save" id="saveTip">已载入模板</span>
+      <button class="btn ghost" id="editBtn" onclick="toggleEdit()">✎ 模板编辑</button>
+      <button class="btn" onclick="exportHTML()">⬇ 导出共享</button>
+      <button class="btn" onclick="save()">💾 保存</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid">
+    <div class="note c1"><span class="tag tpl" contenteditable="true">· 目的</span><label class="tpl" contenteditable="true">这场要达成什么</label><textarea rows="2" data-key="p1" placeholder="写 1-2 个目标"></textarea><div class="hint tpl" contenteditable="true">只写最关键的</div></div>
+    <div class="note c2"><span class="tag tpl" contenteditable="true">· 对象</span><label class="tpl" contenteditable="true">谁来看 / 什么基础</label><textarea rows="2" data-key="p2" placeholder="新人 / 熟手 / 混合"></textarea><div class="hint tpl" contenteditable="true">决定讲深讲浅</div></div>
+    <div class="note c3"><span class="tag tpl" contenteditable="true">· 关键三点</span><label class="tpl" contenteditable="true">① ② ③</label><textarea rows="3" data-key="p3" placeholder="1.__&#10;2.__&#10;3.__"></textarea><div class="hint tpl" contenteditable="true">多了留到下次</div></div>
+    <div class="note c4"><span class="tag tpl" contenteditable="true">· 钩子</span><label class="tpl" contenteditable="true">第 1 分钟抓注意</label><textarea rows="2" data-key="p4" placeholder="故事 / 数字 / 提问"></textarea><div class="hint tpl" contenteditable="true">别一上来念标题</div></div>
+    <div class="note c5"><span class="tag tpl" contenteditable="true">· 案例</span><label class="tpl" contenteditable="true">真实例子</label><textarea rows="2" data-key="p5" placeholder="对应每点各 1 个真事"></textarea><div class="hint tpl" contenteditable="true">1 个真例 ＞ 10 句定义</div></div>
+    <div class="note c6"><span class="tag tpl" contenteditable="true">· 收尾</span><label class="tpl" contenteditable="true">总结 + 动作</label><textarea rows="2" data-key="p6" placeholder="回去先做____"></textarea><div class="hint tpl" contenteditable="true">给一个可执行的下一步</div></div>
+
+    <div class="menu">
+      <h3 class="tpl" contenteditable="true">✅ 清单（点一下勾选）</h3>
+      <div class="chips" id="chipList">
+        <button class="chip sel" data-n="1"><span class="ctext tpl" contenteditable="true">材料备齐</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="2"><span class="ctext tpl" contenteditable="true">提前 15 分到</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="3"><span class="ctext tpl" contenteditable="true">对着镜子练一遍</span><span class="del" onclick="delChip(this)">×</span></button>
+      </div>
+      <button class="addbtn addchip" onclick="addChip()">+ 加一项</button>
+    </div>
+
+    <div class="redline">
+      <h3 class="tpl" contenteditable="true">⚠️ 温馨提醒</h3>
+      <ul id="rl">
+        <li><span class="tpl" contenteditable="true">❌ 别照念稿子</span><span class="del" onclick="delRL(this)">×</span></li>
+        <li><span class="tpl" contenteditable="true">💡 先讲"为什么"再讲"怎么做"</span><span class="del" onclick="delRL(this)">×</span></li>
+        <li><span class="tpl" contenteditable="true">⏱ 单段别连讲超 20 分钟</span><span class="del" onclick="delRL(this)">×</span></li>
+      </ul>
+      <button class="addbtn" onclick="addRL()">+ 加一条</button>
+    </div>
+  </div>
+</div>
+<footer class="foot">📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+const KEY='stickyTplShared_v1';
+let editing=false;
+function toggleEdit(){
+  editing=!editing;
+  document.body.classList.toggle('editing',editing);
+  document.querySelectorAll('.tpl').forEach(el=>el.setAttribute('contenteditable',editing?'true':'false'));
+  const b=document.getElementById('editBtn');
+  b.classList.toggle('on',editing);
+  b.textContent=editing?'✓ 完成模板':'✎ 模板编辑';
+}
+function collect(){
+  const d={values:{},tpl:{},chips:{sel:[],items:[]},rl:[]};
+  document.querySelectorAll('[data-key]').forEach(el=>d.values[el.dataset.key]=el.value);
+  document.querySelectorAll('.tpl[data-tpl]').forEach(el=>d.tpl[el.dataset.tpl]=el.innerText);
+  document.querySelectorAll('#chipList .chip').forEach(c=>{
+    d.chips.items.push({n:c.dataset.n,html:c.querySelector('.ctext').innerHTML});
+    if(c.classList.contains('sel'))d.chips.sel.push(c.dataset.n);
+  });
+  document.querySelectorAll('#rl li .tpl').forEach(el=>d.rl.push(el.innerText));
+  return d;
+}
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(collect()));
+  document.getElementById('saveTip').textContent='已保存 '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+}
+function apply(d){
+  Object.entries(d.values||{}).forEach(([k,v])=>{const el=document.querySelector(`[data-key="${k}"]`);if(el)el.value=v;});
+  Object.entries(d.tpl||{}).forEach(([k,v])=>{const el=document.querySelector(`[data-tpl="${k}"]`);if(el)el.innerText=v;});
+  if(d.chips&&d.chips.items){
+    const list=document.getElementById('chipList');list.innerHTML='';
+    d.chips.items.forEach(it=>{
+      const b=document.createElement('button');b.className='chip';b.dataset.n=it.n;
+      b.innerHTML=`<span class="ctext tpl" data-tpl="chip-${it.n}">${it.html}</span><span class="del" onclick="delChip(this)">×</span>`;
+      if((d.chips.sel||[]).includes(it.n))b.classList.add('sel');
+      list.appendChild(b);
+    });
+  }
+  if(d.rl){
+    const ul=document.getElementById('rl');ul.innerHTML='';
+    d.rl.forEach(t=>{const li=document.createElement('li');li.innerHTML=`<span class="tpl">${t}</span><span class="del" onclick="delRL(this)">×</span>`;ul.appendChild(li);});
+  }
+  if(editing)document.querySelectorAll('.tpl').forEach(el=>el.setAttribute('contenteditable','true'));
+}
+function exportHTML(){
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll('[data-key]').forEach(el=>el.value='');
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  clone.body.classList.remove('editing');
+  let html='<!DOCTYPE html>\n'+clone.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='便签提纲_共享版.html';a.click();
+  document.getElementById('saveTip').textContent='已生成共享 HTML，去下载发出';
+}
+function delChip(x){x.closest('.chip').remove();save();}
+function addChip(){
+  const list=document.getElementById('chipList');
+  const n=Date.now();
+  const b=document.createElement('button');b.className='chip';b.dataset.n=n;
+  b.innerHTML=`<span class="ctext tpl" contenteditable="true">新一项</span><span class="del" onclick="delChip(this)">×</span>`;
+  list.appendChild(b);save();
+}
+function delRL(x){x.closest('li').remove();save();}
+function addRL(){
+  const ul=document.getElementById('rl');
+  const li=document.createElement('li');
+  li.innerHTML=`<span class="tpl" contenteditable="true">新提醒</span><span class="del" onclick="delRL(this)">×</span>`;
+  ul.appendChild(li);save();
+}
+document.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input',save));
+document.getElementById('chipList').addEventListener('click',e=>{
+  if(editing)return;
+  const chip=e.target.closest('.chip');
+  if(chip&&!e.target.classList.contains('del')){chip.classList.toggle('sel');save();}
+});
+document.getElementById('rl').addEventListener('input',()=>{if(editing)save();});
+document.getElementById('chipList').addEventListener('input',()=>{if(editing)save();});
+(function(){const raw=localStorage.getItem(KEY);if(raw){try{apply(JSON.parse(raw));}catch(e){}}})();
+</script>
+</body></html>

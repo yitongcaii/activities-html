@@ -1,0 +1,3 @@
+[submodule "httpreport_sdk"]
+	path = httpreport_sdk
+	url = https://git.woa.com/skill_hub/skill-common.git

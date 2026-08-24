@@ -1,0 +1,26 @@
+{
+  "description": "生图输出示例 - 文生图模式（不传 --image）",
+  "command": "python scripts/generate.py --prompt \"一只橘猫趴在窗台上晒太阳，温暖的阳光\" --size 1536x1024 --quality medium",
+  "stdout": [
+    "[request] 正在调用 GPT Image 2 (gpt-image-2), 模式: 文生图 ...",
+    "[response] 模型返回成功, 耗时 15.2s",
+    "",
+    "===== 生成结果 =====",
+    "图片 1: ./gpt_image_20260421_153000_1.png (已保存)"
+  ],
+  "api_request": {
+    "model": "gpt-image-2",
+    "prompt": "一只橘猫趴在窗台上晒太阳，温暖的阳光",
+    "n": 1,
+    "size": "1536x1024",
+    "quality": "medium"
+  },
+  "api_response": {
+    "created": 1757496455,
+    "data": [
+      {
+        "b64_json": "iVBORw0KGgoAAAANSUhEUgAAA..."
+      }
+    ]
+  }
+}

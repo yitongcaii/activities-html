@@ -1,0 +1,11 @@
+{
+  "name": "Remotion 视频创作",
+  "installedAt": 1784790272564,
+  "source": "marketplace",
+  "iconSource": "remotion-video-toolkit",
+  "version": "1.4.1",
+  "skillId": "skill_2053083805713256448",
+  "skillName": "remotion-video-toolkit",
+  "description_zh": "用 React + Remotion 编写代码生成程序化视频，支持动画、字幕、3D、云端渲染",
+  "description_en": "Programmatic video creation with Remotion + React: animations, rendering, captions, 3D, cloud rendering"
+}

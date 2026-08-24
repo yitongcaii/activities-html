@@ -1,0 +1,28 @@
+{
+  "description": "生图输出示例 - 图片编辑模式（传入 --image）",
+  "command": "python scripts/generate.py --prompt \"转换为吉卜力动画风格，保持原图构图\" --image ./landscape.jpg --size 1024x1024",
+  "stdout": [
+    "[request] 正在调用 GPT Image 2 (gpt-image-2), 模式: 图片编辑 ...",
+    "[response] 模型返回成功, 耗时 18.5s",
+    "",
+    "===== 生成结果 =====",
+    "图片 1: ./gpt_image_20260421_160000_1.png (已保存)"
+  ],
+  "api_request_note": "图片编辑使用 multipart/form-data 格式，以下为等效参数",
+  "api_request_fields": {
+    "model": "gpt-image-2",
+    "prompt": "转换为吉卜力动画风格，保持原图构图",
+    "image[]": "@landscape.jpg",
+    "n": "1",
+    "size": "1024x1024",
+    "quality": "medium"
+  },
+  "api_response": {
+    "created": 1757497200,
+    "data": [
+      {
+        "b64_json": "iVBORw0KGgoAAAANSUhEUgAAA..."
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "browser-auto-creator-tests",
+  "version": "1.0.0",
+  "description": "测试新增的浏览器自动化事件功能",
+  "main": "test-new-events.js",
+  "scripts": {
+    "test": "node test-new-events.js",
+    "test:watch": "nodemon test-new-events.js",
+    "test:debug": "node --inspect-brk test-new-events.js"
+  },
+  "keywords": ["test", "automation", "playwright", "browser"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
