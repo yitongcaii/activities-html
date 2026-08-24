@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人才管理三件套 · 可复用模块（带完整示例参考版）</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+  .col{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--soft)}
+  .col h4{margin:0 0 8px;font-size:14px}
+  .col.must h4{color:var(--warn)} .col.should h4{color:var(--purple)} .col.could h4{color:var(--cyan)}
+  .col ul{margin:0;padding-left:18px;font-size:13px}
+  .col li{margin:6px 0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .pillbox{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.cols,.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>人才管理三件套 · 可复用模块（带完整示例参考版）</h1>
+  <div class="sub">岗位模型 / 人才画像 / 人才盘点 —— 每个模块都给「完整示意示例 + 可照抄流程 + 常见坑反例」</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="hr-interview-qa.html">← 四岗问答总览</a>
+    <a href="hr-interview-training.html">培训岗</a>
+    <a href="hr-interview-culture.html">企业文化岗</a>
+    <a href="hr-interview-regional.html">区域 HR</a>
+    <a href="hr-interview-hrbp.html">HRBP 岗</a>
+    <a href="hr-interview-mindset.html">岗位认知话术</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用（重要）：</b>每个模块都分四块——<b>① 完整示意示例</b>（填实了，标了具体数字和动作，是直接能照着讲的参考）<b>② 怎么建·流程</b>（5 步，带具体做法和阈值）<b>③ 常见坑·反例</b>（新手踩的雷）<b>④ 你的填空版</b>（黄色字段本地自动保存，填你真实数据，<u>严禁编造</u>）。下方每个模块还附一句「面试能直接说的版本」。</div>
+
+  <!-- ============ 模块一：岗位模型 ============ -->
+  <section id="model">
+    <div class="sec-head"><div class="sec-no">1</div><h2>岗位模型（先建标尺）</h2><span class="sub">这个岗成功到底要什么能力 · 评人/筛人/培养的统一标尺</span></div>
+
+    <div class="card">
+      <h3>① 完整示意示例 · 云技服 HRBP（服务安全产品三中心）</h3>
+      <p class="tag">从绩优者逆向萃取，写「可观测行为锚」，不是形容词；跟业务目标对齐</p>
+      <div class="ex">
+        <span class="lab">注：以下为「示意」数字，请代入你真实团队的绩优样本</span>
+        <div class="cols">
+          <div class="col must">
+            <h4>① Must（不会就不及格）</h4>
+            <ul>
+              <li><b>独立闭环敏感个案</b>：能独自处理绩效争议 / 离职谈判 / 违纪，不升级到总监。行为锚：过去半年独立闭环 ≥3 起敏感个案，零升级零投诉。</li>
+              <li><b>听得懂业务语言</b>：能跟研发 / 产品 leader 对齐 headcount 与 HC 使用节奏。行为锚：能独立做 HC 测算并向业务解释「为什么 now / 为什么这些人」。</li>
+              <li><b>数据找问题</b>：能用离职率 / 入职周期 / 敬业度数据发现异常。行为锚：能独立跑出季度人力看板，并指出 ≥1 个异常（如某组离职突增）。</li>
+            </ul>
+          </div>
+          <div class="col should">
+            <h4>② Should（干得好需要）</h4>
+            <ul>
+              <li><b>从 0 搭机制并被复用</b>：如博闻多识式学习运营机制、AISee 沙龙式技术文化载体，做完被别中心抄走。</li>
+              <li><b>业务主动找你</b>：业务 leader 主动来聊组织问题（HC 卡点 / 梯队断档），不是你追着推。</li>
+              <li><b>能解释 HR 动作的业务账</b>：把一次培训 / 一次盘点翻译成「对交付 / 对人效」的影响。</li>
+            </ul>
+          </div>
+          <div class="col could">
+            <h4>③ Could（加分项）</h4>
+            <ul>
+              <li><b>会用 AI 自己搭流程</b>：如新人答辩自动化 MCP（PRD 设计 + 编排，不一定要写码）。</li>
+              <li><b>跨事业部经验</b>：懂一线业务语境，能跟不同 BG 的 HR 对齐。</li>
+              <li><b>文化活动能做出记忆点</b>：如 AI 漫剧《企鹅英雄》、57 套团建方案这类有传播力的产出。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-h"><span class="b">②</span>怎么建 · 5 步流程（带阈值）</div>
+      <div class="step"><div class="n">1</div><div class="t"><b>定样本：</b>取该岗 top 20% 绩优者，用「绩效 + 360 + 业务 leader 提名」三者交叉锁定，<b>样本量 ≥5 人</b>，且覆盖新老（避免只萃取老人习惯）。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>BEI 行为事件访谈：</b>每人 45–60 min，只问真实发生过的事——「讲一个你处理过最难的员工关系个案」「你最自豪的一个从 0 搭的机制」，追问 STAR（情境 / 动作 / 结果 / 你具体做了什么），<b>记可观测动作，不记感受</b>。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>萃取维度 + 写行为锚：</b>把访谈里高频出现的动作归成 6–9 个能力维度，每个维度写 3 档锚点（达标 / 优秀 / 卓越），<b>锚点必须是「做了 X」不是「X 能力强」</b>。</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>跟业务目标对齐：</b>该中心明年重点是降本增效 → 模型加重「数据敏感度 / HC 管控」权重。问业务 leader：「你招这个人最怕他缺哪样？」补进 Must。</div></div>
+      <div class="step"><div class="n">5</div><div class="t"><b>验证 + 更新：</b>拿去筛 10 份简历 / 评 5 个在岗人，<b>回测：绩优者命中率应 >70%</b>，否则重写锚点。更新节奏：业务目标变即更新，常规半年一次。</div></div>
+
+      <div class="block-h"><span class="b">③</span>常见坑 · 反例</div>
+      <div class="pit"><b>❌ 抄 JD：</b>JD 写「沟通能力强 / 责任心强」→ 无法评人，两人谁强全凭经理感觉。</div>
+      <div class="pit"><b>❌ 形容词当锚：</b>把「沟通能力强」直接当维度 → 改成「能独立闭环 X 类冲突」（可观测）。</div>
+      <div class="pit"><b>❌ 无区分度：</b>Must 和 Should 重合（都要「独立闭环」）→ 用「不会就不及格」这把刀筛 Must，Should 是「干得好才需要」。</div>
+      <div class="pit"><b>❌ 建完不更新：</b>业务从扩张转降本，模型还停在「能招人」→ 标尺失效，筛出来的人不对路。</div>
+
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「我不抄 JD，会从绩优者逆向萃取——找 top20% 做 BEI 访谈，把高频动作写成行为锚（可观测、可评），再跟业务明年的目标对齐权重，最后拿去筛人回测命中率，>70% 才算立住。建完不是终点，业务目标一变就更新。」</span></div>
+    </div>
+
+    <div class="card">
+      <h3>④ 你的填空版 · 岗位模型卡</h3>
+      <p class="tag">黄色字段可编辑，本地自动保存；示例见上，照结构填你真实岗位</p>
+      <div class="ex">
+        <span class="lab">岗位：<span class="edit" contenteditable="true" id="m1-role">__ 岗 · __ 级别</span></span>
+        <div class="cols" style="margin-top:10px">
+          <div class="col must"><h4>① Must（不会就不及格）</h4><ul>
+            <li><span class="edit" contenteditable="true" id="m1-m1">__</span></li>
+            <li><span class="edit" contenteditable="true" id="m1-m2">__</span></li>
+            <li><span class="edit" contenteditable="true" id="m1-m3">__</span></li>
+          </ul></div>
+          <div class="col should"><h4>② Should（干得好需要）</h4><ul>
+            <li><span class="edit" contenteditable="true" id="m1-s1">__</span></li>
+            <li><span class="edit" contenteditable="true" id="m1-s2">__</span></li>
+          </ul></div>
+          <div class="col could"><h4>③ Could（加分项）</h4><ul>
+            <li><span class="edit" contenteditable="true" id="m1-c1">__</span></li>
+            <li><span class="edit" contenteditable="true" id="m1-c2">__</span></li>
+          </ul></div>
+        </div>
+        <div class="field" style="margin-top:12px"><span class="lbl">业务目标对齐（明年重点 → 加重哪档权重）：</span><span class="edit" contenteditable="true" id="m1-align">__</span></div>
+        <div class="field"><span class="lbl">验证回测（筛 __ 人，绩优命中率 __%）：</span><span class="edit" contenteditable="true" id="m1-test">__</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 模块二：人才画像 ============ -->
+  <section id="profile">
+    <div class="sec-head"><div class="sec-no">2</div><h2>人才画像（再测对象）</h2><span class="sub">这个人实际能干什么、缺什么、想去哪 · 多维动态档案</span></div>
+
+    <div class="card">
+      <h3>① 完整示意示例 · 张三（云技服风控平台 · 高级工程师）</h3>
+      <p class="tag">交叉验证四维，标「隐形核心 / 高宠高危」，动态更新不静态存档</p>
+      <div class="ex">
+        <span class="lab">注：以下为「示意」人物与数字，请代入你真实团队的样本</span>
+        <div class="grid2">
+          <div class="field"><span class="lbl">① 硬能力证据（实际干过什么难事）</span>主导风控规则引擎重构（2024），带 4 人，QPS 从 1.2w→3.5w，故障率降 40%；独立搞定 2 次 P2 故障复盘，零重复。</div>
+          <div class="field"><span class="lbl">② 行为信号（360 / ONA 中心度）</span>ONA 协作网络中心度 top 8%（跨 3 个团队做节点）；360 里「出问题都找他」出现 6 次；但本人不爱发言 → <b>隐形核心</b>。</div>
+          <div class="field"><span class="lbl">③ 潜力（学习敏捷 / 跨级评价）</span>半年自学会 Go 并迁移 2 个老服务；跨级评价写「可往上走」；主动接没人愿意碰的历史债。</div>
+          <div class="field"><span class="lbl">④ 意愿（想去哪 / Internal mobility）</span>想往技术架构方向；内部活水意向「否」（家庭原因短期不出京）；但薪酬已到带宽顶 → 留人隐患。</div>
+        </div>
+        <div class="pillbox">
+          <span class="pill p-should">高潜</span><span class="pill p-must">关键人·勿动</span><span class="pill p-could">可继任（架构师后备）</span><span class="pill p-red">离职风险：中</span>
+        </div>
+      </div>
+
+      <div class="block-h"><span class="b">②</span>怎么采 · 四维数据从哪来</div>
+      <div class="step"><div class="n">1</div><div class="t"><b>硬能力：</b>拉项目系统 / 绩效系统里的实际战功，<b>不是简历</b>。问「他主导过什么难事、带过几个人、解决过什么反复出的问题」。</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>行为信号：</b>ONA 取协作网络中心度；360 关键词提取（「都找他」「离了不行」）；经理提名 + <b>反向提名</b>（「谁离开你最慌」）——专捞不爱说话的隐形核心。</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>潜力：</b>学习敏捷（新技能掌握速度，如半年学会 Go）+ 挑战偏好（愿接没人碰的活）+ 跨级评价（上级的上级怎么看他）。</div></div>
+      <div class="step"><div class="n">4</div><div class="t"><b>意愿：</b>1:1 谈 + 内部活水系统意向。意愿变了（想走 / 想转）是<b>前置风险信号</b>，要标红。</div></div>
+      <div class="step"><div class="n">5</div><div class="t"><b>动态更新：</b>每季度刷新；关键事件（晋升 / 大项目 / 离职风险信号）即时更新，<b>不静态存档</b>。</div></div>
+
+      <div class="block-h"><span class="b">③</span>常见坑 · 反例</div>
+      <div class="pit"><b>❌ 静态画像 = 只看职级学历：</b>组织调整时按「职级高」优化，把隐形核心张三砍了 → 3 个团队瘫痪 2 周，才知道他多关键。</div>
+      <div class="pit"><b>❌ 只采硬能力漏软信号：</b>张三不爱发言，经理以为「存在感低」→ 没进高潜池，被竞对挖走。</div>
+      <div class="pit"><b>❌ 不标意愿：</b>张三薪酬到顶+想转架构，没人管 → 默默看机会，等递辞呈才慌。</div>
+
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「画像不是把简历重抄一遍。我采四维交叉验证：硬能力看项目系统真实战功、行为信号用 ONA + 360 + 反向提名捞隐形核心、潜力看学习敏捷和跨级评价、意愿靠 1:1 和活水意向。关键是动态更新、标红风险——张三式的人（能力强但不爱说）最容易在静态画像里被漏掉。」</span></div>
+    </div>
+
+    <div class="card">
+      <h3>④ 你的填空版 · 人才画像卡</h3>
+      <p class="tag">黄色字段可编辑，本地自动保存</p>
+      <div class="ex">
+        <span class="lab">对象：<span class="edit" contenteditable="true" id="m2-name">__（__ / __ 级别）</span></span>
+        <div class="grid2" style="margin-top:10px">
+          <div class="field"><span class="lbl">① 硬能力证据</span><span class="edit" contenteditable="true" id="m2-h">主导过 __ / 带过 __ 人 / 解决过 __ 难题</span></div>
+          <div class="field"><span class="lbl">② 行为信号（ONA/360）</span><span class="edit" contenteditable="true" id="m2-b">中心度 __ / 被 __ 人依赖 / 隐形核心?</span></div>
+          <div class="field"><span class="lbl">③ 潜力</span><span class="edit" contenteditable="true" id="m2-p">学习敏捷 __ / 跨级评价 __</span></div>
+          <div class="field"><span class="lbl">④ 意愿（活水意向）</span><span class="edit" contenteditable="true" id="m2-w">想往 __ / 活水意向 __</span></div>
+        </div>
+        <div class="field" style="margin-top:12px"><span class="lbl">标签：</span><span class="edit" contenteditable="true" id="m2-tag">高潜 / 关键人·勿动 / 可继任 / 离职风险 __</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 模块三：人才盘点 ============ -->
+  <section id="review">
+    <div class="sec-head"><div class="sec-no">3</div><h2>人才盘点（出决策）</h2><span class="sub">用标尺量对象，盘完必有动作 · 九宫格 + 校准 + 风险 + IDP</span></div>
+
+    <div class="card">
+      <h3>① 完整示意示例 · 云技服某中心九宫格 + 校准结论</h3>
+      <p class="tag">绩效 × 潜力；校准会消偏；标红「高宠高危」；盘完必出继任 / IDP / 风险</p>
+      <div class="ex">
+        <span class="lab">注：以下为「示意」落位，请代入你真实盘点</span>
+        <table>
+          <tr><th>绩效\潜力</th><th>低潜力</th><th>中潜力</th><th>高潜力</th></tr>
+          <tr><td>高绩效</td><td>老王：稳定交付，可留任骨干</td><td>小李：可重点培养，给挑战项目</td><td><span class="pill p-red">张三·高宠高危</span><br>标红：核心资产+易流失</td></tr>
+          <tr><td>中绩效</td><td>老陈：守成，需激活或转岗</td><td>小赵：有空间，补 __ 能力</td><td>小孙：重点培养，列继任</td></tr>
+          <tr><td>低绩效</td><td>待优化：PIP 或汰换</td><td>新人期：给 3 月观察</td><td>小周：绩效沟通+定位校准</td></tr>
+        </table>
+        <div class="grid2" style="margin-top:14px">
+          <div class="field"><span class="lbl">关键岗位继任覆盖（没人能替＝红线）</span>风控平台负责人：现可上 <b>张三</b> / 1 年可上 <b>小孙</b> / 还需培养 <b>__</b>。→ 张三若走，无即时备份＝红线。</div>
+          <div class="field"><span class="lbl">风险清单（高宠高危 / 关键人流失预警）</span>张三：薪酬到顶 + 想转架构 + 不出京 → 竞对可给架构岗。留人方案：带宽外特批 + 内部转架构通道。</div>
+          <div class="field"><span class="lbl">发展计划 IDP（每人一条）</span>张三：补「架构设计能见度」→ 3 个月内主导 1 次架构评审 + 带 1 个校招。owner：本人 + HRBP 双周跟。</div>
+          <div class="field"><span class="lbl">校准会结论（消偏 / 捞埋没苗子）</span>经理把小周（低绩效高潜）归错格 → 跨组对比发现同岗别人能带，定位为「放错项目」→ 调岗而非淘汰。</div>
+        </div>
+      </div>
+
+      <div class="block-h"><span class="b">②</span>校准会 runbook（怎么开才不黑箱）</div>
+      <div class="step"><div class="n">会前</div><div class="t">每人填好画像 + 初评，数据（绩效 / ONA / 敬业度）就绪；HRBP 先拉一份「疑似高宠高危」预警名单。</div></div>
+      <div class="step"><div class="n">会中</div><div class="t">逐人过：经理陈述（带证据）→ 其他人挑战证据 → <b>强制分布</b>消偏 → 标定高宠高危。<b>每人 8–10 min，一个中心半天开完</b>。</div></div>
+      <div class="step"><div class="n">消偏</div><div class="t">四招：① <b>强制分布</b>（避免全员优秀）② <b>跨组同岗对比</b>（同岗拉一起评）③ <b>每条高潜必须有行为证据</b>（说不出就降级）④ <b>反向提名</b>捞埋没苗子（谁离开你最慌）。</div></div>
+      <div class="step"><div class="n">谁参加</div><div class="t">业务 leader + 上级 HRBP + 中心负责人 +（可选）跨中心 HR 当「外部眼」防近亲。</div></div>
+      <div class="step"><div class="n">会后</div><div class="t">出三张表：<b>继任覆盖表 / 风险清单 / IDP 表</b>，盘完必有动作，不盘完拉倒。</div></div>
+
+      <div class="block-h"><span class="b">③</span>常见坑 · 反例</div>
+      <div class="pit"><b>❌ 收表出名单就完：</b>经理自评全「优秀」→ 没有分布、没有校准 → 高潜名单无区分度，等于没盘。</div>
+      <div class="pit"><b>❌ 黑箱定高潜：</b>「我觉得他是高潜」拿不出证据 → 员工申诉公平危机，信任崩。</div>
+      <div class="pit"><b>❌ 盘完无动作：</b>出了九宫格锁进抽屉，张三的离职风险没人跟 → 三个月后真走，继任空白。</div>
+      <div class="pit"><b>❌ 漏标高宠高危：</b>只盯低绩效，忘了「高绩效高潜但想走」的人最贵也最易失。</div>
+
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「盘点不是收表出名单，是出决策。我用绩效×潜力九宫格，但关键是校准会——强制分布消偏、每条高潜必须拿行为证据、反向提名捞埋没苗子，保证可解释。盘完必出三张表：继任覆盖（谁没人替是红线）、风险清单（高宠高危标红）、IDP。张三式的高绩效高潜但想走的人，是最贵也最该盯的。」</span></div>
+    </div>
+
+    <div class="card">
+      <h3>④ 你的填空版 · 盘点输出表</h3>
+      <p class="tag">黄色字段可编辑，本地自动保存</p>
+      <div class="ex">
+        <div class="field"><span class="lbl">关键岗位继任覆盖</span><span class="edit" contenteditable="true" id="m3-succ">__ 负责人：现可上 __ / 1年可上 __ / 还需培养 __</span></div>
+        <div class="field"><span class="lbl">风险清单（高宠高危）</span><span class="edit" contenteditable="true" id="m3-risk">__</span></div>
+        <div class="field"><span class="lbl">IDP（每人一条）</span><span class="edit" contenteditable="true" id="m3-idp">__：补 __，__ 个月达成 __</span></div>
+        <div class="field"><span class="lbl">校准会结论</span><span class="edit" contenteditable="true" id="m3-cal">__</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="why" style="margin-top:8px"><b>三者怎么串：</b>标尺（岗位模型）→ 对象（人才画像）→ 决策（盘点）。如果是救火（关键人要走），可先抓画像 + 盘点。三件套共用一套数据底座（绩效 / ONA / 敬业度），复用率最高、最值钱——也正好是 HR AI 方案里「继任高潜 + ONA」的落地逻辑。</div>
+
+  <div class="lead" style="margin-top:18px"><b>一页速记（面试前扫一眼）：</b>岗位模型 = 从绩优者 BEI 萃取行为锚，跟业务目标对齐，筛人回测 >70%。人才画像 = 四维交叉验证（硬能力/行为信号/潜力/意愿），动态标红风险，专捞隐形核心。人才盘点 = 九宫格 + 校准会（强制分布+证据+反向提名），盘完出继任/风险/IDP 三表，高宠高危必标红。</div>
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+
+<script>
+(function(){
+  var KEY='talent_modules_v2';
+  function load(){
+    try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}
+  }
+  var data=load();
+  document.querySelectorAll('[contenteditable][id]').forEach(function(el){
+    if(el.id in data) el.textContent=data[el.id];
+    el.addEventListener('input',function(){
+      data[el.id]=el.textContent;
+      localStorage.setItem(KEY,JSON.stringify(data));
+    });
+  });
+})();
+</script>
+</body>
+</html>
