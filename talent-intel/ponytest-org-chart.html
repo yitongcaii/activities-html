@@ -52,13 +52,20 @@
 
   .columns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px;}
   @media(max-width:720px){.columns{grid-template-columns:1fr;}}
-  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 4px 12px rgba(0,0,0,.06);}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 4px 12px rgba(0,0,0,.06);text-align:left;}
   .panel h3{font-size:16px;font-weight:700;margin-bottom:12px;padding-left:10px;border-left:4px solid var(--purple);}
   .chip{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);
     border-radius:10px;margin-bottom:8px;cursor:pointer;font-size:13px;transition:.15s;}
   .chip:hover{background:#F8FAFF;border-color:var(--purple);}
   .chip .meta{font-size:11px;color:var(--sub);}
+  .chip.static{cursor:default;background:#F8FAFC;}
+  .chip.static:hover{background:#F8FAFC;border-color:var(--line);transform:none;}
+  .chip.warn{background:#FFF7ED;border-color:#FED7AA;color:#9A3412;}
+  .chip.info{background:#EEF2FF;border-color:#C7D2FE;color:#3730A3;}
+  .grp-title{font-size:13px;font-weight:700;color:var(--purple);margin:16px 0 8px;padding-left:10px;border-left:4px solid var(--cyan);}
+  .grp-title:first-of-type{margin-top:2px;}
   .note{font-size:12px;color:#9a3412;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;margin-top:6px;}
+  .note.info{color:#3730A3;background:#EEF2FF;border-color:#C7D2FE;}
 
   /* detail */
   #detail{margin-top:24px;background:#fff;border:1px solid var(--purple);border-radius:16px;padding:20px 22px;
@@ -80,7 +87,7 @@
     <h1>谱尼测试（300887.SZ）组织架构图</h1>
     <div class="sub">
       采集日期：2026-08-25 ｜ 锚点：公司（谱尼测试集团股份有限公司）<br>
-      主树＝经营汇报链（宋薇 → 张英杰 → 各高管）；董事会构成与治理变动单列于下方面板。口径：仅采公开可查，不编不猜。
+      主树＝经营汇报链（宋薇 → 张英杰 → 各高管）；董事会构成、治理变动、业务线/子公司负责人网络分列于下方面板。口径：仅采公开可查，不编不猜；第二步已补充业务线/子公司具名负责人与在招信号。
     </div>
   </header>
 
@@ -130,12 +137,41 @@
     </div>
 
     <div class="panel">
-      <h3>治理变动 · 分支机构</h3>
+      <h3>治理变动（2025-09 换届）</h3>
       <div class="chip" data-id="lvqi"><span>吕琦 — 原财务负责人（2025-09届满离任）</span><span class="tag tag-hi">高</span></div>
-      <div class="chip" data-id="chenlidan"><span>陈丽丹 — 雄安分公司负责人</span><span class="tag tag-mid">中</span></div>
-      <div class="chip" data-id="xujiulu"><span>徐九录 — 昆明分公司负责人</span><span class="tag tag-mid">中</span></div>
-      <div class="note">⚠️ 2025-09 换届后公司取消监事会，原监事会主席吴俊霞、监事李涛、职工监事乔臻不再任职。HR线及各业务线（汽车/环境/食品/新能源/医药）一号位公开源未具名 → 待确认。</div>
+      <div class="note">⚠️ 2025-09 换届后公司<strong>取消监事会</strong>，原监事会主席吴俊霞、监事李涛、职工监事乔臻不再任职；财务负责人由吕琦交棒杨鹏远（立信+天音审计背景）。明确的治理变动节点，中小股东监督机制削弱，中性偏负，持续关注。</div>
     </div>
+  </div>
+
+  <!-- 业务线 / 子公司负责人网络 -->
+  <div class="panel" style="margin-top:18px;">
+    <h3>业务线 / 子公司负责人网络（第二步补充 · 2026-08-25）</h3>
+
+    <div class="note info">
+      📊 <strong>经营基本面（2025 年报）</strong>：营收 13.65 亿（连降：2022 年 37.6亿 → 2023 24.7亿 → 2024 15.4亿 → 2025 13.65亿），2025 仍亏 <strong>-2.46 亿</strong>（较 2024 的 -3.56亿 收窄）。营收结构：健康环保 67.81%（最大块，含环境/食品/医药）｜ 汽车及其他消费品 17.20% ｜ 安全保障 9.98% ｜ 电子电气 4.43%。年报原话："生物医药、新能源汽车、特殊行业建设投入较大，市场开拓尚需要时间" —— 这解释了下方"在招高管"信号。
+    </div>
+
+    <div class="grp-title">① 已具名子公司 / 区域法人（工商可查，中置信为主）</div>
+    <div class="chip" data-id="zhangyingjie_sub"><span>张英杰 — 谱尼生物医药(北京) 执行董事·经理</span><span class="tag tag-hi">高</span></div>
+    <div class="chip" data-id="lixiaodong_sub"><span>李小冬 — 谱尼生物医药科技(北京) 董事·经理</span><span class="tag tag-hi">高</span></div>
+    <div class="chip" data-id="jichunbo_qd"><span>嵇春波 — 青岛谱尼测试 总经理（兼集团副总）</span><span class="tag tag-hi">高</span></div>
+    <div class="chip" data-id="lizhisong"><span>李志松 — 谱尼生物医药科技(北京) 财务负责人</span><span class="tag tag-mid">中</span></div>
+    <div class="chip" data-id="qiyan"><span>祁燕 — 谱尼生物医药科技(北京) 副董事长</span><span class="tag tag-mid">中</span></div>
+    <div class="chip" data-id="zhoujiakuan"><span>周家宽 — 上海谱尼认证技术 法定代表人·执行董事</span><span class="tag tag-mid">中</span></div>
+    <div class="chip" data-id="gaoyang"><span>高杨 — 谱尼测试集团四川 法定代表人·经理</span><span class="tag tag-mid">中</span></div>
+    <div class="chip" data-id="niuguihua"><span>牛桂华 — 青岛谱尼测试 法定代表人</span><span class="tag tag-mid">中</span></div>
+    <div class="chip" data-id="chenlidan"><span>陈丽丹 — 雄安分公司 负责人</span><span class="tag tag-mid">中</span></div>
+    <div class="chip" data-id="xujiulu"><span>徐九录 — 昆明分公司 负责人</span><span class="tag tag-mid">中</span></div>
+
+    <div class="grp-title">② 在招总监信号业务线（在招 ≠ 现任，中置信）</div>
+    <div class="chip warn static"><span>🚧 汽车检测实验室总监（上海松江，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+    <div class="chip warn static"><span>🚧 新能源实验室负责人 / 新能源事业部运营经理（上海松江，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+    <div class="chip warn static"><span>🚧 HR 综合办总监（人力方向）/ 高级人事经理 / HRBP（北京，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+
+    <div class="grp-title">③ 仍空白待确认（集团事业部级一号位）</div>
+    <div class="chip static"><span>❓ 环境检测 BU head — 未具名（健康环保占营收 67.81%，最大块却无公开业务线 leader）</span><span class="tag tag-lo">待确认</span></div>
+    <div class="chip static"><span>❓ 食品检测 BU head — 未具名</span><span class="tag tag-lo">待确认</span></div>
+    <div class="chip static"><span>❓ 集团 HR 线一号位（CHO / HR VP）— 未具名，仅在招总监</span><span class="tag tag-lo">待确认</span></div>
   </div>
 
   <!-- 详情 -->
@@ -154,15 +190,15 @@ const D = {
   songwei:{nm:'宋薇',role:'董事长 · 非独立董事 · 实际控制人',conf:'高',tag:'tag-hi',
     desc:'1968年生，女，研究员。防化指挥工程学院本科、人大世界经济硕士、清华五道口金融EMBA。2002年创立谱尼测试并任董事长至今；国家"万人计划"领军人才。直接持股约44.85%+间接约5.5%，集团实控人；与持股5%以上股东李阳谷为母子关系。',
     src:[['全景IR','https://mir.p5w.net/senior/300887.html'],['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF']]},
-  zhangyingjie:{nm:'张英杰',role:'总经理 · 法定代表人',conf:'高',tag:'tag-hi',
-    desc:'1977年生，男，本科（山西大学应用化学）。2004年加入谱尼，历任贸易符合性事业部总经理、董事、副总、财务负责人；2019年起任总经理。2025-09换届不再担任董事，续任总经理、法定代表人。',
-    src:[['东方财富','https://emweb.securities.eastmoney.com/PC_HSF10/CompanyManagement/Index?type=web&code=SZ300887'],['招股书','https://ima.qq.com/wiki/?shareId=63468c6a89bcc0298918cda69e0ef3fe432c95f26d3e2468d17460d071b6c599']]},
-  jichunbo:{nm:'嵇春波',role:'副总经理',conf:'高',tag:'tag-hi',
-    desc:'1978年生，男，大专。2019年起任副总经理；2025-09换届因任期届满不再担任董事，续任副总经理（非董事）。',
-    src:[['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF']]},
-  lixiaodong:{nm:'李小冬',role:'董事 · 副总经理 · 董事会秘书',conf:'高',tag:'tag-hi',
-    desc:'1981年生，男，硕士（中央财经大学财政学），高级会计师。2015年任董秘，2021年任董事，2025-09增任副总经理。董事会与经营层关键枢纽。',
-    src:[['全景IR','https://mir.p5w.net/senior/300887.html']]},
+  zhangyingjie:{nm:'张英杰',role:'总经理 · 法定代表人（集团）',conf:'高',tag:'tag-hi',
+    desc:'1977年生，男，本科（山西大学应用化学）。2004年加入谱尼，历任贸易符合性事业部总经理、董事、副总、财务负责人；2019年起任总经理。2025-09换届不再担任董事，续任总经理、法定代表人。同时兼任谱尼生物医药(北京)执行董事·经理，核心高管直接掌控医药板块。',
+    src:[['东方财富','https://emweb.securities.eastmoney.com/PC_HSF10/CompanyManagement/Index?type=web&code=SZ300887'],['工商(爱企查)','https://www.aqccn.com/']]},
+  jichunbo:{nm:'嵇春波',role:'副总经理（集团）',conf:'高',tag:'tag-hi',
+    desc:'1978年生，男，大专。2019年起任副总经理；2025-09换届因任期届满不再担任董事，续任副总经理（非董事）。同时任青岛谱尼测试总经理。',
+    src:[['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF'],['新浪财经','https://finance.sina.com.cn/']]},
+  lixiaodong:{nm:'李小冬',role:'董事 · 副总经理 · 董事会秘书（集团）',conf:'高',tag:'tag-hi',
+    desc:'1981年生，男，硕士（中央财经大学财政学），高级会计师。2015年任董秘，2021年任董事，2025-09增任副总经理。同时任谱尼生物医药科技(北京)董事·经理，董事会与经营层关键枢纽。',
+    src:[['全景IR','https://mir.p5w.net/senior/300887.html'],['工商(爱企查)','https://www.aqccn.com/']]},
   yangpengyuan:{nm:'杨鹏远',role:'董事 · 财务负责人',conf:'高',tag:'tag-hi',
     desc:'1983年生，男，本科（东北林业大学会计）。历任立信会计师事务所项目经理、天音控股审计经理；2015年加入谱尼历任审计总监；2025-09接替吕琦任财务负责人、董事。',
     src:[['全景IR','https://mir.p5w.net/senior/300887.html']]},
@@ -186,7 +222,33 @@ const D = {
     src:[['同花顺','https://www.iwencai.com/yike/detail/auid/b2866734088a2af1']]},
   xujiulu:{nm:'徐九录',role:'昆明分公司 负责人',conf:'中',tag:'tag-mid',
     desc:'谱尼测试集团股份有限公司昆明分公司负责人，分公司成立于2020-08-17，经营状态在营。来源为工商信息聚合，单一源。',
-    src:[['同花顺','https://www.iwencai.com/yike/detail/auid/b2866734088a2af1']]}
+    src:[['同花顺','https://www.iwencai.com/yike/detail/auid/b2866734088a2af1']]},
+
+  /* ---- 第二步：子公司 / 区域法人补充 ---- */
+  zhangyingjie_sub:{nm:'张英杰',role:'谱尼生物医药(北京) 执行董事·经理（子公司）',conf:'高',tag:'tag-hi',
+    desc:'集团总经理/法定代表人张英杰兼任谱尼生物医药(北京)执行董事·经理，体现核心高管对医药板块的直接掌控。来源为工商信息聚合，因张英杰集团职务高置信，本条目记为高。',
+    src:[['工商(爱企查)','https://www.aqccn.com/']]},
+  lixiaodong_sub:{nm:'李小冬',role:'谱尼生物医药科技(北京) 董事·经理（子公司）',conf:'高',tag:'tag-hi',
+    desc:'集团董事·副总·董秘李小冬兼任谱尼生物医药科技(北京)董事·经理。来源为工商信息聚合，因李小冬集团职务高置信，本条目记为高。',
+    src:[['工商(爱企查)','https://www.aqccn.com/']]},
+  jichunbo_qd:{nm:'嵇春波',role:'青岛谱尼测试 总经理（子公司）',conf:'高',tag:'tag-hi',
+    desc:'集团副总经理嵇春波兼任青岛谱尼测试总经理。来源为新浪财经等多源，记为高。',
+    src:[['新浪财经','https://finance.sina.com.cn/']]},
+  lizhisong:{nm:'李志松',role:'谱尼生物医药科技(北京) 财务负责人',conf:'中',tag:'tag-mid',
+    desc:'谱尼生物医药科技(北京)财务负责人。来源为工商信息聚合（爱企查），单一源，置信度中。',
+    src:[['工商(爱企查)','https://www.aqccn.com/']]},
+  qiyan:{nm:'祁燕',role:'谱尼生物医药科技(北京) 副董事长',conf:'中',tag:'tag-mid',
+    desc:'谱尼生物医药科技(北京)副董事长。来源为工商信息聚合（爱企查），单一源，置信度中。',
+    src:[['工商(爱企查)','https://www.aqccn.com/']]},
+  zhoujiakuan:{nm:'周家宽',role:'上海谱尼认证技术 法定代表人·执行董事',conf:'中',tag:'tag-mid',
+    desc:'上海谱尼认证技术有限公司法定代表人·执行董事。来源为工商信息聚合（爱企查），单一源，置信度中。',
+    src:[['工商(爱企查)','https://www.aqccn.com/']]},
+  gaoyang:{nm:'高杨',role:'谱尼测试集团四川 法定代表人·经理',conf:'中',tag:'tag-mid',
+    desc:'谱尼测试集团四川有限公司法定代表人·经理。来源为工商信息聚合（爱企查），单一源，置信度中。',
+    src:[['工商(爱企查)','https://www.aqccn.com/']]},
+  niuguihua:{nm:'牛桂华',role:'青岛谱尼测试 法定代表人',conf:'中',tag:'tag-mid',
+    desc:'青岛谱尼测试有限公司法定代表人。来源为万得等工商聚合，单一源，置信度中。',
+    src:[['万得','https://www.wind.com.cn/']]}
 };
 const detail=document.getElementById('detail');
 function show(id){const p=D[id];if(!p)return;
