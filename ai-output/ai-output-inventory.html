@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的 AI 产出盘点 · 12 项</title>
+<style>
+:root{
+  --purple:#7C3AED; --cyan:#06B6D4;
+  --grad:linear-gradient(135deg,#7C3AED,#06B6D4);
+  --bg:#FFFFFF; --bg2:#F8FAFC; --txt:#1E293B;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg2);color:var(--txt);
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  line-height:1.62;padding:40px 20px 90px}
+.wrap{max-width:1120px;margin:0 auto}
+.h1{font-size:clamp(30px,5vw,40px);font-weight:700;margin:0 0 6px;
+  background:var(--grad);-webkit-background-clip:text;color:transparent}
+.sub{color:#64748b;font-size:15px;margin:0 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.legend span{font-size:12px;color:#475569;background:#fff;border:1px solid #e2e8f0;
+  padding:3px 10px;border-radius:999px}
+.bento{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+.card{background:var(--bg);border-radius:16px;padding:18px 18px 16px;
+  box-shadow:0 8px 24px rgba(124,58,237,.08);transition:transform .22s,box-shadow .22s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(124,58,237,.16)}
+.card .top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.idx{flex:0 0 26px;height:26px;border-radius:8px;background:var(--grad);color:#fff;
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.card h3{margin:0;font-size:18px;font-weight:600;flex:1}
+.pill{display:inline-block;font-size:12px;padding:3px 10px;border-radius:999px;
+  background:rgba(124,58,237,.1);color:var(--purple);font-weight:600;white-space:nowrap}
+.pill.cy{background:rgba(6,182,212,.12);color:#0891b2}
+.pill.rd{background:rgba(239,68,68,.1);color:#dc2626}
+.body{font-size:13.5px;color:#475569}
+.body [data-sec]{margin:10px 0 0}
+.sec-t{font-size:12.5px;font-weight:700;color:var(--purple);letter-spacing:.3px;
+  display:flex;align-items:center;gap:5px;margin-bottom:2px}
+.sec-t::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--grad)}
+.body p{margin:0;font-size:13.5px}
+.avoid{background:rgba(239,68,68,.06);border-left:3px solid #ef4444;border-radius:0 8px 8px 0;
+  padding:8px 10px;margin-top:4px}
+.avoid .sec-t{color:#dc2626}
+.avoid .sec-t::before{background:#ef4444}
+.body[contenteditable="true"]:focus{outline:2px solid rgba(124,58,237,.35);border-radius:8px}
+.empty{color:#dc2626;font-style:italic}
+/* 保存条 */
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e2e8f0;
+  box-shadow:0 -4px 18px rgba(0,0,0,.06);padding:10px 20px;display:flex;gap:10px;
+  align-items:center;justify-content:center;z-index:30}
+.bar button{border:0;cursor:pointer;font-weight:700;font-size:13px;color:#fff;
+  background:var(--grad);padding:8px 18px;border-radius:999px}
+.bar button.ghost{background:#fff;color:var(--purple);border:1px solid var(--purple)}
+.bar .hint{font-size:12px;color:#94a3b8}
+.toast{position:fixed;bottom:64px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;
+  font-size:13px;padding:8px 16px;border-radius:999px;opacity:0;transition:opacity .3s;z-index:40;pointer-events:none}
+.toast.show{opacity:1}
+footer{text-align:center;color:#94a3b8;font-size:13px;margin-top:34px}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="h1">我的 AI 产出盘点</h1>
+  <p class="sub">12 项 · 背景 / 内容 / 细节 / 避坑 · 正文可直接编辑，点底部「保存修改」存本地</p>
+  <div class="legend">
+    <span>🟣 内容/知识资产</span><span>🔵 自动化系统</span><span>🟢 AI 能力资产</span>
+    <span>🟠 产品/平台</span><span>🔴 占位待补</span>
+  </div>
+
+  <div class="bento">
+
+    <!-- 1 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">1</span><h3>文化活动知识库AI自动化更新</h3></div>
+      <div class="top"><span class="pill">内容/知识资产</span><span class="pill cy">已沉淀</span></div>
+      <div class="body" contenteditable="true" data-key="c1" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>文化活动资料散落在 KM、乐享、公众号、外部资讯，人工整理慢、易过期、来源难辨。需要一套能持续「采编—去重—沉淀」的自动化机制。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>由 knowledge-collection（知识采集）skill 驱动。主题池固定 6 个（员工大会 / Leader Offsite / 破冰 / 颁奖 / Open Day / 下午茶研讨），由 6h 轮询 automation 按序触发；自动多源搜索、判定一手/二手来源、做<b>六维评估</b>（相关度 / 权威性·一手加权 / 时效性 / 去重度 / 可落地质量 / 关系适配度，各 1-5 分、任一 &lt;3 淘汰），与历史去重，沉淀为卡片墙 HTML 进 Obsidian「知识采集库」并关联 GitHub Pages。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>每张卡强制打「适用关系」标签——①平级/朋友 peer　②领导↔员工 supervisor　③领导↔领导 exec 三层，绝不混用；跨档内容关系适配度从严（平级向内容套到上下级直接判低分）。落库三端：Obsidian 知识采集库（汇总笔记+索引+本轮独立笔记）/ 乐享团队文件夹「待清洗素材」/ GitHub（SSH push master）。单文件 HTML、紫青 Bento、来源透明标注（📌云技服等）。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 必须标一手/二手来源，别把二手当一手引用；② 与历史去重，避免同一案例反复沉淀；③ 外部资讯有时效，定时重跑而非一次性；④ 不硬写主办团队，用占位由人填；⑤ 案例仅做出处标注，不做主办断言；⑥「适用关系」标签必填，别把平级向团建游戏套到高管 Offsite（关系适配度从严）。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">2</span><h3>新人答辩AI自动化（维护看板+跟催）</h3></div>
+      <div class="top"><span class="pill cy">自动化系统</span><span class="pill cy">已上线·月1触发</span></div>
+      <div class="body" contenteditable="true" data-key="c2" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>新人发展答辩每月一次，建会、建群、看板回填、归档全是重复人工，易漏节点、跟催不及时。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>MCP 应用（WorkBuddy 编排 + 企微客服号通道 + 腾讯会议），每月 1 日触发，自动建会 / 建群 / 看板回填 / 归档；并对答辩进度做看板维护与节点跟催。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>依赖企微通道可用 + 腾讯会议 MCP；定时触发（月 1）；看板字段含答辩状态 / 负责人 / 节点。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 企微连接器断开会直接导致发不出（此前 wecom disconnected，需 webhook 或重连后才发）；② 月 1 触发确认时区/节假日，避免踩假期；③ 看板回填字段口径要对齐，防数据错位；④ 跟催设阈值而非天天催，别骚扰；⑤ 归档路径/权限先定好。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 3 推断稿 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">3</span><h3>培训积分商城</h3></div>
+      <div class="top"><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">推断稿·待核对</span></div>
+      <div class="body" contenteditable="true" data-key="c3" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>【推断·待你核对】培训与文化活动（博闻多识·一堂课、AISee 实战沙龙、英语角、新人答辩等）参与靠自觉，活跃度波动、贡献难衡量，缺一个把「参与行为」变成「可积累权益」的激励闭环。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>【推断·待你核对】积分获取（参训 / 沙龙打卡、投稿分享、担任布道师等得积分）+ 积分商城（周边礼品 / 咖啡券 / 调休券 / 礼包等权益兑换）+ 参与看板 / 排行榜（活跃度可视化）。建议与抽奖平台、培训宣传文案 skill 联动复用。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>【推断·待你核对】需对接企业身份账号体系；积分规则防刷；参与看板可复用薪酬看板的数据可视化思路；兑换 SKU 与预算需提前对齐。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 积分规则务必公开透明，避免争议；② 奖品预算与兑换履约要跟上，否则失信；③ 谁多少分属敏感数据，权限与脱敏要管；④ 别和薪酬 / 奖金报销混淆（激励 ≠ 薪酬）；⑤ 防刷分（代打卡 / 刷分识别）。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">4</span><h3>抽奖平台</h3></div>
+      <div class="top"><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">产品/平台</span><span class="pill cy">已上线·Railway+Pages</span></div>
+      <div class="body" contenteditable="true" data-key="c4" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>文化活动（年会 / 表彰 / 团建 / 节日）抽奖高频，现成工具要么收费、要么规则不灵活、要么不支持名单管理。自建更可控。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>Web 应用：Vue3+Vite 前端 + Express+SQLite 后端，抽奖逻辑、概率权重、中奖名单管理、多人并发抽奖；Railway 部署后端 + GitHub Pages 托管前端。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>技术栈 Vue3+Vite / Express+SQLite；后端 Railway、前端 Pages；支持名单导入 / 去重、概率配置。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 并发抽奖必须防超发/重复中奖（事务或锁）；② 概率权重配置要对，别算错；③ Pages 只托管静态，后端必须另部署（Railway）别混；④ 名单去重 + 防刷；⑤ 中奖名单涉隐私，权限与脱敏要管。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">5</span><h3>自建 skill 体系</h3></div>
+      <div class="top"><span class="pill" style="background:rgba(34,197,94,.12);color:#16a34a">AI 能力资产</span><span class="pill cy">持续迭代·16文件/11顶层</span></div>
+      <div class="body" contenteditable="true" data-key="c5" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>活动 SOP、主持稿、谈参、培训宣传、知识采集、抖音生产、报告防错等场景反复出现，每次重写 prompt 低效且质量不稳，沉淀为可复用 skill 才是资产。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>实际自建（<b>agent_created: true</b>）共 <b>15 个文件 = 10 个顶层 skill</b>；抖音生产体系含 6 个自建子层。每个解决一类反复出现的重复痛点：</p>
+<ul style="margin:.4rem 0;padding-left:1.15rem;line-height:1.75">
+<li style="margin:.35rem 0"><b>culture-event-sop</b>（文化活动 SOP）→ 员工大会/Offsite/团建/Openday 每次都得从零想方案、找模板、列 checklist，重复且质量不稳。</li>
+<li style="margin:.35rem 0"><b>exec-talk-prep</b>（高管谈参/致辞）→ 高管每次出场临时写发言稿，易漏保密提醒、职位确认等坑。</li>
+<li style="margin:.35rem 0"><b>host-talk-prep</b>（主持稿通用版）→ exec-talk-prep 太私有化同事复用不了，抽成通用方法论供内部复用。</li>
+<li style="margin:.35rem 0"><b>training-promo-copy</b>（培训宣传文案）→ 每次培训/活动手写招募推文、群公告、海报文案，风格不一、费时。</li>
+<li style="margin:.35rem 0"><b>knowledge-collection</b>（知识采集）→ 文化素材靠人工网上搜，慢、易重复沉淀、一手/二手来源不清。</li>
+<li style="margin:.35rem 0"><b>campaign-recap</b>（营销活动复盘）→ 每次活动复盘口径不一、手动算 ROI/五维评分慢且易错。</li>
+<li style="margin:.35rem 0"><b>talent-intel-mapper</b>（人才情报地图）→ 竞品/组织盘点时人工搜公开信息零散、置信度不清。</li>
+<li style="margin:.35rem 0"><b>tencent-meeting-minutes</b>（会议全流程自动化）→ 会后纪要靠手工整理、参会人核对繁琐，建会改会也重复。</li>
+<li style="margin:.35rem 0"><b>ui-design-spec</b>（UI 设计规范）→ 每次展示/活动类 HTML 风格不统一，反复调审美。</li>
+<li style="margin:.35rem 0"><b>xhs-hr-content</b>（小红书 HR 内容方法论）→ HR 博主内容选题靠拍脑袋、钩子弱打开率低、发前无打分、改稿凭感觉，风格与质量难稳定。</li>
+<li style="margin:.35rem 0"><b>douyin-pro 体系</b>（抖音生产，含 6 自建子层：大脑/脚本优化/混剪/绘图/渲染/采集）→ 短视频链路长，每步人工重复、风格难统一、合规易踩雷。</li>
+</ul>
+<p style="margin-top:.4rem;color:#94a3b8;font-size:.82rem">⚠️ 此前盘点把 <b>data-report-guard</b> 也算进自建，实测它未标 agent_created（属安装所得），已剔除。</p>
+</div>
+        <div data-sec><div class="sec-t">细节</div><p>存于 ~/.workbuddy/skills/，共 16 个 agent_created 文件（11 顶层 + 抖音 6 子层）；触发词需收窄避免误触发；部分依赖外部 MCP（ima/lexiang）尚未连接；有 skill 自查/审计机制。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 触发词过宽会误触发并撑爆上下文（抖音 skill 卡顿根因）；② 主 SKILL 过大要精简、收窄触发词；③ 子层引用缺失（brain-layer.md / run_autoclip.py 等）要清理；④ 别重复造相似 skill，先查已有；⑤ 改完要实测验证闭环。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">6</span><h3>周报 AI 自动输出</h3></div>
+      <div class="top"><span class="pill cy">自动化系统</span><span class="pill cy">已用·周更+OKR</span></div>
+      <div class="body" contenteditable="true" data-key="c6" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>每周写周报耗时，且内容散落在文化 / 培训 / 激励多条线，容易漏重点、口径不一。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>从文化 / 培训 / 激励素材自动蒸馏「一句话周报 + 详细版」；延伸产出 Q3 OKR（4 目标 × 3 KR）与价值报告；曾把 14 项 todo 分桶、给 4 个改进方向。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>输入多线素材 → 输出短 + 详版；存 HTML 到 d:\AI\codebuddy\报告\ 并同步 Obsidian；已成周更习惯。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 数据基线缺失（价值报告 3 个缺口：知识库人工耗时基线 / 答辩流程步骤基线 / 报销漏发次数）——锁源、写死口径；② 严禁 AI 编数字（靠 data-report-guard 防错）；③ 一句话周报别丢关键动作；④ 多线素材要标清来源再汇总。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">7</span><h3>奖金报销提醒</h3></div>
+      <div class="top"><span class="pill cy">自动化系统</span><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">设计中·基线待补</span></div>
+      <div class="body" contenteditable="true" data-key="c7" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>奖金发放、报销流程节点多，人工跟进易漏发、漏报，员工体验和合规都受影响。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>自动化提醒（定时 / 触发）提示奖金节点与报销节点；记录「漏发次数」用于价值量化。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>与企微通道相关；提醒内容含节点说明 + 操作入口；数据缺口含「报销漏发次数」基线。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 提醒时机别过早 / 过频造成骚扰，设合理窗口；② 依赖企微通道可用（断连则发不出）；③ 奖金与报销口径要区分清楚；④ 提醒内容留人工确认入口，别全自动代发钱；⑤ 敏感金额信息注意脱敏。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">8</span><h3>AI 漫剧</h3></div>
+      <div class="top"><span class="pill">内容/知识资产</span><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">试产·抖音体系</span></div>
+      <div class="body" contenteditable="true" data-key="c8" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>短视频 / 漫剧内容生产门槛高、周期长、成本高，用 AI 生成（脚本 → 绘图 → 配音 → 渲染）可大幅降本提速。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>抖音生产体系（douyin-video-skill + 6 子层：大脑 / 中游脚本优化 / 混剪 / 绘图 / 渲染 / 采集）；路径 A 付费 / 路径 B 免费直出；曾做企鹅形象「图生视频」保留本体动作。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>抖音生产体系 = 1 个主 skill + 6 子层分工：大脑(定方向/合规闸门) / 脚本优化(中游口播) / 混剪(素材粗剪) / 绘图(生图) / 渲染(配音 edge-tts 等+成片) / 采集(多平台资讯抓取)。配音层支持 edge-tts 等多选；成片可推抖音 / 小红书。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 模板误用（如 futuresoldier 机甲变身把企鹅变机甲，应走图生视频保留本体）；② skill 卡顿根因（上下文爆炸 / 触发词过宽 / 依赖未就绪）；③ 子层引用缺失要清理；④ 合规红线必须先过闸门再生成；⑤ 免费直出有音质 / 时长限制，商用注意。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">9</span><h3>薪酬看板脚本</h3></div>
+      <div class="top"><span class="pill">内容/知识资产</span><span class="pill cy">脚本·内部</span></div>
+      <div class="body" contenteditable="true" data-key="c9" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>薪酬数据分散、口径杂，手工汇总慢且易错，HR / 管理层做决策缺一张可视图。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>薪酬相关数据的聚合 / 展示脚本（看板）：把薪酬结构、分布、对比等做成可视图表，辅助决策。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>偏数据 / 内部使用；思路可复用博闻看板类 dashboard 脚本；关注数据源锁源与定期刷新。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 薪酬属敏感数据，务必脱敏、权限收紧；② 口径写死，杜绝 AI 编数；③ 数据源锁源 + 刷新机制；④ 内部使用，不外发。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">10</span><h3>AI 新媒体运营</h3></div>
+      <div class="top"><span class="pill">内容/知识资产</span><span class="pill cy">运营中·对外</span></div>
+      <div class="body" contenteditable="true" data-key="c10" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>抖音 / 小红书等新媒体内容需 AI 提速生产与发布，人工链路长、风格难统一。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>抖音 / 小红书内容 AI 生产与发布（含 xhs-publish 自动化代发流水线），复用抖音生产体系（大脑 / 脚本 / 混剪 / 绘图 / 渲染 / 采集）。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>偏内容 / 对外；复用 douyin-pro 体系 + 小红书代发；涵盖账号矩阵运营与发布数据复盘。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 发布合规（小红书代发需登录态、验证码人工过，不逆向）；② 发布前内容人工审核；③ 代发流水线卡在登录态 / 验证码，需预留人工过桥；④ 与「AI 漫剧」区分——漫剧是内容形态，本卡侧重账号运营与分发链路。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">11</span><h3>培训效果与原声反馈看板</h3></div>
+      <div class="top"><span class="pill cy">已上线·数据看板</span></div>
+      <div class="body" contenteditable="true" data-key="c11" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>博闻多识·一堂课、AISee 实战沙龙等培训持续运营，但效果过去只靠"开了几场"衡量，缺人均深度、真实感受与学员原声，难证明价值、也难迭代。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>数据看板（bowen_dashboard）：效果维度＝去重人数 / 参与人次 / 人均参与深度 / 参与时长（&lt;15min 剔除、空白排除）；感受维度＝学员原声反馈、满意度。脚本 dashboard.py / build_dashboard2.py 产出 HTML 看板。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>区分去重人数 vs 参与人次，避免重复计数虚高；人均参与深度为核心指标；参与时长清洗（&lt;15min 与空白剔除）保证质量；效果×感受双维度并跑、已维护半年。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 去重人数与参与人次必须分清，别用人次冒充覆盖；② 参与时长设阈值剔除刷场/挂机，空白排除；③ 原声反馈要脱敏、去标识；④ 指标口径锁死写进脚本，别每次手算；⑤ 数据来源优先复用学员明细，别手抄清单。</p></div></div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card reveal">
+      <div class="top"><span class="idx">12</span><h3>leaderAI教练（管理教练对话 prompt）</h3></div>
+      <div class="top"><span class="pill" style="background:rgba(34,197,94,.12);color:#16a34a">AI 能力资产</span><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">对话prompt·非skill</span></div>
+      <div class="body" contenteditable="true" data-key="c12" spellcheck="false">
+        <div data-sec><div class="sec-t">背景</div><p>leader 要跟下属做绩效改进 1-on-1，但不知怎么开场不打击人、怎么探查卡点、怎么定支持动作；直接问通用 AI 又常得到「你要更努力」式空话。需要一个结构化的管理教练对话框架。</p></div>
+        <div data-sec><div class="sec-t">内容</div><p>一个精心设计的「管理教练」对话 prompt（原文已存档 Obsidian 素材库/leaderAI教练-prompt.md）：输入下属背景（入职时长 / 表现前后变化 / 观察 / 目标），固定输出四段——① 开场白（≤3 句、低压迫、可念）② 3 个探查性问题（帮自查、不质问）③ 卡点假设（技能 gap / 资源不足 / 动机）+ 每种对应支持动作 ④ 结尾对齐（1 个本周微小改进 + 下次跟进时间）。</p></div>
+        <div data-sec><div class="sec-t">细节</div><p>形态＝对话 prompt（直接喂通用模型，非持久 skill；已查证 ~/.workbuddy/skills/ 无此 skill）；四段式结构固定、可复用于任意绩效/辅导 1-on-1；核心约束＝口语化、不替 leader 下绩效结论、信息不足标（需确认）、禁止「你要更努力」类空话、只基于给定信息不编造。</p></div>
+        <div data-sec><div class="sec-t">避坑</div><div class="avoid"><p>① 不替 leader 下绩效结论（绩效改进场景越权/法律风险高，AI 只做教练不做裁判）；② 信息不足必须标（需确认）而非编造下属情况；③ 开场低压迫，避免打击信心；④ 禁止空话（「你要更努力」等无行动指引的话）；⑤ 只基于给定信息，不脑补下属表现。</p></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<div class="bar">
+  <span class="hint">改完点保存，自动存本地浏览器（不覆盖原文件逻辑）</span>
+  <button onclick="save()">💾 保存修改</button>
+  <button class="ghost" onclick="reset()">↺ 重置</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='ai-output-inventory-v1';
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600);}
+function save(){const o={};document.querySelectorAll('[data-key]').forEach(e=>o[e.dataset.key]=e.innerHTML);localStorage.setItem(KEY,JSON.stringify(o));toast('已保存修改 ✓');}
+function load(){try{const o=JSON.parse(localStorage.getItem(KEY));if(o){for(const k in o){const e=document.querySelector('[data-key="'+k+'"]');if(e)e.innerHTML=o[k];}}}catch(e){}}
+function reset(){localStorage.removeItem(KEY);location.reload();}
+document.addEventListener('DOMContentLoaded',load);
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 产出 · 问题与目的总览</title>
+<style>
+:root{
+  --purple:#7C3AED; --cyan:#06B6D4;
+  --grad:linear-gradient(135deg,#7C3AED,#06B6D4);
+  --bg:#FFFFFF; --bg2:#F8FAFC; --txt:#1E293B;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg2);color:var(--txt);
+  font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  line-height:1.62;padding:40px 20px 90px}
+.wrap{max-width:1180px;margin:0 auto}
+.h1{font-size:clamp(30px,5vw,40px);font-weight:700;margin:0 0 6px;
+  background:var(--grad);-webkit-background-clip:text;color:transparent}
+.sub{color:#64748b;font-size:15px;margin:0 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.legend span{font-size:12px;color:#475569;background:#fff;border:1px solid #e2e8f0;
+  padding:3px 10px;border-radius:999px}
+.grp{font-size:22px;font-weight:700;margin:34px 0 14px;color:var(--purple);
+  display:flex;align-items:center;gap:8px}
+.grp::before{content:"";width:8px;height:22px;border-radius:3px;background:var(--grad)}
+.bento{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px}
+.card{background:var(--bg);border-radius:16px;padding:16px 16px 14px;
+  box-shadow:0 8px 24px rgba(124,58,237,.08);transition:transform .22s,box-shadow .22s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(124,58,237,.16)}
+.card .top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.idx{flex:0 0 26px;height:26px;border-radius:8px;background:var(--grad);color:#fff;
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.card h3{margin:0;font-size:17px;font-weight:600;flex:1}
+.pill{display:inline-block;font-size:11.5px;padding:3px 9px;border-radius:999px;
+  background:rgba(124,58,237,.1);color:var(--purple);font-weight:600;white-space:nowrap}
+.pill.cy{background:rgba(6,182,212,.12);color:#0891b2}
+.pill.rd{background:rgba(239,68,68,.1);color:#dc2626}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.col{border-radius:10px;padding:9px 11px;font-size:12.8px;line-height:1.6}
+.col.q{background:rgba(6,182,212,.08);border-left:3px solid #06B6D4}
+.col.p{background:rgba(124,58,237,.08);border-left:3px solid #7C3AED}
+.col .lab{font-size:11.5px;font-weight:700;margin-bottom:3px;letter-spacing:.3px}
+.col.q .lab{color:#0891b2}
+.col.p .lab{color:#7C3AED}
+.col p{margin:0}
+.empty{color:#dc2626;font-style:italic;font-size:12.5px}
+footer{text-align:center;color:#94a3b8;font-size:13px;margin-top:34px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="h1">AI 产出 · 问题与目的总览</h1>
+  <p class="sub">12 张 AI 产出卡 + 11 个自建 skill，逐项列「解决后的表现」与「设计目的」</p>
+  <div class="legend">
+    <span>🔵 左栏＝解决后的表现（用了之后带来的改变）</span><span>🟣 右栏＝设计目的（要做成什么/价值）</span>
+  </div>
+
+  <div class="grp">一、12 张 AI 产出卡</div>
+  <div class="bento">
+
+    <div class="card">
+      <div class="top"><span class="idx">1</span><h3>文化活动知识库AI自动化更新</h3><span class="pill">内容/知识资产</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>知识库持续自动保鲜——新案例按时进库、一手/二手层级清晰可溯源，不再依赖人工零散上网搜、也不会越积越乱。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>自动化采集→六维评估→去重，持续沉淀为可检索卡片墙，保鲜知识库、降低人工采编成本。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">2</span><h3>新人答辩AI自动化（看板+跟催）</h3><span class="pill cy">自动化系统</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>答辩流程自动闭环——每月定时建会建群、看板实时回填、4 人跟催到位，关键节点零遗漏、不用再人工盯进度。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>月1定时触发，自动建会建群、维护看板、跟催 4 人，流程闭环不漏、省人力。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">3</span><h3>培训积分商城</h3><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">推断稿·待核对</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>员工参与培训/活动有即时量化反馈与获得感，参与率/活跃度可量化提升，培训贡献被看见、可被激励，形成「参与→积分→兑换」正向循环。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>搭建积分获取+兑换平台，量化培训贡献、提升参与，把文化/培训运营从「靠自觉」变成「有激励机制」。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">4</span><h3>抽奖平台</h3><span class="pill">产品/平台</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>活动抽奖自助配置规则与名单，公平透明的现场即开即用，不再受第三方收费与功能限制、也不用担心名单管不了。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>自建可控抽奖 Web 应用，灵活规则+名单管理+公平抽奖，活动高频复用。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">5</span><h3>自建 skill 体系</h3><span class="pill">AI 能力资产</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>高频场景一次沉淀、触发即用，同类任务产出质量稳定可控、可跨人传承，不再每次从零重写 prompt、质量看天。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>把高频场景沉淀为 16 文件/11 顶层可复用 skill，触发即用、质量稳定、可传承。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">6</span><h3>周报 AI 自动输出</h3><span class="pill cy">自动化系统</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>每周一句话+详细版周报自动成文，多线进展口径统一、重点不漏，还能顺手延伸出 OKR/价值报告，写周报几乎不占时间。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>自动蒸馏一句话+详细版周报，延伸 OKR/价值报告，省时且口径统一。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">7</span><h3>奖金报销提醒</h3><span class="pill cy">自动化系统</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>奖金/报销节点自动提醒到人，漏发漏报趋近于零，员工体验与合规双双兜住，不用再人工逐一跟进。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>自动化提醒，减少漏发漏报，保障体验与合规（基线待补）。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">8</span><h3>AI 漫剧</h3><span class="pill">内容生产</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>漫剧成片规模化稳定产出，风格统一、链路标准化，内容创新与降本同步实现，短视频产能不再卡在人工重复上。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>用抖音生产体系批量产出《企鹅英雄》等漫剧成片，内容形态创新、降本提效。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">9</span><h3>薪酬看板脚本</h3><span class="pill">数据·内部</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>薪酬结构/分布/对比一屏可视，决策有数可依，汇总从手工慢错走向自动准确（脱敏、锁源、防编数，安全不泄）。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>聚合展示薪酬结构/分布/对比，辅助 HR/管理层决策（脱敏、锁源、防编数）。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">10</span><h3>AI 新媒体运营</h3><span class="pill">内容·对外</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>从内容生产到发布全程提速、风格统一、合规可控，账号矩阵可量化运营与复盘，对外内容不再又慢又散。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>AI 提速生产与代发，统一风格、合规发布、账号矩阵运营与数据复盘。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">11</span><h3>培训效果与原声反馈看板</h3><span class="pill">数据·内部</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>培训不再是"开了几场"黑盒——效果（去重人数/参与深度/时长清洗）与原声反馈（学员真实感受）双维度可视，培训价值可量化、迭代有据。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>用 bowen_dashboard 看板固化效果×感受双指标，口径锁进脚本，证明培训价值、指导运营迭代。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">12</span><h3>leaderAI教练（管理教练对话 prompt）</h3><span class="pill" style="background:rgba(249,115,22,.12);color:#ea580c">对话prompt·非skill</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>leader 拿到可直接念的开场、能帮下属自查的探查问题、分场景的支持动作与本周微小改进，1-on-1 不再空泛、不打击人、能落地，绩效沟通有章法。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>把绩效改进 1-on-1 结构化为四段式教练框架（开场/探查/卡点假设+支持/对齐），只基于给定信息、不替下结论、禁空话。</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grp">二、11 个自建 skill（解决后的表现 / 设计目的）</div>
+  <div class="bento">
+
+    <div class="card">
+      <div class="top"><span class="idx">1</span><h3>culture-event-sop</h3><span class="pill">文化活动 SOP</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>文化活动从需求到方案/checklist/模板/案例一键产出，筹备质量稳定、不再每次重复造轮子。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>沉淀场景分析→方案→checklist&时间线→模板→案例→统一文档，一键产出。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">2</span><h3>exec-talk-prep</h3><span class="pill">高管谈参/致辞</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>高管出场快速拿到合规谈参/致辞，保密与职位确认等红线前置把关，临场零踩坑。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>快速产出谈参/致辞/串词，内置把关清单，安全合规。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">3</span><h3>host-talk-prep</h3><span class="pill">主持稿通用版</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>通用主持方法论全员可复用，同事独立产出主持稿/谈参，不再卡在私有化版本上用不了。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>抽通用方法论，去私有化，供内部同事复用。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">4</span><h3>training-promo-copy</h3><span class="pill">培训宣传文案</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>招募推文/群公告按统一风格快速成稿，出稿提速、调性一致，告别每次手写风格飘忽。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>ABCD 框架引导填空成稿，风格统一、出稿快。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">5</span><h3>knowledge-collection</h3><span class="pill">知识采集</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>素材自动采集+六维评估+去重入库，来源层级清晰、零重复沉淀，人工采编几乎归零。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>自动搜索+六维评估+去重，沉淀卡片墙进 Obsidian。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">6</span><h3>campaign-recap</h3><span class="pill">营销活动复盘</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>复盘自动归一化+评分，口径统一、又快又准，再也不用人工慢慢算 ROI/五维。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>归一化字段+自动评分，复盘标准化、快且准。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">7</span><h3>talent-intel-mapper</h3><span class="pill">人才情报地图</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>人物关系网络多源交叉、带置信度，盘点省时且结论可信，不再靠零散人工搜信息拼图。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>多源交叉采集人物关系网络，带置信度，省时且可信。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">8</span><h3>tencent-meeting-minutes</h3><span class="pill">会议全流程</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>会议建会→纪要→落文档全流程自动，纪要即时可得、参会人核对零手工，会后整理不再耗时。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>建会→查人→取转写+AI纪要→落文档，全流程自动化。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">9</span><h3>ui-design-spec</h3><span class="pill">UI 设计规范</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>展示 HTML 锁定四风格自动套用，风格统一、审美一次到位，不再反复调样式。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>锁定四风格规范（Bento/画报/便签/能力地图），自动套用，风格统一省心。</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="top"><span class="idx">10</span><h3>douyin-pro 体系</h3><span class="pill">含 6 子层</span></div>
+      <div class="two-col">
+        <div class="col q"><div class="lab">解决后的表现</div><p>六子层标准化协作，成片稳定产出、风格统一、合规前置，短视频生产不再步步人工、处处踩雷。</p></div>
+        <div class="col p"><div class="lab">设计目的</div><p>大脑/脚本/混剪/绘图/渲染/采集分层协作，标准化生产成片。</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
