@@ -54,12 +54,21 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .ed:empty:before{content:attr(data-ph);color:#94A3B8}
 .lnk{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:5px 13px;border-radius:999px;background:var(--grad);color:#fff;font-size:12.5px;font-weight:600;text-decoration:none;transition:.2s}
 .lnk:hover{box-shadow:0 6px 16px rgba(124,58,237,.32);transform:translateY(-1px)}
-.lnk.ghost{background:transparent;color:var(--purple);border:1px solid rgba(124,58,237,.35)}
 .lk{font-size:12px;color:#94A3B8;margin-top:10px}
+/* 案例卡：结果前置 */
+.case-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.metric{flex:0 0 auto;background:var(--grad);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;font-size:15px;line-height:1.25;text-align:center}
+.case-head h3{margin-bottom:0}
+.case-body p{font-size:13.5px;color:#475569;margin-top:9px}
+.case-body b{color:var(--purple)}
+.case-result{margin-top:12px;padding-top:10px;border-top:1px dashed #E2E8F0;font-size:13px;color:var(--sub)}
+/* AI 作品卡：角色标签 + 代表作高亮 */
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:rgba(6,182,212,.12);color:#0891B2;margin-bottom:9px}
+.card.feat{border:1.5px solid rgba(124,58,237,.35)}
 footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
 .reveal{opacity:0;transform:translateY(14px);transition:.6s ease}
 .reveal.in{opacity:1;transform:none}
-@media(max-width:600px){.hero{padding:40px 22px 34px}.wrap{padding:0 14px 50px}}
+@media(max-width:600px){.hero{padding:40px 22px 34px}.wrap{padding:0 14px 50px}.case-head{flex-direction:column;align-items:flex-start;gap:8px}}
 </style>
 </head>
 <body>
@@ -101,33 +110,53 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 案例集 -->
+  <!-- 案例集（结果前置） -->
   <section class="sec reveal">
-    <div class="sec-head"><span class="k">02</span><h2>案例集（核心）</h2><span class="hint">每个案例按 背景→动作→结果 写</span></div>
+    <div class="sec-head"><span class="k">02</span><h2>案例集（核心）</h2><span class="hint">结果前置 · 一眼看懂你带来了什么</span></div>
     <div class="bento">
-      <div class="card">
-        <h3><span class="dot"></span><span class="ed" id="tc1t" data-ph="案例1标题">案例1 · 部门文化活动（腾讯 · 覆盖1000+）</span></h3>
-        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="tc1b" data-ph="新人入职散、融入慢">团队扩张快，新老员工缺共同记忆点，归属感弱。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="tc1a" data-ph="你具体做了哪些动作">参与策划落地多场活动（学习平台、员工大会）；独立负责全流程：方案设计 → 物料筹备 → 现场执行 → 效果复盘。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="tc1r" data-ph="数字结果">覆盖 1000+ 人技术团队（待补参与率/满意度/NPS 数字）。</span></p>
+      <div class="card case">
+        <div class="case-head">
+          <span class="metric"><span class="ed" id="tc1m" data-ph="大结果">1000+ 人</span></span>
+          <h3><span class="dot"></span><span class="ed" id="tc1t" data-ph="案例1标题">案例1 · 部门文化活动（腾讯 · 覆盖1000+）</span></h3>
+        </div>
+        <div class="case-body">
+          <p><b>背景：</b><span class="ed" id="tc1b" data-ph="新人入职散、融入慢">团队扩张快，新老员工缺共同记忆点，归属感弱。</span></p>
+          <p><b>我干了啥：</b><span class="ed" id="tc1a" data-ph="你具体做了哪些动作">参与策划落地多场活动（学习平台、员工大会）；独立负责全流程：方案设计 → 物料筹备 → 现场执行 → 效果复盘。</span></p>
+        </div>
+        <div class="case-result">📌 结果：<span class="ed" id="tc1r" data-ph="数字结果">覆盖 1000+ 人技术团队（待补参与率/满意度/NPS 数字）。</span></div>
       </div>
-      <div class="card">
-        <h3><span class="dot"></span><span class="ed" id="tc2t" data-ph="案例2标题">案例2 · AI 文化建设（腾讯）</span></h3>
-        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="tc2b" data-ph="团队氛围淡、认同感弱">部门 AI 应用刚起步，员工认知参差、应用意愿不一。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="tc2a" data-ph="你具体做了哪些动作">推动部门 AI 文化建设，参与公司级人才培养项目；主导建设文化活动通知效率，形成部门「公众号」资产。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="tc2r" data-ph="数字结果">进入公司级人才培养项目，沉淀可复用的内部 AI 文化资产（待补具体数字）。</span></p>
+      <div class="card case">
+        <div class="case-head">
+          <span class="metric"><span class="ed" id="tc2m" data-ph="大结果">公司级</span></span>
+          <h3><span class="dot"></span><span class="ed" id="tc2t" data-ph="案例2标题">案例2 · AI 文化建设（腾讯）</span></h3>
+        </div>
+        <div class="case-body">
+          <p><b>背景：</b><span class="ed" id="tc2b" data-ph="团队氛围淡、认同感弱">部门 AI 应用刚起步，员工认知参差、应用意愿不一。</span></p>
+          <p><b>我干了啥：</b><span class="ed" id="tc2a" data-ph="你具体做了哪些动作">推动部门 AI 文化建设，参与公司级人才培养项目；主导建设文化活动通知效率，形成部门「公众号」资产。</span></p>
+        </div>
+        <div class="case-result">📌 结果：<span class="ed" id="tc2r" data-ph="数字结果">进入公司级人才培养项目，沉淀可复用的内部 AI 文化资产（待补具体数字）。</span></div>
       </div>
-      <div class="card">
-        <h3><span class="dot"></span><span class="ed" id="tc3t" data-ph="案例3标题">案例3 · 雇主品牌 / 内推运营</span></h3>
-        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="tc3b" data-ph="培训全靠外部、成本高">雇主品牌从 0 起步，招聘成本高。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="tc3a" data-ph="你具体做了哪些动作">联想 0-1 推行内推制度（年度宣导 + 奖励规则）；安芯易协作制作海报/图文/视频、运营公众号。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="tc3r" data-ph="数字结果">公众号推文增长 500+，内推 20+ 人入职降本（待补具体金额）。</span></p>
+      <div class="card case">
+        <div class="case-head">
+          <span class="metric"><span class="ed" id="tc3m" data-ph="大结果">+500 / 20+</span></span>
+          <h3><span class="dot"></span><span class="ed" id="tc3t" data-ph="案例3标题">案例3 · 雇主品牌 / 内推运营</span></h3>
+        </div>
+        <div class="case-body">
+          <p><b>背景：</b><span class="ed" id="tc3b" data-ph="培训全靠外部、成本高">雇主品牌从 0 起步，招聘成本高。</span></p>
+          <p><b>我干了啥：</b><span class="ed" id="tc3a" data-ph="你具体做了哪些动作">联想 0-1 推行内推制度（年度宣导 + 奖励规则）；安芯易协作制作海报/图文/视频、运营公众号。</span></p>
+        </div>
+        <div class="case-result">📌 结果：<span class="ed" id="tc3r" data-ph="数字结果">公众号推文增长 500+，内推 20+ 人入职降本（待补具体金额）。</span></div>
       </div>
-      <div class="card">
-        <h3><span class="dot"></span><span class="ed" id="tc4t" data-ph="案例4标题">案例4 · 培训运营（康诺思腾 + 如新）</span></h3>
-        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="tc4b" data-ph="知识散落、难沉淀">新员工培训课件老旧；加盟商培训缺标准。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="tc4a" data-ph="你具体做了哪些动作">康诺思腾优化入职培训课件与视频、运营培训系统、主导毕业季礼品方案；如新独立制作培训课件与视频剪辑，完成 100 名加盟商培训。</span></p>
-        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="tc4r" data-ph="数字结果">如新加盟商培训满意度 90%。</span></p>
+      <div class="card case">
+        <div class="case-head">
+          <span class="metric"><span class="ed" id="tc4m" data-ph="大结果">90% 满意</span></span>
+          <h3><span class="dot"></span><span class="ed" id="tc4t" data-ph="案例4标题">案例4 · 培训运营（康诺思腾 + 如新）</span></h3>
+        </div>
+        <div class="case-body">
+          <p><b>背景：</b><span class="ed" id="tc4b" data-ph="知识散落、难沉淀">新员工培训课件老旧；加盟商培训缺标准。</span></p>
+          <p><b>我干了啥：</b><span class="ed" id="tc4a" data-ph="你具体做了哪些动作">康诺思腾优化入职培训课件与视频、运营培训系统、主导毕业季礼品方案；如新独立制作培训课件与视频剪辑，完成 100 名加盟商培训。</span></p>
+        </div>
+        <div class="case-result">📌 结果：<span class="ed" id="tc4r" data-ph="数字结果">如新加盟商培训满意度 90%。</span></div>
       </div>
     </div>
   </section>
@@ -136,18 +165,17 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
   <section class="sec reveal">
     <div class="sec-head"><span class="k">03</span><h2>AI 流程产品化（文化运营侧）</h2><span class="hint">我把重复性文化运营做成了系统 / 内容</span></div>
     <div class="bento">
-      <div class="card full"><h3><span class="dot"></span><span class="ed" id="ta1t" data-ph="作品标题">文化活动知识库 AI 自动化更新</span></h3><p><span class="ed" id="ta1d" data-ph="作用">知识库持续自动保鲜——新案例按时进库、一手 / 二手层级清晰可溯源，不再依赖人工零散上网搜、也不会越积越乱。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">🔗 看文化活动文档地图</a></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ta2t" data-ph="作品标题">AI 漫剧</span></h3><p><span class="ed" id="ta2d" data-ph="作用">可用于活动宣发、产品介绍、线下活动暖场等场景，宣传内容形态创新、降本提效。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank" rel="noopener">🔗 看《企鹅英雄》分镜台本</a></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ta3t" data-ph="作品标题">培训效果看板</span></h3><p><span class="ed" id="ta3d" data-ph="作用">培训效果数据（参与人数 / 参与人次 / 参与时长清洗）与原声反馈（学员真实感受）双维度可视，培训价值可量化、迭代有据。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/bowen_dashboard_20260804_2052.html" target="_blank" rel="noopener">🔗 看博闻培训综合看板</a></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ta4t" data-ph="作品标题">小红书账号 AI 运营</span></h3><p><span class="ed" id="ta4d" data-ph="作用">从内容生产到发布全程提速、风格统一、合规可控，账号矩阵可量化运营与复盘，对外内容不再又慢又散。</span></p><span class="lk">📕 小红书运营范式（图文/视频见下方素材库）</span></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ta5t" data-ph="作品标题">培训积分商城</span></h3><p><span class="ed" id="ta5d" data-ph="作用">员工参与培训 / 活动有即时量化反馈与获得感，参与率 / 活跃度可量化提升，形成「参与→积分→兑换」正向循环。</span></p><span class="lk">🛒 积分商城 Demo（视频见下方素材库）</span></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ta6t" data-ph="作品标题">抽奖平台</span></h3><p><span class="ed" id="ta6d" data-ph="作用">自建可控抽奖平台，规则灵活 + 名单管理 + 公平抽奖，活动氛围与参与度拉满。</span></p><span class="lk">🎲 抽奖平台 Demo（视频见下方素材库）</span></div>
-      <div class="card full"><h3><span class="dot"></span><span class="ed" id="ta7t" data-ph="作品标题">偏文化的自建 HR skill 子集</span></h3><p><span class="ed" id="ta7d" data-ph="作用">与文化运营强相关的 3 套：① 文化活动 skill（需求→方案 / checklist / 模板 / 案例一键产出）② 高管谈参 skill（合规谈参 / 致辞，保密与职位红线前置把关）③ 活动话术 skill（统一风格快速成稿，调性一致、出稿提速）；另配视觉风格 skill 锁定展示 HTML 四风格自动套用。</span></p><span class="lk">🧩 skill 体系（文化活动 / 高管谈参 / 活动话术 / 绩效 1v1 / 视觉风格，沉淀于 WorkBuddy）</span></div>
+      <div class="card full feat"><span class="tag">知识库自动化</span><h3><span class="dot"></span><span class="ed" id="ta1t" data-ph="作品标题">文化活动知识库 AI 自动化更新</span></h3><p><span class="ed" id="ta1d" data-ph="作用">知识库持续自动保鲜——新案例按时进库、一手 / 二手层级清晰可溯源，不再依赖人工零散上网搜、也不会越积越乱。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">🔗 看文化活动文档地图</a></div>
+      <div class="card feat"><span class="tag">AIGC 内容</span><h3><span class="dot"></span><span class="ed" id="ta2t" data-ph="作品标题">AI 漫剧</span></h3><p><span class="ed" id="ta2d" data-ph="作用">可用于活动宣发、产品介绍、线下活动暖场等场景，宣传内容形态创新、降本提效。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank" rel="noopener">🔗 看《企鹅英雄》分镜台本</a></div>
+      <div class="card"><span class="tag">数据分析</span><h3><span class="dot"></span><span class="ed" id="ta3t" data-ph="作品标题">培训效果看板</span></h3><p><span class="ed" id="ta3d" data-ph="作用">培训效果数据（参与人数 / 参与人次 / 参与时长清洗）与原声反馈（学员真实感受）双维度可视，培训价值可量化、迭代有据。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/bowen_dashboard_20260804_2052.html" target="_blank" rel="noopener">🔗 看博闻培训综合看板</a></div>
+      <div class="card"><span class="tag">新媒体运营</span><h3><span class="dot"></span><span class="ed" id="ta4t" data-ph="作品标题">小红书账号 AI 运营</span></h3><p><span class="ed" id="ta4d" data-ph="作用">从内容生产到发布全程提速、风格统一、合规可控，账号矩阵可量化运营与复盘，对外内容不再又慢又散。</span></p><span class="lk">📕 小红书运营（图文/视频内容生产→发布提速）</span></div>
+      <div class="card"><span class="tag">激励系统</span><h3><span class="dot"></span><span class="ed" id="ta5t" data-ph="作品标题">培训积分商城</span></h3><p><span class="ed" id="ta5d" data-ph="作用">员工参与培训 / 活动有即时量化反馈与获得感，参与率 / 活跃度可量化提升，形成「参与→积分→兑换」正向循环。</span></p><span class="lk">🛒 积分商城（参与→积分→兑换正向循环）</span></div>
+      <div class="card"><span class="tag">活动系统</span><h3><span class="dot"></span><span class="ed" id="ta6t" data-ph="作品标题">抽奖平台</span></h3><p><span class="ed" id="ta6d" data-ph="作用">自建可控抽奖平台，规则灵活 + 名单管理 + 公平抽奖，活动氛围与参与度拉满。</span></p><span class="lk">🎲 抽奖平台（规则灵活+名单管理+公平）</span></div>
+      <div class="card full"><span class="tag">skill 体系</span><h3><span class="dot"></span><span class="ed" id="ta7t" data-ph="作品标题">偏文化的自建 HR skill 子集</span></h3><p><span class="ed" id="ta7d" data-ph="作用">与文化运营强相关的 3 套：① 文化活动 skill（需求→方案 / checklist / 模板 / 案例一键产出）② 高管谈参 skill（合规谈参 / 致辞，保密与职位红线前置把关）③ 活动话术 skill（统一风格快速成稿，调性一致、出稿提速）；另配视觉风格 skill 锁定展示 HTML 四风格自动套用。</span></p><span class="lk">🧩 skill 体系（文化活动 / 高管谈参 / 活动话术 / 绩效 1v1 / 视觉风格，沉淀于 WorkBuddy）</span></div>
     </div>
-    <p style="margin-top:14px;color:var(--sub);font-size:13px">💡 想看实拍海报 / 漫剧成片 / 商城抽奖 Demo 视频：<a class="lnk ghost" href="https://yitongcaii.github.io/activities-html/resume/portfolio-cai.html" target="_blank" rel="noopener">🎬 作品素材库（海报 / 视频见证）</a></p>
   </section>
 
-  <!-- 数据成果墙 -->
+  <!-- 数据成果墙（数字盒子） -->
   <section class="sec reveal">
     <div class="sec-head"><span class="k">04</span><h2>数据成果墙</h2><span class="hint">把所有能量化的成绩集中放</span></div>
     <div class="kpi">
