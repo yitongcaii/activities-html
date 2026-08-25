@@ -52,6 +52,10 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .ed:hover{background:rgba(124,58,237,.04)}
 .ed:focus{background:rgba(124,58,237,.08);box-shadow:0 0 0 2px rgba(124,58,237,.25)}
 .ed:empty:before{content:attr(data-ph);color:#94A3B8}
+.lnk{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:5px 13px;border-radius:999px;background:var(--grad);color:#fff;font-size:12.5px;font-weight:600;text-decoration:none;transition:.2s}
+.lnk:hover{box-shadow:0 6px 16px rgba(124,58,237,.32);transform:translateY(-1px)}
+.lnk.ghost{background:transparent;color:var(--purple);border:1px solid rgba(124,58,237,.35)}
+.lk{font-size:12px;color:#94A3B8;margin-top:10px}
 footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
 .reveal{opacity:0;transform:translateY(14px);transition:.6s ease}
 .reveal.in{opacity:1;transform:none}
@@ -132,15 +136,15 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
   <section class="sec reveal">
     <div class="sec-head"><span class="k">03</span><h2>AI 流程产品化（自动化系统）</h2><span class="hint">我把重复 HR 动作做成了系统 / skill</span></div>
     <div class="bento">
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha1t" data-ph="作品标题">新人答辩 AI 自动化</span></h3><p><span class="ed" id="ha1d" data-ph="作用">每月定时建会建群 + 看板实时回填 + 跟催，答辩流程自动闭环，关键节点零遗漏、不用人工盯进度。</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha2t" data-ph="作品标题">奖金 / 报销提醒自动化</span></h3><p><span class="ed" id="ha2d" data-ph="作用">奖金 / 报销节点自动提醒到人，漏发漏报趋近于零，员工体验与合规双双兜住，不用再人工逐一跟进。</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha3t" data-ph="作品标题">薪酬看板脚本</span></h3><p><span class="ed" id="ha3d" data-ph="作用">薪酬结构 / 分布 / 对比一屏可视，汇总从手工慢错走向自动准确（脱敏、锁源、防编数，安全不泄）。</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha4t" data-ph="作品标题">周报 AI 自动输出</span></h3><p><span class="ed" id="ha4d" data-ph="作用">每周一句话 + 详细版周报自动成文，多线进展口径统一、重点不漏。</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha5t" data-ph="作品标题">培训积分商城</span></h3><p><span class="ed" id="ha5d" data-ph="作用">员工参与培训 / 活动有即时量化反馈与获得感，参与率 / 活跃度可量化提升，形成「参与→积分→兑换」正向循环。</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha6t" data-ph="作品标题">抽奖平台</span></h3><p><span class="ed" id="ha6d" data-ph="作用">自建可控抽奖平台，规则灵活 + 名单管理 + 公平抽奖，活动氛围与参与度拉满。</span></p></div>
-      <div class="card full"><h3><span class="dot"></span><span class="ed" id="ha7t" data-ph="作品标题">自建 HR skill 体系（5 套）</span></h3><p><span class="ed" id="ha7d" data-ph="作用">把高频 HR 场景沉淀为可直接调用的 AI 助手：① 文化活动 skill（需求→方案 / checklist / 模板 / 案例一键产出，筹备质量稳定）② 高管谈参 skill（合规谈参 / 致辞，保密与职位确认等红线前置把关，临场零踩坑）③ 活动话术 skill（统一风格快速成稿，出稿提速、调性一致）④ 绩效 1v1 谈话 skill（四段式教练框架：开场 / 探查 / 卡点假设 + 支持 / 对齐，leader 拿到可直接念的开场）⑤ 视觉风格 skill（展示 HTML 锁定四风格自动套用，审美一次到位）。</span></p></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha1t" data-ph="作品标题">新人答辩 AI 自动化</span></h3><p><span class="ed" id="ha1d" data-ph="作用">每月定时建会建群 + 看板实时回填 + 跟催，答辩流程自动闭环，关键节点零遗漏、不用人工盯进度。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/hr-activity-playbook.html" target="_blank" rel="noopener">🔗 看 HR 自动化手册</a></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha2t" data-ph="作品标题">奖金 / 报销提醒自动化</span></h3><p><span class="ed" id="ha2d" data-ph="作用">奖金 / 报销节点自动提醒到人，漏发漏报趋近于零，员工体验与合规双双兜住，不用再人工逐一跟进。</span></p><span class="lk">⚙️ 提醒机器人（企微触发，截图见证见下方素材库）</span></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha3t" data-ph="作品标题">薪酬看板脚本</span></h3><p><span class="ed" id="ha3d" data-ph="作用">薪酬结构 / 分布 / 对比一屏可视，汇总从手工慢错走向自动准确（脱敏、锁源、防编数，安全不泄）。</span></p><span class="lk">📊 同类看板范式（脱敏示例）：具身智能薪酬诊断</span></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha4t" data-ph="作品标题">周报 AI 自动输出</span></h3><p><span class="ed" id="ha4d" data-ph="作用">每周一句话 + 详细版周报自动成文，多线进展口径统一、重点不漏。</span></p><span class="lk">📝 周报自动产出（三段式反思流，截图见素材库）</span></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha5t" data-ph="作品标题">培训积分商城</span></h3><p><span class="ed" id="ha5d" data-ph="作用">员工参与培训 / 活动有即时量化反馈与获得感，参与率 / 活跃度可量化提升，形成「参与→积分→兑换」正向循环。</span></p><span class="lk">🛒 积分商城 Demo（视频见下方素材库）</span></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="ha6t" data-ph="作品标题">抽奖平台</span></h3><p><span class="ed" id="ha6d" data-ph="作用">自建可控抽奖平台，规则灵活 + 名单管理 + 公平抽奖，活动氛围与参与度拉满。</span></p><span class="lk">🎲 抽奖平台 Demo（视频见下方素材库）</span></div>
+      <div class="card full"><h3><span class="dot"></span><span class="ed" id="ha7t" data-ph="作品标题">自建 HR skill 体系（5 套）</span></h3><p><span class="ed" id="ha7d" data-ph="作用">把高频 HR 场景沉淀为可直接调用的 AI 助手：① 文化活动 skill（需求→方案 / checklist / 模板 / 案例一键产出，筹备质量稳定）② 高管谈参 skill（合规谈参 / 致辞，保密与职位确认等红线前置把关，临场零踩坑）③ 活动话术 skill（统一风格快速成稿，出稿提速、调性一致）④ 绩效 1v1 谈话 skill（四段式教练框架：开场 / 探查 / 卡点假设 + 支持 / 对齐，leader 拿到可直接念的开场）⑤ 视觉风格 skill（展示 HTML 锁定四风格自动套用，审美一次到位）。</span></p><span class="lk">🧩 skill 体系（文化活动 / 高管谈参 / 活动话术 / 绩效 1v1 / 视觉风格，沉淀于 WorkBuddy）</span></div>
     </div>
-    <p style="margin-top:12px;color:var(--sub);font-size:13px">💡 想看实拍海报 / Demo 视频：<a href="https://yitongcaii.github.io/activities-html/resume/portfolio-cai.html" target="_blank" rel="noopener" style="color:var(--purple);font-weight:600">🎬 作品素材库（海报 / 视频见证）</a></p>
+    <p style="margin-top:14px;color:var(--sub);font-size:13px">💡 想看实拍海报 / Demo 视频 / 机器人截图：<a class="lnk ghost" href="https://yitongcaii.github.io/activities-html/resume/portfolio-cai.html" target="_blank" rel="noopener">🎬 作品素材库（海报 / 视频见证）</a></p>
   </section>
 
   <!-- 数据成果墙 -->
