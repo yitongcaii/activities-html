@@ -23,8 +23,18 @@
   .dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
   .dot-hi{background:var(--hi);} .dot-mid{background:var(--mid);} .dot-lo{background:var(--lo);}
 
+  /* ---- detail（移至顶部 + 吸顶，避免被长页面淹没） ---- */
+  #detail{margin:16px 0;background:#fff;border:2px solid var(--purple);border-radius:16px;padding:16px 22px;
+    box-shadow:0 6px 20px rgba(124,58,237,.12);min-height:72px;position:sticky;top:12px;z-index:10;}
+  #detail h2{font-size:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  #detail .drole{color:var(--purple);font-weight:600;font-size:13px;margin:6px 0 10px;}
+  #detail p{font-size:14px;color:var(--sub);}
+  #detail .src{font-size:12px;margin-top:10px;}
+  #detail .src a{color:var(--cyan);text-decoration:none;}
+  #detail .ph{color:#94A3B8;font-size:14px;}
+
   /* ---- tree ---- */
-  .tree{display:flex;justify-content:center;margin:30px 0 10px;overflow-x:auto;}
+  .tree{display:flex;justify-content:center;margin:24px 0 10px;overflow-x:auto;}
   .tree ul{display:flex;padding-top:22px;position:relative;transition:.3s;}
   .tree li{list-style:none;text-align:center;position:relative;padding:22px 10px 0;transition:.3s;}
   .tree li::before,.tree li::after{content:'';position:absolute;top:0;right:50%;border-top:2px solid #CBD5E1;width:50%;height:22px;}
@@ -64,18 +74,11 @@
   .chip.info{background:#EEF2FF;border-color:#C7D2FE;color:#3730A3;}
   .grp-title{font-size:13px;font-weight:700;color:var(--purple);margin:16px 0 8px;padding-left:10px;border-left:4px solid var(--cyan);}
   .grp-title:first-of-type{margin-top:2px;}
+  /* 横版网格：压缩业务线面板纵向面积 */
+  .chip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:8px;margin-bottom:4px;}
+  .chip-grid .chip{margin-bottom:0;}
   .note{font-size:12px;color:#9a3412;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;margin-top:6px;}
   .note.info{color:#3730A3;background:#EEF2FF;border-color:#C7D2FE;}
-
-  /* detail */
-  #detail{margin-top:24px;background:#fff;border:1px solid var(--purple);border-radius:16px;padding:20px 22px;
-    box-shadow:0 6px 20px rgba(124,58,237,.12);min-height:90px;}
-  #detail h2{font-size:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-  #detail .drole{color:var(--purple);font-weight:600;font-size:13px;margin:6px 0 10px;}
-  #detail p{font-size:14px;color:var(--sub);}
-  #detail .src{font-size:12px;margin-top:10px;}
-  #detail .src a{color:var(--cyan);text-decoration:none;}
-  #detail .ph{color:#94A3B8;font-size:14px;}
 
   footer{text-align:center;color:#94A3B8;font-size:12px;margin-top:40px;}
 </style>
@@ -96,6 +99,11 @@
     <span><i class="dot dot-mid"></i>中置信（单一来源）</span>
     <span><i class="dot dot-lo"></i>低·需人工核实</span>
     <span>👆 点击任意节点查看详情</span>
+  </div>
+
+  <!-- 详情（移至顶部 + 吸顶，避免被长页面淹没） -->
+  <div id="detail">
+    <p class="ph">👆 点击上方任意节点 / 卡片，查看该人物的公开履历、来源与置信度。此卡片已吸顶，滚动时始终可见。</p>
   </div>
 
   <!-- 主树：经营汇报链 -->
@@ -152,31 +160,32 @@
     </div>
 
     <div class="grp-title">① 已具名子公司 / 区域法人（工商可查，中置信为主）</div>
-    <div class="chip" data-id="zhangyingjie_sub"><span>张英杰 — 谱尼生物医药(北京) 执行董事·经理</span><span class="tag tag-hi">高</span></div>
-    <div class="chip" data-id="lixiaodong_sub"><span>李小冬 — 谱尼生物医药科技(北京) 董事·经理</span><span class="tag tag-hi">高</span></div>
-    <div class="chip" data-id="jichunbo_qd"><span>嵇春波 — 青岛谱尼测试 总经理（兼集团副总）</span><span class="tag tag-hi">高</span></div>
-    <div class="chip" data-id="lizhisong"><span>李志松 — 谱尼生物医药科技(北京) 财务负责人</span><span class="tag tag-mid">中</span></div>
-    <div class="chip" data-id="qiyan"><span>祁燕 — 谱尼生物医药科技(北京) 副董事长</span><span class="tag tag-mid">中</span></div>
-    <div class="chip" data-id="zhoujiakuan"><span>周家宽 — 上海谱尼认证技术 法定代表人·执行董事</span><span class="tag tag-mid">中</span></div>
-    <div class="chip" data-id="gaoyang"><span>高杨 — 谱尼测试集团四川 法定代表人·经理</span><span class="tag tag-mid">中</span></div>
-    <div class="chip" data-id="niuguihua"><span>牛桂华 — 青岛谱尼测试 法定代表人</span><span class="tag tag-mid">中</span></div>
-    <div class="chip" data-id="chenlidan"><span>陈丽丹 — 雄安分公司 负责人</span><span class="tag tag-mid">中</span></div>
-    <div class="chip" data-id="xujiulu"><span>徐九录 — 昆明分公司 负责人</span><span class="tag tag-mid">中</span></div>
+    <div class="chip-grid">
+      <div class="chip" data-id="zhangyingjie_sub"><span>张英杰 — 谱尼生物医药(北京) 执行董事·经理</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="lixiaodong_sub"><span>李小冬 — 谱尼生物医药科技(北京) 董事·经理</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="jichunbo_qd"><span>嵇春波 — 青岛谱尼测试 总经理（兼集团副总）</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="lizhisong"><span>李志松 — 谱尼生物医药科技(北京) 财务负责人</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="qiyan"><span>祁燕 — 谱尼生物医药科技(北京) 副董事长</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="zhoujiakuan"><span>周家宽 — 上海谱尼认证技术 法定代表人·执行董事</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="gaoyang"><span>高杨 — 谱尼测试集团四川 法定代表人·经理</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="niuguihua"><span>牛桂华 — 青岛谱尼测试 法定代表人</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="chenlidan"><span>陈丽丹 — 雄安分公司 负责人</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="xujiulu"><span>徐九录 — 昆明分公司 负责人</span><span class="tag tag-mid">中</span></div>
+    </div>
 
     <div class="grp-title">② 在招总监信号业务线（在招 ≠ 现任，中置信）</div>
-    <div class="chip warn static"><span>🚧 汽车检测实验室总监（上海松江，猎聘在招）</span><span class="tag tag-mid">中</span></div>
-    <div class="chip warn static"><span>🚧 新能源实验室负责人 / 新能源事业部运营经理（上海松江，猎聘在招）</span><span class="tag tag-mid">中</span></div>
-    <div class="chip warn static"><span>🚧 HR 综合办总监（人力方向）/ 高级人事经理 / HRBP（北京，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+    <div class="chip-grid">
+      <div class="chip warn static"><span>🚧 汽车检测实验室总监（上海松江，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+      <div class="chip warn static"><span>🚧 新能源实验室负责人 / 新能源事业部运营经理（上海松江，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+      <div class="chip warn static"><span>🚧 HR 综合办总监（人力方向）/ 高级人事经理 / HRBP（北京，猎聘在招）</span><span class="tag tag-mid">中</span></div>
+    </div>
 
     <div class="grp-title">③ 仍空白待确认（集团事业部级一号位）</div>
-    <div class="chip static"><span>❓ 环境检测 BU head — 未具名（健康环保占营收 67.81%，最大块却无公开业务线 leader）</span><span class="tag tag-lo">待确认</span></div>
-    <div class="chip static"><span>❓ 食品检测 BU head — 未具名</span><span class="tag tag-lo">待确认</span></div>
-    <div class="chip static"><span>❓ 集团 HR 线一号位（CHO / HR VP）— 未具名，仅在招总监</span><span class="tag tag-lo">待确认</span></div>
-  </div>
-
-  <!-- 详情 -->
-  <div id="detail">
-    <p class="ph">👆 点击上方任意节点 / 卡片，查看该人物的公开履历、来源与置信度。</p>
+    <div class="chip-grid">
+      <div class="chip static"><span>❓ 环境检测 BU head — 未具名（健康环保占营收 67.81%，最大块却无公开业务线 leader）</span><span class="tag tag-lo">待确认</span></div>
+      <div class="chip static"><span>❓ 食品检测 BU head — 未具名</span><span class="tag tag-lo">待确认</span></div>
+      <div class="chip static"><span>❓ 集团 HR 线一号位（CHO / HR VP）— 未具名，仅在招总监</span><span class="tag tag-lo">待确认</span></div>
+    </div>
   </div>
 
   <footer>
