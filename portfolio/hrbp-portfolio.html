@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HRBP 求职作品集 · 蔡女士</title>
+<style>
+:root{
+  --purple:#7C3AED;--cyan:#06B6D4;
+  --grad:linear-gradient(135deg,#7C3AED,#06B6D4);
+  --bg:#F8FAFC;--card:#FFFFFF;--txt:#1E293B;--sub:#64748B;
+  --shadow:0 8px 24px rgba(124,58,237,.08);
+  --shadow-h:0 16px 36px rgba(124,58,237,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 60px}
+.hero{background:var(--grad);border-radius:0 0 28px 28px;padding:54px 40px 46px;color:#fff;box-shadow:var(--shadow-h);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);border-radius:50%}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pill{display:inline-block;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600}
+.pill.w{background:rgba(255,255,255,.22);color:#fff}
+.hero h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.hero .role{font-size:17px;font-weight:600;opacity:.95;margin-bottom:18px}
+.hero .claim{font-size:16px;max-width:760px;opacity:.97;margin-bottom:24px}
+.hero .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.num{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:16px 18px;backdrop-filter:blur(2px)}
+.num b{display:block;font-size:30px;font-weight:800;line-height:1.1}
+.num span{font-size:13px;opacity:.92}
+.sec{margin-top:46px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.sec-head .k{background:var(--grad);color:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
+.sec-head h2{font-size:23px;font-weight:700}
+.sec-head .hint{font-size:13px;color:var(--sub);margin-left:auto}
+.bento{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:.28s;height:100%}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
+.card h3{font-size:18px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);flex:0 0 auto}
+.card p{font-size:14.5px;color:#334155}
+.mini{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12.5px;background:rgba(124,58,237,.1);color:var(--purple);font-weight:600;margin:0 6px 8px 0}
+.full{grid-column:1/-1}
+.steps{list-style:none;counter-reset:s}
+.steps li{position:relative;padding:10px 0 10px 38px;border-bottom:1px dashed #E2E8F0;font-size:14.5px}
+.steps li:last-child{border-bottom:none}
+.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+.kpi .box{background:linear-gradient(135deg,#F5F3FF,#ECFEFF);border-radius:14px;padding:18px;text-align:center}
+.kpi b{display:block;font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi span{font-size:13px;color:var(--sub)}
+.ed{outline:none;border-radius:6px;transition:.2s}
+.ed:hover{background:rgba(124,58,237,.04)}
+.ed:focus{background:rgba(124,58,237,.08);box-shadow:0 0 0 2px rgba(124,58,237,.25)}
+.ed:empty:before{content:attr(data-ph);color:#94A3B8}
+footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
+.reveal{opacity:0;transform:translateY(14px);transition:.6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:600px){.hero{padding:40px 22px 34px}.wrap{padding:0 14px 50px}}
+</style>
+</head>
+<body>
+<header class="hero reveal">
+  <div class="tag-row">
+    <span class="pill w">求职作品集</span>
+    <span class="pill w">HRBP 方向</span>
+    <span class="pill w">深圳</span>
+  </div>
+  <h1><span class="ed" id="hrbp_name" data-ph="你的名字">蔡女士</span></h1>
+  <div class="role">求职方向：<span class="ed" id="hrbp_role" data-ph="HRBP（人力资源业务伙伴） · 行业/年限">HRBP · 互联网/科技公司 · 24届本科</span></div>
+  <div class="claim"><span class="ed" id="hrbp_claim" data-ph="一句话说清：你能帮业务解决什么、做出过什么结果">一句话主张：1年腾讯 BP 协同 + AI 流程产品化经验，擅长把 HR 流程做成自动化系统、把员工激励和数据做成闭环；独立交付过 40+ 岗位、统筹过 300 人 SSC。</span></div>
+  <div class="nums">
+    <div class="num"><b><span class="ed" id="n1" data-ph="40+">40+</span></b><span><span class="ed" id="n1t" data-ph="累计招聘人数">累计独立交付岗位</span></span></div>
+    <div class="num"><b><span class="ed" id="n2" data-ph="1000+">1000+</span></b><span><span class="ed" id="n2t" data-ph="核心岗离职率变化">文化活动覆盖人数</span></span></div>
+    <div class="num"><b><span class="ed" id="n3" data-ph="3">3</span></b><span><span class="ed" id="n3t" data-ph="主导1v1面谈场次">0-1 上线 AI 流程产品</span></span></div>
+    <div class="num"><b><span class="ed" id="n4" data-ph="300">300</span></b><span><span class="ed" id="n4t" data-ph="急招项目交付周期">SSC 全盘管理人数</span></span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 能力全景 -->
+  <section class="sec reveal">
+    <div class="sec-head"><span class="k">01</span><h2>能力全景</h2><span class="hint">点标签可改 · 删掉不擅长的</span></div>
+    <div class="bento">
+      <div class="card full">
+        <h3><span class="dot"></span>我主要会干这几块活</h3>
+        <div>
+          <span class="mini ed" id="s1" data-ph="招聘拿人">招聘全流程交付</span>
+          <span class="mini ed" id="s2" data-ph="员工关系·稳人">BP 协同</span>
+          <span class="mini ed" id="s3" data-ph="绩效落地支持">AI 流程产品化</span>
+          <span class="mini ed" id="s4" data-ph="组织氛围建设">员工激励评选</span>
+          <span class="mini ed" id="s5" data-ph="业务伙伴沟通">文化活动</span>
+          <span class="mini ed" id="s6" data-ph="人力数据看板">SSC 全盘</span>
+          <span class="mini ed" id="s7" data-ph="跨文化">跨文化（外籍办理）</span>
+        </div>
+        <p style="margin-top:8px;color:var(--sub)"><span class="ed" id="s_desc" data-ph="一句话补充：你的打法特点">补充：结果导向 + 数据意识，习惯把重复人力动作产品化、自动化；有独立考勤算薪与跨文化协作经验。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 案例集 -->
+  <section class="sec reveal">
+    <div class="sec-head"><span class="k">02</span><h2>案例集（核心）</h2><span class="hint">每个案例按 背景→动作→结果 写</span></div>
+    <div class="bento">
+      <div class="card">
+        <h3><span class="dot"></span><span class="ed" id="c1t" data-ph="案例1标题">案例1 · AI 流程产品化 0-1（腾讯）</span></h3>
+        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="c1b" data-ph="业务线突然扩招，时间紧、HC多">HR 流程靠人工提醒 + 手动统计，易遗漏、耗工时。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="c1a" data-ph="你具体做了哪些动作">0-1 搭建新人转正自动化流程（人工提醒→系统自动推送）；主导建设文化活动通知效率（职时自动检索沉淀，形成部门「公众号」资产）；搭建积分 + 抽奖平台，游戏化驱动员工参与。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="c1r" data-ph="数字结果">3 个 AI 流程产品上线，手动统计工作量大幅减少，活动活跃度提升（待补具体数字）。</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span><span class="ed" id="c2t" data-ph="案例2标题">案例2 · BP 协同 · 公司激励评选全流程（腾讯）</span></h3>
+        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="c2b" data-ph="骨干扎堆提离职">部门年度激励评选需跨部门协同，流程散、易扯皮。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="c2a" data-ph="你具体做了哪些动作">支持 6P 完成申报收集 → 评审排序 → 奖金分配 → 宣发全流程推进。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="c2r" data-ph="数字结果">评选按时闭环，宣发覆盖全员（待补参与/满意度数字）。</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span><span class="ed" id="c3t" data-ph="案例3标题">案例3 · 招聘交付攻坚（联想）</span></h3>
+        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="c3b" data-ph="团队效率/氛围出问题">跨职能 + 跨国招聘需求集中，时间紧。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="c3a" data-ph="你具体做了哪些动作">独立交付 20+ 岗位（含 1 名高级经理、4 名经理级、4 个海外岗含 1 位印度当地人），覆盖财务/内审/CSR/IE/质量/供应链/高管助理。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="c3r" data-ph="数字结果">总监年终 90%，招聘留存达标。</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="dot"></span><span class="ed" id="c4t" data-ph="案例4标题">案例4 · SSC 全盘 + 跨文化（广东东心医疗）</span></h3>
+        <p><b style="color:var(--purple)">背景：</b><span class="ed" id="c4b" data-ph="某团队人效下滑">深圳分公司 300 人 SSC 无人统筹，且含外籍员工。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--purple)">我干了啥：</b><span class="ed" id="c4a" data-ph="你具体做了哪些动作">独立负责入离职 / EHR 系统 / 考勤异常 / 员工档案；独立办理外籍员工来华工作许可。</span></p>
+        <p style="margin-top:8px"><b style="color:var(--cyan)">结果：</b><span class="ed" id="c4r" data-ph="数字结果">300 人 SSC 稳定运行，外籍入职合规落地。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据成果墙 -->
+  <section class="sec reveal">
+    <div class="sec-head"><span class="k">03</span><h2>数据成果墙</h2><span class="hint">把所有能量化的成绩集中放</span></div>
+    <div class="kpi">
+      <div class="box"><b><span class="ed" id="k1" data-ph="40+">40+</span></b><span><span class="ed" id="k1t" data-ph="平均招聘周期缩短">累计独立交付岗位</span></span></div>
+      <div class="box"><b><span class="ed" id="k2" data-ph="1000+">1000+</span></b><span><span class="ed" id="k2t" data-ph="offer接受率提升">文化活动覆盖人数</span></span></div>
+      <div class="box"><b><span class="ed" id="k3" data-ph="300">300</span></b><span><span class="ed" id="k3t" data-ph="员工满意度得分">SSC 全盘管理人数</span></span></div>
+      <div class="box"><b><span class="ed" id="k4" data-ph="90%">90%</span></b><span><span class="ed" id="k4t" data-ph="组织氛围评分">招聘留存（总监年终）</span></span></div>
+    </div>
+  </section>
+
+  <!-- 工具/SOP -->
+  <section class="sec reveal">
+    <div class="sec-head"><span class="k">04</span><h2>我沉淀的工具 / 模板 / SOP</h2><span class="hint">这是HR真正的「作品」</span></div>
+    <div class="bento">
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="t1t" data-ph="结构化面试评估表">新人转正自动化流程</span></h3><p><span class="ed" id="t1d" data-ph="说明解决了什么麻烦">把人工提醒改为系统自动推送，减少手动统计、避免遗漏。</span></p></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="t2t" data-ph="离职面谈指引">积分 + 抽奖平台</span></h3><p><span class="ed" id="t2d" data-ph="说明解决了什么麻烦">用游戏化机制驱动员工参与文化活动，提升活跃度。</span></p></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="t3t" data-ph="1v1面谈模板">JSOP 与台账资料库</span></h3><p><span class="ed" id="t3d" data-ph="说明解决了什么麻烦">沉淀流程规范与历史数据，降低团队协同成本。</span></p></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="t4t" data-ph="新员工融入checklist">内推奖励制度（联想 0-1）</span></h3><p><span class="ed" id="t4d" data-ph="说明解决了什么麻烦">从 0 搭内推体系 + 年度宣导 + 奖励规则，降低招聘成本。</span></p></div>
+    </div>
+    <p style="margin-top:12px;color:var(--sub);font-size:13px">💡 把上面工具的脱敏截图贴进对应卡片会更可信（截图里公司名/人名打码）。</p>
+  </section>
+
+  <!-- 影响力 -->
+  <section class="sec reveal">
+    <div class="sec-head"><span class="k">05</span><h2>影响力 / 跨部门协作</h2></div>
+    <div class="card full">
+      <ol class="steps">
+        <li><span class="ed" id="i1" data-ph="推动业务改了什么规矩">推动部门 AI 文化建设，参与公司级人才培养项目。</span></li>
+        <li><span class="ed" id="i2" data-ph="跨部门项目">牵头 6P 跨部门激励评选，把申报-评审-奖金-宣发跑成闭环。</span></li>
+        <li><span class="ed" id="i3" data-ph="对外/对内分享">在联想 0-1 落地内推体系，年降本（待补具体金额）。</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 学习证书 -->
+  <section class="sec reveal">
+    <div class="sec-head"><span class="k">06</span><h2>学习成长线</h2></div>
+    <div class="bento">
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="l1t" data-ph="HRBP 专业认证">工商管理本科 · 中山大学新华学院</span></h3><p><span class="ed" id="l1d" data-ph="机构/年份">统招全日制 · 结课排名前 15%</span></p></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="l2t" data-ph="人力资源管理师">创新创业赛事 3 项银奖</span></h3><p><span class="ed" id="l2d" data-ph="机构/年份">挑战杯 / 互联网+ / 三创（省级+校级）</span></p></div>
+      <div class="card"><h3><span class="dot"></span><span class="ed" id="l3t" data-ph="持续学习轨迹">附加技能</span></h3><p><span class="ed" id="l3d" data-ph="例 季度读2本管理书">PR 视频剪辑 · 海报设计 · 数据分析（独立考勤算薪）· 问卷设计</span></p></div>
+    </div>
+  </section>
+</main>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+
+<script>
+document.querySelectorAll('.ed').forEach(el=>{
+  const key='hrbp_'+el.id;
+  const saved=localStorage.getItem(key);
+  if(saved!==null && saved!=='') el.innerHTML=saved;
+  el.addEventListener('input',()=>localStorage.setItem(key,el.innerHTML));
+});
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
