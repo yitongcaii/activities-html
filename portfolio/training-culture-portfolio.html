@@ -23,14 +23,13 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .hero .role{font-size:17px;font-weight:600;opacity:.95;margin-bottom:18px}
 .hero .claim{font-size:16px;max-width:760px;opacity:.97;margin-bottom:24px}
 .hero .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
-.num{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:16px 18px;backdrop-filter:blur(2px)}
-.num b{display:block;font-size:30px;font-weight:800;line-height:1.1}
-.num span{font-size:13px;opacity:.92}
+.num{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:18px 18px;backdrop-filter:blur(2px)}
+.num b{display:block;font-size:42px;font-weight:800;line-height:1.05}
+.num span{font-size:13.5px;opacity:.92;margin-top:4px;display:block}
 .sec{margin-top:46px}
 .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .sec-head .k{background:var(--ac);color:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
 .sec-head h2{font-size:23px;font-weight:700}
-.sec-head .hint{font-size:13px;color:var(--sub);margin-left:auto}
 .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:.28s;height:100%}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
@@ -39,14 +38,10 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .card p{font-size:14.5px;color:#334155}
 .mini{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12.5px;background:color-mix(in srgb,var(--ac) 12%,white);color:var(--ac);font-weight:600;margin:0 6px 8px 0}
 .full{grid-column:1/-1}
-.steps{list-style:none;counter-reset:s}
-.steps li{position:relative;padding:10px 0 10px 38px;border-bottom:1px dashed #E2E8F0;font-size:14.5px}
-.steps li:last-child{border-bottom:none}
-.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kpi .box{background:color-mix(in srgb,var(--ac) 8%,white);border:1px solid color-mix(in srgb,var(--ac) 18%,white);border-radius:14px;padding:18px;text-align:center}
-.kpi b{display:block;font-size:26px;font-weight:800;color:var(--ac)}
-.kpi span{font-size:13px;color:var(--sub)}
+.kpi .box{background:color-mix(in srgb,var(--ac) 8%,white);border:1px solid color-mix(in srgb,var(--ac) 18%,white);border-radius:14px;padding:22px 18px;text-align:center}
+.kpi b{display:block;font-size:40px;font-weight:800;color:var(--ac);line-height:1.05}
+.kpi span{font-size:13.5px;color:var(--sub);margin-top:6px;display:block}
 .ed{outline:none;border-radius:6px;transition:.2s}
 .ed:hover{background:rgba(124,58,237,.04)}
 .ed:focus{background:rgba(124,58,237,.08);box-shadow:0 0 0 2px rgba(124,58,237,.25)}
@@ -55,7 +50,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .lnk:hover{box-shadow:0 6px 16px rgba(124,58,237,.32);transform:translateY(-1px)}
 .lk{font-size:12px;color:#94A3B8;margin-top:10px}
 .case-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
-.metric{flex:0 0 auto;background:var(--ac);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;font-size:15px;line-height:1.25;text-align:center;min-width:88px}
+.metric{flex:0 0 auto;background:var(--ac);color:#fff;border-radius:12px;padding:10px 16px;font-weight:800;font-size:20px;line-height:1.25;text-align:center;min-width:96px}
 .case-head h3{margin-bottom:0;font-size:16.5px}
 .case-body p{font-size:13.5px;color:#475569;margin-top:9px}
 .case-body b{color:var(--ac)}
@@ -117,9 +112,22 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 02 案例集 -->
+  <!-- 02 数据成果墙 -->
+  <section class="sec reveal" style="--ac:var(--c4)">
+    <div class="sec-head"><span class="k">02</span><h2>数据成果墙</h2></div>
+    <div class="kpi">
+      <div class="box"><b><span class="ed" id="tk1" data-ph="1000+">1000+</span></b><span><span class="ed" id="tk1t" data-ph="年交付培训/活动场次">文化活动覆盖人数</span></span></div>
+      <div class="box"><b><span class="ed" id="tk2" data-ph="500+">500+</span></b><span><span class="ed" id="tk2t" data-ph="平均满意度（5分制）">公众号推文增长</span></span></div>
+      <div class="box"><b><span class="ed" id="tk3" data-ph="90%">90%</span></b><span><span class="ed" id="tk3t" data-ph="活动平均参与率">培训满意度</span></span></div>
+      <div class="box"><b><span class="ed" id="tk4" data-ph="53%">53%</span></b><span><span class="ed" id="tk4t" data-ph="培训成本下降">文化调研收集率</span></span></div>
+      <div class="box"><b><span class="ed" id="tk5" data-ph="4">4</span></b><span><span class="ed" id="tk5t" data-ph="文化运营自动化系统">AI 文化运营产品上线</span></span></div>
+      <div class="box"><b><span class="ed" id="tk6" data-ph="3+">3+</span></b><span><span class="ed" id="tk6t" data-ph="内容形态创新">AIGC 内容产出场景</span></span></div>
+    </div>
+  </section>
+
+  <!-- 03 案例集 -->
   <section class="sec reveal" style="--ac:var(--c2)">
-    <div class="sec-head"><span class="k">02</span><h2>案例集（核心）</h2></div>
+    <div class="sec-head"><span class="k">03</span><h2>案例集（核心）</h2></div>
     <div class="bento">
       <div class="card case">
         <div class="case-head">
@@ -164,9 +172,9 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 03 AI 流程产品化（文化运营侧） -->
+  <!-- 04 AI 流程产品化（文化运营侧） -->
   <section class="sec reveal" style="--ac:var(--c3)">
-    <div class="sec-head"><span class="k">03</span><h2>AI 流程产品化（文化运营侧）</h2></div>
+    <div class="sec-head"><span class="k">04</span><h2>AI 流程产品化（文化运营侧）</h2></div>
     <div class="bento">
       <div class="card full feat"><span class="tag">知识库自动化</span><h3><span class="dot"></span><span class="ed" id="ta1t" data-ph="作品标题">文化活动知识库 AI 自动化更新</span></h3><a class="vcover" data-type="video" data-full="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base.mp4" data-poster="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base-01.jpg"><img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base-01.jpg" alt="文化活动知识库"><span class="badge">Demo 视频</span><span class="play">▶</span></a><p><span class="ed" id="ta1d" data-ph="作用">知识库持续自动保鲜——新案例按时进库、一手 / 二手层级清晰可溯源，不再依赖人工零散上网搜、也不会越积越乱。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">🔗 看文化活动文档地图</a></div>
       <div class="card feat"><span class="tag">AIGC 内容</span><h3><span class="dot"></span><span class="ed" id="ta2t" data-ph="作品标题">AI 漫剧</span></h3><a class="vcover" data-type="video" data-full="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic.mp4" data-poster="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic-01.jpg"><img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic-01.jpg" alt="AI 漫剧"><span class="badge">Demo 视频</span><span class="play">▶</span></a><p><span class="ed" id="ta2d" data-ph="作用">可用于活动宣发、产品介绍、线下活动暖场等场景，宣传内容形态创新、降本提效。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank" rel="noopener">🔗 看《企鹅英雄》分镜台本</a></div>
@@ -178,19 +186,6 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 04 数据成果墙 -->
-  <section class="sec reveal" style="--ac:var(--c4)">
-    <div class="sec-head"><span class="k">04</span><h2>数据成果墙</h2></div>
-    <div class="kpi">
-      <div class="box"><b><span class="ed" id="tk1" data-ph="1000+">1000+</span></b><span><span class="ed" id="tk1t" data-ph="年交付培训/活动场次">文化活动覆盖人数</span></span></div>
-      <div class="box"><b><span class="ed" id="tk2" data-ph="500+">500+</span></b><span><span class="ed" id="tk2t" data-ph="平均满意度（5分制）">公众号推文增长</span></span></div>
-      <div class="box"><b><span class="ed" id="tk3" data-ph="90%">90%</span></b><span><span class="ed" id="tk3t" data-ph="活动平均参与率">培训满意度</span></span></div>
-      <div class="box"><b><span class="ed" id="tk4" data-ph="53%">53%</span></b><span><span class="ed" id="tk4t" data-ph="培训成本下降">文化调研收集率</span></span></div>
-      <div class="box"><b><span class="ed" id="tk5" data-ph="4">4</span></b><span><span class="ed" id="tk5t" data-ph="文化运营自动化系统">AI 文化运营产品上线</span></span></div>
-      <div class="box"><b><span class="ed" id="tk6" data-ph="3+">3+</span></b><span><span class="ed" id="tk6t" data-ph="内容形态创新">AIGC 内容产出场景</span></span></div>
-    </div>
-  </section>
-
   <!-- 05 工具/SOP -->
   <section class="sec reveal" style="--ac:var(--c5)">
     <div class="sec-head"><span class="k">05</span><h2>可复用资产 · 工具 / 模板 / SOP</h2></div>
@@ -199,28 +194,6 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
       <div class="card"><h3><span class="dot"></span><span class="ed" id="tt2t" data-ph="活动策划checklist">海报 / 视频模板（PR）</span></h3><p><span class="ed" id="tt2d" data-ph="说明解决了什么麻烦">一套可复用视觉模板，自己就能出图出片，不依赖设计。</span></p></div>
       <div class="card"><h3><span class="dot"></span><span class="ed" id="tt3t" data-ph="海报/推文模板">文化调研问卷</span></h3><p><span class="ed" id="tt3d" data-ph="说明解决了什么麻烦">面向部门长的文化问卷，拆解公司价值观，收集率 53%。</span></p></div>
       <div class="card"><h3><span class="dot"></span><span class="ed" id="tt4t" data-ph="培训效果调研问卷">内推奖励制度（0-1）</span></h3><p><span class="ed" id="tt4d" data-ph="说明解决了什么麻烦">年度宣导 + 奖励规则，把内推做成可持续渠道。</span></p></div>
-    </div>
-  </section>
-
-  <!-- 06 影响力 -->
-  <section class="sec reveal" style="--ac:var(--c6)">
-    <div class="sec-head"><span class="k">06</span><h2>影响力 / 跨部门协作</h2></div>
-    <div class="card full">
-      <ol class="steps">
-        <li><span class="ed" id="ti1" data-ph="跨部门项目">参与公司级人才培养项目，跨部门推动部门 AI 文化建设。</span></li>
-        <li><span class="ed" id="ti2" data-ph="方法论对外">主导建设文化活动通知效率，沉淀为部门「公众号」可复用资产。</span></li>
-        <li><span class="ed" id="ti3" data-ph="对内分享">跨多段经历，把培训+文化活动打法内化为可迁移方法论。</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 07 学习证书 -->
-  <section class="sec reveal" style="--ac:var(--c7)">
-    <div class="sec-head"><span class="k">07</span><h2>学习成长线</h2></div>
-    <div class="bento">
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="tl1t" data-ph="企业培训师认证">工商管理本科 · 中山大学新华学院</span></h3><p><span class="ed" id="tl1d" data-ph="机构/年份">统招全日制 · 结课排名前 15%</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="tl2t" data-ph="引导技术/教练">创新创业赛事 3 项银奖</span></h3><p><span class="ed" id="tl2d" data-ph="机构/年份">挑战杯 / 互联网+ / 三创（省级+校级）</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="tl3t" data-ph="持续学习轨迹">附加技能</span></h3><p><span class="ed" id="tl3d" data-ph="例 跟完用户体验/内容运营课程">PR 视频剪辑 · 海报设计 · 问卷设计 · 数据分析（独立考勤算薪）</span></p></div>
     </div>
   </section>
 </main>

@@ -23,14 +23,13 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .hero .role{font-size:17px;font-weight:600;opacity:.95;margin-bottom:18px}
 .hero .claim{font-size:16px;max-width:760px;opacity:.97;margin-bottom:24px}
 .hero .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
-.num{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:16px 18px;backdrop-filter:blur(2px)}
-.num b{display:block;font-size:30px;font-weight:800;line-height:1.1}
-.num span{font-size:13px;opacity:.92}
+.num{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:18px 18px;backdrop-filter:blur(2px)}
+.num b{display:block;font-size:42px;font-weight:800;line-height:1.05}
+.num span{font-size:13.5px;opacity:.92;margin-top:4px;display:block}
 .sec{margin-top:46px}
 .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .sec-head .k{background:var(--ac);color:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
 .sec-head h2{font-size:23px;font-weight:700}
-.sec-head .hint{font-size:13px;color:var(--sub);margin-left:auto}
 .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:.28s;height:100%}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
@@ -39,14 +38,10 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .card p{font-size:14.5px;color:#334155}
 .mini{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12.5px;background:color-mix(in srgb,var(--ac) 12%,white);color:var(--ac);font-weight:600;margin:0 6px 8px 0}
 .full{grid-column:1/-1}
-.steps{list-style:none;counter-reset:s}
-.steps li{position:relative;padding:10px 0 10px 38px;border-bottom:1px dashed #E2E8F0;font-size:14.5px}
-.steps li:last-child{border-bottom:none}
-.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kpi .box{background:color-mix(in srgb,var(--ac) 8%,white);border:1px solid color-mix(in srgb,var(--ac) 18%,white);border-radius:14px;padding:18px;text-align:center}
-.kpi b{display:block;font-size:26px;font-weight:800;color:var(--ac)}
-.kpi span{font-size:13px;color:var(--sub)}
+.kpi .box{background:color-mix(in srgb,var(--ac) 8%,white);border:1px solid color-mix(in srgb,var(--ac) 18%,white);border-radius:14px;padding:22px 18px;text-align:center}
+.kpi b{display:block;font-size:40px;font-weight:800;color:var(--ac);line-height:1.05}
+.kpi span{font-size:13.5px;color:var(--sub);margin-top:6px;display:block}
 .ed{outline:none;border-radius:6px;transition:.2s}
 .ed:hover{background:rgba(124,58,237,.04)}
 .ed:focus{background:rgba(124,58,237,.08);box-shadow:0 0 0 2px rgba(124,58,237,.25)}
@@ -55,7 +50,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .lnk:hover{box-shadow:0 6px 16px rgba(124,58,237,.32);transform:translateY(-1px)}
 .lk{font-size:12px;color:#94A3B8;margin-top:10px}
 .case-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
-.metric{flex:0 0 auto;background:var(--ac);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;font-size:15px;line-height:1.25;text-align:center;min-width:88px}
+.metric{flex:0 0 auto;background:var(--ac);color:#fff;border-radius:12px;padding:10px 16px;font-weight:800;font-size:20px;line-height:1.25;text-align:center;min-width:96px}
 .case-head h3{margin-bottom:0;font-size:16.5px}
 .case-body p{font-size:13.5px;color:#475569;margin-top:9px}
 .case-body b{color:var(--ac)}
@@ -117,9 +112,22 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 02 案例集 -->
+  <!-- 02 数据成果墙 -->
+  <section class="sec reveal" style="--ac:var(--c4)">
+    <div class="sec-head"><span class="k">02</span><h2>数据成果墙</h2></div>
+    <div class="kpi">
+      <div class="box"><b><span class="ed" id="k1" data-ph="40+">40+</span></b><span><span class="ed" id="k1t" data-ph="平均招聘周期缩短">累计独立交付岗位</span></span></div>
+      <div class="box"><b><span class="ed" id="k2" data-ph="1000+">1000+</span></b><span><span class="ed" id="k2t" data-ph="offer接受率提升">文化活动覆盖人数</span></span></div>
+      <div class="box"><b><span class="ed" id="k3" data-ph="300">300</span></b><span><span class="ed" id="k3t" data-ph="员工满意度得分">SSC 全盘管理人数</span></span></div>
+      <div class="box"><b><span class="ed" id="k4" data-ph="90%">90%</span></b><span><span class="ed" id="k4t" data-ph="组织氛围评分">招聘留存（总监年终）</span></span></div>
+      <div class="box"><b><span class="ed" id="k5" data-ph="7+">7+</span></b><span><span class="ed" id="k5t" data-ph="HR重复动作产品化">AI 自动化系统上线</span></span></div>
+      <div class="box"><b><span class="ed" id="k6" data-ph="5">5</span></b><span><span class="ed" id="k6t" data-ph="高频场景一键调用">自建 HR skill 套数</span></span></div>
+    </div>
+  </section>
+
+  <!-- 03 案例集 -->
   <section class="sec reveal" style="--ac:var(--c2)">
-    <div class="sec-head"><span class="k">02</span><h2>案例集（核心）</h2></div>
+    <div class="sec-head"><span class="k">03</span><h2>案例集（核心）</h2></div>
     <div class="bento">
       <div class="card case">
         <div class="case-head">
@@ -164,30 +172,17 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 03 AI 流程产品化 -->
+  <!-- 04 AI 流程产品化 -->
   <section class="sec reveal" style="--ac:var(--c3)">
-    <div class="sec-head"><span class="k">03</span><h2>AI 流程产品化（自动化系统）</h2></div>
+    <div class="sec-head"><span class="k">04</span><h2>AI 流程产品化（自动化系统）</h2></div>
     <div class="bento">
-      <div class="card feat"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha1t" data-ph="作品标题">新人答辩 AI 自动化</span></h3><p><span class="ed" id="ha1d" data-ph="作用">每月定时建会建群 + 看板实时回填 + 跟催，答辩流程自动闭环，关键节点零遗漏、不用人工盯进度。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/hr-activity-playbook.html" target="_blank" rel="noopener">🔗 看 HR 自动化手册</a></div>
+      <div class="card feat"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha1t" data-ph="作品标题">新人答辩 AI 自动化</span></h3><p><span class="ed" id="ha1d" data-ph="作用">每月定时建会建群 + 看板实时回填 + 跟催，答辩流程自动闭环，关键节点零遗漏、不用人工盯进度。</span></p></div>
       <div class="card"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha2t" data-ph="作品标题">奖金 / 报销提醒自动化</span></h3><p><span class="ed" id="ha2d" data-ph="作用">奖金 / 报销节点自动提醒到人，漏发漏报趋近于零，员工体验与合规双双兜住，不用再人工逐一跟进。</span></p><span class="lk">⚙️ 提醒机器人（企微触发，自动跟进）</span></div>
-      <div class="card"><span class="tag">数据分析</span><h3><span class="dot"></span><span class="ed" id="ha3t" data-ph="作品标题">薪酬看板脚本</span></h3><p><span class="ed" id="ha3d" data-ph="作用">薪酬结构 / 分布 / 对比一屏可视，汇总从手工慢错走向自动准确（脱敏、锁源、防编数，安全不泄）。</span></p><span class="lk">📊 同类看板范式（脱敏示例）：具身智能薪酬诊断</span></div>
+      <div class="card"><span class="tag">数据分析</span><h3><span class="dot"></span><span class="ed" id="ha3t" data-ph="作品标题">薪酬看板脚本</span></h3><p><span class="ed" id="ha3d" data-ph="作用">薪酬结构 / 分布 / 对比一屏可视，汇总从手工慢错走向自动准确（脱敏、锁源、防编数，安全不泄）。</span></p></div>
       <div class="card"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha4t" data-ph="作品标题">周报 AI 自动输出</span></h3><p><span class="ed" id="ha4d" data-ph="作用">每周一句话 + 详细版周报自动成文，多线进展口径统一、重点不漏。</span></p><span class="lk">📝 周报自动产出（三段式反思流）</span></div>
       <div class="card"><span class="tag">激励系统</span><h3><span class="dot"></span><span class="ed" id="ha5t" data-ph="作品标题">培训积分商城</span></h3><a class="vcover" data-type="video" data-full="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points.mp4" data-poster="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points-01.jpg"><img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points-01.jpg" alt="培训积分商城"><span class="badge">Demo 视频</span><span class="play">▶</span></a><p><span class="ed" id="ha5d" data-ph="作用">员工参与培训 / 活动有即时量化反馈与获得感，参与率 / 活跃度可量化提升，形成「参与→积分→兑换」正向循环。</span></p><span class="lk">🛒 积分商城（参与→积分→兑换正向循环）</span></div>
       <div class="card"><span class="tag">活动系统</span><h3><span class="dot"></span><span class="ed" id="ha6t" data-ph="作品标题">抽奖平台</span></h3><p><span class="ed" id="ha6d" data-ph="作用">自建可控抽奖平台，规则灵活 + 名单管理 + 公平抽奖，活动氛围与参与度拉满。</span></p><span class="lk">🎲 抽奖平台（规则灵活+名单管理+公平）</span></div>
       <div class="card full"><span class="tag">skill 体系</span><h3><span class="dot"></span><span class="ed" id="ha7t" data-ph="作品标题">自建 HR skill 体系（5 套）</span></h3><p><span class="ed" id="ha7d" data-ph="作用">把高频 HR 场景沉淀为可直接调用的 AI 助手：① 文化活动 skill（需求→方案 / checklist / 模板 / 案例一键产出，筹备质量稳定）<br>② 高管谈参 skill（合规谈参 / 致辞，保密与职位确认等红线前置把关，临场零踩坑）<br>③ 活动话术 skill（统一风格快速成稿，出稿提速、调性一致）<br>④ 绩效 1v1 谈话 skill（四段式教练框架：开场 / 探查 / 卡点假设 + 支持 / 对齐，leader 拿到可直接念的开场）<br>⑤ 视觉风格 skill（展示 HTML 锁定四风格自动套用，审美一次到位）。</span></p><span class="lk">🧩 skill 体系（文化活动 / 高管谈参 / 活动话术 / 绩效 1v1 / 视觉风格，沉淀于 WorkBuddy）</span></div>
-    </div>
-  </section>
-
-  <!-- 04 数据成果墙 -->
-  <section class="sec reveal" style="--ac:var(--c4)">
-    <div class="sec-head"><span class="k">04</span><h2>数据成果墙</h2></div>
-    <div class="kpi">
-      <div class="box"><b><span class="ed" id="k1" data-ph="40+">40+</span></b><span><span class="ed" id="k1t" data-ph="平均招聘周期缩短">累计独立交付岗位</span></span></div>
-      <div class="box"><b><span class="ed" id="k2" data-ph="1000+">1000+</span></b><span><span class="ed" id="k2t" data-ph="offer接受率提升">文化活动覆盖人数</span></span></div>
-      <div class="box"><b><span class="ed" id="k3" data-ph="300">300</span></b><span><span class="ed" id="k3t" data-ph="员工满意度得分">SSC 全盘管理人数</span></span></div>
-      <div class="box"><b><span class="ed" id="k4" data-ph="90%">90%</span></b><span><span class="ed" id="k4t" data-ph="组织氛围评分">招聘留存（总监年终）</span></span></div>
-      <div class="box"><b><span class="ed" id="k5" data-ph="7+">7+</span></b><span><span class="ed" id="k5t" data-ph="HR重复动作产品化">AI 自动化系统上线</span></span></div>
-      <div class="box"><b><span class="ed" id="k6" data-ph="5">5</span></b><span><span class="ed" id="k6t" data-ph="高频场景一键调用">自建 HR skill 套数</span></span></div>
     </div>
   </section>
 
@@ -199,28 +194,6 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
       <div class="card"><h3><span class="dot"></span><span class="ed" id="t2t" data-ph="离职面谈指引">积分 + 抽奖平台</span></h3><p><span class="ed" id="t2d" data-ph="说明解决了什么麻烦">用游戏化机制驱动员工参与文化活动，提升活跃度。</span></p></div>
       <div class="card"><h3><span class="dot"></span><span class="ed" id="t3t" data-ph="1v1面谈模板">JSOP 与台账资料库</span></h3><p><span class="ed" id="t3d" data-ph="说明解决了什么麻烦">沉淀流程规范与历史数据，降低团队协同成本。</span></p></div>
       <div class="card"><h3><span class="dot"></span><span class="ed" id="t4t" data-ph="新员工融入checklist">内推奖励制度（0-1）</span></h3><p><span class="ed" id="t4d" data-ph="说明解决了什么麻烦">从 0 搭内推体系 + 年度宣导 + 奖励规则，降低招聘成本。</span></p></div>
-    </div>
-  </section>
-
-  <!-- 06 影响力 -->
-  <section class="sec reveal" style="--ac:var(--c6)">
-    <div class="sec-head"><span class="k">06</span><h2>影响力 / 跨部门协作</h2></div>
-    <div class="card full">
-      <ol class="steps">
-        <li><span class="ed" id="i1" data-ph="推动业务改了什么规矩">推动部门 AI 文化建设，参与公司级人才培养项目。</span></li>
-        <li><span class="ed" id="i2" data-ph="跨部门项目">牵头 6P 跨部门激励评选，把申报-评审-奖金-宣发跑成闭环。</span></li>
-        <li><span class="ed" id="i3" data-ph="对外/对内分享">在 0-1 落地内推体系，建立可持续内推渠道。</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 07 学习证书 -->
-  <section class="sec reveal" style="--ac:var(--c7)">
-    <div class="sec-head"><span class="k">07</span><h2>学习成长线</h2></div>
-    <div class="bento">
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="l1t" data-ph="HRBP 专业认证">工商管理本科 · 中山大学新华学院</span></h3><p><span class="ed" id="l1d" data-ph="机构/年份">统招全日制 · 结课排名前 15%</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="l2t" data-ph="人力资源管理师">创新创业赛事 3 项银奖</span></h3><p><span class="ed" id="l2d" data-ph="机构/年份">挑战杯 / 互联网+ / 三创（省级+校级）</span></p></div>
-      <div class="card"><h3><span class="dot"></span><span class="ed" id="l3t" data-ph="持续学习轨迹">附加技能</span></h3><p><span class="ed" id="l3d" data-ph="例 季度读2本管理书">PR 视频剪辑 · 海报设计 · 数据分析（独立考勤算薪）· 问卷设计</span></p></div>
     </div>
   </section>
 </main>
