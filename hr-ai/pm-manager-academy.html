@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新经理训练营 / 管理者赋能 · 施工图</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)} .p-ok{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>新经理训练营 / 管理者赋能 · 施工图</h1>
+  <div class="sub">技术转管理肌肉 + 真实带队演练 —— 把"好员工"变成"好经理"</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="project-hub.html">← 项目施工图集</a>
+    <a href="hr-knowledge-hub.html">HR 知识点集</a>
+    <a href="pm-structured-interview.html">结构化面试</a>
+    <a href="pm-onboarding-90.html">新员工 90 天</a>
+    <a href="pm-comp-review.html">年度调薪</a>
+    <a href="pm-culture-sop.html">文化活动 SOP</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+    <a href="pm-hr-productization.html">HR 流程产品化</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>统一四块——<b>① 项目定位</b><b>② 实操时间线（选拔→训战→陪跑→认证）</b><b>③ 示意样例产出</b><b>④ 易卡点</b> + <b>⑤ 你的填空版</b>。核心逻辑：经理解释约 70% 的敬业度方差，"离职因经理非公司"。管理者赋能是 ROI 最高的 HR 杠杆之一，但最常被做成"上几节课"。</div>
+
+  <section id="pos">
+    <div class="sec-head"><div class="sec-no">1</div><h2>项目定位 · 一句话</h2><span class="sub">为什么值钱 · 面试怎么讲</span></div>
+    <div class="card">
+      <h3>这是什么 & 为什么高 ROI</h3>
+      <p class="tag">行业口径：经理质量直接解释 ~70% 团队敬业度方差；技术转管理最易"摔"（你云技服技术团队语境尤甚）</p>
+      <div class="ex">
+        <span class="lab">价值点</span>
+        <div class="step"><div class="n">·</div><div class="t"><b>留人：</b>好经理→团队留存高；一个差经理能带走整组。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>产能：</b>经理会排兵、会 1:1、会授权 → 团队产出上去。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>补断层：</b>技术骨干升 manager 最常被"摔"——给了 title 没给肌肉。</div></div>
+      </div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「管理者赋能我按'选拔-训战-陪跑-认证'四段做，不是上课。重点补三块肌肉：1:1 反馈、目标拆解与授权、难谈话（绩效/离职）。技术转管理的我专门加'从做事到带人'心态转换。落地用 70-20-10——七成真实带队演练+两成 peer 复盘+一成课，结营要交'带队改进计划'并季度回看团队指标。」</span></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head"><div class="sec-no">2</div><h2>实操时间线（四段 · 约 12 周）</h2><span class="sub">阶段 / 时间 / 动作 / owner</span></div>
+    <div class="card">
+      <h3>一张表跑完（示意）</h3>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>关键动作</th><th>owner</th></tr></thead>
+        <tbody>
+          <tr><td>① 选拔</td><td>W0</td><td>新晋/准经理提名；测管理潜质+意愿（非只看绩效）；定 cohort</td><td>HRBP + 业务 head</td></tr>
+          <tr><td>② 训战</td><td>W1–6</td><td>模块：1:1 反馈 / 目标拆解授权 / 难谈话 / 团队诊断；每模块配真实案例演练（角色扮演）</td><td>L&D</td></tr>
+          <tr><td>③ 陪跑</td><td>W7–10</td><td>每人带一个真实团队改进项目；配资深经理做反向导师；周度 peer 复盘</td><td>业务 mentor</td></tr>
+          <tr><td>④ 认证</td><td>W11–12</td><td>答辩"带队改进计划"；上级评价+团队反馈；未达标进加强营</td><td>HRBP + 业务</td></tr>
+          <tr><td>跟进</td><td>持续</td><td>季度回看所带团队留存/绩效；未达标 manager 进教练</td><td>HRBP</td></tr>
+        </tbody>
+      </table>
+      <div class="why"><b>为什么 70-20-10 是核心：</b>管理是"做"出来的不是"听"出来的。你把培训占比压到一成，七成放在真实带队演练，才能长出肌肉。</div>
+    </div>
+  </section>
+
+  <section id="sample">
+    <div class="sec-head"><div class="sec-no">3</div><h2>示意样例产出</h2><span class="sub">长什么样</span></div>
+    <div class="card">
+      <h3>样例 · 训练营模块卡（示意）</h3>
+      <table>
+        <thead><tr><th>模块</th><th>练什么（真实场景）</th><th>交付物</th></tr></thead>
+        <tbody>
+          <tr><td>1:1 反馈</td><td>给一个"以为还行其实想走"的下属做反馈谈话</td><td>谈话提纲+复盘</td></tr>
+          <tr><td>目标拆解授权</td><td>把一个模糊业务目标拆给 3 人并授权边界</td><td>拆解表+授权清单</td></tr>
+          <tr><td>难谈话</td><td>绩效改进/离职谈判角色扮演</td><td>谈话脚本</td></tr>
+          <tr><td>团队诊断</td><td>用 ONA/敬业度数据定位团队问题</td><td>诊断报告</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:18px">样例 · 结营验收指标（示意）</h3>
+      <div class="pillbox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <span class="pill p-ok">结营答辩通过率 ≥ 80%</span>
+        <span class="pill p-should">所带团队季度留存 不降</span>
+        <span class="pill p-must">未达标进加强营</span>
+        <span class="pill p-could">manager NPS ≥ 8</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>易卡点 · 反例</h2><span class="sub">新手踩的雷</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 只上课不演练：</b>听完"管理十大原则"回去原样 → 没肌肉。必须角色扮演+真实项目。</div>
+      <div class="pit"><b>❌ 按绩效选人：</b>技术 top1 就提拔 → 可能最不愿带人。加意愿+潜质测。</div>
+      <div class="pit"><b>❌ 结营即结束：</b>不管后续 → 回到旧习惯。季度回看团队指标才是闭环。</div>
+      <div class="pit"><b>❌ 忽略技术转管理痛点：</b>还按通用管理课讲 → 技术骨干"听不进去"。单列心态转换模块。</div>
+      <div class="ok"><b>✅ 正确路径：</b>选拔看意愿+潜质；训战重演练（70-20-10）；结营交改进计划；季度回看团队指标。</div>
+    </div>
+  </section>
+
+  <section id="blank">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 项目卡</h2><span class="sub">黄色字段本地存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">cohort：<span class="edit" contenteditable="true" id="f-co">__（新晋/准经理/技术转管理）</span></span>
+        <div class="field" style="margin-top:10px"><span class="lbl">① 选拔标准（绩效+意愿+潜质）：</span><span class="edit" contenteditable="true" id="f-sel">__</span></div>
+        <div class="field"><span class="lbl">② 四大模块设定：</span><span class="edit" contenteditable="true" id="f-mod">__</span></div>
+        <div class="field"><span class="lbl">③ 真实演练项目：</span><span class="edit" contenteditable="true" id="f-proj">__</span></div>
+        <div class="field"><span class="lbl">④ 成功指标（答辩/团队留存/绩效）：</span><span class="edit" contenteditable="true" id="f-kpi">__</span></div>
+        <div class="field"><span class="lbl">⑤ 季度回看机制：</span><span class="edit" contenteditable="true" id="f-follow">__</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+(function(){
+  var KEY='ma_v1';
+  var fields=document.querySelectorAll('[contenteditable]');
+  fields.forEach(function(el){
+    var id=el.id||el.getAttribute('data-id')||el.className;
+    var k=KEY+':'+id;
+    var v=localStorage.getItem(k);
+    if(v!==null && el.innerText!==v) el.innerText=v;
+  });
+  fields.forEach(function(el){
+    el.addEventListener('input',function(){
+      var id=el.id||el.getAttribute('data-id')||el.className;
+      try{localStorage.setItem(KEY+':'+id, el.innerText);}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>

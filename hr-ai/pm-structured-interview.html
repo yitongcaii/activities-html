@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>结构化面试体系搭建 · 项目施工图</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)} .p-ok{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>结构化面试体系搭建 · 项目施工图</h1>
+  <div class="sub">行为面试题库 + 评分 rubric + 面试官认证 —— 把「凭感觉面」变成「可重复、可预测」</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="project-hub.html">← 项目施工图集</a>
+    <a href="hr-knowledge-hub.html">HR 知识点集</a>
+    <a href="pm-onboarding-90.html">新员工 90 天</a>
+    <a href="pm-manager-academy.html">新经理训练营</a>
+    <a href="pm-comp-review.html">年度调薪</a>
+    <a href="pm-culture-sop.html">文化活动 SOP</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+    <a href="pm-hr-productization.html">HR 流程产品化</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>这是一张"照着能跑的项目施工图"，不是概念。统一四块——<b>① 项目定位</b>（一句话讲清价值+面试怎么讲）<b>② 实操时间线</b>（阶段 / 时间 / 动作 / owner）<b>③ 示意样例产出</b>（长什么样，标"示意"）<b>④ 易卡点</b> + <b>⑤ 你的填空版</b>（黄色字段本地存）。核心逻辑：结构化面试的预测效度远高于直觉面试，但前提是题库、rubric、面试官三者都"结构化"。</div>
+
+  <!-- ① 项目定位 -->
+  <section id="pos">
+    <div class="sec-head"><div class="sec-no">1</div><h2>项目定位 · 一句话</h2><span class="sub">为什么值得做 · 面试怎么讲</span></div>
+    <div class="card">
+      <h3>这是什么 & 为什么值钱</h3>
+      <p class="tag">把"面得好不好全看面试官心情"变成"同一把尺、可复盘、能预测"</p>
+      <div class="ex">
+        <span class="lab">价值点</span>
+        <div class="step"><div class="n">·</div><div class="t"><b>降错配：</b>结构化面试效度≈0.5，远高于非结构化的≈0.2；错配代价是数年薪资，建体系是一次性投入长期回本。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>提公平 & 合规：</b>所有候选人走同一题、同一评分锚 → 减少偏见、规避招聘歧视风险（尤其技术/外企合规要求高）。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>可规模化：</b>面试官认证后，新人 HR / 业务经理也能稳定面，不依赖个别"面神"。</div></div>
+      </div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「我搭结构化面试不是只写一套题，而是三件套——基于岗位模型（胜任力）出行为题库、配套评分 rubric 让打分可对齐、再加面试官认证保证执行不走样。核心是让预测效度从'凭感觉'的 0.2 提到 0.5，错配成本省回来。落地我会先挑一个高频岗试点，跑完回测通过率再铺开。」</span></div>
+    </div>
+  </section>
+
+  <!-- ② 时间线 -->
+  <section id="timeline">
+    <div class="sec-head"><div class="sec-no">2</div><h2>实操时间线（6 阶段项目制）</h2><span class="sub">阶段 / 时间 / 动作 / owner</span></div>
+    <div class="card">
+      <h3>一张表跑完一个项目（示意：总周期 ≈ 8–10 周）</h3>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>具体动作</th><th>owner</th></tr></thead>
+        <tbody>
+          <tr><td>① 立项对齐</td><td>T-2周</td><td>选 1 个高频岗（如云技服 HRBP / 研发）做试点；拉业务 head 确认"到底要什么能力"；定成功指标（面试官一致性、offer 质量、新员工 6 月留存）</td><td>HRBP + 业务 head</td></tr>
+          <tr><td>② 建题库</td><td>T-1周</td><td>基于岗位模型抽 6–8 个能力维度，每维度 2–3 题行为题（问"做过什么"不是"会不会"），附追问 STAR；区分必问/选问</td><td>HR 专家</td></tr>
+          <tr><td>③ 做 rubric</td><td>T 周</td><td>每题 4 档锚（1 不符 / 2 部分 / 3 符合 / 4 超出），每档写可观测行为；统一权重</td><td>HR 专家 + 业务</td></tr>
+          <tr><td>④ 面试官认证</td><td>T+1周</td><td>认证工作坊：讲偏见、练打分、盲测一致性；未过不发面试权限；设有效期（如 1 年）</td><td>L&D / HRBP</td></tr>
+          <tr><td>⑤ 试点跑</td><td>T+2~4周</td><td>试点岗全部走新流程；收集打分分布、面试官间一致性（ICC / 方差）、候选人反馈</td><td>招聘 HR</td></tr>
+          <tr><td>⑥ 复盘固化</td><td>T+5周</td><td>看回测（高分区新员是否真高绩效）、修订题库/rubric；出 SOP + 纳入新人 onboarding；年度刷新</td><td>HRBP</td></tr>
+        </tbody>
+      </table>
+      <div class="why"><b>为什么按项目制而非"发个文档"：</b>结构化面试死因是"建完没人用"。项目制有 owner、有试点、有回测，才能从 PPT 落到真实招聘。</div>
+    </div>
+  </section>
+
+  <!-- ③ 示意样例 -->
+  <section id="sample">
+    <div class="sec-head"><div class="sec-no">3</div><h2>示意样例产出</h2><span class="sub">长什么样 · 可直接照抄框架</span></div>
+    <div class="card">
+      <h3>样例 A · 云技服 HRBP 岗行为题库（节选·示意）</h3>
+      <div class="ex">
+        <span class="lab">能力维度 → 行为题 + 追问</span>
+        <div class="field"><span class="lbl">维度1 敏感个案斡旋</span>题：「讲一次你处理过最棘手的员工关系/绩效争议——什么情况、你具体做了哪几步、最后啥结果？」追问：当时有升级风险吗？你如何把控合规？业务怎么看这次处理？</div>
+        <div class="field"><span class="lbl">维度2 业务洞察翻译</span>题：「业务 leader 说'我要加 3 个人'，你怎么做？」追问：你怎么判断是真缺口还是排布问题？给过什么反向建议？</div>
+        <div class="field"><span class="lbl">维度3 数据找问题</span>题：「讲一次你用数据发现一个没人注意的人力异常。」追问：什么数据、怎么发现的、推动了什么动作？</div>
+      </div>
+      <h3 style="margin-top:18px">样例 B · 评分 rubric（单题 4 档·示意）</h3>
+      <table>
+        <thead><tr><th>档</th><th>分数</th><th>可观测行为锚</th></tr></thead>
+        <tbody>
+          <tr><td>不符合</td><td>1</td><td>答非所问 / 只讲"我擅长"无具体事件 / 推给团队无个人动作</td></tr>
+          <tr><td>部分符合</td><td>2</td><td>有事件但缺结果 / 动作模糊 / 未体现闭环</td></tr>
+          <tr><td>符合</td><td>3</td><td>STAR 完整、个人动作清晰、有可量化结果、复盘到位</td></tr>
+          <tr><td>超出</td><td>4</td><td>在 3 基础上体现"提前预判 / 方法论沉淀 / 被复用"</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:18px">样例 C · 认证通过看板（示意指标）</h3>
+      <div class="pillbox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <span class="pill p-ok">盲测打分一致性 ≥ 0.7</span>
+        <span class="pill p-should">认证通过率首轮 ≈ 60%</span>
+        <span class="pill p-must">未过不发面试权限</span>
+        <span class="pill p-could">6 月新员工留存 试点 vs 对照 +15%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 易卡点 -->
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>易卡点 · 反例</h2><span class="sub">新手踩的雷 + 正确做法</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 题库和岗位模型脱节：</b>题是网上抄的，跟这个岗真要的能力无关 → 先有岗位模型（你 talent-modules 页）再出题。</div>
+      <div class="pit"><b>❌ 只有题没有 rubric：</b>面试官凭印象打分，一致性差 → 每题必配 4 档锚。</div>
+      <div class="pit"><b>❌ 认证走过场：</b>发了 PPT 就算认证 → 必须盲测打分，一致性不达标不发权限。</div>
+      <div class="pit"><b>❌ 建完不回测：</b>高分区新人后来绩效一般 → 体系失效不自知；设 6 月留存/绩效回测。</div>
+      <div class="pit"><b>❌ 业务不买账：</b>业务经理嫌"流程重"绕过 → 立项就拉业务 head 背书，试点选他们最痛的岗。</div>
+      <div class="ok"><b>✅ 正确路径：</b>试点一岗跑通（含回测）→ 出 SOP → 纳入 HR/经理 onboarding → 年度刷新；拒绝"全公司一次性铺开"。</div>
+    </div>
+  </section>
+
+  <!-- ⑤ 填空版 -->
+  <section id="blank">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 项目卡</h2><span class="sub">黄色字段本地自动保存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">试点岗：<span class="edit" contenteditable="true" id="f-role">__ 岗</span> ｜ 项目周期：<span class="edit" contenteditable="true" id="f-cycle">__ 周</span></span>
+        <div class="field" style="margin-top:10px"><span class="lbl">① 成功指标（定 2–3 个可量化）：</span><span class="edit" contenteditable="true" id="f-kpi">__</span></div>
+        <div class="field"><span class="lbl">② 抽出的能力维度（6–8 个）：</span><span class="edit" contenteditable="true" id="f-dim">__</span></div>
+        <div class="field"><span class="lbl">③ 认证通过门槛（如一致性 ≥ __）：</span><span class="edit" contenteditable="true" id="f-pass">__</span></div>
+        <div class="field"><span class="lbl">④ 回测方式（6 月后看什么）：</span><span class="edit" contenteditable="true" id="f-test">__</span></div>
+        <div class="field"><span class="lbl">⑤ 试点跑完是否铺开 / 何时刷新：</span><span class="edit" contenteditable="true" id="f-roll">__</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+(function(){
+  var KEY='si_v1';
+  var fields=document.querySelectorAll('[contenteditable]');
+  fields.forEach(function(el){
+    var id=el.id||el.getAttribute('data-id')||el.className;
+    var k=KEY+':'+id;
+    var v=localStorage.getItem(k);
+    if(v!==null && el.innerText!==v) el.innerText=v;
+  });
+  fields.forEach(function(el){
+    el.addEventListener('input',function(){
+      var id=el.id||el.getAttribute('data-id')||el.className;
+      try{localStorage.setItem(KEY+':'+id, el.innerText);}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>

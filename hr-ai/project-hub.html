@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR 项目施工图集 · 入口</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05);text-decoration:none;color:inherit;display:block;transition:.15s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(124,92,255,.18)}
+  .card h3{margin:0 0 6px;font-size:17px;color:var(--purple)}
+  .card p{margin:0;font-size:13px;color:var(--muted)}
+  .tagrow{margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600}
+  .p-live{background:var(--ok)} .p-line{background:var(--cyan)} .p-val{background:var(--purple)}
+  .card .mini{font-size:12.5px;color:var(--muted);margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.bento{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>HR 项目施工图集</h1>
+  <div class="sub">把 HR 模块变成「可照着跑的项目」—— 时间线 + 真实样例 + 易卡点 + 可填写模板</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="hr-knowledge-hub.html">← HR 知识点集</a>
+    <a href="pm-structured-interview.html">结构化面试</a>
+    <a href="pm-onboarding-90.html">新员工 90 天</a>
+    <a href="pm-manager-academy.html">新经理训练营</a>
+    <a href="pm-comp-review.html">年度调薪</a>
+    <a href="pm-culture-sop.html">文化活动 SOP</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+    <a href="pm-hr-productization.html">HR 流程产品化</a>
+  </div>
+
+  <div class="lead"><b>怎么用：</b>每张绿卡点开即跳对应「项目施工图」——每页统一四块：① 项目定位 / ② 实操时间线（阶段·时间·动作·owner）/ ③ 示意样例产出 / ④ 易卡点 + ⑤ 你的填空版（黄色字段本地自动保存）。这套和「HR 知识点集」互补：知识点集讲"是什么/为什么"，施工图集讲"具体怎么跑"。</div>
+
+  <section id="hub">
+    <div class="sec-head"><div class="sec-no">★</div><h2>7 个可填写项目施工图（已上线）</h2><span class="sub">点开即用</span></div>
+    <div class="bento">
+      <a class="card" href="pm-structured-interview.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-line">选人线</span></div>
+        <h3>结构化面试体系搭建</h3>
+        <p>行为题库 + 评分 rubric + 面试官认证，把"凭感觉面"变"可预测"。</p>
+        <div class="mini">含：6 阶段时间线 · 题库/rubric 样例 · 认证通过看板 · 易卡点</div>
+      </a>
+      <a class="card" href="pm-onboarding-90.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-line">育人线</span></div>
+        <h3>新员工 90 天 Onboarding</h3>
+        <p>30/60/90 三段式 + 体验设计，拉留存、缩产能爬坡。</p>
+        <div class="mini">含：90 天里程碑卡 · 新人健康度看板 · 异地闭环机制</div>
+      </a>
+      <a class="card" href="pm-manager-academy.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-line">育人线</span></div>
+        <h3>新经理训练营 / 管理者赋能</h3>
+        <p>选拔-训战-陪跑-认证，补技术转管理肌肉。</p>
+        <div class="mini">含：四大模块演练 · 70-20-10 设计 · 结营验收指标</div>
+      </a>
+      <a class="card" href="pm-comp-review.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-line">留人线</span></div>
+        <h3>年度调薪 / 薪酬回顾</h3>
+        <p>对标→带宽→矩阵→沟通，每分钱可解释。</p>
+        <div class="mini">含：调薪矩阵 · 带宽体检 · 高宠高危风险清单</div>
+      </a>
+      <a class="card" href="pm-culture-sop.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-val">文化线·差异点</span></div>
+        <h3>文化活动从 0 到 1 SOP</h3>
+        <p>立项→策划→执行→复盘，有记忆点可复用。</p>
+        <div class="mini">含：活动组合卡（AI 漫剧/沙龙/团建池）· 参与深度验收</div>
+      </a>
+      <a class="card" href="pm-people-analytics.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-val">数据线·独特卖点</span></div>
+        <h3>People Analytics 看板</h3>
+        <p>定指标→建看板→预警，事后救火变事前。</p>
+        <div class="mini">含：核心指标卡 · 预警→动作闭环 · 命中率复盘</div>
+      </a>
+      <a class="card" href="pm-hr-productization.html">
+        <div class="tagrow"><span class="pill p-live">已上线</span><span class="pill p-val">工具线·稀缺经历</span></div>
+        <h3>HR 流程产品化（答辩 MCP）</h3>
+        <p>选型→设计→落地→adoption，重复动作自动跑。</p>
+        <div class="mini">含：编排节点图（建会/建群/回填/归档）· PRD 模板</div>
+      </a>
+    </div>
+  </section>
+
+  <section id="route">
+    <div class="sec-head"><div class="sec-no">↺</div><h2>备战路线图（建议顺序）</h2><span class="sub">面试前怎么串</span></div>
+    <div class="lead" style="border-left-color:var(--cyan)">按 HR 价值链走：<b>选人（结构化面试）→ 育人（Onboarding / 新经理）→ 留人（调薪）→ 组织（盘点/九宫格/IDP，见知识点集）→ 文化（SOP）→ 数据（PA 看板）→ 工具（流程产品化）</b>。每页填完你的真实数据，面试就能讲"我跑过、产出长这样"，而不是"我知道"。</div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</body>
+</html>

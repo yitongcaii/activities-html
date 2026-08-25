@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年度调薪 / 薪酬回顾项目 · 施工图</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)} .p-ok{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>年度调薪 / 薪酬回顾项目 · 施工图</h1>
+  <div class="sub">市场对标 → 带宽 → 调薪矩阵 → 沟通 —— 让每一分钱花在刀刃上</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="project-hub.html">← 项目施工图集</a>
+    <a href="hr-knowledge-hub.html">HR 知识点集</a>
+    <a href="pm-structured-interview.html">结构化面试</a>
+    <a href="pm-onboarding-90.html">新员工 90 天</a>
+    <a href="pm-manager-academy.html">新经理训练营</a>
+    <a href="pm-culture-sop.html">文化活动 SOP</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+    <a href="pm-hr-productization.html">HR 流程产品化</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>统一四块——<b>① 项目定位</b><b>② 实操时间线（对标→带宽→矩阵→沟通→复盘）</b><b>③ 示意样例产出</b><b>④ 易卡点</b> + <b>⑤ 你的填空版</b>。核心逻辑（结合你 hr-comp-structure 页）：调薪不是"谁闹给谁加"，而是用市场分位+带宽+绩效矩阵算出来的可解释决策。配合薪酬结构四块（固定/浮动/中长期/福利）与 3P 付薪逻辑。</div>
+
+  <section id="pos">
+    <div class="sec-head"><div class="sec-no">1</div><h2>项目定位 · 一句话</h2><span class="sub">为什么值钱 · 面试怎么讲</span></div>
+    <div class="card">
+      <h3>这是什么 & 为什么值钱</h3>
+      <p class="tag">调薪是最敏感的 HR 动作：加错人=激励失效+倒挂；不加关键人=高宠高危流失（你盘点页张三案例）</p>
+      <div class="ex">
+        <span class="lab">价值点</span>
+        <div class="step"><div class="n">·</div><div class="t"><b>控倒挂：</b>用带宽体系压住"新人比老人贵"的内部不公平。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>保关键人：</b>预算有限时优先锁高宠高危（盘点红区），不是平均主义。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>可解释：</b>每笔调薪能说清"为什么是这个数"→ 降争议降合规风险。</div></div>
+      </div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「年度调薪我当项目跑，不是拍脑袋。先拉市场对标定分位（50/75），再用带宽体系（最小/中位/最大+级差）看谁在带内谁触顶；然后出调薪矩阵——绩效×当前位置决定加多少；最后做经理沟通培训，确保'为什么加/不加'能讲清楚。预算不够时优先锁高宠高危，平均主义最伤士气。」</span></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head"><div class="sec-no">2</div><h2>实操时间线（5 阶段 · 约 10 周）</h2><span class="sub">阶段 / 时间 / 动作 / owner</span></div>
+    <div class="card">
+      <h3>一张表跑完（示意）</h3>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>关键动作</th><th>owner</th></tr></thead>
+        <tbody>
+          <tr><td>① 市场对标</td><td>W1–2</td><td>拉薪酬报告定各职级市场分位；识别关键序列（研发/销售）溢价</td><td>薪酬 HR</td></tr>
+          <tr><td>② 带宽体检</td><td>W3</td><td>算现有带宽渗透率；标红触顶（如张三薪酬到顶）和倒挂</td><td>薪酬 HR</td></tr>
+          <tr><td>③ 调薪矩阵</td><td>W4–5</td><td>绩效×位置→加薪幅度档；预算封顶；高宠高危单列优先</td><td>HRBP + 业务</td></tr>
+          <tr><td>④ 沟通落地</td><td>W6–7</td><td>经理沟通培训（话术+边界）；1:1 谈；系统生效</td><td>各级经理</td></tr>
+          <tr><td>⑤ 复盘</td><td>W8–10</td><td>看离职/敬业度/倒挂改善；出次年规则优化</td><td>薪酬 HR</td></tr>
+        </tbody>
+      </table>
+      <div class="why"><b>为什么带宽体检不能省：</b>不先算渗透率，调薪会变成"凭感觉补"，触顶的人（张三）反而加不动，流失隐患爆发。</div>
+    </div>
+  </section>
+
+  <section id="sample">
+    <div class="sec-head"><div class="sec-no">3</div><h2>示意样例产出</h2><span class="sub">长什么样</span></div>
+    <div class="card">
+      <h3>样例 · 调薪矩阵（绩效 × 当前位置·示意）</h3>
+      <table>
+        <thead><tr><th>当前位置＼绩效</th><th>低（C/D）</th><th>中（B）</th><th>高（A/S）</th></tr></thead>
+        <tbody>
+          <tr><td>带宽下半</td><td>0~2%</td><td>4~6%</td><td>8~10%</td></tr>
+          <tr><td>带宽中位</td><td>0%</td><td>3~5%</td><td>6~8%</td></tr>
+          <tr><td>带宽触顶</td><td>0%</td><td>0~2%（特殊审批）</td><td>优先转中长期激励</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:18px">样例 · 风险清单（示意）</h3>
+      <div class="pillbox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <span class="pill p-red">张三 触顶 → 转架构通道/中长期</span>
+        <span class="pill p-must">倒挂 3 人 → 本年优先修正</span>
+        <span class="pill p-ok">预算使用率 ≤ 95%</span>
+        <span class="pill p-could">高宠高危 100% 覆盖</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>易卡点 · 反例</h2><span class="sub">新手踩的雷</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 平均主义：</b>"每人都加 5%" → 高宠高危没被锁，反而走。</div>
+      <div class="pit"><b>❌ 不体检直接加：</b>触顶的人加不动、倒挂更歪 → 先算带宽渗透率。</div>
+      <div class="pit"><b>❌ 经理不会谈：</b>扔个数字就完 → 员工不知道"为什么"。做沟通培训。</div>
+      <div class="pit"><b>❌ 只加现金：</b>触顶的人再加薪违法/超预算 → 转中长期激励（你薪酬结构页第四块）。</div>
+      <div class="ok"><b>✅ 正确路径：</b>对标→带宽体检→矩阵→沟通培训→复盘；预算优先锁红区，触顶转激励。</div>
+    </div>
+  </section>
+
+  <section id="blank">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 项目卡</h2><span class="sub">黄色字段本地存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">周期：<span class="edit" contenteditable="true" id="f-cy">__ 周</span> ｜ 总预算：<span class="edit" contenteditable="true" id="f-bud">__%</span></span>
+        <div class="field" style="margin-top:10px"><span class="lbl">① 市场分位目标（如 P 级对标 75）：</span><span class="edit" contenteditable="true" id="f-pct">__</span></div>
+        <div class="field"><span class="lbl">② 带宽体检发现（触顶/倒挂 几人）：</span><span class="edit" contenteditable="true" id="f-band">__</span></div>
+        <div class="field"><span class="lbl">③ 调薪矩阵规则摘要：</span><span class="edit" contenteditable="true" id="f-mat">__</span></div>
+        <div class="field"><span class="lbl">④ 高宠高危优先名单：</span><span class="edit" contenteditable="true" id="f-red">__</span></div>
+        <div class="field"><span class="lbl">⑤ 经理沟通培训要点：</span><span class="edit" contenteditable="true" id="f-com">__</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+(function(){
+  var KEY='cr_v1';
+  var fields=document.querySelectorAll('[contenteditable]');
+  fields.forEach(function(el){
+    var id=el.id||el.getAttribute('data-id')||el.className;
+    var k=KEY+':'+id;
+    var v=localStorage.getItem(k);
+    if(v!==null && el.innerText!==v) el.innerText=v;
+  });
+  fields.forEach(function(el){
+    el.addEventListener('input',function(){
+      var id=el.id||el.getAttribute('data-id')||el.className;
+      try{localStorage.setItem(KEY+':'+id, el.innerText);}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR 流程产品化项目（新人答辩 MCP）· 施工图</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)} .p-ok{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>HR 流程产品化项目（新人答辩 MCP）· 施工图</h1>
+  <div class="sub">选型 → 设计 → 落地 → adoption —— 把重复 HR 动作变成"自动跑、人不累"</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="project-hub.html">← 项目施工图集</a>
+    <a href="hr-knowledge-hub.html">HR 知识点集</a>
+    <a href="pm-structured-interview.html">结构化面试</a>
+    <a href="pm-onboarding-90.html">新员工 90 天</a>
+    <a href="pm-manager-academy.html">新经理训练营</a>
+    <a href="pm-comp-review.html">年度调薪</a>
+    <a href="pm-culture-sop.html">文化活动 SOP</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>统一四块——<b>① 项目定位</b><b>② 实操时间线（4 段）</b><b>③ 示意样例产出</b><b>④ 易卡点</b> + <b>⑤ 你的填空版</b>。这是你最稀缺的经历——别人基本没碰过。核心逻辑：HR 流程产品化不是"写代码"，是"把重复、易错、跨系统的动作设计成自动编排"，你做的是 PRD + 编排设计，不一定要写码。</div>
+
+  <section id="pos">
+    <div class="sec-head"><div class="sec-no">1</div><h2>项目定位 · 一句话</h2><span class="sub">为什么值钱 · 面试怎么讲</span></div>
+    <div class="card">
+      <h3>这是什么 & 为什么是稀缺卖点</h3>
+      <p class="tag">新人发展答辩原是人工月级重活（建会/建群/看板回填/归档）；你用 MCP 编排自动化</p>
+      <div class="ex">
+        <span class="lab">价值点（你的真实项目·示意）</span>
+        <div class="step"><div class="n">·</div><div class="t"><b>省人力：</b>月 1 日自动触发，原需数小时人工 → 分钟级跑完。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>降错漏：</b>建会/建群/看板回填/归档全自动，不依赖人记得每一步。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>可复用：</b>编排做出来，别的活动（答辩/盘点）可直接套。</div></div>
+      </div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「我把 HR 重复动作当产品做。拿新人答辩举例：原来是每月人工建会、建群、回填看板、归档，容易漏。我做的是 PRD + 流程编排——定触发条件（每月1日）、拆成建会/建群/回填/归档几个节点、接企微和会议系统，跑通后自动执行。重点是我设计逻辑和验收，不一定要写底层代码。结论是 HR 不该被重复动作吃掉，能编排就编排。」</span></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head"><div class="sec-no">2</div><h2>实操时间线（4 段 · 约 4–6 周）</h2><span class="sub">阶段 / 时间 / 动作 / owner</span></div>
+    <div class="card">
+      <h3>一张表跑完（示意）</h3>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>关键动作</th><th>owner</th></tr></thead>
+        <tbody>
+          <tr><td>① 选型</td><td>W1</td><td>识别重复/易错/跨系统动作；判断能否编排（不是所有流程都适合自动化）</td><td>HRBP</td></tr>
+          <tr><td>② 设计</td><td>W2–3</td><td>写 PRD：触发条件+节点拆解+异常处理+验收；画编排流程图</td><td>HRBP（产品侧）</td></tr>
+          <tr><td>③ 落地</td><td>W4</td><td>接系统（企微/会议/文档）；跑通最小闭环；灰度测试</td><td>技术/编排</td></tr>
+          <tr><td>④ 推广</td><td>W5–6</td><td>adoption：培训+监控+异常处理 SOP；沉淀可复用模板</td><td>HRBP</td></tr>
+        </tbody>
+      </table>
+      <div class="why"><b>为什么先判"能否编排"：</b>带大量主观判断的流程（如敏感个案）不该硬自动化。只挑"规则明确、重复、跨系统"的动手。</div>
+    </div>
+  </section>
+
+  <section id="sample">
+    <div class="sec-head"><div class="sec-no">3</div><h2>示意样例产出</h2><span class="sub">长什么样 · 你的答辩 MCP</span></div>
+    <div class="card">
+      <h3>样例 · 编排节点图（示意）</h3>
+      <table>
+        <thead><tr><th>节点</th><th>动作</th><th>触发/异常</th></tr></thead>
+        <tbody>
+          <tr><td>触发</td><td>每月 1 日 定时</td><td>失败重试 3 次</td></tr>
+          <tr><td>建会</td><td>调会议系统建答辩会</td><td>冲突则顺延并通知</td></tr>
+          <tr><td>建群</td><td>拉评委+候选人群</td><td>缺人则告警 HRBP</td></tr>
+          <tr><td>回填</td><td>结果写看板</td><td>格式校验</td></tr>
+          <tr><td>归档</td><td>文档沉淀</td><td>完成后通知</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:18px">样例 · 验收 & adoption（示意）</h3>
+      <div class="pillbox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <span class="pill p-ok">端到端成功率 ≥ 95%</span>
+        <span class="pill p-should">人工耗时 数小时→分钟</span>
+        <span class="pill p-must">异常 SOP 覆盖</span>
+        <span class="pill p-could">被其他答辩/盘点复用</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>易卡点 · 反例</h2><span class="sub">新手踩的雷</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 什么都想自动化：</b>主观流程硬编 → 出错更难查。只挑规则明确的。</div>
+      <div class="pit"><b>❌ 只有流程没人管：</b>跑挂了没人知 → 异常监控+告警到人。</div>
+      <div class="pit"><b>❌ 不沉淀：</b>只有你会用 → 写 PRD+异常 SOP，给别人也能接。</div>
+      <div class="pit"><b>❌ 忽视 adoption：</b>建完没人用 → 培训+监控驱动使用。</div>
+      <div class="ok"><b>✅ 正确路径：</b>判能否编排→写 PRD 拆节点→接系统跑通→异常 SOP+adoption；HR 做产品侧设计，不一定要写码。</div>
+    </div>
+  </section>
+
+  <section id="blank">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 项目卡</h2><span class="sub">黄色字段本地存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">自动化对象：<span class="edit" contenteditable="true" id="f-obj">__（重复/跨系统动作）</span></span>
+        <div class="field" style="margin-top:10px"><span class="lbl">① 为什么值得编排（省时/降错）：</span><span class="edit" contenteditable="true" id="f-why">__</span></div>
+        <div class="field"><span class="lbl">② PRD 节点拆解：</span><span class="edit" contenteditable="true" id="f-nodes">__</span></div>
+        <div class="field"><span class="lbl">③ 接的系统 / 触发条件：</span><span class="edit" contenteditable="true" id="f-sys">__</span></div>
+        <div class="field"><span class="lbl">④ 异常处理 SOP：</span><span class="edit" contenteditable="true" id="f-exc">__</span></div>
+        <div class="field"><span class="lbl">⑤ 验收 & 复用情况：</span><span class="edit" contenteditable="true" id="f-ok">__</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+(function(){
+  var KEY='hp_v1';
+  var fields=document.querySelectorAll('[contenteditable]');
+  fields.forEach(function(el){
+    var id=el.id||el.getAttribute('data-id')||el.className;
+    var k=KEY+':'+id;
+    var v=localStorage.getItem(k);
+    if(v!==null && el.innerText!==v) el.innerText=v;
+  });
+  fields.forEach(function(el){
+    el.addEventListener('input',function(){
+      var id=el.id||el.getAttribute('data-id')||el.className;
+      try{localStorage.setItem(KEY+':'+id, el.innerText);}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>

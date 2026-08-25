@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新员工 90 天 Onboarding 项目 · 施工图</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)} .p-ok{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>新员工 90 天 Onboarding 项目 · 施工图</h1>
+  <div class="sub">30 / 60 / 90 计划 + 体验设计 + 留存 —— 让新人"来了就不想走、快就能产出"</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="project-hub.html">← 项目施工图集</a>
+    <a href="hr-knowledge-hub.html">HR 知识点集</a>
+    <a href="pm-structured-interview.html">结构化面试</a>
+    <a href="pm-manager-academy.html">新经理训练营</a>
+    <a href="pm-comp-review.html">年度调薪</a>
+    <a href="pm-culture-sop.html">文化活动 SOP</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+    <a href="pm-hr-productization.html">HR 流程产品化</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>统一四块——<b>① 项目定位</b><b>② 实操时间线（30/60/90 + 阶段动作/owner）</b><b>③ 示意样例产出</b><b>④ 易卡点</b> + <b>⑤ 你的填空版</b>。核心逻辑：好的入职不是"发电脑+培训一周"，而是用 90 天三段式把"陌生→能产出→认同"跑通，直接拉留存和产能爬坡。</div>
+
+  <section id="pos">
+    <div class="sec-head"><div class="sec-no">1</div><h2>项目定位 · 一句话</h2><span class="sub">为什么值钱 · 面试怎么讲</span></div>
+    <div class="card">
+      <h3>这是什么 & 为什么高 ROI</h3>
+      <p class="tag">行业常见：好 onboarding 让 1 年留存 +~80%、产能爬坡快数周；成本极低（机制+陪伴，非砸钱）</p>
+      <div class="ex">
+        <span class="lab">价值点（示意口径）</span>
+        <div class="step"><div class="n">·</div><div class="t"><b>留存：</b>新员工前 90 天是离职高发期，体验差直接走；结构化 onboarding 显著降低。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>产能：</b>明确 30/60/90 里程碑 → 新人知道"什么时候算合格"，爬坡期缩短。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>认同：</b>前 30 天决定"认不认这家"，文化融入靠设计不靠运气。</div></div>
+      </div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「Onboarding 我按 90 天三段式做——30 天融入（环境+关系+基础）、60 天产出（第一个小项目）、90 天复盘（达标+规划）。关键不是培训周，是' buddy + 经理周度 1:1 + 里程碑验收'三件套保证不掉链。我习惯用留存率和产能爬坡周期做验收，不是'培训满意度'这种虚指标。」</span></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head"><div class="sec-no">2</div><h2>实操时间线（90 天三段）</h2><span class="sub">阶段 / 时间 / 动作 / owner</span></div>
+    <div class="card">
+      <h3>一张表跑完（示意）</h3>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>关键动作</th><th>owner</th></tr></thead>
+        <tbody>
+          <tr><td>准备期</td><td>入职前 D-7</td><td>账号/设备/权限就绪；buddy 指派；经理写好 30 天目标；异地入职排好落地（你云技服"异地入职当天闭环"思路）</td><td>HR + IT + 经理</td></tr>
+          <tr><td>30 天·融入</td><td>D1–30</td><td>Day1 欢迎+文化；buddy 陪跑；经理每周 1:1；环境/工具/人认清；完成基础认证</td><td>buddy + 经理</td></tr>
+          <tr><td>60 天·产出</td><td>D31–60</td><td>接第一个真实小项目（proxy 角色）；中期复盘；补能力缺口（接 IDP 逻辑）</td><td>经理</td></tr>
+          <tr><td>90 天·复盘</td><td>D61–90</td><td>正式复盘会：达标否、下一阶段目标、留任意向摸底；输出新人健康度看板</td><td>HRBP + 经理</td></tr>
+          <tr><td>跟进</td><td>持续</td><td>季度回看留存/绩效；buddy 机制沉淀；异常（前 30 天想走）预警</td><td>HRBP</td></tr>
+        </tbody>
+      </table>
+      <div class="why"><b>为什么异地/多地团队更要设计：</b>你云技服多地协作经验里"异地入职当天闭环"就是这项目的硬动作——物理距离放大孤独感，必须靠机制补。</div>
+    </div>
+  </section>
+
+  <section id="sample">
+    <div class="sec-head"><div class="sec-no">3</div><h2>示意样例产出</h2><span class="sub">长什么样</span></div>
+    <div class="card">
+      <h3>样例 · 90 天里程碑卡（示意）</h3>
+      <table>
+        <thead><tr><th>节点</th><th>验收标准（可观测）</th><th>风险信号</th></tr></thead>
+        <tbody>
+          <tr><td>30 天</td><td>独立跑通日常工具；能说出跨部门 3 个关键接口人；基础认证通过</td><td>还没加进业务群 / 经理 2 周没 1:1</td></tr>
+          <tr><td>60 天</td><td>交付 1 个可演示的小项目；中期复盘无重大能力缺口</td><td>还在"看文档"没实做 / 反馈"不知道要干嘛"</td></tr>
+          <tr><td>90 天</td><td>达到岗位入门绩效；留任意向明确；下一阶段目标对齐</td><td>复盘时才说"想走" / 绩效不达标无 PIP</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:18px">样例 · 新人健康度看板指标（示意）</h3>
+      <div class="pillbox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <span class="pill p-ok">90 天留存率 ≥ 90%</span>
+        <span class="pill p-should">产能达标周期 ≤ 60 天</span>
+        <span class="pill p-must">前 30 天离职预警 即时</span>
+        <span class="pill p-could">新人 NPS ≥ 8</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>易卡点 · 反例</h2><span class="sub">新手踩的雷</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 培训周即终点：</b>上完课就散，后面没人管 → 30 天后是真空期，最容易走。</div>
+      <div class="pit"><b>❌ 无 buddy / 经理甩锅：</b>"HR 负责新人" → 经理不 1:1，新人没归属 → 明确经理是 owner。</div>
+      <div class="pit"><b>❌ 验收虚：</b>"参加了培训"算过关 → 必须里程碑可观测（交付/认证/复盘）。</div>
+      <div class="pit"><b>❌ 异地忽略：</b>总部热闹、异地冷清 → 异地入职当天闭环机制。</div>
+      <div class="ok"><b>✅ 正确路径：</b>buddy + 经理周度 1:1 + 里程碑验收三件套；用留存率和爬坡周期验收，不是满意度。</div>
+    </div>
+  </section>
+
+  <section id="blank">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 项目卡</h2><span class="sub">黄色字段本地存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">适用人群：<span class="edit" contenteditable="true" id="f-who">__（校招/社招/异地）</span></span>
+        <div class="field" style="margin-top:10px"><span class="lbl">① 30 天验收标准：</span><span class="edit" contenteditable="true" id="f-30">__</span></div>
+        <div class="field"><span class="lbl">② 60 天验收标准：</span><span class="edit" contenteditable="true" id="f-60">__</span></div>
+        <div class="field"><span class="lbl">③ 90 天验收标准：</span><span class="edit" contenteditable="true" id="f-90">__</span></div>
+        <div class="field"><span class="lbl">④ 成功指标（留存/爬坡/预警）：</span><span class="edit" contenteditable="true" id="f-kpi">__</span></div>
+        <div class="field"><span class="lbl">⑤ buddy/经理职责切分：</span><span class="edit" contenteditable="true" id="f-role">__</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+(function(){
+  var KEY='ob_v1';
+  var fields=document.querySelectorAll('[contenteditable]');
+  fields.forEach(function(el){
+    var id=el.id||el.getAttribute('data-id')||el.className;
+    var k=KEY+':'+id;
+    var v=localStorage.getItem(k);
+    if(v!==null && el.innerText!==v) el.innerText=v;
+  });
+  fields.forEach(function(el){
+    el.addEventListener('input',function(){
+      var id=el.id||el.getAttribute('data-id')||el.className;
+      try{localStorage.setItem(KEY+':'+id, el.innerText);}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>

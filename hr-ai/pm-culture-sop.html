@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文化活动从 0 到 1 SOP · 施工图</title>
+<style>
+  :root{
+    --grad:linear-gradient(120deg,#7c5cff 0%,#36c6ff 100%);
+    --grad2:linear-gradient(120deg,#a78bfa 0%,#5eead4 100%);
+    --purple:#7c5cff; --cyan:#36c6ff; --ink:#1f2430; --muted:#6b7280;
+    --soft:#f5f3ff; --card:#ffffff; --line:#ecedf5; --warn:#ff7a59; --ok:#2bbf8a; --red:#e5484d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(180deg,#f7f8ff 0%,#eef4ff 100%);color:var(--ink);line-height:1.75;padding:0 0 60px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:42px 20px 26px;text-align:center;background:var(--grad);color:#fff;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(124,92,255,.25)}
+  header h1{margin:0;font-size:30px;letter-spacing:1px}
+  header .sub{opacity:.92;margin-top:8px;font-size:14px}
+  .dept{margin-top:16px;display:inline-block;background:rgba(255,255,255,.18);border:1px dashed rgba(255,255,255,.6);
+    border-radius:999px;padding:6px 18px;font-size:14px;color:#fff;cursor:text}
+  .dept:focus{outline:none;background:rgba(255,255,255,.3)}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 6px}
+  .toc a{text-decoration:none;font-size:13px;color:var(--purple);background:#fff;border:1px solid var(--line);
+    padding:7px 14px;border-radius:999px;box-shadow:0 2px 8px rgba(124,92,255,.08)}
+  .toc a:hover{background:var(--soft)}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .sec-no{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex:none}
+  .sec-head h2{margin:0;font-size:22px}
+  .sec-head .sub{color:var(--muted);font-size:13px;margin-left:auto}
+  .lead{font-size:13.5px;color:var(--muted);margin:0 0 16px;background:var(--soft);padding:12px 16px;border-radius:12px;border-left:3px solid var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;
+    box-shadow:0 4px 18px rgba(31,36,48,.05)}
+  .card h3{margin:0 0 4px;font-size:17px;color:var(--purple)}
+  .card .tag{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .block-h{font-size:14px;font-weight:700;color:var(--ink);margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+  .block-h .b{width:22px;height:22px;border-radius:7px;background:var(--grad2);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+  .ex{background:#fbf7ff;border:1px solid #ece4ff;border-radius:12px;padding:14px 16px;margin-top:6px}
+  .ex .lab{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;display:block}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .step .t{font-size:13.5px}
+  .step .t b{color:var(--purple)}
+  .pit{background:#fff5f2;border:1px solid #ffd9cc;border-left:3px solid var(--warn);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .pit b{color:var(--warn)}
+  .ok{background:#f1fbf6;border:1px solid #cdeede;border-left:3px solid var(--ok);border-radius:0 10px 10px 0;padding:10px 14px;margin:8px 0;font-size:13px}
+  .ok b{color:var(--ok)}
+  .edit{background:#fff8d6;border-bottom:1px dashed #e0c200;padding:1px 4px;border-radius:4px;color:#7a5b00;font-weight:600}
+  .edit:focus{outline:none;background:#fff3b0}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:center;vertical-align:middle}
+  th{background:var(--soft);color:var(--purple)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;color:#fff;font-weight:600;vertical-align:middle}
+  .p-must{background:var(--warn)} .p-should{background:var(--purple)} .p-could{background:var(--cyan)} .p-red{background:var(--red)} .p-ok{background:var(--ok)}
+  .why{font-size:12.5px;color:var(--muted);background:#fbf7ff;border-left:3px solid var(--purple);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px}
+  .why b{color:var(--purple)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .field{font-size:13.5px;margin:8px 0}
+  .field .lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+  .say{background:#eef6ff;border:1px solid #d4e6ff;border-radius:12px;padding:12px 16px;margin-top:12px;font-size:13.5px}
+  .say .q{color:var(--cyan);font-weight:700}
+  .say .a{color:var(--ink)}
+  footer{margin-top:50px;text-align:center;font-size:13px;color:var(--muted);padding:22px;border-top:1px solid var(--line)}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>文化活动从 0 到 1 SOP · 施工图</h1>
+  <div class="sub">立项 → 策划 → 筹备 → 执行 → 复盘 —— 让文化"有记忆点、可复用"，不是办完就散</div>
+  <div class="dept" contenteditable="true" id="dept">部门 / 目标公司：（双击编辑，本地自动保存）</div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <a href="project-hub.html">← 项目施工图集</a>
+    <a href="hr-knowledge-hub.html">HR 知识点集</a>
+    <a href="pm-structured-interview.html">结构化面试</a>
+    <a href="pm-onboarding-90.html">新员工 90 天</a>
+    <a href="pm-manager-academy.html">新经理训练营</a>
+    <a href="pm-comp-review.html">年度调薪</a>
+    <a href="pm-people-analytics.html">PA 看板</a>
+    <a href="pm-hr-productization.html">HR 流程产品化</a>
+  </div>
+
+  <div class="lead"><b>这份怎么用：</b>统一四块——<b>① 项目定位</b><b>② 实操时间线（5 段）</b><b>③ 示意样例产出</b><b>④ 易卡点</b> + <b>⑤ 你的填空版</b>。这是你最具辨识度的差异点——你真做过 H2 文化周、57 套团建方案池、AI 漫剧《企鹅英雄》、AISee 沙龙、MigraQ 英语角、博闻多识。核心逻辑：文化活动最怕"热闹一阵没沉淀"，SOP 化让它可复用、可量化。</div>
+
+  <section id="pos">
+    <div class="sec-head"><div class="sec-no">1</div><h2>项目定位 · 一句话</h2><span class="sub">为什么值钱 · 面试怎么讲</span></div>
+    <div class="card">
+      <h3>这是什么 & 为什么是差异点</h3>
+      <p class="tag">文化活动常是"花架子"；你做的是"有记忆点+有机制+可复用"的运营型文化</p>
+      <div class="ex">
+        <span class="lab">价值点（你的真实素材·示意）</span>
+        <div class="step"><div class="n">·</div><div class="t"><b>有记忆点：</b>AI 漫剧《企鹅英雄》、AISee 沙龙这种不是喊口号，是传播载体。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>有机制：</b>博闻多识平台盯"人均参与深度、剔掉<15min 水课"，不是堆场次。</div></div>
+        <div class="step"><div class="n">·</div><div class="t"><b>可复用：</b>57 套团建方案池、员工大会/Open Day 模板，做过被别中心抄走。</div></div>
+      </div>
+      <div class="say"><span class="q">面试能直接说：</span><span class="a">「我做文化活动不是办完就散，而是当运营项目——先定'这次要解决什么组织问题'（不是为办而办），再选载体（沙龙/漫剧/团建），执行后用参与深度和业务反馈验收，最后沉淀成可复用 SOP/方案池。我做过 AI 文化落地的完整链路：从 AISee 沙龙到 AI 漫剧 IP 到英语角，结论是'文化靠高频小载体持续渗透，不靠一年一次大活动'。」</span></div>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head"><div class="sec-no">2</div><h2>实操时间线（5 段 · 依规模 4–12 周）</h2><span class="sub">阶段 / 时间 / 动作 / owner</span></div>
+    <div class="card">
+      <h3>一张表跑完（示意）</h3>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>关键动作</th><th>owner</th></tr></thead>
+        <tbody>
+          <tr><td>① 立项</td><td>W0</td><td>定目标（解决什么组织问题）+ 受众 + 预算 + 成功指标（参与深度/业务反馈）</td><td>文化 HR + 业务</td></tr>
+          <tr><td>② 策划</td><td>W1–2</td><td>选载体（沙龙/漫剧/团建/大赛）；出主题与记忆点；拉方案池（57 套思路）</td><td>文化 HR</td></tr>
+          <tr><td>③ 筹备</td><td>W3–5</td><td>物料/嘉宾/场地/宣发；志愿者；风险预案（你异地/多地语境）</td><td>执行小组</td></tr>
+          <tr><td>④ 执行</td><td>W6</td><td>现场/线上落地；实时收集反馈；记录高光时刻做传播素材</td><td>全员</td></tr>
+          <tr><td>⑤ 复盘</td><td>W7</td><td>参与深度+业务反馈验收；沉淀 SOP/方案池；高光内容二次传播</td><td>文化 HR</td></tr>
+        </tbody>
+      </table>
+      <div class="why"><b>为什么先定"组织问题"再选载体：</b>很多文化活动的死因是"为办而办"——先有 KPI 要凑场次，再硬塞内容。反过来才能保证每次都有记忆点。</div>
+    </div>
+  </section>
+
+  <section id="sample">
+    <div class="sec-head"><div class="sec-no">3</div><h2>示意样例产出</h2><span class="sub">长什么样 · 用你的真实素材</span></div>
+    <div class="card">
+      <h3>样例 · 文化活动组合卡（示意，均源自你真实做过）</h3>
+      <table>
+        <thead><tr><th>载体</th><th>解决的组织问题</th><th>记忆点 / 机制</th></tr></thead>
+        <tbody>
+          <tr><td>AISee 沙龙</td><td>技术团队 AI 认知断层</td><td>高频小场、讲真落地案例</td></tr>
+          <tr><td>AI 漫剧《企鹅英雄》</td><td>文化口号没人记</td><td>IP 化传播、二次传播率高</td></tr>
+          <tr><td>MigraQ 英语角</td><td>跨域协作语言门槛</td><td>轻量持续、参与度深</td></tr>
+          <tr><td>博闻多识平台</td><td>培训行为不转化</td><td>参与深度口径、剔<15min水课</td></tr>
+          <tr><td>57 套团建方案池</td><td>多地团队"管不过来"</td><td>可复用、按需取</td></tr>
+        </tbody>
+      </table>
+      <h3 style="margin-top:18px">样例 · 验收指标（示意）</h3>
+      <div class="pillbox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <span class="pill p-ok">人均参与深度 达标</span>
+        <span class="pill p-should">业务反馈正向 ≥ 70%</span>
+        <span class="pill p-must">沉淀 SOP/方案池 1 份</span>
+        <span class="pill p-could">高光内容二次传播 曝光 ≥ __</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pit">
+    <div class="sec-head"><div class="sec-no">4</div><h2>易卡点 · 反例</h2><span class="sub">新手踩的雷</span></div>
+    <div class="card">
+      <div class="pit"><b>❌ 为办而办：</b>先凑场次 KPI 再塞内容 → 没记忆点。先定组织问题。</div>
+      <div class="pit"><b>❌ 只重到场：</b>"几百人参与"但<15min 就走 → 用参与深度口径（博闻思路）。</div>
+      <div class="pit"><b>❌ 不沉淀：</b>办完素材丢 → 下次从零。复盘必出 SOP/方案池。</div>
+      <div class="pit"><b>❌ 一年一次大活动：</b>脉冲式，平时没渗透 → 高频小载体持续运营。</div>
+      <div class="ok"><b>✅ 正确路径：</b>组织问题→载体→执行→参与深度+业务反馈验收→沉淀复用；高频小载体 > 一年一大场。</div>
+    </div>
+  </section>
+
+  <section id="blank">
+    <div class="sec-head"><div class="sec-no">5</div><h2>你的填空版 · 项目卡</h2><span class="sub">黄色字段本地存</span></div>
+    <div class="card">
+      <div class="ex">
+        <span class="lab">本次活动：<span class="edit" contenteditable="true" id="f-name">__（主题）</span></span>
+        <div class="field" style="margin-top:10px"><span class="lbl">① 要解决的组织问题：</span><span class="edit" contenteditable="true" id="f-prob">__</span></div>
+        <div class="field"><span class="lbl">② 选的载体 + 记忆点：</span><span class="edit" contenteditable="true" id="f-vec">__</span></div>
+        <div class="field"><span class="lbl">③ 成功指标（参与深度/业务反馈）：</span><span class="edit" contenteditable="true" id="f-kpi">__</span></div>
+        <div class="field"><span class="lbl">④ 沉淀产出（SOP/方案池/素材）：</span><span class="edit" contenteditable="true" id="f-out">__</span></div>
+        <div class="field"><span class="lbl">⑤ 风险预案（异地/嘉宾/舆情）：</span><span class="edit" contenteditable="true" id="f-risk">__</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+<script>
+(function(){
+  var KEY='cu_v1';
+  var fields=document.querySelectorAll('[contenteditable]');
+  fields.forEach(function(el){
+    var id=el.id||el.getAttribute('data-id')||el.className;
+    var k=KEY+':'+id;
+    var v=localStorage.getItem(k);
+    if(v!==null && el.innerText!==v) el.innerText=v;
+  });
+  fields.forEach(function(el){
+    el.addEventListener('input',function(){
+      var id=el.id||el.getAttribute('data-id')||el.className;
+      try{localStorage.setItem(KEY+':'+id, el.innerText);}catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>
