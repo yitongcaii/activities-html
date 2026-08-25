@@ -6,16 +6,15 @@
 <title>培训文化求职作品集 · 蔡女士</title>
 <style>
 :root{
-  --purple:#7C3AED;--cyan:#06B6D4;
-  --grad:linear-gradient(135deg,#7C3AED,#06B6D4);
   --bg:#F8FAFC;--card:#FFFFFF;--txt:#1E293B;--sub:#64748B;
-  --shadow:0 8px 24px rgba(124,58,237,.08);
-  --shadow-h:0 16px 36px rgba(124,58,237,.16);
+  --shadow:0 8px 24px rgba(30,41,59,.07);
+  --shadow-h:0 16px 36px rgba(30,41,59,.14);
+  --c1:#7C3AED;--c2:#06B6D4;--c3:#F59E0B;--c4:#3B82F6;--c5:#10B981;--c6:#EF4444;--c7:#EC4899;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px 60px}
-.hero{background:var(--grad);border-radius:0 0 28px 28px;padding:54px 40px 46px;color:#fff;box-shadow:var(--shadow-h);position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,#7C3AED,#06B6D4);border-radius:0 0 28px 28px;padding:54px 40px 46px;color:#fff;box-shadow:var(--shadow-h);position:relative;overflow:hidden}
 .hero:after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);border-radius:50%}
 .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
 .pill{display:inline-block;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600}
@@ -29,46 +28,55 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .num span{font-size:13px;opacity:.92}
 .sec{margin-top:46px}
 .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.sec-head .k{background:var(--grad);color:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
+.sec-head .k{background:var(--ac);color:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
 .sec-head h2{font-size:23px;font-weight:700}
 .sec-head .hint{font-size:13px;color:var(--sub);margin-left:auto}
-.bento{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.bento{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:.28s;height:100%}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
 .card h3{font-size:18px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.card h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);flex:0 0 auto}
+.card h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--ac);flex:0 0 auto}
 .card p{font-size:14.5px;color:#334155}
-.mini{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12.5px;background:rgba(124,58,237,.1);color:var(--purple);font-weight:600;margin:0 6px 8px 0}
+.mini{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12.5px;background:color-mix(in srgb,var(--ac) 12%,white);color:var(--ac);font-weight:600;margin:0 6px 8px 0}
 .full{grid-column:1/-1}
 .steps{list-style:none;counter-reset:s}
 .steps li{position:relative;padding:10px 0 10px 38px;border-bottom:1px dashed #E2E8F0;font-size:14.5px}
 .steps li:last-child{border-bottom:none}
-.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
-.kpi .box{background:linear-gradient(135deg,#F5F3FF,#ECFEFF);border-radius:14px;padding:18px;text-align:center}
-.kpi b{display:block;font-size:26px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kpi .box{background:color-mix(in srgb,var(--ac) 8%,white);border:1px solid color-mix(in srgb,var(--ac) 18%,white);border-radius:14px;padding:18px;text-align:center}
+.kpi b{display:block;font-size:26px;font-weight:800;color:var(--ac)}
 .kpi span{font-size:13px;color:var(--sub)}
 .ed{outline:none;border-radius:6px;transition:.2s}
 .ed:hover{background:rgba(124,58,237,.04)}
 .ed:focus{background:rgba(124,58,237,.08);box-shadow:0 0 0 2px rgba(124,58,237,.25)}
 .ed:empty:before{content:attr(data-ph);color:#94A3B8}
-.lnk{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:5px 13px;border-radius:999px;background:var(--grad);color:#fff;font-size:12.5px;font-weight:600;text-decoration:none;transition:.2s}
+.lnk{display:inline-flex;align-items:center;gap:5px;margin-top:12px;padding:5px 13px;border-radius:999px;background:var(--ac);color:#fff;font-size:12.5px;font-weight:600;text-decoration:none;transition:.2s}
 .lnk:hover{box-shadow:0 6px 16px rgba(124,58,237,.32);transform:translateY(-1px)}
 .lk{font-size:12px;color:#94A3B8;margin-top:10px}
-/* 案例卡：结果前置 */
-.case-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.metric{flex:0 0 auto;background:var(--grad);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;font-size:15px;line-height:1.25;text-align:center}
-.case-head h3{margin-bottom:0}
+.case-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.metric{flex:0 0 auto;background:var(--ac);color:#fff;border-radius:12px;padding:8px 14px;font-weight:800;font-size:15px;line-height:1.25;text-align:center;min-width:88px}
+.case-head h3{margin-bottom:0;font-size:16.5px}
 .case-body p{font-size:13.5px;color:#475569;margin-top:9px}
-.case-body b{color:var(--purple)}
+.case-body b{color:var(--ac)}
 .case-result{margin-top:12px;padding-top:10px;border-top:1px dashed #E2E8F0;font-size:13px;color:var(--sub)}
-/* AI 作品卡：角色标签 + 代表作高亮 */
-.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:rgba(6,182,212,.12);color:#0891B2;margin-bottom:9px}
-.card.feat{border:1.5px solid rgba(124,58,237,.35)}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--ac) 14%,white);color:var(--ac);margin-bottom:9px}
+.card.feat{border:1.5px solid color-mix(in srgb,var(--ac) 35%,white)}
+.vcover{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-bottom:12px;cursor:pointer;background:#0f172a}
+.vcover img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.vcover:hover img{transform:scale(1.05)}
+.vcover .play{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px}
+.vcover .badge{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:3px 9px;border-radius:999px}
+.lb{position:fixed;inset:0;background:rgba(15,23,42,.86);display:none;align-items:center;justify-content:center;z-index:99;padding:24px}
+.lb.show{display:flex}
+.lb-stage{max-width:92vw;max-height:88vh}
+.lb-stage video,.lb-stage img{max-width:92vw;max-height:88vh;border-radius:12px;background:#000}
+.lb-close{position:absolute;top:18px;right:24px;width:42px;height:42px;border:none;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:24px;cursor:pointer;line-height:1}
+.lb-close:hover{background:rgba(255,255,255,.32)}
 footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
 .reveal{opacity:0;transform:translateY(14px);transition:.6s ease}
 .reveal.in{opacity:1;transform:none}
-@media(max-width:600px){.hero{padding:40px 22px 34px}.wrap{padding:0 14px 50px}.case-head{flex-direction:column;align-items:flex-start;gap:8px}}
+@media(max-width:720px){.bento,.kpi{grid-template-columns:1fr}.hero{padding:40px 22px 34px}.wrap{padding:0 14px 50px}.case-head{flex-direction:column;align-items:flex-start;gap:8px}.metric{min-width:0}}
 </style>
 </head>
 <body>
@@ -90,12 +98,11 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
 </header>
 
 <main class="wrap">
-  <!-- 能力全景 -->
-  <section class="sec reveal">
+  <!-- 01 能力全景 -->
+  <section class="sec reveal" style="--ac:var(--c1)">
     <div class="sec-head"><span class="k">01</span><h2>能力全景</h2><span class="hint">点标签可改 · 删掉不擅长的</span></div>
     <div class="bento">
       <div class="card full">
-        <h3><span class="dot"></span>我主要会干这几块活</h3>
         <div>
           <span class="mini ed" id="ts1" data-ph="培训策划与交付">文化活动策划落地</span>
           <span class="mini ed" id="ts2" data-ph="文化活动运营">培训运营</span>
@@ -110,8 +117,8 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 案例集（结果前置） -->
-  <section class="sec reveal">
+  <!-- 02 案例集 -->
+  <section class="sec reveal" style="--ac:var(--c2)">
     <div class="sec-head"><span class="k">02</span><h2>案例集（核心）</h2><span class="hint">结果前置 · 一眼看懂你带来了什么</span></div>
     <div class="bento">
       <div class="card case">
@@ -121,7 +128,7 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
         </div>
         <div class="case-body">
           <p><b>背景：</b><span class="ed" id="tc1b" data-ph="新人入职散、融入慢">团队扩张快，新老员工缺共同记忆点，归属感弱。</span></p>
-          <p><b>我干了啥：</b><span class="ed" id="tc1a" data-ph="你具体做了哪些动作">参与策划落地多场活动（学习平台、员工大会）；独立负责全流程：方案设计 → 物料筹备 → 现场执行 → 效果复盘。</span></p>
+          <p><b>关键动作：</b><span class="ed" id="tc1a" data-ph="你具体做了哪些动作">参与策划落地多场活动（学习平台、员工大会）；独立负责全流程：方案设计 → 物料筹备 → 现场执行 → 效果复盘。</span></p>
         </div>
         <div class="case-result">📌 结果：<span class="ed" id="tc1r" data-ph="数字结果">覆盖 1000+ 人技术团队（待补参与率/满意度/NPS 数字）。</span></div>
       </div>
@@ -132,7 +139,7 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
         </div>
         <div class="case-body">
           <p><b>背景：</b><span class="ed" id="tc2b" data-ph="团队氛围淡、认同感弱">部门 AI 应用刚起步，员工认知参差、应用意愿不一。</span></p>
-          <p><b>我干了啥：</b><span class="ed" id="tc2a" data-ph="你具体做了哪些动作">推动部门 AI 文化建设，参与公司级人才培养项目；主导建设文化活动通知效率，形成部门「公众号」资产。</span></p>
+          <p><b>关键动作：</b><span class="ed" id="tc2a" data-ph="你具体做了哪些动作">推动部门 AI 文化建设，参与公司级人才培养项目；主导建设文化活动通知效率，形成部门「公众号」资产。</span></p>
         </div>
         <div class="case-result">📌 结果：<span class="ed" id="tc2r" data-ph="数字结果">进入公司级人才培养项目，沉淀可复用的内部 AI 文化资产（待补具体数字）。</span></div>
       </div>
@@ -143,7 +150,7 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
         </div>
         <div class="case-body">
           <p><b>背景：</b><span class="ed" id="tc3b" data-ph="培训全靠外部、成本高">雇主品牌从 0 起步，招聘成本高。</span></p>
-          <p><b>我干了啥：</b><span class="ed" id="tc3a" data-ph="你具体做了哪些动作">联想 0-1 推行内推制度（年度宣导 + 奖励规则）；安芯易协作制作海报/图文/视频、运营公众号。</span></p>
+          <p><b>关键动作：</b><span class="ed" id="tc3a" data-ph="你具体做了哪些动作">联想 0-1 推行内推制度（年度宣导 + 奖励规则）；安芯易协作制作海报/图文/视频、运营公众号。</span></p>
         </div>
         <div class="case-result">📌 结果：<span class="ed" id="tc3r" data-ph="数字结果">公众号推文增长 500+，内推 20+ 人入职降本（待补具体金额）。</span></div>
       </div>
@@ -154,19 +161,19 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
         </div>
         <div class="case-body">
           <p><b>背景：</b><span class="ed" id="tc4b" data-ph="知识散落、难沉淀">新员工培训课件老旧；加盟商培训缺标准。</span></p>
-          <p><b>我干了啥：</b><span class="ed" id="tc4a" data-ph="你具体做了哪些动作">康诺思腾优化入职培训课件与视频、运营培训系统、主导毕业季礼品方案；如新独立制作培训课件与视频剪辑，完成 100 名加盟商培训。</span></p>
+          <p><b>关键动作：</b><span class="ed" id="tc4a" data-ph="你具体做了哪些动作">康诺思腾优化入职培训课件与视频、运营培训系统、主导毕业季礼品方案；如新独立制作培训课件与视频剪辑，完成 100 名加盟商培训。</span></p>
         </div>
         <div class="case-result">📌 结果：<span class="ed" id="tc4r" data-ph="数字结果">如新加盟商培训满意度 90%。</span></div>
       </div>
     </div>
   </section>
 
-  <!-- AI 流程产品化（文化活动侧） -->
-  <section class="sec reveal">
+  <!-- 03 AI 流程产品化（文化运营侧） -->
+  <section class="sec reveal" style="--ac:var(--c3)">
     <div class="sec-head"><span class="k">03</span><h2>AI 流程产品化（文化运营侧）</h2><span class="hint">我把重复性文化运营做成了系统 / 内容</span></div>
     <div class="bento">
-      <div class="card full feat"><span class="tag">知识库自动化</span><h3><span class="dot"></span><span class="ed" id="ta1t" data-ph="作品标题">文化活动知识库 AI 自动化更新</span></h3><p><span class="ed" id="ta1d" data-ph="作用">知识库持续自动保鲜——新案例按时进库、一手 / 二手层级清晰可溯源，不再依赖人工零散上网搜、也不会越积越乱。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">🔗 看文化活动文档地图</a></div>
-      <div class="card feat"><span class="tag">AIGC 内容</span><h3><span class="dot"></span><span class="ed" id="ta2t" data-ph="作品标题">AI 漫剧</span></h3><p><span class="ed" id="ta2d" data-ph="作用">可用于活动宣发、产品介绍、线下活动暖场等场景，宣传内容形态创新、降本提效。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank" rel="noopener">🔗 看《企鹅英雄》分镜台本</a></div>
+      <div class="card full feat"><span class="tag">知识库自动化</span><h3><span class="dot"></span><span class="ed" id="ta1t" data-ph="作品标题">文化活动知识库 AI 自动化更新</span></h3><a class="vcover" data-type="video" data-full="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base.mp4" data-poster="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base-01.jpg"><img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base-01.jpg" alt="文化活动知识库"><span class="badge">Demo 视频</span><span class="play">▶</span></a><p><span class="ed" id="ta1d" data-ph="作用">知识库持续自动保鲜——新案例按时进库、一手 / 二手层级清晰可溯源，不再依赖人工零散上网搜、也不会越积越乱。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">🔗 看文化活动文档地图</a></div>
+      <div class="card feat"><span class="tag">AIGC 内容</span><h3><span class="dot"></span><span class="ed" id="ta2t" data-ph="作品标题">AI 漫剧</span></h3><a class="vcover" data-type="video" data-full="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic.mp4" data-poster="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic-01.jpg"><img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic-01.jpg" alt="AI 漫剧"><span class="badge">Demo 视频</span><span class="play">▶</span></a><p><span class="ed" id="ta2d" data-ph="作用">可用于活动宣发、产品介绍、线下活动暖场等场景，宣传内容形态创新、降本提效。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank" rel="noopener">🔗 看《企鹅英雄》分镜台本</a></div>
       <div class="card"><span class="tag">数据分析</span><h3><span class="dot"></span><span class="ed" id="ta3t" data-ph="作品标题">培训效果看板</span></h3><p><span class="ed" id="ta3d" data-ph="作用">培训效果数据（参与人数 / 参与人次 / 参与时长清洗）与原声反馈（学员真实感受）双维度可视，培训价值可量化、迭代有据。</span></p><a class="lnk" href="https://yitongcaii.github.io/activities-html/bowen_dashboard_20260804_2052.html" target="_blank" rel="noopener">🔗 看博闻培训综合看板</a></div>
       <div class="card"><span class="tag">新媒体运营</span><h3><span class="dot"></span><span class="ed" id="ta4t" data-ph="作品标题">小红书账号 AI 运营</span></h3><p><span class="ed" id="ta4d" data-ph="作用">从内容生产到发布全程提速、风格统一、合规可控，账号矩阵可量化运营与复盘，对外内容不再又慢又散。</span></p><span class="lk">📕 小红书运营（图文/视频内容生产→发布提速）</span></div>
       <div class="card"><span class="tag">激励系统</span><h3><span class="dot"></span><span class="ed" id="ta5t" data-ph="作品标题">培训积分商城</span></h3><p><span class="ed" id="ta5d" data-ph="作用">员工参与培训 / 活动有即时量化反馈与获得感，参与率 / 活跃度可量化提升，形成「参与→积分→兑换」正向循环。</span></p><span class="lk">🛒 积分商城（参与→积分→兑换正向循环）</span></div>
@@ -175,9 +182,9 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 数据成果墙（数字盒子） -->
-  <section class="sec reveal">
-    <div class="sec-head"><span class="k">04</span><h2>数据成果墙</h2><span class="hint">把所有能量化的成绩集中放</span></div>
+  <!-- 04 数据成果墙 -->
+  <section class="sec reveal" style="--ac:var(--c4)">
+    <div class="sec-head"><span class="k">04</span><h2>数据成果墙</h2><span class="hint">核心数据总览</span></div>
     <div class="kpi">
       <div class="box"><b><span class="ed" id="tk1" data-ph="1000+">1000+</span></b><span><span class="ed" id="tk1t" data-ph="年交付培训/活动场次">文化活动覆盖人数</span></span></div>
       <div class="box"><b><span class="ed" id="tk2" data-ph="500+">500+</span></b><span><span class="ed" id="tk2t" data-ph="平均满意度（5分制）">公众号推文增长</span></span></div>
@@ -188,9 +195,9 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 工具/SOP -->
-  <section class="sec reveal">
-    <div class="sec-head"><span class="k">05</span><h2>我沉淀的工具 / 模板 / SOP</h2><span class="hint">这是培训文化岗真正的「作品」</span></div>
+  <!-- 05 工具/SOP -->
+  <section class="sec reveal" style="--ac:var(--c5)">
+    <div class="sec-head"><span class="k">05</span><h2>可复用资产 · 工具 / 模板 / SOP</h2><span class="hint">培训文化岗真正的「作品」</span></div>
     <div class="bento">
       <div class="card"><h3><span class="dot"></span><span class="ed" id="tt1t" data-ph="培训项目SOP">活动策划 checklist</span></h3><p><span class="ed" id="tt1d" data-ph="说明解决了什么麻烦">从方案到复盘的全流程清单（时间线+物料+风险），大型活动不翻车。</span></p></div>
       <div class="card"><h3><span class="dot"></span><span class="ed" id="tt2t" data-ph="活动策划checklist">海报 / 视频模板（PR）</span></h3><p><span class="ed" id="tt2d" data-ph="说明解决了什么麻烦">一套可复用视觉模板，自己就能出图出片，不依赖设计。</span></p></div>
@@ -200,8 +207,8 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     <p style="margin-top:12px;color:var(--sub);font-size:13px">💡 把上面模板的脱敏截图贴进对应卡片会更可信（公司名/logo打码）。</p>
   </section>
 
-  <!-- 影响力 -->
-  <section class="sec reveal">
+  <!-- 06 影响力 -->
+  <section class="sec reveal" style="--ac:var(--c6)">
     <div class="sec-head"><span class="k">06</span><h2>影响力 / 跨部门协作</h2></div>
     <div class="card full">
       <ol class="steps">
@@ -212,8 +219,8 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
     </div>
   </section>
 
-  <!-- 学习证书 -->
-  <section class="sec reveal">
+  <!-- 07 学习证书 -->
+  <section class="sec reveal" style="--ac:var(--c7)">
     <div class="sec-head"><span class="k">07</span><h2>学习成长线</h2></div>
     <div class="bento">
       <div class="card"><h3><span class="dot"></span><span class="ed" id="tl1t" data-ph="企业培训师认证">工商管理本科 · 中山大学新华学院</span></h3><p><span class="ed" id="tl1d" data-ph="机构/年份">统招全日制 · 结课排名前 15%</span></p></div>
@@ -225,6 +232,8 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
 
 <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
 
+<div class="lb" id="lb"><button class="lb-close" onclick="closeLb()" aria-label="关闭">×</button><div class="lb-stage" id="lbStage"></div></div>
+
 <script>
 document.querySelectorAll('.ed').forEach(el=>{
   const key='tc_'+el.id;
@@ -232,6 +241,10 @@ document.querySelectorAll('.ed').forEach(el=>{
   if(saved!==null && saved!=='') el.innerHTML=saved;
   el.addEventListener('input',()=>localStorage.setItem(key,el.innerHTML));
 });
+function openLb(type,full,poster){const s=document.getElementById('lbStage');s.innerHTML=type==='video'?'<video src="'+full+'"'+(poster?' poster="'+poster+'"':'')+' controls autoplay playsinline></video>':'<img src="'+full+'">';document.getElementById('lb').classList.add('show')}
+function closeLb(){document.getElementById('lb').classList.remove('show');document.getElementById('lbStage').innerHTML=''}
+document.querySelectorAll('.vcover').forEach(c=>c.addEventListener('click',()=>openLb(c.dataset.type,c.dataset.full,c.dataset.poster)));
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')closeLb()});
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
