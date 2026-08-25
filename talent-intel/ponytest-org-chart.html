@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>谱尼测试 组织架构图</title>
+<style>
+  :root{
+    --purple:#7C3AED; --cyan:#06B6D4;
+    --bg:#F8FAFC; --card:#FFFFFF; --ink:#1E293B; --sub:#64748B; --line:#E2E8F0;
+    --hi:#16A34A; --mid:#F59E0B; --lo:#DC2626;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;padding:30px 18px 60px;}
+  .wrap{max-width:1200px;margin:0 auto;}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));border-radius:22px;padding:30px 34px;color:#fff;
+    box-shadow:0 10px 30px rgba(124,58,237,.25);margin-bottom:22px;}
+  header h1{font-size:28px;font-weight:700;}
+  header .sub{font-size:13px;opacity:.92;margin-top:8px;line-height:1.7;}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0 6px;font-size:12px;color:var(--sub);}
+  .legend span{display:inline-flex;align-items:center;gap:5px;}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  .dot-hi{background:var(--hi);} .dot-mid{background:var(--mid);} .dot-lo{background:var(--lo);}
+
+  /* ---- tree ---- */
+  .tree{display:flex;justify-content:center;margin:30px 0 10px;overflow-x:auto;}
+  .tree ul{display:flex;padding-top:22px;position:relative;transition:.3s;}
+  .tree li{list-style:none;text-align:center;position:relative;padding:22px 10px 0;transition:.3s;}
+  .tree li::before,.tree li::after{content:'';position:absolute;top:0;right:50%;border-top:2px solid #CBD5E1;width:50%;height:22px;}
+  .tree li::after{right:auto;left:50%;border-left:2px solid #CBD5E1;}
+  .tree li:only-child::after,.tree li:only-child::before{display:none;}
+  .tree li:only-child{padding-top:22px;}
+  .tree li:first-child::before,.tree li:last-child::after{border:0 none;}
+  .tree li:last-child::before{border-right:2px solid #CBD5E1;border-radius:0 6px 0 0;}
+  .tree li:first-child::after{border-radius:6px 0 0 0;}
+  .tree ul ul::before{content:'';position:absolute;top:0;left:50%;border-left:2px solid #CBD5E1;width:0;height:22px;}
+  .tree ul:first-child{padding-top:0;}
+  .tree ul:first-child>li{margin-top:0;}
+
+  .node{cursor:pointer;border:none;background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:12px 16px;min-width:150px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.15s;display:inline-block;text-align:left;}
+  .node:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(124,58,237,.18);border-color:var(--purple);}
+  .node.sel{border:2px solid var(--purple);box-shadow:0 8px 22px rgba(124,58,237,.28);}
+  .node .nm{font-weight:700;font-size:16px;display:flex;align-items:center;gap:6px;}
+  .node .rl{font-size:12px;color:var(--purple);font-weight:600;margin-top:3px;}
+  .node .tag{font-size:10px;padding:1px 7px;border-radius:999px;font-weight:700;}
+  .tag-hi{background:#DCFCE7;color:var(--hi);} .tag-mid{background:#FEF3C7;color:var(--mid);} .tag-lo{background:#FEE2E2;color:var(--lo);}
+  .node.apex{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border:none;}
+  .node.apex .rl{color:#fff;opacity:.9;}
+  .node.gm{background:#EEF2FF;border-color:#C7D2FE;}
+
+  .columns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px;}
+  @media(max-width:720px){.columns{grid-template-columns:1fr;}}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 4px 12px rgba(0,0,0,.06);}
+  .panel h3{font-size:16px;font-weight:700;margin-bottom:12px;padding-left:10px;border-left:4px solid var(--purple);}
+  .chip{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--line);
+    border-radius:10px;margin-bottom:8px;cursor:pointer;font-size:13px;transition:.15s;}
+  .chip:hover{background:#F8FAFF;border-color:var(--purple);}
+  .chip .meta{font-size:11px;color:var(--sub);}
+  .note{font-size:12px;color:#9a3412;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;margin-top:6px;}
+
+  /* detail */
+  #detail{margin-top:24px;background:#fff;border:1px solid var(--purple);border-radius:16px;padding:20px 22px;
+    box-shadow:0 6px 20px rgba(124,58,237,.12);min-height:90px;}
+  #detail h2{font-size:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  #detail .drole{color:var(--purple);font-weight:600;font-size:13px;margin:6px 0 10px;}
+  #detail p{font-size:14px;color:var(--sub);}
+  #detail .src{font-size:12px;margin-top:10px;}
+  #detail .src a{color:var(--cyan);text-decoration:none;}
+  #detail .ph{color:#94A3B8;font-size:14px;}
+
+  footer{text-align:center;color:#94A3B8;font-size:12px;margin-top:40px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>谱尼测试（300887.SZ）组织架构图</h1>
+    <div class="sub">
+      采集日期：2026-08-25 ｜ 锚点：公司（谱尼测试集团股份有限公司）<br>
+      主树＝经营汇报链（宋薇 → 张英杰 → 各高管）；董事会构成与治理变动单列于下方面板。口径：仅采公开可查，不编不猜。
+    </div>
+  </header>
+
+  <div class="legend">
+    <span><i class="dot dot-hi"></i>高置信（官方公告/IR多源交叉）</span>
+    <span><i class="dot dot-mid"></i>中置信（单一来源）</span>
+    <span><i class="dot dot-lo"></i>低·需人工核实</span>
+    <span>👆 点击任意节点查看详情</span>
+  </div>
+
+  <!-- 主树：经营汇报链 -->
+  <div class="tree">
+    <ul>
+      <li>
+        <div class="node apex" data-id="songwei">
+          <div class="nm">宋薇 <span class="tag tag-hi">高</span></div>
+          <div class="rl">董事长 · 实际控制人（张英杰为法定代表人）</div>
+        </div>
+        <ul>
+          <li>
+            <div class="node gm" data-id="zhangyingjie">
+              <div class="nm">张英杰 <span class="tag tag-hi">高</span></div>
+              <div class="rl">总经理 · 法定代表人（宋薇提名）</div>
+            </div>
+            <ul>
+              <li><div class="node" data-id="jichunbo"><div class="nm">嵇春波 <span class="tag tag-hi">高</span></div><div class="rl">副总经理</div></div></li>
+              <li><div class="node" data-id="lixiaodong"><div class="nm">李小冬 <span class="tag tag-hi">高</span></div><div class="rl">董事·副总·董秘</div></div></li>
+              <li><div class="node" data-id="yangpengyuan"><div class="nm">杨鹏远 <span class="tag tag-hi">高</span></div><div class="rl">董事·财务负责人</div></div></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 下方面板 -->
+  <div class="columns">
+    <div class="panel">
+      <h3>第六届董事会构成（2025-09 换届起）</h3>
+      <div class="chip" data-id="songwei"><span>宋薇 — 董事长（非独董）</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="lixiaodong"><span>李小冬 — 董事·副总·董秘</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="yangpengyuan"><span>杨鹏远 — 董事·财务负责人</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="fenghuashuai"><span>冯华帅 — 职工代表董事</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="huwenxiang"><span>胡文祥 — 独立董事（博士）</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="zhuyujie"><span>朱玉杰 — 独立董事（博士·CPA）</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="fangjun"><span>方军 — 独立董事（2026-05新任）</span><span class="tag tag-mid">中</span></div>
+    </div>
+
+    <div class="panel">
+      <h3>治理变动 · 分支机构</h3>
+      <div class="chip" data-id="lvqi"><span>吕琦 — 原财务负责人（2025-09届满离任）</span><span class="tag tag-hi">高</span></div>
+      <div class="chip" data-id="chenlidan"><span>陈丽丹 — 雄安分公司负责人</span><span class="tag tag-mid">中</span></div>
+      <div class="chip" data-id="xujiulu"><span>徐九录 — 昆明分公司负责人</span><span class="tag tag-mid">中</span></div>
+      <div class="note">⚠️ 2025-09 换届后公司取消监事会，原监事会主席吴俊霞、监事李涛、职工监事乔臻不再任职。HR线及各业务线（汽车/环境/食品/新能源/医药）一号位公开源未具名 → 待确认。</div>
+    </div>
+  </div>
+
+  <!-- 详情 -->
+  <div id="detail">
+    <p class="ph">👆 点击上方任意节点 / 卡片，查看该人物的公开履历、来源与置信度。</p>
+  </div>
+
+  <footer>
+    📌 本页由 yitong 沉淀整理 · 文化活动知识库 ｜ 人才情报 · 采集日期: 2026-08-25
+  </footer>
+
+</div>
+
+<script>
+const D = {
+  songwei:{nm:'宋薇',role:'董事长 · 非独立董事 · 实际控制人',conf:'高',tag:'tag-hi',
+    desc:'1968年生，女，研究员。防化指挥工程学院本科、人大世界经济硕士、清华五道口金融EMBA。2002年创立谱尼测试并任董事长至今；国家"万人计划"领军人才。直接持股约44.85%+间接约5.5%，集团实控人；与持股5%以上股东李阳谷为母子关系。',
+    src:[['全景IR','https://mir.p5w.net/senior/300887.html'],['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF']]},
+  zhangyingjie:{nm:'张英杰',role:'总经理 · 法定代表人',conf:'高',tag:'tag-hi',
+    desc:'1977年生，男，本科（山西大学应用化学）。2004年加入谱尼，历任贸易符合性事业部总经理、董事、副总、财务负责人；2019年起任总经理。2025-09换届不再担任董事，续任总经理、法定代表人。',
+    src:[['东方财富','https://emweb.securities.eastmoney.com/PC_HSF10/CompanyManagement/Index?type=web&code=SZ300887'],['招股书','https://ima.qq.com/wiki/?shareId=63468c6a89bcc0298918cda69e0ef3fe432c95f26d3e2468d17460d071b6c599']]},
+  jichunbo:{nm:'嵇春波',role:'副总经理',conf:'高',tag:'tag-hi',
+    desc:'1978年生，男，大专。2019年起任副总经理；2025-09换届因任期届满不再担任董事，续任副总经理（非董事）。',
+    src:[['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF']]},
+  lixiaodong:{nm:'李小冬',role:'董事 · 副总经理 · 董事会秘书',conf:'高',tag:'tag-hi',
+    desc:'1981年生，男，硕士（中央财经大学财政学），高级会计师。2015年任董秘，2021年任董事，2025-09增任副总经理。董事会与经营层关键枢纽。',
+    src:[['全景IR','https://mir.p5w.net/senior/300887.html']]},
+  yangpengyuan:{nm:'杨鹏远',role:'董事 · 财务负责人',conf:'高',tag:'tag-hi',
+    desc:'1983年生，男，本科（东北林业大学会计）。历任立信会计师事务所项目经理、天音控股审计经理；2015年加入谱尼历任审计总监；2025-09接替吕琦任财务负责人、董事。',
+    src:[['全景IR','https://mir.p5w.net/senior/300887.html']]},
+  fenghuashuai:{nm:'冯华帅',role:'职工代表董事',conf:'高',tag:'tag-hi',
+    desc:'1987年生，男，本科。2025-09-29经职工代表大会选举为第六届董事会职工代表董事。',
+    src:[['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF']]},
+  huwenxiang:{nm:'胡文祥',role:'独立董事',conf:'高',tag:'tag-hi',
+    desc:'1961年生，男，博士。第六届董事会独立董事（2025-09-29起），兼任战略、提名、薪酬与考核委员会委员。',
+    src:[['换届公告','https://disc.static.szse.cn/disc/disk03/finalpage/2025-09-29/13631443-10a5-4cb8-9a8f-0f4660fbc8d7.PDF']]},
+  zhuyujie:{nm:'朱玉杰',role:'独立董事',conf:'高',tag:'tag-hi',
+    desc:'1969年生，男，博士，非执业注册会计师。第六届董事会独立董事，任审计委员会主任委员；出席2026年投资者关系活动。',
+    src:[['IR记录','https://www.cnfin.com/announ/detail/index.html?dannoun=lcdetail&id=832089346884']]},
+  fangjun:{nm:'方军',role:'独立董事',conf:'中',tag:'tag-mid',
+    desc:'1962年生，男，硕士。2026-05-27新任独立董事；公开源未明确其接替对象，单一来源，置信度中。',
+    src:[['东方财富','https://emweb.securities.eastmoney.com/PC_HSF10/CompanyManagement/Index?type=web&code=SZ300887']]},
+  lvqi:{nm:'吕琦',role:'原财务负责人（至2025-09）',conf:'高',tag:'tag-hi',
+    desc:'2025年5月IR记录中仍为"副总、财务负责人"；2025-09换届因任期届满不再担任财务负责人，继续担任公司其他职务。由杨鹏远接任——典型权力交接节点。',
+    src:[['IR记录','https://caifuhao.eastmoney.com/news/1547574806']]},
+  chenlidan:{nm:'陈丽丹',role:'雄安分公司 负责人',conf:'中',tag:'tag-mid',
+    desc:'谱尼测试集团股份有限公司雄安分公司负责人，分公司成立于2025-07-08，经营状态在营。来源为工商信息聚合，单一源。',
+    src:[['同花顺','https://www.iwencai.com/yike/detail/auid/b2866734088a2af1']]},
+  xujiulu:{nm:'徐九录',role:'昆明分公司 负责人',conf:'中',tag:'tag-mid',
+    desc:'谱尼测试集团股份有限公司昆明分公司负责人，分公司成立于2020-08-17，经营状态在营。来源为工商信息聚合，单一源。',
+    src:[['同花顺','https://www.iwencai.com/yike/detail/auid/b2866734088a2af1']]}
+};
+const detail=document.getElementById('detail');
+function show(id){const p=D[id];if(!p)return;
+  document.querySelectorAll('.node,.chip').forEach(e=>e.classList.remove('sel'));
+  document.querySelectorAll(`[data-id="${id}"]`).forEach(e=>e.classList.add('sel'));
+  detail.innerHTML=`<h2>${p.nm} <span class="tag ${p.tag}">${p.conf}</span></h2>
+    <div class="drole">${p.role}</div><p>${p.desc}</p>
+    <div class="src">来源：${p.src.map(s=>`<a href="${s[1]}" target="_blank">${s[0]}</a>`).join(' · ')} ｜ 采集：2026-08-25</div>`;
+}
+document.querySelectorAll('[data-id]').forEach(el=>el.addEventListener('click',()=>show(el.dataset.id)));
+</script>
+</body>
+</html>
