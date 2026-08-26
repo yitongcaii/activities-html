@@ -115,10 +115,12 @@ a{color:inherit;text-decoration:none}
 .vrow{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
 /* ---------- 海报封面（与卡片同源：纸底细线，点击页内放大） ---------- */
-.poster-card{margin-top:28px;border:1px solid var(--line);background:var(--paper);overflow:hidden;display:block;cursor:zoom-in;transition:filter .3s ease}
+.poster-card{border:1px solid var(--line);background:var(--paper);overflow:hidden;display:block;cursor:zoom-in;transition:filter .3s ease}
 .poster-card:hover{filter:brightness(.985)}
 .poster-card img{display:block;width:100%;height:auto;background:var(--paper2)}
 .poster-card .pn{font-size:13px;color:var(--muted);padding:13px 16px;border-top:1px solid var(--hair);background:var(--paper)}
+.poster-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+.poster-row .poster-card{margin-top:0}
 
 /* ---------- 03 文化活动 简介 ---------- */
 .brief{font-size:clamp(15px,1.8vw,17px);max-width:38em;margin-bottom:8px}
@@ -284,10 +286,16 @@ a{color:inherit;text-decoration:none}
       <ul class="work-links">
         <li><a href="https://yitongcaii.github.io/activities-html/index-trimmed.html" target="_blank" rel="noopener">文化活动知识库 · 精简版<span class="ext">↗</span></a><span class="wl-d">知识库首页，快速浏览沉淀的活动方法</span></li>
       </ul>
-      <a class="poster-card" data-zoom="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/culture-week.jpg" data-cap="我设计的海报 · 业务连续性文化周（点击任意处关闭）">
-        <img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/culture-week.jpg" alt="业务连续性文化周海报">
-        <span class="pn">我设计的海报 · 业务连续性文化周（点击放大查看全图）</span>
-      </a>
+      <div class="poster-row">
+        <a class="poster-card" data-zoom="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/culture-week.jpg" data-cap="我设计的海报 · 业务连续性文化周（点击任意处关闭）">
+          <img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/culture-week.jpg" alt="业务连续性文化周海报">
+          <span class="pn">我设计的海报 · 业务连续性文化周（点击放大查看全图）</span>
+        </a>
+        <a class="poster-card" data-zoom="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/lottery-01.png" data-cap="我自建的抽奖平台 · LUCKY DRAW（点击任意处关闭）">
+          <img src="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/lottery-01.png" alt="抽奖平台界面">
+          <span class="pn">我自建的抽奖平台 · LUCKY DRAW（点击放大查看全图）</span>
+        </a>
+      </div>
       <div class="vrow">
         <div class="vcard">
           <button class="vcover" data-mp4="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points.mp4"
