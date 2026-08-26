@@ -29,7 +29,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .sec{margin-top:46px}
 .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .sec-head .k{background:var(--ac);color:#fff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
-.sec-head h2{font-size:23px;font-weight:700}
+.sec-head h2{font-size:23px;font-weight:700;color:var(--ac)}
 .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow);transition:.28s;height:100%}
 .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
@@ -39,9 +39,9 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .mini{display:inline-block;border-radius:999px;padding:4px 11px;font-size:12.5px;background:color-mix(in srgb,var(--ac) 12%,white);color:var(--ac);font-weight:600;margin:0 6px 8px 0}
 .full{grid-column:1/-1}
 .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kpi .box{background:color-mix(in srgb,var(--ac) 8%,white);border:1px solid color-mix(in srgb,var(--ac) 18%,white);border-radius:14px;padding:22px 18px;text-align:center}
-.kpi b{display:block;font-size:48px;font-weight:800;color:var(--ac);line-height:1.05}
-.kpi span{font-size:13.5px;color:var(--sub);margin-top:6px;display:block}
+.kpi .box{background:color-mix(in srgb,var(--ac) 11%,white);border:1.5px solid color-mix(in srgb,var(--ac) 30%,white);border-radius:14px;padding:24px 18px;text-align:center}
+.kpi b{display:block;font-size:54px;font-weight:900;color:color-mix(in srgb,var(--ac) 75%,#0f172a);line-height:1.02}
+.kpi span{font-size:14px;color:#475569;margin-top:7px;display:block;font-weight:500}
 .ed{outline:none;border-radius:6px;transition:.2s}
 .ed:hover{background:rgba(124,58,237,.04)}
 .ed:focus{background:rgba(124,58,237,.08);box-shadow:0 0 0 2px rgba(124,58,237,.25)}
@@ -56,7 +56,6 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .case-body b{color:var(--ac)}
 .case-result{margin-top:12px;padding-top:10px;border-top:1px dashed #E2E8F0;font-size:13px;color:var(--sub)}
 .tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--ac) 14%,white);color:var(--ac);margin-bottom:9px}
-.card.feat{border:1.5px solid color-mix(in srgb,var(--ac) 35%,white)}
 .vcover{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin-bottom:12px;cursor:pointer;background:#0f172a}
 .vcover img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
 .vcover:hover img{transform:scale(1.05)}
@@ -164,7 +163,7 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
   <section class="sec reveal" style="--ac:var(--c3)">
     <div class="sec-head"><span class="k">04</span><h2>AI 流程产品化（自动化系统）</h2></div>
     <div class="bento">
-      <div class="card feat"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha1t" data-ph="作品标题">新人答辩 AI 自动化</span></h3><p><span class="ed" id="ha1d" data-ph="作用">每月定时建会建群 + 看板实时回填 + 跟催，答辩流程自动闭环，关键节点零遗漏、不用人工盯进度。</span></p></div>
+      <div class="card"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha1t" data-ph="作品标题">新人答辩 AI 自动化</span></h3><p><span class="ed" id="ha1d" data-ph="作用">每月定时建会建群 + 看板实时回填 + 跟催，答辩流程自动闭环，关键节点零遗漏、不用人工盯进度。</span></p></div>
       <div class="card"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha2t" data-ph="作品标题">奖金 / 报销提醒自动化</span></h3><p><span class="ed" id="ha2d" data-ph="作用">奖金 / 报销节点自动提醒到人，漏发漏报趋近于零，员工体验与合规双双兜住，不用再人工逐一跟进。</span></p></div>
       <div class="card"><span class="tag">数据分析</span><h3><span class="dot"></span><span class="ed" id="ha3t" data-ph="作品标题">薪酬看板脚本</span></h3><p><span class="ed" id="ha3d" data-ph="作用">薪酬结构 / 分布 / 对比一屏可视，汇总从手工慢错走向自动准确（脱敏、锁源、防编数，安全不泄）。</span></p></div>
       <div class="card"><span class="tag">自动化系统</span><h3><span class="dot"></span><span class="ed" id="ha4t" data-ph="作品标题">周报 AI 自动输出</span></h3><p><span class="ed" id="ha4d" data-ph="作用">每周一句话 + 详细版周报自动成文，多线进展口径统一、重点不漏。</span></p></div>
