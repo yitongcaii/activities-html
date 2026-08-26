@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蔡女士 · HRBP 作品集</title>
+<style>
+:root{
+  --ink:#17150F;
+  --paper:#F4F1E8;
+  --paper2:#EAE4D6;
+  --red:#BE3A2B;
+  --muted:#6E685B;
+  --line:#1A1A1A;
+  --serif:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",Georgia,"Times New Roman",serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.62;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+
+/* 可编辑（视觉隐形，仅聚焦时细红框） */
+.ed{outline:none}
+.ed:focus{outline:1px solid var(--red);outline-offset:3px}
+
+/* 通用 section */
+section{position:relative;padding:clamp(72px,11vw,140px) clamp(22px,6vw,96px);border-bottom:1px solid rgba(26,26,26,.14)}
+.wrap{max-width:1200px;margin:0 auto;width:100%}
+.sec-no{display:inline-block;font:600 12px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--red);border-bottom:2px solid var(--red);padding-bottom:7px;margin-bottom:clamp(34px,5vw,56px)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 封面 Masthead ---------- */
+.masthead{display:grid;grid-template-columns:1.55fr .85fr;gap:48px;align-items:end;padding-top:clamp(54px,9vw,108px);padding-bottom:clamp(40px,6vw,68px)}
+.kicker{font:600 12px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:26px}
+.name{font-family:var(--serif);font-weight:700;font-size:clamp(54px,12vw,134px);line-height:.9;letter-spacing:-.02em}
+.name .ns{display:block;font-size:.24em;letter-spacing:.14em;color:var(--muted);font-family:var(--sans);font-weight:600;margin-top:14px}
+.role-line{margin-top:26px;font-family:var(--serif);font-size:clamp(18px,2.4vw,24px);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.role-line .bar{width:34px;height:2px;background:var(--red);display:inline-block}
+.mast-right{text-align:right;border-left:1px solid var(--line);padding-left:32px}
+.meta-k{font:600 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:14px}
+.meta-v{display:block;font-family:var(--serif);font-size:clamp(17px,2vw,21px);margin-bottom:8px;position:relative;width:fit-content;margin-left:auto}
+.meta-v::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .4s ease}
+.meta-v:hover::after{transform:scaleX(1);transform-origin:left}
+.issue{margin-top:30px;font:600 11px/1.5 var(--sans);letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+
+/* ---------- 01 思考方式 ---------- */
+.statement{background:var(--paper2)}
+.statement .big{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5.4vw,62px);line-height:1.2;letter-spacing:-.01em;max-width:14em}
+.statement .big em{font-style:normal;color:var(--red)}
+.statement .sub{margin-top:30px;color:var(--muted);font-size:clamp(14px,1.6vw,16px);letter-spacing:.02em;max-width:34em}
+.keywords{margin-top:46px;display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line)}
+.keywords span{font-family:var(--serif);font-size:clamp(15px,1.8vw,19px);padding:16px 26px 16px 0;margin-right:26px;border-right:1px solid rgba(26,26,26,.16)}
+.keywords span:last-child{border-right:none}
+
+/* ---------- 02 数据成果 ---------- */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.stat{padding:30px 30px 30px 0;border-left:2px solid var(--red);padding-left:26px;margin-bottom:8px}
+.stat b{display:block;font-family:var(--serif);font-weight:700;font-size:clamp(46px,8vw,92px);line-height:.96;letter-spacing:-.02em}
+.stat .lab{display:block;margin-top:12px;font-size:13.5px;color:var(--muted);letter-spacing:.02em;max-width:14em}
+
+/* ---------- 03 代表项目 ---------- */
+.proj{margin-bottom:clamp(56px,8vw,96px)}
+.proj:last-child{margin-bottom:0}
+.proj-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:30px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.pno{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--red);line-height:1}
+.proj-head h3{font-family:var(--serif);font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-.01em}
+.ptag{margin-left:auto;font:600 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid rgba(26,26,26,.25);padding:7px 12px}
+
+/* P01 流程系统 */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.node{flex:1;min-width:160px;border:1px solid var(--line);padding:22px 20px;background:var(--paper);font-family:var(--serif);font-size:clamp(15px,1.8vw,18px);display:flex;align-items:center}
+.node.core{background:var(--ink);color:var(--paper);font-weight:700;flex:1.1}
+.arrow{display:flex;align-items:center;justify-content:center;padding:0 14px;color:var(--red);font-size:22px;font-weight:700}
+.scenes{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 0}
+.scenes li{list-style:none;font-size:13.5px;color:var(--muted);padding:0 18px;border-right:1px solid rgba(26,26,26,.18)}
+.scenes li:first-child{padding-left:0}
+.proj-result{margin-top:26px;font-family:var(--serif);font-size:clamp(16px,2vw,20px);padding-left:18px;border-left:3px solid var(--red)}
+
+/* P02 步骤线 */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.steps li{padding:26px 22px 26px 0;position:relative;border-right:1px solid rgba(26,26,26,.16)}
+.steps li:last-child{border-right:none}
+.steps .sno{display:block;font-family:var(--serif);font-size:clamp(28px,3.4vw,42px);font-weight:700;color:var(--red);line-height:1;margin-bottom:12px}
+.proj-result.solo{margin-top:30px}
+
+/* P03 Case Study 不对称 */
+.case{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(30px,5vw,64px);align-items:start}
+.case-left{border-top:3px solid var(--red);padding-top:22px}
+.big-num{font-family:var(--serif);font-weight:700;font-size:clamp(72px,13vw,150px);line-height:.84;letter-spacing:-.03em}
+.big-num sup{font-size:.32em;color:var(--red);top:-1.4em}
+.case-metric{margin-top:14px;font-size:14px;color:var(--muted);letter-spacing:.02em}
+.case-result{margin-top:30px;font-family:var(--serif);font-size:clamp(20px,2.6vw,30px);line-height:1.25}
+.case-right h3{font-family:var(--serif);font-size:clamp(22px,3vw,30px);margin-bottom:18px}
+.case-right p{font-size:clamp(15px,1.8vw,17px);max-width:34em}
+.case-right .hl{background:linear-gradient(transparent 62%,rgba(190,58,43,.18) 0)}
+
+/* P04 Before / After */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
+.ba-col{padding:clamp(28px,4vw,46px)}
+.ba-before{background:var(--paper2)}
+.ba-after{background:var(--ink);color:var(--paper)}
+.ba-k{display:inline-block;font:600 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.ba-after .ba-k{color:#E89277}
+.ba-col p{font-family:var(--serif);font-size:clamp(18px,2.2vw,24px);line-height:1.35}
+.ba-metric{margin-top:26px;font-size:14px;letter-spacing:.02em;color:#EAD9D4;border-top:1px solid rgba(255,255,255,.2);padding-top:18px}
+
+/* ---------- 04 方法论 Index ---------- */
+.method{background:var(--paper2)}
+.method-cols{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(36px,6vw,80px)}
+.mcol h4{font-family:var(--serif);font-size:clamp(19px,2.2vw,24px);font-weight:700;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.idx{list-style:none}
+.idx li{padding:14px 0;border-bottom:1px solid rgba(26,26,26,.16);font-size:15px;display:flex;gap:14px;align-items:baseline}
+.idx-num li{padding-left:0}
+.idx .n{font-family:var(--serif);font-weight:700;color:var(--red);font-size:17px;min-width:26px}
+.idx .d{color:var(--muted);font-size:13.5px}
+.ai-others{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);letter-spacing:.02em}
+
+/* ---------- 05 作品 ---------- */
+.work-links{list-style:none;border-top:1px solid var(--line)}
+.work-links li{padding:22px 0;border-bottom:1px solid rgba(26,26,26,.16);display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline}
+.work-links a{font-family:var(--serif);font-size:clamp(18px,2.2vw,25px);font-weight:700;position:relative;width:fit-content}
+.work-links a .ext{font-family:var(--sans);font-size:.7em;color:var(--red);margin-left:8px;transition:transform .3s ease;display:inline-block}
+.work-links a::after{content:"";position:absolute;left:0;bottom:1px;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .4s ease}
+.work-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.work-links a:hover .ext{transform:translate(3px,-3px)}
+.work-links .wl-d{color:var(--muted);font-size:14px;align-self:center}
+
+/* ---------- 06 关于我 ---------- */
+.traits .lead{font-family:var(--serif);font-weight:700;font-size:clamp(26px,4vw,46px);line-height:1.22;letter-spacing:-.01em;max-width:16em}
+.traits .lead em{font-style:normal;color:var(--red)}
+.traits p.body{margin-top:28px;max-width:38em;font-size:clamp(15px,1.8vw,17px);color:var(--ink)}
+.traits .sig{margin-top:40px;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:16px}
+
+/* ---------- footer ---------- */
+footer{text-align:center;padding:46px 20px;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:860px){
+  .masthead{grid-template-columns:1fr;gap:34px}
+  .mast-right{text-align:left;border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:28px}
+  .meta-v{margin-left:0}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .steps li:nth-child(2){border-right:none}
+  .steps li:nth-child(1),.steps li:nth-child(2){border-bottom:1px solid rgba(26,26,26,.16)}
+  .case{grid-template-columns:1fr;gap:26px}
+  .method-cols{grid-template-columns:1fr;gap:44px}
+  .ba{grid-template-columns:1fr}
+  .flow .node{flex-basis:100%;width:100%;min-width:0}
+  .arrow{transform:rotate(90deg);padding:10px 0}
+  .ptag{margin-left:0}
+}
+@media(max-width:520px){
+  .stat-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .steps li{border-right:none!important;border-bottom:1px solid rgba(26,26,26,.16)}
+  .work-links li{grid-template-columns:1fr;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<header class="masthead wrap reveal">
+  <div class="mast-left">
+    <div class="kicker">Portfolio · 2026</div>
+    <h1 class="name">蔡女士<span class="ns">HRBP 求职作品集</span></h1>
+    <div class="role-line"><span class="bar"></span>人力资源业务伙伴 · <span class="ed" id="v4_role">HRBP</span></div>
+  </div>
+  <div class="mast-right">
+    <span class="meta-k">联系方式</span>
+    <a class="meta-v ed" id="v4_tel" href="tel:18665138212">18665138212</a>
+    <a class="meta-v ed" id="v4_email" href="mailto:18665138212@163.com">18665138212@163.com</a>
+    <div class="issue">No. HR-01<br>AI × HR Operations</div>
+  </div>
+</header>
+
+<main>
+  <!-- 01 思考方式 -->
+  <section class="statement reveal">
+    <div class="wrap">
+      <span class="sec-no">01 — 思考方式</span>
+      <p class="big">把重复的人力动作，<br><em>做成系统。</em></p>
+      <p class="sub">结果导向 + 数据意识，把重复人力动作产品化、自动化。</p>
+      <div class="keywords">
+        <span>招聘全流程交付</span><span>BP 协同</span><span>AI 流程产品化</span><span>员工激励评选</span><span>文化活动</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 数据成果 -->
+  <section class="reveal">
+    <div class="wrap">
+      <span class="sec-no">02 — 数据成果</span>
+      <div class="stat-grid">
+        <div class="stat"><b><span class="ed" id="v4_k1">40+</span></b><span class="lab">累计独立交付岗位</span></div>
+        <div class="stat"><b><span class="ed" id="v4_k2">1000+</span></b><span class="lab">文化活动覆盖人数</span></div>
+        <div class="stat"><b><span class="ed" id="v4_k3">300</span></b><span class="lab">SSC 全盘管理人数</span></div>
+        <div class="stat"><b><span class="ed" id="v4_k4">90%</span></b><span class="lab">招聘留存</span></div>
+        <div class="stat"><b><span class="ed" id="v4_k5">7+</span></b><span class="lab">AI 自动化系统上线</span></div>
+        <div class="stat"><b><span class="ed" id="v4_k6">5</span></b><span class="lab">自建的 HR skills</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 代表项目 -->
+  <section class="reveal">
+    <div class="wrap">
+      <span class="sec-no">03 — 代表项目</span>
+
+      <!-- P01 流程系统 -->
+      <article class="proj">
+        <div class="proj-head"><span class="pno">P01</span><h3>AI 流程产品化 0→1</h3><span class="ptag">Process System</span></div>
+        <div class="flow">
+          <div class="node">7 类高频 HR 场景</div>
+          <div class="arrow">→</div>
+          <div class="node core">AI 助手库</div>
+          <div class="arrow">→</div>
+          <div class="node">需求 → 方案 → 模板 → 案例<br>一键产出</div>
+        </div>
+        <ul class="scenes">
+          <li>文化活动</li><li>高管谈参</li><li>绩效 1v1</li><li>新人转正</li>
+        </ul>
+        <div class="proj-result">统计工作量大幅减少，新人也能独立交付。</div>
+      </article>
+
+      <!-- P02 步骤线 -->
+      <article class="proj">
+        <div class="proj-head"><span class="pno">P02</span><h3>BP 协同 · 公司激励评选全流程</h3><span class="ptag">Step Line</span></div>
+        <ol class="steps">
+          <li><span class="sno">01</span>完成申报发起</li>
+          <li><span class="sno">02</span>评审排序</li>
+          <li><span class="sno">03</span>奖金分配</li>
+          <li><span class="sno">04</span>宣发</li>
+        </ol>
+        <div class="proj-result solo">评选按时闭环，宣发覆盖全员。</div>
+      </article>
+
+      <!-- P03 Case Study -->
+      <article class="proj">
+        <div class="proj-head"><span class="pno">P03</span><h3>招聘交付攻坚</h3><span class="ptag">Case Study</span></div>
+        <div class="case">
+          <div class="case-left">
+            <div class="big-num">40<sup>+</sup></div>
+            <div class="case-metric">累计独立交付岗位</div>
+            <div class="case-result">招聘留存率<br><em>90% 以上</em></div>
+          </div>
+          <div class="case-right">
+            <h3>从 0 到 40+ 的交付密度</h3>
+            <p>累计独立交付 <span class="hl">40+ 岗位</span>，含 1 名高级经理、4 名经理级、4 个海外岗，覆盖 7 个部门。</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- P04 Before / After -->
+      <article class="proj">
+        <div class="proj-head"><span class="pno">P04</span><h3>SSC 全盘 + 跨文化</h3><span class="ptag">Before / After</span></div>
+        <div class="ba">
+          <div class="ba-col ba-before">
+            <span class="ba-k">Before</span>
+            <p>手工考勤算薪，差错与月度关账慢，外籍入职靠逐人盯。</p>
+          </div>
+          <div class="ba-col ba-after">
+            <span class="ba-k">After</span>
+            <p>自动化模板 + 带教 1 位印尼当地人，全盘稳定运行。</p>
+            <div class="ba-metric">算薪差错率 → 0 · 月度关账提效 ~40% · 外籍入职合规落地</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 方法论 -->
+  <section class="method reveal">
+    <div class="wrap">
+      <span class="sec-no">04 — 方法论 · AI 流程产品化</span>
+      <div class="method-cols">
+        <div class="mcol">
+          <h4>自动化系统</h4>
+          <ul class="idx">
+            <li>新人答辩 AI 自动化</li>
+            <li>奖金 / 报销提醒自动化</li>
+            <li>薪酬看板脚本</li>
+            <li>周报 AI 自动输出</li>
+            <li>培训积分商城</li>
+            <li>抽奖平台</li>
+          </ul>
+        </div>
+        <div class="mcol">
+          <h4>自建的 skill 体系</h4>
+          <ul class="idx idx-num">
+            <li><span class="n">①</span><div>文化活动<span class="d"> — 需求到产出一键</span></div></li>
+            <li><span class="n">②</span><div>高管谈参<span class="d"> — 合规红线前置把关</span></div></li>
+            <li><span class="n">③</span><div>活动话术<span class="d"> — 风格统一、快速成稿</span></div></li>
+            <li><span class="n">④</span><div>绩效 1v1<span class="d"> — 四段式教练框架</span></div></li>
+            <li><span class="n">⑤</span><div>视觉风格<span class="d"> — HTML 4 风格自动套用</span></div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ai-others">其他 AI 实践：AI 漫剧（AIGC） · 培训 / 薪酬看板（数据分析） · 小红书 AI 运营（新媒体）</div>
+    </div>
+  </section>
+
+  <!-- 05 作品 -->
+  <section class="reveal">
+    <div class="wrap">
+      <span class="sec-no">05 — 作品</span>
+      <ul class="work-links">
+        <li><a href="https://yitongcaii.github.io/activities-html/hr-activity-playbook.html" target="_blank" rel="noopener">文化活动实操手册<span class="ext">↗</span></a><span class="wl-d">HR 活动从 0 到 1 的 SOP 与模板</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">文化文档地图<span class="ext">↗</span></a><span class="wl-d">文化资料的结构化索引</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/ai-manga/ai-manga-penguin-storyboard.html" target="_blank" rel="noopener">AI 漫剧分镜<span class="ext">↗</span></a><span class="wl-d">AIGC 内容生产实践</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/bowen_dashboard_20260804_2052.html" target="_blank" rel="noopener">培训效果看板<span class="ext">↗</span></a><span class="wl-d">培训数据可视化</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points.mp4" target="_blank" rel="noopener">培训积分商城 Demo<span class="ext">▶</span></a><span class="wl-d">视频</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 06 关于我 -->
+  <section class="traits reveal">
+    <div class="wrap">
+      <span class="sec-no">06 — 关于我</span>
+      <p class="lead">习惯把重复的事，<br><em>做成系统。</em></p>
+      <p class="body">独立负责过 300 人 SSC 全盘考勤算薪，也在跨文化团队带教当地同事；结果导向、数据意识。</p>
+      <div class="sig">— 蔡女士 · HRBP</div>
+    </div>
+  </section>
+</main>
+
+<footer>📌 本页由 yitong 沉淀整理</footer>
+
+<script>
+// 可编辑自动保存（隐形，key 隔离防与 v1/v2/v3 串）
+(function(){
+  var PREFIX="hrbp4_";
+  document.querySelectorAll(".ed").forEach(function(el){
+    var id=el.id; if(!id) return;
+    var k=PREFIX+id, v=localStorage.getItem(k);
+    if(v!==null && v!==el.innerHTML) el.innerHTML=v;
+    el.addEventListener("input",function(){ localStorage.setItem(k,el.innerHTML); });
+  });
+})();
+// 滚动渐显
+(function(){
+  var els=document.querySelectorAll(".reveal");
+  if(!("IntersectionObserver" in window)){ els.forEach(function(e){e.classList.add("in")}); return; }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  },{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>
