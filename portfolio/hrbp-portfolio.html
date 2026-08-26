@@ -52,6 +52,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 .case-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
 .metric{flex:0 0 auto;background:var(--ac);color:#fff;border-radius:12px;padding:10px 16px;font-weight:800;font-size:20px;line-height:1.25;text-align:center;min-width:96px}
 .case-head h3{margin-bottom:0;font-size:16.5px}
+.cmetric{flex:0 0 auto;margin-left:auto;background:var(--ac);color:#fff;border-radius:10px;padding:6px 13px;font-size:16px;font-weight:800;line-height:1.2;white-space:nowrap}
 .case-body p{font-size:13.5px;color:#475569;margin-top:9px}
 .case-body b{color:var(--ac)}
 .case-result{margin-top:12px;padding-top:10px;border-top:1px dashed #E2E8F0;font-size:13px;color:var(--sub)}
@@ -70,7 +71,7 @@ body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background
 footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
 .reveal{opacity:0;transform:translateY(14px);transition:.6s ease}
 .reveal.in{opacity:1;transform:none}
-@media(max-width:720px){.bento,.kpi{grid-template-columns:1fr}.hero{padding:16px 22px 14px}.wrap{padding:0 14px 50px}.case-head{flex-direction:column;align-items:flex-start;gap:8px}.metric{min-width:0}}
+@media(max-width:720px){.bento,.kpi{grid-template-columns:1fr}.hero{padding:16px 22px 14px}.wrap{padding:0 14px 50px}.case-head{flex-direction:column;align-items:flex-start;gap:8px}.cmetric{margin-left:0}.metric{min-width:0}}
 </style>
 </head>
 <body>
@@ -123,6 +124,7 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
       <div class="card case">
         <div class="case-head">
           <h3><span class="dot"></span><span class="ed" id="c1t" data-ph="案例标题">AI 流程产品化 0-1</span></h3>
+          <span class="cmetric ed" id="c1m" data-ph="核心数据">0→1</span>
         </div>
         <div class="case-body">
           <p><b>关键动作：</b><span class="ed" id="c1a" data-ph="你具体做了哪些动作">0-1 搭建新人转正自动化流程（人工提醒→系统自动推送）；<br>主导建设文化活动通知效率（职时自动检索沉淀，形成部门「公众号」资产）；<br>搭建积分 + 抽奖平台，游戏化驱动员工参与。</span></p>
@@ -132,6 +134,7 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
       <div class="card case">
         <div class="case-head">
           <h3><span class="dot"></span><span class="ed" id="c2t" data-ph="案例标题">BP 协同 · 公司激励评选全流程</span></h3>
+          <span class="cmetric ed" id="c2m" data-ph="核心数据">覆盖全员</span>
         </div>
         <div class="case-body">
           <p><b>关键动作：</b><span class="ed" id="c2a" data-ph="你具体做了哪些动作">完成申报发起 → 评审排序 → 奖金分配 → 宣发全流程推进。</span></p>
@@ -141,15 +144,17 @@ footer{text-align:center;padding:30px 20px;color:var(--sub);font-size:13.5px}
       <div class="card case">
         <div class="case-head">
           <h3><span class="dot"></span><span class="ed" id="c3t" data-ph="案例标题">招聘交付攻坚</span></h3>
+          <span class="cmetric ed" id="c3m" data-ph="核心数据">40+ 岗位</span>
         </div>
         <div class="case-body">
-          <p><b>关键动作：</b><span class="ed" id="c3a" data-ph="你具体做了哪些动作">独立交付 20+ 岗位（含 1 名高级经理、4 名经理级、4 个海外岗含 1 位印尼当地人），覆盖财务/内审/CSR/IE/质量/供应链/高管助理。</span></p>
+          <p><b>关键动作：</b><span class="ed" id="c3a" data-ph="你具体做了哪些动作">累计独立交付 40+ 岗位（其中本项目 20+，含 1 名高级经理、4 名经理级、4 个海外岗含 1 位印尼当地人），覆盖财务/内审/CSR/IE/质量/供应链/高管助理。</span></p>
         </div>
-        <div class="case-result"><span class="ed" id="c3r" data-ph="数字结果">总监年终 90%，招聘留存达标。</span></div>
+        <div class="case-result"><span class="ed" id="c3r" data-ph="数字结果">招聘留存率 90% 以上。</span></div>
       </div>
       <div class="card case">
         <div class="case-head">
           <h3><span class="dot"></span><span class="ed" id="c4t" data-ph="案例标题">SSC 全盘 + 跨文化</span></h3>
+          <span class="cmetric ed" id="c4m" data-ph="核心数据">300 人</span>
         </div>
         <div class="case-body">
           <p><b>关键动作：</b><span class="ed" id="c4a" data-ph="你具体做了哪些动作">独立负责入离职 / EHR 系统 / 考勤异常 / 员工档案；<br>独立办理外籍员工来华工作许可。</span></p>
