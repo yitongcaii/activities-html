@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蔡女士 · HRBP 作品集</title>
+<style>
+:root{
+  --ink:#17150F;
+  --paper:#FCFBF8;
+  --paper2:#F2EFE8;
+  --red:#BE3A2B;
+  --muted:#6E685B;
+  --line:#1A1A1A;
+  --hair:rgba(26,26,26,.14);
+  --serif:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",Georgia,"Times New Roman",serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.66;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+.hl{background:linear-gradient(transparent 62%,rgba(190,58,43,.16) 0)}
+
+/* 可编辑（视觉隐形，仅聚焦时细红框） */
+.ed{outline:none}
+.ed:focus{outline:1px solid var(--red);outline-offset:3px}
+
+/* ---------- 分栏骨架：目录栏 + 内容台 ---------- */
+.book{display:flex;max-width:1340px;margin:0 auto;align-items:flex-start}
+.rail{position:sticky;top:0;align-self:flex-start;height:100vh;width:258px;flex:0 0 258px;border-right:1px solid var(--hair);padding:46px 30px;display:flex;flex-direction:column;background:var(--paper);z-index:5}
+.rail-top .rt-name{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1.08;letter-spacing:.01em}
+.rail-top .rt-sub{margin-top:10px;font-size:13px;color:var(--ink);line-height:1.5}
+.rail-top .rt-no{margin-top:16px;font:600 10.5px/1.6 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.rail-nav{list-style:none;margin-top:42px;display:flex;flex-direction:column;gap:2px}
+.rail-nav li{display:flex;align-items:baseline;gap:13px;padding:13px 14px;cursor:pointer;font-family:var(--serif);font-size:17px;color:var(--muted);border-left:2px solid transparent;transition:color .25s,border-color .25s}
+.rail-nav li .rn{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--red)}
+.rail-nav li:hover{color:var(--ink)}
+.rail-nav li.active{color:var(--ink);border-left-color:var(--red)}
+.rail-foot{margin-top:auto;font-size:12.5px;color:var(--muted);line-height:1.8;border-top:1px solid var(--hair);padding-top:20px}
+.rail-foot a{color:var(--ink);position:relative}
+.rail-foot a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .4s ease}
+.rail-foot a:hover::after{transform:scaleX(1);transform-origin:left}
+
+.stage{flex:1;min-width:0}
+.page{display:none;padding:clamp(50px,6.5vw,98px) clamp(28px,6vw,88px);border-bottom:1px solid var(--hair);animation:fade .5s ease both}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.sec-no{display:inline-block;font:600 11.5px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--red);border-bottom:2px solid var(--red);padding-bottom:7px}
+.phead{margin-bottom:clamp(36px,5vw,60px)}
+.phead .sec-no{margin-bottom:16px}
+.ptitle{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,52px);line-height:1.08;letter-spacing:-.01em;margin-top:0;max-width:15em}
+
+/* ---------- 00 定位 ---------- */
+.cover .kicker{font:600 12px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:24px}
+.cover .name{font-family:var(--serif);font-weight:700;font-size:clamp(52px,11vw,128px);line-height:.9;letter-spacing:-.02em}
+.cover .name .ns{display:block;font-size:.2em;letter-spacing:.14em;color:var(--muted);font-family:var(--sans);font-weight:600;margin-top:16px}
+.cover .role-line{margin-top:26px;font-family:var(--serif);font-size:clamp(18px,2.4vw,24px);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.cover .role-line .bar{width:34px;height:2px;background:var(--red);display:inline-block}
+.cover .statement{margin-top:clamp(40px,6vw,68px);font-family:var(--serif);font-weight:700;font-size:clamp(30px,5.2vw,60px);line-height:1.2;letter-spacing:-.01em;max-width:13em}
+.cover .statement em{font-style:normal;color:var(--red)}
+.cover .c-contact{margin-top:30px;font-size:15px;display:flex;gap:22px;flex-wrap:wrap;color:var(--muted)}
+.cover .c-contact a{color:var(--ink)}
+
+/* 数据成果 */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(44px,6vw,68px)}
+.stat{padding:30px 30px 30px 0;border-left:2px solid var(--red);padding-left:26px;margin-bottom:8px}
+.stat b{display:block;font-family:var(--serif);font-weight:700;font-size:clamp(46px,8vw,92px);line-height:.96;letter-spacing:-.02em}
+.stat .lab{display:block;margin-top:12px;font-size:13.5px;color:var(--muted);letter-spacing:.02em;max-width:14em}
+
+/* ---------- 01 招聘交付 ---------- */
+.case{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(30px,5vw,64px);align-items:start}
+.case-left{border-top:3px solid var(--red);padding-top:22px}
+.big-num{font-family:var(--serif);font-weight:700;font-size:clamp(72px,13vw,150px);line-height:.84;letter-spacing:-.03em}
+.big-num sup{font-size:.32em;color:var(--red);top:-1.4em}
+.case-metric{margin-top:14px;font-size:14px;color:var(--muted);letter-spacing:.02em}
+.case-right h3{font-family:var(--serif);font-size:clamp(22px,3vw,30px);margin-bottom:18px}
+.case-right p{font-size:clamp(15px,1.8vw,17px);max-width:34em}
+.case-right .hl{background:linear-gradient(transparent 62%,rgba(190,58,43,.16) 0)}
+.poslist{list-style:none;margin-top:26px;border-top:1px solid var(--line)}
+.poslist li{padding:16px 0;border-bottom:1px solid var(--hair);font-size:15.5px;display:flex;gap:14px;align-items:baseline}
+.poslist li b{font-family:var(--serif);color:var(--red);min-width:88px;display:inline-block;font-weight:700}
+.proj-result{margin-top:28px;font-family:var(--serif);font-size:clamp(18px,2.4vw,26px);padding-left:18px;border-left:3px solid var(--red);line-height:1.3}
+
+/* ---------- 02 AI 自动化 ---------- */
+.why{background:var(--paper2);border-left:3px solid var(--red);padding:24px 26px;font-size:clamp(15px,1.8vw,17px);max-width:40em;color:var(--ink);line-height:1.74}
+.why b{color:var(--red);font-weight:700}
+.work-links{list-style:none;border-top:1px solid var(--line);margin-top:36px}
+.work-links li{padding:20px 0;border-bottom:1px solid var(--hair);display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline}
+.work-links a{font-family:var(--serif);font-size:clamp(18px,2.2vw,25px);font-weight:700;position:relative;width:fit-content}
+.work-links a .ext{font-family:var(--sans);font-size:.7em;color:var(--red);margin-left:8px;transition:transform .3s ease;display:inline-block}
+.work-links a::after{content:"";position:absolute;left:0;bottom:1px;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .4s ease}
+.work-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.work-links a:hover .ext{transform:translate(3px,-3px)}
+.work-links .wl-d{color:var(--muted);font-size:14px;align-self:center}
+.skillset{margin-top:36px}
+.skillset h4{font-family:var(--serif);font-size:clamp(18px,2.2vw,22px);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.skillset ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.skillset li{padding:13px 0;font-size:15px;border-bottom:1px solid rgba(26,26,26,.12);display:flex;gap:12px;align-items:baseline}
+.skillset li .n{font-family:var(--serif);font-weight:700;color:var(--red);min-width:22px}
+.skillset li .d{color:var(--muted);font-size:13px}
+
+/* ---------- 视频封面组件（与卡片同源：纸底细线，去黑块） ---------- */
+.vcard{margin-top:32px;border:1px solid var(--line);background:var(--paper);overflow:hidden}
+.vcover{display:block;width:100%;aspect-ratio:16/9;background-size:cover;background-position:center center;background-color:var(--paper);border:none;cursor:pointer;position:relative;padding:0;transition:filter .3s ease}
+.vcover:hover{filter:brightness(.96)}
+.vcover .vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(190,58,43,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;padding-left:4px;transition:transform .25s}
+.vcover:hover .vplay{transform:translate(-50%,-50%) scale(1.07)}
+.vcover .vcap{position:absolute;left:16px;bottom:14px;color:#fff;font-family:var(--serif);font-size:15px;background:rgba(23,21,15,.62);padding:5px 11px;letter-spacing:.02em}
+.vplayer{display:block;width:100%;aspect-ratio:16/9;background:var(--ink);border:none}
+.vcard .vnote{font-size:13px;color:var(--muted);padding:13px 16px;border-top:1px solid var(--hair);background:var(--paper)}
+.vrow{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+/* ---------- 03 文化活动 / 04 数据看板 简介 ---------- */
+.brief{font-size:clamp(15px,1.8vw,17px);max-width:38em;margin-bottom:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:start;margin-top:8px}
+
+/* ---------- 05 SSC · 跨文化 ---------- */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);margin-top:8px}
+.ba-col{padding:clamp(28px,4vw,46px)}
+.ba-before{background:var(--paper2)}
+.ba-after{background:var(--ink);color:var(--paper)}
+.ba-k{display:inline-block;font:600 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.ba-after .ba-k{color:#E89277}
+.ba-col p{font-family:var(--serif);font-size:clamp(18px,2.2vw,24px);line-height:1.35}
+.ba-metric{margin-top:26px;font-size:14px;letter-spacing:.02em;color:#EAD9D4;border-top:1px solid rgba(255,255,255,.2);padding-top:18px}
+
+/* ---------- 06 关于 ---------- */
+.traits .lead{font-family:var(--serif);font-weight:700;font-size:clamp(26px,4vw,46px);line-height:1.22;letter-spacing:-.01em;max-width:16em}
+.traits .lead em{font-style:normal;color:var(--red)}
+.traits p.body{margin-top:28px;max-width:38em;font-size:clamp(15px,1.8vw,17px);color:var(--ink)}
+.traits .sig{margin-top:40px;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:16px}
+
+footer{text-align:center;padding:44px 20px;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:860px){
+  .book{flex-direction:column}
+  .rail{position:static;width:auto;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--hair);padding:20px 18px 16px}
+  .rail-top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px}
+  .rail-nav{flex-direction:row;flex-wrap:wrap;gap:4px;margin-top:16px}
+  .rail-nav li{border-left:none;border-bottom:2px solid transparent;padding:8px 10px;font-size:14px;flex:0 0 auto}
+  .rail-nav li.active{border-left:none;border-bottom-color:var(--red)}
+  .rail-foot{display:none}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .case{grid-template-columns:1fr;gap:26px}
+  .skillset ul{grid-template-columns:1fr}
+  .vrow{grid-template-columns:1fr;gap:20px}
+  .two{grid-template-columns:1fr;gap:30px}
+  .ba{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .stat-grid{grid-template-columns:1fr}
+  .work-links li{grid-template-columns:1fr;gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="book">
+  <!-- 常驻目录栏 -->
+  <nav class="rail">
+    <div class="rail-top">
+      <div class="rt-name">蔡女士<br>作品集</div>
+      <div class="rt-no">No. HR-01<br>AI × HR Ops</div>
+    </div>
+    <ul class="rail-nav">
+      <li data-page="p0" class="active"><span class="rn">00</span> 定位</li>
+      <li data-page="p1"><span class="rn">01</span> 招聘交付</li>
+      <li data-page="p2"><span class="rn">02</span> AI 自动化</li>
+      <li data-page="p3"><span class="rn">03</span> 文化活动</li>
+      <li data-page="p4"><span class="rn">04</span> 数据看板</li>
+      <li data-page="p5"><span class="rn">05</span> SSC · 跨文化</li>
+      <li data-page="p6"><span class="rn">06</span> 关于</li>
+    </ul>
+    <div class="rail-foot">
+      <a class="ed" id="v6_tel" href="tel:18665138212">18665138212</a><br>
+      <a class="ed" id="v6_email" href="mailto:18665138212@163.com">18665138212@163.com</a>
+    </div>
+  </nav>
+
+  <!-- 内容台 -->
+  <main class="stage">
+
+    <!-- 00 定位 -->
+    <section class="page cover active" id="p0">
+      <div class="kicker">Portfolio · 2026</div>
+      <h1 class="name">蔡女士<span class="ns">HRBP 求职作品集</span></h1>
+      <div class="role-line"><span class="bar"></span>人力资源业务伙伴 · <span class="ed" id="v6_role">HRBP</span></div>
+      <p class="statement">把重复的人力动作，<br><em>做成系统。</em></p>
+      <div class="c-contact">
+        <a class="ed" id="v6_tel2" href="tel:18665138212">18665138212</a>
+        <a class="ed" id="v6_email2" href="mailto:18665138212@163.com">18665138212@163.com</a>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><b><span class="ed" id="v6_k1">40+</span></b><span class="lab">累计独立交付岗位</span></div>
+        <div class="stat"><b><span class="ed" id="v6_k2">1000+</span></b><span class="lab">文化活动覆盖人数</span></div>
+        <div class="stat"><b><span class="ed" id="v6_k3">300</span></b><span class="lab">SSC 全盘管理人数</span></div>
+        <div class="stat"><b><span class="ed" id="v6_k4">90%</span></b><span class="lab">招聘留存率</span></div>
+        <div class="stat"><b><span class="ed" id="v6_k5">7+</span></b><span class="lab">AI 自动化系统上线</span></div>
+        <div class="stat"><b><span class="ed" id="v6_k6">5</span></b><span class="lab">自建的 HR skills</span></div>
+      </div>
+    </section>
+
+    <!-- 01 招聘交付 -->
+    <section class="page" id="p1">
+      <div class="phead">
+        <span class="sec-no">01 — 招聘交付</span>
+        <h2 class="ptitle">招聘了什么岗位</h2>
+      </div>
+      <div class="case">
+        <div class="case-left">
+          <div class="big-num">40<sup>+</sup></div>
+          <div class="case-metric">累计独立交付岗位</div>
+        </div>
+        <div class="case-right">
+          <p>从 0 到 <span class="hl">40+ 岗位</span> 的交付密度，管理层与海外岗并重，覆盖 7 个部门。</p>
+          <ul class="poslist">
+            <li><b>管理层</b> 1 名高级经理 · 4 名经理级</li>
+            <li><b>海外岗</b> 4 个（含 1 位印尼当地人）</li>
+            <li><b>覆盖部门</b> 财务 / 内审 / CSR / IE / 质量 / 供应链 / 高管助理</li>
+          </ul>
+          <div class="proj-result">招聘留存率 90% 以上</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 AI 自动化 -->
+    <section class="page" id="p2">
+      <div class="phead">
+        <span class="sec-no">02 — AI 自动化</span>
+        <h2 class="ptitle">把重复的场景，做成可调用系统</h2>
+      </div>
+      <div class="why">
+        <b>为什么做这些 AI 作品？</b><br>
+        HR 里大量场景是重复的——文化活动从需求到方案、高管谈参的合规把关、绩效 1v1 的话术、新人转正的流程，每次都从零写、质量靠人手。
+        我把它们沉淀成可一键调用的 AI 系统 / skills：新人也能稳定产出，我只需维护"方法"。AI 漫剧则是验证 AIGC 内容生产的完整链路——从分镜到成片能自己跑通。
+      </div>
+      <ul class="work-links">
+        <li><a href="https://yitongcaii.github.io/activities-html/hr-activity-playbook.html" target="_blank" rel="noopener">文化活动实操手册<span class="ext">↗</span></a><span class="wl-d">HR 活动从 0 到 1 的 SOP 与模板</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">文化文档地图<span class="ext">↗</span></a><span class="wl-d">文化资料的结构化索引</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/bowen_dashboard_20260804_2052.html" target="_blank" rel="noopener">培训效果看板<span class="ext">↗</span></a><span class="wl-d">培训数据可视化</span></li>
+      </ul>
+      <div class="skillset">
+        <h4>自建的 skill 体系（高频场景 → 可调用）</h4>
+        <ul>
+          <li><span class="n">①</span><div>文化活动<span class="d">需求到产出一键</span></div></li>
+          <li><span class="n">②</span><div>高管谈参<span class="d">合规红线前置把关</span></div></li>
+          <li><span class="n">③</span><div>活动话术<span class="d">风格统一、快速成稿</span></div></li>
+          <li><span class="n">④</span><div>绩效 1v1<span class="d">四段式教练框架</span></div></li>
+          <li><span class="n">⑤</span><div>视觉风格<span class="d">HTML 4 风格自动套用</span></div></li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <button class="vcover" data-mp4="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic.mp4"
+          style="background-image:url('https://yitongcaii.github.io/activities-html/resume/portfolio-assets/ai-comic-01.jpg')">
+          <span class="vplay">▶</span><span class="vcap">AI 漫剧 · 成片 Demo</span>
+        </button>
+        <video class="vplayer" controls playsinline hidden><source src="" type="video/mp4"></video>
+        <div class="vnote">从分镜到成片全链路自跑通——验证 AI 内容生产能力。</div>
+      </div>
+    </section>
+
+    <!-- 03 文化活动 -->
+    <section class="page" id="p3">
+      <div class="phead">
+        <span class="sec-no">03 — 文化活动</span>
+        <h2 class="ptitle">从 0 到 1 的文化活动体系</h2>
+      </div>
+      <p class="brief">从 0 到 1 的文化活动实操体系，覆盖 <span class="hl">1000+</span> 人；把活动筹备做成可复用的方法与模板。</p>
+      <ul class="work-links">
+        <li><a href="https://yitongcaii.github.io/activities-html/hr-activity-playbook.html" target="_blank" rel="noopener">文化活动实操手册<span class="ext">↗</span></a><span class="wl-d">HR 活动 SOP 与模板</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/culture-doc-map.html" target="_blank" rel="noopener">文化文档地图<span class="ext">↗</span></a><span class="wl-d">文化资料结构化索引</span></li>
+      </ul>
+      <div class="vrow">
+        <div class="vcard">
+          <button class="vcover" data-mp4="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points.mp4"
+            style="background-image:url('https://yitongcaii.github.io/activities-html/resume/portfolio-assets/training-points-01.jpg')">
+            <span class="vplay">▶</span><span class="vcap">培训积分商城 · Demo</span>
+          </button>
+          <video class="vplayer" controls playsinline hidden><source src="" type="video/mp4"></video>
+          <div class="vnote">积分商城机制演示。</div>
+        </div>
+        <div class="vcard">
+          <button class="vcover" data-mp4="https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base.mp4"
+            style="background-image:url('https://yitongcaii.github.io/activities-html/resume/portfolio-assets/knowledge-base-01.jpg')">
+            <span class="vplay">▶</span><span class="vcap">知识库 · Demo</span>
+          </button>
+          <video class="vplayer" controls playsinline hidden><source src="" type="video/mp4"></video>
+          <div class="vnote">文化活动知识库检索演示。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 数据看板 -->
+    <section class="page" id="p4">
+      <div class="phead">
+        <span class="sec-no">04 — 数据看板</span>
+        <h2 class="ptitle">用看板替代手工统计</h2>
+      </div>
+      <p class="brief">把培训与薪酬效果变成可追踪的指标——用看板替代手工统计，业务一眼看懂投入产出。</p>
+      <ul class="work-links">
+        <li><a href="https://yitongcaii.github.io/activities-html/bowen_dashboard_20260804_2052.html" target="_blank" rel="noopener">培训效果看板<span class="ext">↗</span></a><span class="wl-d">培训数据可视化</span></li>
+        <li><a href="https://yitongcaii.github.io/activities-html/salary/comp-salary-diagnosis.html" target="_blank" rel="noopener">薪酬看板脚本<span class="ext">↗</span></a><span class="wl-d">薪酬诊断数据化</span></li>
+      </ul>
+    </section>
+
+    <!-- 05 SSC · 跨文化 -->
+    <section class="page" id="p5">
+      <div class="phead">
+        <span class="sec-no">05 — SSC · 跨文化</span>
+        <h2 class="ptitle">把 SSC 做成稳定运行</h2>
+      </div>
+      <div class="ba">
+        <div class="ba-col ba-before">
+          <span class="ba-k">Before</span>
+          <p>手工考勤算薪，差错与月度关账慢，外籍入职靠逐人盯。</p>
+        </div>
+        <div class="ba-col ba-after">
+          <span class="ba-k">After</span>
+          <p>自动化模板 + 带教 1 位印尼当地人，全盘稳定运行。</p>
+          <div class="ba-metric">算薪差错率 → 0 · 月度关账提效 ~40% · 外籍入职合规落地</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 关于 -->
+    <section class="page traits" id="p6">
+      <div class="phead">
+        <span class="sec-no">06 — 关于</span>
+        <h2 class="ptitle">关于我</h2>
+      </div>
+      <p class="lead">习惯把重复的事，<br><em>做成系统。</em></p>
+      <p class="body">独立负责过 300 人 SSC 全盘考勤算薪，也在跨文化团队带教当地同事；结果导向、数据意识。</p>
+      <div class="sig">— 蔡女士 · HRBP</div>
+      <div class="c-contact" style="margin-top:30px">
+        <a class="ed" id="v6_tel3" href="tel:18665138212">18665138212</a>
+        <a class="ed" id="v6_email3" href="mailto:18665138212@163.com">18665138212@163.com</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理</footer>
+
+<script>
+// 可编辑自动保存（隐形，key 隔离防与 v1~v5 串）
+(function(){
+  var PREFIX="hrbp6_";
+  document.querySelectorAll(".ed").forEach(function(el){
+    var id=el.id; if(!id) return;
+    var k=PREFIX+id, v=localStorage.getItem(k);
+    if(v!==null && v!==el.innerHTML) el.innerHTML=v;
+    el.addEventListener("input",function(){ localStorage.setItem(k,el.innerHTML); });
+  });
+})();
+// 分栏导航（目录栏 ↔ 内容页）
+(function(){
+  var navs=document.querySelectorAll(".rail-nav li");
+  var pages=document.querySelectorAll(".page");
+  function go(id){
+    navs.forEach(function(n){ n.classList.toggle("active", n.dataset.page===id); });
+    pages.forEach(function(p){ p.classList.toggle("active", p.id===id); });
+    if(history.replaceState) history.replaceState(null,"","#"+id);
+    var top=document.querySelector(".book");
+    window.scrollTo({top: top.offsetTop-10, behavior:"smooth"});
+  }
+  navs.forEach(function(n){ n.addEventListener("click",function(){ go(n.dataset.page); }); });
+  var h=(location.hash||"#p0").slice(1);
+  if(document.getElementById(h)) go(h); else go("p0");
+})();
+// 视频封面 → 点击播放
+document.querySelectorAll(".vcover").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var card=btn.closest(".vcard");
+    var vid=card.querySelector(".vplayer");
+    vid.querySelector("source").src=btn.dataset.mp4;
+    vid.load();
+    btn.style.display="none";
+    vid.hidden=false;
+    vid.play().catch(function(){});
+  });
+});
+</script>
+</body>
+</html>
