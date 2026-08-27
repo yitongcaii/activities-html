@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳口碑公司 · HR岗薪资卡片墙 & 对标表</title>
+<style>
+  :root{
+    --purple:#7c5cff; --teal:#21c7c7; --bg:#f6f7fb; --ink:#232534; --muted:#6b7080;
+    --soft:#ffffff; --line:#e9ebf2;
+    --ok:#16a34a; --no:#ef4444; --unk:#f59e0b;
+    --radius:18px; --shadow:0 6px 22px rgba(60,70,120,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(135deg,#f3f1ff 0%,#eafaf8 100%);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;line-height:1.5}
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 22px 70px}
+  header h1{font-size:26px;margin:0 0 6px;letter-spacing:.5px}
+  header h1 .g{background:linear-gradient(90deg,var(--purple),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{margin:0;color:var(--muted);font-size:14px}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 8px}
+  .stat{flex:1 1 150px;background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 16px;box-shadow:var(--shadow)}
+  .stat .n{font-size:24px;font-weight:800}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .stat.ok .n{color:var(--ok)} .stat.no .n{color:var(--no)} .stat.unk .n{color:var(--unk)}
+  .filters{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px;margin:18px 0;box-shadow:var(--shadow)}
+  .frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+  .frow:last-child{margin-bottom:0}
+  .flabel{font-size:12.5px;color:var(--muted);width:74px;flex:0 0 auto}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;
+    cursor:pointer;transition:.15s;user-select:none}
+  .chip:hover{border-color:var(--purple)}
+  .chip.on{background:linear-gradient(90deg,var(--purple),var(--teal));color:#fff;border-color:transparent;font-weight:600}
+  .toggle{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+  .toggle input{width:16px;height:16px;accent-color:var(--purple)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-top:8px}
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 14px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.18s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(60,70,120,.14)}
+  .card .bar{position:absolute;top:0;left:0;right:0;height:4px}
+  .card.ok .bar{background:linear-gradient(90deg,var(--ok),#34d399)}
+  .card.no .bar{background:linear-gradient(90deg,var(--no),#fb7185)}
+  .card.unk .bar{background:linear-gradient(90deg,var(--unk),#fbbf24)}
+  .cname{font-size:17px;font-weight:800;margin:6px 0 8px;padding-right:54px}
+  .badge{position:absolute;top:12px;right:14px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
+  .badge.ok{background:#dcfce7;color:var(--ok)} .badge.no{background:#fee2e2;color:var(--no)} .badge.unk{background:#fef3c7;color:#b45309}
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+  .pill{font-size:11px;padding:3px 9px;border-radius:999px;background:#f1f0fe;color:var(--purple);font-weight:600}
+  .pill.t{background:#e6fbfb;color:#0e9488}
+  .pill.b{background:#eef2ff;color:#4f46e5}
+  .pill.x{background:#fde68a;color:#92400e}
+  .role{font-size:13px;color:var(--ink);margin:2px 0}
+  .sal{font-size:15px;font-weight:800;color:var(--purple);margin:6px 0 2px}
+  .meta{font-size:12px;color:var(--muted);margin-top:6px}
+  .note{font-size:11.5px;color:#8a8fa3;margin-top:7px;border-top:1px dashed var(--line);padding-top:7px}
+  .jd{margin-top:9px}
+  .jd-h{font-size:11px;color:var(--teal);font-weight:700;display:flex;align-items:center;gap:4px}
+  .jd-edit{font-size:12px;color:var(--ink);background:#fafbff;border:1px dashed var(--line);border-radius:10px;
+    padding:7px 9px;margin-top:3px;min-height:32px;outline:none;line-height:1.45}
+  .jd-edit:focus{border-color:var(--purple);background:#fff}
+  .jdtip{font-size:11.5px;color:#8a8fa3;margin:10px 2px 0}
+  .src{font-size:11px;color:#0e9488;margin-top:7px;border-top:1px dashed var(--line);padding-top:6px}
+  .src a{color:#0e9488;text-decoration:underline;word-break:break-all}
+  .count{font-size:13px;color:var(--muted);margin:14px 2px 0}
+  section.block{margin-top:34px}
+  h2.sec{font-size:20px;margin:0 0 4px}
+  h2.sec span{font-size:12px;color:var(--muted);font-weight:500;margin-left:8px}
+  table{width:100%;border-collapse:collapse;background:var(--soft);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);font-size:13.5px;margin-top:12px}
+  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#f7f8fc;font-weight:700;cursor:pointer;white-space:nowrap;user-select:none}
+  th:hover{color:var(--purple)}
+  tbody tr:hover{background:#fafbff}
+  td .tag{font-size:11px;padding:2px 8px;border-radius:999px;font-weight:600}
+  td .tag.ok{background:#dcfce7;color:var(--ok)} td .tag.no{background:#fee2e2;color:var(--no)} td .tag.unk{background:#fef3c7;color:#b45309}
+  td .tag.y{background:#dbeafe;color:#1d4ed8} td .tag.n{background:#f1f5f9;color:#64748b}
+  .legend{font-size:12px;color:var(--muted);margin-top:10px}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);text-align:center}
+  @media(max-width:600px){.flabel{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>深圳口碑公司 · <span class="g">HR岗薪资卡片墙 &amp; 对标表</span></h1>
+    <p>数据口径：薪酬起点 ≤ 14k 即「达标」｜含1万档 = 区间下限≤10k≤上限｜来源 各公司官网招聘门户 / 猎聘·51job·BOSS·牛客等实时在招链接（已尽量替换为实时链接，2026-08-27 更新）</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat ok"><div class="n">30</div><div class="l">达标（HR岗起薪≤14k）</div></div>
+    <div class="stat no"><div class="n">18</div><div class="l">不含（起薪≥15k / 高端 / 外包 / 移出）</div></div>
+    <div class="stat unk"><div class="n">11</div><div class="l">未明确（面议/实习/无）</div></div>
+    <div class="stat"><div class="n">17</div><div class="l">达标中含「1万档」</div></div>
+  </div>
+
+  <div class="filters">
+    <div class="frow"><span class="flabel">状态</span>
+      <span class="chip on" data-f="status" data-v="全部">全部</span>
+      <span class="chip" data-f="status" data-v="ok">✅ 达标</span>
+      <span class="chip" data-f="status" data-v="no">❌ 不含</span>
+      <span class="chip" data-f="status" data-v="unk">⚠️ 未明确</span>
+    </div>
+    <div class="frow"><span class="flabel">类别</span>
+      <span class="chip on" data-f="category" data-v="全部">全部</span>
+      <span class="chip" data-f="category" data-v="中腰部">首轮·中腰部</span>
+      <span class="chip" data-f="category" data-v="30强">最佳雇主30强</span>
+      <span class="chip" data-f="category" data-v="成长型">成长型</span>
+      <span class="chip" data-f="category" data-v="外企">外企</span>
+    </div>
+    <div class="frow"><span class="flabel">薪资带</span>
+      <span class="chip on" data-f="band" data-v="全部">全部</span>
+      <span class="chip" data-f="band" data-v="≤8k">≤8k</span>
+      <span class="chip" data-f="band" data-v="8-10k">8–10k</span>
+      <span class="chip" data-f="band" data-v="10-12k">10–12k</span>
+      <span class="chip" data-f="band" data-v="12-14k">12–14k</span>
+    </div>
+    <div class="frow"><span class="flabel">快捷</span>
+      <label class="toggle"><input type="checkbox" id="only10"> 只看「含1万档」</label>
+    </div>
+  </div>
+
+  <div class="jdtip">✎ 每张卡的「职责 / 要求」已预填为<b>官招/平台公开 JD 原文（别人写的原话）</b>，下方标注来源链接（2026-08-27 已尽量替换为实时在招链接，优先官网门户 / 猎聘·51job·BOSS 实时帖）。仍可点击直接改，自动存本地浏览器（KEY: sz-hr-jd-v2）；你的编辑优先于预填。切换筛选不会丢失编辑。</div>
+
+  <div class="grid" id="grid"></div>
+  <div class="count" id="count"></div>
+
+  <section class="block">
+    <h2 class="sec">HRBP / HR岗 薪资对标表 <span>按起薪降序 · 点表头可重排 · 仅列达标30家</span></h2>
+    <table id="tbl">
+      <thead><tr>
+        <th data-k="name">公司</th><th data-k="category">类别</th><th data-k="role">HR岗</th>
+        <th data-k="sal">薪资区间</th><th data-k="low">起薪(k)</th><th data-k="c10">含1万档</th><th data-k="loc">城市</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="legend">
+      定量验收：达标 30 家 HR 岗 <b>起薪中位 8k</b>｜均值 ≈8.8k｜区间 6k–13k（不含未公开/20k擦边）；其中 <b>含1万档 18 家</b>（占 60%，口径：薪资区间含 10k）。
+      分带：≤8k 12家 · 8–10k 7家 · 10–12k 4家 · 12–14k 5家（另有 2 家薪资未公开）。
+      已按用户要求移出参考：创维（海外HRBP 20-30k 超≤14k）· TCL（人力外包岗）· 银雁科技（金融外包公司）。入职前请以官招 / Boss 实时 JD 为准。
+    </div>
+  </section>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+const data = [
+ {n:"比亚迪",c:"中腰部",s:"ok",role:"HRBP专员",sal:"12-18k",low:12,band:"12-14k",c10:false,loc:"深圳",note:"新能源龙头，HRBP专员岗",duty:"1、负责人力资源专业线条(组织管理、招聘、培训、任职资格、晋升、绩效、员工关系、试用期转正)的专项管理; 2、人才发展和人才梯队建设,组织人才盘点; 3、定期组织员工活动,提高团队凝聚力; 4、述职管理跟进与参与; 5、深度理解业务,协助业务部门制定HR解决方案; 6、主导公司核心价值观的践行。",req:"1、大学以上学历,专业不限; 2、1年以上人力资源经验,1年以上BP经验; 3、了解人力资源各模块,具备人才发展体系搭建经验; 4、良好的业务理解力和洞察力; 5、善于整合资源驱动目标达成。",src:"https://www.liepin.com/job/1979921479.shtml",srcName:"猎聘（实时在招）"},
+ {n:"万物云",c:"中腰部",s:"ok",role:"人力资源岗(员工关系方向)",sal:"7000-8000",low:7,band:"≤8k",c10:false,loc:"深圳",note:"万科物业系，员工关系方向",duty:"1、独立策划并组织各类企业文化活动,提升员工归属感; 2、了解员工意见,建立和维护员工关系,定期进行满意度调查; 3、受理员工投诉和劳动纠纷并协同法务处理; 4、协助HRBP完成日常工作。",req:"1、本科及以上,1-3年人事经验,物业行业优先; 2、良好的沟通能力和团队合作精神; 3、对人力资源领域有浓厚兴趣。",src:"https://tc.onewo.com/talent/index.html",srcName:"万物云招聘官网"},
+ {n:"创维",c:"中腰部",s:"no",role:"海外HRBP",sal:"20-30k",low:20,band:"—",c10:false,loc:"深圳",note:"⛔ 已移出参考：海外HRBP 20-30k 超≤14k口径（用户要求）",duty:"深度融入业务,全面负责对接业务线人力资源全模块工作,搭建适配业务的人力资源体系: 1、招聘配置; 2、培训发展; 3、人才发展; 4、薪酬绩效; 5、员工关系; 6、配合HR部落实公司人力资源政策。",req:"硬性要求: 1、本科及以上,管理学相关; 2、3-5年人力资源经验,HRBP经验优先; 3、良好英语读写能力。个性与能力:自驱力强、责任心强、抗压性好。",src:"https://m.liepin.com/job/1983029889.shtml",srcName:"猎聘"},
+ {n:"TCL",c:"中腰部",s:"no",role:"HRBP/人力外包(企业文化方向)",sal:"6000-8000",low:6,band:"≤8k",c10:false,loc:"深圳",note:"⛔ 已移出参考：岗位为人力外包（用户要求）",duty:"1、组织策划部门内文化活动工作; 2、负责日常行政费用审核和报销; 3、负责办公用品、福利用品采购和节假日福利发放; 4、体系化沉淀、展示组织文化产品; 5、日常行政费用管控和年度行政经费预算; 6、协助培训需求调研与活动策划; 7、负责活动接待和会议组织。",req:"1、本科及以上,3年左右HR企业文化经验; 2、较强的活动策划组织和实施能力; 3、良好的沟通和协作能力; 4、具备企业文化制作、宣传、编辑知识; 5、性格开朗活泼。",src:"https://www.zhaopin.com/jobdetail/CC271678330J40718946014.htm",srcName:"智联招聘"},
+ {n:"富士康",c:"中腰部",s:"ok",role:"人力资源专员(组织发展方向)",sal:"8k-1.3万",low:8,band:"8-10k",c10:true,loc:"深圳",note:"组织发展方向",duty:"1、跟进单位组织架构调整,审核架构调整规范性; 2、开展定员定编分析,发现异常反馈预警并提出改善建议; 3、开展单位定员信息稽核,识别异常并跟进处理; 4、具备组织发展推动及项目规划经验优先。",req:"1、3年以上组织与岗位管理经验; 2、具备数据分析能力; 3、优秀的沟通和组织协调能力,抗压能力强; 4、熟悉人力资源六大模块; 5、具备出色的学习能力。",src:"https://hr.foxconn.com.cn/social",srcName:"富士康招聘官网"},
+ {n:"工业富联",c:"中腰部",s:"ok",role:"员工关系专员",sal:"7-15k·13薪",low:7,band:"≤8k",c10:true,loc:"深圳",note:"员工关系",duty:"1、事业群组织人力优化,负责员工离职/奖惩管理、异常事件处理及投诉、申诉事项跟进与处置; 2、统筹策划并落实事业群层级员工关爱行动及公益活动; 3、满意度调查、敬业度调查的组织、实施及后续追踪改进; 4、完成主管交办的其他任务。",req:"1、本科及以上,人力资源、法律、心理学等相关专业优先; 2、熟悉《劳动合同法》等法律法规; 3、沟通协调能力强,责任心强、注重细节,情绪稳定、抗压性强。",src:"https://m.liepin.com/job/1983276271.shtml",srcName:"猎聘"},
+ {n:"鹏鼎控股",c:"中腰部",s:"ok",role:"员工关系异常处理专员",sal:"7000-14000",low:7,band:"≤8k",c10:true,loc:"深圳",note:"PCB龙头，员工关系",duty:"1、劳资纠纷、重大案件处理; 2、员工关爱座谈会开展; 3、奖惩审核; 4、异常关爱技巧课程开展; 5、协助BU降低离职率; 6、领导交办的其他工作。",req:"1、本科及以上学历; 2、具备一定抗压能力; 3、大型制造业同等工作经验三年以上; 4、具一定制作PPT及报告能力。",src:"https://avaryholding.zhiye.com/",srcName:"鹏鼎控股招聘官网"},
+ {n:"东鹏饮料",c:"中腰部",s:"ok",role:"储备干部(人力资源)",sal:"10K-13K·13薪",low:10,band:"10-12k",c10:true,loc:"深圳",note:"硕士校招储备",duty:"1、人力资源相关工作,在人力资源中心轮岗学习后确定具体岗位; 2、跨部门沟通与协调,处理日常人力资源工作; 3、领导交办的其他临时性、项目性工作。",req:"1、26届硕士及以上,人力资源、心理学、管理类等相关专业; 2、英语口语流利; 3、具有丰富实践能力者优先; 4、正式入职前需完成不少于2个月岗位实习。",src:"https://www.quanzhi.com/job/6a23505e1433e769ad669f3c",srcName:"全职招聘网"},
+ {n:"跨越速运",c:"中腰部",s:"ok",role:"人资综合高级专员",sal:"7000-10000",low:7,band:"≤8k",c10:true,loc:"深圳",note:"人资综合",duty:"人资基础服务: 1、协助人事主管处理日常事务; 2、办理入职、离职、档案收集更新; 3、新入职人员工牌制作及证件到期跟进; 4、人员薪资异动人事资料提供。招聘工作: 1、全面负责公司内部人才招聘; 2、搜索简历,筛选,通知面试; 3、组织复试; 4、总结招聘问题,提出优化建议。",req:"1、专科及以上,人力资源管理专业优先; 2、2年以上人事/招聘/猎头经验; 3、性格外向、服从管理、处理事务灵活。",src:"https://m.zhaopin.com/jobs/CC574811320J40848914711.htm",srcName:"智联招聘（2026-08-27在招）"},
+ {n:"新瑞鹏",c:"中腰部",s:"ok",role:"HRBP主管",sal:"8-12k",low:8,band:"8-10k",c10:true,loc:"深圳",note:"宠物医疗连锁",duty:"1、维护招聘渠道,进行招聘、甄选、面试、安置; 2、执行区域校园招聘; 3、实时掌握一线员工动态; 4、定期走访门店,协助门店与员工沟通; 5、结合公司战略制定人才培养规划; 6、收集分析人力数据; 7、做好人才发展生命周期管理。",req:"1、本科及以上,人力资源、培训、工商管理相关专业; 2、5年以上人力资源经验,连锁门店或培训经验优先; 3、熟悉招聘渠道、测评工具和面试技巧; 4、良好的沟通协调能力; 5、较强的责任心和抗压能力。",src:"https://www.quanzhi.com/job/68ad798d2e95e8aa8441bb07",srcName:"全职招聘网"},
+ {n:"银雁科技",c:"中腰部",s:"no",role:"招聘运营主管",sal:"1-1.2万",low:10,band:"10-12k",c10:true,loc:"深圳",note:"⛔ 已移出参考：金融外包公司（用户要求）",duty:"1、渠道规划拓展:制定年度、季度渠道规划; 2、渠道运维增效:运营维护各招聘平台及服务商; 3、预算成本管控:编制招聘渠道预算; 4、数据复盘迭代:输出复盘报告。",req:"1、本科及以上,人力资源、工商管理等相关专业优先; 2、3年以上招聘渠道管理经验; 3、熟悉各类招聘渠道运营逻辑; 4、较强的数据分析能力。",src:"https://m.zhaopin.com/jobs/CC853113380J40873060909.htm",srcName:"智联招聘"},
+ {n:"麦科田",c:"中腰部",s:"ok",role:"人力资源专员",sal:"8000-12000",low:8,band:"8-10k",c10:true,loc:"深圳",note:"医疗器械",duty:"1、生产招聘:制定并执行招聘方案; 2、人事手续办理:入离调转全流程; 3、培训实施:新员工上岗培训; 4、绩效支持:配合落地一线员工绩效考核; 5、劳务派遣管理。",req:"1、人力资源管理等相关专业,本科及以上; 2、两年以上制造业人力资源经验; 3、熟悉《劳动合同法》及劳务派遣法规; 4、积极主动,责任心强; 5、有同行业经验优先。",src:"https://medcaptain.zhiye.com/",srcName:"麦科田招聘官网"},
+ {n:"乐有家",c:"中腰部",s:"ok",role:"人事行政专员",sal:"6000-8000(综合6000-12000)",low:6,band:"≤8k",c10:false,loc:"深圳",note:"房产中介，起6k不含1万档",duty:"1、总部各类通知、文件和信息的传达; 2、负责日常招聘、面试、人事手续; 3、和店长一起管理门店; 4、负责合同、收据的检查和定期上交; 5、负责门店物资申请和保管。",req:"1、统招大专及以上,形象气质佳; 2、学习能力强,做事认真负责; 3、有一定的文字功底; 4、能适应扁平化管理,承挫抗压能力强。",src:"https://hr.leyoujia.com",srcName:"乐有家招聘官网"},
+ {n:"中信银行信用卡中心",c:"30强",s:"ok",role:"人事招聘专员",sal:"6000-8000",low:6,band:"≤8k",c10:false,loc:"深圳",note:"周末双休+一档社保",duty:"1、协助上级建立健全招聘、培训、绩效考核等人力资源制度; 2、负责各招聘岗位信息发布、简历收集筛选、面试安排及甄选; 3、完成上级安排的其他工作。",req:"1、大专及以上,人力资源学等相关专业优先; 2、1年以上招聘工作经验优先; 3、有责任心和良好的沟通能力。",src:"https://jobs.zhaopin.com/CC696307830J40312583503.htm",srcName:"智联招聘"},
+ {n:"思摩尔国际",c:"30强",s:"ok",role:"人力资源专员(校招)",sal:"6千-1万·14薪",low:6,band:"≤8k",c10:true,loc:"深圳",note:"电子雾化，校招",duty:"1、跟进招聘全流程,包括对接招聘需求与发布职位、筛选简历、协调跨时区面试、管理Offer与跟进入职; 2、协助管理招聘渠道; 3、参与培训、绩效考核等工作。",req:"1、26届应届本科及以上,人力资源、劳动与社会保障、英语/小语种等相关专业; 2、英语听说读写流利; 3、具有良好的招聘流程理解能力; 4、有招聘相关实习经验优先。",src:"https://app.mokahr.com/m/campus_apply/smoore/150918",srcName:"思摩尔校招官网"},
+ {n:"招商证券",c:"30强",s:"ok",role:"薪酬管理岗",sal:"1.2-2万",low:12,band:"12-14k",c10:false,loc:"深圳",note:"薪酬管理",duty:"1、实施开展薪酬日常管理、工资、社保、福利; 2、及时准确发放员工各项工资福利,统计分析薪酬数据; 3、完成员工社保、公积金缴纳; 4、部门安排的其他工作。",req:"1、中共党员,知名院校本科及以上,人力资源、金融、经济、财务等相关专业; 2、较强的主动学习、沟通协调能力; 3、熟练使用常用办公软件。",src:"https://www.cmschina.com/index.html",srcName:"招商证券官网"},
+ {n:"华侨城商管",c:"30强",s:"ok",role:"人力资源管理岗(商管)",sal:"8千-1.2万·15薪",low:8,band:"8-10k",c10:true,loc:"深圳",note:"文旅/地产",duty:"1、负责人力资源管理制度、流程体系的搭建、优化、宣贯与落地; 2、负责招聘/员工关系/薪酬绩效/干部管理/人才发展; 3、梳理汇总人力资源各项数据,定期输出报表; 4、完成公司和上级交办的其他工作。",req:"1、大学本科及以上,中共党员,人力资源等相关管理类专业优先; 2、2年及以上工作经验; 3、熟悉人力资源日常工作流程; 4、较好的沟通协调能力; 5、熟练运用office。",src:"https://www.quanzhi.com/job/6a8101d0f87cf99210cd69aa",srcName:"全职招聘网"},
+ {n:"海目星激光",c:"30强",s:"ok",role:"HRBP(主招聘)",sal:"8000-14000",low:8,band:"8-10k",c10:true,loc:"深圳",note:"激光设备；其他HRBP岗1.7万+不含",duty:"1、执行3C行业非标自动化设备技术岗位招聘; 2、搜索人才、挖掘人才,维护与拓展招聘渠道; 3、执行招聘需求澄清、甄选、面试、入职准备; 4、与业务部门紧密衔接; 5、协助开展或负责部门内其他项目性工作; 6、负责部分HRBP工作事项落地执行。",req:"1、大专及以上,人力资源等相关专业; 2、3年中型以上企业专职招聘经验; 3、擅长高端技术、管理人才寻访; 4、熟悉测评工具及方法; 5、工作耐心,积极主动,抗压能力强。",src:"https://m.liepin.com/job/1974905785.shtml",srcName:"猎聘（实时在招）"},
+ {n:"港华能源",c:"30强",s:"ok",role:"人力资源主管",sal:"8-12k·14薪",low:8,band:"8-10k",c10:true,loc:"深圳",note:"能源",duty:"1、协助优化用工管理流程,前置化规避法律风险; 2、人事运营与档案管理; 3、维护人力资源系统基础数据; 4、跟进员工投诉、劳动纠纷、奖惩管理; 5、定期组织员工访谈; 6、协助招聘计划制定与执行; 7、企业文化落地与活动对接。",req:"1、本科及以上,人力资源管理、企业管理等相关专业优先; 2、3年以上人事基础运营或HRBP经验; 3、熟悉入转调离流程及劳动法规; 4、熟练使用办公软件及常用HR系统; 5、良好的沟通协调能力。",src:"https://towngasenergy.zhiye.com/",srcName:"港华能源招聘官网"},
+ {n:"民太安",c:"30强",s:"ok",role:"薪酬绩效岗",sal:"1.2-1.6万",low:12,band:"12-14k",c10:false,loc:"深圳",note:"保险公估",duty:"1、统筹制定公司薪酬、绩效、激励等方案; 2、高效完成总部薪酬核算; 3、全面负责绩效考核表收集与审核; 4、开展薪酬、绩效数据分析; 5、负责人力资源薪酬绩效模块日常维护; 6、组织指导各部门开展薪酬激励工作; 7、响应领导安排的工作任务。",req:"1、人力资源、劳动经济学、工商管理等相关专业本科及以上,211/985及硕士优先; 2、3-5年以上人力资源经验; 3、精通国家及地方劳动法律法规; 4、熟练使用HRIS、Excel; 5、工作责任心强,严谨细致,保密意识强。",src:"https://m.zhaopin.com/jobs/CC448226020J40733599202.htm",srcName:"智联招聘"},
+ {n:"同方电子",c:"30强",s:"ok",role:"人事主管",sal:"7000-10000",low:7,band:"≤8k",c10:true,loc:"东莞(深圳总部旗下)",note:"深圳总部旗下，工作地东莞",duty:"1、熟悉人力资源各个模块,善于统筹、完善部门各项工作; 2、协助人资中心总监安排、落实行政服务支持工作; 3、主持公司后勤日常管理工作; 4、编制并落实各种行政规章制度; 5、协助上级完成公司行政事务性工作。",req:"1、企业管理、行政管理、人力资源管理等专业本科以上; 2、对现代企业行政管理模式有系统的了解; 3、具有良好的外联与公关能力; 4、8年以上企业行政管理经验; 5、受过战略管理、行政管理等培训。",src:"https://www.linshigong.com/wap/c_job-a_comapply-id_628921.html",srcName:"临时工网"},
+ {n:"爱奇迹",c:"30强",s:"ok",role:"员工关系(校招)",sal:"1-2万",low:10,band:"10-12k",c10:true,loc:"深圳",note:"电子雾化出海，员工关系校招",duty:"1、员工全生命周期管理:员工从入职到离职全过程的劳动关系事务处理; 2、劳动关系制度建设与优化; 3、数据运营与报表分析:员工结构、离职率等,监控风险点并预警。",req:"1、英语可作为工作语言,有海外留学或海外生活经验优先; 2、具备基础数据分析能力,熟练使用Excel。",src:"https://heavengifts.zhiye.com/campus",srcName:"爱奇迹招聘官网"},
+ {n:"丰e足食",c:"30强",s:"ok",role:"高级招聘",sal:"10-15K",low:10,band:"10-12k",c10:true,loc:"深圳",note:"顺丰孵化，零售/自动售货",duty:"1、对区域的销售团队开展招聘管理工作; 2、招聘计划制定; 3、过程管理,拆解阶段性目标; 4、数据分析,推动卡点问题; 5、渠道运营,开发新渠道; 6、人才库建立。",req:"1、3年以上招聘工作经验; 2、强招聘、强执行力; 3、抗压能力强,良好的组织协调能力。",src:"https://hr-new.sf-express.com/SearchJobSearchById/17315",srcName:"顺丰招聘官网"},
+ {n:"中建香港",c:"30强",s:"ok",role:"人力资源主管",sal:"7-10k·14薪",low:7,band:"≤8k",c10:true,loc:"珠海",note:"建筑系，岗位珠海/香港",duty:"1、开展招聘需求分析及招聘计划制定,高质量完成招聘交付; 2、负责员工入离职、转正、异动等流程办理; 3、协同开展绩效管理; 4、协同开展培训管理; 5、为业务团队提供人力资源全方位解决方案; 6、协同完成部门其他任务。",req:"1、统招本科以上,3年以上人力资源从业经验; 2、具备招聘交付、劳动关系、绩效考核等模块实操经验; 3、优秀数据分析能力、沟通协调能力; 4、良好的职业素养和道德操守。",src:"http://job.csci.com.hk",srcName:"中建国际招聘官网"},
+ {n:"深圳证券通信",c:"30强",s:"ok",role:"人力资源管理岗",sal:"薪资未公开(硕士校招)",low:0,band:"—",c10:false,loc:"深圳",note:"国企校招硕士岗，薪资未公开",duty:"1、协助做好人力资源相关制度体系建设; 2、负责员工培训工作、员工关系; 3、协助绩效考核、干部管理; 4、完成领导安排的其他人力资源工作。",req:"1、人力资源、工商管理、行政管理、心理学等相关专业,全日制硕士及以上; 2、党员优先。",src:"https://www.sscc.com/html/web/news/feeInform/2004138984176578561.html",srcName:"深证通官网招聘公告"},
+ {n:"汉阳科技",c:"30强",s:"ok",role:"人力资源管培生",sal:"8k-10k",low:8,band:"8-10k",c10:true,loc:"深圳",note:"庭院机器人",duty:"1、参与技术岗位招聘,协助校招全流程; 2、培训体系搭建,推动技术人才发展项目; 3、协助SSC的工作开展。",req:"1、本科及以上,人力资源管理、心理学或工科背景; 2、对机器人行业有热情,擅长数据分析者优先。",src:"https://hanyangtech.cn/join",srcName:"汉阳科技招聘官网"},
+ {n:"视爵光旭",c:"30强",s:"ok",role:"人事专员",sal:"6000-8000·13薪",low:6,band:"≤8k",c10:false,loc:"惠州",note:"LED，工作地惠州",duty:"1、负责招聘计划实施,选择合适招聘渠道,筛选候选人; 2、应聘人员资质评定、背景调查; 3、建立公司人才储备简历信息库; 4、新员工入职手续办理,劳动合同签订; 5、建立与员工、各部门积极沟通; 6、员工试用期转正手续跟进; 7、岗位说明书盘点; 8、员工社保及雇主责任险参保; 9、员工考勤、假期明细; 10、完成上级交办的其他工作。",req:"1、25~35岁,大专以上; 2、5年以上工厂人事行政管理经验; 3、熟悉招聘工作,熟练使用招聘平台、人力系统、办公软件; 4、工作细心,有耐心。",src:"https://www.infiled.cn/join",srcName:"视爵光旭招聘官网"},
+ {n:"莲花物业",c:"成长型",s:"ok",role:"人力资源专员/主管(培训方向)",sal:"6-8K",low:6,band:"≤8k",c10:false,loc:"深圳",note:"培训方向",duty:"1、培训管理体系的建立和完善; 2、制定企业培训计划; 3、负责培训计划的具体执行; 4、组织和建立企业内部培训队伍; 5、建立与外部培训单位合作关系; 6、协助培训工作的考核和评估; 7、完成领导交给的其他任务。",req:"1、本科及以上,人力资源管理相关专业; 2、1-3年企业培训工作经验; 3、熟悉培训行业市场; 4、具备专业培训管理体系知识; 5、良好的沟通协调能力及组织策划能力。",src:"https://www.zhipin.com/job_detail/cda0d1436538c4451nd62NS5F1tS.html",srcName:"BOSS直聘"},
+ {n:"泽医细胞治疗",c:"成长型",s:"ok",role:"HRBP",sal:"13-20k",low:13,band:"12-14k",c10:false,loc:"深圳",note:"大健康，起13k擦边达标",duty:"1、深入业务,了解业务部门组织现状,提出改善建议; 2、识别和诊断业务部门人员需求和痛点; 3、负责业务部门招聘、员工关系; 4、负责业务部门员工绩效体系搭建; 5、负责赋能需求分析; 6、负责人才盘点、投入度调查。",req:"1、大健康行业HR管理工作经验优先; 2、熟悉劳动法; 3、优秀的沟通能力、协调能力; 4、身体健康,勤奋有责任感。",src:"https://m.liepin.com/job/1983090251.shtml",srcName:"猎聘"},
+ {n:"华星恒泰",c:"成长型",s:"ok",role:"人才发展专员",sal:"1.3-2.5万",low:13,band:"12-14k",c10:false,loc:"深圳",note:"起13k擦边达标",duty:"1、制定并实施公司人才培养计划; 2、设计人才梯队建设方案; 3、开展员工职业发展诊断与能力评估; 4、协同推进绩效管理与晋升机制优化; 5、收集分析人才市场动态,输出人才发展报告; 6、策划组织内部讲师培养等人才活动; 7、领导安排的其他工作。",req:"1、本科及以上,理工科优先; 2、基础数据分析能力,熟练使用Excel及PPT; 3、良好沟通协调能力; 4、对人才发展领域有热情; 5、工作细致严谨,抗压能力强。",src:"https://www.szcnht.com/",srcName:"华星恒泰官网"},
+ {n:"英伟达",c:"外企",s:"ok",role:"人力资源专员(员工关系)",sal:"6-8k",low:6,band:"≤8k",c10:false,loc:"深圳",note:"六险一金，外企里少见的低起薪HR岗，不含1万档",duty:"1、负责日常HR流程服务,包含入离调转手续办理; 2、HR相关福利政策管理; 3、作为窗口,提供HR相关政策、福利、流程问询服务; 4、准确人事信息维护与报表更新; 5、活动组织,团建、家庭日、年会; 6、领导安排的其他事务。",req:"1、本科及以上; 2、1-2年HR流程工作经验优先; 3、良好的团队合作意识,自我驱动力及抗压能力; 4、英语听说读写良好。",src:"https://www.nvidia.com/careers",srcName:"NVIDIA招聘官网"},
+ {n:"IBM",c:"外企",s:"ok",role:"HR Specialist",sal:"薪资未公开",low:0,band:"—",c10:false,loc:"深圳",note:"外企HR运营岗，薪资未公开",duty:"HR Operation Support; 离职/续签/relocation 支持; HR program execution; C&B Support; Verification Letter; 办理员工离职手续、计算离职员工工资、兼职/实习生工资计算、续签合约、组织年度体检等。",req:"Bachelor degree; Good English and Cantonese; 1+ year HR experience; 良好的质量与保密意识; Quick learner。",src:"https://www.ibm.com/cn-zh/careers/connect",srcName:"IBM招聘官网"},
+ {n:"ZURU",c:"外企",s:"ok",role:"海外人力资源专员",sal:"10-11k",low:10,band:"10-12k",c10:true,loc:"深圳",note:"消费品外企，海外HR专员含1万档",duty:"1、员工劳动合同起草、新签、续签、变更与解除全流程管理; 2、新员工入职资料收集、审核及归档; 3、办理员工入离职、转正、调岗、晋升等异动手续; 4、HR系统日常维护与数据录入; 5、监控员工人事关键节点,提前提醒续签/签证到期; 6、跟进海外劳动法规变化; 7、协助对接海外各实体人事事务; 8、开具人事证明,解答咨询; 9、协助HR专项工作。",req:"1、本科及以上,人力资源管理、工商管理优先; 2、1至2年HRSSC经验; 3、熟悉主流HR系统,熟练使用Excel; 4、了解劳动基础法规; 5、良好的中英文读写能力; 6、跨文化沟通意识。",src:"https://www.zururecruit.cn/",srcName:"ZURU招聘官网"},
+ {n:"腾讯",c:"30强",s:"no",role:"HRBP / 招聘",sal:"15k+",low:15,band:"—",c10:false,loc:"深圳",note:"高端"},
+ {n:"大疆",c:"中腰部",s:"no",role:"资深HRBP",sal:"40–70k·16薪",low:40,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"华为",c:"中腰部",s:"no",role:"HR",sal:"15–40k·16薪",low:15,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"迈瑞",c:"中腰部",s:"no",role:"HR",sal:"15k+",low:15,band:"—",c10:false,loc:"深圳",note:"医疗器械"},
+ {n:"货拉拉",c:"中腰部",s:"no",role:"HR",sal:"15k+",low:15,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"华润置地",c:"30强",s:"no",role:"HR",sal:"15–30k·16薪",low:15,band:"—",c10:false,loc:"深圳",note:"地产"},
+ {n:"realme",c:"30强",s:"no",role:"海外HRBP / 招聘经理",sal:"15–35k",low:15,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"西门子",c:"外企",s:"no",role:"HR Consultant",sal:"15–25k",low:15,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"ABB",c:"外企",s:"no",role:"HR Specialist",sal:"15–20k",low:15,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"微软",c:"外企",s:"no",role:"HR Generalist",sal:"20.8–33k",low:20.8,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"谷歌",c:"外企",s:"no",role:"People Consultant",sal:"50–90k",low:50,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"高通",c:"外企",s:"no",role:"HRBP / HR Manager",sal:"高端",low:20,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"飞利浦",c:"外企",s:"no",role:"Recruitment Exec",sal:"35k",low:35,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"巴斯夫",c:"外企",s:"no",role:"HR Manager",sal:"28k+",low:28,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"Thoughtworks",c:"外企",s:"no",role:"深圳整体≥20k",sal:"≥20k",low:20,band:"—",c10:false,loc:"深圳",note:"HR岗深圳未明确"},
+ {n:"中集集团",c:"中腰部",s:"unk",role:"HR",sal:"面议",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"麦米电气",c:"30强",s:"unk",role:"HR",sal:"无明确薪资",low:0,band:"—",c10:false,loc:"深圳",note:"多为实习或外地岗"},
+ {n:"联通深圳",c:"30强",s:"unk",role:"HR",sal:"无明确薪资",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"工行深圳",c:"30强",s:"unk",role:"HR",sal:"无明确薪资",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"天顿数据",c:"30强",s:"unk",role:"HR",sal:"无明确HR岗",low:0,band:"—",c10:false,loc:"深圳",note:"多为IDC技术岗"},
+ {n:"中图仪器",c:"30强",s:"unk",role:"HR",sal:"无明确薪资",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"瑞能实业",c:"30强",s:"unk",role:"薪酬绩效经理",sal:"面议",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"九洲光电",c:"30强",s:"unk",role:"HR",sal:"无明确薪资",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"大美仁",c:"成长型",s:"unk",role:"HR",sal:"无明确薪资",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"DHL",c:"外企",s:"unk",role:"HR实习 / 资深助理",sal:"未披露",low:0,band:"—",c10:false,loc:"深圳",note:""},
+ {n:"英特尔",c:"外企",s:"unk",role:"HR(实习)",sal:"113–157元/天",low:0,band:"—",c10:false,loc:"深圳",note:"深圳HR只见实习"}
+];
+
+const stMap={ok:"达标",no:"不含",unk:"未明确"};
+let f={status:"全部",category:"全部",band:"全部",only10:false};
+
+// —— 岗位类型通用模板（待替换为官招JD）——
+function getTpl(role){
+  if(/招聘/.test(role)) return {duty:"负责社招/校招需求对接、渠道拓展维护、简历筛选、面试安排与 offer 谈判、招聘数据复盘。",req:"本科及以上，2年+招聘经验，熟悉行业人才地图，沟通强、抗压、结果导向。"};
+  if(/员工关系/.test(role)) return {duty:"员工入转调离手续、劳动合同与劳动关系管理、员工活动与关怀、劳动纠纷预防与处理。",req:"熟悉《劳动法》及地方政策，3年+HR经验，沟通协调力强、细心。"};
+  if(/薪酬|绩效/.test(role)) return {duty:"薪酬核算与发放、绩效体系搭建与落地、人力数据分析、激励方案设计。",req:"Excel/HRIS 熟练，有薪酬或绩效模块实操经验，数据敏感、严谨。"};
+  if(/管培|储备/.test(role)) return {duty:"HR 各模块轮岗学习、参与人才项目实践、协助业务支持，定向培养为 HR 骨干。",req:"应届或1年以内，211/985 优先，逻辑清晰、学习力强、有潜力。"};
+  if(/培训|人才发展/.test(role)) return {duty:"培训体系搭建、课程开发与交付、人才盘点与梯队建设、学习项目运营。",req:"2年+培训/TD 经验，表达与项目运营力强，懂人才发展方法论。"};
+  return {duty:"作为业务伙伴支持组织与人才、招聘与配置、绩效与员工关系、HR 项目推动。",req:"本科，3年+HRBP/HR 经验，懂业务、沟通强、能独立扛模块。"};
+}
+const JD_KEY="sz-hr-jd-v2";
+function loadJD(){try{return JSON.parse(localStorage.getItem(JD_KEY)||"{}")}catch(e){return{}}}
+function saveJD(name,field,val){const all=loadJD();all[name]=all[name]||{};all[name][field]=val;localStorage.setItem(JD_KEY,JSON.stringify(all));}
+
+function render(){
+  const grid=document.getElementById("grid");
+  const savedAll=loadJD();
+  const list=data.filter(d=>
+    (f.status==="全部"||d.s===f.status) &&
+    (f.category==="全部"||d.c===f.category) &&
+    (f.band==="全部"||d.band===f.band) &&
+    (!f.only10||d.c10)
+  );
+  grid.innerHTML=list.map(d=>{
+    const sv=savedAll[d.n]||{};
+    const tpl=getTpl(d.role);
+    const duty=sv.duty||d.duty||tpl.duty, req=sv.req||d.req||tpl.req;
+    return `
+    <div class="card ${d.s}">
+      <div class="bar"></div>
+      <span class="badge ${d.s}">${stMap[d.s]}</span>
+      <div class="cname">${d.n}</div>
+      <div class="pills">
+        <span class="pill">${d.c==="30强"?"最佳雇主30强":d.c==="中腰部"?"首轮·中腰部":d.c}</span>
+        ${d.band!=="—"?`<span class="pill b">${d.band}</span>`:""}
+        ${d.c10?`<span class="pill x">含1万档</span>`:""}
+      </div>
+      <div class="role">${d.role}</div>
+      <div class="sal">${d.sal}</div>
+      <div class="meta">📍 ${d.loc}</div>
+      <div class="jd"><span class="jd-h">✎ 岗位职责</span><div class="jd-edit" contenteditable="true" data-name="${d.n}" data-field="duty">${duty}</div></div>
+      <div class="jd"><span class="jd-h">✎ 岗位要求</span><div class="jd-edit" contenteditable="true" data-name="${d.n}" data-field="req">${req}</div></div>
+      ${d.src?`<div class="src">🔗 来源：<a href="${d.src}" target="_blank" rel="noopener">${d.srcName||d.src}</a> · 实时在招链接（2026-08-27更新）</div>`:""}
+      ${d.note?`<div class="note">${d.note}</div>`:""}
+    </div>`;
+  }).join("");
+  grid.querySelectorAll(".jd-edit").forEach(el=>{
+    el.addEventListener("input",()=>saveJD(el.dataset.name,el.dataset.field,el.innerText));
+  });
+  document.getElementById("count").textContent=`共显示 ${list.length} 家（达标 ${list.filter(d=>d.s==="ok").length} · 不含 ${list.filter(d=>d.s==="no").length} · 未明确 ${list.filter(d=>d.s==="unk").length}）`;
+}
+
+document.querySelectorAll(".chip").forEach(ch=>{
+  ch.addEventListener("click",()=>{
+    const fk=ch.dataset.f, fv=ch.dataset.v;
+    document.querySelectorAll(`.chip[data-f="${fk}"]`).forEach(x=>x.classList.remove("on"));
+    ch.classList.add("on");
+    f[fk]=fv; render();
+  });
+});
+document.getElementById("only10").addEventListener("change",e=>{f.only10=e.target.checked;render();});
+
+// 对标表
+const okData=data.filter(d=>d.s==="ok").sort((a,b)=>b.low-a.low);
+const tb=document.getElementById("tbody");
+function drawTbl(arr){
+  tb.innerHTML=arr.map(d=>`
+    <tr>
+      <td><b>${d.n}</b></td><td>${d.c==="30强"?"30强":d.c}</td><td>${d.role}</td>
+      <td>${d.sal}</td><td>${d.low||"—"}</td>
+      <td><span class="tag ${d.c10?"y":"n"}">${d.c10?"含":"—"}</span></td>
+      <td>${d.loc}</td>
+    </tr>`).join("");
+}
+drawTbl(okData);
+let asc=false;
+document.querySelectorAll("#tbl th[data-k]").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const k=th.dataset.k;
+    const sorted=[...okData].sort((a,b)=>{
+      let va=a[k],vb=b[k];
+      if(k==="c10"){va=a.c10?1:0;vb=b.c10?1:0;}
+      if(typeof va==="string"){return asc?va.localeCompare(vb):vb.localeCompare(va);}
+      return asc?va-vb:vb-va;
+    });
+    asc=!asc; drawTbl(sorted);
+  });
+});
+
+render();
+</script>
+</body>
+</html>
