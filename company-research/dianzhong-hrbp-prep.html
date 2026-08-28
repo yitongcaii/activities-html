@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>入职点众 · HRBP 备战便签</title>
+<style>
+:root{
+  --pg:#f4f1ea; --ink:#2c2a26; --muted:#8a857c;
+  --y:#fff3b0; --b:#cdeffd; --g:#d6f5d6; --o:#ffe0c2; --p:#e8d8ff; --r:#ffd6d6;
+  --accent:#b9892f; --sel:#7cc7e8;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:24px 18px 60px;background:var(--pg);
+  font-family:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;color:var(--ink)}
+.wrap{max-width:1080px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin:0 auto 18px;flex-wrap:wrap;gap:10px}
+.top h1{font-size:20px;margin:0;letter-spacing:1px}
+.top .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{border:none;background:var(--ink);color:#fff;padding:8px 14px;border-radius:20px;
+  font-size:13px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid #d8d3c8}
+.btn.on{background:var(--accent);color:#fff}
+.btn:hover{opacity:.88}
+.save{font-size:12px;color:#3a9d4e;min-width:72px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:780px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.note{border-radius:4px;padding:14px 14px 12px;min-height:120px;
+  box-shadow:0 4px 10px rgba(0,0,0,.12);position:relative}
+.note:nth-child(3n+1){transform:rotate(-.6deg)}
+.note:nth-child(3n+2){transform:rotate(.5deg)}
+.note:nth-child(3n){transform:rotate(-.3deg)}
+.note:hover{transform:rotate(0) translateY(-4px);box-shadow:0 8px 16px rgba(0,0,0,.16)}
+.note .tag{font-size:11px;font-weight:700;letter-spacing:.5px;opacity:.7;display:block;margin-bottom:8px}
+.note label{font-size:13px;font-weight:600;display:block;margin-bottom:5px}
+.note textarea,.note input[type=text]{width:100%;border:none;background:rgba(255,255,255,.55);
+  border-radius:4px;padding:6px 8px;font-size:13px;color:var(--ink);font-family:inherit;resize:vertical}
+.note textarea:focus,.note input:focus{outline:2px solid rgba(0,0,0,.18);background:#fff}
+.note .hint{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
+.c1{background:var(--y)} .c2{background:var(--b)} .c3{background:var(--g)}
+.c4{background:var(--o)} .c5{background:var(--p)} .c6{background:var(--r)}
+.menu{grid-column:1/-1;background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.menu h3{margin:0 0 10px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--b);border:none;padding:6px 11px;border-radius:16px;font-size:12px;cursor:pointer;color:var(--ink);position:relative}
+.chip.sel{background:var(--sel);color:#fff}
+.chip small{opacity:.6;margin-left:3px;font-size:10px}
+.redline{grid-column:1/-1;background:var(--r);border-radius:8px;padding:12px 16px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.redline h3{margin:0 0 6px;font-size:14px}
+.redline ul{margin:0;padding:0;font-size:12.5px;line-height:1.7;list-style:none}
+.redline li{position:relative;padding:2px 0}
+.del{display:none;color:#c0392b;cursor:pointer;font-weight:700;margin-left:6px}
+.addbtn{display:none;margin-top:8px;background:#fff;border:1px dashed var(--accent);color:var(--accent);border-radius:16px;padding:5px 12px;font-size:12px;cursor:pointer}
+body.editing .tpl{outline:1px dashed var(--accent);border-radius:3px;padding:1px 3px}
+body.editing .tpl:hover{background:rgba(255,255,255,.45)}
+body.editing .del{display:inline}
+body.editing .addbtn{display:inline-block}
+[contenteditable]:focus{outline:2px solid #2c7fb8 !important}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+@media print{
+  body{background:#fff;padding:0}
+  .top .bar{display:none}
+  .note{box-shadow:none;transform:none !important}
+  .menu,.redline{box-shadow:none}
+  .del,.addbtn{display:none !important}
+}
+</style></head><body>
+<div class="wrap">
+  <div class="top">
+    <div><h1 contenteditable="true">入职点众 · HRBP 备战便签</h1><div class="sub" contenteditable="true">每张便签一个准备点，填空框直接写你的答案 / 勾选清单，自动存本地。</div></div>
+    <div class="bar">
+      <span class="save" id="saveTip">已载入模板</span>
+      <button class="btn ghost" id="editBtn" onclick="toggleEdit()">✎ 模板编辑</button>
+      <button class="btn" onclick="exportHTML()">⬇ 导出共享</button>
+      <button class="btn" onclick="save()">💾 保存</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="note c1"><span class="tag tpl" contenteditable="true">· 公司一句话</span><label class="tpl" contenteditable="true">你进的是家什么公司</label><textarea rows="3" data-key="p1" placeholder="微短剧+数字阅读头部，2011 北京起步，陈瑞卿夫妻档；河马剧场(DramaBox 出海)双引擎，2025 营收约 145 亿（创始人披露）"></textarea><div class="hint tpl" contenteditable="true">面试被问"了解我们吗"就背这段</div></div>
+
+    <div class="note c2"><span class="tag tpl" contenteditable="true">· 产品地图</span><label class="tpl" contenteditable="true">4 条核心产品线</label><textarea rows="4" data-key="p2" placeholder="河马剧场＝IAA 免费短剧（国内第2）&#10;繁花剧场＝IAP 付费短剧&#10;DramaBox＝出海短剧（海外双寡头之一）&#10;点众阅读 / Webfic＝网文（IP 底座）"></textarea><div class="hint tpl" contenteditable="true">HRBP 要分清你服务的 BU 是哪条线</div></div>
+
+    <div class="note c3"><span class="tag tpl" contenteditable="true">· 业务黑话</span><label class="tpl" contenteditable="true">听得懂的 8 个词</label><textarea rows="4" data-key="p3" placeholder="投流＝买量获客&#10;ROAS＝广告收入÷广告消耗&#10;回本周期＝几天回本&#10;付费率 / ARPPU＝肯花钱的人&#10;LTV-CAC＝用户价值÷获客成本&#10;保底+分成＝和 CP 的结算&#10;MAU＝月活"></textarea><div class="hint tpl" contenteditable="true">听不懂业务黑话，业务不带你玩</div></div>
+
+    <div class="note c4"><span class="tag tpl" contenteditable="true">· 你的角色</span><label class="tpl" contenteditable="true">HRBP 在点众干嘛</label><textarea rows="3" data-key="p4" placeholder="招聘 + 绩效 + 薪酬 + 培训 + 员工关系 + 组织编制 + 人才盘点，贴着业务线走，是业务搭档不是后台职能"></textarea><div class="hint tpl" contenteditable="true">招聘/绩效/薪酬任一模块有成功经验即可切入</div></div>
+
+    <div class="note c5"><span class="tag tpl" contenteditable="true">· 前 30 天</span><label class="tpl" contenteditable="true">入职先做什么</label><textarea rows="4" data-key="p5" placeholder="① 摸业务：跟投流 / 内容 / 出海三条线各聊一轮&#10;② 盘人头：现有编制 / HC / 离职率&#10;③ 建信任：1v1 业务 leader，问痛点不问赋能&#10;④ 搞清汇报线（HR 中台 vs 业务负责人）"></textarea><div class="hint tpl" contenteditable="true">前 30 天别急着出方案，先听懂</div></div>
+
+    <div class="note c6"><span class="tag tpl" contenteditable="true">· 面试官会问</span><label class="tpl" contenteditable="true">准备 3 个答案</label><textarea rows="4" data-key="p6" placeholder="① 为什么选点众 / 短剧赛道？&#10;② HRBP 怎么真正懂业务？&#10;③ 一个你搞定业务难题的 STAR 例子&#10;（参考真实 JD：要求英语可作工作语言、抗压、自驱）"></textarea><div class="hint tpl" contenteditable="true">用 STAR 讲，别背定义</div></div>
+
+    <div class="note c1"><span class="tag tpl" contenteditable="true">· 访谈提纲</span><label class="tpl" contenteditable="true">见业务 leader 问啥</label><textarea rows="4" data-key="p7" placeholder="当前最大人才缺口？&#10;团队气质 / 管理风格？&#10;绩效怎么打、怎么分钱？&#10;最近离职的人为什么走？&#10;海外团队（韩/印尼/日/美）怎么管？"></textarea><div class="hint tpl" contenteditable="true">问"痛"不喊"赋能"</div></div>
+
+    <div class="note c2"><span class="tag tpl" contenteditable="true">· 招聘重点</span><label class="tpl" contenteditable="true">点众最缺什么人</label><textarea rows="4" data-key="p8" placeholder="投流优化师（数百人团队，流失高、要快补）&#10;短剧编剧 / 制片（真人精品打底）&#10;出海本地化运营（英语/小语种）&#10;AI 内容生产 / AIGC 承制方对接 "></textarea><div class="hint tpl" contenteditable="true">投流团队是规模战，招聘节奏要跟得上</div></div>
+
+    <div class="note c3"><span class="tag tpl" contenteditable="true">· 数据口径警惕</span><label class="tpl" contenteditable="true">别踩的雷</label><textarea rows="3" data-key="p9" placeholder="公司非上市、财务不透明，145 亿营收是创始人留言披露、非审计财报；员工问薪酬对标用区间，别说"公司赚多少""></textarea><div class="hint tpl" contenteditable="true">候选人问期权/分红，别画饼，说"非上市不确定"</div></div>
+
+    <div class="menu">
+      <h3 class="tpl" contenteditable="true">✅ 入职前 Checklist（点一下勾选）</h3>
+      <div class="chips" id="chipList">
+        <button class="chip sel" data-n="1"><span class="ctext tpl" contenteditable="true">背熟公司产品地图</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="2"><span class="ctext tpl" contenteditable="true">搞懂投流 / 分账黑话</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="3"><span class="ctext tpl" contenteditable="true">准备 3 个面试 STAR 故事</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="4"><span class="ctext tpl" contenteditable="true">列业务访谈提纲</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="5"><span class="ctext tpl" contenteditable="true">查点众在招 HRBP JD</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="6"><span class="ctext tpl" contenteditable="true">了解 DramaBox 海外布局（韩/印尼/日/美）</span><span class="del" onclick="delChip(this)">×</span></button>
+        <button class="chip" data-n="7"><span class="ctext tpl" contenteditable="true">准备 1 个"HRBP 帮业务赚钱"的例子</span><span class="del" onclick="delChip(this)">×</span></button>
+      </div>
+      <button class="addbtn addchip" onclick="addChip()">+ 加一项</button>
+    </div>
+
+    <div class="redline">
+      <h3 class="tpl" contenteditable="true">⚠️ HRBP 在点众的 5 个坑</h3>
+      <ul id="rl">
+        <li><span class="tpl" contenteditable="true">💡 投流/内容团队高压 + 大小周 + 强考勤（刷脸），招聘承诺要谨慎，别美化加班</span><span class="del" onclick="delRL(this)">×</span></li>
+        <li><span class="tpl" contenteditable="true">💡 绩效 ABCDE，正常完成仅得 C，薪酬沟通务必管理员工预期</span><span class="del" onclick="delRL(this)">×</span></li>
+        <li><span class="tpl" contenteditable="true">💡 海外团队（韩/印尼/日/美）英语工作语言，跨文化管理别套国内一套</span><span class="del" onclick="delRL(this)">×</span></li>
+        <li><span class="tpl" contenteditable="true">💡 内容强监管，题材合规是业务红线，HR 招人也要懂边界</span><span class="del" onclick="delRL(this)">×</span></li>
+        <li><span class="tpl" contenteditable="true">💡 非上市、期权/分红不确定，给候选人画饼会被戳穿</span><span class="del" onclick="delRL(this)">×</span></li>
+      </ul>
+      <button class="addbtn" onclick="addRL()">+ 加一条</button>
+    </div>
+  </div>
+</div>
+<footer class="foot">📌 本页由 yitong 沉淀整理 · 文化活动知识库 ｜ 调研 2026-08-28 ｜ 数据来源：点众公开披露 / 猎聘 HRBP JD / 行业公开报道</footer>
+<script>
+const KEY='hrbpDianzhongPrep_v1';
+let editing=false;
+function toggleEdit(){
+  editing=!editing;
+  document.body.classList.toggle('editing',editing);
+  document.querySelectorAll('.tpl').forEach(el=>el.setAttribute('contenteditable',editing?'true':'false'));
+  const b=document.getElementById('editBtn');
+  b.classList.toggle('on',editing);
+  b.textContent=editing?'✓ 完成模板':'✎ 模板编辑';
+}
+function collect(){
+  const d={values:{},tpl:{},chips:{sel:[],items:[]},rl:[]};
+  document.querySelectorAll('[data-key]').forEach(el=>d.values[el.dataset.key]=el.value);
+  document.querySelectorAll('.tpl[data-tpl]').forEach(el=>d.tpl[el.dataset.tpl]=el.innerText);
+  document.querySelectorAll('#chipList .chip').forEach(c=>{
+    d.chips.items.push({n:c.dataset.n,html:c.querySelector('.ctext').innerHTML});
+    if(c.classList.contains('sel'))d.chips.sel.push(c.dataset.n);
+  });
+  document.querySelectorAll('#rl li .tpl').forEach(el=>d.rl.push(el.innerText));
+  return d;
+}
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(collect()));
+  document.getElementById('saveTip').textContent='已保存 '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+}
+function apply(d){
+  Object.entries(d.values||{}).forEach(([k,v])=>{const el=document.querySelector(`[data-key="${k}"]`);if(el)el.value=v;});
+  Object.entries(d.tpl||{}).forEach(([k,v])=>{const el=document.querySelector(`[data-tpl="${k}"]`);if(el)el.innerText=v;});
+  if(d.chips&&d.chips.items){
+    const list=document.getElementById('chipList');list.innerHTML='';
+    d.chips.items.forEach(it=>{
+      const b=document.createElement('button');b.className='chip';b.dataset.n=it.n;
+      b.innerHTML=`<span class="ctext tpl" data-tpl="chip-${it.n}">${it.html}</span><span class="del" onclick="delChip(this)">×</span>`;
+      if((d.chips.sel||[]).includes(it.n))b.classList.add('sel');
+      list.appendChild(b);
+    });
+  }
+  if(d.rl){
+    const ul=document.getElementById('rl');ul.innerHTML='';
+    d.rl.forEach(t=>{const li=document.createElement('li');li.innerHTML=`<span class="tpl">${t}</span><span class="del" onclick="delRL(this)">×</span>`;ul.appendChild(li);});
+  }
+  if(editing)document.querySelectorAll('.tpl').forEach(el=>el.setAttribute('contenteditable','true'));
+}
+function exportHTML(){
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll('[data-key]').forEach(el=>el.value='');
+  clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+  clone.body.classList.remove('editing');
+  let html='<!DOCTYPE html>\n'+clone.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='入职点众HRBP备战_共享版.html';a.click();
+  document.getElementById('saveTip').textContent='已生成共享 HTML，去下载发出';
+}
+function delChip(x){x.closest('.chip').remove();save();}
+function addChip(){
+  const list=document.getElementById('chipList');
+  const n=Date.now();
+  const b=document.createElement('button');b.className='chip';b.dataset.n=n;
+  b.innerHTML=`<span class="ctext tpl" contenteditable="true">新一项</span><span class="del" onclick="delChip(this)">×</span>`;
+  list.appendChild(b);save();
+}
+function delRL(x){x.closest('li').remove();save();}
+function addRL(){
+  const ul=document.getElementById('rl');
+  const li=document.createElement('li');
+  li.innerHTML=`<span class="tpl" contenteditable="true">新提醒</span><span class="del" onclick="delRL(this)">×</span>`;
+  ul.appendChild(li);save();
+}
+document.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input',save));
+document.getElementById('chipList').addEventListener('click',e=>{
+  if(editing)return;
+  const chip=e.target.closest('.chip');
+  if(chip&&!e.target.classList.contains('del')){chip.classList.toggle('sel');save();}
+});
+document.getElementById('rl').addEventListener('input',()=>{if(editing)save();});
+document.getElementById('chipList').addEventListener('input',()=>{if(editing)save();});
+(function(){const raw=localStorage.getItem(KEY);if(raw){try{apply(JSON.parse(raw));}catch(e){}}})();
+</script>
+</body></html>
