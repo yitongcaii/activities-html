@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>点众科技 · 公司调研画像</title>
+<style>
+  :root{
+    --purple:#7c5cff; --purple-d:#5b3ff0;
+    --cyan:#22c3e6; --cyan-d:#0fa8cf;
+    --ink:#1f2330; --sub:#5a6172; --line:#eceef5;
+    --card:#ffffff; --bg:#f5f6fb;
+    --hi:#2bb673; --mid:#f0a020; --lo:#e8596b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:linear-gradient(160deg,#f7f5ff 0%,#eef7fb 100%);color:var(--ink);
+    line-height:1.65;padding:28px 18px 60px}
+  .wrap{max-width:1080px;margin:0 auto}
+  /* hero */
+  .hero{background:linear-gradient(120deg,var(--purple) 0%,var(--cyan) 100%);
+    border-radius:22px;padding:30px 32px;color:#fff;
+    box-shadow:0 14px 38px rgba(90,63,240,.25);margin-bottom:22px}
+  .hero h1{font-size:28px;letter-spacing:.5px}
+  .hero .en{opacity:.85;font-size:13px;margin-top:4px;letter-spacing:1px}
+  .hero .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .hero .tags span{background:rgba(255,255,255,.2);backdrop-filter:blur(4px);
+    border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:20px;font-size:12.5px}
+  /* KPI strip */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+  .kpi{background:var(--card);border-radius:16px;padding:16px;text-align:center;
+    border:1px solid var(--line);box-shadow:0 6px 18px rgba(60,60,120,.06)}
+  .kpi .num{font-size:24px;font-weight:800;
+    background:linear-gradient(120deg,var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi .lab{font-size:12px;color:var(--sub);margin-top:4px}
+  /* section */
+  .sec-t{font-size:16px;font-weight:800;margin:26px 4px 14px;display:flex;align-items:center;gap:8px}
+  .sec-t::before{content:"";width:5px;height:18px;border-radius:3px;
+    background:linear-gradient(var(--purple),var(--cyan))}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px}
+  .card{background:var(--card);border-radius:16px;padding:18px;
+    border:1px solid var(--line);box-shadow:0 6px 18px rgba(60,60,120,.06);
+    transition:transform .15s ease,box-shadow .15s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(90,63,240,.14)}
+  .card h3{font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .card .pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;color:#fff}
+  .pill.p{background:var(--purple)} .pill.c{background:var(--cyan)}
+  .pill.hi{background:var(--hi)} .pill.lo{background:var(--lo)} .pill.mid{background:var(--mid)}
+  .card ul{list-style:none;font-size:13px;color:var(--sub)}
+  .card ul li{padding:3px 0 3px 14px;position:relative}
+  .card ul li::before{content:"·";position:absolute;left:2px;color:var(--purple);font-weight:800}
+  .card .big{font-size:14px;color:var(--ink);font-weight:600}
+  .note{font-size:11.5px;color:#9aa1b2;margin-top:8px;font-style:italic}
+  .risk{background:#fff4f5;border:1px solid #f7d4d8;border-radius:16px;padding:18px}
+  .risk li{font-size:13px;color:#9a3b46;margin:5px 0 5px 16px;position:relative}
+  .risk li::before{content:"⚠";position:absolute;left:-16px}
+  footer{text-align:center;color:#aab0c0;font-size:12px;margin-top:34px}
+  @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>点众科技 · 公司调研画像</h1>
+    <div class="en">Beijing Dianzhong Technology Co., Ltd. ｜ 微短剧 &amp; 数字阅读头部企业</div>
+    <div class="tags">
+      <span>成立 2011</span>
+      <span>非上市（拟创业板 IPO 曾终止）</span>
+      <span>实控人：陈瑞卿 + 何春虹（夫妻档）</span>
+      <span>2025 营收 ≈ 145 亿</span>
+      <span>国家高新技术企业 · 专精特新小巨人</span>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="num">≈145亿</div><div class="lab">2025 营收（国内109亿+海外5.3亿美元）· 同比+45%</div></div>
+    <div class="kpi"><div class="num">3亿+</div><div class="lab">全球月活用户（含网文+短剧）</div></div>
+    <div class="kpi"><div class="num">8亿</div><div class="lab">全球注册用户</div></div>
+    <div class="kpi"><div class="num">200+国</div><div class="lab">DramaBox 海外覆盖国家</div></div>
+  </div>
+
+  <!-- 公司背景 -->
+  <div class="sec-t">一、公司背景</div>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="pill p">档案</span>基本工商信息</h3>
+      <ul>
+        <li>全称：北京点众科技股份有限公司</li>
+        <li>成立：2011-09-15，注册地北京海淀</li>
+        <li>法人/董事长/总经理：陈瑞卿</li>
+        <li>注册资本：约 4956 万（2025-12 增资）</li>
+        <li>企业类型：股份有限公司（非上市）</li>
+        <li>资质：国家高新、北京市专精特新小巨人</li>
+      </ul>
+      <div class="note">员工口径不一：工商 345 / 官网 2200+ / 2024 CSR 1500+，取"规模较大"定性。</div>
+    </div>
+
+    <div class="card">
+      <h3><span class="pill lo">核心</span>实控人夫妻档</h3>
+      <ul>
+        <li><b>陈瑞卿</b>（董事长/总经理）：1972 年生，浙大计算机；曾任中国移动"移动梦网"业务主要负责人、卓望数码副总裁</li>
+        <li><b>何春虹</b>（妻）：直接持股 38.3%，公司创始出资人</li>
+        <li>夫妻合计控制 ≈57%（招股书口径）</li>
+        <li>一致行动平台：天津万卷书城（35.5%）</li>
+      </ul>
+      <div class="note">典型"创始人掌舵+家族控股"，控制权高度集中。</div>
+    </div>
+
+    <div class="card">
+      <h3><span class="pill c">资本</span>资本化历程</h3>
+      <ul>
+        <li>2016 年：新三板挂牌</li>
+        <li>2017 年：签上市辅导（华泰联合）</li>
+        <li>2020 年：创业板 IPO 获受理，三轮问询</li>
+        <li>2021-12：<b>终止审核</b>（用户真实性被追问、保密协议致信息不透明）</li>
+        <li>2023 年：掌阅科技入股，持股 4.99%</li>
+      </ul>
+      <div class="note">至今非上市，财务靠创始人/媒体零星披露，透明度低。</div>
+    </div>
+  </div>
+
+  <!-- 业务矩阵 -->
+  <div class="sec-t">二、业务矩阵（产品全景）</div>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="pill p">免费</span>河马剧场</h3>
+      <ul>
+        <li>免费短剧 APP（IAA 广告模式）</li>
+        <li>2023-09 推出，早于红果卡位免费赛道</li>
+        <li>国内月活第二：2025-12 月活 4720 万、日活近 2000 万</li>
+        <li>剧集 10000+ 部；2024 用户增 10 倍、单月广告收入破亿</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill p">付费</span>繁花剧场</h3>
+      <ul>
+        <li>付费短剧 APP（IAP 模式）</li>
+        <li>2022-09 首推，公司短剧起点</li>
+        <li>独家付费短剧 6000+ 部</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill c">出海</span>DramaBox</h3>
+      <ul>
+        <li>海外短剧平台，覆盖 200+ 国家</li>
+        <li>获迪士尼投资押注</li>
+        <li>2025 下载 1.5 亿、净收入 4.7 亿美元</li>
+        <li>陈瑞卿称预计年收入超 10 亿美元</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill hi">网文</span>点众阅读 / 快看小说</h3>
+      <ul>
+        <li>免费网文客户端，全品类正版</li>
+        <li>前身"快看小说"2014 上线</li>
+        <li>"书找人"运营 + 头部书策略，单本充值最高近 4 亿</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill hi">原创</span>点众文学 / 松鼠阅读</h3>
+      <ul>
+        <li>原创网文平台（作者发布+社区）</li>
+        <li>2021 品牌升级为"点众文学"</li>
+        <li>自有版权 35 万+ 册，支撑短剧 IP 改编</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill c">出海</span>Webfic</h3>
+      <ul>
+        <li>网文出海 APP，2019 启动</li>
+        <li>100+ 国家、1000 万+ 用户</li>
+        <li>多语种（英/西/泰/印尼等）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill mid">经纪</span>河马星驰</h3>
+      <ul>
+        <li>旗下独家经纪公司</li>
+        <li>泛娱乐艺人经纪 + IP 孵化 + 整合营销</li>
+        <li>签约 30+ 艺人</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 经营数据 -->
+  <div class="sec-t">三、经营数据（口径提示：多为创始人留言/媒体披露，非审计财报）</div>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="pill lo">营收</span>2025 首披露 145 亿</h3>
+      <ul>
+        <li>国内 109 亿 + 海外 5.3 亿美元 ≈ 145 亿元</li>
+        <li>同比 +45%，主营过百亿（"全国文化企业30强"口径）</li>
+        <li>已超微博(126亿)、完美世界(67亿)</li>
+        <li>旧口径：2023 营收 50.8 亿（差异或因统计范围）</li>
+      </ul>
+      <div class="note">陈瑞卿 2026-06 于文章留言首披露，未附成本，盈利能力难算。</div>
+    </div>
+    <div class="card">
+      <h3><span class="pill mid">盈利</span>毛利薄、净利低</h3>
+      <ul>
+        <li>早期披露：整体毛利率约 10%</li>
+        <li>短剧业务净利率不到 1%（2024 口径）</li>
+        <li>验证：2023 分红 1 亿，掌阅获 499 万（4.99% 股）</li>
+      </ul>
+      <div class="note">"月入4亿"风波：澄清为含小说+广告总流水，非短剧单项。</div>
+    </div>
+    <div class="card">
+      <h3><span class="pill c">分发</span>私域+投流模式</h3>
+      <ul>
+        <li>数百人自投流团队</li>
+        <li>全行业规模最大的分销平台</li>
+        <li>小程序+免费+付费多维矩阵</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- AI 战略 -->
+  <div class="sec-t">四、战略重心：AI 短剧 + 内容生态</div>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="pill p">计划</span>"双十亿"AIGC 共创</h3>
+      <ul>
+        <li>国内 10 亿内容扶持 + 海外 1.5 亿美元激励</li>
+        <li>国内剧本最高保底 20 万；海外最高 2 万美元+20% 分成</li>
+        <li>开放 8 万部存量小说 IP 授权（河马剧场+DramaBox）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill p">产能</span>AI 短剧断层第一</h3>
+      <ul>
+        <li>2025 月新 AI 短剧 1287 部、新增播放约 52 亿</li>
+        <li>单月 6 部 AI 真人短剧破亿</li>
+        <li>DramaBox 用 AI 动态漫：单集成本 8000→2000 美元，周期 7天→2天</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="pill c">定位</span>平台型公司转身</h3>
+      <ul>
+        <li>2025 从"风口型"转"平台型"（河马剧场运营负责人刘鹏）</li>
+        <li>"合伙人计划"3.0：按剧龄分档保底</li>
+        <li>编剧团队扩至百人，内部原创+外部工作室双轨</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 风险 -->
+  <div class="sec-t">五、风险与争议（调研标注）</div>
+  <div class="card risk">
+    <ul>
+      <li><b>IPO 告败：</b>2021 终止创业板审核，曾被追问用户重复充值、信息不透明（保密协议无法披露关键数据）。</li>
+      <li><b>财务不透明：</b>非上市，145 亿营收为创始人留言披露，无审计财报背书，口径与 2023 年 50.8 亿矛盾待解。</li>
+      <li><b>净利率薄：</b>短剧业务净利率不到 1%，高营收≠高利润；投流买量成本高。</li>
+      <li><b>竞争白热化：</b>红果短剧（字节）聚合免费流量、九州文化/麦芽/山海星辰等 AI 短剧加码，差异化壁垒待验证。</li>
+      <li><b>内容监管：</b>微短剧属强监管赛道，题材合规与"爽文"边界是关键变量。</li>
+    </ul>
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库 ｜ 调研日期: 2026-08-27 ｜ 数据来源：公司官网/CSR报告、工商聚合、央广网/新浪财经/白鲸出海等公开报道</footer>
+</div>
+</body>
+</html>
