@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>点众科技 · 公司调研画像</title>
+<title>点众科技 · 公司调研画像（整合版）</title>
 <style>
   :root{
     --purple:#7c5cff; --purple-d:#5b3ff0;
@@ -54,6 +54,16 @@
   .risk{background:#fff4f5;border:1px solid #f7d4d8;border-radius:16px;padding:18px}
   .risk li{font-size:13px;color:#9a3b46;margin:5px 0 5px 16px;position:relative}
   .risk li::before{content:"⚠";position:absolute;left:-16px}
+  /* formula table inside card */
+  .ftab{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+  .ftab th{background:#f3f1ff;color:var(--purple-d);text-align:left;padding:5px 7px;font-weight:700;border-radius:6px 6px 0 0}
+  .ftab td{padding:5px 7px;border-top:1px solid var(--line);color:var(--sub);vertical-align:top}
+  .ftab td b{color:var(--ink)}
+  .ftab tr td:first-child{white-space:nowrap;color:var(--purple-d);font-weight:700}
+  /* verdict banner */
+  .verdict{background:linear-gradient(120deg,#fff7e6,#eef7fb);border:1px solid #ffe2b0;
+    border-radius:16px;padding:16px 18px;margin:6px 0 4px;font-size:13.5px;color:var(--ink)}
+  .verdict b{color:var(--purple-d)}
   footer{text-align:center;color:#aab0c0;font-size:12px;margin-top:34px}
   @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
 </style>
@@ -62,7 +72,7 @@
 <div class="wrap">
 
   <div class="hero">
-    <h1>点众科技 · 公司调研画像</h1>
+    <h1>点众科技 · 公司调研画像（整合版）</h1>
     <div class="en">Beijing Dianzhong Technology Co., Ltd. ｜ 微短剧 &amp; 数字阅读头部企业</div>
     <div class="tags">
       <span>成立 2011</span>
@@ -70,6 +80,7 @@
       <span>实控人：陈瑞卿 + 何春虹（夫妻档）</span>
       <span>2025 营收 ≈ 145 亿</span>
       <span>国家高新技术企业 · 专精特新小巨人</span>
+      <span>真人短剧基本盘 + AI 并行新赛道</span>
     </div>
   </div>
 
@@ -215,33 +226,46 @@
     </div>
   </div>
 
-  <!-- AI 战略 -->
-  <div class="sec-t">四、战略重心：AI 短剧 + 内容生态</div>
+  <!-- 内容生产：真人 vs AI -->
+  <div class="sec-t">四、内容生产：真人基本盘 + AI 并行赛道（点众到底拍什么）</div>
   <div class="grid">
     <div class="card">
-      <h3><span class="pill p">计划</span>"双十亿"AIGC 共创</h3>
+      <h3><span class="pill hi">基本盘</span>真人精品短剧</h3>
       <ul>
-        <li>国内 10 亿内容扶持 + 海外 1.5 亿美元激励</li>
-        <li>国内剧本最高保底 20 万；海外最高 2 万美元+20% 分成</li>
-        <li>开放 8 万部存量小说 IP 授权（河马剧场+DramaBox）</li>
+        <li><b>真人为主</b>：河马剧场 2025 年真人微短剧分成已超 <b>2 亿元</b>，2026 至今又超 5000 万元</li>
+        <li>2026 年精品真人扶持计划超 <b>1 亿元</b>、不低于 <b>200 部</b></li>
+        <li>代表作：《无家》（抗战题材）、《半糖青梅》（甜宠），靠"活人温度"跑量</li>
+      </ul>
+      <div class="note">点众的现金流主引擎是真人和拍内容，不是 AI 生成。</div>
+    </div>
+    <div class="card">
+      <h3><span class="pill p">新赛道</span>AI 短剧（并行押注）</h3>
+      <ul>
+        <li>"双十亿"AIGC 全球共创计划：国内 10 亿 + 海外 1.5 亿美元资金池，开放 8 万部小说 IP</li>
+        <li>扶持方向：<b>AI 仿真人剧 / 2D·3D 动态漫</b>，承制方 10–20 万保底 + 最高 80% 纯分成</li>
+        <li>"河马杯"大赛 AIGC 赛道收 687 部作品、播放破 5 亿——在养 AI 创作生态</li>
+        <li>产能：2025 月新 AI 短剧 1287 部、单月 6 部 AI 真人短剧破亿；DramaBox 动态漫单集成本 8000→2000 美元</li>
       </ul>
     </div>
     <div class="card">
-      <h3><span class="pill p">产能</span>AI 短剧断层第一</h3>
+      <h3><span class="pill c">反差</span>行业数据（为什么真人仍是王）</h3>
       <ul>
-        <li>2025 月新 AI 短剧 1287 部、新增播放约 52 亿</li>
-        <li>单月 6 部 AI 真人短剧破亿</li>
-        <li>DramaBox 用 AI 动态漫：单集成本 8000→2000 美元，周期 7天→2天</li>
+        <li>2026 Q1 全网上线 12.8 万部微短剧：<b>AI 拍摄占 95%、真人仅 5%</b></li>
+        <li>但<b>真人播放量是 AI 的 25 倍</b>——AI 靠量铺，真人靠质赢</li>
+        <li>点众两边都下注，但赚钱主引擎还是真人</li>
       </ul>
     </div>
     <div class="card">
-      <h3><span class="pill c">定位</span>平台型公司转身</h3>
+      <h3><span class="pill mid">转身</span>平台型公司</h3>
       <ul>
         <li>2025 从"风口型"转"平台型"（河马剧场运营负责人刘鹏）</li>
         <li>"合伙人计划"3.0：按剧龄分档保底</li>
         <li>编剧团队扩至百人，内部原创+外部工作室双轨</li>
       </ul>
     </div>
+  </div>
+  <div class="verdict">
+    <b>一句话结论：</b>点众 = <b>真人精品短剧打底（现金流）</b> + <b>AI 仿真人/动态漫探路（未来增量）</b>。它不是纯 AI 短剧厂——"AI 月产千部"说的是产能铺量，不等于收入主来源。
   </div>
 
   <!-- 商业化模式 -->
@@ -299,8 +323,56 @@
     </div>
   </div>
 
+  <!-- 商业化团队考核指标与公式 -->
+  <div class="sec-t">六、商业化团队考核指标与公式（投流 / 变现人天天看）</div>
+  <div class="grid">
+    <div class="card">
+      <h3><span class="pill p">投放效率</span>花出去的钱回没回本</h3>
+      <table class="ftab">
+        <tr><th>指标</th><th>公式</th><th>人话 / 健康线</th></tr>
+        <tr><td>ROAS</td><td>广告收入 ÷ 广告消耗</td><td>花1块赚回几块<b>流水</b>（≥1 才不亏）</td></tr>
+        <tr><td>投放ROI</td><td>(广告收入 − 广告消耗) ÷ 广告消耗</td><td>扣掉买量成本净赚% （&gt;0 才赚）</td></tr>
+        <tr><td>首日回收率</td><td>首日收入 ÷ 首日广告消耗</td><td>≥60% 稳，&lt;30% 危险</td></tr>
+        <tr><td>回本周期</td><td>累计广告消耗 ÷ 日均收入</td><td>≤7天优秀，&gt;30天基本砍</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3><span class="pill c">收入质量</span>用户掏不掏钱</h3>
+      <table class="ftab">
+        <tr><th>指标</th><th>公式</th><th>人话 / 健康线</th></tr>
+        <tr><td>付费率</td><td>付费用户数 ÷ 活跃用户数</td><td>短剧通常 3%–10%</td></tr>
+        <tr><td>ARPPU</td><td>总收入 ÷ 付费用户数</td><td>肯花钱的人人均 30–200 元</td></tr>
+        <tr><td>CAC</td><td>获客总花费 ÷ 新增用户数</td><td>拉一个新用户成本，越低越好</td></tr>
+        <tr><td>LTV</td><td>ARPPU × 平均付费次数</td><td>一个用户从头到尾赚几块</td></tr>
+        <tr><td>LTV/CAC</td><td>用户终身价值 ÷ 获客成本</td><td><b>≥3</b> 才健康，&lt;1 亏本拉新</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3><span class="pill hi">分账 / 毛利</span>平台和你怎么分</h3>
+      <table class="ftab">
+        <tr><th>指标</th><th>公式</th><th>人话</th></tr>
+        <tr><td>分账收入</td><td>总流水 × (1 − 平台分成比例)</td><td>扣掉渠道抽成到你兜里的</td></tr>
+        <tr><td>平台分成</td><td>总流水 × 分成比例（10%–50%）</td><td>红果/抖音/微信等抽走的</td></tr>
+        <tr><td>毛利率</td><td>(收入 − 内容成本 − 投放成本) ÷ 收入</td><td>扣掉买剧+买量真净赚比例</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3><span class="pill mid">订阅（若有）</span>会员续不续</h3>
+      <table class="ftab">
+        <tr><th>指标</th><th>公式</th><th>人话</th></tr>
+        <tr><td>次/7/30留</td><td>第N日活跃 ÷ 首日新增</td><td>用户第2/7/30天还在不在</td></tr>
+        <tr><td>续费率</td><td>到期续费用户 ÷ 到期用户</td><td>会员到期还肯交钱的比例</td></tr>
+        <tr><td>订阅收入</td><td>订阅数 × 月费 × 续费率</td><td>包月/包年稳定现金流</td></tr>
+      </table>
+      <div class="note">微短剧多为单部付费，纯订阅少；河马 99 元/年会员属补充项。</div>
+    </div>
+  </div>
+  <div class="verdict">
+    <b>考核收口：</b>投流看 <b>ROAS + 回本周期</b>，收入看 <b>付费率 + LTV/CAC</b>，分账看 <b>毛利率</b>，订阅看 <b>留存与续费率</b>。实际常压成加权综合分（如 ROAS 40% + 回本周期 30% + 付费率 30%），权重看这阶段是冲量还是冲利润。
+  </div>
+
   <!-- 广州布局 -->
-  <div class="sec-t">六、广州布局（分公司 / 关联实体）</div>
+  <div class="sec-t">七、广州布局（分公司 / 关联实体）</div>
   <div class="grid">
     <div class="card">
       <h3><span class="pill p">实体</span>广州点众科技</h3>
@@ -345,7 +417,7 @@
   </div>
 
   <!-- 市场评价 -->
-  <div class  ="sec-t">七、市场评价（口碑 · 竞争 · 资本情绪）</div>
+  <div class="sec-t">八、市场评价（口碑 · 竞争 · 资本情绪）</div>
   <div class="grid">
     <div class="card">
       <h3><span class="pill p">地位</span>国内短剧 TOP2</h3>
@@ -357,24 +429,25 @@
       </ul>
     </div>
     <div class="card">
-      <h3><span class="pill c">出海</span>双寡头之一</h3>
+      <h3><span class="pill c">出海</span>双寡头之一（口径已修正）</h3>
       <ul>
         <li>DramaBox 与 ReelShort（中文在线）构成海外短剧「双寡头」</li>
         <li>2025 Q1 DramaBox 内购约 1.2 亿美元、累计 4.5 亿；2026 Q1 与 ReelShort 均近 1.4 亿</li>
-        <li>点众 + 中文在线合计占海外市场份额 &gt;70%（ReelPulse 口径）</li>
+        <li><b>修正：</b>海外短剧 CR5 中资约 <b>70%</b>；点众（DramaBox）按<b>收入口径排第 2、下载量排第 1，约 20% 份额</b>（ReelPulse 口径），并非"点众+中文在线合计&gt;70%"</li>
         <li>DramaBox iOS 4.6★ / Google Play 4.3★</li>
       </ul>
     </div>
     <div class="card">
-      <h3><span class="pill mid">竞争</span>同行对比</h3>
+      <h3><span class="pill lo">竞争</span>同行对比</h3>
       <ul>
         <li>直接竞品：ReelShort / ShortMax(九州) / NetShort(麦芽) / FlareFlow(中文在线) / 红果(字节)</li>
+        <li><b>红果出海澄清：</b>红果本人<b>不出海</b>（国内聚合免费流量）；字节用 <b>Melolo / PineDrama / TikTok 短剧板块</b>矩阵出海，非红果直出</li>
         <li>差异化：点众靠 35 万册网文 IP 低成本改剧出海，成本优于 ReelShort 自制剧；天花板存疑</li>
         <li>竞争加剧：九州/麦芽/山海星辰 AI 短剧加码，红果聚合免费流量</li>
       </ul>
     </div>
     <div class="card">
-      <h3><span class="pill lo">资本</span>估值争议</h3>
+      <h3><span class="pill mid">资本</span>估值争议</h3>
       <ul>
         <li>非上市、无审计财报；散户基于 145 亿营收对标中文在线，估算市值 400–1000 亿（非官方）</li>
         <li>掌阅持股 4.99%，每年分红 499 万（2023 分红 1 亿）验证盈利能力</li>
@@ -384,7 +457,7 @@
   </div>
 
   <!-- 员工评价 -->
-  <div class="sec-t">八、员工评价（求职者 · 在职口碑）</div>
+  <div class="sec-t">九、员工评价（求职者 · 在职口碑）</div>
   <div class="grid">
     <div class="card">
       <h3><span class="pill hi">福利</span>官方 JD / HR 口径</h3>
@@ -417,7 +490,7 @@
   </div>
 
   <!-- 风险 -->
-  <div class="sec-t">九、风险与争议（调研标注）</div>
+  <div class="sec-t">十、风险与争议（调研标注）</div>
   <div class="card risk">
     <ul>
       <li><b>IPO 告败：</b>2021 终止创业板审核，曾被追问用户重复充值、信息不透明（保密协议无法披露关键数据）。</li>
