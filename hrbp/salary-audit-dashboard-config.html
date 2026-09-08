@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>飞书多维表格 · 薪资核查看板 配置方案</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#19c8d6; --bg:#f6f7fb; --card:#fff;
+    --ink:#23262f; --sub:#6b7280; --line:#eceef3; --red:#ff4d4f; --amber:#ffb020; --green:#22c55e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 60px;}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border-radius:18px;padding:30px 32px;box-shadow:0 10px 30px rgba(124,92,255,.22);}
+  header h1{margin:0 0 8px;font-size:26px;}
+  header p{margin:0;opacity:.92;font-size:14px;}
+  .tag{display:inline-block;background:rgba(255,255,255,.18);border-radius:999px;padding:3px 12px;font-size:12px;margin:8px 8px 0 0;}
+  section{margin-top:26px;}
+  h2{font-size:19px;border-left:5px solid var(--purple);padding-left:12px;margin:0 0 14px;}
+  h3{font-size:15px;color:var(--purple);margin:18px 0 8px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 4px 16px rgba(20,20,40,.04);}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:6px;}
+  th,td{border:1px solid var(--line);padding:9px 11px;vertical-align:top;text-align:left;}
+  th{background:#f3f1ff;color:#4b3fae;font-weight:600;}
+  tr:nth-child(even) td{background:#fafbff;}
+  code{background:#eef0f7;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#c026d3;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+  .pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;}
+  .p-red{background:#ffeaea;color:var(--red);}
+  .p-amber{background:#fff4dc;color:var(--amber);}
+  .p-green{background:#e7f9ee;color:var(--green);}
+  .p-pur{background:#f0ebff;color:var(--purple);}
+  ul{margin:6px 0 0;padding-left:20px;} li{margin:4px 0;}
+  .step{display:flex;gap:12px;align-items:flex-start;margin:10px 0;}
+  .step .n{flex:0 0 34px;height:34px;border-radius:10px;background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .note{background:#fff8e8;border:1px solid #ffe2a8;border-radius:10px;padding:12px 14px;font-size:13px;color:#8a6d1a;margin-top:10px;}
+  footer{margin-top:40px;text-align:center;color:var(--sub);font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>飞书多维表格 · 薪资核查看板 配置方案</h1>
+  <p>一张表承载「原始数据 → 自动校验 → 异常标红 → 仪表盘预警」，让每次核算从"重算一遍"变成"跑一遍看板"。</p>
+  <span class="tag">字段清单</span><span class="tag">关键公式</span><span class="tag">条件格式</span><span class="tag">仪表盘</span><span class="tag">自动化</span>
+</header>
+
+<!-- 总览 -->
+<section class="card">
+  <h2>一、整体架构</h2>
+  <p style="margin:0;font-size:14px;">建议建 <b>1 张主表 + 1 个仪表盘 + 2~3 个视图</b>，不拆多表也能跑通核查：</p>
+  <ul>
+    <li><b>主表《薪资核算明细》</b>：每行一个人·一个月，所有字段在此。</li>
+    <li><b>仪表盘《薪资核查驾驶舱》</b>：总额、部门分布、异常分布、趋势。</li>
+    <li><b>视图</b>：全部数据 / 异常清单（筛选异常）/ 按部门看板。</li>
+    <li><b>高级权限</b>：HRBP 可编辑、部门负责人只看本部门、财务看汇总不可改。</li>
+  </ul>
+</section>
+
+<!-- 字段 -->
+<section>
+  <h2>二、字段清单（直接照抄建列）</h2>
+  <div class="card" style="overflow-x:auto;">
+  <table>
+    <tr><th>字段名</th><th>类型</th><th>说明 / 示例</th></tr>
+    <tr><td>员工ID</td><td>自动编号</td><td>主键，防重复发放</td></tr>
+    <tr><td>姓名</td><td>文本</td><td>—</td></tr>
+    <tr><td>部门</td><td>单选</td><td>用于分部门汇总与权限</td></tr>
+    <tr><td>职级</td><td>单选</td><td>用于倒挂核查</td></tr>
+    <tr><td>计薪月份</td><td>日期/文本</td><td>如 2026-09</td></tr>
+    <tr><td>入离职状态</td><td>单选</td><td>在职 / 新入职 / 离职</td></tr>
+    <tr><td>计薪天数</td><td>数字</td><td>离职/新入职须折算，非全月</td></tr>
+    <tr><td>基本工资</td><td>数字</td><td>—</td></tr>
+    <tr><td>岗位工资</td><td>数字</td><td>—</td></tr>
+    <tr><td>绩效工资</td><td>数字</td><td>含绩效系数计算后金额</td></tr>
+    <tr><td>津贴补贴</td><td>数字</td><td>交通/餐补/高温等合计</td></tr>
+    <tr><td>奖金</td><td>数字</td><td>年终/项目/全勤等</td></tr>
+    <tr><td>加班费</td><td>数字</td><td>—</td></tr>
+    <tr><td>缺勤扣款</td><td>数字</td><td>负数或正数扣减，统一用正数表示"扣多少"</td></tr>
+    <tr><td>社保基数</td><td>数字</td><td>用于基数匹配核查</td></tr>
+    <tr><td>社保个人</td><td>数字</td><td>基数×比例</td></tr>
+    <tr><td>公积金个人</td><td>数字</td><td>基数×比例</td></tr>
+    <tr><td>个税</td><td>数字</td><td>累计预扣法</td></tr>
+    <tr><td>其他扣款</td><td>数字</td><td>借款/差错等</td></tr>
+    <tr><td><b>应发工资</b></td><td>公式</td><td><code>基本+岗位+绩效+津贴+奖金+加班费−缺勤扣款</code></td></tr>
+    <tr><td><b>实发工资</b></td><td>公式</td><td><code>应发−社保个人−公积金个人−个税−其他扣款</code></td></tr>
+    <tr><td>上月实发</td><td>数字/关联</td><td>上月同人实发，用于环比</td></tr>
+    <tr><td><b>环比波动%</b></td><td>公式</td><td><code>IF(上月实发>0,(实发−上月实发)/上月实发,0)</code></td></tr>
+    <tr><td><b>校验结果</b></td><td>公式</td><td>见下方"关键公式"</td></tr>
+    <tr><td>异常原因</td><td>文本</td><td>人工标注或公式带出</td></tr>
+    <tr><td>银行卡号</td><td>文本</td><td>为空则预警</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- 公式 -->
+<section>
+  <h2>三、关键公式（粘贴即用）</h2>
+  <div class="card">
+    <h3>① 应发工资</h3>
+    <code>{基本工资}+{岗位工资}+{绩效工资}+{津贴补贴}+{奖金}+{加班费}-{缺勤扣款}</code>
+    <h3>② 实发工资</h3>
+    <code>{应发工资}-{社保个人}-{公积金个人}-{个税}-{其他扣款}</code>
+    <h3>③ 环比波动%</h3>
+    <code>IF({上月实发}>0,({实发工资}-{上月实发})/{上月实发},0)</code>
+    <h3>④ 校验结果（核心，不平就标红）</h3>
+    <code>IF(ABS({应发工资}-({基本工资}+{岗位工资}+{绩效工资}+{津贴补贴}+{奖金}+{加班费}-{缺勤扣款}))>0.01,"应发合计不平",IF(ABS({实发工资}-({应发工资}-{社保个人}-{公积金个人}-{个税}-{其他扣款}))>0.01,"实发不平","通过"))</code>
+    <div class="note">💡 维度可再加：社保基数匹配 = <code>IF(ABS({社保基数}-{应发工资})/{应发工资}>0.4,"基数疑似未更新","")</code>，并入校验结果。</div>
+  </div>
+</section>
+
+<!-- 条件格式 -->
+<section>
+  <h2>四、条件格式规则（逐条配置，命中即标色）</h2>
+  <div class="card" style="overflow-x:auto;">
+  <table>
+    <tr><th>#</th><th>规则</th><th>触发条件</th><th>效果</th></tr>
+    <tr><td>1</td><td>漏发</td><td>实发工资 = 0 或 为空</td><td><span class="pill p-red">红</span></td></tr>
+    <tr><td>2</td><td>波动异常</td><td>环比波动% &gt; 0.2 或 &lt; -0.2</td><td><span class="pill p-red">红</span></td></tr>
+    <tr><td>3</td><td>漏税风险</td><td>个税 = 0 且 应发工资 &gt; 10000</td><td><span class="pill p-red">红</span></td></tr>
+    <tr><td>4</td><td>校验失败</td><td>校验结果 ≠ "通过"</td><td><span class="pill p-red">红</span></td></tr>
+    <tr><td>5</td><td>离职多算</td><td>入离职状态 = 离职 且 计薪天数 = 当月全月</td><td><span class="pill p-red">红</span></td></tr>
+    <tr><td>6</td><td>基数滞后</td><td>社保基数 &lt; 应发工资 × 0.6</td><td><span class="pill p-amber">黄</span></td></tr>
+    <tr><td>7</td><td>银行卡缺失</td><td>银行卡号 为空</td><td><span class="pill p-amber">黄</span></td></tr>
+    <tr><td>8</td><td>薪资倒挂（进阶）</td><td>同部门同职级，本人实发 &gt; 司龄更长者实发（需关联/分组公式）</td><td><span class="pill p-amber">黄</span></td></tr>
+  </table>
+  </div>
+  <div class="note">⚠️ 倒挂核查较复杂，可先用手动筛选"同部门同职级按实发排序"肉眼看，公式版作为进阶。</div>
+</section>
+
+<!-- 仪表盘 -->
+<section>
+  <h2>五、仪表盘配置（核查驾驶舱）</h2>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0;">数字卡</h3><ul><li>本月发薪总人数</li><li>薪资总包（应发合计）</li><li>人均实发</li><li>异常人数</li></ul></div>
+    <div class="card"><h3 style="margin-top:0;">柱状图</h3><ul><li>各部门实发总额（叠加上月对比）</li><li>异常类型分布（校验不平/波动/漏税/倒挂）</li></ul></div>
+    <div class="card"><h3 style="margin-top:0;">折线图</h3><ul><li>近 6 月薪资总包趋势</li><li>各部门环比波动</li></ul></div>
+    <div class="card"><h3 style="margin-top:0;">明细表</h3><ul><li>异常清单：筛选 校验结果≠通过 或 标红行</li><li>支持按部门/异常类型下钻</li></ul></div>
+  </div>
+</section>
+
+<!-- 视图 -->
+<section>
+  <h2>六、视图配置</h2>
+  <div class="card">
+    <ul>
+      <li><span class="pill p-pur">表格</span> <b>全部数据</b>：HR 核算主战场，含全部字段。</li>
+      <li><span class="pill p-red">表格</span> <b>异常清单</b>：筛选 校验结果≠"通过" 或 标红，仅看要处理的人。</li>
+      <li><span class="pill p-pur">看板</span> <b>按部门</b>：分组=部门，每组看人数与总额，部门负责人只看自己组（配合高级权限）。</li>
+      <li><span class="pill p-pur">仪表盘</span> <b>核查驾驶舱</b>：见上。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 自动化 -->
+<section>
+  <h2>七、自动化（让机器跑流程）</h2>
+  <div class="card">
+    <ul>
+      <li><b>异常即时推送</b>：当 校验结果 由"通过"变为异常 → 飞书消息通知 HRBP + 财务，带姓名与异常原因。</li>
+      <li><b>核算启动提醒</b>：每月 T-5 自动提醒"薪资数据已锁定，请启动核算"。</li>
+      <li><b>异常汇总</b>：标记异常的行自动同步到《异常记录表》，留痕可追溯。</li>
+      <li><b>部门确认</b>：T-2 自动给各部门负责人发"请确认本部门薪资"卡片。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 搭建节奏 -->
+<section>
+  <h2>八、落地节奏（不发错靠排期）</h2>
+  <div class="card">
+    <div class="step"><div class="n">T-5</div><div><b>数据锁定</b>：考勤/绩效/变动数据收集截止，导入主表。</div></div>
+    <div class="step"><div class="n">T-3</div><div><b>第一轮核算 + 自查</b>：跑公式与条件格式，异常清单全员过一遍。</div></div>
+    <div class="step"><div class="n">T-2</div><div><b>部门确认</b>：负责人确认本部门，自动化推送卡片。</div></div>
+    <div class="step"><div class="n">T-1</div><div><b>HRBP + 财务复核</b>：看仪表盘总额环比，签字放行。</div></div>
+    <div class="step"><div class="n">T</div><div><b>发薪</b>：导出实发，对接银行代发。</div></div>
+  </div>
+  <div class="note">✅ 搭好后，每次核算 = 导入新月份数据 → 看板自动标红 → 处理异常 → 放行。重点从"重算"转为"查异常"。</div>
+</section>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRBP 0-1 完整手册 · 雇主品牌 + 新员工入职培训</title>
+<style>
+  :root{
+    --purple:#7c5cff; --purple-soft:#a99bff; --cyan:#23c8d8; --cyan-soft:#7fe3ec;
+    --ink:#1f2233; --ink-2:#5a5f73; --line:#ecebf5;
+    --bg:#f6f5fb; --card:#ffffff; --warn:#ff7a59; --ok:#1fb87a; --gold:#f5b945;
+    --shadow:0 6px 24px rgba(60,50,140,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;padding-bottom:60px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  /* header */
+  header{background:linear-gradient(120deg,#7c5cff 0%,#23c8d8 100%);color:#fff;
+    padding:46px 0 38px;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;
+    background:radial-gradient(circle,rgba(255,255,255,.25),transparent 70%);border-radius:50%}
+  header h1{font-size:32px;font-weight:800;letter-spacing:.5px}
+  header p{margin-top:10px;font-size:15px;opacity:.95;max-width:760px}
+  .meta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+  .meta span{background:rgba(255,255,255,.2);padding:5px 14px;border-radius:30px;font-size:13px}
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 0}
+  nav .wrap{display:flex;gap:10px;flex-wrap:wrap}
+  nav a{font-size:13.5px;text-decoration:none;color:var(--ink-2);background:#fff;
+    border:1px solid var(--line);padding:6px 14px;border-radius:20px;transition:.2s}
+  nav a:hover{border-color:var(--purple);color:var(--purple)}
+  /* section */
+  section{padding:40px 0 8px}
+  .sec-tag{display:inline-block;font-size:13px;font-weight:700;color:#fff;
+    background:linear-gradient(120deg,var(--purple),var(--cyan));padding:4px 14px;border-radius:20px}
+  h2{font-size:25px;font-weight:800;margin:14px 0 6px}
+  .sec-sub{color:var(--ink-2);font-size:14.5px;margin-bottom:22px;max-width:820px}
+  h3{font-size:18px;font-weight:750;margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+  h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--purple);display:inline-block}
+  /* bento grid */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border-radius:16px;padding:20px 20px;box-shadow:var(--shadow);
+    border:1px solid var(--line);position:relative}
+  .card h4{font-size:15.5px;font-weight:750;margin-bottom:8px;color:var(--ink)}
+  .card p,.card li{font-size:13.5px;color:var(--ink-2)}
+  .card ul{margin:6px 0 0 18px}
+  .card li{margin:3px 0}
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:20px;
+    margin:0 6px 6px 0}
+  .p-purple{background:#efeaff;color:#6a4cf0}
+  .p-cyan{background:#e2f7fa;color:#0f9fb0}
+  .p-gold{background:#fff3da;color:#b9801a}
+  .p-warn{background:#ffe9e2;color:#d6532f}
+  .p-ok{background:#e3f7ee;color:#0f9268}
+  .num{font-size:30px;font-weight:800;background:linear-gradient(120deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+  .accent-bar{height:4px;width:42px;border-radius:3px;background:linear-gradient(90deg,var(--purple),var(--cyan));margin-bottom:12px}
+  /* table */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:#fff;
+    border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f3f1fc;color:var(--purple);font-weight:700}
+  tr:nth-child(even) td{background:#fafaff}
+  /* callout */
+  .callout{border-radius:14px;padding:16px 18px;margin:16px 0;font-size:13.8px;
+    border-left:5px solid var(--purple);background:#f6f3ff}
+  .callout.warn{border-color:var(--warn);background:#fff4f0}
+  .callout.ok{border-color:var(--ok);background:#f0faf5}
+  .callout b{color:var(--ink)}
+  /* code/quote */
+  .quote{background:#1f2233;color:#e8e6f5;padding:16px 18px;border-radius:12px;font-size:13.5px;
+    white-space:pre-wrap;line-height:1.7;margin:12px 0;font-family:"SFMono-Regular",Consolas,monospace}
+  .quote .c{color:#8fd9e0}
+  /* footer */
+  footer{text-align:center;color:var(--ink-2);font-size:13px;margin-top:50px;padding:22px}
+  .toc{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 4px}
+  .toc a{flex:1;min-width:200px;text-decoration:none;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);transition:.2s}
+  .toc a:hover{transform:translateY(-3px);border-color:var(--purple)}
+  .toc b{display:block;font-size:15px;color:var(--ink);margin-bottom:4px}
+  .toc span{font-size:12.5px;color:var(--ink-2)}
+  .label{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--purple);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>HRBP 0-1 完整手册</h1>
+    <p>覆盖<b>雇主品牌</b>与<b>新员工入职培训</b>两大模块，按「设计方案 → 执行细节 → 沉淀总结」三段式组织，拿去即可落地、可复盘、可复用。</p>
+    <div class="meta">
+      <span>适用：HRBP / 初创 & 成长型团队</span>
+      <span>架构：设计 · 执行 · 沉淀</span>
+      <span>配套：飞书多维表格承载</span>
+      <span>v1.0 · 2026-09</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#design">① 设计方案</a>
+    <a href="#exec">② 执行细节</a>
+    <a href="#sum">③ 沉淀总结</a>
+    <a href="#a-brand">雇主品牌</a>
+    <a href="#onboard">入职培训</a>
+    <a href="#gantt">落地甘特</a>
+    <a href="#pit">避坑</a>
+    <a href="#kb">知识库</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- 总览卡 -->
+  <section style="padding-top:30px">
+    <div class="toc">
+      <a href="#design"><b>① 设计方案</b><span>为什么做、做什么、0-1 路线、指标与边界</span></a>
+      <a href="#exec"><b>② 执行细节</b><span>模板 / 话术 / 制度 / 逐字段配置 / 示例</span></a>
+      <a href="#sum"><b>③ 沉淀总结</b><span>甘特 / 避坑 / 全局看板 / 知识库 / 迭代</span></a>
+    </div>
+    <div class="callout">
+      <b>怎么用这本手册：</b>首次上手先读<b>①设计</b>对齐思路与验收线；落地时直接翻<b>②执行</b>抄物料；每跑完一个阶段回头看<b>③沉淀</b>做复盘与迭代。两份前置文档（框架层、细节层）已并入本册，无需再单独查。
+    </div>
+  </section>
+
+  <!-- ============ PART 1 设计方案 ============ -->
+  <section id="design">
+    <span class="sec-tag">PART 01</span>
+    <h2>① 设计方案 · 先想清楚再动手</h2>
+    <p class="sec-sub">0-1 阶段最贵的是「试错方向」而非「执行量」。设计阶段要把<b>原则、框架、路线、指标、边界</b>钉死，后面执行才有锚点。</p>
+
+    <h3><span class="dot"></span>通用设计原则（第一性原理）</h3>
+    <div class="grid g3">
+      <div class="card"><div class="accent-bar"></div><h4>先 MVP 后系统</h4><p>不一次性搭大体系。先最小可用跑通一个部门 / 2 个新人，验证后再系统化。</p></div>
+      <div class="card"><div class="accent-bar"></div><h4>小样本试跑</h4><p>拿 1 个 team 实测，边跑边改。全员铺开前先消灭 80% 的坑。</p></div>
+      <div class="card"><div class="accent-bar"></div><h4>借现有资产</h4><p>英语角 / 黑客松 / AI 文化 / 文化活动 → 既是培训素材也是雇主品牌内容，零成本起量。</p></div>
+      <div class="card"><div class="accent-bar"></div><h4>一张表管起来</h4><p>用飞书多维表格承载（呼应薪资看板、试用期表思路），杜绝 Excel 手工。</p></div>
+      <div class="card"><div class="accent-bar"></div><h4>指标前置</h4><p>启动即定验收指标，否则做半年说不清成没成。</p></div>
+      <div class="card"><div class="accent-bar"></div><h4>对内先于对外</h4><p>员工体验是雇主品牌的源头。内部口碑没做顺，对外内容再花哨也立不住。</p></div>
+    </div>
+
+    <!-- 模块A 雇主品牌 设计 -->
+    <h3 id="a-brand"><span class="dot"></span>模块 A · 雇主品牌设计方案</h3>
+
+    <h4 style="margin:6px 0 10px;color:var(--ink-2);font-size:14px">A1 · 概念分层（对内 / 对外 / EVP）</h4>
+    <div class="grid g3">
+      <div class="card"><h4>① 对内：员工体验</h4><p>入职第一天起的好感、日常认可、成长感。员工是最好的代言人。</p>
+        <span class="pill p-purple">Day1 体验</span><span class="pill p-purple">荣誉体系</span><span class="pill p-purple">防负面口碑</span></div>
+      <div class="card"><h4>② 对外：候选人体验 + 内容</h4><p>流程快、反馈及时、面试官专业；用真实内容吸引同频的人。</p>
+        <span class="pill p-cyan">招聘体验</span><span class="pill p-cyan">内容矩阵</span><span class="pill p-cyan">内推机制</span></div>
+      <div class="card"><h4>③ EVP：雇主价值主张</h4><p>你凭什么吸引人。所有对内对外动作都围绕它展开，避免散。</p>
+        <span class="pill p-gold">成长</span><span class="pill p-gold">氛围</span><span class="pill p-gold">稳定</span><span class="pill p-gold">意义</span></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A2 · EVP 五维设计模型（含云技服适配卖点）</h4>
+    <table>
+      <tr><th>维度</th><th>云技服可主打</th><th>落地动作</th><th>验证问题</th></tr>
+      <tr><td><b>成长</b></td><td>技术成长路径、硬核实战项目</td><td>技术分享机制、晋升通道可视化</td><td>员工觉得"在这里能变强吗"</td></tr>
+      <tr><td><b>氛围</b></td><td>兄弟式协作、不拘小节</td><td>团建、破冰、跨组交流</td><td>同事值得交吗</td></tr>
+      <tr><td><b>稳定</b></td><td>大厂技术中台、业务扎实</td><td>业务前景沟通、组织透明度</td><td>有安全感吗</td></tr>
+      <tr><td><b>意义</b></td><td>技术服务业务一线，看得见影响</td><td>战报、用户故事、价值回顾</td><td>干的事有意义吗</td></tr>
+      <tr><td><b>回报</b></td><td>薪酬结构清晰、总包有竞争力</td><td>薪酬沟通、福利差异化</td><td>钱给到位且说得清吗</td></tr>
+    </table>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A3 · 0-1 四阶段路线（先内后外，3 个月跑出雏形）</h4>
+    <table>
+      <tr><th>阶段</th><th>时间</th><th>目标</th><th>核心动作</th><th>验收线</th></tr>
+      <tr><td><b>① 定位</b></td><td>W1–2</td><td>拍板 EVP</td><td>访谈老员工、写口号、定3卖点</td><td>EVP 文档 + 3 卖点</td></tr>
+      <tr><td><b>② 对内体验</b></td><td>W2–4</td><td>员工变代言人</td><td>修 Day1 清单、开员工故事栏、离职面谈标准化</td><td>入职 checklist 上线</td></tr>
+      <tr><td><b>③ 对外内容</b></td><td>W4+</td><td>内容往外发</td><td>活动拍短视频、技术 blog、内推激励上线</td><td>可对外内容 ≥4 篇</td></tr>
+      <tr><td><b>④ 量化迭代</b></td><td>M2–3</td><td>看数调方向</td><td>盯 Offer 接受率 / 内推占比 / eNPS</td><td>主动投递率环比升</td></tr>
+    </table>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A4 · 指标设计（证明你做了）</h4>
+    <div class="grid g3">
+      <div class="card"><div class="num">6</div><p><b>核心指标：</b>主动投递率、Offer 接受率、面试体验 NPS、eNPS、离职率、内推占比、单 hire 成本</p></div>
+      <div class="card"><h4>口径要钉死</h4><p>eNPS = 推荐意愿净比例；内推占比 = 内推入职 ÷ 总入职。口径不清 = 指标失真。</p></div>
+      <div class="card"><h4>达标线示例</h4><p>Offer 接受率 ≥ 85%；eNPS ≥ 30；内推占比季度提升到 35%+。</p></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A5 · 边界与风险（设计时就画红线）</h4>
+    <div class="callout warn"><b>边界：</b>0-1 不花钱做 campaign；不承诺做不到的福利；不夸大业务。雇主品牌崩在「说一套做一套」，所以所有对外主张必须内部已发生或可验证。</div>
+
+    <!-- 模块B 入职培训 设计 -->
+    <h3 id="onboard"><span class="dot"></span>模块 B · 新员工入职培训设计方案</h3>
+
+    <h4 style="margin:6px 0 10px;color:var(--ink-2);font-size:14px">B1 · 双框架</h4>
+    <div class="grid g2">
+      <div class="card"><h4>30-60-90 天成长闭环</h4><p>把「胜任」拆成三个里程碑，每阶段有明确学习目标 + 产出 + 检查点，不让新人盲跑。</p>
+        <span class="pill p-purple">30天融入</span><span class="pill p-purple">60天胜任</span><span class="pill p-purple">90天独立</span></div>
+      <div class="card"><h4>70-20-10 学习法则</h4><p>70% 实战、20% 导师带教、10% 课程。培训重心放在「干」和「带」，不是「听课」。</p>
+        <span class="pill p-cyan">70%实战</span><span class="pill p-cyan">20%带教</span><span class="pill p-cyan">10%课程</span></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B2 · 四阶段 0-1 路线</h4>
+    <table>
+      <tr><th>阶段</th><th>时间</th><th>目标</th><th>核心动作</th><th>验收线</th></tr>
+      <tr><td><b>① 搭骨架</b></td><td>W1–2</td><td>出地图+mentor制</td><td>列三阶段清单、定 mentor、做 Day1 欢迎包</td><td>成长地图模板</td></tr>
+      <tr><td><b>② 跑首批</b></td><td>W2–6</td><td>1–2 新人实测</td><td>填地图、mentor 周更、30天 check-in、收吐槽</td><td>首批数据进入表</td></tr>
+      <tr><td><b>③ 系统化</b></td><td>M2–3</td><td>多维表格承载</td><td>建《新人成长地图表》、节点提醒、仪表盘</td><td>看板跑通</td></tr>
+      <tr><td><b>④ 指标闭环</b></td><td>M3+</td><td>反推改进</td><td>盯留存/通过率/入职 NPS，迭代地图</td><td>3月留存≥90%</td></tr>
+    </table>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B3 · 三机制（落地靠它们，不是靠自觉）</h4>
+    <div class="grid g3">
+      <div class="card"><h4>成长地图</h4><p>每阶段学什么、找谁、产出什么，可视化。新人照着走，mentor 照着带。</p></div>
+      <div class="card"><h4>Mentor 制</h4><p>指定带教人 + 激励（¥500 占位）。无激励 → Mentor 不真带，机制空转。</p></div>
+      <div class="card"><h4>节点 Check-in</h4><p>30/60/90 天各一次，别等 6 个月转正才发现不对。</p></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B4 · 指标设计</h4>
+    <div class="grid g3">
+      <div class="card"><div class="num">5</div><p><b>核心指标：</b>入职体验 NPS、试用期通过率、3 月留存率、新人转正时长、Mentor 满意度</p></div>
+      <div class="card"><h4>达标线</h4><p>入职 NPS ≥ 40；试用期通过率 ≥ 90%；3 月留存 ≥ 90%。</p></div>
+      <div class="card"><h4>反推逻辑</h4><p>某阶段留存掉 → 查对应地图节点 → 改内容/mentor/节奏。</p></div>
+    </div>
+
+    <div class="callout ok"><b>设计阶段交付物：</b>① EVP 文档（5 维+卖点+口号）② 0-1 路线图（带验收线）③ 指标口径表 ④ 边界红线清单。这四样齐了，才算「设计完成」，可进执行。</div>
+  </section>
+
+  <!-- ============ PART 2 执行细节 ============ -->
+  <section id="exec">
+    <span class="sec-tag">PART 02</span>
+    <h2>② 执行细节 · 拿去就能用</h2>
+    <p class="sec-sub">下面是可直接抄的物料：访谈提纲、文案范例、Checklist、制度草案、逐字段配置、问卷模板。括号内「占位」可按你们实际改。</p>
+
+    <!-- A 雇主品牌 执行 -->
+    <h3><span class="dot"></span>模块 A · 雇主品牌执行物料</h3>
+
+    <h4 style="margin:6px 0 10px;color:var(--ink-2);font-size:14px">A-执行1 · EVP 访谈提纲（直接发老员工，10 问）</h4>
+    <div class="card">
+      <ol style="margin-left:20px;font-size:13.5px;color:var(--ink-2);line-height:1.9">
+        <li>当初为什么选择加入我们，而不是别的 offer？</li>
+        <li>哪一件事让你觉得「来对了」？</li>
+        <li>在这里你最大的成长是什么？</li>
+        <li>你愿意把朋友推荐来吗？为什么？</li>
+        <li>团队里最让你舒服的氛围是什么？</li>
+        <li>你觉得公司「说到做到」的地方有哪些？</li>
+        <li>哪类人最适合在这里发展？</li>
+        <li>如果对外讲我们的优势，你会先说哪三点？</li>
+        <li>有没有哪个瞬间让你想离职？最后为什么留下？</li>
+        <li>用一句话形容「在这里工作是什么感觉」。</li>
+      </ol>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A-执行2 · EVP 文案范例（云技服场景，可改）</h4>
+    <div class="quote"><span class="c">主口号：</span>「在云技服，把技术做成真本事。」
+<span class="c">卖点1 成长：</span>硬核项目练手，技术大佬手把手带，半年顶别处两年。
+<span class="c">卖点2 氛围：</span>兄弟式协作，不内卷不宫斗，有事一起扛。
+<span class="c">卖点3 意义：</span>你的代码跑在业务一线，用户的问题你亲眼看见被解决。
+<span class="c">一句话收尾：</span>想变强、想踏实、想干点有回响的事 —— 来这。</div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A-执行3 · 入职 Day1 时间轴 Checklist（含责任人）</h4>
+    <table>
+      <tr><th>时间</th><th>事项</th><th>责任人</th><th>完成</th></tr>
+      <tr><td>入职前 3 天</td><td>账号/邮箱/权限/设备就绪</td><td>IT</td><td>☐</td></tr>
+      <tr><td>入职前 1 天</td><td>发 Welcome 邮件 + Day1 日程</td><td>HRBP</td><td>☐</td></tr>
+      <tr><td>09:30</td><td>门禁/工位/团队介绍</td><td>Mentor</td><td>☐</td></tr>
+      <tr><td>10:30</td><td>文化制度 30 分钟速览</td><td>HRBP</td><td>☐</td></tr>
+      <tr><td>14:00</td><td>第一件小任务交付（建立成就感）</td><td>Mentor</td><td>☐</td></tr>
+      <tr><td>17:30</td><td>Day1 一对一（问感受/卡点）</td><td>Leader</td><td>☐</td></tr>
+      <tr><td>下班前</td><td>新人发一条「Day1 朋友圈式」反馈</td><td>新人</td><td>☐</td></tr>
+    </table>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A-执行4 · 内容选题库（20 个，直接排期）</h4>
+    <div class="grid g3">
+      <div class="card"><h4>技术向</h4><p>① 一次线上故障复盘 ② 我们怎么搭内部工具 ③ 新人第一个 PR 背后的故事 ④ 技术分享会精华 ⑤ 某模块架构演进</p></div>
+      <div class="card"><h4>人物向</h4><p>⑥ 老员工访谈 ⑦ Mentor 的一天 ⑧ 转岗成长记 ⑨ 校招生半年记 ⑩ 离职返场聊</p></div>
+      <div class="card"><h4>文化/生活向</h4><p>⑪ 团建 vlog ⑫ 黑客松战报 ⑬ 英语角名场面 ⑭ 下午茶研讨 ⑮ 办公环境 tour</p></div>
+      <div class="card"><h4>招聘向</h4><p>⑯ 在招岗位剧透 ⑰ 面试官说真话 ⑱ 我们怎么面试 ⑲ 校招备战指南 ⑳ 内推英雄榜</p></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A-执行5 · 内推制度草案（全文，金额占位可改）</h4>
+    <div class="card">
+      <p style="font-size:13.5px;color:var(--ink-2);white-space:pre-wrap;line-height:1.8"><b>一、目的</b>　激活员工网络，降低招聘成本，提升人才质量。
+<b>二、奖励</b>　成功入职并转正：技术岗 ¥【3000】/ 非技术岗 ¥【2000】；紧缺岗位额外 ¥【1000】。
+<b>三、发放节奏</b>　入职发 50%，转正发 50%。离职未转正不发放。
+<b>四、流程</b>　企微填推荐 → HR 标注来源 → 入职登记 → 财务随工资发放。
+<b>五、荣誉</b>　月度/季度「内推之星」上英雄榜，年度 TOP3 额外奖励。
+<b>六、红线</b>　推荐直系亲属需报备；弄虚作假取消资格并追责；不得干预面试公正。</p>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">A-执行6 · 渠道 SOP 要点 + 月度复盘模板</h4>
+    <div class="grid g2">
+      <div class="card"><h4>各渠道运营 SOP</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li><b>BOSS/猎聘：</b>活跃度每日维护，回复 ≤ 4h，话术统一</li>
+          <li><b>内推：</b>每月 1 次英雄榜 + 1 次制度提醒</li>
+          <li><b>技术社区：</b>每月 ≥ 2 篇实战文，埋招聘钩子</li>
+          <li><b>校园：</b>提前锁定宣讲/双选，建校友群</li>
+        </ul></div>
+      <div class="card"><h4>月度复盘模板（填数即用）</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>本月新增投递 ___，内推占比 ___%</li>
+          <li>Offer ___，接受 ___，接受率 ___%</li>
+          <li>eNPS 本月 ___，环比 ___</li>
+          <li>单 hire 成本 ___ 元</li>
+          <li>下月重点：________________</li>
+        </ul></div>
+    </div>
+
+    <!-- B 入职培训 执行 -->
+    <h3><span class="dot"></span>模块 B · 入职培训执行物料</h3>
+
+    <h4 style="margin:6px 0 10px;color:var(--ink-2);font-size:14px">B-执行1 · 30-60-90 周度任务清单（W1–W12 节选）</h4>
+    <table>
+      <tr><th>阶段</th><th>周</th><th>新人任务</th><th>Mentor 动作</th></tr>
+      <tr><td rowspan="2"><b>30天</b></td><td>W1</td><td>走完入职清单；配环境；读 1 篇架构文</td><td>每天 15min 答疑；给第一个小任务</td></tr>
+      <tr><td>W2–4</td><td>跟 1 个项目；产出 1 份学习笔记</td><td>周 review；纠偏；引荐关键人</td></tr>
+      <tr><td rowspan="2"><b>60天</b></td><td>W5–8</td><td>独立负责小模块；参与评审</td><td>放手+兜底；反馈具体</td></tr>
+      <tr><td>W9–12</td><td>交付一个完整需求；做 30/60 check-in</td><td>评估胜任度；提改进</td></tr>
+      <tr><td><b>90天</b></td><td>W13+</td><td>独立排期；准备转正材料</td><td>写评语；定级建议</td></tr>
+    </table>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B-执行2 · Mentor 手册（选拔/职责/激励/考核）</h4>
+    <div class="grid g2">
+      <div class="card"><h4>选拔 & 职责</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>选拔：司龄 ≥ 1 年、绩效良好、愿意带人</li>
+          <li>周 review 模板：本周学了啥 / 卡在哪 / 下周目标</li>
+          <li>首月每周 ≥ 2 次 1v1</li>
+        </ul></div>
+      <div class="card"><h4>激励 & 考核</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>带教津贴 ¥【500】/ 人（转正发）</li>
+          <li>新人 3 月留存 ≥ 90% → Mentor 评优</li>
+          <li>新人试用期未过 → 复盘 Mentor 投入</li>
+        </ul></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B-执行3 · Pre-boarding Welcome 邮件模板</h4>
+    <div class="quote"><span class="c">主题：</span>欢迎加入云技服｜你的 Day1 安排已就绪 🎉
+<span class="c">正文：</span>Hi 【姓名】，
+恭喜你成为云技服的一员！我们已为你准备好工位、账号和一位 Mentor（【Mentor名】）。
+Day1 时间轴：09:30 到岗 → 团队介绍 → 文化速览 → 第一个小任务 → 17:30 一对一。
+有任何问题随时找我（【HRBP】）。期待和你一起把技术做成真本事！
+—— 你的 HRBP 【署名】</div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B-执行4 · 培训课程大纲（通用 + 专业 + 实战）</h4>
+    <div class="grid g3">
+      <div class="card"><h4>通用（10%）</h4><p>文化价值观、制度流程、安全合规、工具使用</p></div>
+      <div class="card"><h4>专业（20%）</h4><p>岗位技能课、系统设计、代码规范、业务知识</p></div>
+      <div class="card"><h4>实战（70%）</h4><p>跟项目、做需求、参与评审、独立交付</p></div>
+    </div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B-执行5 · 飞书多维表格「新人成长地图」逐字段配置</h4>
+    <table>
+      <tr><th>字段</th><th>类型</th><th>说明 / 示例</th></tr>
+      <tr><td>员工ID / 姓名</td><td>文本</td><td>唯一标识</td></tr>
+      <tr><td>入职日期</td><td>日期</td><td>算 30/60/90 节点</td></tr>
+      <tr><td>阶段（30/60/90）</td><td>单选</td><td>公式按入职日自动推进</td></tr>
+      <tr><td>Mentor</td><td>人员</td><td>关联带教人</td></tr>
+      <tr><td>本周任务</td><td>多行文本</td><td>Mentor 周更</td></tr>
+      <tr><td>完成度</td><td>进度</td><td>0–100%</td></tr>
+      <tr><td>节点提醒</td><td>自动化</td><td>到点 @Mentor + 新人</td></tr>
+      <tr><td>Check-in 评分</td><td>评分</td><td>30/60/90 各一次</td></tr>
+      <tr><td>风险标记</td><td>单选</td><td>正常 / 关注 / 高危（标红）</td></tr>
+      <tr><td>转正结论</td><td>单选</td><td>通过 / 延期 / 不通过</td></tr>
+    </table>
+    <div class="callout"><b>3 条自动化：</b>① 入职满 30/60/90 天 → 自动发 check-in 提醒给 Mentor+新人；② 风险标记=高危 → 即时推送 HRBP；③ 转正结论=通过 → 同步更新花名册状态。</div>
+
+    <h4 style="margin:22px 0 10px;color:var(--ink-2);font-size:14px">B-执行6 · 入职 NPS 问卷 + 试用期评估表</h4>
+    <div class="grid g2">
+      <div class="card"><h4>入职 NPS 问卷（3 题）</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>你多大可能推荐朋友来这？（0–10）</li>
+          <li>入职体验最满意 / 最想改的一点？</li>
+          <li>第一周有没有「被忽视」的时刻？</li>
+        </ul></div>
+      <div class="card"><h4>试用期评估表（维度/权重）</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>岗位胜任 40% · 学习成长 25%</li>
+          <li>协作沟通 20% · 文化匹配 15%</li>
+          <li>综合 ≥ 80 分 → 通过</li>
+        </ul></div>
+    </div>
+  </section>
+
+  <!-- ============ PART 3 沉淀总结 ============ -->
+  <section id="sum">
+    <span class="sec-tag">PART 03</span>
+    <h2>③ 沉淀总结 · 复盘才能复用</h2>
+    <p class="sec-sub">做完不算完。把过程变资产：甘特看全局、避坑防再犯、看板盯指标、知识库可检索、迭代转下一轮。</p>
+
+    <h3 id="gantt"><span class="dot"></span>3-1 · 整体落地甘特（两模块并行，M1–M3）</h3>
+    <table>
+      <tr><th>月份</th><th>雇主品牌</th><th>入职培训</th><th>共同</th></tr>
+      <tr><td><b>M1</b></td><td>EVP 定位 + 对内体验启动</td><td>成长地图模板 + mentor 制</td><td>定指标口径</td></tr>
+      <tr><td><b>M2</b></td><td>对外内容 ≥4 篇 + 内推上线</td><td>首批新人实测 + 系统化表</td><td>首次双模块复盘</td></tr>
+      <tr><td><b>M3</b></td><td>量化迭代 / 调方向</td><td>看板跑通 / 指标闭环</td><td>知识库成形</td></tr>
+    </table>
+
+    <h3 id="pit"><span class="dot"></span>3-2 · 避坑清单（把别人踩过的坑先画出来）</h3>
+    <table>
+      <tr><th>坑</th><th>表现</th><th>解法</th></tr>
+      <tr><td>雇主品牌「说一套做一套」</td><td>对外吹氛围，内部离职面谈一堆怨</td><td>所有主张内部先发生；离职面谈真做</td></tr>
+      <tr><td>Mentor 制空转</td><td>指派了但不带，新人盲跑</td><td>给激励 + 周 review 模板 + 考核挂钩</td></tr>
+      <tr><td>指标口径不清</td><td>eNPS/内推占比各算各的，无法对账</td><td>启动即钉死口径与公式</td></tr>
+      <tr><td>全员铺开翻车</td><td>体系没验证就推全公司，bug 放大</td><td>小样本先跑，再系统化</td></tr>
+      <tr><td>培训=听课</td><td>新人上完课仍不会干活</td><td>70-20-10，重心放实战与带教</td></tr>
+      <tr><td>做完不沉淀</td><td>每次从零来，经验随人走</td><td>本手册 + 知识库，SOP 化</td></tr>
+    </table>
+
+    <h3><span class="dot"></span>3-3 · 全局指标看板（一张表看两个模块健康度）</h3>
+    <div class="grid g4">
+      <div class="card"><div class="num">≥85%</div><p><b>Offer 接受率</b><br>雇主品牌健康度</p></div>
+      <div class="card"><div class="num">≥30</div><p><b>eNPS</b><br>员工净推荐</p></div>
+      <div class="card"><div class="num">≥90%</div><p><b>试用期通过率</b><br>培训有效性</p></div>
+      <div class="card"><div class="num">≥90%</div><p><b>3 月留存率</b><br>综合健康度</p></div>
+    </div>
+
+    <h3 id="kb"><span class="dot"></span>3-4 · 知识沉淀结构（建议存成可复用 SOP 库）</h3>
+    <div class="grid g3">
+      <div class="card"><h4>📁 雇主品牌</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>EVP 文档模板</li>
+          <li>访谈提纲 / 文案范例</li>
+          <li>内推制度草案</li>
+          <li>内容选题库 + 排期表</li>
+        </ul></div>
+      <div class="card"><h4>📁 入职培训</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>30-60-90 地图模板</li>
+          <li>Mentor 手册</li>
+          <li>Welcome 邮件 / NPS 问卷</li>
+          <li>飞书表配置说明</li>
+        </ul></div>
+      <div class="card"><h4>📁 通用</h4>
+        <ul style="font-size:13px;color:var(--ink-2);margin-left:18px">
+          <li>指标口径表</li>
+          <li>月度复盘模板</li>
+          <li>避坑清单（常更）</li>
+          <li>本手册 v 记录</li>
+        </ul></div>
+    </div>
+
+    <h3><span class="dot"></span>3-5 · 迭代节奏（让手册活起来）</h3>
+    <div class="callout ok"><b>季度复盘：</b>每季度末拉一次双模块数据 → 对照达标线 → 更新避坑清单与指标 → 本手册升版本（v1.0→v1.1）。<b>半年度：</b>重做 EVP 访谈（员工感觉会变），刷新卖点与内容方向。<b>年度：</b>把知识库 SOP 审计一遍，删过期、补新坑。</div>
+
+    <h3><span class="dot"></span>3-6 · 给云技服的定制建议</h3>
+    <div class="grid g2">
+      <div class="card"><h4>男性为主技术团队</h4>
+        <p>「兄弟式协作 / 硬核练手」比「温情福利」更戳；团建偏户外/竞技易出内容；避免过度软性包装。</p></div>
+      <div class="card"><h4>外地团建 / 活动资产</h4>
+        <p>已有团建方案池、黑客松、英语角、AI 文化 —— 全部可转成雇主品牌内容素材，零成本起量，优先拍。</p></div>
+    </div>
+
+    <div class="callout"><b>一句话收尾：</b>雇主品牌和入职培训不是两个项目，是<b>同一件事的两面</b>——把人吸引来（品牌）、把人留下来并变强（培训），用一张表管、用指标验、用复盘沉淀。本手册即起点，跑起来比完美更重要。</div>
+  </section>
+
+</div>
+
+<footer>
+  📌 本页由 yitong 沉淀整理 · 文化活动知识库
+</footer>
+
+</body>
+</html>

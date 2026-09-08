@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRBP 0-1 落地手册 · 雇主品牌 + 新员工入职培训 全面方案</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#19c8d6; --bg:#f6f7fb; --card:#fff;
+    --ink:#23262f; --sub:#6b7280; --line:#eceef3; --red:#ff4d4f; --amber:#ffb020; --green:#22c55e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.62;}
+  .wrap{max-width:1180px;margin:0 auto;padding:30px 20px 64px;}
+  header{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border-radius:20px;padding:34px 36px;box-shadow:0 12px 34px rgba(124,92,255,.22);}
+  header h1{margin:0 0 8px;font-size:27px;letter-spacing:.5px;}
+  header p{margin:0;opacity:.93;font-size:14px;}
+  .tag{display:inline-block;background:rgba(255,255,255,.18);border-radius:999px;padding:3px 12px;font-size:12px;margin:10px 8px 0 0;}
+  .metricbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px;}
+  .metric{background:rgba(255,255,255,.16);border-radius:12px;padding:12px 14px;}
+  .metric b{font-size:20px;display:block;}
+  .metric span{font-size:12px;opacity:.9;}
+  h2.sec{font-size:22px;margin:34px 0 4px;display:flex;align-items:center;gap:10px;}
+  h2.sec .dot{width:12px;height:12px;border-radius:4px;background:linear-gradient(120deg,var(--purple),var(--cyan));}
+  .sub2{color:var(--sub);font-size:13px;margin:0 0 16px;}
+  .bento{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
+  .bento .wide{grid-column:span 2;}
+  @media(max-width:720px){.bento .wide{grid-column:span 1;}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 4px 16px rgba(20,20,40,.045);}
+  .card h3{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px;}
+  .card h3 .bar{width:5px;height:18px;border-radius:3px;background:linear-gradient(var(--purple),var(--cyan));}
+  .card h4{margin:14px 0 6px;font-size:13.5px;color:var(--purple);}
+  .pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:600;margin:0 4px 4px 0;}
+  .p-red{background:#ffeaea;color:var(--red);} .p-amber{background:#fff4dc;color:var(--amber);}
+  .p-green{background:#e7f9ee;color:var(--green);} .p-pur{background:#f0ebff;color:var(--purple);} .p-cyan{background:#e3f8fb;color:#0e8c97;}
+  table{border-collapse:collapse;width:100%;font-size:12.8px;margin-top:6px;}
+  th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;text-align:left;}
+  th{background:#f3f1ff;color:#4b3fae;font-weight:600;}
+  tr:nth-child(even) td{background:#fafbff;}
+  ul{margin:6px 0 0;padding-left:18px;} li{margin:4px 0;font-size:13px;}
+  ol{margin:6px 0 0;padding-left:20px;} li{margin:4px 0;font-size:13px;}
+  .todo{background:#f0fbff;border:1px solid #cdeef5;border-radius:10px;padding:12px 14px;font-size:13px;}
+  .todo b{color:#0e8c97;}
+  .note{background:#fff8e8;border:1px solid #ffe2a8;border-radius:10px;padding:11px 13px;font-size:12.5px;color:#8a6d1a;margin-top:10px;}
+  .part{background:linear-gradient(120deg,#faf8ff,#f0fbff);border:1px solid var(--line);border-radius:18px;padding:6px 18px 20px;margin-top:22px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr;}}
+  footer{margin-top:44px;text-align:center;color:var(--sub);font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>HRBP 0-1 落地手册</h1>
+  <p>雇主品牌 + 新员工入职培训 · 全面完整方案（含概念 / 框架 / 四阶段路线 / 执行清单 / 量化指标 / 避坑 / 第一周行动）</p>
+  <span class="tag">适用：HRBP / PM</span><span class="tag">团队：技术型（云技服）</span><span class="tag">原则：先 MVP 后系统化</span>
+  <div class="metricbar">
+    <div class="metric"><b>2</b><span>大模块</span></div>
+    <div class="metric"><b>4×2</b><span>阶段路线</span></div>
+    <div class="metric"><b>10+</b><span>量化指标</span></div>
+    <div class="metric"><b>2</b><span>第一周清单</span></div>
+    <div class="metric"><b>1</b><span>张表管全程</span></div>
+  </div>
+</header>
+
+<!-- 总览 -->
+<div class="part">
+<h2 class="sec"><span class="dot"></span>总览 · 怎么用这本手册</h2>
+<p class="sub2">0-1 的核心心法：不先搭大体系，先找最小样本跑通，再系统化。两个模块都按"定位→跑通→系统化→指标闭环"推进。</p>
+<div class="bento">
+  <div class="card">
+    <h3><span class="bar"></span>全局验收（启动即定）</h3>
+    <ul>
+      <li><b>雇主品牌</b>：Offer 接受率↑、内推占比↑、主动投递率↑、eNPS≥30、单 hire 成本↓</li>
+      <li><b>入职培训</b>：3 月留存率≥90%、试用期通过率≥95%、入职 NPS≥8、转正时长稳定</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="bar"></span>通用 0-1 打法</h3>
+    <ul>
+      <li><b>小样本试</b>：拿 1 部门 / 2 新人先跑，别全员铺</li>
+      <li><b>借现有资产</b>：英语角 / 黑客松 / AI 文化 = 素材+内容</li>
+      <li><b>一张表管</b>：飞书多维表格承载，告别 Excel 手工</li>
+      <li><b>指标前置</b>：启动就定验收，不然做半年说不清</li>
+    </ul>
+  </div>
+  <div class="card wide">
+    <h3><span class="bar"></span>本手册结构</h3>
+    <p style="margin:0;font-size:13px;">Part 1 雇主品牌（概念→EVP→四阶段路线→对内体验→对外内容→内推→指标→避坑→第一周）｜ Part 2 新员工入职培训（框架→四阶段→30-60-90 地图→Mentor→Pre-boarding→内容体系→系统化→指标→避坑→第一周）｜ 末尾附配套工具索引与落地节奏。</p>
+  </div>
+</div>
+</div>
+
+<!-- ============ PART 1 雇主品牌 ============ -->
+<div class="part">
+<h2 class="sec"><span class="dot"></span>Part 1 · 雇主品牌 0-1 全面方案</h2>
+<p class="sub2">本质 = 对内让员工愿留、对外让候选人愿来。核心先拍板 EVP（雇主价值主张），再用体验+内容传出去。</p>
+
+<div class="bento">
+  <div class="card">
+    <h3><span class="bar"></span>1.1 概念分层</h3>
+    <ul>
+      <li><b>对内</b>：员工体验与认同（员工是最好代言人）</li>
+      <li><b>对外</b>：候选人体验与向往（内容+渠道）</li>
+      <li><b>EVP</b>：Employee Value Proposition，你凭啥吸引人</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>1.2 EVP 五维设计</h3>
+    <table>
+      <tr><th>维度</th><th>云技服适配卖点</th></tr>
+      <tr><td>薪酬福利</td><td>有竞争力+清晰调薪</td></tr>
+      <tr><td>成长发展</td><td>硬核技术项目练手</td></tr>
+      <tr><td>团队氛围</td><td>不拘小节兄弟式协作</td></tr>
+      <tr><td>工作意义</td><td>技术服务业务一线</td></tr>
+      <tr><td>稳定性</td><td>大厂技术中台安全感</td></tr>
+    </table>
+    <div class="note">💡 EVP 要"真"，别写假大空。先访谈 5 个老员工："你为啥留下？"</div>
+  </div>
+
+  <div class="card wide">
+    <h3><span class="bar"></span>1.3 四阶段 0-1 执行路线</h3>
+    <table>
+      <tr><th>阶段</th><th>时间</th><th>目标</th><th>关键动作</th><th>产出 / 验收</th></tr>
+      <tr><td>① 定位</td><td>W1–2</td><td>拍板 EVP</td><td>员工访谈、写口号、定 3 卖点</td><td>EVP 文档 + 主口号</td></tr>
+      <tr><td>② 对内体验</td><td>W2–4</td><td>员工变代言人</td><td>修 Day1 checklist、开员工故事栏、离职面谈标准化</td><td>体验清单 + 分享栏上线</td></tr>
+      <tr><td>③ 对外内容</td><td>W4+</td><td>真实内容起量</td><td>活动拍视频、技术 blog、内推上线</td><td>内容≥4 篇/月</td></tr>
+      <tr><td>④ 量化迭代</td><td>M2–3</td><td>数据调方向</td><td>盯指标、砍低效渠道</td><td>Offer 接受率 / 内推占比↑</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>1.4 对内体验清单</h3>
+    <ul>
+      <li><b>Day1</b>：welcome + 工位/账号/设备就绪 + mentor 迎接</li>
+      <li><b>日常</b>：荣誉体系、技术分享、员工故事</li>
+      <li><b>离职</b>：结构化面谈，真实回应问题</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>1.5 对外内容矩阵</h3>
+    <p style="margin:4px 0;font-size:12.5px;"><span class="pill p-pur">渠道</span> BOSS/猎聘 · 内推 · 技术社区(掘金/InfoQ/知乎) · 校园 · 视频号</p>
+    <p style="margin:4px 0;font-size:12.5px;"><span class="pill p-cyan">内容</span> 技术 blog · 员工 vlog · 招聘海报 · 赛事战报 · 节日文化</p>
+    <p style="margin:4px 0;font-size:12.5px;"><span class="pill p-amber">节奏</span> 每周 1 内容 + 每月 1 大稿</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>1.6 内推机制</h3>
+    <ul>
+      <li><b>激励</b>：现金奖 + 荣誉（性价比最高渠道）</li>
+      <li><b>流程</b>：一键推荐 + 进度可见</li>
+      <li><b>荣誉榜</b>：月度/季度"伯乐"公示</li>
+    </ul>
+  </div>
+
+  <div class="card wide">
+    <h3><span class="bar"></span>1.7 量化指标体系</h3>
+    <table>
+      <tr><th>指标</th><th>定义 / 算法</th><th>健康值 / 目标</th></tr>
+      <tr><td>Offer 接受率</td><td>接受数 ÷ 发放数</td><td>≥ 85%</td></tr>
+      <tr><td>内推占比</td><td>内推入职 ÷ 总入职</td><td>持续提升，目标 ≥ 30%</td></tr>
+      <tr><td>主动投递率</td><td>主动投递 ÷ 总投递</td><td>环比上升</td></tr>
+      <tr><td>eNPS</td><td>愿推荐比例 − 不愿比例</td><td>≥ 30</td></tr>
+      <tr><td>面试体验 NPS</td><td>候选人问卷</td><td>≥ 8/10</td></tr>
+      <tr><td>单 hire 成本</td><td>招聘总费用 ÷ 入职数</td><td>内推拉高后下降</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>1.8 避坑清单</h3>
+    <ul>
+      <li>❌ 只对外不对内（员工体验差反而负面）</li>
+      <li>❌ EVP 假大空、无访谈支撑</li>
+      <li>❌ 内容断更（起一次就没了）</li>
+      <li>❌ 只看曝光不看转化</li>
+    </ul>
+  </div>
+
+  <div class="card wide">
+    <h3><span class="bar"></span>1.9 第一周行动清单</h3>
+    <div class="todo">
+      <b>Day 1–2</b> 拉 5 个老员工做"为啥留下"访谈，记录原话<br>
+      <b>Day 3</b> 从访谈提炼 1 句 EVP 口号 + 3 个主打卖点，发群征询<br>
+      <b>Day 4–5</b> 列《入职 Day1 体验 checklist》v1；在内部群开"员工故事"栏，发第 1 篇<br>
+      <b>周末</b> 写内推激励草案（金额+荣誉+流程），准备下周评审
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ PART 2 入职培训 ============ -->
+<div class="part">
+<h2 class="sec"><span class="dot"></span>Part 2 · 新员工入职培训 0-1 全面方案</h2>
+<p class="sub2">别只做"第一天讲课"，做 30-60-90 成长闭环。遵循 70-20-10（70% 实战 / 20% 导师 / 10% 课程）。</p>
+
+<div class="bento">
+  <div class="card">
+    <h3><span class="bar"></span>2.1 概念框架</h3>
+    <ul>
+      <li><b>30-60-90</b>：融入 → 上手 → 胜任</li>
+      <li><b>70-20-10</b>：实战 70% · 导师 20% · 课程 10%</li>
+      <li><b>目标对齐</b>：入职即定试用期目标</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>2.2 四阶段 0-1 路线</h3>
+    <table>
+      <tr><th>阶段</th><th>时间</th><th>做啥</th></tr>
+      <tr><td>① 搭骨架</td><td>W1–2</td><td>写 30-60-90 地图 + mentor 制 + Day1 包</td></tr>
+      <tr><td>② 跑首批</td><td>W2–6</td><td>1–2 新人实测，边跑边改</td></tr>
+      <tr><td>③ 系统化</td><td>M2–3</td><td>飞书多维表格承载（提醒+仪表盘）</td></tr>
+      <tr><td>④ 指标闭环</td><td>M3+</td><td>看留存/通过率，反推改进</td></tr>
+    </table>
+  </div>
+
+  <div class="card wide">
+    <h3><span class="bar"></span>2.3 30-60-90 成长地图</h3>
+    <table>
+      <tr><th>阶段</th><th>周期</th><th>重点</th><th>关键动作</th></tr>
+      <tr><td>融入</td><td>0–30 天</td><td>文化/制度/破冰</td><td>文化制度合规课、团队介绍、工具培训、基础岗位知识</td></tr>
+      <tr><td>上手</td><td>31–60 天</td><td>独立做小任务</td><td>mentor 周 review、技能深化、参与真实项目片段</td></tr>
+      <tr><td>胜任</td><td>61–90 天</td><td>独立负责模块</td><td>达成试用期目标、转正评估/答辩、反馈定级</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>2.4 Mentor 制设计</h3>
+    <ul>
+      <li><b>选拔</b>：业务骨干、沟通好、自愿</li>
+      <li><b>职责</b>：带教、周 review、反馈</li>
+      <li><b>激励</b>：带教津贴 + 荣誉（无激励=不真带）</li>
+      <li><b>考核</b>：新人通过率反评 mentor</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>2.5 Pre-boarding 清单</h3>
+    <ul>
+      <li>offer 后发 welcome 邮件</li>
+      <li>提前备工位/设备/账号</li>
+      <li>介绍 mentor + 团队</li>
+      <li>发 Day1 日程（几点、找谁、带啥）</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>2.6 培训内容体系</h3>
+    <p style="margin:4px 0;font-size:12.5px;"><span class="pill p-pur">通用</span> 文化/制度/安全合规/工具</p>
+    <p style="margin:4px 0;font-size:12.5px;"><span class="pill p-cyan">专业</span> 岗位技能/技术栈</p>
+    <p style="margin:4px 0;font-size:12.5px;"><span class="pill p-green">实战</span> 项目任务（占 70%）</p>
+  </div>
+
+  <div class="card wide">
+    <h3><span class="bar"></span>2.7 系统化承载（飞书多维表格）</h3>
+    <table>
+      <tr><th>字段</th><th>说明</th><th>自动化 / 仪表盘</th></tr>
+      <tr><td>员工ID/姓名/部门/入职日</td><td>主键与分组</td><td rowspan="3">自动化：30/60/90 天节点自动提醒 mentor 与新人的<br>卡点预警：阶段超期未更新标红<br>仪表盘：各阶段人数、通过率、3 月留存</td></tr>
+      <tr><td>阶段 / 阶段完成度</td><td>融入/上手/胜任</td></tr>
+      <tr><td>30/60/90 天目标 + 达成</td><td>对齐试用期目标</td></tr>
+      <tr><td>mentor / 转正状态 / 异常标记</td><td>责任到人</td><td>异常视图：筛选卡点新人</td></tr>
+    </table>
+    <div class="note">📌 呼应前面做的「薪资核查看板」同思路：一张表 + 公式校验 + 条件格式 + 仪表盘。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>2.8 量化指标</h3>
+    <ul>
+      <li>入职体验 NPS ≥ 8</li>
+      <li>试用期通过率 ≥ 95%</li>
+      <li>3 月留存率 ≥ 90%</li>
+      <li>转正时长稳定</li>
+      <li>mentor 满意度 / 培训完成率</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="bar"></span>2.9 避坑清单</h3>
+    <ul>
+      <li>❌ 只讲课不实战（违背 70-20-10）</li>
+      <li>❌ mentor 无激励，带教走过场</li>
+      <li>❌ 6 个月才反馈（问题早发现）</li>
+      <li>❌ 无目标对齐、离职无复盘</li>
+    </ul>
+  </div>
+
+  <div class="card wide">
+    <h3><span class="bar"></span>2.10 第一周行动清单</h3>
+    <div class="todo">
+      <b>Day 1–2</b> 列三阶段学习内容清单（通用/专业/实战），找 2 个业务骨干当 pilot mentor<br>
+      <b>Day 3</b> 定 mentor 激励草案（津贴+荣誉）；做 Day1 欢迎包模板（邮件+清单）<br>
+      <b>Day 4–5</b> 选 1–2 个近期入职新人跑 pilot，填 30-60-90 地图 v1<br>
+      <b>周末</b> 在飞书多维表格建《新人成长地图表》骨架，准备下周录入
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- 配套 -->
+<div class="part">
+<h2 class="sec"><span class="dot"></span>配套工具与落地节奏</h2>
+<div class="bento">
+  <div class="card">
+    <h3><span class="bar"></span>可联动的现有交付物</h3>
+    <ul>
+      <li><b>薪资核查看板</b>（已交付）：字段+公式+条件格式方案</li>
+      <li><b>本手册</b>：雇主品牌 + 入职培训 0-1</li>
+      <li>后续可补：招聘进度表、员工结构看板</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3><span class="bar"></span>整体落地甘特（建议）</h3>
+    <table>
+      <tr><th>周</th><th>雇主品牌</th><th>入职培训</th></tr>
+      <tr><td>W1–2</td><td>EVP 定位</td><td>搭骨架</td></tr>
+      <tr><td>W2–4</td><td>对内体验</td><td>跑 pilot</td></tr>
+      <tr><td>W4–M2</td><td>对外内容</td><td>系统化表</td></tr>
+      <tr><td>M2–3</td><td>量化迭代</td><td>指标闭环</td></tr>
+    </table>
+  </div>
+  <div class="card wide">
+    <h3><span class="bar"></span>一句话收尾</h3>
+    <p style="margin:0;font-size:13.5px;">两个模块都不是"做项目"，是"建机制"：<b>雇主品牌</b>靠真实体验+内容滚雪球，<b>入职培训</b>靠 30-60-90 地图+mentor 系统化。先用小样本跑通，再用一张表管起来，最后用指标证明价值。你手上的英语角/黑客松/AI 文化，既是培训素材也是品牌内容——零成本起步，先动起来。</p>
+  </div>
+</div>
+</div>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
