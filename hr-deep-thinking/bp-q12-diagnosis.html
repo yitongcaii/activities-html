@@ -1,0 +1,247 @@
+<!-- TEMPLATE_KEY=v1 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BP 团队诊断实操卡 · 盖洛普 Q12</title>
+<style>
+  :root{
+    --purple:#7c5cff; --purple-d:#5b3fd6;
+    --teal:#21c8b8; --teal-d:#0fa89a;
+    --ink:#1f2030; --sub:#5b5d72; --line:#eceef6;
+    --card:#ffffff; --bg1:#f3f0ff; --bg2:#e8fbf7;
+    --red:#ff5d6c; --yellow:#ffb020; --green:#22c55e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    color:var(--ink); background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    min-height:100vh; padding:32px 18px 60px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  header.hero{
+    background:linear-gradient(120deg,var(--purple),var(--teal));
+    border-radius:26px;padding:30px 34px;color:#fff;
+    box-shadow:0 18px 40px -18px rgba(124,92,255,.55);
+    position:relative;overflow:hidden;
+  }
+  header.hero h1{font-size:27px;letter-spacing:.5px;margin-bottom:8px}
+  header.hero p{opacity:.95;font-size:14.5px;line-height:1.7;max-width:760px}
+  .pills{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);
+    padding:5px 12px;border-radius:999px;font-size:12.5px;backdrop-filter:blur(4px)}
+  .section-title{display:flex;align-items:center;gap:10px;margin:34px 4px 16px}
+  .section-title .bar{width:5px;height:22px;border-radius:4px;background:linear-gradient(var(--purple),var(--teal))}
+  .section-title h2{font-size:19px}
+  .section-title .tip{font-size:12.5px;color:var(--sub);margin-left:auto}
+
+  /* 汇总仪表盘 */
+  .dash{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:6px}
+  .dash .d{background:var(--card);border-radius:18px;padding:18px;text-align:center;
+    box-shadow:0 10px 26px -18px rgba(31,32,48,.4);border:1px solid var(--line)}
+  .dash .d b{display:block;font-size:30px;line-height:1;margin:4px 0}
+  .dash .d span{font-size:12.5px;color:var(--sub)}
+  .lvbar{display:flex;justify-content:space-between;gap:6px;margin:14px 0 4px}
+  .lvbar .lv{flex:1;text-align:center;border-radius:12px;padding:9px 4px;font-size:12.5px;font-weight:600;color:#fff}
+  .lvbar .lv small{display:block;font-weight:400;opacity:.9;font-size:10.5px;margin-top:2px}
+
+  /* 12问网格 */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .q{background:var(--card);border-radius:18px;padding:16px 16px 14px;
+    box-shadow:0 10px 26px -20px rgba(31,32,48,.45);border:1px solid var(--line);
+    display:flex;flex-direction:column;gap:10px;position:relative}
+  .q .top{display:flex;align-items:center;gap:8px}
+  .q .qn{width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--purple),var(--teal));
+    color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .q .lyr{font-size:11px;color:var(--sub);background:var(--bg1);padding:3px 8px;border-radius:999px}
+  .q .txt{font-size:13.5px;line-height:1.55;min-height:42px}
+  .rate{display:flex;gap:6px}
+  .rate button{flex:1;height:34px;border:1.5px solid var(--line);background:#fbfbff;border-radius:10px;
+    cursor:pointer;font-size:14px;font-weight:700;color:var(--sub);transition:.15s}
+  .rate button:hover{border-color:var(--purple)}
+  .rate button.on{background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;border-color:transparent;
+    box-shadow:0 6px 14px -6px rgba(124,92,255,.6)}
+  .q .state{font-size:12px;font-weight:700;text-align:right}
+  .q .state.g{color:var(--green)} .q .state.y{color:var(--yellow)} .q .state.r{color:var(--red)} .q .state.n{color:var(--sub)}
+
+  /* 掉分即补动作表 */
+  .fixwrap{background:var(--card);border-radius:18px;padding:18px 18px 8px;
+    box-shadow:0 10px 26px -20px rgba(31,32,48,.45);border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:10px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;color:var(--sub);font-weight:600}
+  td .n{display:inline-block;width:22px;height:22px;border-radius:7px;background:var(--bg2);
+    color:var(--teal-d);font-weight:700;text-align:center;line-height:22px;font-size:12px}
+  [contenteditable]{outline:none;border-radius:8px;padding:4px 6px;transition:.15s}
+  [contenteditable]:focus{background:#fff7e6;box-shadow:0 0 0 2px var(--yellow)}
+  [contenteditable]:hover{background:#f7f8ff}
+
+  /* 落地四步 */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .step{background:var(--card);border-radius:18px;padding:18px;position:relative;
+    box-shadow:0 10px 26px -20px rgba(31,32,48,.45);border:1px solid var(--line)}
+  .step .no{position:absolute;top:-14px;left:18px;width:34px;height:34px;border-radius:11px;
+    background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 8px 16px -6px rgba(124,92,255,.6)}
+  .step h3{margin:10px 0 8px;font-size:15px}
+  .step p{font-size:12.8px;line-height:1.62;color:var(--sub)}
+  .step .k{color:var(--purple-d);font-weight:600}
+
+  .toolbar{display:flex;gap:10px;justify-content:flex-end;margin:22px 0 0;flex-wrap:wrap}
+  .toolbar button{border:none;padding:10px 18px;border-radius:12px;font-size:13.5px;font-weight:600;cursor:pointer;
+    background:linear-gradient(135deg,var(--purple),var(--teal));color:#fff;box-shadow:0 10px 22px -10px rgba(124,92,255,.6)}
+  .toolbar .ghost{background:#fff;color:var(--sub);border:1px solid var(--line);box-shadow:none}
+  .hint{font-size:12px;color:var(--sub);text-align:right;margin-top:8px}
+  footer{text-align:center;margin-top:42px;font-size:12.5px;color:var(--sub)}
+  @media(max-width:880px){.dash,.steps{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.lvbar{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>BP 团队诊断实操卡 · 盖洛普 Q12</h1>
+    <p>12 个问题 = 4 级敬业台阶。不是满意度问卷，是「测 → 读 → 补 → 验」的团队健康仪表盘。逐问打分（1–5），卡自动算均分与红黄绿，掉红的那层就是你下阶段干预重点。</p>
+    <div class="pills">
+      <span class="pill">思维模型 · 第一性原理</span>
+      <span class="pill">思维模型 · 金字塔原理</span>
+      <span class="pill">方法 · PDCA 闭环</span>
+      <span class="pill">KEY=v1</span>
+    </div>
+  </header>
+
+  <div class="section-title"><span class="bar"></span><h2>① 实时仪表盘</h2>
+    <span class="tip">打分会自动存进本机草稿，下次打开还在</span></div>
+  <div class="dash">
+    <div class="d"><span>总体均分</span><b id="avg">–</b><span id="avgState">未评分</span></div>
+    <div class="d"><span>红灯项（&lt;3）</span><b id="redN" style="color:var(--red)">0</b><span>优先补</span></div>
+    <div class="d"><span>黄灯项（3–4）</span><b id="yelN" style="color:var(--yellow)">0</b><span>观察</span></div>
+    <div class="d"><span>绿灯项（≥4）</span><b id="grnN" style="color:var(--green)">0</b><span>稳住</span></div>
+  </div>
+  <div class="lvbar">
+    <div class="lv" id="lv1" style="background:var(--purple)">L1 生存层<small>Q1–Q2</small></div>
+    <div class="lv" id="lv2" style="background:var(--purple-d)">L2 归属层<small>Q3–Q6</small></div>
+    <div class="lv" id="lv3" style="background:var(--teal-d)">L3 成长层<small>Q7–Q10</small></div>
+    <div class="lv" id="lv4" style="background:var(--teal)">L4 共同成长<small>Q11–Q12</small></div>
+  </div>
+
+  <div class="section-title"><span class="bar"></span><h2>② 逐问打分（1=强烈不同意 · 5=强烈同意）</h2></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="section-title"><span class="bar"></span><h2>③ 掉分即补动作表</h2>
+    <span class="tip">右侧「补法」可直接改，会自动存草稿</span></div>
+  <div class="fixwrap">
+    <table>
+      <thead><tr><th style="width:40px">#</th><th style="width:200px">问题（人话）</th><th>红灯时的具体补动作</th></tr></thead>
+      <tbody id="fixbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-title"><span class="bar"></span><h2>④ Q12 落地四步（PDCA）</h2></div>
+  <div class="steps">
+    <div class="step"><span class="no">1</span><h3>测 · 团队级</h3>
+      <p>以<span class="k">团队</span>为单位（不是全公司、不是个人考核），每季度匿名测 12 问 + 1 道开放题「最该改的一件事」。结果归<span class="k">团队负责人</span>，不排名、不公开攀比。</p></div>
+    <div class="step"><span class="no">2</span><h3>读 · 看最低层</h3>
+      <p>不盯总分，盯<span class="k">掉分在哪层</span>。金字塔原理：先补 L1 红灯。Q1/Q2 没分，别搞文化，先澄清目标、配工具。</p></div>
+    <div class="step"><span class="no">3</span><h3>补 · 落到动作</h3>
+      <p>每问对应 <span class="k">1 个管理者每周/每月必做的具体事</span>（见上表）。不是「加强沟通」，是「每周 1 次具体公开表扬」。</p></div>
+    <div class="step"><span class="no">4</span><h3>验 · 复测转色</h3>
+      <p>下周期复测，看红灯是否转黄/绿。Q12 就是你的<span class="k">团队健康仪表盘</span>，掉分层 = 你下阶段干预重点。</p></div>
+  </div>
+
+  <div class="toolbar">
+    <button class="ghost" id="reset">清空重填</button>
+    <button id="export">导出本页为图片(打印)</button>
+  </div>
+  <div class="hint">提示：「导出」会调用浏览器打印，选「另存为 PDF」即可归档。</div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+const Q=[
+ {n:1,lyr:"L1",q:"我知道公司对我的工作要求吗？",fix:"主管每周 1:1 对齐目标与优先级，写清「做成啥样算好」"},
+ {n:2,lyr:"L1",q:"干这活要的材料/工具我有没有？",fix:"列资源清单，卡点 48h 内响应；缺权限/设备立刻提"},
+ {n:3,lyr:"L2",q:"每天有机会干我最拿手的事吗？",fix:"排活前先看能力地图，把人放对位置而非凑数"},
+ {n:4,lyr:"L2",q:"过去 7 天，我因干得好被夸了吗？",fix:"每周至少 1 次具体+公开表扬（对应颁奖/达人赛设计）"},
+ {n:5,lyr:"L2",q:"主管/同事关心我个人情况吗？",fix:"新人入职 30 天 1:1 聊生活；记住关键节点（生日/家庭）"},
+ {n:6,lyr:"L2",q:"有人鼓励我发展吗？",fix:"每季度 1 次发展谈话，聊「想往哪走」而非只聊绩效"},
+ {n:7,lyr:"L3",q:"我的意见在单位有人听吗？",fix:"每月提建议必须有反馈闭环，哪怕「不采纳+为什么」"},
+ {n:8,lyr:"L3",q:"公司使命让我觉得这活有意义吗？",fix:"把活连到用户/业务真实价值讲清楚，别只念口号"},
+ {n:9,lyr:"L3",q:"同事都在认真搞质量吗？",fix:"树质量标杆，让「靠谱」被看见被效仿"},
+ {n:10,lyr:"L3",q:"我在单位有最要好的朋友吗？",fix:"设计真实协作/破冰（对应团建），让人交到朋友"},
+ {n:11,lyr:"L4",q:"过去半年有人跟我聊过我的进步吗？",fix:"半年 1 次进步复盘，摆事实说成长"},
+ {n:12,lyr:"L4",q:"这一年我有机会学新东西/成长吗？",fix:"给学习预算/轮岗/项目练手机会"}
+];
+const KEY="bpQ12Diagnosis_v1";
+let scores=JSON.parse(localStorage.getItem(KEY)||"{}");
+let fixes=JSON.parse(localStorage.getItem(KEY+"_fix")||"{}");
+
+const grid=document.getElementById("grid");
+const fixbody=document.getElementById("fixbody");
+Q.forEach(item=>{
+  const s=scores[item.n]||0;
+  const card=document.createElement("div");card.className="q";
+  card.innerHTML=`<div class="top"><div class="qn">${item.n}</div><div class="lyr">${item.lyr}</div>
+    <div class="state n" id="st${item.n}">未评</div></div>
+    <div class="txt">${item.q}</div>
+    <div class="rate">${[1,2,3,4,5].map(v=>`<button data-n="${item.n}" data-v="${v}" class="${v===s?'on':''}">${v}</button>`).join("")}</div>`;
+  grid.appendChild(card);
+
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td><span class="n">${item.n}</span></td><td>${item.q}</td>
+    <td><div contenteditable="true" id="fx${item.n}">${fixes[item.n]||item.fix}</div></td>`;
+  fixbody.appendChild(tr);
+});
+
+grid.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  const n=+b.dataset.n,v=+b.dataset.v;
+  scores[n]=(scores[n]===v)?0:v; // 再点同分=取消
+  localStorage.setItem(KEY,JSON.stringify(scores));
+  grid.querySelectorAll(`button[data-n="${n}"]`).forEach(x=>x.classList.toggle("on",+x.dataset.v===scores[n]));
+  render();
+});
+fixbody.addEventListener("input",e=>{
+  const d=e.target.closest("[contenteditable]");if(!d)return;
+  const n=+d.id.slice(2);fixes[n]=d.textContent;
+  localStorage.setItem(KEY+"_fix",JSON.stringify(fixes));
+});
+
+function color(v){return v>=4?"g":v>=3?"y":"r";}
+function render(){
+  let tot=0,c=0,red=0,yel=0,grn=0;
+  const lv={1:[],2:[],3:[],4:[]};
+  Q.forEach(item=>{
+    const s=scores[item.n]||0;
+    const st=document.getElementById("st"+item.n);
+    if(s){st.textContent=s>=4?"🟢 绿":s>=3?"🟡 黄":"🔴 红";st.className="state "+color(s);
+      tot+=s;c++;lv[Math.ceil(item.n/3+0.0001)|0||1].push(s);
+      if(s>=4)grn++;else if(s>=3)yel++;else red++;
+    }else{st.textContent="未评";st.className="state n";}
+  });
+  const avg=c?(tot/c).toFixed(2):"–";
+  document.getElementById("avg").textContent=avg;
+  const as=document.getElementById("avgState");
+  if(c===0){as.textContent="未评分";as.style.color="var(--sub)";}
+  else{const a=+avg;as.textContent=a>=4?"团队健康":a>=3?"有隐患":"危急";as.style.color=a>=4?"var(--green)":a>=3?"var(--yellow)":"var(--red)";}
+  document.getElementById("redN").textContent=red;
+  document.getElementById("yelN").textContent=yel;
+  document.getElementById("grnN").textContent=grn;
+  [["lv1",1],["lv2",2],["lv3",3],["lv4",4]].forEach(([id,li])=>{
+    const arr=lv[li];const el=document.getElementById(id);
+    if(arr.length){const m=(arr.reduce((a,b)=>a+b,0)/arr.length);
+      el.style.opacity="1";
+      el.style.filter=m>=4?"none":m>=3?"saturate(.7)":"grayscale(.4) brightness(.92)";
+    }else{el.style.opacity=".45";el.style.filter="grayscale(1)";}
+  });
+}
+render();
+
+document.getElementById("reset").onclick=()=>{
+  if(confirm("确定清空所有打分与改动？")){localStorage.removeItem(KEY);localStorage.removeItem(KEY+"_fix");location.reload();}
+};
+document.getElementById("export").onclick=()=>window.print();
+</script>
+</body>
+</html>
