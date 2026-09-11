@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>组织熵商自检卡</title>
+<style>
+  :root{
+    --purple:#7c5cff; --cyan:#22c3d6; --pink:#ff6fb5;
+    --ink:#1f2440; --sub:#5b6080; --line:#e7e9f5;
+    --card:#ffffff; --bg1:#f3f0ff; --bg2:#e8fbfd;
+    --green:#16b364; --yellow:#f5a623; --red:#ee5a6f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    min-height:100vh; padding:32px 18px 60px;
+  }
+  .wrap{max-width:1040px;margin:0 auto}
+  header{text-align:center;margin-bottom:26px}
+  h1{font-size:30px;font-weight:800;letter-spacing:.5px;
+     background:linear-gradient(90deg,var(--purple),var(--cyan));
+     -webkit-background-clip:text;background-clip:text;color:transparent}
+  .pill{display:inline-block;margin-top:10px;padding:5px 14px;border-radius:999px;
+    font-size:13px;font-weight:600;color:#fff;
+    background:linear-gradient(90deg,var(--purple),var(--cyan))}
+  .note{margin:14px auto 0;max-width:760px;font-size:13.5px;color:var(--sub);line-height:1.7}
+
+  /* dashboard */
+  .dash{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:22px 0 30px}
+  .dash .box{background:var(--card);border-radius:18px;padding:16px 22px;
+    box-shadow:0 8px 24px rgba(124,92,255,.10);min-width:150px;text-align:center}
+  .dash .num{font-size:34px;font-weight:800}
+  .dash .lab{font-size:12.5px;color:var(--sub);margin-top:4px}
+  .light{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:18px}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .dot.r{background:var(--red)} .dot.y{background:var(--yellow)} .dot.g{background:var(--green)}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+  .card{background:var(--card);border-radius:20px;padding:20px;
+    box-shadow:0 10px 28px rgba(124,92,255,.10);border:2px solid transparent;
+    transition:border-color .25s, transform .2s;position:relative}
+  .card.glow{transform:translateY(-2px)}
+  .card .tag{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;
+    padding:3px 10px;border-radius:999px;display:none}
+  .card.lv-r .tag{display:inline-block;background:#ffe9ec;color:var(--red)}
+  .card.lv-y .tag{display:inline-block;background:#fff4e0;color:var(--yellow)}
+  .card.lv-g .tag{display:inline-block;background:#e3f9ee;color:var(--green)}
+  .card h3{font-size:17px;font-weight:800;margin-bottom:4px}
+  .card .judge{font-size:12.5px;color:var(--purple);font-weight:600;margin-bottom:12px}
+  .clist{list-style:none;font-size:13px;color:var(--ink);line-height:1.6}
+  .clist li{padding:6px 0;border-bottom:1px dashed var(--line)}
+  .clist li[contenteditable]{outline:none;border-bottom:1px dashed var(--purple)}
+  .clist li[contenteditable]:focus{background:#f6f3ff}
+  .score{display:flex;gap:6px;margin:14px 0 10px}
+  .score button{flex:1;padding:8px 0;border:none;border-radius:10px;cursor:pointer;
+    font-size:14px;font-weight:700;background:#f1f0fb;color:var(--sub);transition:.15s}
+  .score button:hover{background:#e7e3fb}
+  .score button.on{background:linear-gradient(90deg,var(--purple),var(--cyan));color:#fff}
+  .fix{font-size:12.5px;color:var(--sub);background:#f7f6ff;border-radius:12px;
+    padding:10px 12px;line-height:1.6}
+  .fix b{color:var(--cyan)}
+  .fix[contenteditable]{outline:none}
+  .fix[contenteditable]:focus{background:#eef9fb}
+
+  .verdict{margin:30px auto;max-width:820px;background:#fff;border-radius:18px;
+    padding:18px 22px;box-shadow:0 8px 24px rgba(34,195,214,.10);font-size:14px;line-height:1.8}
+  .verdict b{color:var(--purple)}
+  .relate{margin:24px auto;max-width:820px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .relate .r{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 6px 18px rgba(124,92,255,.08);font-size:13px;line-height:1.6}
+  .relate .r b{color:var(--cyan)}
+  .models{text-align:center;margin:22px 0}
+  .models .m{display:inline-block;margin:4px;padding:6px 14px;border-radius:999px;
+    font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--pink),var(--purple))}
+  .toolbar{text-align:center;margin:14px 0 4px}
+  .toolbar button{border:none;padding:9px 20px;border-radius:999px;cursor:pointer;font-weight:700;
+    font-size:13px;color:#fff;background:linear-gradient(90deg,var(--purple),var(--cyan))}
+  .toolbar button.ghost{background:#fff;color:var(--purple);box-shadow:0 4px 14px rgba(124,92,255,.12)}
+  footer{text-align:center;margin-top:34px;font-size:12.5px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>组织熵商自检卡</h1>
+    <span class="pill">HR深度思考 · 熵增落地工具 · 第1章延伸</span>
+    <p class="note">熵商 = 组织 / 个人「对抗混乱、主动注入负熵」的能力强弱，是顺着熵增 / 熵减延伸的自检词（非学术量表）。打分只是对齐认知、定位掉分点，落到具体动作才算数。</p>
+  </header>
+
+  <div class="dash">
+    <div class="box"><div class="num" id="avg">—</div><div class="lab">总体熵商分（均分）</div></div>
+    <div class="box"><div class="light"><span class="dot g"></span><span id="cntG">0</span></div><div class="lab">绿灯（≥4）</div></div>
+    <div class="box"><div class="light"><span class="dot y"></span><span id="cntY">0</span></div><div class="lab">黄灯（=3）</div></div>
+    <div class="box"><div class="light"><span class="dot r"></span><span id="cntR">0</span></div><div class="lab">红灯（≤2）</div></div>
+  </div>
+
+  <div class="toolbar">
+    <button onclick="saveDraft()">存草稿</button>
+    <button class="ghost" onclick="resetAll()">重置</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="verdict" id="verdict">每维度打完分，这里给出组织熵商读档：哪层掉序、先补哪层。</div>
+
+  <div class="relate">
+    <div class="r"><b>你是 BP = 组织的负熵泵</b><br>给业务团队做「熵诊断」，哪维度掉分先补哪维度，别一上来搞宏大文化——地基不牢上层白搭（金字塔原理）。</div>
+    <div class="r"><b>文化活动 / AI 文化运营</b><br>本质是注入「精神负熵」：用意义感 / 归属感把人从各自散拉回一起干，对应 D1 开放 + D3 吐故纳新。</div>
+    <div class="r"><b>绩效 / 新人答辩自动化</b><br>定期清淤、拉开差距，防「干好干坏一个样」的熵堆积，对应 D3 吐故纳新 + D4 简化流程。</div>
+    <div class="r"><b>流程产品化</b><br>把个人经验固化进系统，减少对单点人脑依赖（人走流程不死），对应 D4 简化流程 + D5 自我批判。</div>
+  </div>
+
+  <div class="models">
+    <span class="m">第一性原理：从物理底层（熵增不可逆）看组织</span>
+    <span class="m">系统思维：开放系统须持续输入能量维持低熵</span>
+  </div>
+
+  <footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+
+<script>
+const KEY = "v1";
+const DIMS = [
+  {id:"d1", name:"开放吸能", judge:"持续从外部吸能量，封闭系统必然熵死",
+   items:["团队近3个月是否引入并落地过外部新方法 / 工具？",
+          "新人 / 一线有无真实向上反馈渠道且被回应？",
+          "跨部门信息是否对流（非形式化同步会）？"],
+   fix:"建固定「外部输入」动作：每人每月拆解1个外部案例并落地1条；开1个匿名反馈入口，72小时内必回应。"},
+  {id:"d2", name:"打破平衡 / 舒适区", judge:"不躺功劳簿，敢把资源投向不确定方向",
+   items:["有无轮岗 / 训战让骨干离开舒适区？",
+          "是否敢给不确定性方向配专项预算（饱和攻击）？",
+          "管理者任期目标是否含「新挑战」而非只守成？"],
+   fix:"设战略预备队 / 轮岗机制；不确定性方向单列预算池；管理者 OKR 必含1项突破性挑战。"},
+  {id:"d3", name:"吐故纳新", judge:"敢淘汰惰怠、拉开差距、新人有上升通道",
+   items:["绩效是否强制分布、敢拉开差距？",
+          "新人有无「破格提拔」通道（塔尖削平）？",
+          "知识 / 技能是否季度刷新而非吃老本？"],
+   fix:"绩效强制分布 + 头部重奖；建破格提拔名单（每年N名）；知识库季度刷新并淘汰过期文档。"},
+  {id:"d4", name:"简化流程", judge:"加法减法并行，定期清淤，审批链有上限",
+   items:["加1个流程节点是否同步减≥2个？",
+          "有无「流程日落」机制定期删冗余？",
+          "审批层级是否设上限、不层层加码？"],
+   fix:"落地「加1减2」日落法；每季度审一次流程删冗余节点；审批层级硬性封顶（如≤3级）。"},
+  {id:"d5", name:"自我批判", judge:"鼓励暴露问题、报喜也报忧、主动纠偏",
+   items:["暴露问题是否受鼓励而非被问责？",
+          "每项目结项是否必复盘找根因？",
+          "变革是否在「日子好时」主动做而非救火？"],
+   fix:"建红黄绿灯问题看板且公开；结项必复盘会（根因法，不甩锅）；设「改进提案」季度激励。"}
+];
+
+let state = JSON.parse(localStorage.getItem("orgEQ_"+KEY) || "null") || {scores:{}, texts:{}};
+
+const grid = document.getElementById("grid");
+DIMS.forEach(d=>{
+  const card = document.createElement("div");
+  card.className = "card"; card.id = d.id;
+  const itemsHtml = d.items.map((it,i)=>{
+    const saved = state.texts[d.id+"_i"+i];
+    return `<li contenteditable="true" data-k="${d.id}_i${i}">${saved!==undefined?saved:it}</li>`;
+  }).join("");
+  const fixSaved = state.texts[d.id+"_fix"];
+  card.innerHTML = `
+    <span class="tag"></span>
+    <h3>${d.name}</h3>
+    <div class="judge">判据：${d.judge}</div>
+    <ul class="clist">${itemsHtml}</ul>
+    <div class="score" data-id="${d.id}">
+      ${[1,2,3,4,5].map(n=>`<button data-n="${n}">${n}</button>`).join("")}
+    </div>
+    <div class="fix" contenteditable="true" data-k="${d.id}_fix">${fixSaved!==undefined?fixSaved:d.fix}</div>`;
+  grid.appendChild(card);
+  // score buttons
+  const sc = card.querySelector(".score");
+  sc.querySelectorAll("button").forEach(b=>{
+    b.onclick = ()=>{
+      state.scores[d.id] = +b.dataset.n;
+      sc.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on");
+      localStorage.setItem("orgEQ_"+KEY, JSON.stringify(state));
+      render();
+    };
+  });
+  // restore score highlight
+  if(state.scores[d.id]){
+    sc.querySelector(`button[data-n="${state.scores[d.id]}"]`).classList.add("on");
+  }
+  // editable text capture
+  card.querySelectorAll("[contenteditable]").forEach(el=>{
+    el.addEventListener("input", ()=>{
+      state.texts[el.dataset.k] = el.innerText;
+      localStorage.setItem("orgEQ_"+KEY, JSON.stringify(state));
+    });
+  });
+});
+
+function render(){
+  let sum=0, n=0, r=0,y=0,g=0;
+  DIMS.forEach(d=>{
+    const s = state.scores[d.id];
+    const card = document.getElementById(d.id);
+    card.classList.remove("lv-r","lv-y","lv-g","glow");
+    if(!s){ card.querySelector(".tag").textContent=""; return; }
+    sum+=s; n++;
+    let lv = s<=2?"r":(s===3?"y":"g");
+    card.classList.add("lv-"+lv,"glow");
+    card.querySelector(".tag").textContent = lv==="r"?"红灯·优先补":(lv==="y"?"黄灯·待加固":"绿灯·稳");
+    if(lv==="r")r++; else if(lv==="y")y++; else g++;
+  });
+  document.getElementById("cntR").textContent=r;
+  document.getElementById("cntY").textContent=y;
+  document.getElementById("cntG").textContent=g;
+  const avg = n? (sum/n):0;
+  document.getElementById("avg").textContent = n? avg.toFixed(1):"—";
+  const v = document.getElementById("verdict");
+  if(!n){ v.innerHTML="每维度打完分，这里给出组织熵商读档：哪层掉序、先补哪层。"; return; }
+  let msg = `已评 ${n}/5 维度，总体熵商分 <b>${avg.toFixed(1)}</b>。`;
+  if(avg<3){
+    msg += ` 组织处于<b>高危区</b>：自然混乱在累加、负熵注入不足。先补红灯维度（${r}个），按 D 序号从低到高——地基不牢上层白搭。`;
+  }else if(avg<4){
+    msg += ` 组织<b>基本健康但脆弱</b>：黄灯维度（${y}个）是当前短板，优先加固即可避免滑向混乱。`;
+  }else{
+    msg += ` 组织<b>活力充足</b>：负熵机制运转良好，维持开放 + 持续清淤即可。`;
+  }
+  v.innerHTML = msg;
+}
+
+function saveDraft(){
+  localStorage.setItem("orgEQ_"+KEY, JSON.stringify(state));
+  const b=document.querySelector(".toolbar button");
+  const t=b.textContent; b.textContent="已存 ✓";
+  setTimeout(()=>b.textContent=t,1200);
+}
+function resetAll(){
+  if(!confirm("清空所有打分与编辑？")) return;
+  localStorage.removeItem("orgEQ_"+KEY);
+  location.reload();
+}
+render();
+</script>
+</body>
+</html>
