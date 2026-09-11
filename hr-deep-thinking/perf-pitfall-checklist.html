@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绩效避坑清单 · 基于《人力资源管理的深度思考》第6章</title>
+<style>
+  :root{--purple:#7C3AED;--cyan:#06B6D4;--ink:#1f2233;--muted:#6b7280;--bg:#f6f7fb;--card:#fff;--soft:#eef1fb;--warn:#fff7ed;--warnb:#fed7aa;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#f3f0ff,#e8f7fb);color:var(--ink);padding:32px 20px 60px;line-height:1.65}
+  .wrap{max-width:1180px;margin:0 auto}
+  header.hero{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border-radius:24px;padding:32px 38px;margin-bottom:24px;box-shadow:0 18px 40px -18px rgba(124,58,237,.55)}
+  header.hero h1{font-size:28px;margin-bottom:8px}
+  header.hero .sub{opacity:.95;font-size:14px}
+  header.hero .tags{margin-top:14px;display:flex;gap:9px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);padding:5px 12px;border-radius:999px;font-size:12.5px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .card{background:var(--card);border-radius:20px;padding:20px 22px;box-shadow:0 10px 28px -16px rgba(31,34,51,.35);border:1px solid #eef0f7;transition:transform .18s,box-shadow .18s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(124,58,237,.4)}
+  .card h3{font-size:16.5px;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .card h3 .no{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;width:28px;height:28px;border-radius:8px;display:inline-grid;place-items:center;font-size:13px;flex:0 0 auto}
+  .card p{font-size:13.5px;color:#374151;margin-bottom:7px}
+  .qt{background:var(--soft);border-left:3px solid var(--purple);padding:9px 12px;border-radius:10px;font-size:12.8px;color:#4b5563;margin:9px 0}
+  .cue{font-size:12.3px;color:var(--muted);margin-top:5px}
+  .cue b{color:var(--cyan)}
+  .tag{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;background:linear-gradient(120deg,#ede9fe,#e0f7fb);color:#5b21b6;margin:2px 3px 2px 0;font-weight:600}
+  .src{font-size:11px;color:#9ca3af;margin-top:6px}
+  .s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+  .warncard{background:var(--warn);border:1px solid var(--warnb)}
+  .model{background:linear-gradient(120deg,#faf5ff,#ecfeff);border:1px dashed #c4b5fd;border-radius:16px;padding:18px 20px}
+  .model h3{margin-bottom:8px}
+  .model li{font-size:13px;margin:5px 0 5px 18px;color:#374151}
+  table.dt{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+  table.dt th,table.dt td{border:1px solid #e5e7eb;padding:6px 8px;text-align:center}
+  table.dt th{background:#f3f0ff;color:#5b21b6}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:28px}
+  @media(max-width:900px){.s3,.s4,.s5,.s6,.s7,.s8{grid-column:span 12}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🛑 绩效避坑清单</h1>
+  <div class="sub">来源：《人力资源管理的深度思考》第 6 章「绩效真的有效吗？」(3649 字) + 你的绩效 / 新人答辩自动化场景<br>
+  用法：每条 = 书中原话(论据) + 坑在哪 + 给你(做产品化/答辩时的落点)。标注案例出处，拒绝空话。</div>
+  <div class="tags">
+    <span class="pill">逐句精读</span><span class="pill">8 大坑</span><span class="pill">案例标注</span><span class="pill">关联你的绩效</span>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- 坑1 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">1</span>坑：把绩效当"激发活力"的万能药</h3>
+    <div class="qt">书中："我们做绩效的初衷是激发组织活力，但大部分企业的绩效最终成了发展的桎梏。"<br>案例："绩效毁了索尼"——很多日企反思绩效是否赋能了组织。"优秀的人不需要绩效管理，做与不做绩效，优秀的人就在那，拖后腿的也在那。"</div>
+    <p><b>坑在哪：</b>对绩效期望过高，以为它能解决组织能力问题。</p>
+    <p class="cue"><b>给你：</b>做新人答辩/绩效流程时，先想清"激发还是控制"。流程是<b>度量工具不是发动机</b>，别让自动化答辩变成新的桎梏。</p>
+    <span class="tag">期望管理</span><span class="tag">索尼案例</span>
+    <div class="src">📌 出处：第6章 开头段 + "绩效毁了索尼"段</div>
+  </section>
+
+  <!-- 坑2 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">2</span>坑：精力错配，死磕个人绩效</h3>
+    <div class="qt">书中："我个人认为没有必要花精力去管理(个人绩效)，只要控制好强制分布，剩下的就交给业务部门。人力资源如果管到个人绩效了，可能是精力分配的失衡，捡了芝麻丢了西瓜。"</div>
+    <p><b>坑在哪：</b>HR 投入太多在个人绩效，忽略组织绩效互锁（这才是战略解码的主线）。</p>
+    <p class="cue"><b>给你：</b>答辩自动化优先做<b>组织/团队层</b>的强关联与互锁，个人评价交给业务+强制分布即可，别把系统做成"管到每个人"。</p>
+    <span class="tag">组织绩效优先</span><span class="tag">强制分布</span>
+    <div class="src">📌 出处：第6章 "个人绩效真的那么重要吗" 段</div>
+  </section>
+
+  <!-- 坑3 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">3</span>坑：目标拍脑袋 → 全员自嗨</h3>
+    <div class="qt">书中："我们应当基于增量来定目标，否则拍脑袋的目标永远是空中楼阁，纯粹是一场自嗨。"组织绩效目标要"相对合理，否则个人绩效一片哀嚎"。</div>
+    <p><b>坑在哪：</b>目标非增量导向，定太高人人完不成、定太低没挑战。</p>
+    <p class="cue"><b>给你：</b>答辩/目标设定模块加<b>增量基线校验</b>（同比/环比/行业），目标值不合理的，系统给红牌预警而不是照单全收。</p>
+    <span class="tag">增量定目标</span><span class="tag">红牌预警</span>
+    <div class="src">📌 出处：第6章 "个人绩效究竟为什么服务" 段</div>
+  </section>
+
+  <!-- 坑4 固浮比 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">4</span>坑：固浮比拍错 → 没激励 / 谈 offer 吃力</h3>
+    <div class="qt">书中："浮动比例太低，没有激励性；浮动比例过高……可能我们谈 offer 都会吃力。合理的固浮比，是我们做薪酬设计的根本。"</div>
+    <p><b>坑在哪：</b>浮动比例与岗位业绩强度不匹配。</p>
+    <p class="cue"><b>给你：</b>绩效和薪酬策略必须联动设计（第6章第3点）。做答辩看板时把"固浮比"作为校验维度，而非只算分。</p>
+    <span class="tag">固浮比</span><span class="tag">薪酬联动</span>
+    <div class="src">📌 出处：第6章 "我们的薪酬策略是否严谨" 段</div>
+  </section>
+
+  <!-- 坑5 分布表 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">5</span>坑：组织绩效目标值不合理 → 捧杀 or 错杀</h3>
+    <div class="qt">书中：组织绩效决定个体等级名额分布（见下表）。"这样就对组织绩效目标值设定的合理性提出很高要求，否则要么捧杀了大家，要么错杀了大家。"</div>
+    <table class="dt">
+      <tr><th>组织等级</th><th>S</th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+      <tr><td>S</td><td>30%</td><td>40%</td><td>30%</td><td>-</td><td>-</td></tr>
+      <tr><td>A</td><td>20%</td><td>30%</td><td>50%</td><td>-</td><td>-</td></tr>
+      <tr><td>B</td><td>10%</td><td>20%</td><td>70%</td><td>-</td><td>-</td></tr>
+      <tr><td>C</td><td>-</td><td>20%</td><td>70%</td><td>10%</td><td>-</td></tr>
+      <tr><td>D</td><td>-</td><td>10%</td><td>60%</td><td>20%</td><td>10%</td></tr>
+    </table>
+    <p class="cue"><b>给你：</b>答辩结果应用这套分布逻辑时，<b>先审组织目标合理性</b>再套比例，避免"组织差→全员背低绩效"的错杀。</p>
+    <span class="tag">强制分布</span><span class="tag">目标合理性</span>
+    <div class="src">📌 出处：第6章 组织绩效 "名额分布表" 段</div>
+  </section>
+
+  <!-- 坑6 ROI -->
+  <section class="card s6 warncard">
+    <h3><span class="no">6</span>坑：绩效只用来算工资 → ROI 太低</h3>
+    <div class="qt">书中："如果绩效只是用来算出一个绩效工资，那确实 ROI 有点太低了。"应和任职资格、晋升、人才盘点、评优、股权、裁员等<b>强绑定</b>，形成逻辑闭环。</div>
+    <p><b>坑在哪：</b>绩效结果孤岛，不反哺其他模块。</p>
+    <p class="cue"><b>给你：</b>答辩自动化别只产出"分数"，要能<b>一键回流</b>到人才盘点/晋升/评优，让业务真重视。</p>
+    <span class="tag">结果应用</span><span class="tag">逻辑闭环</span>
+    <div class="src">📌 出处：第6章 个人绩效 结尾段</div>
+  </section>
+
+  <!-- 坑7 复盘联动 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">7</span>坑：只考核不复盘 → 流于形式</h3>
+    <div class="qt">书中："绩效管理和干部管理深度地、动态地联动。"红黄绿灯机制：<b>连续两季度红灯</b>负责人受质询，<b>连续三季度红灯</b>离开管理岗。"大家都用数据说话，达不成指标的就换个管理干部。"</div>
+    <p><b>坑在哪：</b>考完即止，不复盘根因、不与干部管理挂钩。</p>
+    <p class="cue"><b>给你：</b>答辩/绩效系统加<b>复盘会议机制+红黄绿灯</b>，把"未达成指标"掰开揉碎，做成干部抓手而非打分机器。</p>
+    <span class="tag">绩效复盘</span><span class="tag">红黄绿灯</span><span class="tag">干部联动</span>
+    <div class="src">📌 出处：第6章 组织绩效复盘段</div>
+  </section>
+
+  <!-- 坑8 选择 -->
+  <section class="card s6 warncard">
+    <h3><span class="no">8</span>坑：盲目抄模板，不顾企业阶段</h3>
+    <div class="qt">书中："管理没有对错，无非是一种选择。"MBO 还是 PBC、强/弱关联、激励/管控导向、产品线/职能线考核——都要看企业阶段：求规模还是利润、做大做强还是小而美。</div>
+    <p><b>坑在哪：</b>别人家好用的，照搬就翻车。</p>
+    <p class="cue"><b>给你：</b>做流程产品化前，先让你的方案<b>暴露假设</b>（适用哪类团队/阶段），别做成"一套模板通吃"。</p>
+    <span class="tag">管理是选择</span><span class="tag">审时度势</span>
+    <div class="src">📌 出处：第6章 结尾"给老板的建议"段</div>
+  </section>
+
+  <!-- 逐句精读 -->
+  <section class="card s12 model">
+    <h3>🔍 第6章 关键句逐句精读（带出处）</h3>
+    <ul>
+      <li><b>"绩效承接了目标，还决定了浮动收入"</b> → 点明绩效两大锚点：战略解码 + 薪酬绑定。做系统别漏任一个。（开头段）</li>
+      <li><b>"HR 的视角永远在搞平衡，既想激发又怕失控"</b> → 作者自剖绩效失效根因：保守。启发：产品化时给业务"可调参数"而非死规则。（为何失效段）</li>
+      <li><b>"组织绩效分解到位，才能做到销售渠道与产品互锁、业绩与资源互锁"</b> → 互锁是组织绩效的灵魂，非考核。（构建体系第1点）</li>
+      <li><b>"组织绩效主要目的不在考核，而是确保目标一致性及结果互锁"</b> → 推翻"绩效=打分"直觉，呼应坑2。（组织绩效段）</li>
+      <li><b>"TL 个人绩效 = 上级组织绩效×30% + 主管部门组织绩效×60% + 述职/360"</b> → 管理者绩效公式范例，可抄进答辩模板。（个人绩效段）</li>
+    </ul>
+  </section>
+
+  <!-- 思维模型 -->
+  <section class="card s12 model">
+    <h3>🔧 用到的思维模型</h3>
+    <ul>
+      <li><b>第一性原理</b>：回到"绩效为何存在"——承接战略+决定收入，而非"别人都做所以我做"。</li>
+      <li><b>奥卡姆剃剃刀</b>：个人绩效"只控强制分布即可"，别过度设计；系统解决 80% 问题。</li>
+      <li><b>预判质疑</b>：作者主动认"管理无对错只是选择""目标可能自嗨"，先讲代价再给方案，诚实可信。</li>
+      <li><b>系统互锁思维</b>：组织绩效互锁（销产/业绩资源/前后台）是设计核心，不是打分层。</li>
+    </ul>
+  </section>
+
+</div>
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>

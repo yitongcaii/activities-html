@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BP 能力自检表 · 基于《人力资源管理的深度思考》第9章</title>
+<style>
+  :root{--purple:#7C3AED;--cyan:#06B6D4;--ink:#1f2233;--muted:#6b7280;--bg:#f6f7fb;--card:#fff;--soft:#eef1fb;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#f3f0ff,#e8f7fb);color:var(--ink);padding:32px 20px 60px;line-height:1.65}
+  .wrap{max-width:1180px;margin:0 auto}
+  header.hero{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border-radius:24px;padding:32px 38px;margin-bottom:24px;box-shadow:0 18px 40px -18px rgba(124,58,237,.55)}
+  header.hero h1{font-size:28px;margin-bottom:8px}
+  header.hero .sub{opacity:.95;font-size:14px}
+  header.hero .tags{margin-top:14px;display:flex;gap:9px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);padding:5px 12px;border-radius:999px;font-size:12.5px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .card{background:var(--card);border-radius:20px;padding:20px 22px;box-shadow:0 10px 28px -16px rgba(31,34,51,.35);border:1px solid #eef0f7;transition:transform .18s,box-shadow .18s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(124,58,237,.4)}
+  .card h3{font-size:16.5px;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .card h3 .no{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;width:28px;height:28px;border-radius:8px;display:inline-grid;place-items:center;font-size:13px;flex:0 0 auto}
+  .card p{font-size:13.5px;color:#374151;margin-bottom:7px}
+  .qt{background:var(--soft);border-left:3px solid var(--purple);padding:9px 12px;border-radius:10px;font-size:12.8px;color:#4b5563;margin:9px 0}
+  .cue{font-size:12.3px;color:var(--muted);margin-top:5px}
+  .cue b{color:var(--cyan)}
+  .tag{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;background:linear-gradient(120deg,#ede9fe,#e0f7fb);color:#5b21b6;margin:2px 3px 2px 0;font-weight:600}
+  .src{font-size:11px;color:#9ca3af;margin-top:6px}
+  .s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+  .check{font-size:13px}
+  .check .row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px dashed #eee}
+  .check .row:last-child{border:none}
+  .check .q{flex:1}
+  .check .lv{font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;white-space:nowrap}
+  .lv.y{background:#dcfce7;color:#166534}
+  .lv.p{background:#fef9c3;color:#854d0e}
+  .lv.n{background:#fee2e2;color:#991b1b}
+  .lv.t{background:#ede9fe;color:#5b21b6}
+  .score{background:linear-gradient(120deg,#faf5ff,#ecfeff);border:1px dashed #c4b5fd;border-radius:16px;padding:18px 20px;text-align:center}
+  .score .big{font-size:40px;font-weight:800;background:linear-gradient(120deg,var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .model{background:linear-gradient(120deg,#faf5ff,#ecfeff);border:1px dashed #c4b5fd;border-radius:16px;padding:18px 20px}
+  .model h3{margin-bottom:8px}
+  .model li{font-size:13px;margin:5px 0 5px 18px;color:#374151}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:28px}
+  @media(max-width:900px){.s3,.s4,.s5,.s6,.s7,.s8{grid-column:span 12}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🧭 BP 能力自检表</h1>
+  <div class="sub">来源：《人力资源管理的深度思考》第 9 章「人力资源的管理架构」(三支柱前置条件③) + 你的 HRBP 日常<br>
+  用法：3 大维度逐项打勾（✅能 / 🟡部分 / ❌不能 / 🟣我即标杆），算总分看你在"独当一面"光谱的位置。</div>
+  <div class="tags">
+    <span class="pill">独当一面</span><span class="pill">3 维度自检</span><span class="pill">避传话筒</span><span class="pill">三支柱前置</span>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- 维度1 业务认知 -->
+  <section class="card s12">
+    <h3><span class="no">A</span>维度一：业务认知与对话力</h3>
+    <div class="qt">书中：BP"要对业务有足够认知，可以与业务部门的人有效对话，甚至能够主动发现一些问题并解决，以此取得业务部门的信任"。不能独当一面就变"传话筒/小助理"。</div>
+    <div class="check">
+      <div class="row"><div class="q">① 我能说清所支持业务的商业模式、核心指标与当年重点（不靠背稿）</div><span class="lv t">自评</span></div>
+      <div class="row"><div class="q">② 业务负责人愿意主动找我聊问题，而非只在我找他时才回</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">③ 我能提前发现组织/人才隐患，而非等出事才被叫去救火</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">④ 我给的建议业务真采纳，且能讲清落地控制点（非泛泛方法论）</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+    </div>
+    <div class="src">📌 出处：第9章 "3、有没有独当一面的 HRBP"</div>
+  </section>
+
+  <!-- 维度2 中枢交互 -->
+  <section class="card s12">
+    <h3><span class="no">B</span>维度二：与 COE / SSC 的中枢交互</h3>
+    <div class="qt">书中：BP"还要与 COE、SSC 形成有效交互，既要将 HR 的机制、体系落实到位，又要将业务的需求进行有效传递"。最弱的是 COE，COE 与 BP"打架"成常态。</div>
+    <div class="check">
+      <div class="row"><div class="q">⑤ 我能把公司 HR 机制(绩效/激励/编制)翻译给业务听懂并落地</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">⑥ 我能把业务的真实痛点准确传回 COE，不被"传话"损耗</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">⑦ 我敢对 COE 不落地的方案提反对意见（坚持立场，不做小助理）</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">⑧ 我熟悉 SSC/HR 系统数据口径，能自助取数支撑决策（非等报表）</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+    </div>
+    <div class="src">📌 出处：第9章 "2、COE 专家" + "3、BP 交互"</div>
+  </section>
+
+  <!-- 维度3 独当一面 -->
+  <section class="card s12">
+    <h3><span class="no">C</span>维度三：独当一面（小闭环力）</h3>
+    <div class="qt">书中："我称这种能力为'独当一面'，优秀的 BP 甚至能把 COE 的工作给干了，形成一个小闭环。"三支柱有效运转需满足 3 个前置条件中的至少 2 个。</div>
+    <div class="check">
+      <div class="row"><div class="q">⑨ 单个业务问题，我从诊断到出方案到落地能独立跑完闭环</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">⑩ 复杂问题我能在不依赖 COE 的情况下，给出底层解法框架</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">⑪ 我不在"传话筒/小助理"两种失格状态里（可对照自查）</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+      <div class="row"><div class="q">⑫ 我的存在让业务与 HR 两边都省力，而非两边都不靠</div><span class="lv y">✅</span><span class="lv p">🟡</span><span class="lv n">❌</span></div>
+    </div>
+    <div class="src">📌 出处：第9章 "3、BP 独当一面" + "满足两个才有效运转"</div>
+  </section>
+
+  <!-- 计分 -->
+  <section class="card s5 score">
+    <h3 style="justify-content:center">总分速算</h3>
+    <div class="big">A+B+C</div>
+    <p style="font-size:12.5px;margin-top:8px">每题 ✅=3 · 🟡=2 · ❌=0<br>满分 36。</p>
+  </section>
+  <section class="card s7">
+    <h3><span class="no">📊</span>结果怎么读</h3>
+    <p><b>30–36</b>：独当一面，已是业务离不开的 BP，可挑战 COE 级课题。</p>
+    <p><b>22–29</b>：基本合格，补最弱的维度（看 A/B/C 哪组扣分多）。</p>
+    <p><b>12–21</b>：偏传话筒，优先练"业务对话+主动发现"，别只做执行。</p>
+    <p><b>&lt;12</b>：需回炉：先懂业务再谈 BP，否则三支柱只是架子（作者警告"陷入自嗨"）。</p>
+    <p class="cue"><b>给你：</b>你已是 BP，拿这张表季度自评；扣分项的维度，正是你下阶段成长杠杆。</p>
+    <div class="src">📌 出处：第9章 "至少满足两个前置条件才能有效运转，否则学个架子陷入自嗨"</div>
+  </section>
+
+  <!-- 落地建议 -->
+  <section class="card s12">
+    <h3><span class="no">🚀</span>作者给的落地路径（照做不踩坑）</h3>
+    <div class="qt">书中建议：采用三支柱"可以先设置 BP 团队，其他模块先维持原样，待 BP 成熟后逐步转移职能；若恰好有套好 HR 系统，再搭 SSC；COE 初期最好以委员会模式运转，让 BP 负责人、SSC 负责人都参与，减少内耗"。戴维·尤里奇："三支柱本质是思维方式，非简单组织结构划分。"</div>
+    <p class="cue"><b>给你：</b>别一上来全转三支柱。先把 BP 跑顺（你正在做），系统/COE 逐步补，避免模仿式被动。</p>
+    <span class="tag">先BP后SSC</span><span class="tag">COE委员会</span><span class="tag">尤里奇思维</span>
+    <div class="src">📌 出处：第9章 结尾"个人建议" + 戴维·尤里奇引文</div>
+  </section>
+
+  <!-- 思维模型 -->
+  <section class="card s12 model">
+    <h3>🔧 用到的思维模型</h3>
+    <ul>
+      <li><b>第一性原理</b>：BP 价值不在"岗位名"，而在"独当一面+小闭环"这一本质能力。</li>
+      <li><b>系统前置条件</b>：任何架构转型先看前置条件满足几个（系统/COE/BP，≥2），否则只是学架子。</li>
+      <li><b>预判质疑</b>：作者先说"BP 门槛低是误区""很多人转 BP 是无奈之举"，戳破幻想再给标准。</li>
+      <li><b>渐进式演进</b>：先 BP→再 SSC→COE 委员会，对应"别简单模仿"的稳妥路径。</li>
+    </ul>
+  </section>
+
+</div>
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>

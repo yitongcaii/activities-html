@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文化激励设计画布 · 基于《人力资源管理的深度思考》第7章</title>
+<style>
+  :root{--purple:#7C3AED;--cyan:#06B6D4;--ink:#1f2233;--muted:#6b7280;--bg:#f6f7fb;--card:#fff;--soft:#eef1fb;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#f3f0ff,#e8f7fb);color:var(--ink);padding:32px 20px 60px;line-height:1.65}
+  .wrap{max-width:1180px;margin:0 auto}
+  header.hero{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;border-radius:24px;padding:32px 38px;margin-bottom:24px;box-shadow:0 18px 40px -18px rgba(124,58,237,.55)}
+  header.hero h1{font-size:28px;margin-bottom:8px}
+  header.hero .sub{opacity:.95;font-size:14px}
+  header.hero .tags{margin-top:14px;display:flex;gap:9px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);padding:5px 12px;border-radius:999px;font-size:12.5px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .card{background:var(--card);border-radius:20px;padding:20px 22px;box-shadow:0 10px 28px -16px rgba(31,34,51,.35);border:1px solid #eef0f7;transition:transform .18s,box-shadow .18s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(124,58,237,.4)}
+  .card h3{font-size:16.5px;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .card h3 .no{background:linear-gradient(120deg,var(--purple),var(--cyan));color:#fff;width:28px;height:28px;border-radius:8px;display:inline-grid;place-items:center;font-size:13px;flex:0 0 auto}
+  .card p{font-size:13.5px;color:#374151;margin-bottom:7px}
+  .qt{background:var(--soft);border-left:3px solid var(--purple);padding:9px 12px;border-radius:10px;font-size:12.8px;color:#4b5563;margin:9px 0}
+  .cue{font-size:12.3px;color:var(--muted);margin-top:5px}
+  .cue b{color:var(--cyan)}
+  .tag{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;background:linear-gradient(120deg,#ede9fe,#e0f7fb);color:#5b21b6;margin:2px 3px 2px 0;font-weight:600}
+  .src{font-size:11px;color:#9ca3af;margin-top:6px}
+  .s3{grid-column:span 3}.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+  /* 画布双栏 */
+  .canvas{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:16px;overflow:hidden;border:1px solid #e5e7eb}
+  .canvas .left{background:linear-gradient(120deg,#faf5ff,#f3f0ff);padding:14px 16px;font-size:12.8px}
+  .canvas .right{background:#ecfeff;padding:14px 16px;font-size:12.8px}
+  .canvas .left b,.canvas .right b{color:#5b21b6}
+  .canvas .right b{color:#0e7490}
+  .model{background:linear-gradient(120deg,#faf5ff,#ecfeff);border:1px dashed #c4b5fd;border-radius:16px;padding:18px 20px}
+  .model h3{margin-bottom:8px}
+  .model li{font-size:13px;margin:5px 0 5px 18px;color:#374151}
+  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:28px}
+  @media(max-width:900px){.s3,.s4,.s5,.s6,.s7,.s8{grid-column:span 12}.canvas{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🎨 文化激励设计画布</h1>
+  <div class="sub">来源：《人力资源管理的深度思考》第 7 章「激励设计」(2445 字) × 你的文化活动 / AI 文化运营<br>
+  用法：左栏=书中"全面薪酬"模型，右栏=你文化活动的落点。把活动从"发奖金"升级成"从人出发的体系"。</div>
+  <div class="tags">
+    <span class="pill">全面薪酬</span><span class="pill">左书右你</span><span class="pill">Q12 映射</span><span class="pill">时机意识</span>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- 框架：为何做 -->
+  <section class="card s6">
+    <h3><span class="no">1</span>为何做激励：文化导向 × 战略意图</h3>
+    <div class="qt">书中：激励体现"文化导向=行为(倡导/反对什么)"与"战略意图=结果(取得什么业绩)"；上升到愿景使命。失效本质=战略意图不清，"既要又要还要"导致激励走向失效。</div>
+    <p class="cue"><b>给你：</b>每场文化活动先写清"倡导什么行为 + 服务什么业务结果"，否则热热闹闹却无战略锚点。</p>
+    <span class="tag">行为锚</span><span class="tag">结果锚</span>
+    <div class="src">📌 出处：第7章 "1、为什么要做激励"</div>
+  </section>
+
+  <!-- 激励谁 -->
+  <section class="card s6">
+    <h3><span class="no">2</span>激励谁：回归"人"，不是角色</h3>
+    <div class="qt">书中：伙伴提"视人为人"作者"有些感动"，这是做 HR 的内核。对象不是员工/下属/项目等属性，而是有血有肉、有社会价值需求、多元立体的"人"。</div>
+    <p class="cue"><b>给你：</b>文化活动设计先问"这个人此刻需要什么(成长/成就/同频)"，别只按"参与者"标签群发。</p>
+    <span class="tag">视人为人</span><span class="tag">多元立体</span>
+    <div class="src">📌 出处：第7章 "2、我们激励谁"</div>
+  </section>
+
+  <!-- 画布主图：四组平衡 -->
+  <section class="card s12">
+    <h3><span class="no">3</span>画布：四组平衡 × 你的文化活动落点</h3>
+    <div class="canvas">
+      <div class="left">
+        <b>📐 书中模型（全面薪酬四组平衡）</b><br><br>
+        <b>① 统一化 vs 个性化</b><br>COE 方案求普适、最小管理成本；业务多元化时各 BU 要授权做个性激励，HR 左右为难。做法：定大框架+测算，逻辑不冲突即可。<br><br>
+        <b>② 物质 vs 精神</b><br>二者都要做。物质尽量依托毛利/净利<b>增量</b>；精神注意评价<b>公平性</b>，不能流于形式。<br><br>
+        <b>③ 固定 vs 浮动</b><br>业绩强/职级高→浮动占比高；控固定、让大家赚浮动，实现个人与组织"利出一孔"。<br><br>
+        <b>④ 短期 vs 长期</b><br>短期=绩效工资/年终/项目奖/速赢奖；长期=股权/长期兑现奖，给高绩效高潜关键人才（损失厌恶：许诺的期权更动人）。
+      </div>
+      <div class="right">
+        <b>🎯 你的文化活动落点（可直接套）</b><br><br>
+        <b>① 统一 vs 个性</b><br>公司级文化节做"统一框架"(主题/视觉/奖项)；各团队开放"自定义环节"(如AI黑客松各BU自定命题)，避免一刀切自嗨。<br><br>
+        <b>② 物质 vs 精神</b><br>物质：速赢奖金/周边；精神：<b>"过去7天因工作出色受表扬"</b>式即时认可、荣誉墙、成长证书——精神占比要明显高于物质才可持续。<br><br>
+        <b>③ 固定 vs 浮动</b><br>基础参与(固定)保底氛围；挑战任务(浮动)如AI提效打卡达标才解锁奖励，让投入与产出"利出一孔"。<br><br>
+        <b>④ 短期 vs 长期</b><br>短期：单次活动惊喜；长期：人才池/代言人计划/虚拟股权感（连续参与解锁"文化勋章"），用损失厌恶留人。
+      </div>
+    </div>
+    <div class="src">📌 出处：第7章 "3、激励机制如何成体系"（统一/物质/固定/短期 四组）+ "如何判断激励有效"</div>
+  </section>
+
+  <!-- Q12 映射 -->
+  <section class="card s12">
+    <h3><span class="no">4</span>盖洛普 Q12 × 文化活动映射表</h3>
+    <div class="canvas">
+      <div class="left">
+        <b>📋 盖洛普 Q12（书中引，洞穿组织是否"值得付出/留恋"）</b><br>
+        1 知道工作要求　2 有做好工作的材料设备　3 每天做最擅长的事　4 过去7天因出色受表扬　5 主管/同事关心个人　6 单位鼓励发展　7 意见受重视　8 使命使工作重要　9 同事致力高质量　10 单位有最好朋友　11 半年内有人谈我进步　12 一年中有机会学习成长
+      </div>
+      <div class="right">
+        <b>🎪 你的活动对应动作</b><br>
+        1-2 工具包/指引清晰　3 让擅长的同事牵头环节　4 活动即时点赞墙　5 破冰关心卡　6 成长路线图展示　7 提案箱(意见真被采纳并公示)　8 文化主题呼应公司使命　9 质量标杆秀　10 团建/工作搭子机制　11 复盘会点名进步　12 AI训练营/分享会
+      </div>
+    </div>
+    <p class="cue"><b>给你：</b>年轻人把"干得开心"当动力——Q12 就是你的<b>文化活动效果验收表</b>，别只办完就散。</p>
+    <div class="src">📌 出处：第7章 Q12 引文 + "年轻人把是不是干得开心当动力"</div>
+  </section>
+
+  <!-- 时机 -->
+  <section class="card s6">
+    <h3><span class="no">5</span>时机：违背时机=白做</h3>
+    <div class="qt">书中："时机可太重要了"——行业下行期硬做全员获取分享、在老业务上做提成，都是违背时机的体现。要审时度势、洞察人心。</div>
+    <p class="cue"><b>给你：</b>业务收缩期别推"重赏挑战"，改做低成本的<b>认可/连接型</b>活动(如感谢信、搭子机制)，反而更打动人。</p>
+    <span class="tag">审时度势</span>
+    <div class="src">📌 出处：第7章 末尾"时机的强调"</div>
+  </section>
+
+  <!-- 预判质疑 -->
+  <section class="card s6">
+    <h3><span class="no">6</span>预判你的质疑：激励能救业务吗？</h3>
+    <div class="qt">书中自泼冷水："激励可能只决定组织能力重心偏移，并不能带来能力增长……重赏之下必有勇夫，但很可能组织里就没有勇夫。"有效=认真找实现路径、解卡点，而非只画大饼。</div>
+    <p class="cue"><b>给你：</b>文化活动别承诺"激励改变业绩"，定位是<b>激活与连接</b>；真要出业绩，配业务路径支持才靠谱。</p>
+    <span class="tag">不神话激励</span>
+    <div class="src">📌 出处：第7章 "如何判断激励有效"</div>
+  </section>
+
+  <!-- 思维模型 -->
+  <section class="card s12 model">
+    <h3>🔧 用到的思维模型</h3>
+    <ul>
+      <li><b>第一性原理</b>：激励从"人"出发，不是从"工资奖金"出发；剥离表象看需求本质。</li>
+      <li><b>系统平衡思维</b>：四组平衡(统一/个性、物质/精神、固定/浮动、短期/长期)是设计杠杆，不是单选。</li>
+      <li><b>预判质疑</b>：作者主动说"激励不能带来能力增长"，先降预期再谈用法，避免被捧杀。</li>
+      <li><b>时机杠杆</b>：同样动作，时机错则反效——审时度势是隐性变量。</li>
+    </ul>
+  </section>
+
+</div>
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
