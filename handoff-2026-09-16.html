@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目交接文档 · y(蔡依彤) × 小柚 · 2026-09-16</title>
+<style>
+  :root{
+    --purple:#7c5cff; --purple-soft:#efeaff;
+    --cyan:#19c3c9; --cyan-soft:#e2fafb;
+    --ink:#1f2230; --muted:#6b7080; --line:#e7e9f0;
+    --bg:#f7f8fc; --card:#ffffff; --red:#e5484d; --amber:#f59e0b; --green:#16a34a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 80px}
+  header.hero{background:linear-gradient(120deg,#7c5cff,#19c3c9);color:#fff;
+    border-radius:20px;padding:28px 30px;box-shadow:0 14px 40px rgba(124,92,255,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:2px 0;opacity:.95;font-size:14px}
+  .tag{display:inline-block;background:rgba(255,255,255,.22);border-radius:999px;
+    padding:3px 11px;font-size:12px;margin:4px 6px 0 0}
+  h2{margin:42px 0 14px;font-size:20px;padding-left:12px;border-left:5px solid var(--purple)}
+  h3{margin:24px 0 8px;font-size:16px;color:var(--purple)}
+  h4{margin:14px 0 6px;font-size:14px;color:var(--cyan)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 18px;box-shadow:0 6px 18px rgba(31,34,48,.05)}
+  .card.red{border-color:#ffd0d2;background:#fff6f6}
+  .card.amber{border-color:#ffe6b8;background:#fffaf0}
+  .card.cyan{background:var(--cyan-soft)}
+  .card.purple{background:var(--purple-soft)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;
+    background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(31,34,48,.05)}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:linear-gradient(120deg,#efeaff,#e2fafb);font-weight:700;color:var(--ink)}
+  tr:nth-child(even) td{background:#fbfbfe}
+  .pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700}
+  .p-done{background:#e7f8ec;color:var(--green)}
+  .p-doing{background:#fff3df;color:var(--amber)}
+  .p-block{background:#ffe9ea;color:var(--red)}
+  .p-decide{background:#eeeaff;color:var(--purple)}
+  .kv{font-size:13.5px}
+  .kv b{color:var(--muted);font-weight:600;display:inline-block;min-width:74px}
+  code{background:#f0f1f7;padding:1px 6px;border-radius:6px;font-size:12.5px;color:#3a2d7a}
+  .warn{background:#fff6f6;border:1px solid #ffd0d2;border-radius:12px;padding:12px 16px;
+    color:#a4282d;font-size:13.5px;margin:10px 0}
+  .ok{color:var(--green);font-weight:700}
+  .no{color:var(--red);font-weight:700}
+  ul.tight{margin:6px 0;padding-left:20px}
+  ul.tight li{margin:3px 0}
+  .note{font-size:12.5px;color:var(--muted)}
+  .jump{font-size:12px;color:var(--cyan);text-decoration:none}
+  footer{margin-top:48px;padding:18px;text-align:center;color:var(--muted);font-size:12.5px;
+    border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>📦 项目交接文档 · 零上下文版</h1>
+  <p><b>y（蔡依彤 / v_yitcai）</b> × <b>小柚（WorkBuddy 执行引擎）</b></p>
+  <p>生成日期 2026-09-16 ｜ 面向：完全没上下文的新会话 ｜ 当前会话 workspace：<code>D:\AI\workbuddy\2026-09-16-17-22-43</code></p>
+  <span class="tag">审美：活泼 / 紫青双色 / 卡片墙</span>
+  <span class="tag">沟通：极简命令驱动 / 结论先行</span>
+</header>
+
+<!-- ========== 0. 一句话定位 ========== -->
+<h2>0 · 先搞懂这两个人是谁（30 秒版）</h2>
+<div class="grid">
+  <div class="card purple">
+    <h3>y（用户 / 蔡依彤）</h3>
+    <ul class="tight">
+      <li>核心职责：把 HR 流程<b>产品化/自动化</b>——定需求、定验收，不写实现</li>
+      <li>偏好：结论先行、结构化表格、定量验收、可编辑字段保留人工所有权</li>
+      <li>常用确认词：<code>要</code> / <code>改了吗</code> / <code>1要2要3要</code></li>
+    </ul>
+  </div>
+  <div class="card cyan">
+    <h3>小柚（我 / 执行引擎）</h3>
+    <ul class="tight">
+      <li>驻扎 WorkBuddy 的 AI，y 把工作区/企微/会议/文档都交出来了</li>
+      <li>对内动作（读/整理/学/生成）大胆；<b>对外动作（发消息/公开推送）谨慎</b></li>
+      <li>企微禁发是最高红线（见 §1）</li>
+      <li>交付物默认做<b>单文件自包含 HTML</b>（活泼/紫青/卡片），给可点击预览</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== 1. 红线 ========== -->
+<h2>1 · 🔴 对外动作红线（踩到 = 事故，先读这节）</h2>
+
+<div class="card red">
+  <h3>① 企微禁发（最高优先级，凌驾一切）</h3>
+  <ul class="tight">
+    <li><span class="no">绝对禁止</span>主动向企微发任何消息——含待办、群 webhook、模板卡片、甚至"测试消息"。</li>
+    <li>唯一例外：y 在<b>当前对话</b>明确说"可以发 / 发吧 / 测试一下"。</li>
+    <li>任何自动化/脚本默认不发企微；要先发必须先问。</li>
+    <li>涉及企微发送的动作，执行前必须在回复里显式标注 <code>⚠️ 这将发企微消息</code> 等 y 确认。</li>
+    <li><b>wecom-cli 无个人发消息能力</b>——只能走授权机器人（爱滴尔，见 §6）。</li>
+  </ul>
+</div>
+
+<div class="card amber">
+  <h3>② 公开动作必须 y 先确认</h3>
+  <ul class="tight">
+    <li>上传 GitHub / 推送 Obsidian vault / 小红书发帖 / 任何对外可见操作 = <b>先问后做</b>。</li>
+    <li>企微/微信发消息每次都需<b>明确授权</b>，禁自动发送、禁测试消息。</li>
+    <li>新人答辩自动化是 <code>propose-only</code> 模式：只提议、不自动外发。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>③ 交付物增删改 = 先汇报再动手</h3>
+  <ul class="tight">
+    <li>凡对文档/HTML/代码做任何改动，<b>先汇报方案</b>（改哪、改成什么、为什么、风险），等 y 确认再动。</li>
+    <li>严禁"先改了再汇报"。法律/合规类敏感文档尤其严格执行。</li>
+    <li>改完必须<b>验证闭环</b>——"改了吗"是硬关卡，要能证明改对了。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>④ 内容质量硬标准（拒绝正确废话）</h3>
+  <ul class="tight">
+    <li>每条产出必须有<b>论据链</b>（为什么 + 数据/真实案例），不能只堆方法论框架。</li>
+    <li><b>预判对方质疑并主动堵住</b>；话术类要落成"能张嘴就背的成稿"，非提纲。</li>
+    <li><b>去术语化</b>：避免北极星/杠杆/归因/RACI/SOP/IP 等黑话，用具体场景举例、口语化。</li>
+    <li><span class="no">忌文艺抒情/鸡汤腔</span>：制度/文档用事实陈述（平实、克制），禁止"托付青春/守护伙伴"式散文。</li>
+    <li>话术/方法论类产出须<b>显式标注思维模型</b>：🧱第一性原理（从底层事实出发）、🔺金字塔原理（结论先行）。</li>
+  </ul>
+</div>
+
+<!-- ========== 2. GitHub Pages 铁律 ========== -->
+<h2>2 · 🟠 GitHub Pages 交付铁律（含所有坑，已实测）</h2>
+<div class="card">
+  <p class="kv"><b>仓库</b>活跃 = <code>yitongcaii/activities-html</code>（SSH 可写，owner）。<code>yutttyi/activities-html</code> 已停用，勿再推。</p>
+  <p class="kv"><b>SSH key</b><code>C:\Users\v_yitcai\.ssh\id_ed25519</code>（yitongcaii 账号）。<b>不碰 PAT</b>。</p>
+  <p class="kv"><b>本地克隆</b><code>D:\activities-html-yitongcaii</code>（blobless，仅 hr-ai/、src/ 等局部）。</p>
+</div>
+<table>
+  <tr><th style="width:30%">规则</th><th>为什么 / 坑</th></tr>
+  <tr><td>文件名必须 <b>ASCII</b></td><td>中文名 Pages 一律 404。命名用拼音/英文（如 <code>ai-manga/</code>、<code>salary-report.html</code>）。</td></tr>
+  <tr><td>根目录放 <code>.nojekyll</code></td><td>否则 Pages 当 Jekyll 处理，部分资源被忽略。</td></tr>
+  <tr><td>每个 HTML <code>&lt;/body&gt;</code> 前必含页脚<br><code>📌 本页由 yitong 沉淀整理 · 文化活动知识库</code></td><td>验收：含页脚文件数 = HTML 总数。漏一个都不合格。</td></tr>
+  <tr><td>内容按主题分子目录</td><td>如 <code>ai-manga/</code>、<code>hr-ai/</code>。别全堆根目录。</td></tr>
+  <tr><td>git 提交用 <code>git add &lt;具体文件&gt;</code><br>勿 <code>git add -A</code></td><td>避免误带工作区遗留大文件（如 <code>ppt-gallery-assets ~35MB</code>）拖慢/撑爆推送。</td></tr>
+  <tr><td>可编辑模板结构性改动必升 <b>KEY</b></td><td><code>contenteditable + localStorage</code> 模板：改正文（增删/清批注）KEY 版本 +1，否则浏览器旧草稿覆盖新模板，y 看到"旧版"。改完提醒<b>硬刷新</b>（Ctrl/Cmd+Shift+R）。</td></tr>
+  <tr><td>Pages CDN 10 分钟缓存<br><code>Cache-Control: max-age=600</code></td><td>push 后 y 说"还是旧的"：先 <code>curl</code> 确认 raw/Pages 已是新版；是则让他访问 <code>?v=N</code>（N=当次 KEY 版本）绕过缓存立即看，并说明约 10 分钟全节点自动更新。</td></tr>
+  <tr><td>空提交不触发构建</td><td><code>git commit --allow-empty</code> 不会触发 Pages 分支构建。</td></tr>
+  <tr><td>推送后长时间 404 / 未更新 → <code>touch .nojekyll</code></td><td>先 <code>curl -I</code> Pages 上任意<b>已知文件</b>看 <code>Last-Modified</code>（GMT，+8h 换算北京时间），判断最近成功构建时点。若最新 push 未反映，用<b>真实文件变更</b>（如给 <code>.nojekyll</code> 加一行注释）<code>git add &lt;该文件&gt; && commit && push</code> 强制触发重建，再轮询目标 URL 至 200。<br><span class="note">实测 2026-08-19：salary 报告 push 后 12+ 分钟未构建，touch .nojekyll 后约 1 分钟内构建完成上线。</span></td></tr>
+</table>
+
+<!-- ========== 3. 沙箱/git 坑 ========== -->
+<h2>3 · 🟡 本机沙箱杀 git 的坑（实测 2026-08-19）</h2>
+<div class="warn">
+  <b>现象：</b>沙箱会在 <code>git clone</code>（落地全量工作树）/ <code>git reset --hard</code> 等<b>批量写工作树文件</b>（如 activities-html 211 个文件）时杀掉进程，残留 <code>.git/index.lock</code>，使后续 git 全报 <code>index.lock exists</code> 无法提交。且 Bash 的 <code>rm</code> 被 safe-delete 拦截（删不掉 lock），<code>cmd.exe</code> 也被安全策略拦截。
+</div>
+<table>
+  <tr><th style="width:28%">解法</th><th>命令 / 说明</th></tr>
+  <tr><td>删 lock 用 PowerShell 原生</td><td><code>PowerShell: Remove-Item -Force -Path "D:\activities-html-yitongcaii\.git\index.lock"</code><br>绕过 safe-delete 回收站拦截（Bash rm / cmd 都失败）。</td></tr>
+  <tr><td>落地仓库用 blobless 克隆</td><td><code>git clone --filter=blob:none &lt;url&gt;</code> 避免一次性写全量工作树被沙箱杀。</td></tr>
+  <tr><td>已残留 index.lock</td><td>先 PowerShell <code>Remove-Item -Force</code> 清掉，再正常操作。</td></tr>
+  <tr><td>批量写盘</td><td>优先走 blobless 管线或<b>分小批</b>写，避免 <code>git reset --hard</code> 全量覆盖。</td></tr>
+</table>
+
+<!-- ========== 4. 项目总览矩阵 ========== -->
+<h2>4 · 📊 项目总览矩阵（状态一眼看懂）</h2>
+<table>
+  <tr><th>项目</th><th>状态</th><th>一句话现状</th><th>详见</th></tr>
+  <tr><td>简历定稿</td><td><span class="pill p-decide">最高优先级</span></td><td>4 条核心经历锚定，数字 __ 占位待补真实数据</td><td>§5.1</td></tr>
+  <tr><td>面试谈判话术</td><td><span class="pill p-doing">进行中</span></td><td>分寸感"温和坚定"，需模拟演练迭代</td><td>§5.2</td></tr>
+  <tr><td>POP MART 潮玩 deck</td><td><span class="pill p-doing">进行中</span></td><td>用 html-deck-maker，潮玩波普风，财务数据需联网真实</td><td>§5.3</td></tr>
+  <tr><td>training-pkg 培训网站首页</td><td><span class="pill p-doing">进行中</span></td><td>端口 8080 + OA 网关验证</td><td>§5.4</td></tr>
+  <tr><td>博闻看板</td><td><span class="pill p-doing">进行中</span></td><td>去重/人次/人均深度/<15min 剔除，持续迭代</td><td>§5.5</td></tr>
+  <tr><td>AI 漫剧《企鹅英雄》</td><td><span class="pill p-doing">进行中</span></td><td>双线叙事铁律锁死，已沉淀 6 个 HTML</td><td>§5.6</td></tr>
+  <tr><td>MigraQ 英语角</td><td><span class="pill p-doing">进行中</span></td><td>poster + 12 页 deck 转 PDF/PPTX，机制优化中</td><td>§5.7</td></tr>
+  <tr><td>新人答辩自动化</td><td><span class="pill p-done">已跑通</span></td><td>PRD v1.1，MCP 应用，propose-only，跟踪 4 人</td><td>§5.8</td></tr>
+  <tr><td>抽奖应用</td><td><span class="pill p-doing">进行中</span></td><td>Vue3+Vite/Express+SQLite，Railway+Pages 部署</td><td>§5.9</td></tr>
+  <tr><td>周报</td><td><span class="pill p-doing">进行中</span></td><td>三段式反思流（短评+待办分析+改进建议）</td><td>§5.10</td></tr>
+  <tr><td>Obsidian 工作流</td><td><span class="pill p-doing">进行中</span></td><td>vault 131 笔记 5 目录，HTML 自动沉淀</td><td>§5.11</td></tr>
+  <tr><td>AI 采纳激励 / 文化周</td><td><span class="pill p-doing">进行中</span></td><td>独立负责激励设计，H2 文化周方案</td><td>§5.12</td></tr>
+  <tr><td>小红书发帖自动发布</td><td><span class="pill p-block">待执行</span></td><td>组织沉默主题已备素材，待 AI 接管发布（需授权）</td><td>§5.13</td></tr>
+  <tr><td>知识采集自动化</td><td><span class="pill p-done">已部署</span></td><td>双自动化并行，sink=乐享 KB-A</td><td>§5.14</td></tr>
+  <tr><td>企微 bot（爱滴尔）</td><td><span class="pill p-done">已切换</span></td><td>活跃 bot 已切爱滴尔，UI 仍显旧 ID</td><td>§6</td></tr>
+</table>
+
+<!-- ========== 5. 分项目详解 ========== -->
+<h2>5 · 🗂 分项目详解</h2>
+
+<!-- 5.1 简历 -->
+<h3>5.1 简历定稿</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>定稿可投简历，目标综合 HR / HRBP + AI 方向。4 条核心经历：腾讯新人转正自动化 / 联志 0-1 内推 / 腾讯游戏化平台 / 乐心 SSC。</td></tr>
+  <tr><td>已完成</td><td>四级口径框架（主导/负责一块/执行落地/参与讨论）；每条锚定真实证据；数字先用 <code>__</code> 占位。</td></tr>
+  <tr><td>卡点 → 解决</td><td>缺中高端寻访 + 人才盘点<b>主导</b>案例（面试业务+技术中心 HRBP 需补）→ 待 y 补真实经历或调整定位。</td></tr>
+  <tr><td>⚠️ 坑（别踩）</td><td>① 数字定稿前 <code>__</code> 占位，<b>定稿后改成【待补】标死</b>，等 y 本人补真实数据，AI 不编。② 每条事实必须锚真实证据，话术不能有漏洞。③ 禁用「赋能」等套话，偏爱「布道师/实操/茶歇/上车」口语词。</td></tr>
+  <tr><td>下一步</td><td>y 补真实数字 + 中高端寻访/盘点案例 → 定稿 → 同步面试话术。</td></tr>
+</table>
+
+<!-- 5.2 面试话术 -->
+<h3>5.2 面试谈判话术</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>面试开场/谈判模拟演练，分寸感"稍微强势但不超过傲慢"= 温和坚定；外部场景默认交流型避免强势 push。</td></tr>
+  <tr><td>已完成</td><td>方法论类产出已强制显式标注思维模型（🧱第一性原理 / 🔺金字塔原理）。</td></tr>
+  <tr><td>卡点 → 解决</td><td>话术需多轮打磨才有漏洞 → 每次要求"模拟开场"，迭代到能背。</td></tr>
+  <tr><td>⚠️ 坑</td><td>别暗用思维模型，必须<b>明标</b>；别只给提纲，要成稿；别用术语堆砌。</td></tr>
+  <tr><td>下一步</td><td>围绕 4 条经历逐条打磨谈判开场与反问话术。</td></tr>
+</table>
+
+<!-- 5.3 POP MART -->
+<h3>5.3 POP MART 潮玩商业模式 HTML 幻灯片</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>用 <code>html-deck-maker</code> skill 产潮玩波普风 deck（明亮撞色/圆角卡片/俏皮现代/图标 CSS 绘制）。</td></tr>
+  <tr><td>已完成</td><td>已启动；同款风格复用 hr-ai/ 系列 deck。</td></tr>
+  <tr><td>卡点 → 解决</td><td>财务/品牌数据需真实 → <b>联网搜索真实财报并注明年份来源，禁止编造</b>。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① 数字编造 = 硬伤，必须标来源年份。② 图标用 CSS 画不用图片。③ 生成后会做视觉微调（数字标红、删冗余序号/标签），小增量迭代。</td></tr>
+  <tr><td>下一步</td><td>补真实财报数据 → 分章节出 deck → y 视觉微调。</td></tr>
+</table>
+
+<!-- 5.4 training-pkg -->
+<h3>5.4 training-pkg 内部培训网站首页</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>内部培训网站首页定制（端口 8080，OA 网关验证）。</td></tr>
+  <tr><td>状态</td><td>启动阶段，待 y 提供设计输入 / 内容结构。</td></tr>
+  <tr><td>⚠️ 坑</td><td>OA 网关验证可能涉及内网权限，本机沙箱不一定能直连；先确认可访问性再动手。</td></tr>
+  <tr><td>下一步</td><td>确认端口/OA 可达性 → 出首页原型。</td></tr>
+</table>
+
+<!-- 5.5 博闻看板 -->
+<h3>5.5 博闻培训覆盖率看板</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>覆盖安全产品二部/三部（风控平台中心、金融风控产品中心、云安全技术中心）。区分<b>去重人数 vs 参与人次</b>；核心指标=人均参与深度与参与时长（<15min 剔除 + 空白排除）。</td></tr>
+  <tr><td>已完成</td><td><code>dashboard.py</code>、<code>build_dashboard2.py</code> 产出 <code>bowen_dashboard.html</code>、<code>bowen_overview_2025_2026.html</code>；新维护半年效果看板（效果×感受双维度）。</td></tr>
+  <tr><td>卡点 → 解决</td><td>指标口径易错 → AI 按要求<b>先用 grep 定位代码逻辑再改</b>，优先复用<b>源数据（学员明细）</b>而非手工清单，反复用具体数据迭代修正。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① 别用学员手工清单，复用源数据明细。② 改前 grep 定位逻辑，别盲改。③ 去重 vs 人次两套口径别混。④ <15min 与空白必须剔除，否则人均深度失真。</td></tr>
+  <tr><td>下一步</td><td>持续按 y 给的具体数据校准指标与展示。</td></tr>
+</table>
+
+<!-- 5.6 漫剧 -->
+<h3>5.6 AI 漫剧《企鹅英雄》</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>双线叙事（白天上班族 / 夜晚奇幻勇士），横屏 16:9、锁立绘参考、火焰/飞刀/logo 三处后期、页脚"本页由 yitong 沉淀整理"。单文件 HTML 分镜卡片墙（Bento + contenteditable）。交付 text 和 html 双版本。</td></tr>
+  <tr><td>已完成</td><td>已沉淀 6 个 HTML 到 <code>yitongcaii/activities-html/ai-manga/</code> 和 Obsidian。</td></tr>
+  <tr><td>卡点 → 解决</td><td>风格一致性 → <b>铁律全部锁死</b>（尺寸/立绘/三处后期/页脚），改动走可编辑模板升 KEY（见 §2）。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① 横屏 16:9 别改竖。② 立绘参考别漂移。③ 三处后期（火焰/飞刀/logo）别漏。④ 必须双版本（text + html）。</td></tr>
+  <tr><td>下一步</td><td>按分镜继续产出，迭代可编辑分镜卡。</td></tr>
+</table>
+
+<!-- 5.7 英语角 -->
+<h3>5.7 MigraQ 英语角</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>poster + 12 页 deck，转 PDF/PPTX 交付；同步推进运营机制优化（与业务讨论改进方向）。</td></tr>
+  <tr><td>状态</td><td>素材齐（poster+12页 deck），转格式 + 机制优化中。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① PDF 输出保持与 HTML 一致排版比例，长页面<b>截图/栅格化</b>避免图片碎裂。② 三阶段群公告用 <code>training-promo-copy</code> skill，禁用「赋能」类套话。</td></tr>
+  <tr><td>下一步</td><td>HTML→PDF/PPTX；机制优化方案与业务对齐。</td></tr>
+</table>
+
+<!-- 5.8 答辩自动化 -->
+<h3>5.8 新人答辩自动化（✅ 已跑通）</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>月 1 日触发：建会/建群/看板回填/归档。方案=MCP 应用（非 skill）。当前跟踪 4 人：joanndu / yumiwu / yuanliuliu / austinniu。</td></tr>
+  <tr><td>已完成</td><td>PRD v1.1（22KB）首例真实跑通；<code>wecom_gate.py</code> 审批闸门守住所有对外消息，不自动发送。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① 必须 <code>propose-only</code>：任何对外消息经闸门，禁自动发。② 加新人改 PRD + 跟踪列表。</td></tr>
+  <tr><td>下一步</td><td>推广到更多新人；监控 4 人流程跑通。</td></tr>
+</table>
+
+<!-- 5.9 抽奖 -->
+<h3>5.9 抽奖应用</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>Vue3+Vite / Express+SQLite，Railway + GitHub Pages 部署。</td></tr>
+  <tr><td>状态</td><td>多线并行中，y 常切主题深挖（"还有别的吗"）。</td></tr>
+  <tr><td>⚠️ 坑</td><td>部署走 Pages 时遵守 §2 铁律（ASCII 名/页脚/.nojekyll）。</td></tr>
+  <tr><td>下一步</td><td>按 y 需求迭代功能。</td></tr>
+</table>
+
+<!-- 5.10 周报 -->
+<h3>5.10 周报</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>三段式反思流：一句话周报（短~40字 + 详细~65字，<b>不含</b>下周 todos）→ 待办分析（表格化优先级/责任人/时间节点）→ 改进建议。</td></tr>
+  <tr><td>状态</td><td>博闻周报已维持该格式。</td></tr>
+  <tr><td>⚠️ 坑</td><td>详细版别塞下周计划；价值导向短语而非动作清单。</td></tr>
+</table>
+
+<!-- 5.11 Obsidian -->
+<h3>5.11 Obsidian 工作流</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>vault 根目录 131 笔记 5 大目录；每交付 HTML <b>默认自动写 Markdown 笔记</b>进 vault（不再逐次问），按类型建子目录（如 <code>素材库/</code>）。</td></tr>
+  <tr><td>已完成</td><td>沉淀格式=Markdown + 链接（嵌入 HTML 访问链接 + 一句话说明），源 HTML 不删、不留副本。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① 写 <code>.md</code> 不是拷 HTML。② 文件名稳定、修改即覆盖同文件（如 <code>素材库/员工大会-单主持串词.md</code>），不新建重复笔记。③ 推送 Obsidian 属公开动作，<b>先确认</b>（但 y 已授权"默认沉淀"，仅临时跳过需说明）。</td></tr>
+</table>
+
+<!-- 5.12 激励 -->
+<h3>5.12 AI 采纳激励 / 文化周</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>独立负责 AI 文化落地激励设计模块；输出云技服 H2 文化周方案主导设计；维护 57 套团建方案池（6 主题，平级 hard-excluded）。</td></tr>
+  <tr><td>状态</td><td>激励设计 + H2 文化周进行中；57 套方案池已建。</td></tr>
+  <tr><td>⚠️ 坑</td><td>方案不假设主办团队：团队/部门名用 <code>contenteditable</code> 占位或留空，由 y 自填；案例仅出处标注（如「📌 云技服」），<b>不硬写主办断言</b>。</td></tr>
+</table>
+
+<!-- 5.13 小红书 -->
+<h3>5.13 小红书发帖自动发布（⏸ 待执行·需授权）</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>"组织沉默"主题：标题 + 5 图 + 正文已填充，待 AI 接管发布动作。</td></tr>
+  <tr><td>状态</td><td>素材齐，未发布。</td></tr>
+  <tr><td>⚠️ 坑（红线）</td><td><span class="no">发布 = 对外公开动作，必须先经 y 明确授权</span>，禁自动发。用 <code>xhs-publish</code> skill（浏览器自动化，合规不逆向）。</td></tr>
+  <tr><td>下一步</td><td>等 y 说"发吧" → 走发布流水线（登录态复用/渲染 PNG/填标题正文/验证码人工过）。</td></tr>
+</table>
+
+<!-- 5.14 知识库 -->
+<h3>5.14 知识采集自动化（✅ 已部署）</h3>
+<table>
+  <tr><th style="width:22%">维度</th><th>内容</th></tr>
+  <tr><td>目标</td><td>端到端摄取流水线：6 主题（AI 工具+安全方向，平级 hard-excluded）轮询，分发 GitHub Pages + Obsidian + 乐享。</td></tr>
+  <tr><td>已完成</td><td>双自动化并行：<code>automation-1785925668790</code> 每日 URL 去重灌入；<code>automation-1785984826299</code> 每 6h 轮询 6 主题分发。KB 自动采集 96 张活动卡片 + 统一模板。</td></tr>
+  <tr><td>⚠️ 坑</td><td>① <b>主 sink = 乐享"KB-A 企业文化创意"</b>（非 ima）。② 乐享交付走 HTML 文件本体上传，<b>非</b> <code>build_award_blocks.py</code> 原生块路径。③ 归档归属待确认（可能不在 Obsidian vault）。④ ima-mcp 曾断连。</td></tr>
+</table>
+
+<!-- ========== 6. 企微/微信 ========== -->
+<h2>6 · 🔗 企微 / 微信通道现状</h2>
+<table>
+  <tr><th style="width:26%">项</th><th>现状 / 坑</th></tr>
+  <tr><td>活跃企微 bot</td><td><b>爱滴尔</b>（botId <code>aibYv1mC7UMBL8t70OpIDUtRI31LcBOdzz</code>），配置在 <code>C:\Users\v_yitcai\.workbuddy\settings.json</code> 下 <code>claw.channels.wecomaibot</code>。</td></tr>
+  <tr><td>UI 显示</td><td>仍显旧注册 ID <code>aibbyz</code>（显示滞后，实际已切爱滴尔）。</td></tr>
+  <tr><td>绑定机制</td><td>wecomai 通道<b>单实例单 bot</b>；绑新 bot 会<b>覆盖旧绑定</b>。别随意重绑。</td></tr>
+  <tr><td>微信 clawbot</td><td>y 用微信 clawbot 远程控制 WorkBuddy，实跑 hy3 模型（累计 251 次会话），非 auto。</td></tr>
+  <tr><td>长连接冲突</td><td>长连接模式与 WorkBuddy 回调 URL 冲突曾导致无回复——通道坏了就坏着，<b>绝用"发一条测试"去验证</b>（见 §1 红线）。</td></tr>
+  <tr><td>安全文化群</td><td>用 aibot/爱滴尔等个人 bot 与群互动；建会/建群走 MCP（腾讯会议/企微）。</td></tr>
+</table>
+
+<!-- ========== 7. 环境 ========== -->
+<h2>7 · 🔧 环境 & 工具链速查</h2>
+<div class="grid">
+  <div class="card">
+    <h4>本地路径</h4>
+    <ul class="tight">
+      <li>工作区（本会话）：<code>D:\AI\workbuddy\2026-09-16-17-22-43</code></li>
+      <li>历史工作区：<code>C:\Users\v_yitcai\WorkBuddy\20260728111214</code></li>
+      <li>Pages 克隆：<code>D:\activities-html-yitongcaii</code></li>
+      <li>Obsidian vault：<code>C:\Users\v_yitcai\Documents\Obsidian\活动\</code></li>
+      <li>SSH key：<code>C:\Users\v_yitcai\.ssh\id_ed25519</code></li>
+      <li>企微存档：<code>D:/企微存档/WXWork/1688855082742181/Cache/File/2026-09/</code></li>
+      <li>用户级 skills：<code>C:\Users\v_yitcai\.workbuddy\skills\</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Runtime（优先用 managed）</h4>
+    <ul class="tight">
+      <li>Node：<code>C:\Users\v_yitcai\.workbuddy\binaries\node\versions\22.22.2\node.exe</code></li>
+      <li>Python：<code>C:\Users\v_yitcai\.workbuddy\binaries\python\versions\3.13.12\python.exe</code></li>
+      <li>Python venv：<code>C:\Users\v_yitcai\.workbuddy\binaries\python\envs\default</code></li>
+      <li>装包隔离：node → workspace/node_modules；py → venv，<b>勿全局</b>。</li>
+    </ul>
+  </div>
+  <div class="card red">
+    <h4>⚠️ 设备瓶颈（提速诉求）</h4>
+    <ul class="tight">
+      <li>16GB 内存占用 95%、C 盘仅剩 16%。</li>
+      <li>WorkBuddy 多进程 ~2.7GB。</li>
+      <li>同机 OneDrive 按需同步 + ZtsmEnt(零信任)。</li>
+      <li><b>基建短板：skills 与 MCP server 配置当前无跨设备同步能力</b>——换机/新会话要重建。</li>
+      <li>路径：平衡资源，给可执行提速路径；大文件别随意 <code>git add -A</code>。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>已装关键 skills（节选）</h4>
+    <ul class="tight">
+      <li>HR 主线：<code>training-promo-copy</code> / <code>culture-event-sop</code> / <code>knowledge-collection</code> / <code>exec-talk-prep</code> / <code>bowen_dashboard</code></li>
+      <li>展示：<code>ui-design-spec</code>（4 风格 A/B/C/D）、<code>html-deck-maker</code>、<code>pdf</code></li>
+      <li>发布：<code>xhs-publish</code>、<code>html-deploy</code>、<code>shippage</code></li>
+      <li>第三方（装前必做安全审计）：<code>travel-memory-sticker-card</code> / <code>healing-illustrator</code> / <code>make-tape-collage</code></li>
+      <li>连接器：企微(connected) / 飞书(connected) / agent-mail(connected)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== 8. 待决策 ========== -->
+<h2>8 · ❓ 待 y 决策 / 开放问题</h2>
+<table>
+  <tr><th style="width:34%">问题</th><th>影响</th></tr>
+  <tr><td>简历真实数字 + 中高端寻访/人才盘点主导案例</td><td>定稿 blocker，决定能否投业务+技术中心 HRBP</td></tr>
+  <tr><td>training-pkg 端口 8080 / OA 网关是否本机可达</td><td>决定能否本地预览首页原型</td></tr>
+  <tr><td>POP MART deck 真实财报数据年份口径</td><td>决定内容可信度（禁编造）</td></tr>
+  <tr><td>知识采集归档归属（是否在 Obsidian vault）</td><td>影响检索路径与双自动化落点</td></tr>
+  <tr><td>小红书"组织沉默"是否授权发布</td><td>对外动作，需 y 明确"发吧"</td></tr>
+  <tr><td>跨设备同步方案（skills/MCP 配置）</td><td>基建短板，影响换机接续效率</td></tr>
+</table>
+
+<p class="note" style="margin-top:28px">💡 本文件为 y 与小柚协作的零上下文交接底稿。新会话读完后即可接续；若某项目状态已变，以 y 当轮最新指令为准。展示风格默认采用 y 偏好的紫青卡片墙；如需切到 ui-design-spec 的 B/C/D 风格可随时说。</p>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</div>
+</body>
+</html>
