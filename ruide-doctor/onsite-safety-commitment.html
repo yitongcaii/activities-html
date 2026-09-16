@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>进场人员（安全·保密）承诺书</title>
+<style>
+  :root{ --brand:#2f7d4f; --brand2:#3aa0c4; }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:#1f2933;background:#f5f7fa;line-height:1.75;}
+  .wrap{max-width:820px;margin:0 auto;padding:32px 24px 60px;background:#fff;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.05);}
+  header{padding:26px 28px;border-radius:16px;background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;margin-bottom:24px;}
+  header h1{margin:0;font-size:24px;letter-spacing:1px;}
+  header p{margin:8px 0 0;font-size:13px;opacity:.92;}
+  h2{font-size:17px;margin:26px 0 10px;color:var(--brand);border-left:4px solid var(--brand);padding-left:10px;}
+  .intro{background:#f0f7f2;border:1px solid #d6e9dd;border-radius:12px;padding:16px 18px;font-size:14px;color:#33414a;}
+  ol.clause{counter-reset:c;padding-left:0;list-style:none;margin:0;}
+  ol.clause>li{position:relative;padding:14px 16px 14px 52px;margin-bottom:12px;background:#fafbfc;border:1px solid #eef1f4;border-radius:12px;}
+  ol.clause>li::before{counter-increment:c;content:counter(c);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  ol.clause>li b{color:var(--brand);}
+  .key{background:#fff3cd;padding:1px 5px;border-radius:4px;font-weight:600;}
+  .editable{background:#fff3cd;border-bottom:1px dashed #e0a800;padding:0 4px;border-radius:4px;min-width:90px;display:inline-block;}
+  .sign{margin-top:26px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:20px;}
+  .sign .row{display:flex;flex-wrap:wrap;gap:18px 40px;font-size:14px;margin:10px 0;}
+  .sign .row span{flex:1 1 240px;}
+  .note{margin-top:22px;font-size:12.5px;color:#6b7785;background:#f7f9fb;border-radius:10px;padding:14px 16px;}
+  .note b{color:#33414a;}
+  footer{margin-top:30px;text-align:center;font-size:12.5px;color:#9aa5b1;}
+  @media print{
+    body{background:#fff;}
+    .wrap{box-shadow:none;max-width:100%;padding:0 8px;}
+    header{ -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    .editable{background:transparent;border-bottom:1px solid #999;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>进场人员（安全 · 保密）承诺书</h1>
+    <p>适用于非劳动关系进场人员（实习 / 外包 / 劳务 / 兼职 / 退休返聘等）</p>
+  </header>
+
+  <div class="intro">
+    本人因 <span class="editable" contenteditable="true">【项目合作 / 实习 / 劳务服务 / 其他】</span> 需要进入 <span class="editable" contenteditable="true">【公司全称】</span>（下称"公司"）办公、研发、生产或实验场所，或使用公司系统、设备、数据。为明确双方关系与责任边界，本人自愿签署本承诺书。
+  </div>
+
+  <h2>承诺内容</h2>
+  <ol class="clause">
+    <li><b>现场安全：</b>遵守公司现场安全管理规定，包括药品生产 / 实验区域准入、个人防护用品穿戴、设备操作规范、消防与应急要求；未经许可不进入受限区域、不操作非授权设备。</li>
+    <li><b>保密义务：</b>对接触到的公司药品配方、生产工艺、检测数据、客户（宠物医院与渠道）信息、经营信息等保密信息严格保密；不拍摄、复制、下载、外传，不用于任何与公司无关的用途。<span class="key">离场后保密义务持续有效</span>。</li>
+    <li><b>基本行为规范：</b>遵守公司基本公共秩序与行为规范，不从事损害公司利益或声誉的行为。</li>
+    <li><b>关系确认（核心）：</b>本承诺书仅约束本人在公司场所 / 系统内的安全与保密行为，<span class="key">不构成本人与公司之间的任何劳动关系、劳务关系或雇佣关系</span>。本人知晓：本人的工资报酬、社会保险、工伤、工时等权利义务，由其签约主体（如外包公司、学校、劳务公司等第三方）依据其与本人的协议承担，与公司无关。</li>
+    <li><b>违约后果：</b>如违反上述承诺，公司有权立即终止本人的进场权限、拒绝其进入场所；造成公司损失的，公司有权依法及依相关协议追究赔偿责任。</li>
+  </ol>
+
+  <div class="sign">
+    <div class="row">
+      <span>承诺人（签字）：________________</span>
+      <span>身份证号码：____________________</span>
+    </div>
+    <div class="row">
+      <span>所属单位 / 签约主体：________________</span>
+      <span>进场事由：________________</span>
+    </div>
+    <div class="row">
+      <span>日期：______ 年 ____ 月 ____ 日</span>
+    </div>
+  </div>
+
+  <div class="note">
+    · 本承诺书一式两份，承诺人留存一份、公司留存一份。<br>
+    · 可通过 <b>飞书表单</b> 提交签署扫描件或上传（可选，依公司流程）。<br>
+    · 黄色高亮处为可编辑占位，由公司于下发前填写真实信息；现场安全条款可按实际场所进一步细化。
+  </div>
+
+  <footer>本承诺书由 <span class="editable" contenteditable="true">【公司全称】</span> 人力资源部制发</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>员工手册</title>
+<style>
+  :root{
+    --ink:#1f2330; --sub:#5b6172; --line:#e6e8f0;
+    --brand:#4c3a8c; --brand2:#2bb5b5; --soft:#f5f6fc;
+    --warn:#b8860b; --warnbg:#fff7e0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+    color:var(--ink);background:#eef0f7;line-height:1.75;font-size:15px}
+  header.top{background:linear-gradient(120deg,var(--brand),var(--brand2));
+    color:#fff;padding:38px 6vw 30px}
+  header.top h1{margin:0 0 6px;font-size:30px;letter-spacing:2px}
+  header.top .meta{opacity:.92;font-size:13px}
+  .wrap{display:flex;align-items:flex-start;gap:26px;max-width:1180px;margin:0 auto;padding:26px 4vw 60px}
+  nav.toc{position:sticky;top:18px;flex:0 0 230px;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:16px 14px;font-size:13.5px;max-height:88vh;overflow:auto}
+  nav.toc h4{margin:0 0 10px;color:var(--brand);font-size:13px;letter-spacing:1px}
+  nav.toc a{display:block;color:var(--sub);text-decoration:none;padding:5px 8px;border-radius:8px}
+  nav.toc a:hover{background:var(--soft);color:var(--brand)}
+  main{flex:1;min-width:0}
+  section.card{background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:22px 26px;margin-bottom:20px;box-shadow:0 4px 18px rgba(60,50,120,.05)}
+  section.card h2{margin:0 0 4px;font-size:21px;color:var(--brand);
+    border-left:4px solid var(--brand2);padding-left:12px}
+  section.card .tag{display:inline-block;font-size:11px;color:#fff;background:var(--brand2);
+    border-radius:20px;padding:1px 10px;margin-left:8px;vertical-align:middle}
+  section.card .tag.legal{background:#c0392b}
+  section.card .tag.soft{background:var(--warn)}
+  h3{font-size:16px;color:#333a4d;margin:20px 0 6px}
+  p,li{color:#333a4d}
+  ul{padding-left:20px}
+  .editable{background:var(--warnbg);border-bottom:1px dashed var(--warn);
+    padding:0 4px;border-radius:4px;color:#7a5b00;cursor:text}
+  .note{background:var(--soft);border-left:3px solid var(--brand2);
+    padding:10px 14px;border-radius:8px;font-size:13.5px;color:var(--sub);margin:12px 0}
+  .legal-box{background:#fdecea;border-left:3px solid #c0392b;padding:10px 14px;
+    border-radius:8px;font-size:13.5px;margin:12px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--soft);color:var(--brand)}
+  footer{padding:24px 6vw 40px;color:var(--sub);font-size:12.5px;text-align:center;border-top:1px solid var(--line)}
+  @media(max-width:860px){nav.toc{display:none}.wrap{padding:18px}}
+  @media print{body{background:#fff}nav.toc{display:none}
+    header.top{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section.card{box-shadow:none;break-inside:avoid}}
+  /* 封面 */
+  .cover{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:40px 6vw;background:linear-gradient(160deg,#fff 30%,#f3f1fb)}
+  .cover-logo{width:160px;height:60px;border:2px dashed var(--brand);border-radius:10px;
+    display:flex;align-items:center;justify-content:center;color:var(--brand);
+    font-size:13px;margin-bottom:26px;opacity:.7}
+  .cover-art{width:200px;height:120px;margin-bottom:18px;stroke:var(--brand)}
+  .cover-title{font-size:42px;font-weight:700;letter-spacing:10px;color:var(--brand)}
+  .cover-sub{font-size:18px;color:var(--sub);letter-spacing:8px;margin-top:4px}
+  .cover-slogan{margin-top:18px;font-size:15px;color:var(--brand2);letter-spacing:3px}
+  .cover-foot{margin-top:36px;font-size:13px;color:var(--sub)}
+  /* 密级卡 */
+  .level-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+  .level-card{border-radius:10px;padding:12px;font-size:12.5px;border:1px solid var(--line);color:#333a4d}
+  .level-card b{display:block;font-size:14px;margin-bottom:4px}
+  .l-public{background:#f4f5f7}.l-internal{background:#eaf2fb}
+  .l-conf{background:#fdeee0}.l-secret{background:#fdecea}
+  /* 红线框 */
+  .redline{border:1.5px solid var(--brand);border-left:5px solid #c0392b;background:#faf9ff;
+    border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13.5px;color:#333a4d}
+  .redline .rl-title{color:#c0392b;font-weight:700;margin-bottom:6px;font-size:13.5px}
+  @media print{.cover{min-height:auto;break-after:page}
+    .level-grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-logo">公司 LOGO 占位</div>
+  <svg class="cover-art" viewBox="0 0 200 120" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="118" y="38" width="46" height="66" rx="6"/>
+    <rect x="128" y="26" width="26" height="14" rx="3"/>
+    <line x1="141" y1="50" x2="141" y2="92"/><line x1="121" y1="71" x2="161" y2="71"/>
+    <path d="M28 96 q-7 -36 24 -36 q31 0 24 36"/>
+    <path d="M28 62 l-7 -18 l18 9"/><path d="M76 62 l7 -18 l-18 9"/>
+    <circle cx="44" cy="80" r="2.6" fill="#4c3a8c" stroke="none"/>
+    <circle cx="60" cy="80" r="2.6" fill="#4c3a8c" stroke="none"/>
+    <path d="M48 90 q4 4 8 0"/>
+  </svg>
+  <div class="cover-title">瑞德医生</div>
+  <div class="cover-sub">员 工 手 册</div>
+  <div class="cover-slogan">人药标准 · 做兽药</div>
+  <div class="cover-foot">深圳市瑞德制药有限公司</div>
+</div>
+<header class="top">
+  <h1>深圳市瑞德制药有限公司 <span style="font-size:18px;opacity:.85">（瑞德医生）</span> 员工手册</h1>
+  <div class="meta">版本 V1.0 ｜ 生效日期：<span class="editable" contenteditable="true">【YYYY-MM-DD】</span> ｜ 适用对象：全体正式员工</div>
+</header>
+
+<div class="wrap">
+  <nav class="toc">
+    <h4>目录</h4>
+    <a href="#c1">一、总则</a>
+    <a href="#c2">二、入职管理</a>
+    <a href="#c3">三、工时与考勤</a>
+    <a href="#c4">四、薪酬与福利</a>
+    <a href="#c5">五、假期管理</a>
+    <a href="#c6">六、绩效与发展</a>
+    <a href="#c7">七、行为准则与纪律</a>
+    <a href="#c8">八、保密与信息安全</a>
+    <a href="#c9">九、离职管理</a>
+    <a href="#c10">十、附则</a>
+  </nav>
+
+  <main>
+    <section class="card" id="c1">
+      <h2>一、总则 <span class="tag">基础</span></h2>
+      <h3>1.1 欢迎辞</h3>
+      <p>欢迎加入 <span class="editable" contenteditable="true">瑞德医生</span>。我们是人药级兽药的开创者和领导者，坚持"像对待家人一样对待它的健康"。本手册旨在帮助您快速了解公司的制度安排与基本准则，使您在职期间的各项权利义务清晰、可预期。手册内容如与国家法律法规及当地规定不一致，以法律法规及当地规定为准。</p>
+      <h3>1.2 适用范围</h3>
+      <p>本手册适用于与公司签订书面劳动合同、建立劳动关系的全体正式员工，规范双方基于劳动关系的权利义务。</p>
+      <p><b>地域适用：</b>本手册按<b>深圳地区</b>劳动用工标准制定（含最低工资、假期天数、社保公积金基数等）。公司如设有异地分支机构或派驻异地工作的员工，其假期、最低工资、社保缴纳地等按劳动合同履行地或当地规定及公司另行制度执行；本手册与当地强制性规定冲突的，以当地规定为准。</p>
+      <p>实习、外包、劳务、兼职、退休返聘等<b>未与公司建立劳动关系</b>的人员，其权利义务以相应协议（实习协议 / 外包合同 / 劳务派遣协议等）为准，<b>不适用本手册关于劳动关系存续期间的管理条款（考勤、假期、薪酬、绩效、处分与解除等）</b>。</p>
+      <p>上述非劳动关系人员进入公司场所工作的，须遵守现场安全管理、保密与基本行为规范等要求；该等要求仅为场地管理需要，<b>不构成任何劳动关系或用工关系的建立</b>，公司亦不因此承担用人单位责任。</p>
+      <h3>1.3 公司概况</h3>
+      <p>瑞德医生是人药级兽药的开创者和领导者，秉持"人药标准做兽药"的理念，让每一只宠物都能享受人药同标准的安全、专业、高品质健康守护。公司拥有国内唯一一家按美国 FDA 标准建设的人药级口服及外用宠物药工厂，研发联合国家兽药与人药研究中心及多所高校院所，产品覆盖耳科、皮肤、驱虫、骨关节、心血管、肠胃等全科系，线上全域电商与线下 5000+ 宠物医院、10000+ 零售网点协同覆盖，并由 PICC 中国人民保险承保。</p>
+      <h3>1.4 使命 · 愿景 · 价值观</h3>
+      <p>
+      <b>使命：</b>给它可靠的药，让你安心的药——让每一只宠物都能享受人药同标准的安全、专业、高品质的健康守护。<br>
+      <b>愿景：</b>成为人药级兽药的开创者和领导者，重构兽药安全新高度。<br>
+      <b>核心价值观：</b>像对待家人一样对待它的健康；以人药标准做事（源头高纯、严检严判、精准临床、全程无菌）；合规可溯源，坚守品质底线。
+      </p>
+    </section>
+
+    <section class="card" id="c2">
+      <h2>二、入职管理 <span class="tag legal">法定必备</span></h2>
+      <h3>2.1 报到与材料</h3>
+      <p>入职当日，员工须按要求提交身份证明、学历证明、离职证明、银行卡及社保相关材料，并配合完成入职登记。</p>
+      <h3>2.2 试用期</h3>
+      <div class="legal-box">
+        依据《劳动合同法》第十九条、第二十条：<br>
+        · 合同期限 3 个月以上不满 1 年，试用期 ≤ 1 个月；<br>
+        · 1 年以上不满 3 年，试用期 ≤ 2 个月；<br>
+        · 3 年以上固定期限或无固定期限，试用期 ≤ 6 个月；<br>
+        · 同一单位与同一劳动者只能约定一次试用期；<br>
+        · 试用期工资 ≥ 转正工资的 80%，且 ≥ 用人单位所在地最低工资标准。
+      </div>
+      <h3>2.3 劳动合同</h3>
+      <p>入职之日起 <span class="editable" contenteditable="true">【1 个月内，法定上限】</span> 签订书面劳动合同。合同明确岗位、地点、期限、薪酬等核心条款，是双方权利义务的基础文件。员工经公司书面通知后逾期不签订书面劳动合同的，公司可依法终止劳动关系，并结清实际工作期间的劳动报酬。</p>
+      <h3>2.4 社会保险与住房公积金</h3>
+      <p>公司依法为员工缴纳养老、医疗、失业、工伤、生育保险及住房公积金，起缴时间与基数按当地政策及公司规定执行。</p>
+      <h3>2.5 职务成果与知识产权</h3>
+      <p>员工在职期间、利用公司资源或履行职务所完成的发明创造、作品、技术成果（含配方、工艺、检测数据等）、文档等职务成果，其知识产权归公司所有。离职后不得私自保留或对外披露。</p>
+      <h3>2.6 试用期录用条件确认 <span class="tag legal">合规重点</span></h3>
+      <p>入职时，员工通过 <b>飞书入职流程表单</b> 确认《录用条件确认书》，明确岗位要求、考核标准与转正条件。试用期内被证明不符合录用条件的，公司可依据《劳动合同法》第三十九条第一项依法解除劳动合同。</p>
+      <h3>2.7 员工个人信息处理告知</h3>
+      <div class="legal-box">
+        依据《个人信息保护法》第十三条、第十七条、第二十九条：公司为用工管理之目的处理员工个人信息（含身份、学历、入职体检、背景调查、考勤与薪酬记录等），已通过本手册告知处理目的、方式与范围。<b>其中健康、医疗、生物识别等敏感个人信息，依法须取得您的"单独同意"</b>，不通过本手册概括授权——员工入职时须另行签署《员工个人信息处理同意书》（含敏感信息处理专项授权），未签署不得收集相关敏感信息。公司严格将上述信息用于用工管理必要范围并保密，不用于无关目的。
+      </div>
+    </section>
+
+    <section class="card" id="c3">
+      <h2>三、工时与考勤 <span class="tag legal">法定必备</span></h2>
+      <h3>3.1 工时制度</h3>
+      <div class="legal-box">
+        依据《劳动法》第三十六条、第三十八条：标准工时制为每日工作 ≤ 8 小时、平均每周 ≤ 40 小时，每周至少休息 1 日。不定时工作制或综合计算工时制须依法经行政审批后方可适用。
+      </div>
+      <h3>3.2 考勤方式</h3>
+      <p>公司采用 <span class="editable" contenteditable="true">【打卡系统 / 工时填报 / 系统日志】</span> 记录出勤。员工须真实、及时完成考勤，不得代打卡、虚构出勤。</p>
+      <h3>3.3 迟到、早退与旷工</h3>
+      <p>迟到/早退、旷工的具体认定标准与处理，按公司考勤制度执行。月度迟到/早退累计 <span class="editable" contenteditable="true">【请填写：如 3 次】</span> 次及以上，将影响当期考勤评价。</p>
+      <div class="legal-box">
+        旷工界定与后果：未经批准缺勤视为旷工。<span class="editable" contenteditable="true">【连续旷工 3 天】</span> 或 <span class="editable" contenteditable="true">【一年内累计旷工 5 天】</span> 及以上，属严重违反规章制度，公司可依据《劳动合同法》第三十九条立即解除劳动合同且无需支付经济补偿（即视为自动离职）。具体天数可按公司制度调整。
+      </div>
+      <h3>3.4 加班管理</h3>
+      <div class="legal-box">
+        加班须事先审批，员工应在加班前通过飞书提交加班申请并经主管批准；<b>未经事先审批的延长工作时间，不视为加班，公司不支付加班工资</b>。依据《劳动法》第四十四条：<br>
+        · 工作日延长工作时间，支付 ≥ 150% 工资；<br>
+        · 休息日安排工作且不能补休，支付 ≥ 200% 工资；<br>
+        · 法定休假日安排工作，支付 ≥ 300% 工资。<br>
+        每月加班时长原则上不超过 36 小时。
+      </div>
+      <h3>3.5 远程与混合办公<span class="editable" contenteditable="true">【可选：填写适用范围 / 响应要求 / 在岗认定】</span></h3>
+      <p>技术团队如适用远程或混合办公，员工须确保工作时间内可联络、按要求响应，并遵守信息安全相关规定（详见第八章）。</p>
+    </section>
+
+    <section class="card" id="c4">
+      <h2>四、薪酬与福利 <span class="tag soft">模糊处理</span></h2>
+      <div class="note">本章为概览。具体薪酬结构、发放标准、调薪规则及各项福利细则，以您与公司签订的《劳动合同》约定及公司届时有效的薪酬安排为准，本手册不作逐项列示。</div>
+      <h3>4.1 薪酬结构</h3>
+      <p>员工薪酬由固定部分与浮动/绩效部分构成，具体组成、标准与发放口径以《劳动合同》约定为准。</p>
+      <h3>4.2 发薪</h3>
+      <p>公司每月 <span class="editable" contenteditable="true">【请填写：如 10 日】</span> 发放上月工资，遇节假日顺延。工资以银行转账方式支付。</p>
+      <h3>4.3 调薪</h3>
+      <p>调薪结合公司经营状况、岗位变化与个人绩效表现，由公司根据经营管理需要统筹确定。</p>
+      <h3>4.4 社会保险与住房公积金</h3>
+      <p>依法缴纳（同 2.4），个人应承担部分由公司代扣代缴。</p>
+    </section>
+
+    <section class="card" id="c5">
+      <h2>五、假期管理 <span class="tag legal">法定必备</span></h2>
+      <h3>5.1 法定节假日</h3>
+      <p>按国务院规定执行，全年 11 天（元旦、春节、清明、劳动、端午、中秋、国庆）。</p>
+      <h3>5.2 带薪年休假</h3>
+      <div class="legal-box">
+        依据《职工带薪年休假条例》第三条：<br>
+        · 累计工作满 1 年不满 10 年：5 天 / 年；<br>
+        · 满 10 年不满 20 年：10 天 / 年；<br>
+        · 满 20 年及以上：15 天 / 年。<br>
+        新入职员工当年度天数按剩余日历天数折算。
+      </div>
+      <h3>5.3 病假与医疗期</h3>
+      <div class="legal-box">
+        医疗期按《企业职工患病或非因工负伤医疗期规定》执行（如实际工作年限 10 年以下、在本单位工作年限 5 年以下为 3 个月；5 年以上为 6 个月；10 年以上逐级递增）。<br>
+        病假工资依据《深圳市员工工资支付条例》第二十三条：不低于本人正常工作时间工资的 60%，且不低于本市最低工资标准的 80%（深圳市 2026 年最低工资为 2520 元/月）。
+      </div>
+      <h3>5.4 事假</h3>
+      <p>因私请假须提前申请并获批；事假期间一般不发薪，具体按考勤制度执行。</p>
+      <h3>5.5 婚假 / 产假 / 陪产 / 育儿假</h3>
+      <div class="legal-box">
+        依据《广东省人口与计划生育条例》及《广东省职工假期待遇和死亡抚恤待遇规定》（粤人社规〔2023〕17号），深圳执行：<br>
+        · 婚假：3 天（双方异地可据路程给路程假）；<br>
+        · 产假：98 天 + 80 天奖励假 = 178 天；难产增 30 天，多胞胎每婴增 15 天；<br>
+        · 陪产假：男方 15 天；<br>
+        · 育儿假：子女 3 周岁内，父母每年各 10 天（按子女周年计算，可拆分 ≤2 次）。<br>
+        公司依法履行对女职工的特殊劳动保护，产假/奖励假/陪产假/育儿假期内照发工资，不得因结婚、怀孕、生育降低待遇或解除合同。
+      </div>
+      <h3>5.6 丧假与独生子女护理假</h3>
+      <p><b>丧假：</b>直系亲属（父母、配偶、子女）去世给予 3 天丧假；配偶父母去世经批准后给予 3 天；异地料理可据路程给路程假。</p>
+      <p><b>独生子女护理假：</b>依据粤人社规〔2023〕1号，独生子女父母一方年满 60 周岁，其子女每年享 5 天护理假；父母患病住院治疗的，每年累计不超过 15 天（可拆分 ≤2 次，需提供诊断/住院证明）。</p>
+      <h3>5.7 请假流程（飞书）</h3>
+      <p>所有假期须通过 <b>飞书请假表单</b> 提前申请并经审批；紧急情况须事后 24 小时内通过飞书及时补办。病假须上传正规医疗机构证明。</p>
+      <h3>5.8 病假真实性复核</h3>
+      <p>公司对病假真实性保留复核权。对存疑的病假，公司可通过飞书要求员工到指定（二甲及以上）医院复诊或补充诊断材料；无正当理由拒绝复核或经查实虚假病假的，按旷工或严重违纪处理，并处相应纪律处分。</p>
+    </section>
+
+    <section class="card" id="c6">
+      <h2>六、绩效与发展 <span class="tag soft">模糊处理</span></h2>
+      <div class="note">本章为概览。绩效考核的周期、方式、结果应用及职业发展、晋升安排，由公司根据经营管理需要组织实施，并以届时有效的公司相关规定及《劳动合同》约定为准。</div>
+      <h3>6.1 绩效考核</h3>
+      <p>公司定期开展绩效考核，作为薪酬调整、晋升、培训与发展的参考依据。员工应按时完成目标设定与回顾。</p>
+      <h3>6.2 职业发展</h3>
+      <p>公司提供管理序列与专业/技术序列双通道发展路径（含技术职级 T 级体系），具体晋升条件与评审流程以公司相关规定为准。</p>
+      <h3>6.3 培训</h3>
+      <p>公司提供在岗培训、专业认证等学习资源，支持员工能力提升。</p>
+    </section>
+
+    <section class="card" id="c7">
+      <h2>七、行为准则与纪律 <span class="tag legal">法定必备</span></h2>
+      <h3>7.1 职业道德</h3>
+      <p>员工须诚实守信、勤勉尽责，维护公司利益与声誉，不得从事与职务相冲突的谋取私利行为。</p>
+      <h3>7.2 利益冲突与兼职申报</h3>
+      <p>员工如与供应商、客户、竞争对手存在亲属、投资或兼职等可能影响公正履职的关系，须主动申报。员工不得在与公司有竞争关系的单位兼职、持股或提供服务；未经书面批准的兼职，一经查实视为严重违反规章制度。利益冲突情形可通过 <b>飞书</b> 向合规负责人申报。</p>
+      <h3>7.3 反舞弊与反贪腐</h3>
+      <p>严禁收受回扣、索贿行贿、虚报费用、侵占资产等行为。一经查实，公司将依规严肃处理并保留追究法律责任的权利。</p>
+      <h3>7.4 平等、反骚扰与职场暴力零容忍</h3>
+      <div class="legal-box">
+        依据《妇女权益保障法》（2023 修订）第二十五条，用人单位负有防止和制止职场性骚扰的法定义务。公司禁止任何形式歧视、骚扰（含性骚扰）与霸凌，营造安全、尊重的工作环境。相关情况可通过 <b>飞书举报通道</b> 如实反映，公司承诺对反映人信息保密并依规调查（本通道为合规举报入口，非争议申诉流程）。
+      </div>
+      <h3>7.5 处分等级</h3>
+      <p>违纪视情节给予提醒、警告、记过直至解除劳动合同等处理。</p>
+      <div class="legal-box">
+        依据《劳动合同法》第三十九条，员工有下列情形之一，公司可解除劳动合同且无需支付经济补偿：<br>
+        · 试用期被证明不符合录用条件；<br>
+        · 严重违反规章制度；<br>
+        · 严重失职、营私舞弊，造成重大损害；<br>
+        · 同时与其他单位建立劳动关系且拒不改正；<br>
+        · 因欺诈胁迫致使合同无效；<br>
+        · 被依法追究刑事责任。
+      </div>
+      <h3>7.6 严重违纪行为清单（可立即解除）</h3>
+      <div class="legal-box">
+        为明确《劳动合同法》第三十九条"严重违反规章制度"的具体标准，下列行为一经查实，公司可立即解除劳动合同且无需支付经济补偿：<br>
+        · 严重违反信息安全/保密规定，泄露药品配方、工艺、检测数据、客户或公司核心数据；<br>
+        · 伪造、虚构考勤、报销、病假等记录或材料；<br>
+        · 严重失职、营私舞弊，给公司造成重大损害（含经济损失、质量/安全事故、监管处罚）；<br>
+        · 贪污、受贿、索贿、侵占资产或应申报的利益冲突未申报；<br>
+        · 连续旷工或累计旷工达到第三章规定标准；<br>
+        · 在职期间未经批准的同类竞争业务兼职/持股；<br>
+        · 暴力、骚扰、赌博、吸毒或受刑事处罚等严重影响履职或公司声誉的行为；<br>
+        · 利用公司名义、账号、资源谋取私利，或散布不实信息损害公司声誉与利益；<br>
+        · 其他给公司造成重大损害或严重违反职业操守、公序良俗的情形。<br>
+        公司界定"重大损害"包括但不限于：造成直接经济损失 ≥ <span class="editable" contenteditable="true">【5000】</span> 元；导致药品质量/生产/安全事故；受到监管处罚；泄露商业秘密或技术秘密；造成公司重大声誉损害。具体以公司《员工违纪与处分制度》为准；处分前公司依 7.7 保障员工陈述权利。
+      </div>
+      <h3>7.7 调查与陈述申辩</h3>
+      <p>在违纪调查与处分决定作出前，公司保障员工就相关事实进行陈述与申辩的权利（可通过飞书或书面提交）。本权利为程序性保障，不等于设立争议申诉渠道，不妨碍公司依证据与制度作出处理。</p>
+      <h3>7.8 职业安全健康与工伤管理</h3>
+      <div class="note">本公司涉及药品生产等作业环节，职业安全健康是法定底线，与信息安全（第八章）互为补充。</div>
+      <p>员工须遵守操作规程、正确使用防护用品，不得违章作业；进入生产、实验、仓储等受控区域须按 GMP 与岗位 SOP 操作，禁止违规处置危化品或药品物料，发现隐患立即上报。</p>
+      <div class="legal-box">
+        依据《工伤保险条例》及深圳细则：员工发生事故伤害，公司应在 24 小时内报告、30 日内提出工伤认定申请。员工及部门负有配合义务——须事发后通过 <b>飞书工伤申报表单</b> 第一时间提交，如实说明事发时间、地点、原因并配合调查与救治。故意隐瞒、谎报或拖延致无法认定的，公司依法不承担由此扩大的责任，并可视情节按严重违纪处理。
+      </div>
+      <div class="redline">
+        <div class="rl-title">安全红线</div>
+        进入生产、实验、仓储等受控区域须按 GMP 更衣与准入流程，未经批准不得进入；接触活性物料须佩戴指定防护；禁止违规处置危化品或药品物料；发现隐患须立即上报。
+      </div>
+    </section>
+
+    <section class="card" id="c8">
+      <h2>八、保密与信息安全 <span class="tag legal">合规重点</span></h2>
+      <div class="note">本公司为宠物药品研发与生产企业，涉及药品配方、生产工艺、检测数据、客户（宠物医院与渠道）信息等敏感内容。信息安全与保密是合规生命线，请逐条遵守。</div>
+      <h3>8.1 保密义务</h3>
+      <p>员工对在职期间知悉的商业秘密、技术秘密、客户信息、经营数据等负有保密义务，该义务在离职后持续有效。</p>
+      <h3>8.2 数据分级与保护</h3>
+      <p>公司数据按敏感程度分级管理。涉及生产环境、研发环境、个人信息的操作须严格按权限与审批链执行，禁止未授权访问、导出、篡改；个人敏感信息须脱敏处理。</p>
+      <div class="level-grid">
+        <div class="level-card l-public"><b>公开</b>对外宣传、已公开信息</div>
+        <div class="level-card l-internal"><b>内部</b>普通经营信息、制度文件</div>
+        <div class="level-card l-conf"><b>机密</b>配方、工艺参数、批检验记录</div>
+        <div class="level-card l-secret"><b>绝密</b>注册申报资料、核心技术秘密</div>
+      </div>
+      <div class="redline">
+        <div class="rl-title">保密红线</div>
+        禁止未授权访问、导出、篡改生产/研发/个人信息数据；配方、工艺、批记录按密级管理，接触须走审批链；个人敏感信息须脱敏处理；离职后保密义务持续有效。
+      </div>
+      <h3>8.3 账号与网络安全</h3>
+      <p>员工须妥善保管账号口令，启用多因素认证，不共享账号、不越权操作；禁止使用公司网络与设备从事违法、违规或危害系统安全的活动。</p>
+      <h3>8.4 技术成果与知识产权</h3>
+      <p>工作成果（含技术成果、配方、工艺、检测数据、文档、设计等）归公司所有，须纳入公司统一管理，不得擅自外传、开源或用于私人用途。</p>
+      <h3>8.5 违规后果</h3>
+      <p>违反信息安全规定，视情节给予纪律处分；造成损失或泄露的，公司可追偿并依法追究刑事责任。</p>
+      <h3>8.6 保密延续与竞业限制衔接</h3>
+      <div class="legal-box">
+        保密义务延续：第八章所述保密义务自知悉之日起生效，<b>不因劳动合同解除或终止而终止</b>，员工离职后仍须永久保守公司商业秘密与技术秘密。<br>
+        竞业限制衔接：依据《劳动合同法》第二十四条，对负有保密义务的员工可约定竞业限制，期限不得超过二年；竞业须以<b>书面专项协议</b>另行签署，且公司在限制期内依法支付经济补偿——未签专项协议或未实际支付补偿的，竞业条款不生效。
+      </div>
+    </section>
+
+    <section class="card" id="c9">
+      <h2>九、离职管理 <span class="tag legal">法定必备</span></h2>
+      <h3>9.1 离职类型</h3>
+      <p>包括员工主动离职、双方协商解除、合同终止等。</p>
+      <h3>9.2 离职通知期</h3>
+      <div class="legal-box">
+        依据《劳动合同法》第三十七条：员工提前三十日书面通知公司可解除劳动合同；试用期内提前三日通知即可。员工未依法提前通知或擅自离职，给公司造成损失的（如岗位真空、业务中断、紧急替补成本等），公司有权依法要求赔偿。
+      </div>
+      <h3>9.3 工作交接</h3>
+      <p>离职员工须按要求完成工作、账号、资产、文档与客户的全面交接，经确认后方可办理离职手续。</p>
+      <h3>9.4 离职结算</h3>
+      <p>公司依法结算工资。带薪年休假由员工主动申请、公司结合经营情况统筹安排；公司安排休假而员工因本人原因书面放弃或未申请的，公司依法不支付未休年休假工资。员工未办结工作交接的，公司可依法暂缓支付经济补偿等结算款项（法定工资除外），待交接完成并确认后 <span class="editable" contenteditable="true">【15】</span> 个工作日内支付。社保、公积金办理停缴或转移。</p>
+      <h3>9.5 竞业限制启动</h3>
+      <p>如员工签有竞业限制专项协议，离职时公司须<b>书面告知</b>是否启动竞业限制；启动的，应自离职次月起按月支付经济补偿，并出具书面启动通知。未签专项协议、未书面启动或未按期支付补偿的，竞业限制条款不生效，员工无需遵守。竞业范围、期限与补偿标准以专项协议为准。</p>
+    </section>
+
+    <section class="card" id="c10">
+      <h2>十、附则</h2>
+      <h3>10.1 手册效力</h3>
+      <p>本手册为公司规章制度的概括性说明，未尽事宜以国家法律法规及公司正式制度文件为准。本手册与双方签订的《劳动合同》均为用工管理依据；内容不一致时，以国家法律法规及司法解释的规定为准；如法律未作规定，以公司依法制定的正式制度为准。员工个人《劳动合同》中对其更有利的个别约定，从其约定。</p>
+      <h3>10.2 修订与解释</h3>
+      <p>公司保留根据经营需要与法规变化修订本手册的权利，修订后通过 <b>飞书公告</b> 发布并同步纸质传阅。</p>
+      <h3>10.3 签收确认</h3>
+      <div class="legal-box">
+        员工签字确认即表示已阅读、理解并愿意遵守本手册。未签收不影响手册对相关事项的约束力，但签收是证明"已告知"的关键证据，请务必签署。
+      </div>
+      <p style="margin-top:14px">员工签字：______________　　日期：______________　　部门：______________</p>
+      <p>用人单位（盖章）：<b>深圳市瑞德制药有限公司</b>　　人力资源部经办人：______________　　盖章日期：______________</p>
+      <h3>10.4 民主程序与公示</h3>
+      <div class="legal-box">
+        本手册及后续修订涉及员工切身利益的事项，公司严格依照《劳动合同法》第四条履行民主程序：就相关方案向全体员工征求意见，与工会（如有）或职工代表平等协商确定，并公示后生效。公司目前未建立工会，依法由职工代表参与协商。本手册已通过飞书向全体员工公示，员工可通过飞书查阅历次修订与公示记录；对内容有意见的，可在公示期内通过飞书向人力资源部门反馈。公司就征求意见、协商与公示过程<b>保留完整书面及电子（飞书公告截图、反馈记录）档案</b>，作为民主程序已履行的证据。
+      </div>
+      <h3>10.5 文书送达与确认</h3>
+      <div class="legal-box">
+        公司发出的制度、通知、处分决定等文书，通过 <b>飞书公告 / 飞书消息</b> 发送至员工飞书账号即视为有效送达；员工变更飞书账号或长期未登录导致未查阅的，不影响送达效力。重要文书可辅以纸质签收。员工认可飞书为公司正式工作沟通与送达平台。<b>员工入职时须通过飞书确认本人账号并签署《飞书账号确认书》，确认该账号为其本人使用、并认可其作为公司正式送达渠道；未确认不影响送达效力，公司将以入职登记的飞书账号为准进行送达。</b>
+      </div>
+      <h3>10.6 进场人员管理声明</h3>
+      <div class="legal-box">
+        公司存在因实习、外包、劳务、兼职、退休返聘或其他合作而进入公司场所或使用公司系统、设备、数据的<b>非劳动关系人员</b>。该类人员与公司之间<b>不构成任何劳动关系、劳务关系或雇佣关系</b>，其工资报酬、社会保险、工伤、工时等权利义务由其签约主体（如外包公司、学校、劳务公司等第三方）依据相关协议承担，与公司无关。
+      </div>
+      <p>该类人员进入公司场所或系统前，须签署独立的《进场人员（安全·保密）承诺书》，承诺遵守现场安全管理规定、保密义务与基本行为规范；本手册中有关考勤、假期、薪酬、绩效、处分与解除等劳动管理条款，<b>不适用于该类人员</b>。公司有权对未签署承诺书或违反承诺的人员拒绝其进入场所。</p>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>

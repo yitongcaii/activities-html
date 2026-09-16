@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSC 操作手册 · 深圳市瑞德制药有限公司</title>
+<style>
+  :root{
+    --ink:#1f2330; --sub:#5b6172; --line:#e6e8f0;
+    --brand:#4c3a8c; --brand2:#2bb5b5; --soft:#f5f6fc;
+    --warn:#b8860b; --warnbg:#fff7e0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+    color:var(--ink);background:#eef0f7;line-height:1.75;font-size:15px}
+  header.top{background:linear-gradient(120deg,var(--brand),var(--brand2));
+    color:#fff;padding:38px 6vw 30px}
+  header.top h1{margin:0 0 6px;font-size:30px;letter-spacing:2px}
+  header.top .meta{opacity:.92;font-size:13px}
+  .wrap{display:flex;align-items:flex-start;gap:26px;max-width:1180px;margin:0 auto;padding:26px 4vw 60px}
+  nav.toc{position:sticky;top:18px;flex:0 0 230px;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:16px 14px;font-size:13.5px;max-height:88vh;overflow:auto}
+  nav.toc h4{margin:0 0 10px;color:var(--brand);font-size:13px;letter-spacing:1px}
+  nav.toc a{display:block;color:var(--sub);text-decoration:none;padding:5px 8px;border-radius:8px}
+  nav.toc a:hover{background:var(--soft);color:var(--brand)}
+  main{flex:1;min-width:0}
+  section.card{background:#fff;border:1px solid var(--line);border-radius:16px;
+    padding:22px 26px;margin-bottom:20px;box-shadow:0 4px 18px rgba(60,50,120,.05)}
+  section.card h2{margin:0 0 4px;font-size:21px;color:var(--brand);
+    border-left:4px solid var(--brand2);padding-left:12px}
+  section.card .tag{display:inline-block;font-size:11px;color:#fff;background:var(--brand2);
+    border-radius:20px;padding:1px 10px;margin-left:8px;vertical-align:middle}
+  section.card .tag.legal{background:#c0392b}
+  section.card .tag.soft{background:var(--warn)}
+  h3{font-size:16px;color:#333a4d;margin:20px 0 6px}
+  p,li{color:#333a4d}
+  ul{padding-left:20px}
+  .editable{background:var(--warnbg);border-bottom:1px dashed var(--warn);
+    padding:0 4px;border-radius:4px;color:#7a5b00;cursor:text}
+  .note{background:var(--soft);border-left:3px solid var(--brand2);
+    padding:10px 14px;border-radius:8px;font-size:13.5px;color:var(--sub);margin:12px 0}
+  .legal-box{background:#fdecea;border-left:3px solid #c0392b;padding:10px 14px;
+    border-radius:8px;font-size:13.5px;margin:12px 0}
+  .legal-box .src{display:block;margin-top:6px;font-size:12px;color:#a0522d;font-weight:600}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--soft);color:var(--brand)}
+  footer{padding:24px 6vw 40px;color:var(--sub);font-size:12.5px;text-align:center;border-top:1px solid var(--line)}
+  @media(max-width:860px){nav.toc{display:none}.wrap{padding:18px}}
+  @media print{body{background:#fff}nav.toc{display:none}
+    header.top{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section.card{box-shadow:none;break-inside:avoid}}
+  /* 封面 */
+  .cover{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:40px 6vw;background:linear-gradient(160deg,#fff 30%,#f3f1fb)}
+  .cover-logo{width:160px;height:60px;border:2px dashed var(--brand);border-radius:10px;
+    display:flex;align-items:center;justify-content:center;color:var(--brand);
+    font-size:13px;margin-bottom:26px;opacity:.7}
+  .cover-art{width:200px;height:120px;margin-bottom:18px}
+  .cover-title{font-size:38px;font-weight:700;letter-spacing:6px;color:var(--brand)}
+  .cover-sub{font-size:18px;color:var(--sub);letter-spacing:8px;margin-top:4px}
+  .cover-slogan{margin-top:18px;font-size:15px;color:var(--brand2);letter-spacing:2px}
+  .cover-foot{margin-top:36px;font-size:13px;color:var(--sub)}
+  /* 密级卡 */
+  .level-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+  .level-card{border-radius:10px;padding:12px;font-size:12.5px;border:1px solid var(--line)}
+  .level-card b{display:block;font-size:14px;margin-bottom:4px}
+  .l-public{background:#f4f5f7}.l-internal{background:#eaf2fb}
+  .l-conf{background:#fdeee0}.l-secret{background:#fdecea}
+  /* 红线框 */
+  .redline{border:1.5px solid var(--brand);border-left:5px solid #c0392b;background:#faf9ff;
+    border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13.5px}
+  .redline .rl-title{color:#c0392b;font-weight:700;margin-bottom:6px;font-size:13.5px}
+  @page{size:A4 portrait;margin:15mm 14mm}
+  @media print{.cover{min-height:auto;break-after:page}
+    .level-grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-logo">公司 LOGO 占位</div>
+  <svg class="cover-art" viewBox="0 0 200 120" fill="none" stroke="var(--brand)"
+       stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="118" y="38" width="46" height="66" rx="6"/>
+    <rect x="128" y="26" width="26" height="14" rx="3"/>
+    <line x1="141" y1="50" x2="141" y2="92"/><line x1="121" y1="71" x2="161" y2="71"/>
+    <path d="M28 96 q-7 -36 24 -36 q31 0 24 36"/>
+    <path d="M28 62 l-7 -18 l18 9"/><path d="M76 62 l7 -18 l-18 9"/>
+    <circle cx="44" cy="80" r="2.6" fill="var(--brand)" stroke="none"/>
+    <circle cx="60" cy="80" r="2.6" fill="var(--brand)" stroke="none"/>
+    <path d="M48 90 q4 4 8 0"/>
+  </svg>
+  <div class="cover-title">瑞德医生</div>
+  <div class="cover-sub">SSC 操作手册</div>
+  <div class="cover-slogan">人药标准 · 做兽药</div>
+  <div class="cover-foot">深圳市瑞德制药有限公司 · 人力资源共享服务中心（SSC）</div>
+</div>
+
+<header class="top">
+  <h1>SSC 操作手册</h1>
+  <div class="meta">深圳市瑞德制药有限公司（瑞德医生）· 人力资源共享服务中心 · 版本 <span class="editable" contenteditable="true">V1.0</span> · 生效日期 <span class="editable" contenteditable="true">【填写生效日期】</span></div>
+</header>
+
+<div class="wrap">
+<nav class="toc">
+  <h4>目录</h4>
+  <a href="#c1">一、总则</a>
+  <a href="#c2">二、入职与劳动合同</a>
+  <a href="#c3">三、薪酬与工资支付</a>
+  <a href="#c4">四、社会保险与公积金</a>
+  <a href="#c5">五、工时与考勤</a>
+  <a href="#c6">六、假期管理</a>
+  <a href="#c7">七、员工个人信息保护</a>
+  <a href="#c8">八、离职与终止</a>
+  <a href="#c9">九、进场人员管理</a>
+  <a href="#c10">十、服务目录与 SLA</a>
+  <a href="#c11">十一、运营合规与证据链</a>
+  <a href="#c12">十二、附则</a>
+</nav>
+
+<main>
+
+<section class="card" id="c1">
+  <h2>一、总则 <span class="tag legal">合规底线</span></h2>
+  <h3>1.1 目的与定位</h3>
+  <p>本手册为深圳市瑞德制药有限公司（以下简称"公司"）人力资源共享服务中心（SSC）的日常运营指引，规范入转调离、薪酬社保、档案合同、证明开具、政策咨询等集中业务的操作标准，确保各项人事管理符合国家法律法规及深圳市地方规定。</p>
+  <h3>1.2 适用地域</h3>
+  <p>本手册按<b>深圳市</b>用工与社保公积金规则制定。公司注册地与实际工作地在深圳的正式员工，均按本手册口径执行。<span class="editable" contenteditable="true">【如存在异地分支机构，须另行制定属地化细则，不与本手册冲突】</span></p>
+  <h3>1.3 主要法规依据</h3>
+  <ul>
+    <li>《中华人民共和国劳动合同法》（2008 施行，2012 修正）</li>
+    <li>《中华人民共和国劳动法》</li>
+    <li>《中华人民共和国社会保险法》</li>
+    <li>《中华人民共和国个人信息保护法》</li>
+    <li>《女职工劳动保护特别规定》</li>
+    <li>《广东省人口与计划生育条例》</li>
+    <li>《深圳市员工工资支付条例》</li>
+  </ul>
+  <div class="note">本手册为内部操作指引。涉及员工权利义务的对外告知，以《员工手册》及双方《劳动合同》为准；本手册与法律法规冲突的，以法律法规为准。</div>
+</section>
+
+<section class="card" id="c2">
+  <h2>二、入职与劳动合同</h2>
+  <h3>2.1 订立书面劳动合同</h3>
+  <div class="legal-box">
+    《劳动合同法》第十条：建立劳动关系，应当订立书面劳动合同。已建立劳动关系，未同时订立书面劳动合同的，应当自用工之日起一个月内订立书面劳动合同。
+    <span class="src">——依据：《中华人民共和国劳动合同法》第十条</span>
+  </div>
+  <div class="redline">
+    <div class="rl-title">操作红线</div>
+    用工之日起 <b>1 个月内</b>必须完成书面劳动合同签署归档。超期未签即触发二倍工资风险（自用工满 1 个月次日起算）。SSC 须在员工入职当日建立合同台账，设置到期前 30 日 / 15 日 / 7 日三级预警。
+  </div>
+  <h3>2.2 拒签处理</h3>
+  <div class="legal-box">
+    《劳动合同法实施条例》第五条：自用工之日起一个月内，经用人单位书面通知后，劳动者不与用人单位订立书面劳动合同的，用人单位应当书面通知劳动者终止劳动关系，无需向劳动者支付经济补偿，但应当依法向劳动者支付其实际工作时间的劳动报酬。
+    <span class="src">——依据：《中华人民共和国劳动合同法实施条例》第五条</span>
+  </div>
+  <h3>2.3 入职参保</h3>
+  <div class="legal-box">
+    《社会保险法》第五十八条：用人单位应当自用工之日起三十日内为其职工向社会保险经办机构申请办理社会保险登记。
+    <span class="src">——依据：《中华人民共和国社会保险法》第五十八条第一款</span>
+  </div>
+  <h3>2.4 入职流程（飞书）</h3>
+  <p>员工入职通过 <b>飞书入职流程表单</b> 发起，SSC 据此：① 建立员工主数据档案；② 发起劳动合同签署；③ 触发社保公积金增员待办（30 日倒计时）；④ 归档《员工个人信息处理同意书》（见第七章）。入职材料不齐全的，不得先行用工。</p>
+</section>
+
+<section class="card" id="c3">
+  <h2>三、薪酬与工资支付 <span class="tag legal">深圳特殊规定</span></h2>
+  <h3>3.1 工资支付周期与支付日</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第十一条：工资支付周期不超过一个月的，约定的工资支付日不得超过支付周期期满后第七日。
+    <span class="src">——依据：《深圳市员工工资支付条例》第十一条</span>
+  </div>
+  <p>公司发薪日约定为每月 <span class="editable" contenteditable="true">【如 次月 7 日，须 ≤ 次月 7 日】</span>。遇节假日须提前至最近工作日支付。</p>
+  <h3>3.2 延期支付</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第十二条：用人单位因故不能在约定的工资支付日支付工资的，可以延期五日；因生产经营困难，需延期超过五日的，应当征得本单位工会或者员工本人书面同意，但最长不得超过十五日。
+    <span class="src">——依据：《深圳市员工工资支付条例》第十二条</span>
+  </div>
+  <h3>3.3 离职工资结算</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第十三条：用人单位与员工的劳动关系依法解除或者终止的，支付周期不超过一个月的工资，用人单位应当自劳动关系解除或者终止之日起三个工作日内一次付清。
+    <span class="src">——依据：《深圳市员工工资支付条例》第十三条</span>
+  </div>
+  <div class="redline">
+    <div class="rl-title">操作红线</div>
+    <b>离职工资必须自解除 / 终止之日起 3 个工作日内一次性付清</b>，不得拖至下一个正常发薪日，不得写任何超过 3 个工作日的具体天数（该约定违法、部分无效且反成违规证据）。经济补偿（N / 2N）可依法待工作交接办结后支付，但工资部分不适用"暂缓"。
+  </div>
+  <h3>3.4 加班工资标准</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第十八条 / 《劳动法》第四十四条：安排劳动者延长工作时间的，支付不低于工资 150% 的报酬；休息日安排工作又不能补休的，支付不低于 200%；法定休假日安排工作的，支付不低于 300%。
+    <span class="src">——依据：《劳动法》第四十四条、《深圳市员工工资支付条例》第十八条</span>
+  </div>
+  <h3>3.5 病伤假期工资</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第二十三条：员工患病或者非因工负伤停止工作进行医疗，在国家规定的医疗期内的，用人单位应当按照不低于本人正常工作时间工资的百分之六十支付病伤假期工资，但不得低于最低工资的百分之八十。
+    <span class="src">——依据：《深圳市员工工资支付条例》第二十三条（深圳市 2025 年起最低工资 2520 元/月）</span>
+  </div>
+  <h3>3.6 代扣与扣减</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第三十三条：用人单位可代扣员工个人所得税、个人应缴社保费与住房公积金、法院判决的抚养费等。第三十四条：因员工本人原因造成经济损失的赔偿、依规章制度的违纪经济处罚可扣减，但<b>扣减后工资不得低于最低工资</b>。
+    <span class="src">——依据：《深圳市员工工资支付条例》第三十三、三十四条</span>
+  </div>
+  <h3>3.7 工资表与工资清单</h3>
+  <div class="legal-box">
+    《深圳市员工工资支付条例》第十五条：用人单位支付工资应当制作工资支付表，至少保存两年；支付工资时应当向员工提供一份本人的工资清单。
+    <span class="src">——依据：《深圳市员工工资支付条例》第十五条</span>
+  </div>
+  <h3>3.8 薪酬保密与发放（飞书）</h3>
+  <p>薪酬核算、工资表、发放结果按第八章密级管理。工资清单通过<b>飞书</b>定向发送员工本人，不群发、不公开。调薪经审批后由 SSC 执行，调整记录纳入员工档案。</p>
+</section>
+
+<section class="card" id="c4">
+  <h2>四、社会保险与公积金</h2>
+  <h3>4.1 依法足额缴纳</h3>
+  <div class="legal-box">
+    《社会保险法》第六十条：用人单位应当自行申报、按时足额缴纳社会保险费，非因不可抗力等法定事由不得缓缴、减免。
+    <span class="src">——依据：《中华人民共和国社会保险法》第六十条</span>
+  </div>
+  <div class="redline">
+    <div class="rl-title">操作红线</div>
+    社保公积金缴费基数须按员工上一年度月平均工资如实核定，不得人为压低。基数核定前由系统拉取薪酬实发数据，手工改低须走 HRBP 特批留痕。漏缴 / 错缴由单位承担补缴与滞纳金。
+  </div>
+  <h3>4.2 缴费基数与比例（深圳口径）</h3>
+  <table>
+    <tr><th>项目</th><th>比例（单位 / 个人）</th><th>基数口径</th></tr>
+    <tr><td>养老保险</td><td>单位 14% / 个人 8%</td><td rowspan="4">按深圳市上年度全口径城镇单位就业人员月平均工资核定上下限（每年 7 月调整）</td></tr>
+    <tr><td>医疗保险</td><td>一档单位 6%（2026 恢复标准）/ 个人 2%</td></tr>
+    <tr><td>失业保险</td><td>单位 0.8% / 个人 0.2%</td></tr>
+    <tr><td>工伤保险</td><td>单位按行业费率 / 个人不缴</td></tr>
+    <tr><td>住房公积金</td><td>单位 5%–12% / 个人同比例</td><td>基数上限 24304 元、下限 1950 元（2026.7–2027.6 年度，比例由单位确定）</td></tr>
+  </table>
+  <div class="note">具体上下限、缴费比例以深圳市人力资源和社会保障局、深圳市住房公积金管理中心每年公布为准，SSC 须在年度调整月（7 月）前填准当年数值：<span class="editable" contenteditable="true">【填写当年养老/医保/失业/工伤基数上下限、公积金比例】</span></div>
+  <h3>4.3 深圳医疗保险档位：户籍决定档位、档位决定待遇</h3>
+  <p>深圳医保按《深圳市医疗保障办法》（市政府令第 358 号）分为一档、二档。户籍维度直接决定员工可参保档位——SSC 须按员工户籍字段自动分流，不得人为错配。</p>
+  <div class="level-grid">
+    <div class="level-card l-public"><b>深户职工</b>强制一档，单位不得选二档；费率 单位 6% + 个人 2% = 8%，有个人账户，门诊年度限额约 10623 元（其中二级以上约 5312 元），就医免绑定社康。</div>
+    <div class="level-card l-internal"><b>非深户职工</b>一档或二档单位任选，多数单位选二档省钱；二档费率 单位 1.5% + 个人 0.5% = 2%，无个人账户，门诊限额约 2656 元且须绑定 1 家社康、转诊才报。</div>
+    <div class="level-card l-conf"><b>灵活就业</b>深户 / 非深户均只任一档，全额个人 8%；非深户如需升一档，仅限每年 1 月 1–31 日由单位统一申请变更。</div>
+    <div class="level-card l-secret"><b>住院报销</b>一档 一级 94% / 二级 92% / 三级 90%；二档 一级 92% / 二级 91% / 三级 90%，两者差距仅 1–2 个百分点。</div>
+  </div>
+  <div class="redline">
+    <div class="rl-title">配档红线</div>
+    深户员工系统强制一档，不得为其选配二档；非深户默认二档，升一档仅限每年 1 月变更窗口（1 月 1–31 日）。错配档位导致员工待遇受损或引发投诉的，由单位承担补缴与差额责任。
+  </div>
+  <h3>4.4 增员、减员与年度调基</h3>
+  <ul>
+    <li><b>增员</b>：入职 30 日内通过<b>飞书入职流程</b>触发社保公积金增员待办，超时自动预警。</li>
+    <li><b>减员</b>：离职次月停缴（以系统离职生效日为准），确保不断缴、不漏减。</li>
+    <li><b>年度调基</b>：每年 7 月通过<b>飞书</b>发起"基数核定确认"，员工本人确认基数，防事后争议。</li>
+  </ul>
+</section>
+
+<section class="card" id="c5">
+  <h2>五、工时与考勤</h2>
+  <h3>5.1 标准工时与加班上限</h3>
+  <div class="legal-box">
+    《劳动法》第四十一条：用人单位由于生产经营需要，经与工会和劳动者协商后可以延长工作时间，一般每日不得超过一小时；因特殊原因需要延长工作时间的，在保障劳动者身体健康的条件下延长工作时间每日不得超过三小时，但是每月不得超过三十六小时。
+    <span class="src">——依据：《中华人民共和国劳动法》第四十一条</span>
+  </div>
+  <h3>5.2 特殊工时须审批</h3>
+  <p>不定时工作制、综合计算工时工作制须报<span class="editable" contenteditable="true">【深圳市人社部门】</span>审批后方可实施；未经审批适用标准工时，加班费按第三章标准计发。</p>
+  <h3>5.3 考勤方式</h3>
+  <p>公司考勤通过 <span class="editable" contenteditable="true">【飞书打卡 / 考勤系统】</span> 记录。迟到、早退、旷工认定标准按公司考勤制度执行；连续旷工 <span class="editable" contenteditable="true">【3】</span> 日或年累计 <span class="editable" contenteditable="true">【5】</span> 日视为严重违纪（详见《员工手册》）。</p>
+  <h3>5.4 加班审批</h3>
+  <div class="redline">
+    <div class="rl-title">操作红线</div>
+    加班须通过<b>飞书加班审批表单</b>事先申请并经审批；未经审批的延时一律不计加班、不支付加班费（与《员工手册》3.4 一致）。系统须支持"审批通过→计入加班时长→对接薪酬"的闭环。
+  </div>
+</section>
+
+<section class="card" id="c6">
+  <h2>六、假期管理</h2>
+  <h3>6.1 产假与奖励假（合计 178 天）</h3>
+  <div class="legal-box">
+    《女职工劳动保护特别规定》第七条：女职工生育享受 98 天产假，其中产前可休假 15 天；难产的，增加产假 15 天（广东省实施办法规定难产增加 30 天）；多胞胎每婴增加 15 天。<br>
+    《广东省人口与计划生育条例》第三十条：符合法律、法规规定生育子女的夫妻，女方享受八十日的奖励假，男方享受十五日的陪产假；在子女三周岁以内，父母每年各享受十日的育儿假。
+    <span class="src">——依据：《女职工劳动保护特别规定》第七条、《广东省人口与计划生育条例》第三十条</span>
+  </div>
+  <h3>6.2 婚假 / 丧假 / 独生子女护理假</h3>
+  <ul>
+    <li><b>婚假</b>：按国家及广东省现行规定执行（广东省现行婚假为 <span class="editable" contenteditable="true">【3】</span> 天），双方异地可依规给予路程假。</li>
+    <li><b>丧假</b>：直系亲属去世给予 <span class="editable" contenteditable="true">【1–3】</span> 天，按公司制度及当地惯例。</li>
+    <li><b>独生子女护理假</b>：依据《广东省人口与计划生育条例》第三十六条，员工父母（男满 60 周岁、女满 55 周岁）每年可享受 <b>5 日</b>护理假；父母患病住院治疗的，每年累计不超过 <b>15 日</b>。</li>
+  </ul>
+  <h3>6.3 病假与医疗期</h3>
+  <p>病假工资下限按第三章 3.5 执行（≥ 正常工作时间工资 60% 且 ≥ 最低工资 80%）。SSC 须通过<b>飞书病假表单</b>收讫正规医疗机构证明；对可疑病假，HR 可通过飞书发起指定医院复诊（详见《员工手册》5.8）。</p>
+  <h3>6.4 年休假</h3>
+  <p>按《职工带薪年休假条例》执行（满 1 年 5 天、满 10 年 10 天、满 20 年 15 天）。公司安排休假而员工因本人原因书面放弃或未申请的，依法不支付未休年休假工资（详见《员工手册》9.4）。</p>
+  <h3>6.5 请假流程（飞书）</h3>
+  <p>所有假期通过 <b>飞书请假表单</b> 发起并审批；产假、陪产、育儿、护理等法定假须核对证明材料的真实性与合规性，不符合法定条件的不得违规放行。</p>
+</section>
+
+<section class="card" id="c7">
+  <h2>七、员工个人信息保护</h2>
+  <h3>7.1 处理依据</h3>
+  <div class="legal-box">
+    《个人信息保护法》第十三条：用人单位为订立、履行劳动合同所必需，或为依法制定劳动规章制度、实施人力资源管理所必需，可处理员工个人信息。第十七条：处理个人信息应当告知处理目的、方式、范围等。第二十九条：处理敏感个人信息应当取得个人的单独同意。
+    <span class="src">——依据：《中华人民共和国个人信息保护法》第十三、十七、二十九条</span>
+  </div>
+  <h3>7.2 单独同意（敏感信息）</h3>
+  <p>健康、医疗、生物识别等敏感信息，须取得员工<b>单独同意</b>，不得通过《员工手册》概括授权替代。SSC 须在入职时单独签署《员工个人信息处理同意书》（独立文件），并在系统标注该同意状态。</p>
+  <h3>7.3 数据分级与访问控制</h3>
+  <div class="level-grid">
+    <div class="level-card l-public"><b>公开</b>员工姓名、岗位等对外口径信息</div>
+    <div class="level-card l-internal"><b>内部</b>薪酬、考勤、合同等人事数据</div>
+    <div class="level-card l-conf"><b>机密</b>身份证号、银行账号、健康医疗记录</div>
+    <div class="level-card l-secret"><b>绝密</b>背景调查原始材料、竞业限制信息</div>
+  </div>
+  <div class="redline">
+    <div class="rl-title">数据红线</div>
+    敏感信息按"最小必要"采集与展示，系统须做字段级脱敏与访问审计日志。SSC 人员越权查看、导出、外传员工数据，按《员工手册》严重违纪处理。
+  </div>
+</section>
+
+<section class="card" id="c8">
+  <h2>八、离职与终止</h2>
+  <h3>8.1 员工主动离职</h3>
+  <div class="legal-box">
+    《劳动合同法》第三十七条：劳动者提前三十日以书面形式通知用人单位，可以解除劳动合同；试用期内提前三日通知即可。
+    <span class="src">——依据：《中华人民共和国劳动合同法》第三十七条</span>
+  </div>
+  <h3>8.2 离职证明与转移</h3>
+  <div class="legal-box">
+    《劳动合同法》第五十条第一款：用人单位应当在解除或者终止劳动合同时出具解除或者终止劳动合同的证明，并在十五日内为劳动者办理档案和社会保险关系转移手续。
+    <span class="src">——依据：《中华人民共和国劳动合同法》第五十条第一款</span>
+  </div>
+  <div class="redline">
+    <div class="rl-title">操作红线</div>
+    离职证明须在解除 / 终止后 <b>15 日内</b>出具，不得拖延（拖延致员工无法入职新单位的可主张损害赔偿）。离职工资按第三章 3.3 自解除 / 终止之日起 3 个工作日内付清。
+  </div>
+  <h3>8.3 工作交接与经济补偿</h3>
+  <p>经济补偿（N / 2N）于工作交接办结时支付，未办结交接的可依法暂缓支付经济补偿（工资除外）。竞业限制须在离职时<b>书面</b>告知是否启动，启动的依法按月支付补偿（详见《员工手册》9.5）。</p>
+  <h3>8.4 离职流程（飞书）</h3>
+  <ul>
+    <li>员工通过<b>飞书离职申请表单</b>提交（试用 3 日 / 正式 30 日通知期）；</li>
+    <li>SSC 触发：工作交接单、资产回收、社保减员、离职证明出具、工资结算倒计时；</li>
+    <li>交接确认后 <span class="editable" contenteditable="true">【15】</span> 个工作日内支付经济补偿（如适用）。</li>
+  </ul>
+</section>
+
+<section class="card" id="c9">
+  <h2>九、进场人员管理</h2>
+  <h3>9.1 边界原则</h3>
+  <p>实习、外包、劳务、兼职、退休返聘等<b>非劳动关系人员</b>，不适用《员工手册》中考勤、假期、薪酬、绩效、处分与解除等劳动管理条款；其与公司的权利义务以各自协议为准，与公司不构成任何劳动关系。其工资、社保、工伤、工时由签约第三方承担。</p>
+  <h3>9.2 操作要求</h3>
+  <ul>
+    <li>SSC 对进场人员建立<b>独立的供应商 / 来访人员档案</b>，不进入员工主数据，不发放员工工号、不计算"工资"；</li>
+    <li>进场前须签《进场人员（安全·保密）承诺书》（独立文件），否则有权拒绝其进入受控区域；</li>
+    <li>不得为进场人员出具"在职证明""收入证明"等员工类证明，避免被认定事实劳动关系。</li>
+  </ul>
+  <div class="redline">
+    <div class="rl-title">关系红线</div>
+    SSC 系统若将外包 / 劳务人员纳入员工主数据、发员工证明或算"工资"，等于变相承认劳动关系，与《员工手册》1.2 防线冲突，将放大未签合同二倍工资、社保补缴、工伤连带风险。
+  </div>
+</section>
+
+<section class="card" id="c10">
+  <h2>十、服务目录与 SLA</h2>
+  <p>SSC 对外服务须有明确时效承诺，提升员工体验、降低争议。下列 SLA 为基准，可据实调整：</p>
+  <table>
+    <tr><th>服务项</th><th>时效承诺</th><th>飞书入口</th></tr>
+    <tr><td>劳动合同签署</td><td>入职 1 个月内完成</td><td>飞书入职流程</td></tr>
+    <tr><td>社保公积金增员</td><td>入职 30 日内</td><td>飞书入职流程触发</td></tr>
+    <tr><td>工资发放</td><td>发薪日 / 离职后 3 个工作日内</td><td>薪酬系统</td></tr>
+    <tr><td>请假 / 加班审批</td><td>1–2 个工作日内审结</td><td>飞书表单</td></tr>
+    <tr><td>离职证明</td><td>解除 / 终止后 15 日内</td><td>飞书离职流程</td></tr>
+    <tr><td>收入 / 在职证明</td><td>受理后 <span class="editable" contenteditable="true">【3】</span> 个工作日内</td><td>飞书证明申请</td></tr>
+    <tr><td>政策咨询</td><td>受理后 <span class="editable" contenteditable="true">【1】</span> 个工作日内响应</td><td>飞书咨询入口</td></tr>
+  </table>
+  <div class="note">SLA 为服务承诺而非法定义务下限，但一旦对外公示即成管理责任；离职证明、工资支付等已由法律设定上限，SLA 不得劣于法定标准。</div>
+</section>
+
+<section class="card" id="c11">
+  <h2>十一、运营合规与证据链</h2>
+  <h3>11.1 送达与签收</h3>
+  <p>制度告知、通知、处分决定等文书通过 <b>飞书公告 / 飞书消息</b> 送达即视为有效；重要文书辅以纸质签收。员工入职须签《飞书账号确认书》确认本人账号、认可飞书为正式送达平台（详见《员工手册》10.5）。</p>
+  <h3>11.2 操作留痕与审计</h3>
+  <p>调薪、处分、离职、社保基数调整等关键操作须留存审批链与版本，满足药企"全程可追溯"要求。所有人事操作日志至少保存 <span class="editable" contenteditable="true">【2】</span> 年（工资表法定 2 年）；争议高发事项建议延长保存。</p>
+  <h3>11.3 举证责任</h3>
+  <div class="redline">
+    <div class="rl-title">证据红线</div>
+    劳动争议中公司负主要举证责任（如加班、考勤、解除理由、工资支付）。SSC 所有服务与决策必须可溯——飞书流程记录、电子签收、审批链即为证据，纸质台账缺失的须以电子留痕补强。
+  </div>
+</section>
+
+<section class="card" id="c12">
+  <h2>十二、附则</h2>
+  <h3>12.1 民主程序与公示</h3>
+  <div class="legal-box">
+    《劳动合同法》第四条：直接涉及劳动者切身利益的规章制度，应当经职工代表大会或者全体职工讨论，提出方案和意见，与工会或者职工代表平等协商确定，并公示或者告知劳动者。公司未建立工会的，应与职工代表协商。
+    <span class="src">——依据：《中华人民共和国劳动合同法》第四条</span>
+  </div>
+  <p>本手册涉及员工切身利益的事项，须就方案向全体员工征求意见、与职工代表（无工会时）协商确定并公示。下发时通过<b>飞书公告</b>发布并保留征求意见截图、反馈记录等书面及电子档案作为程序证据。</p>
+  <h3>12.2 修订与生效</h3>
+  <p>本手册可据法规变化与经营需要修订，修订后按 12.1 程序公示生效。生效日期：<span class="editable" contenteditable="true">【填写生效日期】</span>。</p>
+  <h3>12.3 签收确认</h3>
+  <p>SSC 人员须阅读并签署本手册确认页，作为理解操作标准的凭证（员工侧签收以《员工手册》为准）。</p>
+  <p style="margin-top:14px">编制部门：人力资源共享服务中心（SSC）　　用人单位（盖章）：<b>深圳市瑞德制药有限公司</b>　　人力资源负责人：______________　　日期：______________</p>
+</section>
+
+</main>
+</div>
+</body>
+</html>
