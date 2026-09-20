@@ -1388,16 +1388,30 @@ window.showAdminLogin = showAdminLogin;
 console.log('✅ app.js 已加载，登录函数已定义：', typeof showAdminLogin);
 
 async function userLogin(userName) {
-    const user = await DB.getUserByName(userName);
-    if (!user) {
-        alert('用户名不存在，请联系管理员获取正确的用户名');
+    if (!userName) {
+        alert('请填写用户名');
         return;
+    }
+
+    // 用户名不存在则自动创建账号（初始 0 积分），填什么都可以登录
+    let user = await DB.getUserByName(userName);
+    if (!user) {
+        const userId = 'user_' + Date.now();
+        user = {
+            id: userId,
+            name: userName,
+            account_type: '云智',
+            watch_time: 0,
+            points: 0
+        };
+        await DB.addUser(user);
+        console.log('🆕 自动创建新用户:', userName);
     }
 
     login(user.id, user.name, false);
 }
 
-async function adminLogin(password) {
+async function adminLogin(adminName, password) {
     const admin = await DB.getAdmin();
 
     if (!admin || admin.password !== password) {
@@ -1405,7 +1419,9 @@ async function adminLogin(password) {
         return;
     }
 
-    login('admin', '管理员', true);
+    // 管理员名可任意填写，仅作后台显示名
+    const name = (adminName && adminName.trim()) ? adminName.trim() : '管理员';
+    login('admin', name, true);
 }
 
 function login(userId, userName, isAdmin) {
@@ -1455,7 +1471,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const user = JSON.parse(savedUser);
 
             if (user.isAdmin) {
-                await adminLogin('PointsMall@2026Demo');
+                await adminLogin('管理员', 'PointsMall@2026Demo');
             } else {
                 await userLogin(user.userName);
             }
@@ -1478,8 +1494,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 管理员登录表单
     document.getElementById('admin-login-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        const adminName = document.getElementById('admin-user-name').value.trim();
         const password = document.getElementById('admin-password').value;
-        adminLogin(password);
+        adminLogin(adminName, password);
     });
 
     // 导航链接点击事件

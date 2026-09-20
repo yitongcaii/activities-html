@@ -39,7 +39,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">登录</button>
                 </form>
-                <p class="login-tip">用户名由管理员分配，请联系管理员获取</p>
+                <p class="login-tip">输入任意用户名即可登录（首次登录自动创建账号）</p>
                 <p class="login-admin-link">
                     <a href="#" onclick="showAdminLogin()">管理员入口</a>
                 </p>
@@ -50,8 +50,11 @@
         <div id="admin-login-page" class="login-page" style="display: none;">
             <div class="login-container">
                 <h1 class="login-title">管理后台</h1>
-                <p class="login-subtitle">请输入管理员密码</p>
+                <p class="login-subtitle">请输入管理员用户名和密码</p>
                 <form id="admin-login-form">
+                    <div class="form-group">
+                        <input type="text" id="admin-user-name" placeholder="管理员用户名（任意填写）" autocomplete="off">
+                    </div>
                     <div class="form-group">
                         <input type="password" id="admin-password" required placeholder="请输入管理员密码" autocomplete="off">
                     </div>
