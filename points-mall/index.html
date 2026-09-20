@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>积分商城</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+    <link rel="stylesheet" href="css/style.css?v=20250303">
+</head>
+<body>
+    <div id="app">
+        <!-- 登录页面 -->
+        <div id="login-page" class="login-page">
+            <div class="login-container">
+                <h1 class="login-title">博闻多识一堂课积分商城</h1>
+                <div class="login-intro">
+                    <p class="login-intro-welcome">欢迎来到【博闻多识一堂课】培训积分商城！</p>
+
+                    <div class="login-intro-content">
+                        <h4 class="login-intro-heading">以下是积分获取的方式：</h4>
+                        <ul class="login-intro-list">
+                            <li>• 课上/课后积极互动 → 获得积分奖励</li>
+                            <li>• 荣获"优秀讲师/学员" → 额外赢取荣誉积分</li>
+                        </ul>
+                        <p class="login-intro-tip">持续累计积分，可兑换惊喜礼品！</p>
+                    </div>
+
+                    <div class="login-intro-instruction">
+                        <p class="login-intro-tip-highlight">输入企微中英文-登录账号，让知识变现，给惊喜加"分"，快来兑换您的惊喜好礼吧！</p>
+                    </div>
+
+                    <p class="login-intro-notice">积分商城于2026年3月1日上线，之后参训所获积分由管理员3天内同步</p>
+                </div>
+
+                <p class="login-subtitle">请输入用户名登录</p>
+                <form id="login-form">
+                    <div class="form-group">
+                        <input type="text" id="login-user-name" required placeholder="请输入用户名" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">登录</button>
+                </form>
+                <p class="login-tip">用户名由管理员分配，请联系管理员获取</p>
+                <p class="login-admin-link">
+                    <a href="#" onclick="showAdminLogin()">管理员入口</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- 管理员登录页面 -->
+        <div id="admin-login-page" class="login-page" style="display: none;">
+            <div class="login-container">
+                <h1 class="login-title">管理后台</h1>
+                <p class="login-subtitle">请输入管理员密码</p>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <input type="password" id="admin-password" required placeholder="请输入管理员密码" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">登录</button>
+                </form>
+                <p class="login-admin-link">
+                    <a href="#" onclick="showUserLogin()">返回用户登录</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- 主应用页面 -->
+        <div id="main-app" style="display: none;">
+            <!-- 导航栏 -->
+            <nav class="navbar">
+                <div class="nav-container">
+                    <h1 class="nav-logo">积分商城</h1>
+                    <div class="nav-menu">
+                        <a href="#" class="nav-link" data-page="home">首页</a>
+                        <a href="#" class="nav-link" data-page="mall">商城</a>
+                        <a href="#" class="nav-link" data-page="profile">我的</a>
+                        <a href="#" class="nav-link" data-page="admin" id="admin-nav-link">管理后台</a>
+                    </div>
+                    <div class="nav-user">
+                        <span class="user-name-display" id="nav-username"></span>
+                        <span class="user-points">我的积分：<strong id="nav-points">0</strong></span>
+                        <button class="logout-btn" onclick="logout()">退出</button>
+                    </div>
+                </div>
+            </nav>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 首页 -->
+            <section id="page-home" class="page active">
+                <div class="home-layout">
+                    <div class="home-main">
+                        <div class="points-card">
+                            <h2 class="points-label">我的积分</h2>
+                            <div class="points-value" id="home-points">0</div>
+                            <p class="points-tip">积分可兑换礼品</p>
+                            <p class="points-reset-tip">（积分每半年清零，下一次清零时间是2026年7月1日）</p>
+                        </div>
+
+                        <h3 class="section-title">热门礼品</h3>
+                        <div class="gift-grid" id="hot-gifts"></div>
+
+                        <div class="quick-actions">
+                            <div class="action-item" onclick="showPage('mall')">
+                                <div class="action-icon">🛍️</div>
+                                <span class="action-text">全部礼品</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('profile'); openPointsLog()">
+                                <div class="action-icon">📊</div>
+                                <span class="action-text">积分明细</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('profile'); openExchangeRecords()">
+                                <div class="action-icon">📝</div>
+                                <span class="action-text">兑换记录</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 积分榜单（侧边栏） -->
+                    <div class="home-sidebar">
+                        <div class="rank-sidebar">
+                            <h3 class="rank-sidebar-title">🏆 积分排行榜</h3>
+                            <div class="rank-list" id="points-rank-list"></div>
+                        </div>
+                        <div class="rank-sidebar">
+                            <h3 class="rank-sidebar-title">⏱️ 观看时长排行榜</h3>
+                            <div class="rank-list" id="watch-time-rank-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 商城页面 -->
+            <section id="page-mall" class="page">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="搜索礼品..." oninput="searchGifts()">
+                </div>
+                <div class="gift-list" id="mall-gifts"></div>
+            </section>
+
+            <!-- 礼品详情页面 -->
+            <section id="page-gift-detail" class="page">
+                <button class="back-btn" onclick="showPage('mall')">← 返回</button>
+                <div class="gift-detail" id="gift-detail"></div>
+            </section>
+
+            <!-- 个人中心 -->
+            <section id="page-profile" class="page">
+                <div class="user-card">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-info">
+                        <h3 class="user-name" id="profile-name">用户</h3>
+                        <p class="user-id">积分商城会员</p>
+                    </div>
+                </div>
+
+                <div class="points-card">
+                    <h2 class="points-label">可用积分</h2>
+                    <div class="points-value" id="profile-points">0</div>
+                </div>
+
+                <div class="menu-list">
+                    <div class="menu-item" onclick="openPointsLog()">
+                        <span class="menu-icon">📊</span>
+                        <span class="menu-text">积分明细</span>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                    <div class="menu-item" onclick="openExchangeRecords()">
+                        <span class="menu-icon">📝</span>
+                        <span class="menu-text">兑换记录</span>
+                        <span class="menu-arrow">›</span>
+                    </div>
+                </div>
+
+                <!-- 积分明细弹窗 -->
+                <div id="points-log-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>积分明细</h3>
+                            <button class="close-btn" onclick="closeModal('points-log-modal')">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="points-log-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 兑换记录弹窗 -->
+                <div id="exchange-records-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>兑换记录</h3>
+                            <button class="close-btn" onclick="closeModal('exchange-records-modal')">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="exchange-records-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 管理后台 -->
+            <section id="page-admin" class="page">
+                <div class="admin-header">
+                    <h2>管理后台</h2>
+                    <p>积分商城管理系统</p>
+                </div>
+
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="switchAdminTab('dashboard')">数据看板</button>
+                    <button class="tab-btn" onclick="switchAdminTab('users')">用户管理</button>
+                    <button class="tab-btn" onclick="switchAdminTab('gifts')">礼品管理</button>
+                    <button class="tab-btn" onclick="switchAdminTab('orders')">订单管理</button>
+                </div>
+
+                <!-- 数据看板 -->
+                <div id="admin-dashboard" class="admin-tab active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="stat-users">0</div>
+                            <div class="stat-label">用户总数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stat-gifts">0</div>
+                            <div class="stat-label">礼品总数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stat-orders">0</div>
+                            <div class="stat-label">兑换总数</div>
+                        </div>
+                    </div>
+
+                    <!-- 积分榜单 -->
+                    <div class="rank-section">
+                        <h3 class="section-title">🏆 积分排行榜</h3>
+                        <div class="rank-list" id="admin-points-rank-list"></div>
+                    </div>
+
+                    <!-- 礼品兑换榜单 -->
+                    <div class="rank-section">
+                        <h3 class="section-title">🎁 礼品兑换排行榜</h3>
+                        <div class="rank-list" id="admin-exchange-rank-list"></div>
+                    </div>
+
+                    <h3 class="section-title">最近兑换</h3>
+                    <div id="recent-orders" class="order-list"></div>
+                </div>
+
+                <!-- 用户管理 -->
+                <div id="admin-users" class="admin-tab">
+                    <div class="table-header">
+                        <h3>用户列表</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-primary" onclick="showAddPointsModal()">发放积分</button>
+                            <button class="btn btn-success" onclick="showAddUserModal()">添加用户</button>
+                            <button class="btn btn-secondary" onclick="showBatchImportUsersModal()">批量导入用户</button>
+                            <button class="btn btn-danger" onclick="showBatchDeleteUsersModal()">批量删除用户</button>
+                            <button class="btn btn-danger" onclick="clearAllUsers()">清除所有用户</button>
+                        </div>
+                    </div>
+                    <div class="export-actions" style="margin: 1rem 0 1.5rem;">
+                        <button class="btn btn-secondary" onclick="exportPointsLog()">导出积分变动记录</button>
+                    </div>
+                    <div id="users-list" class="user-list"></div>
+                </div>
+
+                <!-- 礼品管理 -->
+                <div id="admin-gifts" class="admin-tab">
+                    <div class="table-header">
+                        <h3>礼品列表</h3>
+                        <button class="btn btn-primary" onclick="showAddGiftModal()">添加礼品</button>
+                    </div>
+                    <div id="admin-gifts-list" class="admin-gift-list"></div>
+                </div>
+
+                <!-- 订单管理 -->
+                <div id="admin-orders" class="admin-tab">
+                    <div class="table-header">
+                        <h3>订单列表</h3>
+                        <button class="btn btn-secondary" onclick="exportOrders()">导出兑换记录</button>
+                    </div>
+                    <div id="admin-orders-list" class="order-list"></div>
+                </div>
+            </section>
+        </main>
+        </div>
+
+        <!-- 模态框：添加礼品 -->
+        <div id="add-gift-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>添加礼品</h3>
+                    <button class="close-btn" onclick="closeModal('add-gift-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-section">
+                        <div class="upload-tabs">
+                            <button class="upload-tab active" onclick="switchUploadTab('single')">单个添加</button>
+                            <button class="upload-tab" onclick="switchUploadTab('batch')">批量导入</button>
+                        </div>
+
+                        <!-- 单个添加 -->
+                        <div id="upload-single" class="upload-tab-content active">
+                            <form id="gift-form">
+                                <div class="form-group">
+                                    <label>礼品名称 *</label>
+                                    <input type="text" id="gift-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>礼品图片 *</label>
+                                    <input type="file" id="gift-image-file" accept="image/*" required onchange="previewImage(this)">
+                                    <small style="color: #666;">建议大小小于100KB，格式JPG/PNG</small>
+                                    <div id="image-preview" class="image-preview"></div>
+                                    <input type="hidden" id="gift-image">
+                                </div>
+                                <div class="form-group">
+                                    <label>礼品描述</label>
+                                    <textarea id="gift-description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>所需积分 *</label>
+                                    <input type="number" id="gift-points" required min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>库存数量 *</label>
+                                    <input type="number" id="gift-stock" required min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>上架状态</label>
+                                    <select id="gift-status">
+                                        <option value="true">已上架</option>
+                                        <option value="false">已下架</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </form>
+                        </div>
+
+                        <!-- 批量导入 -->
+                        <div id="upload-batch" class="upload-tab-content">
+                            <div class="upload-instructions">
+                                <h4>批量导入说明</h4>
+                                <ol>
+                                    <li>下载 <a href="#" onclick="downloadTemplate(event)" style="color: #FF6B6B;">CSV模板</a></li>
+                                    <li>按照模板格式填写礼品信息（推荐使用CSV格式）</li>
+                                    <li>使用UTF-8编码保存CSV文件</li>
+                                    <li>上传CSV文件（图片将使用占位图）</li>
+                                    <li>导入后在管理后台手动上传实际图片</li>
+                                </ol>
+                                <p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 10px;">
+                                    注意：由于浏览器安全限制，无法直接解压压缩包。建议使用CSV格式导入，导入后手动上传图片。
+                                </p>
+                            </div>
+                            <form id="batch-gift-form">
+                                <div class="form-group">
+                                    <label>CSV/Excel文件 *</label>
+                                    <input type="file" id="batch-excel" accept=".csv,.xlsx,.xls" required>
+                                    <small style="color: #666;">推荐使用 .csv 格式（UTF-8编码），也支持 .xlsx 和 .xls</small>
+                                </div>
+                                <div id="batch-preview" class="batch-preview"></div>
+                                <button type="submit" class="btn btn-primary">开始导入</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 模态框：发放积分 -->
+        <div id="add-points-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>发放积分</h3>
+                    <button class="close-btn" onclick="closeModal('add-points-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <form id="points-form">
+                        <div class="form-group">
+                            <label>选择用户 *</label>
+                            <select id="points-user" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label>积分数量 *</label>
+                            <input type="number" id="points-amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label>操作类型</label>
+                            <select id="points-type">
+                                <option value="add">增加积分</option>
+                                <option value="reduce">扣减积分</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>操作原因 *</label>
+                            <textarea id="points-reason" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 模态框：添加用户 -->
+        <div id="add-user-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>添加用户</h3>
+                    <button class="close-btn" onclick="closeModal('add-user-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <form id="user-form">
+                        <div class="form-group">
+                            <label>用户ID *</label>
+                            <input type="text" id="user-id" required placeholder="例如：user_001">
+                        </div>
+                        <div class="form-group">
+                            <label>用户名 *</label>
+                            <input type="text" id="user-name" required placeholder="输入用户名">
+                        </div>
+                        <div class="form-group">
+                            <label>账号类型 *</label>
+                            <select id="user-account-type" required>
+                                <option value="集团">集团</option>
+                                <option value="云智">云智</option>
+                            </select>
+                            <small style="color: #666;">集团账号可兑换礼品，云智账号不可兑换礼品</small>
+                        </div>
+                        <div class="form-group">
+                            <label>观看培训时长（分钟）</label>
+                            <input type="number" id="user-watch-time" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>初始积分 *</label>
+                            <input type="number" id="user-points" required value="0" min="0">
+                            <small style="color: #666;">初始积分由管理员设置，用户获得积分需通过后台操作</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">添加用户</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 模态框：批量导入用户 -->
+        <div id="batch-import-users-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>批量导入用户</h3>
+                    <button class="close-btn" onclick="closeModal('batch-import-users-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-instructions">
+                        <h4>批量导入说明</h4>
+                        <ol>
+                            <li>下载 <a href="#" onclick="downloadUserTemplate(event)" style="color: #FF6B6B;">CSV模板</a></li>
+                            <li>按照模板格式填写用户信息（用户名、账号类型、观看时长、初始积分）</li>
+                            <li>使用UTF-8编码保存CSV文件</li>
+                            <li>上传CSV文件进行批量导入</li>
+                        </ol>
+                        <p style="color: #FF6B6B; font-weight: bold; margin-top: 10px;">
+                            💡 提示：账号类型为"集团"的用户可兑换礼品，"云智"用户不可兑换礼品
+                        </p>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9rem;">
+                            💡 提示：用户ID将由系统自动生成，无需填写
+                        </p>
+                    </div>
+                    <form id="batch-user-form">
+                        <div class="form-group">
+                            <label>CSV文件 *</label>
+                            <input type="file" id="batch-user-csv" accept=".csv,.xlsx,.xls" required>
+                            <small style="color: #666;">推荐使用 .csv 格式（UTF-8编码），也支持 .xlsx 和 .xls</small>
+                        </div>
+                        <div id="batch-user-preview" class="batch-preview"></div>
+                        <button type="submit" class="btn btn-primary">开始导入</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 模态框：批量删除用户 -->
+        <div id="batch-delete-users-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>批量删除用户</h3>
+                    <button class="close-btn" onclick="closeModal('batch-delete-users-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-instructions">
+                        <h4>批量删除说明</h4>
+                        <ol>
+                            <li>下载 <a href="#" onclick="downloadDeleteUserTemplate(event)" style="color: #FF6B6B;">用户名模板</a></li>
+                            <li>按照模板格式填写要删除的用户名</li>
+                            <li>使用UTF-8编码保存CSV文件</li>
+                            <li>上传CSV文件进行批量删除</li>
+                        </ol>
+                        <p style="color: #FF6B6B; font-weight: bold; margin-top: 10px;">
+                            ⚠️ 警告：此操作不可恢复，删除后用户的积分记录和订单数据也会被删除！
+                        </p>
+                        <p style="color: #666; margin-top: 5px; font-size: 0.9rem;">
+                            💡 提示：根据用户名删除，用户ID已自动生成，无需填写
+                        </p>
+                    </div>
+                    <form id="batch-delete-user-form">
+                        <div class="form-group">
+                            <label>CSV文件 *</label>
+                            <input type="file" id="batch-delete-csv" accept=".csv,.xlsx,.xls" required>
+                            <small style="color: #666;">推荐使用 .csv 格式（UTF-8编码），也支持 .xlsx 和 .xls</small>
+                        </div>
+                        <div id="batch-delete-preview" class="batch-preview"></div>
+                        <button type="submit" class="btn btn-danger">确认删除</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 模态框：领取方式选择 -->
+        <div id="delivery-method-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>领取礼品的方式</h3>
+                    <button class="close-btn" onclick="closeModal('delivery-method-modal')">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="delivery-method-options">
+                        <label class="delivery-option">
+                            <input type="radio" name="delivery-method" value="shenzhen" checked>
+                            <div class="delivery-option-card">
+                                <span class="delivery-icon">🏢</span>
+                                <span class="delivery-title">深圳腾讯大厦</span>
+                            </div>
+                        </label>
+                        <label class="delivery-option">
+                            <input type="radio" name="delivery-method" value="mail">
+                            <div class="delivery-option-card">
+                                <span class="delivery-icon">📦</span>
+                                <span class="delivery-title">异地邮寄</span>
+                            </div>
+                        </label>
+                    </div>
+                    <button class="btn btn-primary btn-full" onclick="confirmDeliveryMethod()">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=20250920"></script>
+</body>
+</html>
