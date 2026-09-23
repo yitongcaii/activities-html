@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XX培训运营平台</title>
+  <link rel="stylesheet" href="style.css?v=20260518">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="https://open.work.weixin.qq.com/wwopen/js/jwxwork-1.0.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script>
+  // === 源码保护 ===
+  document.addEventListener('contextmenu', function(e) {
+    if (!e.target.closest('input, textarea, select, [contenteditable], .ai-chat-panel')) e.preventDefault();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'u') { e.preventDefault(); return false; }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) { e.preventDefault(); return false; }
+  });
+  </script>
+</head>
+<body>
+  <noscript><div style="padding:40px;text-align:center;font-size:16px;color:#666;">请启用 JavaScript 以使用本平台</div></noscript>
+  <script>window.onerror=function(m,s,l){document.title='JS Error';console.error('Global:',m,s,l);}</script>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <i class="fas fa-graduation-cap"></i>
+        <h1 data-t="h"></h1>
+      </div>
+      <div class="header-right">
+        <div id="userBadge">
+          <img id="userAvatar" class="avatar" alt="avatar" referrerpolicy="no-referrer">
+          <span id="userAvatarFallback"></span>
+          <span id="userName"></span>
+        </div>
+        <div id="pointsBadge" class="points-badge" title="我的积分">
+          <i class="fas fa-coins"></i><span id="pointsBadgeValue">0</span>
+        </div>
+        <button class="btn-admin-entry" id="btnAdminEntry" onclick="showAdminSetupDialog()" title="管理员配置">
+          <i class="fas fa-user-shield"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Layout -->
+    <div class="layout">
+      <!-- Sidebar -->
+      <nav class="sidebar">
+        <div class="nav-item active" data-tab="home">
+          <i class="fas fa-home"></i>
+          <span>首页</span>
+        </div>
+        <div class="nav-item" data-tab="submit">
+          <i class="fas fa-paper-plane"></i>
+          <span data-t="n1"></span>
+        </div>
+        <div class="nav-item" data-tab="calendar">
+          <i class="fas fa-calendar-alt"></i>
+          <span data-t="n3"></span>
+        </div>
+        <div class="nav-item" data-tab="feedback">
+          <i class="fas fa-comment-dots"></i>
+          <span data-t="n4"></span>
+        </div>
+        <div class="nav-item" data-tab="mall">
+          <i class="fas fa-gift"></i>
+          <span>积分商城</span>
+        </div>
+        <div class="nav-item" data-tab="list" id="listTab" style="display:none;">
+          <i class="fas fa-list-ul"></i>
+          <span data-t="n2"></span><span class="nav-admin-badge"></span>
+        </div>
+        <div class="nav-item" data-tab="knowledge" id="knowledgeTab" style="display:none;">
+          <i class="fas fa-gem"></i>
+          <span data-t="n5"></span><span class="nav-admin-badge"></span>
+        </div>
+        <div class="nav-item" data-tab="admin" id="adminTab" style="display:none;">
+          <i class="fas fa-cog"></i>
+          <span data-t="n6"></span><span class="nav-admin-badge"></span>
+        </div>
+        <div class="sidebar-toggle" onclick="toggleSidebar()">
+          <i class="fas fa-chevron-left" id="sidebarToggleIcon"></i>
+          <span data-t="n7"></span>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <main class="content">
+        <!-- Tab0: 首页（文件夹入口） -->
+        <div class="tab-content active" id="tab-home">
+          <div class="home-wrap">
+            <div class="home-title">
+              <h2>欢迎来到培训运营平台</h2>
+              <p>点击文件夹，进入你想使用的模块</p>
+            </div>
+
+            <div class="folder-grid">
+              <button class="folder-card f-submit" onclick="goTab('submit')">
+                <img src="folder-submit.png" class="folder-asset" alt="提交主题">
+                <div class="folder-label">提交主题</div>
+              </button>
+
+              <button class="folder-card f-cal" onclick="goTab('calendar')">
+                <div class="folder-pocket">
+                  <div class="folder-stuff">
+                    <div class="stuff">📅</div>
+                    <div class="stuff">🗓️</div>
+                    <div class="stuff">⏰</div>
+                    <div class="stuff">📆</div>
+                  </div>
+                </div>
+                <div class="folder-label">分享排期</div>
+              </button>
+
+              <button class="folder-card f-fb" onclick="goTab('feedback')">
+                <div class="folder-pocket">
+                  <div class="folder-stuff">
+                    <div class="stuff">💬</div>
+                    <div class="stuff">⭐</div>
+                    <div class="stuff">📝</div>
+                    <div class="stuff">📊</div>
+                  </div>
+                </div>
+                <div class="folder-label">课后反馈</div>
+              </button>
+
+              <button class="folder-card f-mall" onclick="goTab('mall')">
+                <div class="folder-pocket">
+                  <div class="folder-stuff">
+                    <div class="stuff">🎁</div>
+                    <div class="stuff">🏆</div>
+                    <div class="stuff">💎</div>
+                    <div class="stuff">🛍️</div>
+                  </div>
+                </div>
+                <div class="folder-label">积分商城</div>
+              </button>
+            </div>
+
+            <div class="home-todo">
+              <h3>今日三件小事</h3>
+              <ul>
+                <li>提交一个你感兴趣的内部分享主题</li>
+                <li>查看本周分享排期，预约一场想听的课</li>
+                <li>完成课后反馈，顺手赚点学习积分</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab1: 提交主题 -->
+        <div class="tab-content" id="tab-submit">
+          <div class="page-title">
+            <h2 data-t="t1"></h2>
+            <div class="quick-links">
+              <a href="javascript:void(0)" onclick="alert('请在后台基础配置中设置iWiki页面地址')" class="quick-link-item">
+                <i class="fas fa-book"></i> 往期沉淀
+              </a>
+              <a href="javascript:void(0)" onclick="document.querySelector('.nav-item[data-tab=&quot;calendar&quot;]').click()" class="quick-link-item">
+                <i class="fas fa-calendar-alt"></i> 分享排期
+              </a>
+              <a href="wxwork://message?username=iceykbliao" class="quick-link-item">
+                <i class="fas fa-comment-dots"></i> 联系管理员
+              </a>
+            </div>
+          </div>
+          <form id="topicForm" class="form-card" autocomplete="off">
+            <div class="form-row">
+              <div class="form-group">
+                <label><span class="required">*</span> <span data-t="f1"></span></label>
+                <div class="input-with-action">
+                  <input type="text" id="title" name="topic-title-x" required autocomplete="new-password">
+                  <button type="button" class="btn-action" onclick="checkSimilarity()">
+                    <i class="fas fa-robot"></i> <span data-t="f1a"></span>
+                  </button>
+                </div>
+                <div id="similarityResult" class="similarity-result" style="display:none;"></div>
+              </div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label><span class="required">*</span> <span data-t="f2"></span></label>
+                <input type="text" id="speaker" name="share-speaker-x" required autocomplete="new-password">
+              </div>
+              <div class="form-group">
+                <label><span data-t="f3"></span></label>
+                <input type="text" id="coSpeaker" name="co-speaker-x" autocomplete="new-password">
+              </div>
+            </div>
+            <!-- 所在组织字段已移除，海报生成时会自动查询组织信息 -->
+            <div style="display:none;">
+              <input type="text" id="orgPath">
+              <span id="orgLoading"></span>
+              <span id="orgStatus"></span>
+              <div id="orgMatchList"></div>
+            </div>
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label><span class="required">*</span> <span data-t="f5"></span></label>
+                <select id="shareDate" required></select>
+              </div>
+              <div class="form-group">
+                <label><span data-t="f6"></span></label>
+                <div class="duration-display">
+                  <span class="duration-badge" data-t="f6a"></span>
+                  <span class="duration-detail" data-t="f6b"></span>
+                </div>
+                <input type="hidden" id="duration" value="30">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><span class="required">*</span> <span data-t="f7"></span></label>
+                <input type="text" id="speakerIntro" name="speaker-intro-x" required autocomplete="new-password">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><span class="required">*</span> <span data-t="f8"></span></label>
+                <div class="input-with-action">
+                  <textarea id="shareIntro" rows="4" required></textarea>
+                  <button type="button" class="btn-action btn-optimize" onclick="optimizeIntro()" id="btnOptimize">
+                    <i class="fas fa-magic"></i> <span data-t="f8a"></span>
+                  </button>
+                </div>
+                <div id="aiStylePanel" class="ai-style-panel" style="display:none;">
+                  <div class="ai-style-header">
+                    <span><i class="fas fa-magic" style="color:#667eea;"></i> AI 为你生成了 3 种风格，点击选用：</span>
+                    <button class="ai-style-close" onclick="closeStylePanel()">&times;</button>
+                  </div>
+                  <div id="aiStyleOptions" class="ai-style-options"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-check"></i> <span data-t="b1"></span>
+              </button>
+              <button type="reset" class="btn-secondary">
+                <i class="fas fa-redo"></i> <span data-t="b2"></span>
+              </button>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- Tab2: 分享列表 -->
+        <div class="tab-content" id="tab-list">
+          <div class="page-title">
+            <h2>分享列表</h2>
+            <div class="page-actions admin-only-list">
+              <button class="btn-outline" onclick="downloadTemplate()">
+                <i class="fas fa-file-download"></i> 下载模板
+              </button>
+              <button class="btn-outline" onclick="document.getElementById('importFile').click()">
+                <i class="fas fa-file-import"></i> 批量导入
+              </button>
+              <input type="file" id="importFile" accept=".xlsx,.xls" style="display:none" onchange="importTopics(this)">
+              <button class="btn-primary" onclick="exportTopics()">
+                <i class="fas fa-file-export"></i> 导出Excel
+              </button>
+            </div>
+          </div>
+          <!-- 搜索筛选栏 -->
+          <div class="list-search-bar" style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div style="position:relative;flex:1;max-width:360px;">
+              <i class="fas fa-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#aaa;font-size:13px;"></i>
+              <input type="text" id="listKeywordFilter" placeholder="搜索主题、分享人、内容、日期（如4月、4月15日）..." 
+                style="width:100%;padding:8px 12px 8px 32px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'"
+                oninput="renderTopicList()">
+            </div>
+            <span id="listFilterCount" style="font-size:12px;color:#999;"></span>
+          </div>
+          <!-- 批量操作栏 -->
+          <div id="batchBar" class="batch-bar admin-only-list" style="display:none;">
+            <label class="batch-select-all">
+              <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+              <span>全选</span>
+            </label>
+            <span id="selectedCount" class="selected-count">已选 0 项</span>
+            <div class="batch-actions">
+              <button class="btn-outline btn-sm" onclick="showBatchDateDialog()">
+                <i class="fas fa-calendar-check"></i> 修改日期
+              </button>
+              <button class="btn-outline btn-sm" onclick="exportSelected()">
+                <i class="fas fa-file-export"></i> 导出选中
+              </button>
+              <button class="btn-outline btn-sm btn-danger-outline" onclick="deleteSelected()">
+                <i class="fas fa-trash-alt"></i> 删除选中
+              </button>
+            </div>
+          </div>
+          <div id="topicList" class="topic-list">
+            <div class="empty-state">
+              <i class="fas fa-inbox"></i>
+              <p>暂无分享主题</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab3: 分享日历 -->
+        <div class="tab-content" id="tab-calendar">
+          <div class="page-title">
+            <h2>分享日历</h2>
+            <div class="calendar-filters">
+              <div class="filter-group">
+                <select id="calMonthFilter" onchange="renderCalendar()">
+                  <option value="">全部月份</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <select id="calCategoryFilter" onchange="renderCalendar()" style="font-size:13px;">
+                  <option value="">全部分类</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <button class="btn-outline btn-sm" onclick="exportCalendarPng()" title="导出当前筛选排期为图片" style="white-space:nowrap;">
+                  <i class="fas fa-download"></i> 导出排期
+                </button>
+              </div>
+              <div class="filter-group">
+                <div class="search-input-wrap">
+                  <i class="fas fa-search"></i>
+                  <input type="text" id="calKeywordFilter" placeholder="搜索主题/分享人/部门" oninput="renderCalendar()">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="calendarView" class="calendar-view">
+            <div class="empty-state">
+              <i class="fas fa-calendar-times"></i>
+              <p>暂无分享安排</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: 知识萃取 -->
+        <div class="tab-content" id="tab-knowledge">
+          <div class="page-title">
+            <h2>知识萃取</h2>
+            <p class="subtitle">将经验转化为可复用的知识资产</p>
+          </div>
+
+          <!-- 输入模式切换 -->
+          <div class="ke-mode-switch">
+            <button class="ke-mode-btn active" onclick="switchKeMode('star', this)">
+              <i class="fas fa-crosshairs"></i> STAR 模型
+            </button>
+            <button class="ke-mode-btn" onclick="switchKeMode('free', this)">
+              <i class="fas fa-edit"></i> 自由输入
+            </button>
+            <button class="ke-mode-btn" onclick="switchKeMode('history', this)">
+              <i class="fas fa-history"></i> 萃取历史
+            </button>
+          </div>
+                    <!-- 从分享预填（可选） -->
+          <div class="ke-prefill-card">
+            <div class="form-group">
+              <label><i class="fas fa-link"></i> 关联分享主题（可选）</label>
+              <select id="keTopicSelect" onchange="onKeTopicChange()">
+                <option value="">-- 不关联 / 手动输入 --</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- STAR 模型输入 -->
+          <div id="keStarPanel" class="ke-input-panel">
+            <div class="ke-star-grid">
+              <div class="ke-star-item">
+                <div class="ke-star-label">
+                  <span class="ke-star-letter">S</span>
+                  <span>Situation 背景</span>
+                </div>
+                <textarea id="keSituation" rows="3" placeholder="遇到了什么问题/挑战？当时的背景是什么？"></textarea>
+                <div class="ke-quick-tips">
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keSituation', '业务规模增长导致...')">📈 业务增长</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keSituation', '团队面临效率瓶颈...')">⏱️ 效率瓶颈</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keSituation', '新技术/工具引入需求...')">🔧 技术引入</button>
+                </div>
+              </div>
+              <div class="ke-star-item">
+                <div class="ke-star-label">
+                  <span class="ke-star-letter">T</span>
+                  <span>Task 任务</span>
+                </div>
+                <textarea id="keTask" rows="3" placeholder="需要解决什么目标/完成什么任务？"></textarea>
+                <div class="ke-quick-tips">
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keTask', '提升XX指标XX%...')">🎯 目标指标</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keTask', '搭建XX系统/平台...')">🏗️ 系统搭建</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keTask', '优化XX流程...')">⚡ 流程优化</button>
+                </div>
+              </div>
+              <div class="ke-star-item">
+                <div class="ke-star-label">
+                  <span class="ke-star-letter">A</span>
+                  <span>Action 行动</span>
+                </div>
+                <textarea id="keAction" rows="4" placeholder="具体做了什么？分几步实施的？关键决策是什么？"></textarea>
+                <div class="ke-quick-tips">
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keAction', '第一步：调研分析...\n第二步：方案设计...\n第三步：实施落地...')">📋 步骤模板</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keAction', '引入XX工具/技术...')">🔧 工具引入</button>
+                </div>
+              </div>
+              <div class="ke-star-item">
+                <div class="ke-star-label">
+                  <span class="ke-star-letter">R</span>
+                  <span>Result 结果</span>
+                </div>
+                <textarea id="keResult" rows="3" placeholder="取得了什么成果？数据上的变化？团队/业务的影响？"></textarea>
+                <div class="ke-quick-tips">
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keResult', 'XX指标提升XX%...')">📊 数据提升</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keResult', '获得了XX奖项/认可...')">🏆 获得认可</button>
+                  <button type="button" class="ke-tip-btn" onclick="appendKeField('keResult', '沉淀为XX方法论，推广至...')">📖 方法沉淀</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 自由输入 -->
+          <div id="keFreePanel" class="ke-input-panel" style="display:none;">
+            <div class="ke-free-card">
+              <label>粘贴任意文本（会议纪要、分享笔记、PPT内容等）</label>
+              <textarea id="keFreeText" rows="10" placeholder="将你的经验描述、课件笔记、会议纪要等文字粘贴到这里，AI 会自动萃取可复用的知识..."></textarea>
+            </div>
+          </div>
+
+          <!-- 萃取历史 -->
+          <div id="keHistoryPanel" class="ke-input-panel" style="display:none;">
+            <div id="keHistoryList" class="ke-history-list">
+              <div class="empty-state" style="padding:30px;"><i class="fas fa-archive"></i><p>暂无萃取历史</p></div>
+            </div>
+          </div>
+
+
+          <!-- 输出模板选择 & 萃取按钮 -->
+          <div id="keExtractBar" class="ke-extract-bar">
+            <div class="ke-output-modes">
+              <label class="ke-output-mode active" data-mode="full">
+                <input type="radio" name="keOutputMode" value="full" checked>
+                <i class="fas fa-file-alt"></i>
+                <span>标准全量版</span>
+              </label>
+              <label class="ke-output-mode" data-mode="framework">
+                <input type="radio" name="keOutputMode" value="framework">
+                <i class="fas fa-sitemap"></i>
+                <span>方法论框架</span>
+              </label>
+              <label class="ke-output-mode" data-mode="card">
+                <input type="radio" name="keOutputMode" value="card">
+                <i class="fas fa-id-card"></i>
+                <span>培训卡片</span>
+              </label>
+            </div>
+            <button class="btn-primary" id="btnKeExtract" onclick="doKnowledgeExtract()">
+              <i class="fas fa-magic"></i> 开始萃取
+            </button>
+          </div>
+
+          <!-- 萃取结果 -->
+          <div id="keResultArea" style="display:none;">
+            <div id="keResultContent" class="ke-result-card"></div>
+            <div class="ke-result-actions">
+              <button class="btn-outline btn-sm" onclick="copyKeResult()">
+                <i class="fas fa-copy"></i> 复制结果
+              </button>
+              <button class="btn-outline btn-sm" onclick="exportKeMarkdown()">
+                <i class="fas fa-file-export"></i> 导出 Markdown
+              </button>
+              <button class="btn-primary btn-sm" onclick="toggleBeautifyPanel()" id="btnBeautify" style="background:linear-gradient(135deg,#667eea,#764ba2);border:none;">
+                <i class="fas fa-magic"></i> ✨ 一键美化
+              </button>
+            </div>
+
+            <!-- 美化排版风格选择面板 -->
+            <div id="beautifyPanel" style="display:none;margin-top:16px;">
+              <div class="ke-prefill-card" style="background:linear-gradient(135deg,#f5f3ff 0%,#ede9fe 100%);border:1px solid #c4b5fd;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <i class="fas fa-palette" style="color:#7c3aed;font-size:16px;"></i>
+                    <span style="font-weight:600;color:#333;font-size:14px;">选择美化排版风格</span>
+                    <span style="font-size:11px;color:#888;background:#fff;padding:2px 8px;border-radius:10px;">点击卡片生成精美排版</span>
+                  </div>
+                  <button class="btn-outline btn-sm" onclick="toggleBeautifyPanel()" style="padding:4px 10px;font-size:12px;border-color:#c4b5fd;color:#7c3aed;">
+                    <i class="fas fa-times"></i> 收起
+                  </button>
+                </div>
+                <div id="beautifyStyleGrid" class="beautify-style-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 美化预览弹窗 -->
+          <div id="beautifyPreviewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;padding:1.5rem;">
+            <div style="background:#fff;border-radius:12px;width:100%;max-width:960px;height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.3);margin:auto;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid #e5e7eb;flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <span style="font-size:1.1rem;font-weight:600;">✨ 美化排版预览</span>
+                  <span id="beautifyStyleBadge" style="background:#eef2ff;color:#4f46e5;padding:2px 10px;border-radius:99px;font-size:0.75rem;font-weight:500;"></span>
+                </div>
+                <div style="display:flex;gap:8px;">
+                  <button onclick="beautifyDownloadHtml()" style="background:#3b82f6;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:6px;" title="下载HTML文件">
+                    <i class="fas fa-download"></i> 下载 HTML
+                  </button>
+                  <button onclick="beautifyExportPdf()" style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:6px;" title="导出PDF">
+                    <i class="fas fa-file-pdf"></i> 导出 PDF
+                  </button>
+                  <button onclick="beautifyExportPng()" style="background:#059669;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:6px;" title="导出PNG长图">
+                    <i class="fas fa-image"></i> 导出 PNG
+                  </button>
+                  <button onclick="closeBeautifyPreview()" style="background:#f3f4f6;color:#374151;border:none;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;" title="关闭">✕</button>
+                </div>
+              </div>
+              <div style="flex:1;overflow:auto;background:#e5e7eb;padding:24px;">
+                <iframe id="beautifyPreviewFrame" style="width:100%;height:100%;border:none;border-radius:8px;background:#fff;" sandbox="allow-same-origin allow-modals allow-scripts"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: 课后反馈 -->
+        <div class="tab-content" id="tab-feedback">
+          <div class="page-title">
+            <h2>课后反馈</h2>
+            <p class="subtitle">您的反馈是我们进步的动力</p>
+          </div>
+
+          <!-- 可得积分提示 + 跳商城 -->
+          <div class="earn-hint-bar" id="feedbackEarnHint">
+            <i class="fas fa-coins"></i>
+            <span>提交课后反馈即可获得 <b id="fbEarnPoints">20</b> 学习积分，攒积分去 <a href="javascript:void(0)" onclick="switchTab('mall')">积分商城</a> 兑换好礼 🎁</span>
+          </div>
+
+          <!-- 选择分享日期 -->
+          <div class="feedback-select-card" id="feedbackSelectCard">
+            <div class="form-group">
+              <label><i class="fas fa-clipboard-list"></i> 选择要反馈的分享</label>
+              <select id="feedbackDateSelect" onchange="onFeedbackDateChange()">
+                <option value="">-- 请选择分享日期 --</option>
+              </select>
+              <input type="hidden" id="feedbackTopicSelect" value="">
+            </div>
+          </div>
+
+          <!-- 问卷表单 -->
+          <div id="feedbackFormArea" style="display:none;">
+            <div class="feedback-form-card">
+              <div class="feedback-form-header">
+                <h3 id="feedbackFormTitle">反馈调研</h3>
+                <p id="feedbackFormSubtitle" class="feedback-subtitle"></p>
+              </div>
+
+              <form id="feedbackForm">
+                <!-- 当前选中的日期（隐藏字段，提交时使用） -->
+                <input type="hidden" id="currentDateKey" value="">
+                <!-- 评分区域（动态生成：每个主题一个评分） -->
+                <div class="feedback-rating-section" id="fbRatingSection">
+                  <!-- JS 动态填充 -->
+                </div>
+
+                <!-- 文字反馈区域 -->
+                <div class="feedback-text-section">
+                  <div class="form-group">
+                    <label id="fbQ4Label">4. 最有价值的一个点是</label>
+                    <textarea id="fb_bestPoint" rows="2" placeholder="这次分享中，你觉得最有收获的一个知识点或观点是？"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label id="fbQ5Label">5. 建议改进的地方</label>
+                    <textarea id="fb_improvement" rows="2" placeholder="有什么可以做得更好的？（内容、形式、互动等）"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label id="fbQ6Label">6. 你最想听的下一个话题</label>
+                    <textarea id="fb_nextTopic" rows="2" placeholder="你希望下次 XX分享 聊什么话题？"></textarea>
+                  </div>
+                </div>
+
+                <!-- 匿名选项 & 提交 -->
+                <div class="feedback-submit-area">
+                  <label class="anonymous-toggle">
+                    <input type="checkbox" id="fb_anonymous">
+                    <span>匿名提交</span>
+                  </label>
+                  <button type="submit" class="btn-primary btn-feedback-submit">
+                    <i class="fas fa-paper-plane"></i> 提交反馈
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- 已提交提示 -->
+          <div id="feedbackSubmitted" style="display:none;">
+            <div class="feedback-done-card">
+              <i class="fas fa-check-circle"></i>
+              <h3>感谢你的反馈！</h3>
+              <p>你已提交过该日期的反馈，每人每个日期仅可提交一次。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: 积分商城（融合模块） -->
+        <div class="tab-content" id="tab-mall">
+          <div class="page-title">
+            <h2>积分商城</h2>
+            <div class="quick-links">
+              <a href="javascript:void(0)" onclick="showMallSection('shop')" class="quick-link-item"><i class="fas fa-store"></i> 商城</a>
+              <a href="javascript:void(0)" onclick="showMallSection('points')" class="quick-link-item"><i class="fas fa-wallet"></i> 我的积分</a>
+              <a href="javascript:void(0)" onclick="showMallSection('orders')" class="quick-link-item"><i class="fas fa-gift"></i> 我的兑换</a>
+              <a href="javascript:void(0)" onclick="showMallSection('rank')" class="quick-link-item"><i class="fas fa-fire"></i> 学习能量榜</a>
+            </div>
+          </div>
+
+          <div id="mallPreviewIdentity" class="mall-preview-bar" style="display:none;">
+            <i class="fas fa-user-tag"></i> 本地预览身份：
+            <input type="text" id="previewStaffInput" placeholder="输入体验员工名" />
+            <button class="btn-action" onclick="setPreviewStaff()">切换</button>
+            <span class="mall-hint">（无 OA 网关时用于本地体验，内网无效）</span>
+          </div>
+
+          <div id="mallShop" class="mall-sub">
+            <div id="mallProducts" class="mall-grid"></div>
+          </div>
+
+          <div id="mallPoints" class="mall-sub mall-section" style="display:none;">
+            <div id="mallMyPoints" class="mall-section">
+              <h3><i class="fas fa-wallet"></i> 我的积分</h3>
+              <div id="myPointsSummary" class="points-summary"></div>
+            </div>
+            <div id="mallLedger" class="mall-section" style="display:none;">
+              <h3><i class="fas fa-receipt"></i> 积分流水</h3>
+              <div id="ledgerList" class="ledger-list"></div>
+            </div>
+          </div>
+
+          <div id="mallOrders" class="mall-sub mall-section" style="display:none;">
+            <h3><i class="fas fa-gift"></i> 我的兑换</h3>
+            <p class="mall-hint">查看你兑换的订单与发货进度</p>
+            <div id="myOrdersList" class="orders-list"></div>
+          </div>
+
+          <div id="mallRank" class="mall-sub mall-section" style="display:none;">
+            <h3><i class="fas fa-fire"></i> 学习能量榜</h3>
+            <p class="mall-hint">按累计获得的学习积分排名，激励人人都来分享与反馈</p>
+            <div id="rankList" class="rank-list"></div>
+          </div>
+        </div>
+
+        <!-- Tab4: 后台管理 -->
+        <div class="tab-content" id="tab-admin">
+          <div class="page-title">
+            <h2>后台管理</h2>
+            <p class="subtitle">仅培训管理员可见</p>
+          </div>
+          <div class="admin-sections">
+            <!-- 积分商城管理（融合模块） -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-gift"></i> 积分商城管理</div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-panels">
+                  <!-- 商品管理 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header"><i class="fas fa-box"></i> 商品管理</div>
+                    <div class="admin-card-body">
+                      <form id="productForm" class="form-card" autocomplete="off">
+                        <div class="form-row two-col">
+                          <div class="form-group"><label>商品名称 *</label><input type="text" id="prodName" required></div>
+                          <div class="form-group"><label>所需积分 *</label><input type="number" id="prodPoints" required></div>
+                        </div>
+                        <div class="form-row two-col">
+                          <div class="form-group"><label>库存</label><input type="number" id="prodStock" value="0"></div>
+                          <div class="form-group"><label>图片URL</label><input type="text" id="prodImage" placeholder="/products/cup.png"></div>
+                        </div>
+                        <div class="form-group"><label>描述</label><input type="text" id="prodDesc"></div>
+                        <div class="form-row">
+                          <label class="checkbox-inline"><input type="checkbox" id="prodStatus" checked> 上架</label>
+                          <button type="button" class="btn-action" onclick="createProduct()"><i class="fas fa-plus"></i> 添加商品</button>
+                        </div>
+                      </form>
+                      <div id="productAdminList" class="admin-list"></div>
+                    </div>
+                  </div>
+                  <!-- 订单管理 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header"><i class="fas fa-clipboard-list"></i> 兑换订单</div>
+                    <div class="admin-card-body"><div id="orderAdminList" class="admin-list"></div></div>
+                  </div>
+                  <!-- 积分调分 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header"><i class="fas fa-coins"></i> 积分调分（手动）</div>
+                    <div class="admin-card-body">
+                      <form id="adjustForm" class="form-card" autocomplete="off">
+                        <div class="form-row two-col">
+                          <div class="form-group"><label>员工名 *</label><input type="text" id="adjStaff" required></div>
+                          <div class="form-group"><label>分值(可负) *</label><input type="number" id="adjAmount" required></div>
+                        </div>
+                        <div class="form-group"><label>原因</label><input type="text" id="adjReason"></div>
+                        <button type="button" class="btn-action" onclick="adjustPointsAdmin()"><i class="fas fa-check"></i> 确认调分</button>
+                      </form>
+                      <div id="accountAdminList" class="admin-list"></div>
+                    </div>
+                  </div>
+
+                  <!-- 积分经济看板 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header"><i class="fas fa-chart-pie"></i> 积分经济看板</div>
+                    <div class="admin-card-body"><div id="mallStats" class="admin-stats"></div></div>
+                  </div>
+
+                  <!-- 发分规则 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header"><i class="fas fa-sliders-h"></i> 发分规则（培训行为）</div>
+                    <div class="admin-card-body">
+                      <div class="form-row three-col">
+                        <div class="form-group"><label>完成分享 +分</label><input type="number" id="ruleShare"></div>
+                        <div class="form-group"><label>课后反馈 +分</label><input type="number" id="ruleFeedback"></div>
+                        <div class="form-group"><label>开户礼 +分</label><input type="number" id="ruleWelcome"></div>
+                      </div>
+                      <div class="form-group"><label>规则说明</label><input type="text" id="ruleDesc" placeholder="展示给用户的话术"></div>
+                      <button type="button" class="btn-action" onclick="saveEarningRule()"><i class="fas fa-save"></i> 保存规则</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 第一部分：基础配置 -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-cogs"></i> 基础配置</div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-panels">
+                  <!-- 管理员配置 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-user-shield"></i>
+                      <h3>管理员配置</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>管理员列表（英文名，逗号分隔）</label>
+                      <input type="text" id="adminList" placeholder="如：zhangsan,lisi,wangwu">
+                      <button class="btn-primary btn-sm" onclick="saveAdmins()">保存</button>
+                    </div>
+                  </div>
+
+                  <!-- 海报配置（按主题分类） -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-image"></i>
+                      <h3>海报配置</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <div style="margin-bottom:12px;">
+                        <label>选择分类</label>
+                        <select id="posterCategorySelect" onchange="switchPosterCategory()" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #d9d9d9;font-size:13px;"></select>
+                      </div>
+
+                      <!-- 海报标题（CSS Header显示） -->
+                      <div style="margin-bottom:14px;">
+                        <label>海报标题 <span style="font-size:11px;color:#999;font-weight:400;">（无 Banner 时显示在顶部）</span></label>
+                        <input type="text" id="posterHeaderTitle" placeholder="如：XX分享、新人成长营" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid #d9d9d9;font-size:13px;">
+                        <div style="font-size:11px;color:#999;margin-top:4px;">留空则默认显示分类名称</div>
+                      </div>
+
+                      <!-- 主题风格选择 -->
+                      <div style="margin-bottom:14px;">
+                        <label>主题风格</label>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                          <select id="posterThemeSelect" onchange="updateThemePreview()" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid #d9d9d9;font-size:13px;">
+                            <option value="classic-blue">💎 经典蓝</option>
+                            <option value="tech-purple">🔮 科技紫</option>
+                            <option value="nature-green">🌿 自然绿</option>
+                          </select>
+                          <div id="themePreviewBar" style="width:60px;height:32px;border-radius:8px;background:linear-gradient(135deg, #1e3a8a, #3b82f6, #6366f1);box-shadow:0 2px 6px rgba(0,0,0,0.15);flex-shrink:0;"></div>
+                        </div>
+                        <div style="font-size:11px;color:#999;margin-top:4px;">主题影响海报整体配色（Header、日期栏、按钮等）</div>
+                      </div>
+
+                      <label>Banner 图片 <span style="font-size:11px;color:#999;font-weight:400;">（可选）</span></label>
+                      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+                        <img id="bannerPreview" src="" style="height:48px;border-radius:6px;border:1px solid #e8e8e8;display:none;">
+                        <button class="btn-outline btn-sm" type="button" onclick="document.getElementById('bannerUpload').click()">
+                          <i class="fas fa-upload"></i> 替换图片
+                        </button>
+                        <button id="bannerDeleteBtn" class="btn-outline btn-sm" type="button" onclick="deleteBanner()" style="color:#ff4d4f;border-color:#ffccc7;display:none;">
+                          <i class="fas fa-trash-alt"></i> 删除
+                        </button>
+                        <input type="file" id="bannerUpload" accept="image/*" style="display:none" onchange="uploadBanner(this)">
+                        <span id="bannerUploadStatus" style="font-size:12px;color:#999;"></span>
+                      </div>
+                      <div id="bannerStatusHint" style="font-size:11px;color:#8b5cf6;margin-bottom:12px;">未配置 — 将使用 CSS 装饰性 Header（自动跟随主题配色）</div>
+
+                      <label>底部署名</label>
+                      <input type="text" id="posterFooter" placeholder="如：XX部门 / XX团队" value="培训分享">
+                      <button class="btn-primary btn-sm" style="margin-top:12px;" onclick="saveConfig('posterConfig')">保存配置</button>
+                    </div>
+                  </div>
+
+                  <!-- 讲师课前提醒 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-chalkboard-teacher"></i>
+                      <h3>讲师课前提醒</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>提醒模板</label>
+                      <textarea id="speakerReminderTemplate" rows="8">各位好，XX分享 下期分享将于下周三下午15:00-16:30进行，届时邀请 {speaker} 进行《{title}》的分享，大家别忘记安排好时间！
+
+[玫瑰]也麻烦 {speaker} 这边提前准备好分享材料：
+1、如有PPT，请提前上传至iWiki
+2、分享简介和海报会提前在群内宣传</textarea>
+                      <button class="btn-primary btn-sm" onclick="saveConfig('speakerReminder')" style="margin-top:8px;">保存配置</button>
+                    </div>
+                  </div>
+
+                  <!-- 开课提醒 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-bell"></i>
+                      <h3>开课提醒</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>提醒模板</label>
+                      <textarea id="classReminderTemplate" rows="4" placeholder="支持变量：{topics}"></textarea>
+                      <div style="font-size:11px;color:#999;margin:4px 0 8px;">支持变量：{topics}=主题列表（自动生成）</div>
+                      <button class="btn-primary btn-sm" onclick="saveConfig('classReminder')">保存配置</button>
+                    </div>
+                  </div>
+
+                  <!-- 材料沉淀提醒 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-file-alt"></i>
+                      <h3>材料沉淀提醒</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>提醒模板</label>
+                      <textarea id="materialReminderTemplate" rows="2" placeholder="支持变量：{speaker}"></textarea>
+                      <button class="btn-primary btn-sm" onclick="saveConfig('materialReminder')">保存配置</button>
+                    </div>
+                  </div>
+
+                  <!-- 分享回看&反馈通知话术 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-comment-dots"></i>
+                      <h3>分享回看&反馈通知话术</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>通知模板</label>
+                      <textarea id="feedbackTemplate" rows="8" placeholder="支持变量：{topics}=主题列表, {link}=问卷链接">【XX分享】精彩回看来啦[转圈]~
+
+{topics}
+
+[爱心]诚邀大家对本期分享进行反馈，您的反馈是我们进步的动力！
+填写问卷:{link}</textarea>
+                      <div style="font-size:11px;color:#999;margin:4px 0 8px;">支持变量：{topics}=主题列表（自动生成）, {title}=主题, {department}=部门, {speaker}=分享人, {link}=问卷链接</div>
+                      <button class="btn-primary btn-sm" onclick="saveConfig('feedbackReminder')" style="margin-top:8px;">保存配置</button>
+                    </div>
+                  </div>
+
+                  <!-- 奖励通知话术 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-gift"></i>
+                      <h3>奖励通知话术</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>通知模板</label>
+                      <textarea id="rewardNotifyTemplate" rows="4" placeholder="支持变量：{name}=分享人, {topicTitle}=主题, {codes}=券码">你好！感谢你参与「{topicTitle}」的分享，以下是你的奖励券码：
+{codes}
+请在有效期内使用，谢谢！</textarea>
+                      <div style="font-size:11px;color:#999;margin-top:4px;">点击"通知本人"时，话术+券码会自动复制到剪贴板并跳转企微聊天窗</div>
+                      <button class="btn-primary btn-sm" onclick="saveConfig('rewardNotify')" style="margin-top:8px;">保存配置</button>
+                    </div>
+                  </div>
+
+                  <!-- iWiki 沉淀配置 -->
+                  <div class="admin-card">
+                    <div class="admin-card-header">
+                      <i class="fas fa-book-open"></i>
+                      <h3>iWiki 沉淀配置</h3>
+                    </div>
+                    <div class="admin-card-body">
+                      <label>iWiki MCP Token</label>
+                      <input type="text" id="iwikiMcpToken" placeholder="从 .codebuddy/mcp.json 中获取 tai_pat_ 开头的 Token" autocomplete="off" style="-webkit-text-security:disc;">
+                      <label style="margin-top:8px;">父页面 ID（多个用换行或逗号分隔）</label>
+                      <textarea id="iwikiParentPageId" rows="3" placeholder="输入你的 iWiki 父页面 ID" style="width:100%;font-size:13px;"></textarea>
+                      <div style="font-size:11px;color:#999;margin-top:4px;">配置多个父页面ID后，同步时会同时创建到所有父页面下</div>
+                      <button class="btn-primary btn-sm" onclick="saveConfig('iwikiConfig')" style="margin-top:8px;">保存配置</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第二部分：分享数据看板 -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-chart-pie"></i> 分享数据看板</div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-section-content">
+                  <div id="shareDashboard" class="share-dashboard">
+                    <div class="dashboard-loading"><i class="fas fa-spinner fa-spin"></i> 加载中...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第三部分：反馈数据看板 -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-chart-bar"></i> 反馈数据看板 <span class="section-badge" id="badgeFeedback" style="display:none;"></span></div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-section-content">
+                  <!-- 子 Tab -->
+                  <div class="sub-tabs">
+                    <button class="sub-tab active" onclick="switchFbTab('links', this)">问卷链接</button>
+                    <button class="sub-tab" onclick="switchFbTab('overview', this)">数据概览</button>
+                    <button class="sub-tab" onclick="switchFbTab('detail', this)">日期详情</button>
+                  </div>
+
+                  <div id="fbTab-links" class="fb-tab-content active">
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+                      <p style="font-size:13px;color:#8c8c8c;flex:1;">每个分享日期对应一个独立反馈链接，复制后发给学员即可收集当天所有主题的反馈。</p>
+                      <select id="fbLinkDateFilter" onchange="loadFbLinkList()" style="padding:6px 10px;border:1px solid #d9d9d9;border-radius:6px;font-size:13px;width:auto;min-width:140px;">
+                        <option value="">全部日期</option>
+                      </select>
+                    </div>
+                    <div id="fbLinkList" class="fb-link-list">
+                      <div class="empty-state" style="padding:30px;"><i class="fas fa-link"></i><p>加载中...</p></div>
+                    </div>
+                  </div>
+
+                  <div id="fbTab-overview" class="fb-tab-content" style="display:none;">
+                    <div class="fb-overview-stats" id="fbOverviewStats">
+                      <div class="empty-state" style="padding:30px;"><i class="fas fa-chart-pie"></i><p>暂无反馈数据</p></div>
+                    </div>
+                  </div>
+
+                  <div id="fbTab-detail" class="fb-tab-content" style="display:none;">
+                    <div class="form-row two-col">
+                      <div class="form-group">
+                        <label>选择分享主题查看反馈</label>
+                        <select id="fbDashTopicSelect" onchange="loadFeedbackDashboard()">
+                          <option value="">-- 请选择 --</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div id="fbDetailArea">
+                      <div class="fb-score-cards" id="fbScoreCards"></div>
+                      <div class="fb-dist-section" id="fbDistSection"></div>
+                      <div class="fb-text-section" id="fbTextSection"></div>
+                      <div class="fb-topic-ranking" id="fbTopicRanking"></div>
+                      <div class="fb-action-bar" id="fbActionBar" style="display:none;">
+                        <button class="btn-primary btn-sm" onclick="aiAnalyzeFeedback()">
+                          <i class="fas fa-robot"></i> AI 智能分析
+                        </button>
+                        <button class="btn-outline btn-sm" onclick="copyFeedbackLink(currentFbTopicId)">
+                          <i class="fas fa-link"></i> 复制反馈链接
+                        </button>
+                        <button class="btn-outline btn-sm" onclick="exportFeedback()">
+                          <i class="fas fa-file-export"></i> 导出Excel
+                        </button>
+                      </div>
+                      <div id="fbAiResult" style="display:none;" class="fb-ai-result"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第四部分：AI助手使用看板 -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-robot"></i> AI助手使用看板 <span class="section-badge" id="badgeAiChat" style="display:none;"></span></div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-section-content">
+                  <div style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+                    <div style="font-size:13px;color:#666;">
+                      <i class="fas fa-info-circle"></i> 展示用户使用"小Q同学"AI助手的提问数据（已自动剔除管理员测试数据）
+                    </div>
+                    <button class="btn-outline btn-sm" onclick="loadAiDashboard()">
+                      <i class="fas fa-sync-alt"></i> 刷新数据
+                    </button>
+                  </div>
+                  <div id="aiDashboardContent">
+                    <div style="text-align:center;padding:40px;color:#999;">
+                      <i class="fas fa-robot" style="font-size:32px;margin-bottom:12px;display:block;"></i>
+                      <p>点击上方"刷新数据"加载AI助手使用看板</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第五部分：分享沉淀 -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-archive"></i> 分享沉淀</div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-section-content">
+                  <!-- 子 Tab -->
+                  <div class="sub-tabs">
+                    <button class="sub-tab active" onclick="switchDepositTab('manage', this)">资料管理</button>
+                    <button class="sub-tab" onclick="switchDepositTab('sync', this)">同步iWiki</button>
+                    <button class="sub-tab" onclick="switchDepositTab('records', this)">同步记录</button>
+                  </div>
+
+                  <!-- iWiki 配置提示 -->
+                  <div id="depositIwikiConfig" style="background:#fff7e6;border:1px solid #ffe58f;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#d48806;display:none;">
+                    <i class="fas fa-exclamation-triangle"></i> 请在「基础配置」中设置 iWiki MCP Token 以启用自动同步
+                  </div>
+
+                  <!-- Tab: 资料管理 -->
+                  <div id="depositTab-manage" class="deposit-tab-content active">
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+                      <div class="form-group" style="margin:0;flex:1;min-width:200px;">
+                        <label style="font-size:12px;margin-bottom:4px;"><i class="fas fa-calendar"></i> 选择分享日期</label>
+                        <select id="depositDateFilter" onchange="loadDepositList()" style="width:100%;">
+                          <option value="">-- 全部日期 --</option>
+                        </select>
+                      </div>
+                      <button class="btn-outline btn-sm" onclick="autoFillAllDeposits()" style="margin-top:18px;">
+                        <i class="fas fa-magic"></i> 一键预填
+                      </button>
+                      <button class="btn-outline btn-sm" onclick="triggerDepositImport()" style="margin-top:18px;color:#52c41a;border-color:#52c41a;">
+                        <i class="fas fa-file-import"></i> 导入表格
+                      </button>
+                      <input type="file" id="depositImportFileInput" style="display:none;" accept=".xlsx,.xls,.csv" onchange="handleDepositImport(this)">
+                    </div>
+                    <div id="depositList" class="deposit-list">
+                      <div class="empty-state" style="padding:30px;"><i class="fas fa-archive"></i><p>请选择日期查看分享主题的沉淀资料</p></div>
+                    </div>
+                  </div>
+
+                  <!-- Tab: 同步iWiki -->
+                  <div id="depositTab-sync" class="deposit-tab-content" style="display:none;">
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
+                      <div class="form-group" style="margin:0;flex:1;min-width:200px;">
+                        <label style="font-size:12px;margin-bottom:4px;"><i class="fas fa-calendar"></i> 选择日期批量同步</label>
+                        <select id="depositSyncDateFilter" onchange="loadDepositSyncList()">
+                          <option value="">-- 选择日期 --</option>
+                        </select>
+                      </div>
+                      <button class="btn-primary btn-sm" onclick="batchSyncToIwiki()" style="margin-top:18px;">
+                        <i class="fas fa-cloud-upload-alt"></i> 批量同步到 iWiki
+                      </button>
+                    </div>
+                    <div id="depositSyncList" class="deposit-list">
+                      <div class="empty-state" style="padding:30px;"><i class="fas fa-cloud-upload-alt"></i><p>选择日期后，可批量同步已填资料到 iWiki</p></div>
+                    </div>
+                    <!-- 预览弹窗 -->
+                    <div id="depositPreviewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;padding:20px;">
+                      <div style="background:#fff;border-radius:12px;max-width:700px;max-height:85vh;margin:auto;overflow:hidden;display:flex;flex-direction:column;">
+                        <div style="padding:14px 20px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;">
+                          <span style="font-size:15px;font-weight:600;" id="depositPreviewTitle">iWiki 预览</span>
+                          <button style="background:none;border:none;font-size:20px;cursor:pointer;color:#999;" onclick="document.getElementById('depositPreviewModal').style.display='none'">&times;</button>
+                        </div>
+                        <div id="depositPreviewContent" style="padding:20px;overflow-y:auto;flex:1;font-size:14px;line-height:1.8;white-space:pre-wrap;font-family:monospace;background:#fafafa;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab: 同步记录 -->
+                  <div id="depositTab-records" class="deposit-tab-content" style="display:none;">
+                    <div id="depositSyncRecords">
+                      <div class="empty-state" style="padding:30px;"><i class="fas fa-history"></i><p>暂无同步记录</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 第五部分：奖励发放 -->
+            <div class="admin-section collapsed">
+              <div class="admin-section-header" onclick="toggleAdminSection(this)">
+                <div class="admin-section-title"><i class="fas fa-gift"></i> 奖励发放</div>
+                <i class="fas fa-chevron-up admin-section-arrow"></i>
+              </div>
+              <div class="admin-section-body">
+                <div class="admin-section-content">
+                <!-- Sub Tabs -->
+                <div class="sub-tabs">
+                  <button class="sub-tab active" onclick="switchGiftTab('codes', this)">券码管理</button>
+                  <button class="sub-tab" onclick="switchGiftTab('assign', this)">分配发放</button>
+                  <button class="sub-tab" onclick="switchGiftTab('records', this)">发放记录</button>
+                </div>
+
+                <!-- 券码统计 -->
+                <div class="gift-stats" id="giftStats">
+                  <div class="stat-item"><span class="stat-num" id="statTotal">0</span><span class="stat-label">总计</span></div>
+                  <div class="stat-item unused"><span class="stat-num" id="statUnused">0</span><span class="stat-label">未使用</span></div>
+                  <div class="stat-item assigned"><span class="stat-num" id="statAssigned">0</span><span class="stat-label">已分配</span></div>
+                  <div class="stat-item sent"><span class="stat-num" id="statSent">0</span><span class="stat-label">已发放</span></div>
+                </div>
+
+                <!-- Tab: 券码管理 -->
+                <div id="giftTab-codes" class="gift-tab-content active">
+                  <div class="gift-actions-bar">
+                    <button class="btn-outline btn-sm" onclick="downloadGiftTemplate()">
+                      <i class="fas fa-file-download"></i> 下载导入模板
+                    </button>
+                    <button class="btn-primary btn-sm" onclick="document.getElementById('giftImportFile').click()">
+                      <i class="fas fa-file-import"></i> 批量导入券码
+                    </button>
+                    <input type="file" id="giftImportFile" accept=".xlsx,.xls" style="display:none" onchange="importGiftCodes(this)">
+                  </div>
+                  <div id="giftCodeList" class="gift-code-list">
+                    <div class="empty-state" style="padding:30px;"><i class="fas fa-ticket-alt"></i><p>暂无券码，请导入</p></div>
+                  </div>
+                </div>
+
+                <!-- Tab: 分配发放 -->
+                <div id="giftTab-assign" class="gift-tab-content">
+                  <div class="assign-section">
+                    <div class="form-row two-col">
+                      <div class="form-group">
+                        <label>选择分享日期</label>
+                        <select id="giftDateFilter" onchange="loadAssignList()">
+                          <option value="">-- 全部日期 --</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div id="assignList" class="assign-list">
+                      <div class="empty-state" style="padding:30px;"><i class="fas fa-user-tag"></i><p>请选择分享日期查看分享人</p></div>
+                    </div>
+                    <div class="assign-actions" style="margin-top:12px;">
+                      <button class="btn-outline btn-sm" onclick="batchAssignGifts()">
+                        <i class="fas fa-random"></i> 批量分配券码
+                      </button>
+                      <button class="btn-primary btn-sm" onclick="batchSendGifts()">
+                        <i class="fas fa-paper-plane"></i> 批量确认发放
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tab: 发放记录 -->
+                <div id="giftTab-records" class="gift-tab-content">
+                  <div id="giftRecords" class="gift-records">
+                    <div class="empty-state" style="padding:30px;"><i class="fas fa-history"></i><p>暂无发放记录</p></div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 海报离屏渲染区（不可见） -->
+  <div id="posterOffscreen" style="position:fixed;left:-9999px;top:0;width:640px;z-index:-1;background:#fff;"></div>
+
+  <!-- AI 助手浮动窗口 -->
+  <div id="aiChatWidget" class="ai-chat-widget">
+    <div class="ai-chat-fab-wrap">
+      <span class="ai-chat-fab-label">小Q同学</span>
+      <button class="ai-chat-fab" id="aiChatFab" onclick="toggleAiChat()" title="AI 助手">
+        <i class="fas fa-robot"></i>
+      </button>
+    </div>
+    <div class="ai-chat-panel" id="aiChatPanel">
+      <div class="ai-chat-header">
+        <div class="ai-chat-header-left">
+          <i class="fas fa-robot"></i>
+          <span>小Q同学</span>
+        </div>
+        <div class="ai-chat-header-actions">
+          <button class="ai-chat-hdr-btn" onclick="aiNewChat()" title="开启新对话"><i class="fas fa-plus"></i></button>
+          <button class="ai-chat-hdr-btn" onclick="aiShowHistory()" title="查看历史对话"><i class="fas fa-history"></i></button>
+          <button class="ai-chat-close" onclick="toggleAiChat()"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="ai-chat-messages" id="aiChatMessages">
+        <div class="ai-msg ai-msg-bot">
+          <div class="ai-msg-content">Hi，我是小Q同学，你的培训运营 AI 助手 🎓<br><br>我可以帮你优化分享简介、提供主题灵感、解答平台使用问题，直接输入你的问题吧～</div>
+        </div>
+      </div>
+      <div class="ai-chat-input-area">
+        <textarea id="aiChatInput" placeholder="输入你的问题..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAiMessage();}"></textarea>
+        <button class="ai-chat-send" onclick="sendAiMessage()" id="aiChatSendBtn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- 通用弹窗 -->
+  <div id="appModal" class="app-modal-overlay" style="display:none;" onclick="if(event.target===this)closeAppModal()">
+    <div class="app-modal" id="appModalBox"></div>
+  </div>
+
+  <!-- 公共工具函数 -->
+  <script src="js/utils.js?v=20260513"></script>
+  <!-- 核心入口：全局状态 + Init + User Identity + Tab 导航 -->
+  <script src="app.js?v=20260513"></script>
+  <!-- 各功能模块 -->
+  <script src="js/tab-submit.js?v=20260518"></script>
+  <script src="js/tab-list.js?v=20260518"></script>
+  <script src="js/tab-admin.js?v=20260518"></script>
+  <script src="js/poster-template.js?v=20260518"></script>
+  <script src="js/poster-generate.js?v=20260518"></script>
+  <script src="js/tab-calendar.js?v=20260518"></script>
+  <script src="js/tab-feedback.js?v=20260518"></script>
+  <script src="js/tab-knowledge.js?v=20260518"></script>
+  <script src="js/tab-mall.js?v=20260827"></script>
+  <script src="js/ai-assistant.js?v=20260513"></script>
+  <script>
+    // 首页文件夹入口：跳转到对应功能 tab（复用已有 nav-item 点击逻辑）
+    function goTab(tab) {
+      const nav = document.querySelector('.nav-item[data-tab="' + tab + '"]');
+      if (nav) nav.click();
+    }
+  </script>
+</body>
+</html>
