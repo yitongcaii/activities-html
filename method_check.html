@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>面试方法论卡 · 战略/战术/细节</title>
+<style>
+  :root{
+    --violet:#7c5cff; --cyan:#2dd4bf; --ink:#1f2330; --muted:#6b7280;
+    --bg1:#f6f3ff; --bg2:#ecfeff; --card:#ffffff; --line:#eceef5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink); background:linear-gradient(135deg,var(--bg1),var(--bg2)); min-height:100vh;
+  }
+  header{
+    padding:38px 28px 18px; text-align:center;
+    background:linear-gradient(120deg,rgba(124,92,255,.10),rgba(45,212,191,.10));
+  }
+  header h1{
+    margin:0; font-size:30px; font-weight:800;
+    background:linear-gradient(90deg,var(--violet),var(--cyan));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{margin:8px 0 0; color:var(--muted); font-size:14px;}
+  .toolbar{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.80); border-bottom:1px solid var(--line);
+    padding:12px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;
+  }
+  .search{
+    border:1px solid var(--line); border-radius:999px; padding:9px 16px; font-size:14px;
+    width:min(320px,72vw); outline:none; background:#fff; color:var(--ink);
+  }
+  .search:focus{border-color:var(--violet); box-shadow:0 0 0 3px rgba(124,92,255,.12);}
+  .chips{display:flex; flex-wrap:wrap; gap:7px; justify-content:center;}
+  .chip{
+    cursor:pointer; border:1px solid var(--line); background:#fff; color:var(--muted);
+    border-radius:999px; padding:6px 13px; font-size:13px; transition:.18s; user-select:none;
+  }
+  .chip:hover{border-color:var(--violet); color:var(--violet);}
+  .chip.active{background:linear-gradient(90deg,var(--violet),var(--cyan)); color:#fff; border-color:transparent;}
+  .grid{
+    max-width:1180px; margin:22px auto 8px; padding:0 18px 40px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 18px 16px;
+    box-shadow:0 6px 20px rgba(31,35,48,.06); opacity:0; transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease, box-shadow .2s, transform .2s;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .card.in{opacity:1; transform:translateY(0);}
+  .card:hover{box-shadow:0 10px 28px rgba(124,92,255,.14); transform:translateY(-3px);}
+  .pill{
+    align-self:flex-start; font-size:12px; font-weight:700; padding:4px 11px; border-radius:999px;
+    letter-spacing:.3px;
+  }
+  .card h3{margin:0; font-size:16px; font-weight:800; line-height:1.4;}
+  .ans{
+    font-size:14px; line-height:1.7; color:#374151; border-radius:10px; padding:8px 10px;
+    background:#fafbff; border:1px dashed transparent; transition:.15s; outline:none;
+  }
+  .ans:focus{background:#fff; border-color:var(--cyan); box-shadow:0 0 0 3px rgba(45,212,191,.12);}
+  .ans:empty:before{content:"点击补充你的批注 / 例子…"; color:#b9bfce;}
+  .meta{font-size:12px; color:var(--muted); margin-top:2px;}
+  .count{text-align:center; color:var(--muted); font-size:13px; padding:4px 0 10px;}
+  footer{
+    text-align:center; padding:22px 16px; color:#6b7280; font-size:13px;
+    background:linear-gradient(120deg,rgba(124,92,255,.06),rgba(45,212,191,.06));
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>面试作战方法论卡</h1>
+  <p>战略定生死 · 战术稳发挥 · 细节防翻车 ｜ 黄色卡片=你当前最该补的，点开可填</p>
+</header>
+
+<div class="toolbar" id="toolbar">
+  <input id="search" class="search" placeholder="搜索关键词，如 动机 / 压力型 / 跟进 / 轮次" />
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="count" id="count"></div>
+<main class="grid" id="grid"></main>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+
+<script>
+const CATS = {
+  '战略':{c:'#7c5cff', bg:'rgba(124,92,255,.12)'},
+  '战术':{c:'#2dd4bf', bg:'rgba(45,212,191,.14)'},
+  '细节':{c:'#f59e0b', bg:'rgba(245,158,11,.14)'},
+  '轮次':{c:'#22c55e', bg:'rgba(34,197,94,.14)'},
+  '面试官':{c:'#ec4899', bg:'rgba(236,72,153,.14)'},
+  '心态':{c:'#eab308', bg:'rgba(234,179,8,.16)'},
+  '跟进':{c:'#3b82f6', bg:'rgba(59,130,246,.14)'},
+  '矩阵':{c:'#64748b', bg:'rgba(100,116,139,.14)'},
+  '要补':{c:'#ef4444', bg:'rgba(239,68,68,.14)'}
+};
+
+const cards = [
+  // 战略层
+  {cat:'战略', title:'人设锚·一句话定位', body:'「HR业务 × 产品化 / 自动化的桥梁型」——你最稀缺的位，所有回答往这收，别散成事务罗列。'},
+  {cat:'战略', title:'3分钟故事线', body:'串成线：痛点(人工盯答辩)→产品化(PRD+MCP+审批闸门)→数据化(看板口径)→AI文化(布道师)→下一步。严禁罗列项目。'},
+  {cat:'战略', title:'差异化壁垒', body:'对纯HRBP多「产品化脑子」，对纯PM多「HR业务痛点和人的边界」——双向卡位，谁也替代不了你。'},
+  {cat:'战略', title:'动机框架（红线）', body:'永远框成「我要长出什么」，绝不说「我烦什么 / 原公司不好」——贬原公司直接出局。'},
+  {cat:'战略', title:'反向提问当武器', body:'用「背什么指标 / 最大痛点 / 在推的数字化」三问，既显专业，也帮你判断这家值不值得去。'},
+  {cat:'战略', title:'先判赛道再答', body:'HRBP岗听业务诊断、PA/PM岗听指标定义、AI岗听落地真伪、文化岗听活动记忆点——答偏全白搭。'},
+
+  // 战术层
+  {cat:'战术', title:'四段式万能结构', body:'起点痛点→我的设计/决策→结果→诚实边界。覆盖90%行为题，顺序别乱。'},
+  {cat:'战术', title:'致命三连接法', body:'「是什么 / 你个人贡献占多少 / 数据或边界在哪」——提前把每个项目拆成这三刀的安全答。'},
+  {cat:'战术', title:'诚实边界术', body:'「代码不是我写，但我定义口径和验收闭环」——不抢功、不藏拙，诚实反而加分。'},
+  {cat:'战术', title:'反客为主', body:'被质疑量级词(57套/34+资产)时，转讲「分类框架逻辑」，不defensive，把球导回你的框架。'},
+  {cat:'战术', title:'克制表达', body:'少用「热闹/赋能」这类词，改用「行为改变 / 真实采纳 / 组织效能」——实践派人设靠词撑。'},
+  {cat:'战术', title:'分类对抗模板', body:'战略题讲定位、Case题讲框架(先数据后定性再分层)、认知题讲底层价值观、元问题讲诚意。'},
+
+  // 细节层
+  {cat:'细节', title:'数字回填（最大雷）', body:'面试官不看你写没写，直接问「多少场多少人」。背熟3-5个核心真实值，和简历对齐。'},
+  {cat:'细节', title:'物料备好', body:'看板/PRD截图或链接，被要求「现场看一个」主动说「我带了」——瞬间拉开行动力差距。'},
+  {cat:'细节', title:'表达节奏', body:'结论先行、先听后答、卡壳就停顿别抢话；技术人吃「给数据给选项说清why」这套。'},
+  {cat:'细节', title:'红线题优雅回避', body:'婚育/年龄/家庭计划属违法题，不接茬不撒谎——「精力全可投入，长期更想聊职业本身」。'},
+  {cat:'细节', title:'反向提问时机', body:'薪资别最早问，先聊匹配度；最后用反向三问收，显你真在乎这岗。'},
+  {cat:'细节', title:'体态与语速', body:'别背稿感，用「我真实做过」的笃定语气，比华丽词藻有用；适度停顿显思考。'},
+
+  // 轮次策略
+  {cat:'轮次', title:'一面（HR筛选）', body:'证明靠谱+基础匹配，讲主线+底线即可，别一上来秃噜太深，留后手给后面轮次。'},
+  {cat:'轮次', title:'二面（用人经理）', body:'死磕专业深度，被三连问就展开到动作层(「我定口径、我跟leader对齐过」)，证明真干过不是背的。'},
+  {cat:'轮次', title:'三面（高管/文化）', body:'讲格局+价值观(HR理解/文化落地/AI判断)，显思考高度，别再抠执行细节。'},
+  {cat:'轮次', title:'终面（薪酬动机）', body:'动机框架+反向提问，薪资别最先亮；后一轮要补前一轮没讲的维度，不是复读。'},
+
+  // 面试官类型
+  {cat:'面试官', title:'压力型（刁难/打断）', body:'不慌不抢话，先接「您这质疑我认同」再导回框架；被质疑数据→「问得对，这正是我口径还在对齐的」。'},
+  {cat:'面试官', title:'冷漠型（零反馈）', body:'主动抛钩子「您想听哪块深讲」，用案例引互动，别自说自话冷场。'},
+  {cat:'面试官', title:'话痨型（自己讲多）', body:'抓空隙插你的锚点，结尾硬拉回「所以我的差异化是…」，别让他带跑题。'},
+  {cat:'面试官', title:'技术深挖型', body:'诚实边界术放大——「这层我依赖技术伙伴，但业务规则我说了算」，不装懂也不露怯。'},
+
+  // 心态应急
+  {cat:'心态', title:'卡壳', body:'停顿3秒+「这块我想讲清楚，让我组织下」比慌编强十倍；沉默不可怕，乱编才致命。'},
+  {cat:'心态', title:'被质疑数据虚/造假', body:'不defensive，直接「口径+源数据我能讲清，看板接的是学员明细」——越冷静越真。'},
+  {cat:'心态', title:'完全没准备的题', body:'四段式硬套，没项目就讲「我的判断框架」，框架也能答；空着才是死。'},
+  {cat:'心态', title:'紧张', body:'把面试当「互相确认匹配」不是「被审判」，降低表演欲反而更笃定自然。'},
+
+  // 信息战与跟进
+  {cat:'跟进', title:'反向挖情报', body:'面试官答不出「背什么指标」→岗位可能混乱；聊数字化他眼睛亮→环境对你胃口。用他的回答判断去不去。'},
+  {cat:'跟进', title:'收尾要联系方式', body:'临走要企微/LinkedIn，显主动，也方便后续跟进；顺手补一句对岗位的真诚兴趣。'},
+  {cat:'跟进', title:'follow-up', body:'24h内简短感谢+补「今天聊的X我回去想了想…」——显复盘力，甩90%候选人。'},
+  {cat:'跟进', title:'offer节奏', body:'不第一个亮底牌，先问范围再给区间；低于期望看成长空间，不勉强不卑微。'},
+
+  // 优先级矩阵
+  {cat:'矩阵', title:'一票否决级', body:'动机贬原公司、数字当场穿帮、人设前后矛盾——任一出现直接出局，零容忍。'},
+  {cat:'矩阵', title:'加分级', body:'案例有深度能扛三连问、AI+HR有自己判断、反向提问专业——拉开你和「事务型HR」的差距。'},
+  {cat:'矩阵', title:'锦上花级', body:'细节深挖题(剔除15min谁拍板/57套怎么来)答好不亏、答不好也行——别在这些上耗太多精力。'},
+
+  // 最该补
+  {cat:'要补', title:'回填【待补】数字', body:'唯一让「看起来强」变「真的强」的动作。把场次/人数/采纳率真实值背熟，与简历同步。'},
+  {cat:'要补', title:'准备作品演示包', body:'看板+PRD截图，30秒能讲清「我定口径、我定验收」——被要求现场看时甩出来。'},
+  {cat:'要补', title:'主导项拆「我拍板的三件事」', body:'面试官专挑「主导」项捅，提前把每个主导项拆成具体拍板动作，别被问住。'}
+];
+
+const grid = document.getElementById('grid');
+const chipsBox = document.getElementById('chips');
+const search = document.getElementById('search');
+const countEl = document.getElementById('count');
+let activeCat = '全部';
+
+// 构建分类 chips
+const cats = ['全部', ...Object.keys(CATS)];
+cats.forEach(c=>{
+  const b = document.createElement('span');
+  b.className = 'chip' + (c==='全部'?' active':'');
+  b.textContent = c;
+  b.dataset.cat = c;
+  chipsBox.appendChild(b);
+});
+
+function render(){
+  const kw = search.value.trim().toLowerCase();
+  grid.innerHTML = '';
+  let n = 0;
+  cards.forEach((c, i)=>{
+    if(activeCat!=='全部' && c.cat!==activeCat) return;
+    if(kw && !(c.title.toLowerCase().includes(kw) || c.body.toLowerCase().includes(kw) || c.cat.toLowerCase().includes(kw))) return;
+    n++;
+    const col = CATS[c.cat] || {c:'#888', bg:'#eee'};
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<span class="pill" style="color:'+col.c+';background:'+col.bg+'">'+c.cat+'</span>'+
+      '<h3>'+c.title+'</h3>'+
+      '<div class="ans editable" id="m'+i+'">'+c.body+'</div>';
+    grid.appendChild(card);
+  });
+  countEl.textContent = '共 '+n+' 张方法论卡';
+  bindEditable();
+  observe();
+}
+
+function bindEditable(){
+  document.querySelectorAll('.editable').forEach(t=>{
+    const k = 'method_'+t.id;
+    const v = localStorage.getItem(k);
+    if(v!==null) t.textContent = v;
+    t.addEventListener('input', ()=>localStorage.setItem(k, t.textContent));
+  });
+}
+
+let io;
+function observe(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.08});
+  document.querySelectorAll('.card').forEach(c=>io.observe(c));
+}
+
+chipsBox.addEventListener('click', e=>{
+  if(e.target.classList.contains('chip')){
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    e.target.classList.add('active');
+    activeCat = e.target.dataset.cat;
+    render();
+  }
+});
+search.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>

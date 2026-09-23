@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>面试备考专区 · 作战地图</title>
+<style>
+  :root{
+    --violet:#7c5cff; --cyan:#2dd4bf; --ink:#1f2330; --muted:#6b7280;
+    --bg1:#f6f3ff; --bg2:#ecfeff; --card:#ffffff; --line:#eceef5;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink); background:linear-gradient(135deg,var(--bg1),var(--bg2)); min-height:100vh;
+  }
+  header{
+    padding:40px 28px 20px; text-align:center;
+    background:linear-gradient(120deg,rgba(124,92,255,.10),rgba(45,212,191,.10));
+  }
+  header h1{
+    margin:0; font-size:32px; font-weight:800;
+    background:linear-gradient(90deg,var(--violet),var(--cyan));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  header p{margin:10px 0 0; color:var(--muted); font-size:15px;}
+  .grid{
+    max-width:1080px; margin:30px auto 10px; padding:0 18px 40px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 20px 20px;
+    box-shadow:0 6px 20px rgba(31,35,48,.06); transition:.2s;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .card:hover{box-shadow:0 12px 30px rgba(124,92,255,.16); transform:translateY(-4px);}
+  .pill{
+    align-self:flex-start; font-size:12px; font-weight:700; padding:4px 12px; border-radius:999px;
+    letter-spacing:.3px; color:#7c5cff; background:rgba(124,92,255,.12);
+  }
+  .card h3{margin:0; font-size:19px; font-weight:800;}
+  .card p{margin:0; font-size:14px; line-height:1.7; color:#374151;}
+  .open-btn{
+    margin-top:4px; align-self:flex-start; text-decoration:none; font-size:14px; font-weight:700;
+    padding:10px 18px; border-radius:999px; color:#fff;
+    background:linear-gradient(90deg,var(--violet),var(--cyan)); transition:.18s;
+  }
+  .open-btn:hover{filter:brightness(1.05); box-shadow:0 6px 16px rgba(124,92,255,.3);}
+  .note{font-size:12px; color:var(--muted);}
+  footer{
+    text-align:center; padding:22px 16px; color:#6b7280; font-size:13px;
+    background:linear-gradient(120deg,rgba(124,92,255,.06),rgba(45,212,191,.06));
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>面试备考专区 · 作战地图</h1>
+  <p>题库(背答案) → 方法论(打法) → 补充包(血肉) → 作品包(证据) ｜ 四件套闭环，点开即看</p>
+</header>
+
+<main class="grid">
+  <div class="card">
+    <span class="pill">① 背答案</span>
+    <h3>面试题库作战卡</h3>
+    <p>42 个完整问答，覆盖战略级 / 细节深挖 / Case / 元问题 / 认知类 / 残留 / 边角 / 终极死角 / 极低频，全维度无省略。黄色【待补】可现场填空。</p>
+    <a class="open-btn" href="https://yitongcaii.github.io/activities-html/resume/interview-card.html" target="_blank">打开题库卡 →</a>
+  </div>
+
+  <div class="card">
+    <span class="pill">② 打法</span>
+    <h3>面试作战方法论卡</h3>
+    <p>40 张战术卡：战略 / 战术 / 细节 / 轮次 / 面试官类型 / 心态 / 跟进 / 优先级矩阵。面前列策略、面后复盘用。</p>
+    <a class="open-btn" href="https://yitongcaii.github.io/activities-html/resume/interview-method.html" target="_blank">打开方法论卡 →</a>
+  </div>
+
+  <div class="card">
+    <span class="pill">③ 血肉</span>
+    <h3>面试备考补充包</h3>
+    <p>44 张：数字一致性台账 / 弱点精细预案 / STAR深层故事库(10) / 薪资剧本 / 电梯演讲三版 / 高频逐字稿 / 目标公司模板 / 战役日志 / 观点库 / 作品包 / 档案优化。</p>
+    <a class="open-btn" href="https://yitongcaii.github.io/activities-html/resume/interview-supplement.html" target="_blank">打开补充包 →</a>
+  </div>
+
+  <div class="card">
+    <span class="pill">④ 证据</span>
+    <h3>作品包（本地文件夹）</h3>
+    <p class="note">非网页，需你本地维护：看板截图 / 答辩PRD / 文化落地一页纸 / 知识分层说明 / AI漫剧分镜。被要求「现场看一个」时主动说「我带了」。清单与30秒讲解词见补充包「作品包」分类。</p>
+    <span class="note">📁 存放路径由你定（如桌面「面试作品包」），面试前确认能 30 秒打开。</span>
+  </div>
+</main>
+
+<footer>📌 本页由 yitong 沉淀整理 · 文化活动知识库</footer>
+</body>
+</html>
