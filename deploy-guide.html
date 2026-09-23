@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>培训管理平台 · 内网部署指南</title>
+<style>
+  :root{
+    --c-purple:#7F77DD; --c-purple-50:#EEEDFE;
+    --c-teal:#1D9E75; --c-teal-50:#E1F5EE;
+    --c-amber:#BA7517; --c-amber-50:#FAEEDA;
+    --c-red:#A32D2D; --c-red-50:#FCEBEB;
+    --ink:#2C2C2A; --muted:#5F5E5A; --line:#E4E2DB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#F6F5F1;color:var(--ink);line-height:1.6;padding:32px 20px 60px}
+  .wrap{max-width:1080px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--c-purple),var(--c-teal));color:#fff;border-radius:20px;padding:30px 34px;margin-bottom:24px}
+  header h1{font-size:26px;font-weight:600;letter-spacing:.5px}
+  header p{margin-top:8px;opacity:.92;font-size:14px}
+  .pill{display:inline-block;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:3px 12px;font-size:12px;margin-top:14px}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr 1fr}
+  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 6px 18px rgba(40,40,40,.05)}
+  .card h2{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .card h3{font-size:14px;font-weight:600;margin:14px 0 6px}
+  .card ul{list-style:none}
+  .card li{font-size:13.5px;padding:5px 0 5px 18px;position:relative;color:var(--ink)}
+  .card li::before{content:"";position:absolute;left:2px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--c-purple)}
+  .card li.amber::before{background:var(--c-amber)}
+  .card li.teal::before{background:var(--c-teal)}
+  .card li.red::before{background:var(--c-red)}
+  .tag{font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;margin-left:6px}
+  .tag.p{background:var(--c-purple-50);color:var(--c-purple)}
+  .tag.t{background:var(--c-teal-50);color:var(--c-teal)}
+  .tag.r{background:var(--c-red-50);color:var(--c-red)}
+  .tag.a{background:var(--c-amber-50);color:var(--c-amber)}
+  .wide{grid-column:1/-1}
+  code{background:#F1EFE8;border-radius:6px;padding:1px 6px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#3C3489}
+  .kv{font-size:13px;color:var(--muted);margin:4px 0}
+  .sec-title{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:1px;margin:26px 4px 12px;text-transform:uppercase}
+  .done{color:var(--c-teal);font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:34px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>培训管理平台 · 内网部署指南</h1>
+  <p>纯 Node + Express + MongoDB，无前端构建，依赖轻。已按「可能禁出网 + 两种形态」把方案全部做好，随时可切。</p>
+  <span class="pill">CDN 已本地化 · 两种形态就绪</span>
+  <span class="pill">✅ 已确认容器平台 · Docker 为主推形态</span>
+</header>
+
+<div class="sec-title">结论</div>
+<div class="grid g2">
+  <div class="card wide">
+    <h2>不强制封装 Docker <span class="tag p">已就绪</span></h2>
+    <p class="kv">项目本身是纯 Node 应用，拷代码 + 装 Node + 起 Mongo 就能跑。是否上容器取决于你内网环境：<b>有容器平台就封、裸 VM 就别封</b>。两种形态的产物（Dockerfile / compose / 裸 VM 脚本）都已落盘，按环境选用其一即可。</p>
+    <p class="kv"><span class="done">✓ 已完成</span> 前端外链全部本地化（font-awesome / html2canvas / 企微 JS-SDK 已进 <code>public/vendor</code>），禁出网也能完整运行；CSP 已收紧为同源。</p>
+  </div>
+</div>
+
+<div class="sec-title">两种部署形态对比</div>
+<div class="grid g2">
+  <div class="card">
+    <h2>A. Docker 容器 <span class="tag t">有容器平台选这个</span></h2>
+    <h3>适用</h3>
+    <ul><li>内网有 TKEx / STKE / 公司 K8s / 蓝盾镜像部署</li></ul>
+    <h3>优点</h3>
+    <ul><li class="teal">环境锁版本（node:20-alpine）</li><li class="teal">进程自愈（restart 策略）</li><li class="teal">uploads 卷持久化清晰、换环境零配置</li></ul>
+    <h3>代价</h3>
+    <ul><li>多一层镜像构建 / 推送</li></ul>
+    <h3>文件</h3>
+    <ul><li><code>Dockerfile</code></li><li><code>docker-compose.yml</code>（node + mongo + uploads 卷）</li><li><code>.dockerignore</code></li></ul>
+    <h3>启动</h3>
+    <p class="kv"><code>docker compose up -d</code></p>
+  </div>
+  <div class="card">
+    <h2>B. 裸 VM + pm2 <span class="tag p">环境简单选这个</span></h2>
+    <h3>适用</h3>
+    <ul><li>一台虚拟机，团队不熟容器</li></ul>
+    <h3>优点</h3>
+    <ul><li class="teal">不用镜像构建，装依赖即跑</li><li class="teal">排查直接（看进程 / 日志）</li></ul>
+    <h3>代价</h3>
+    <ul><li class="amber">手动装 Node + 守护 + 开机自启</li></ul>
+    <h3>文件</h3>
+    <ul><li><code>deploy/start.sh</code></li><li><code>deploy/ecosystem.config.js</code></li></ul>
+    <h3>启动</h3>
+    <p class="kv"><code>bash deploy/start.sh</code> → <code>pm2 startup</code> 开机自启</p>
+  </div>
+</div>
+
+<div class="sec-title">部署准备清单</div>
+<div class="grid g2">
+  <div class="card">
+    <h2>基础设施</h2>
+    <ul>
+      <li>内网机器，Node.js 18 / 20 / 22（已用 22 验证）</li>
+      <li>MongoDB 实例（内网可达，或复用公司现有，改 <code>MONGO_URI</code>）</li>
+      <li>内网域名 + <b>OA 网关注入</b> <code>x-staff-id</code> / <code>x-staff-name</code></li>
+      <li>进程守护：pm2 / systemd / 容器 restart policy</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>代码与配置</h2>
+    <ul>
+      <li>拷贝源码（<code>public/</code> <code>server.js</code> <code>package*.json</code>）+ <code>node_modules</code> 或 <code>npm install</code></li>
+      <li><code>.env</code>：<code>MONGO_URI</code> / <code>PORT</code> / <code>BASE_URL</code>(内网域名) / <code>HUNYUAN_API_KEY</code>(可选)</li>
+      <li>同步 <code>uploads/banners/*.png</code>（博闻 / AISee / 部门级 3 张已落地；只拷 public 会 404）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec-title">三条红线（不处理就不能用）</div>
+<div class="grid g3">
+  <div class="card">
+    <h2>① CDN 本地化 <span class="tag t done">已完成</span></h2>
+    <ul>
+      <li class="teal">font-awesome / html2canvas / 企微 JS-SDK 已进 <code>public/vendor</code></li>
+      <li class="teal">index.html / tab-calendar.js 引用已改本地</li>
+      <li class="teal">server.js CSP 已收紧为同源</li>
+      <li class="amber">知识库导出字体：<code>EXPORT_USE_GOOGLE_FONTS=false</code> 降级系统字体（要美观设 true）</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>② OA 网关身份头 <span class="tag r">需联调</span></h2>
+    <ul>
+      <li class="red">身份 100% 靠网关注入 <code>x-staff-*</code></li>
+      <li class="red">没有它 → 所有用户身份为 null，日历编辑 / 开课 / 拉群按钮全不显示</li>
+      <li class="red">本地预览可用 <code>x-staff-override</code> 头，生产必须真网关</li>
+      <li>需和网关联调：请求头字段名 + 透传到 <code>/api/*</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>③ 外网能力降级 <span class="tag a">需确认</span></h2>
+    <ul>
+      <li class="amber">混元 API（AI 助手）：无 key / 不可达 → 仅该功能失效，不崩</li>
+      <li class="amber">iWiki MCP（知识库同步）：不可达 → 仅同步失败，核心正常</li>
+      <li>两项都走 try/catch，失败不影响日历 / 提交 / 海报 / 拉群</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec-title">随时切换 / 上线步骤</div>
+<div class="grid g2">
+  <div class="card">
+    <h2>选 Docker</h2>
+    <ul>
+      <li>复制 <code>.env.production</code> → <code>.env</code>，填 <code>BASE_URL</code> / <code>HUNYUAN_API_KEY</code></li>
+      <li><code>docker compose up -d</code></li>
+      <li>确认：<code>curl localhost:8080/api/me</code> 返回身份（需网关带头）</li>
+      <li>OA 网关反代到容器端口 8080，注入身份头</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>选裸 VM</h2>
+    <ul>
+      <li>装 Node 20 + MongoDB（或指向内网 Mongo）</li>
+      <li>放 <code>.env</code>，<code>bash deploy/start.sh</code></li>
+      <li><code>pm2 startup</code> 设开机自启；<code>pm2 logs</code> 看日志</li>
+      <li>OA 网关反代到 8080，注入身份头</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec-title">本次新增 / 改动文件</div>
+<div class="card wide">
+  <ul>
+    <li class="teal">新增 <code>public/vendor/</code>（html2canvas / font-awesome / 企微 JS-SDK 本地副本）</li>
+    <li class="teal">改 <code>public/index.html</code>、<code>public/js/tab-calendar.js</code>：外链 → 本地</li>
+    <li class="teal">改 <code>public/js/tab-knowledge.js</code>：导出字体开关 <code>EXPORT_USE_GOOGLE_FONTS</code></li>
+    <li class="teal">改 <code>server.js</code>：CSP 收紧去外域白名单</li>
+    <li>新增 <code>Dockerfile</code> / <code>docker-compose.yml</code> / <code>.dockerignore</code></li>
+    <li>新增 <code>deploy/start.sh</code> / <code>deploy/ecosystem.config.js</code></li>
+    <li>新增 <code>.env.production</code>（部署环境变量模板）</li>
+    <li>新增本指南 <code>deploy-guide.html</code></li>
+  </ul>
+</div>
+
+<footer>📌 本页由 yitong 整理 · 培训管理平台部署指南</footer>
+</div>
+</body>
+</html>

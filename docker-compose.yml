@@ -1,0 +1,58 @@
+# 培训管理平台 - Docker 形态一键部署（已确认内网有容器平台，主推形态）
+# 前置：
+#   1) 同目录准备 .env（复制 .env.production 填值，至少填 BASE_URL）
+#   2) 宿主要含完整仓库的 uploads/（已自带默认 banner PNG），否则 bind 挂载会 shadow 镜像内 banner
+# 启动：docker compose up -d
+# 停止：docker compose down
+# 日志：docker compose logs -f app
+# 自愈：restart: unless-stopped，容器平台/OOM 崩溃会自动拉起
+
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - training
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:${PORT:-8080}"
+    environment:
+      PORT: "${PORT:-8080}"
+      MONGO_URI: "mongodb://mongo:27017/training-management"
+      BASE_URL: "${BASE_URL}"
+      HUNYUAN_API_KEY: "${HUNYUAN_API_KEY}"
+      NODE_ENV: production
+      TZ: Asia/Shanghai
+    depends_on:
+      mongo:
+        condition: service_healthy
+    # uploads 持久化：bind 挂载宿主仓库的 uploads/（含默认 banner），运行时上传也落盘
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - training
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:${PORT:-8080}/api/me"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  mongo-data:
+
+networks:
+  training:
