@@ -4,3 +4,7 @@ uploads/
 *.tar.gz
 *.zip
 *.bak
+# macOS 资源叉残留（从 Mac 拷来的 ._ 文件，不进库）
+._*
+# 仅保留 woff2（现代浏览器使用），排除无用的 woff 占位
+*.woff
